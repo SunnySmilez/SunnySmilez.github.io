@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[zhouxiaozhi'blog]]></title>
+  <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://www.cxyteam.com/"/>
+  <updated>2015-05-18T16:09:44.000Z</updated>
+  <id>http://www.cxyteam.com/</id>
+  
+  <author>
+    <name><![CDATA[zhouxiaozhi]]></name>
+    <email><![CDATA[phpchengxuyuan@sina.com]]></email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hexo简单搭建]]></title>
+    <link href="http://www.cxyteam.com/2015/04/28/Hexo%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.cxyteam.com/2015/04/28/Hexo简单搭建/</id>
+    <published>2015-04-27T18:01:46.000Z</published>
+    <updated>2015-05-18T16:09:44.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="用tab键出代码或者用反引号包围">用tab键出代码或者用反引号包围</h1><pre><code><span class="keyword">for</span>(<span class="number">1</span>) {
+    <span class="keyword">if</span>(<span class="number">1</span>) {
+        <span class="keyword">return</span> <span class="literal">true</span>;
+    }
+}
+</code></pre><hr>
+<h2 id="There_is_a_literal_backtick_(`)_here-"><code>There is a literal backtick (`) here.</code></h2><h1 id="大于号表示引用，要有空格">大于号表示引用，要有空格</h1><blockquote>
+<p>This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.<br>Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</p>
+<p>Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse<br>id sem consectetuer libero luctus adipiscing.</p>
+</blockquote>
+<hr>
+<h1 id="表格样式，模拟写">表格样式，模拟写</h1><table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h1 id="链接地址，在本地的about下面">链接地址，在本地的about下面</h1><p>See my <a href="/about">个人简介</a> page for details.</p>
+<p><strong>粗体</strong><br><em>斜体</em><br><em>斜体</em></p>
+<h1 id="图片在本地的img下面">图片在本地的img下面</h1><p><img src="/img/me.jpg" alt="Alt text"><br><img src="/img/me.jpg" alt="Alt text" title="Optional title"><br><img src="/img/me.jpg" alt="GitHub Mark" title="GitHub Mark"></p>
+<h1 id="链接地址">链接地址</h1><p><a href="http://bruce-sha.github.io" title="不如的博客" target="_blank" rel="external">不如</a></p>
+<h1 id="参考文献，两种写法">参考文献，两种写法</h1><p>I get 10 times more traffic from <a href="http://google.com/" title="Google" target="_blank" rel="external">Google</a> than from<br><a href="http://search.yahoo.com/" title="Yahoo Search" target="_blank" rel="external">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search" target="_blank" rel="external">MSN</a>.</p>
+<p>I get 10 times more traffic from <a href="http://google.com/" title="Google" target="_blank" rel="external">Google</a><br>than from <a href="http://search.yahoo.com/" title="Yahoo Search" target="_blank" rel="external">Yahoo</a> or<br><a href="http://search.msn.com/" title="MSN Search" target="_blank" rel="external">MSN</a>.</p>
+<hr>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="用tab键出代码或者用反引号包围">用tab键出代码或者用反引号包围</h1><pre><code><span class="keyword">for</span>(<span class="number">1</span>) {
+    <span class=]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://www.cxyteam.com/tags/hexo/"/>
+    
+      <category term="Mysql" scheme="http://www.cxyteam.com/categories/Mysql/"/>
+    
+  </entry>
+  
+</feed>
