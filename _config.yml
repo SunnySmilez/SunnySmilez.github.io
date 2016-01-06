@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: zhouxiaozhi'blog
+title: 狂奔的菜鸟
 subtitle: 当你的实力支撑不起你的野心的时候，静下心来好好学习吧！
-description: zhouzhi's blog 
-author: zhouxiaozhi
+description: 狂奔的菜鸟 
+author: 狂奔的菜鸟
 language: zh-CN
 email: phpchengxuyuan@sina.com
 timezone:
@@ -74,5 +74,6 @@ plugins:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:SunnySmilez/SunnySmilez.github.io.git
-  branch: master
+  repo:	
+	git@github.com:SunnySmilez/SunnySmilez.github.io.git,master
+	git@gitcafe.com:SunnySmilez/SunnySmilez.github.io.git,gitcafe-pages

@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>join的使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="join的使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">join的使用</h1>
+  
+
+      <time datetime="2015-12-26T02:17:46.000Z"><a href="/2015/12/26/join的使用/">2015-12-26</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="join的使用案例">join的使用案例</h1><p>1.文件内容<br>cat month_cn.txt</p>
+<pre><code>1       一月
+2       二月
+3       三月
+4       四月
+5       五月
+6       六月
+7       七月
+8       八月
+9       九月
+10      十月
+11      十一月
+12      十二月
+13      十三月，故意的
+</code></pre><p>2.文件内容<br>cat month_en.txt</p>
+<pre><code>1       January
+2       February
+3       March
+4       April
+5       May
+6       June
+7       July
+8       August
+9       September
+10      October
+11      November
+12      December
+14      MonthUnknown
+</code></pre><p>3.内连接（指定关联行数）<br>join month_cn.txt month_en.txt<br>join -j 1 month_cn.txt month_en.txt(<code>以第一行作为匹配字段</code>)<br>join -1 1 -2 1 month_cn.txt month_en.txt(<code>第一个文件的第一行和第二个文件的第一行进行匹配</code>)</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>4.左连接（以全面文件为主去匹配后面文件的内容）<br>join -a1 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+</code></pre><p>5.右连接<br>join -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+14 MonthUnknown
+</code></pre><p>6.全连接<br>join -a1 -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+14 MonthUnknown
+</code></pre><p>7.指定输出内容<br>join -o 1.1 1.2 2.2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>8.前面文件存在，后面文件不存在的内容<br>join -v 1  month_cn.txt month_en.txt</p>
+<pre><code>13 十三月，故意的
+</code></pre><h1 id="join参数说明">join参数说明</h1><pre><code>用法：join [选项]... 文件1 文件2(找出两个文件中，指定栏位内容相同的行，并加以合并，再输出到标准输出设备。)
+针对每一对具有相同内容的输入行，整合为一行写到标准输出，
+默认的内容连接区块是由第一个空白符代表的分界符号。当文件1
+或文件2 都被指定为"-"时，程序将从标准输入读取数据。
+
+  -<span class="ruby">a  文件编号        文件编号的值可以是<span class="number">1</span> 或<span class="number">2</span>，分别对应文件<span class="number">1</span> 和 文件<span class="number">2</span>。
+</span>                          此选项用于根据指定文件编号输出不成对的行目。
+  -<span class="ruby">e 字符            将缺失的输入区块替换为指定字符
+</span>  -<span class="ruby">i, --ignore-<span class="keyword">case</span>     比较时忽略大小写
+</span>  -<span class="ruby">j 域         等于<span class="string">"-1 域 -2 域"</span>
+</span>  -<span class="ruby">o 格式         按照指定格式构造输出行
+</span>  -<span class="ruby">t 字符         使用指定字符作为输入和输出的分隔符
+</span>  -<span class="ruby">v 文件编号            类似 -a 文件编号，但禁止组合输出行
+</span>  -<span class="ruby"><span class="number">1</span> 域              在文件<span class="number">1</span> 的此域组合
+</span>  -<span class="ruby"><span class="number">2</span> 域              在文件<span class="number">2</span> 的此域组合
+</span>  -<span class="ruby">-check-order         检查输入行是否正确排序，即使所有输入行均是成对的
+</span>  -<span class="ruby">-nocheck-order       不检查输入是否正确排序
+</span>      -<span class="ruby">-help        显示此帮助信息并退出
+</span>      -<span class="ruby">-version        显示版本信息并退出
+</span>
+除非使用了"-t 字符串" 选项，否则前导空格分隔的域将被忽略，如果指定了字符串，
+则使用指定字符串分隔任意的域并从1 开始计数的域编号。可以指定的格式是由一个
+或多个逗号活空格所分隔的描述，其形式为"文件编号.域"或者"0"。默认的
+格式输出合并后的域、文件1 和文件2 剩下的域，均由该指定字符串分隔。
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-26</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Linux/">Linux</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

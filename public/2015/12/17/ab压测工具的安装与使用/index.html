@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ab压测工具的安装与使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="ab压测工具的安装与使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">ab压测工具的安装与使用</h1>
+  
+
+      <time datetime="2015-12-17T02:03:33.000Z"><a href="/2015/12/17/ab压测工具的安装与使用/">2015-12-17</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h2 id="安装">安装</h2><pre><code>yum <span class="keyword">install</span> httpd-tools
+</code></pre><h2 id="使用">使用</h2><pre><code>ab -kc 10 -n 10 http://hostname/path (<span class="keyword">*</span>命令表示连接100，并发请求数是100次<span class="keyword">*</span>)
+</code></pre><h2 id="命令执行结果分析">命令执行结果分析</h2><pre><code>Server Software:
+Server Hostname:        hostname<span class="comment">(*服务器域名*)</span>
+Server Port:            <span class="number">443</span><span class="comment">(*服务器端口*)</span>
+SSL/TLS Protocol:       TLSv1/SSLv3,ECDHE-RSA-AES128-GCM-SHA256,<span class="number">2048</span>,<span class="number">128</span>
+
+Document Path:          /path<span class="comment">(*测试接口地址*)</span>
+Document Length:        <span class="number">14904</span> bytes<span class="comment">(*测试数据大小*)</span>
+
+Concurrency Level:      <span class="number">10</span><span class="comment">(*并发数*)</span>
+Time taken <span class="keyword">for</span> tests:   <span class="number">0.403</span> seconds<span class="comment">(*整个测试持续时间*)</span>
+Complete requests:      <span class="number">10</span><span class="comment">(*完成的请求数量*)</span>
+Failed requests:        <span class="number">0</span><span class="comment">(*失败的请求*)</span>
+<span class="keyword">Write</span> errors:           <span class="number">0</span><span class="comment">(*请求写入失败的次数*)</span>
+Keep-Alive requests:    <span class="number">0</span><span class="comment">(*保持联机连接的请求数量。只有在命令行中使用-k，才能看到该属性值*)</span>
+Total transferred:      <span class="number">151120</span> bytes<span class="comment">(*整个场景中的网络传输量*)</span>
+HTML transferred:       <span class="number">149040</span> bytes<span class="comment">(*整个场景中的HTML内容传输量*)</span>
+`Requests per second:    <span class="number">24.84</span> [#/sec] (mean)<span class="comment">(*表示当前测试的服务器每秒可以处理24.84个静态html的请求事务，后面的mean表示平均。这个数值表示当前机器的整体性能，值越大越好*)</span>`
+`Time per request:       <span class="number">402.511</span> [ms] (mean)<span class="comment">(*单个并发的延迟时间，后面的mean表示平均。隔离开当前并发，单独完成一个请求需要的平均时间*)</span>`
+`Time per request:       <span class="number">40.251</span> [ms] (mean, across all concurrent requests)<span class="comment">(*即上面的时间（Time per request）除以并发数 ,平均每个并发请求处理的时间*)</span>`
+`Transfer rate:          <span class="number">366.64</span> [Kbytes/sec] received<span class="comment">(*平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题，也就是这些请求在单位时间从服务器获取的数据长度*)</span>`
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       <span class="number">33</span>   <span class="number">46</span>  <span class="number">14.6</span>     <span class="number">41</span>      <span class="number">72</span>
+Processing:    <span class="number">16</span>  <span class="number">113</span> <span class="number">119.2</span>     <span class="number">27</span>     <span class="number">268</span>
+Waiting:       <span class="number">10</span>   <span class="number">37</span>  <span class="number">79.1</span>     <span class="number">12</span>     <span class="number">262</span>
+Total:         <span class="number">49</span>  <span class="number">159</span> <span class="number">121.5</span>     <span class="number">99</span>     <span class="number">340</span>
+
+Percentage <span class="keyword">of</span> the requests served within a certain time (ms)
+  <span class="number">50</span>%     <span class="number">99</span>
+  <span class="number">66</span>%    <span class="number">268</span>
+  <span class="number">75</span>%    <span class="number">282</span>
+  <span class="number">80</span>%    <span class="number">299</span>
+  <span class="number">90</span>%    <span class="number">340</span>
+  <span class="number">95</span>%    <span class="number">340</span>
+  <span class="number">98</span>%    <span class="number">340</span>
+  <span class="number">99</span>%    <span class="number">340</span>
+ <span class="number">100</span>%    <span class="number">340</span> (longest request)
+</code></pre><h2 id="ab命令参数">ab命令参数</h2><pre><code>Usage:
+  ab [options] [http[s]:<span class="comment">//]hostname[:port]/path</span>
+Options are:
+  -n requests     <span class="comment">(*总的请求数目*)</span>
+  -c concurrency  <span class="comment">(*一次请求并发数*)</span>
+  -t timelimit    <span class="comment">(*测试进行的最大秒数*)</span>
+  -b windowsize   <span class="comment">(*tcp连接的最大内存使用*)</span>
+  -p postfile     <span class="comment">(*post的数据*)</span>
+  -u putfile      <span class="comment">(*put的数据*)</span>
+  -T content-<span class="keyword">type</span> <span class="comment">(*header的类型，比如'application/x-www-form-urlencoded'默认为Default is 'text/plain'*)</span>
+  -v verbosity    <span class="comment">(*设置显示信息的详细程度 – 4或更大值会显示头信息， 3或更大值可以显示响应代码(404, 200等), 2或更大值可以显示警告和其他信息*)</span>
+  -w              <span class="comment">(*将结果用html的table打印出来，默认它是白色背景的两列宽度的一张表*)</span>
+  -i              <span class="comment">(*执行HEAD请求，而不是GET*)</span>
+  -C attribute    <span class="comment">(*添加一个cookie信息*)</span><span class="keyword">Add</span> cookie, eg. <span class="string">'Apache=1234. (repeatable)
+  -H attribute    (*添加head属性例如eg. '</span>Accept-Encoding: gzip<span class="string">'*)
+  -A attribute    (*Add Basic WWW Authentication, the attributes are a colon separated username and password*)
+  -P attribute    (*Add Basic Proxy Authentication, the attributes are a colon separated username and password*)
+  -X proxy:port   (*使用代理的端口*)
+  -V              (*显示版本信息并退出*)
+  -k              (*使用http的KeepAlive属性*)
+  -d              (*Do not show percentiles served table*)
+  -S              (*Do not show confidence estimators and warnings*)
+  -g filename     (*Output collected data to gnuplot format file*)
+  -e filename     (*Output CSV file with percentages served*)
+  -r              (*忽略socket错误*)
+  -h              (*Display usage information (this message)*)
+  -Z ciphersuite  (*Specify SSL/TLS cipher suite (See openssl ciphers)*)
+  -f protocol     (*特殊的协议例如SSL2, SSL3, TLS1, or ALL*)</span>
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-17</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Other/">Other</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Other/">Other</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

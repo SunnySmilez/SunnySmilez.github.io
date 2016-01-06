@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>siege压测工具的安装与使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="siege压测工具的安装与使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">siege压测工具的安装与使用</h1>
+  
+
+      <time datetime="2015-12-17T06:18:08.000Z"><a href="/2015/12/17/siege压测工具的安装与使用/">2015-12-17</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="siege的安装">siege的安装</h1><pre><code>wget <span class="string">http:</span><span class="comment">//soft.vpser.net/test/siege/siege-2.67.tar.gz（国内的一个镜像站地址）</span>
+tar -zxvf siege-<span class="number">2.67</span>.tar.gz
+cd siege-<span class="number">2.67</span>
+./configure &amp;&amp; make &amp;&amp; make install
+<span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>siege --help
+</code></pre><p><a href="http://download.joedog.org/siege/siege-latest.tar.gz" target="_blank" rel="external">官网的下载地址</a>（我下载的时候连接超时）<br>    <a href="https://github.com/JoeDog/siege" target="_blank" rel="external">siege，github地址</a></p>
+<h1 id="siege的使用">siege的使用</h1><pre><code><span class="number">50</span>个用户（每次并发量，注意不是每秒并发量） 重复<span class="number">100</span>次 共产生 <span class="number">50</span> * <span class="number">100</span> = <span class="number">5000</span>个请求
+/usr/local/bin/siege -c <span class="number">50</span> -r <span class="number">100</span>  <span class="built_in">hostname</span>/<span class="built_in">path</span>
+
+<span class="number">50</span>个用户 重复<span class="number">100</span>次 发送<span class="constant">G</span>ET参数
+/usr/local/bin/siege -c <span class="number">50</span> -r <span class="number">100</span>  <span class="built_in">hostname</span>/<span class="built_in">path</span>?<span class="literal">name</span>=zhangsan
+
+<span class="number">50</span>个用户 重复<span class="number">100</span>次 发送<span class="constant">P</span>OST参数 (注意引号)
+/usr/local/bin/siege -c <span class="number">50</span> -r <span class="number">100</span>  <span class="string">"hostname/path POST name=zhangsan"</span>
+
+<span class="number">50</span>个用户 重复<span class="number">100</span>次 发送<span class="constant">P</span>OST参数(从文件中读取)
+/usr/local/bin/siege -c <span class="number">50</span> -r <span class="number">100</span>  <span class="string">"hostname/path POST &lt; /tmp/post.xml"</span>
+
+<span class="number">100</span>个用户 重复<span class="number">100</span>次 发送cookie参数
+/usr/local/bin/siege -c <span class="number">100</span> -r <span class="number">100</span> -<span class="constant">H</span> <span class="string">"Cookie:key=value"</span> <span class="string">"hostname/path"</span>
+
+压测多个地址
+siege -c <span class="number">200</span> -r <span class="number">10</span> -f url.txt
+url.txt的内容是:
+    <span class="built_in">hostname</span>/<span class="built_in">path</span>
+    <span class="built_in">hostname</span>/<span class="built_in">path</span>
+    <span class="built_in">hostname</span>/<span class="built_in">path</span>
+</code></pre><h1 id="siege命令结果分析">siege命令结果分析</h1><pre><code><span class="string">Transactions:</span>                    <span class="number">100</span> hits （完成<span class="number">100</span>个请求)
+<span class="string">Availability:</span>                    <span class="number">100.00</span> %（<span class="number">100</span>%的成功率_）
+Elapsed <span class="string">time:</span>                    <span class="number">10.97</span> secs（总共使用时间_）
+Data <span class="string">transferred:</span>                <span class="number">0.54</span> MB（总共传输数据_）
+Response <span class="string">time:</span>                    <span class="number">0.17</span> secs（响应时间）
+Transaction <span class="string">rate:</span>                <span class="number">9.12</span> trans/sec（平均每秒完成的处理）
+<span class="string">Throughput:</span>                        <span class="number">0.05</span> MB/sec（平均每秒传送的数据）
+<span class="string">Concurrency:</span>                    <span class="number">1.58</span>（实际最高并发数）
+Successful <span class="string">transactions:</span>        <span class="number">100</span>（成功处理次数）
+Failed <span class="string">transactions:</span>            <span class="number">0</span>（失败处理次数）
+Longest <span class="string">transaction:</span>            <span class="number">3.09</span>（每次传输花费的最长时间）
+Shortest <span class="string">transaction:</span>            <span class="number">0.03</span>（每次传输花费的最短时间）
+</code></pre><h1 id="siege参数说明">siege参数说明</h1><pre><code>Usage: siege [options]
+       siege [options] URL
+       siege -g URL
+Options:
+  -<span class="ruby"><span class="constant">V</span>, --version           （版本信息）
+</span>  -<span class="ruby">h, --help              （帮助信息）
+</span>  -<span class="ruby"><span class="constant">C</span>, --config            （显示配置）
+</span>  -<span class="ruby">v, --verbose           （运行时能看到详细的运行信息）
+</span>  -<span class="ruby">g, --get               （显示http头信息，用户debug）
+</span>  -<span class="ruby">c, --concurrent=<span class="constant">NUM</span>    （一次请求的并发数目）
+</span>  -<span class="ruby">i, --internet          （随机模拟用户点击）
+</span>  -<span class="ruby">b, --benchmark         （基准测试，设置这个参数默认延迟时间为<span class="number">0</span>）
+</span>  -<span class="ruby">t, --time=<span class="constant">NUMm</span>         （设置测试的时间比如--time=<span class="number">1</span>H, 测试时间一个小时）
+</span>  -<span class="ruby">r, --reps=<span class="constant">NUM</span>          （压测次数）
+</span>  -<span class="ruby">f, --file=<span class="constant">FILE</span>         （指定任务文件）
+</span>  -<span class="ruby"><span class="constant">R</span>, --rc=<span class="constant">FILE</span>           （修改siegerc的文件位置，覆盖<span class="constant">SIEGERC</span>的环境变量）
+</span>  -<span class="ruby">l, --log               （运行完之后的结果log位置）
+</span>  -<span class="ruby">m, --mark=<span class="string">"text"</span>       （利用分隔符标记文件）
+</span>  -<span class="ruby">d, --delay=<span class="constant">NUM</span>         （每次压测延迟的时间）
+</span>  -<span class="ruby"><span class="constant">H</span>, --header=<span class="string">"text"</span>     （添加一个header头请求消息）
+</span>  -<span class="ruby"><span class="constant">A</span>, --user-agent=<span class="string">"text"</span> （设置<span class="constant">User</span>-<span class="constant">Agent</span>）
+</span>  -<span class="ruby"><span class="constant">T</span> --content-type       （指定http请求中的content-type字段内容）</span>
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-17</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Other/">Other</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Other/">Other</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

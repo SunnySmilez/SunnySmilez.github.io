@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sed的使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="sed的使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">sed的使用</h1>
+  
+
+      <time datetime="2015-12-24T01:41:56.000Z"><a href="/2015/12/24/sed的使用/">2015-12-24</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="sed使用场景">sed使用场景</h1><pre><code>1.获取指定行数
+sed -<span class="keyword">n</span> '1,2p' <span class="keyword">test</span>.txt（查看第1到2行的内容）
+sed -<span class="keyword">n</span> '1,<span class="label">$p</span>' <span class="keyword">test</span>.txt（查看第1行到文件末尾的内容）
+sed -<span class="keyword">n</span> '2,3!'p <span class="keyword">test</span>.txt（查看不在第2到3行的内容）
+sed -<span class="keyword">n</span> '4q;2,3p' <span class="keyword">test</span>.txt（读取第2到3行的内容，速度更快）
+
+2.打印包含某字符的行
+sed -<span class="keyword">n</span> '/hello/p' <span class="keyword">test</span>.txt（查看包含hello的行）
+
+3.删除行
+sed '/^#/<span class="keyword">d</span>' <span class="keyword">test</span>.txt（删除空行）
+sed '/hello/<span class="keyword">d</span>' <span class="keyword">test</span>.txt（删除包含hello的行）
+sed '5,10s/[a-z]<span class="comment">//g' test.txt（删除第5行到第10行中的小写字母）</span>
+sed '5,$'<span class="keyword">d</span> <span class="keyword">test</span>.txt（删除第五行之后的内容）
+sed 's/[^0-9a-zA-Z]<span class="comment">//g' test.txt（删除除数字和字母以外的字符）</span>
+sed '/^#/<span class="keyword">d</span>;<span class="keyword">G</span>;<span class="keyword">G</span>' <span class="keyword">test</span>.txt（删除空行添加两个空行）
+sed '<span class="keyword">n</span>;<span class="keyword">n</span>;<span class="keyword">n</span>;<span class="keyword">d</span>;'  <span class="keyword">test</span>.txt（删除第4行的倍数行）
+
+4.选择特定的行，进行替换
+sed '/demo/! s/hello/haha/<span class="keyword">g</span>' <span class="keyword">test</span>.txt &gt; test1.txt（找到不包含demo的行中的hello替换成haha）
+sed '/demo/! s#hello#haha#<span class="keyword">g</span>' <span class="keyword">test</span>.txt &gt; test1.txt（避免替换/bin这种字符串的问题，把正则定界符换成#）
+sed 'y/demo/Demo/' <span class="keyword">test</span>.txt
+
+5.把结果保存到文件
+sed '1,2d;w demo.txt' <span class="keyword">test</span>.txt（将第1，2行删除后保存到demo.txt文件）
+
+6.添加字符
+sed <span class="string">"1,3a hello\ndemo"</span> <span class="keyword">test</span>.txt（在第一行到第三行后添加字符串“hello\ndemo”）
+
+7.替换
+sed '1,3c hello' <span class="keyword">test</span>.txt（把第一行到第三行替换成hello）
+
+8.插入
+sed -i '<span class="label">$a</span> haha_i' <span class="keyword">test</span>.txt（在文件的末尾插入字符串“haha_i”）
+</code></pre><h1 id="sed参数说明">sed参数说明</h1><pre><code>用法: sed [选项]... {脚本(如果没有其他脚本)} [输入文件]...
+
+  -<span class="ruby">n, --quiet, --silent
+</span>                 加上-n参数后，则只有经过sed特殊处理的那一行(或者动作)才会被列出来
+  -<span class="ruby">e 脚本, --expression=脚本
+</span>                 添加“脚本”到程序的运行列表
+  -<span class="ruby">f 脚本文件, --file=脚本文件
+</span>                 添加“脚本文件”到程序的运行列表
+  -<span class="ruby">-follow-symlinks
+</span>                 follow symlinks when processing in place; hard links
+                 will still be broken.
+  -<span class="ruby">i[<span class="constant">SUFFIX</span>], --<span class="keyword">in</span>-place[=<span class="constant">SUFFIX</span>]
+</span>                 直接修改读取的文件内容，不是输出到屏幕
+  -<span class="ruby">c, --copy
+</span>                 取代／替换字符串
+  -<span class="ruby">l <span class="constant">N</span>, --line-length=<span class="constant">N</span>
+</span>                 指定“l”命令的换行期望长度
+  -<span class="ruby">-posix
+</span>                 关闭所有 GNU 扩展
+  -<span class="ruby">r, --regexp-extended 在脚本中使用扩展正则表达式
+</span>  -<span class="ruby">s, --separate
+</span>                 将输入文件视为各个独立的文件而不是一个长的连续输入
+  -<span class="ruby">u, --unbuffered
+</span>                 从输入文件读取最少的数据，更频繁的刷新输出
+      -<span class="ruby">-help     打印帮助并退出
+</span>      -<span class="ruby">-version  输出版本信息并退出
+</span>
+如果没有 -e, --expression, -f 或 --file 选项，那么第一个非选项参数被视为
+sed脚本。其他非选项参数被视为输入文件，如果没有输入文件，那么程序将从标准
+输入读取数据。
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-24</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Linux/">Linux</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

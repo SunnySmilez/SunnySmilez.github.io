@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>awk的使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="awk的使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">awk的使用</h1>
+  
+
+      <time datetime="2015-12-24T01:42:03.000Z"><a href="/2015/12/24/awk的使用/">2015-12-24</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="awk使用案例">awk使用案例</h1><pre><code>1.以每一行为输入，指定分隔符，输出指定域
+    tail -<span class="keyword">n</span> 10 <span class="keyword">test</span>.txt | awk -F ' '  '{<span class="keyword">print</span> <span class="label">$1</span><span class="string">",\t"</span><span class="label">$2}</span>'（以空格为分隔符，输出第一个域与第二个域并以,和<span class="keyword">tab</span>连接）
+
+2.在输出的首尾添加内容
+<span class="keyword">cat</span> /etc/passwd |awk  -F ':'  'BEGIN {<span class="keyword">print</span> <span class="string">"name,shell"</span>}  {<span class="keyword">print</span> <span class="label">$1</span><span class="string">","</span><span class="label">$7}</span> END {<span class="keyword">print</span> <span class="string">"blue,/bin/nosh"</span>}'（显示/etc/passwd的账户和账户对应的<span class="keyword">shell</span>,而账户与<span class="keyword">shell</span>之间以逗号分割,而且在所有行添加列名name,<span class="keyword">shell</span>,在最后一行添加<span class="string">"blue,/bin/nosh"</span>）
+
+3.搜索
+awk -F ':' '/hello/{<span class="keyword">print</span> <span class="label">$1}</span>' <span class="keyword">test</span>.txt（搜索<span class="keyword">test</span>.txt中的包含hello的行,并以':'为分隔符，输出第一个域）
+
+4.awk的环境变量
+awk  -F ':'  '{<span class="keyword">print</span> <span class="string">"filename:"</span> FILENAME <span class="string">",linenumber:"</span> NR <span class="string">",columns:"</span> NF <span class="string">",linecontent:"</span><span class="label">$0}</span>' /etc/passwd（统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:）
+awk  -F ':'  '{printf(<span class="string">"filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n"</span>,FILENAME,NR,NF,<span class="label">$0</span>)}' /etc/passwd
+
+5.awk编程
+awk '{<span class="keyword">count</span>++;<span class="keyword">print</span> <span class="label">$0</span>;} END{<span class="keyword">print</span> <span class="string">"user count is "</span>, <span class="keyword">count</span>}' /etc/passwd（统计用户总数）
+<span class="keyword">ls</span> -<span class="keyword">l</span> | awk 'BEGIN {size=0} {size=size+<span class="label">$5}</span> END {<span class="keyword">print</span> <span class="string">"size is "</span>size}'（统计文件夹大小）
+</code></pre><h1 id="awk参数说明">awk参数说明</h1><pre><code>用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...
+用法: awk [POSIX 或 GNU 风格选项] [--] '程序' 文件 ...
+POSIX 选项:             GNU 长选项:
+    -<span class="ruby">f 脚本文件        --file=脚本文件
+</span>    -<span class="ruby"><span class="constant">F</span> fs            --field-separator=fs
+</span>    -<span class="ruby">v var=val        --assign=var=val
+</span>    -<span class="ruby">m[fr] val
+</span>    -<span class="ruby"><span class="constant">O</span>            --optimize
+</span>    -<span class="ruby"><span class="constant">W</span> compat        --compat
+</span>    -<span class="ruby"><span class="constant">W</span> copyleft        --copyleft
+</span>    -<span class="ruby"><span class="constant">W</span> copyright        --copyright
+</span>    -<span class="ruby"><span class="constant">W</span> dump-variables[=file]    --dump-variables[=file]
+</span>    -<span class="ruby"><span class="constant">W</span> exec=file        --exec=file
+</span>    -<span class="ruby"><span class="constant">W</span> gen-po        --gen-po
+</span>    -<span class="ruby"><span class="constant">W</span> help            --help
+</span>    -<span class="ruby"><span class="constant">W</span> lint[=fatal]        --lint[=fatal]
+</span>    -<span class="ruby"><span class="constant">W</span> lint-old        --lint-old
+</span>    -<span class="ruby"><span class="constant">W</span> non-decimal-data    --non-decimal-data
+</span>    -<span class="ruby"><span class="constant">W</span> profile[=file]    --profile[=file]
+</span>    -<span class="ruby"><span class="constant">W</span> posix        --posix
+</span>    -<span class="ruby"><span class="constant">W</span> re-interval        --re-interval
+</span>    -<span class="ruby"><span class="constant">W</span> source=program-text    --source=program-text
+</span>    -<span class="ruby"><span class="constant">W</span> traditional        --traditional
+</span>    -<span class="ruby"><span class="constant">W</span> usage        --usage
+</span>    -<span class="ruby"><span class="constant">W</span> use-lc-numeric    --use-lc-numeric
+</span>    -<span class="ruby"><span class="constant">W</span> version        --version
+</span>
+awk的环境变量
+    ARGC               命令行参数个数
+    ARGV               命令行参数排列
+    ENVIRON            支持队列中系统环境变量的使用
+    FILENAME           awk浏览的文件名
+    FNR                浏览文件的记录数
+    FS                 设置输入域分隔符，等价于命令行 -F选项
+    NF                 浏览记录的域的个数
+    NR                 已读的记录数
+    OFS                输出域分隔符
+    ORS                输出记录分隔符
+    RS                 控制记录分隔符
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-24</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Linux/">Linux</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

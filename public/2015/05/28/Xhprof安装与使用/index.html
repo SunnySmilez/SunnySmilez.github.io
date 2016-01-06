@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xhprof安装与使用 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="Xhprof安装与使用"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">Xhprof安装与使用</h1>
+  
+
+      <time datetime="2015-05-27T17:01:40.000Z"><a href="/2015/05/28/Xhprof安装与使用/">2015-05-28</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h3 id="简介">简介</h3><p> <em>Xhprof能用来做什么？</em><br>    XHProf是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情 况。一个函数的开销，可细分成调用者和被调用者的开销。</p>
+<h3 id="Xhprof_安装">Xhprof 安装</h3><ul>
+<li><p>Xhprof安装</p>
+<pre><code>wget <span class="string">http:</span><span class="comment">//pecl.php.net/get/xhprof-0.9.2.tgz </span>
+tar xzvf xhprof-<span class="number">0.9</span>.2.tgz 
+cd xhprof-<span class="number">0.9</span>.2<span class="regexp">/extension/</span> 
+cp -r xhprof_html xhprof_lib <span class="regexp">/usr/</span>local<span class="regexp">/www/</span> 
+<span class="regexp">/usr/</span>local<span class="regexp">/php/</span>bin/phpize 
+.<span class="regexp">/configure --with-php-config=/</span>usr<span class="regexp">/local/</span>php<span class="regexp">/bin/</span>php-config 
+make  
+make install 
+</code></pre><p>  修改php.ini，添加xhprof.so （<em>注意xhprof.so需要在extension_dir目录下</em>）</p>
+<pre><code><span class="variable">extension=</span>xhprof.so   
+xhprof.<span class="variable">output_dir=</span>/var/logs/xhprof 
+</code></pre></li>
+<li><p>graphviz安装（<em>性能数据也可以通过callgraph视图来查看 。callgraph 会高亮显示程序的关键路径。</em>）</p>
+<pre><code>wget http:<span class="comment">//www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.24.0.tar.gz</span>
+tar zxf graphviz-<span class="number">2.24</span>.<span class="number">0</span><span class="class">.tar</span><span class="class">.gz</span>
+cd graphviz-<span class="number">2.24</span>.<span class="number">0</span>
+编译安装
+./configure
+make
+make install
+</code></pre></li>
+</ul>
+<h3 id="Xhprof_使用">Xhprof 使用</h3><ul>
+<li><p>XHProf.class.php（<em>本事例是将xhprof_html xhprof_lib XHProf.class.php demo.php放在同一级目录下面，需要web程序能够访问到</em>）</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">XHProf</span> </span>{
+    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>{
+        <span class="comment">// start profiling</span>
+        <span class="keyword">include_once</span> <span class="string">"./xhprof_lib/utils/xhprof_lib.php"</span>;
+        <span class="keyword">include_once</span> <span class="string">"./xhprof_lib/utils/xhprof_runs.php"</span>;
+    }
+
+    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">beginProf</span><span class="params">()</span> </span>{
+        xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
+    }
+
+    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">endProf</span><span class="params">()</span> </span>{
+        <span class="variable">$xhprof_data</span> = xhprof_disable();
+
+        <span class="variable">$xhprof_runs</span> = <span class="keyword">new</span> XHProfRuns_Default();
+        <span class="variable">$run_id</span> = <span class="variable">$xhprof_runs</span>-&gt;save_run(<span class="variable">$xhprof_data</span>, <span class="string">"xhprof_foo"</span>);
+
+        <span class="keyword">echo</span> <span class="string">"&lt;a href=\"http://127.0.0.1/xhprof_html/index.php?run=$run_id&amp;source=xhprof_foo\"&gt;性能分析结果&lt;/a&gt;"</span>;
+    }
+</code></pre></li>
+</ul>
+<ul>
+<li><p>demo.php</p>
+<pre><code>ini_set(<span class="string">'display_errors'</span>, <span class="number">1</span>);
+<span class="keyword">include</span> <span class="string">'./XHProf.class.php'</span>;
+<span class="variable">$objProf</span> = <span class="keyword">new</span> XHProf();
+
+<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>{
+    <span class="keyword">echo</span> <span class="string">'hello world'</span>;
+}
+
+<span class="comment">//开启xhprof并开始记录</span>
+<span class="variable">$objProf</span>-&gt;beginProf();
+
+<span class="comment">//运行一些函数</span>
+foo();
+
+<span class="comment">//停止记录并取到结果</span>
+<span class="variable">$objProf</span>-&gt;endProf();
+</code></pre></li>
+</ul>
+
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-05-28</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/PHP/">PHP</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/PHP/">PHP</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

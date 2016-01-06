@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Innodb存储引擎-1.1 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="Innodb存储引擎-1.1"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">Innodb存储引擎-1.1</h1>
+  
+
+      <time datetime="2015-05-18T16:58:56.000Z"><a href="/2015/05/19/Innodb存储引擎-1-1/">2015-05-19</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h2 id="数据库">数据库</h2><p>物理操作系统文件或其他形式文件类型的集合(<em>可能是存放在内存中的文件</em>)。</p>
+<h2 id="数据库文件">数据库文件</h2><ul>
+<li>.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文件夾下面。 </li>
+<li>MYD：是MyISAM 存储引擎专用，存放MyISAM 表的数据。每一個MyISAM 表都会有一個“.MYD”文件与之对应，存放在所属数据库的文件夾下，和“.frm”文件在一起。 </li>
+<li>MYI:是MyISAM存储引擎的，主要存放MyISAM表的索引相关信息。对于MyISAM存储來說，可以被cache 的內容主要就是來源于“.MYI”文件中。每一个MyISAM表对应一个“.MYI”文件，存放于位置和“.frm”以及“.MYD”一样。 </li>
+<li>ibd，ibdata：是存放Innodb 数据的文件，之所以有两种文件來存放Innodb 的数据（包括索引），是因为Innodb 的数据存储方式能够通过配置來决定是使用共享表空間存放存储数据，还是独享表空间存放存储数据。独享表空间存储方式使用“.ibd”文件來存放數据，且每个表一个“.ibd”文件，文件存放在和MyISAM数据相同的位置。 如果选用共享存储表空間來存放数据，则会使用ibdata 文件來存放，所有表共同使用一个（或者多个，可自行配置）ibdata 文件。</li>
+</ul>
+<h2 id="实例">实例</h2><ul>
+<li><strong>Mysql被设计成的是一个单进程多线程的数据库，因此Mysql数据库实例在系统上的表现就是一个进程</strong></li>
+<li>Mysql数据库由后台线程以及一个共享内存区组成，共享内存可以被运行的后台线程所共享。<em>数据库实例才是真正用于操作数据库文件的</em></li>
+</ul>
+<h2 id="Mysql在linux系统中的使用命令">Mysql在linux系统中的使用命令</h2><p>Mysql启动命令，&amp;代表在后台启动<br>    <code>./mysqld_safe&amp;</code></p>
+<p>ps 查看系统进行命令，这里可以看到Mysql在系统上的表现是一个进程（<em>此时的进程号是1197</em>）</p>
+<p><code>ps aux | grep mysql</code></p>
+<p>执行结果为</p>
+<pre><code>root      <span class="number">1063</span>  <span class="number">0.0</span>  <span class="number">0.0</span> <span class="number">108300</span>   <span class="number">372</span> ?        S    Apr24   0:<span class="number">00</span> <span class="regexp">/bin/</span>sh <span class="regexp">/usr/</span>bin<span class="regexp">/mysqld_safe --datadir=/</span>var<span class="regexp">/lib/</span>mysql --pid-file=<span class="regexp">/var/</span>lib<span class="regexp">/mysql/</span>localhost.localdomain.pid
+
+mysql     <span class="number">1197</span>  <span class="number">0.0</span> <span class="number">13.9</span> <span class="number">1341208</span> <span class="number">65276</span> ?       Sl   Apr24   9:<span class="number">27</span> <span class="regexp">/usr/</span>sbin<span class="regexp">/mysqld --basedir=/</span>usr --datadir=<span class="regexp">/var/</span>lib<span class="regexp">/mysql --plugin-dir=/</span>usr<span class="regexp">/lib64/</span>mysql<span class="regexp">/plugin --user=mysql --log-error=/</span>var<span class="regexp">/lib/</span>mysql<span class="regexp">/localhost.localdomain.err --pid-file=/</span>var<span class="regexp">/lib/</span>mysql/localhost.localdomain.pid
+</code></pre><p><code>ps -ef | grep mysqld</code></p>
+<p>执行结果为</p>
+<pre><code>root      <span class="number">1063</span>     <span class="number">1</span>  <span class="number">0</span> Apr24 ?        00:<span class="number">00</span>:<span class="number">00</span> <span class="regexp">/bin/</span>sh <span class="regexp">/usr/</span>bin<span class="regexp">/mysqld_safe --datadir=/</span>var<span class="regexp">/lib/</span>mysql --pid-file=<span class="regexp">/var/</span>lib<span class="regexp">/mysql/</span>localhost.localdomain.pid
+
+mysql     <span class="number">1197</span>  <span class="number">1063</span>  <span class="number">0</span> Apr24 ?        00:<span class="number">09</span>:<span class="number">27</span> <span class="regexp">/usr/</span>sbin<span class="regexp">/mysqld --basedir=/</span>usr --datadir=<span class="regexp">/var/</span>lib<span class="regexp">/mysql --plugin-dir=/</span>usr<span class="regexp">/lib64/</span>mysql<span class="regexp">/plugin --user=mysql --log-error=/</span>var<span class="regexp">/lib/</span>mysql<span class="regexp">/localhost.localdomain.err --pid-file=/</span>var<span class="regexp">/lib/</span>mysql/localhost.localdomain.pid
+</code></pre><p><code>mysql --help | grep my.cnf</code></p>
+<p>执行结果为（<em>表示如果没有指定Mysql</em>配置文件，Mysql会从这些位置去读取配置文件，如果多个地方有统一参数的配置，则Mysql以最后一个文件的配置参数为准，一般配置文件在/etc/my.cnf*）</p>
+<pre><code><span class="attribute">order</span> of preference, my<span class="class">.cnf</span>, <span class="variable">$MYSQL_TCP_PORT</span>,/etc/my<span class="class">.cnf</span> /etc/mysql/my<span class="class">.cnf</span> /usr/etc/my<span class="class">.cnf</span> ~/<span class="class">.my</span><span class="class">.cnf</span>
+</code></pre><p>ps命令执行后的结果中可以看到datadir的参数，该参数表示数据库所在位置。也可以在Mysql终端使用</p>
+<p><code>SHOW VARIABLES LIKE &#39;datadir&#39;\G</code></p>
+<pre><code><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span> 1. row <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+Variable_name: datadir
+       Value: /var/lib/mysql/   
+1 row in set (0.00 sec)
+</code></pre><p>接着在Mysql终端运行下面下面命令，可以看出data其实就是一个数据目录（<em>该目录的用户和权限必须得到保障只有Mysql用户和组可以访问，通常权限是mysql:mysql</em>）<br><code>system ls -lh /var/lib/mysql/</code> </p>
+<pre><code>总用量 173M
+-<span class="ruby">rw-rw----. <span class="number">1</span> mysql mysql   <span class="number">56</span> <span class="number">3</span>月  <span class="number">24</span> <span class="number">16</span><span class="symbol">:</span>08 auto.cnf
+</span>drwx------. 2 mysql mysql 4.0K 5月  18 14:43 beebank
+-<span class="ruby">rw-rw----. <span class="number">1</span> mysql mysql  <span class="number">76</span>M <span class="number">5</span>月  <span class="number">18</span> <span class="number">20</span><span class="symbol">:</span><span class="number">01</span> ibdata1
+</span>-<span class="ruby">rw-rw----. <span class="number">1</span> mysql mysql  <span class="number">48</span>M <span class="number">5</span>月  <span class="number">18</span> <span class="number">20</span><span class="symbol">:</span><span class="number">01</span> ib_logfile<span class="number">0</span>
+</span>-<span class="ruby">rw-rw----. <span class="number">1</span> mysql mysql  <span class="number">48</span>M <span class="number">3</span>月  <span class="number">24</span> <span class="number">16</span><span class="symbol">:</span><span class="number">04</span> ib_logfile1
+</span>-<span class="ruby">rw-r-----. <span class="number">1</span> mysql root  <span class="number">520</span>K <span class="number">4</span>月  <span class="number">25</span> <span class="number">02</span><span class="symbol">:</span><span class="number">22</span> localhost.localdomain.err
+</span>-<span class="ruby">rw-rw----. <span class="number">1</span> mysql mysql    <span class="number">5</span> <span class="number">4</span>月  <span class="number">25</span> <span class="number">02</span><span class="symbol">:</span><span class="number">22</span> localhost.localdomain.pid
+</span>drwx--x--x. 2 mysql mysql 4.0K 3月  24 16:04 mysql
+srwxrwxrwx. 1 mysql mysql    0 4月  25 02:22 mysql.sock
+drwx------. 2 mysql mysql 4.0K 3月  24 16:04 performance_schema
+-<span class="ruby">rw-r--r--. <span class="number">1</span> root  root   <span class="number">125</span> <span class="number">3</span>月  <span class="number">24</span> <span class="number">16</span><span class="symbol">:</span><span class="number">04</span> <span class="constant">RPM_UPGRADE_HISTORY</span>
+</span>-<span class="ruby">rw-r--r--. <span class="number">1</span> mysql mysql  <span class="number">125</span> <span class="number">3</span>月  <span class="number">24</span> <span class="number">16</span><span class="symbol">:</span><span class="number">04</span> <span class="constant">RPM_UPGRADE_MARKER</span>-<span class="constant">LAST</span>
+</span>drwxr-xr-x. 2 mysql mysql 4.0K 3月  24 16:04 test
+drwx------. 2 mysql mysql 4.0K 5月  11 17:24 test_checklist_table
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-05-19</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Mysql/">Mysql</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/innodb-storage-engine/">innodb_storage_engine</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

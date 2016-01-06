@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+        #kohana_error { background: #ddd; font-size: 1em; font-family:sans-serif; text-align: left; color: #111; }
+        #kohana_error h1,
+        #kohana_error h2 { margin: 0; padding: 1em; font-size: 1em; font-weight: normal; background: #911; color: #fff; }
+        #kohana_error h1 a,
+        #kohana_error h2 a { color: #fff; }
+        #kohana_error h2 { background: #222; }
+        #kohana_error h3 { margin: 0; padding: 0.4em 0 0; font-size: 1em; font-weight: normal; }
+        #kohana_error p { margin: 0; padding: 0.2em 0; }
+        #kohana_error a { color: #1b323b; }
+        #kohana_error pre { overflow: auto; white-space: pre-wrap; }
+        #kohana_error table { width: 100%; display: block; margin: 0 0 0.4em; padding: 0; border-collapse: collapse; background: #fff; }
+        #kohana_error table td { border: solid 1px #ddd; text-align: left; vertical-align: top; padding: 0.4em; }
+        #kohana_error div.content { padding: 0.4em 1em 1em; overflow: hidden; }
+        #kohana_error pre.source { margin: 0 0 1em; padding: 0.4em; background: #fff; border: dotted 1px #b7c680; line-height: 1.2em; }
+        #kohana_error pre.source span.line { display: block; }
+        #kohana_error pre.source span.highlight { background: #f0eb96; }
+        #kohana_error pre.source span.line span.number { color: #666; }
+        #kohana_error ol.trace { display: block; margin: 0 0 0 2em; padding: 0; list-style: decimal; }
+        #kohana_error ol.trace li { margin: 0; padding: 0; }
+        .js .collapsed { display: none; }
+    </style>
+
+    <script type="text/javascript">
+        document.documentElement.className = document.documentElement.className + ' js';
+        function koggle(elem)
+        {
+            elem = document.getElementById(elem);
+
+            if (elem.style && elem.style['display'])
+            // Only works with the "style" attr
+                var disp = elem.style['display'];
+            else if (elem.currentStyle)
+            // For MSIE, naturally
+                var disp = elem.currentStyle['display'];
+            else if (window.getComputedStyle)
+            // For most other browsers
+                var disp = document.defaultView.getComputedStyle(elem, null).getPropertyValue('display');
+
+            // Toggle the state of the "display" style
+            elem.style.display = disp == 'block' ? 'none' : 'block';
+            return false;
+        }
+    </script>
+</head>
+<body>
+<div id="kohana_error">
+    <h1><span class="type"> [ 3050099 ]:</span> <span class="message">empty response from openapi</span></h1>
+    <div id="error5639d8bb02675" class="content">
+        <p><span class="file">/data1/phplib/Api/Openapi/Util.php [ 62 ]</span></p>
+        <pre class="source"><code><span class="line"><span class="number">57</span>             $url = self::PRD_URL;
+</span><span class="line"><span class="number">58</span>         }
+</span><span class="line"><span class="number">59</span>         $url = $url. "{$uri}?" . implode("&amp;", $get_strs);
+</span><span class="line"><span class="number">60</span>         $response = \S\Http::request($url, 'POST', $params, $timeout);
+</span><span class="line"><span class="number">61</span>         if (empty($response)) {
+</span><span class="line highlight"><span class="number">62</span>             throw new Exception("empty response from openapi");
+</span><span class="line"><span class="number">63</span>         }
+</span><span class="line"><span class="number">64</span>         $result = json_decode($response, true);
+</span><span class="line"><span class="number">65</span>         if (empty($result)) {
+</span><span class="line"><span class="number">66</span>             throw new Exception("error format response from openapi");
+</span><span class="line"><span class="number">67</span>         }
+</span></code></pre>        <ol class="trace">
+                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source0" onclick="return koggle('error5639d8bb02675source0')">/data1/phplib/Api/Openapi/Pay.php [ 112 ]</a>
+                                    </span>
+                        &raquo;
+                        Api\Openapi\Util::request(<a href="#error5639d8bb02675args0" onclick="return koggle('error5639d8bb02675args0')">arguments</a>)
+                    </p>
+                                            <div id="error5639d8bb02675args0" class="collapsed">
+                            <table cellspacing="0">
+                                                                    <tr>
+                                        <td><code>0</code></td>
+                                        <td><pre><small>string</small><span>(11)</span> "/pay/deduce"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>1</code></td>
+                                        <td><pre><small>array</small><span>(2)</span> <span>(
+    "header" => <small>array</small><span>(0)</span> 
+    "body" => <small>array</small><span>(9)</span> <span>(
+        "service" => <small>string</small><span>(8)</span> "kuaiqian"
+        "trans_id" => <small>string</small><span>(31)</span> "QL20151104030000000000000000012"
+        "trans_time" => <small>string</small><span>(19)</span> "2015-11-04 18:06:40"
+        "cert_type" => <small>string</small><span>(2)</span> "01"
+        "cert_no" => <small>string</small><span>(18)</span> "432503198912295716"
+        "name" => <small>string</small><span>(6)</span> "周志"
+        "acct" => <small>string</small><span>(16)</span> "6214830108726034"
+        "amt" => <small>string</small><span>(6)</span> "102300"
+        "options" => <small>array</small><span>(15)</span> <span>(
+            "third_pay" => <small>string</small><span>(8)</span> "kuaiqian"
+            "mer_id" => <small>string</small><span>(24)</span> "mer_id_qianlong_recharge"
+            "cust_id" => <small>string</small><span>(5)</span> "QL154"
+            "amt" => <small>string</small><span>(6)</span> "102300"
+            "mobile" => <small>string</small><span>(11)</span> "15580818723"
+            "ori_trans_id" => <small>string</small><span>(31)</span> "QL20151104030000000000000000012"
+            "merchantId" => <small>string</small><span>(15)</span> "104110045112012"
+            "customerId" => <small>string</small><span>(5)</span> "QL154"
+            "storablePan" => <small>string</small><span>(10)</span> "6214836034"
+            "token" => <small>string</small><span>(7)</span> "1209460"
+            "err_code" => <small>string</small><span>(2)</span> "00"
+            "err_msg" => <small>string</small><span>(12)</span> "交易成功"
+            "status" => <small>string</small><span>(1)</span> "0"
+            "storable_card_no" => <small>string</small><span>(10)</span> "6214836034"
+            "validate_code" => <small>string</small><span>(6)</span> "079015"
+        )</span>
+    )</span>
+)</span></pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>2</code></td>
+                                        <td><pre><small>integer</small> 10000</pre></td>
+                                    </tr>
+                                                            </table>
+                        </div>
+                                                                <pre id="error5639d8bb02675source0" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">107</span>         $params = array(
+</span><span class="line"><span class="number">108</span>             "header" =&gt; array(),
+</span><span class="line"><span class="number">109</span>             "body" =&gt; $body,
+</span><span class="line"><span class="number">110</span>         );
+</span><span class="line"><span class="number">111</span> 
+</span><span class="line highlight"><span class="number">112</span>         $trans_info = Util::request(self::URI_PAY_DEDUCE, $params, $timeout)["body"];
+</span><span class="line"><span class="number">113</span> 
+</span><span class="line"><span class="number">114</span>         return $trans_info;
+</span><span class="line"><span class="number">115</span>     }
+</span><span class="line"><span class="number">116</span> 
+</span><span class="line"><span class="number">117</span>     /**
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source1" onclick="return koggle('error5639d8bb02675source1')">/data1/phplib/Modules/Pay/Model/Service/Pay.php [ 268 ]</a>
+                                    </span>
+                        &raquo;
+                        Api\Openapi\Pay->deduce(<a href="#error5639d8bb02675args1" onclick="return koggle('error5639d8bb02675args1')">arguments</a>)
+                    </p>
+                                            <div id="error5639d8bb02675args1" class="collapsed">
+                            <table cellspacing="0">
+                                                                    <tr>
+                                        <td><code>0</code></td>
+                                        <td><pre><small>string</small><span>(8)</span> "kuaiqian"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>1</code></td>
+                                        <td><pre><small>string</small><span>(31)</span> "QL20151104030000000000000000012"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>2</code></td>
+                                        <td><pre><small>string</small><span>(19)</span> "2015-11-04 18:06:40"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>3</code></td>
+                                        <td><pre><small>string</small><span>(2)</span> "01"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>4</code></td>
+                                        <td><pre><small>string</small><span>(18)</span> "432503198912295716"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>5</code></td>
+                                        <td><pre><small>string</small><span>(6)</span> "周志"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>6</code></td>
+                                        <td><pre><small>string</small><span>(16)</span> "6214830108726034"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>7</code></td>
+                                        <td><pre><small>string</small><span>(6)</span> "102300"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>8</code></td>
+                                        <td><pre><small>array</small><span>(15)</span> <span>(
+    "third_pay" => <small>string</small><span>(8)</span> "kuaiqian"
+    "mer_id" => <small>string</small><span>(24)</span> "mer_id_qianlong_recharge"
+    "cust_id" => <small>string</small><span>(5)</span> "QL154"
+    "amt" => <small>string</small><span>(6)</span> "102300"
+    "mobile" => <small>string</small><span>(11)</span> "15580818723"
+    "ori_trans_id" => <small>string</small><span>(31)</span> "QL20151104030000000000000000012"
+    "merchantId" => <small>string</small><span>(15)</span> "104110045112012"
+    "customerId" => <small>string</small><span>(5)</span> "QL154"
+    "storablePan" => <small>string</small><span>(10)</span> "6214836034"
+    "token" => <small>string</small><span>(7)</span> "1209460"
+    "err_code" => <small>string</small><span>(2)</span> "00"
+    "err_msg" => <small>string</small><span>(12)</span> "交易成功"
+    "status" => <small>string</small><span>(1)</span> "0"
+    "storable_card_no" => <small>string</small><span>(10)</span> "6214836034"
+    "validate_code" => <small>string</small><span>(6)</span> "079015"
+)</span></pre></td>
+                                    </tr>
+                                                            </table>
+                        </div>
+                                                                <pre id="error5639d8bb02675source1" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">263</span>          * 使用bc运算服务，防止精度丢失
+</span><span class="line"><span class="number">264</span>          */
+</span><span class="line"><span class="number">265</span>         $trans_amt = bcmul(100, $amt);
+</span><span class="line"><span class="number">266</span> 
+</span><span class="line"><span class="number">267</span>         $sdk = new SdkPay();
+</span><span class="line highlight"><span class="number">268</span>         $resp_data = $sdk-&gt;deduce($third_pay, $request_id, $request_time, $cert_type, $cert_no, $name, $acct_no, $trans_amt, $options);
+</span><span class="line"><span class="number">269</span> 
+</span><span class="line"><span class="number">270</span>         Logger::getInstance()-&gt;debug(array(DbPayRecord::TRANS_TYPE_WITHDRAW, $this-&gt;_buss_id, $third_pay, $acct_no, $name, $amt, $trans_amt, json_encode($options), $callback, json_encode($resp_data)));
+</span><span class="line"><span class="number">271</span> 
+</span><span class="line"><span class="number">272</span>         $response_id = $resp_data["trans_serial_no"];
+</span><span class="line"><span class="number">273</span>         $response_time = (empty($resp_data["resp_trans_time"]) ? null : date("Y-m-d H:i:s", strtotime($resp_data["resp_trans_time"])));
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source2" onclick="return koggle('error5639d8bb02675source2')">/data1/phplib/Modules/Pay/Model/Service/Pay.php [ 204 ]</a>
+                                    </span>
+                        &raquo;
+                        Modules\Pay\Model\Service\Pay->pay()
+                    </p>
+                                                                <pre id="error5639d8bb02675source2" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">199</span>         $this-&gt;beforeAction();
+</span><span class="line"><span class="number">200</span>         /**
+</span><span class="line"><span class="number">201</span>          * 发起支付请求
+</span><span class="line"><span class="number">202</span>          */
+</span><span class="line"><span class="number">203</span>         try{
+</span><span class="line highlight"><span class="number">204</span>             $this-&gt;pay();
+</span><span class="line"><span class="number">205</span>         } catch (\Exception $e) {
+</span><span class="line"><span class="number">206</span>             throw $e;
+</span><span class="line"><span class="number">207</span>         } finally {
+</span><span class="line"><span class="number">208</span>             /**
+</span><span class="line"><span class="number">209</span>              * 删除支付上下文
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source3" onclick="return koggle('error5639d8bb02675source3')">/data1/htdocs/qianlong.hrbbwx.com/app/library/Service/Finance/Buy/Pay.php [ 76 ]</a>
+                                    </span>
+                        &raquo;
+                        Modules\Pay\Model\Service\Pay->action(<a href="#error5639d8bb02675args3" onclick="return koggle('error5639d8bb02675args3')">arguments</a>)
+                    </p>
+                                            <div id="error5639d8bb02675args3" class="collapsed">
+                            <table cellspacing="0">
+                                                                    <tr>
+                                        <td><code>0</code></td>
+                                        <td><pre><small>string</small><span>(3)</span> "429"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>1</code></td>
+                                        <td><pre><small>string</small><span>(2)</span> "01"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>2</code></td>
+                                        <td><pre><small>string</small><span>(18)</span> "432503198912295716"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>3</code></td>
+                                        <td><pre><small>string</small><span>(6)</span> "周志"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>4</code></td>
+                                        <td><pre><small>string</small><span>(16)</span> "6214830108726034"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>5</code></td>
+                                        <td><pre><small>NULL</small></pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>6</code></td>
+                                        <td><pre><small>array</small><span>(1)</span> <span>(
+    "validate_code" => <small>string</small><span>(6)</span> "079015"
+)</span></pre></td>
+                                    </tr>
+                                                            </table>
+                        </div>
+                                                                <pre id="error5639d8bb02675source3" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">71</span> 		$service_validate-&gt;verify($uid, $money, $card_id, array('user_type' =&gt; DataUserInfo::NEW_COMER));
+</span><span class="line"><span class="number">72</span> 		$option = array(
+</span><span class="line"><span class="number">73</span> 			"validate_code" =&gt; $sms_code,
+</span><span class="line"><span class="number">74</span> 		);
+</span><span class="line"><span class="number">75</span> 
+</span><span class="line highlight"><span class="number">76</span> 		$result = $modules_pay-&gt;action($order_id, ModulesPay::CERT_TYPE_ID_CARD, $info["cert_no"], $info["name"], $card_no, $order["amt"], $option);
+</span><span class="line"><span class="number">77</span> 		if (!$result) {
+</span><span class="line"><span class="number">78</span> 			throw new Exception('error.finance.auth_pay_fail');
+</span><span class="line"><span class="number">79</span> 		}
+</span><span class="line"><span class="number">80</span> 
+</span><span class="line"><span class="number">81</span> 		$data['money'] = $money;
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source4" onclick="return koggle('error5639d8bb02675source4')">/data1/htdocs/qianlong.hrbbwx.com/app/controllers/Api/Finance/Authpay.php [ 39 ]</a>
+                                    </span>
+                        &raquo;
+                        Service\Finance\Buy\Pay->authPay(<a href="#error5639d8bb02675args4" onclick="return koggle('error5639d8bb02675args4')">arguments</a>)
+                    </p>
+                                            <div id="error5639d8bb02675args4" class="collapsed">
+                            <table cellspacing="0">
+                                                                    <tr>
+                                        <td><code>0</code></td>
+                                        <td><pre><small>string</small><span>(3)</span> "154"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>1</code></td>
+                                        <td><pre><small>string</small><span>(3)</span> "144"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>2</code></td>
+                                        <td><pre><small>string</small><span>(6)</span> "079015"</pre></td>
+                                    </tr>
+                                                                    <tr>
+                                        <td><code>3</code></td>
+                                        <td><pre><small>string</small><span>(3)</span> "429"</pre></td>
+                                    </tr>
+                                                            </table>
+                        </div>
+                                                                <pre id="error5639d8bb02675source4" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">34</span> 	        ),
+</span><span class="line"><span class="number">35</span>         );
+</span><span class="line"><span class="number">36</span>     }
+</span><span class="line"><span class="number">37</span> 
+</span><span class="line"><span class="number">38</span>     public function action() {
+</span><span class="line highlight"><span class="number">39</span>         $data = (new \Service\Finance\Buy\Pay)-&gt;authPay($this-&gt;uid, $this-&gt;params['card_id'], $this-&gt;params['sms_code'], $this-&gt;params['order_id']);
+</span><span class="line"><span class="number">40</span>         if (!$data) {
+</span><span class="line"><span class="number">41</span>             throw new Exception('error.finance.system_serail_error');
+</span><span class="line"><span class="number">42</span>         }
+</span><span class="line"><span class="number">43</span> 
+</span><span class="line"><span class="number">44</span>         $this-&gt;response['data'] = array(
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source5" onclick="return koggle('error5639d8bb02675source5')">/data1/phplib/Base/Controller/Common.php [ 48 ]</a>
+                                    </span>
+                        &raquo;
+                        Controller_Api_Finance_Authpay->action()
+                    </p>
+                                                                <pre id="error5639d8bb02675source5" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number">43</span>         $this-&gt;beforeParams();
+</span><span class="line"><span class="number">44</span>         //参数检查
+</span><span class="line"><span class="number">45</span>         $this-&gt;params = \S\Validate\Handler::check($this-&gt;params());
+</span><span class="line"><span class="number">46</span>         //逻辑处理
+</span><span class="line"><span class="number">47</span>         $this-&gt;beforeAction();
+</span><span class="line highlight"><span class="number">48</span>         $this-&gt;action();
+</span><span class="line"><span class="number">49</span> 
+</span><span class="line"><span class="number">50</span>         //输出
+</span><span class="line"><span class="number">51</span>         if (\Core\Env::isPhpUnit()) {//测试用例处理
+</span><span class="line"><span class="number">52</span>             ob_start();
+</span><span class="line"><span class="number">53</span>         }
+</span></code></pre></code></pre>
+                                    </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            {PHP internal call}
+                                    </span>
+                        &raquo;
+                        Base\Controller\Common->indexAction()
+                    </p>
+                                                        </li>
+                                            <li>
+                    <p>
+                <span class="file">
+                                            <a href="#error5639d8bb02675source7" onclick="return koggle('error5639d8bb02675source7')">/data1/htdocs/qianlong.hrbbwx.com/public/index.php [ 5 ]</a>
+                                    </span>
+                        &raquo;
+                        Yaf\Application->run()
+                    </p>
+                                                                <pre id="error5639d8bb02675source7" class="source collapsed"><code><pre class="source"><code><span class="line"><span class="number"> 1</span> &lt;?php
+</span><span class="line"><span class="number"> 2</span> header('Pragma: no-cache', false);
+</span><span class="line"><span class="number"> 3</span> require dirname(__DIR__).'/conf/Init.php';
+</span><span class="line"><span class="number"> 4</span> $app  = new \Yaf\Application(APP_CONF. '/application.ini');
+</span><span class="line highlight"><span class="number"> 5</span> $app-&gt;bootstrap()-&gt;run();</span></code></pre></code></pre>
+                                    </li>
+                                    </ol>
+    </div>
+    <h2><a href="#error5639d8bb02675environment" onclick="return koggle('error5639d8bb02675environment')">Environment</a></h2>
+    <div id="error5639d8bb02675environment" class="content collapsed">
+                <h3><a href="#error5639d8bb02675environment_included" onclick="return koggle('error5639d8bb02675environment_included')">Included files</a> (82)</h3>
+        <div id="error5639d8bb02675environment_included" class="collapsed">
+            <table cellspacing="0">
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/public/index.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/Init.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/Bootstrap.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/Bootstrap.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/defined.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Core/Env.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Core/Loader.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Core/Loader/Namespaces.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Core/Loader/Classmaps.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/Plugin/Base.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Logger.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Handler/File.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Handler/Abstraction.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/FileSystem/FileSystem.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Request.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Response.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/controllers/Api/Finance/Authpay.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/controllers/Api/Abstract.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/controllers/Abstract.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/Controller/Common.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Service/User/Auth.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Auth.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Crypt/Aes.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Crypt/CryptInterface.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Config.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/security/dev/aes.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Data/User/Info.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/User/Basic.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/User/Db.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/Dao/Db.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/User/Ext.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Cache/User.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Cache.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Cache/Redis.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Cache/Abstraction.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Cache/CacheInterface.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/server/dev/cache.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Strace/Timelog.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/LogLevel.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Formatter/Debug.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Formatter/Abstraction.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Util/Ip.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Context.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Validate/Handler.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Crypt/Rsa.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/security/dev/rsa.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Validate/Type/Regx.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Validate/Abstraction.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Service/Finance/Buy/Pay.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Service/Finance/Buy/Validate.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Data/User/Card.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/User/Card.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Db/Mysql.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/server/dev/mysql.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Data/Finance/Buy.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/Finance/Buy.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Dao/Db/Finance/Db.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Service/Pay.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Api/Openapi/Pay.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Service/User/Info.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/constant/user.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/library/Data/Finance/Product.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Data/Query.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Dao/Db/PayRecord.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Dao/Db.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Data/Context.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Dao/Redis/Context.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Db/Redis.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/server/dev/redis.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Modules/Pay/Model/Data/PayRecord.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Api/Openapi/Util.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/conf/security/dev/openapi.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Http.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Http/Curl.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Api/Openapi/Exception.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Exception.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Log/Formatter/Error.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/htdocs/qianlong.hrbbwx.com/app/controllers/Error.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/Controller/Error.php</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/Base/View/DevError.phtml</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>/data1/phplib/S/Strace/Debug.php</code></td>
+                    </tr>
+                            </table>
+        </div>
+                <h3><a href="#error5639d8bb02675environment_loaded" onclick="return koggle('error5639d8bb02675environment_loaded')">Loaded extensions</a> (44)</h3>
+        <div id="error5639d8bb02675environment_loaded" class="collapsed">
+            <table cellspacing="0">
+                                    <tr>
+                        <td><code>Core</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>date</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>ereg</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>libxml</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>pcre</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>sqlite3</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>bcmath</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>ctype</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>dom</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>fileinfo</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>filter</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>gd</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>hash</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>iconv</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>json</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>mbstring</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>SPL</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PDO</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>pdo_sqlite</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>openssl</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>posix</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>Reflection</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>session</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>SimpleXML</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>soap</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>standard</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>tokenizer</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>xml</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>xmlreader</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>xmlwriter</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>mysqlnd</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>cgi-fcgi</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>pdo_mysql</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>curl</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>yaf</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>Phar</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>pcntl</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>redis</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>zip</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>ldap</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>ssh2</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>memcached</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>Zend OPcache</code></td>
+                    </tr>
+                                    <tr>
+                        <td><code>xdebug</code></td>
+                    </tr>
+                            </table>
+        </div>
+                                                        <h3><a href="#error5639d8bb02675environment_post" onclick="return koggle('error5639d8bb02675environment_post')">$_POST</a></h3>
+            <div id="error5639d8bb02675environment_post" class="collapsed">
+                <table cellspacing="0">
+                                            <tr>
+                            <td><code>code</code></td>
+                            <td><pre><small>string</small><span>(6)</span> "079015"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>card_no</code></td>
+                            <td><pre><small>string</small><span>(200)</span> "nglO%2BrPv%2FRBhITBVjU%2By0daroPJ%2FAadwjYEVtuHwAWiIlKz2VvfW%2BZefbVX%2BzadyVU6l%2FFRR6OuvI%2F9OPidEsretHlyQQ%2F%2BAcZd9ffG6PTKA&nbsp;&hellip;"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>order_id</code></td>
+                            <td><pre><small>string</small><span>(3)</span> "429"</pre></td>
+                        </tr>
+                                    </table>
+            </div>
+                                            <h3><a href="#error5639d8bb02675environment_cookie" onclick="return koggle('error5639d8bb02675environment_cookie')">$_COOKIE</a></h3>
+            <div id="error5639d8bb02675environment_cookie" class="collapsed">
+                <table cellspacing="0">
+                                            <tr>
+                            <td><code>Hm_lpvt_ce6f031337050e74f295543d8edbeeb2</code></td>
+                            <td><pre><small>string</small><span>(10)</span> "1446631552"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>Hm_lvt_ce6f031337050e74f295543d8edbeeb2</code></td>
+                            <td><pre><small>string</small><span>(43)</span> "1446538990,1446541580,1446555764,1446605896"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>TOKEN</code></td>
+                            <td><pre><small>string</small><span>(68)</span> "cF6VZAFa2Ybb35n5%2BF3CBY26T5nbiDvU2OGCFBC016KdmTRzKOmt2sqc9qKVUzYbv1"</pre></td>
+                        </tr>
+                                    </table>
+            </div>
+                                <h3><a href="#error5639d8bb02675environment_server" onclick="return koggle('error5639d8bb02675environment_server')">$_SERVER</a></h3>
+            <div id="error5639d8bb02675environment_server" class="collapsed">
+                <table cellspacing="0">
+                                            <tr>
+                            <td><code>USER</code></td>
+                            <td><pre><small>string</small><span>(3)</span> "www"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HOME</code></td>
+                            <td><pre><small>string</small><span>(9)</span> "/home/www"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>FCGI_ROLE</code></td>
+                            <td><pre><small>string</small><span>(9)</span> "RESPONDER"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SCRIPT_FILENAME</code></td>
+                            <td><pre><small>string</small><span>(50)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/index.php"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>PATH_INFO</code></td>
+                            <td><pre><small>string</small><span>(20)</span> "/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>x-request-id</code></td>
+                            <td><pre><small>string</small><span>(20)</span> "agq7r75omjc20c2p6oe0"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>QUERY_STRING</code></td>
+                            <td><pre><small>string</small><span>(0)</span> ""</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REQUEST_METHOD</code></td>
+                            <td><pre><small>string</small><span>(4)</span> "POST"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>CONTENT_TYPE</code></td>
+                            <td><pre><small>string</small><span>(33)</span> "application/x-www-form-urlencoded"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>CONTENT_LENGTH</code></td>
+                            <td><pre><small>string</small><span>(3)</span> "261"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SCRIPT_NAME</code></td>
+                            <td><pre><small>string</small><span>(50)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/index.php"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REQUEST_URI</code></td>
+                            <td><pre><small>string</small><span>(20)</span> "/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>DOCUMENT_URI</code></td>
+                            <td><pre><small>string</small><span>(30)</span> "/index.php/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>DOCUMENT_ROOT</code></td>
+                            <td><pre><small>string</small><span>(40)</span> "/data1/htdocs/qianlong.hrbbwx.com/public"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SERVER_PROTOCOL</code></td>
+                            <td><pre><small>string</small><span>(8)</span> "HTTP/1.0"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>GATEWAY_INTERFACE</code></td>
+                            <td><pre><small>string</small><span>(7)</span> "CGI/1.1"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SERVER_SOFTWARE</code></td>
+                            <td><pre><small>string</small><span>(11)</span> "nginx/1.7.4"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REMOTE_ADDR</code></td>
+                            <td><pre><small>string</small><span>(10)</span> "172.16.5.2"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REMOTE_PORT</code></td>
+                            <td><pre><small>string</small><span>(5)</span> "46363"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SERVER_ADDR</code></td>
+                            <td><pre><small>string</small><span>(12)</span> "172.16.9.230"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SERVER_PORT</code></td>
+                            <td><pre><small>string</small><span>(2)</span> "80"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>SERVER_NAME</code></td>
+                            <td><pre><small>string</small><span>(19)</span> "qianlong.hrbbwx.com"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REDIRECT_STATUS</code></td>
+                            <td><pre><small>string</small><span>(3)</span> "200"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_HOST</code></td>
+                            <td><pre><small>string</small><span>(19)</span> "qianlong.hrbbwx.com"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_CONNECTION</code></td>
+                            <td><pre><small>string</small><span>(5)</span> "close"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_CONTENT_LENGTH</code></td>
+                            <td><pre><small>string</small><span>(3)</span> "261"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_ACCEPT</code></td>
+                            <td><pre><small>string</small><span>(33)</span> "application/json, text/plain, */*"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_X_REQUESTED_WITH</code></td>
+                            <td><pre><small>string</small><span>(14)</span> "XMLHttpRequest"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_ACCEPT_ENCODING</code></td>
+                            <td><pre><small>string</small><span>(13)</span> "gzip, deflate"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_ACCEPT_LANGUAGE</code></td>
+                            <td><pre><small>string</small><span>(5)</span> "zh-cn"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_CONTENT_TYPE</code></td>
+                            <td><pre><small>string</small><span>(33)</span> "application/x-www-form-urlencoded"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_ORIGIN</code></td>
+                            <td><pre><small>string</small><span>(26)</span> "http://qianlong.hrbbwx.com"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_USER_AGENT</code></td>
+                            <td><pre><small>string</small><span>(159)</span> "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13A452 MicroMessenger/6.&nbsp;&hellip;"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_REFERER</code></td>
+                            <td><pre><small>string</small><span>(34)</span> "http://qianlong.hrbbwx.com/finance"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>HTTP_COOKIE</code></td>
+                            <td><pre><small>string</small><span>(214)</span> "Hm_lpvt_ce6f031337050e74f295543d8edbeeb2=1446631552; Hm_lvt_ce6f031337050e74f295543d8edbeeb2=1446538990,1446541580,1446555764,14&nbsp;&hellip;"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>ORIG_PATH_INFO</code></td>
+                            <td><pre><small>string</small><span>(70)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/index.php/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>ORIG_SCRIPT_NAME</code></td>
+                            <td><pre><small>string</small><span>(30)</span> "/index.php/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>ORIG_SCRIPT_FILENAME</code></td>
+                            <td><pre><small>string</small><span>(70)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/index.php/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>PATH_TRANSLATED</code></td>
+                            <td><pre><small>string</small><span>(60)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>PHP_SELF</code></td>
+                            <td><pre><small>string</small><span>(70)</span> "/data1/htdocs/qianlong.hrbbwx.com/public/index.php/api/finance/authpay"</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REQUEST_TIME_FLOAT</code></td>
+                            <td><pre><small>float</small> 1446631600.867</pre></td>
+                        </tr>
+                                            <tr>
+                            <td><code>REQUEST_TIME</code></td>
+                            <td><pre><small>integer</small> 1446631600</pre></td>
+                        </tr>
+                                    </table>
+            </div>
+            </div>
+</div>
+</body>
+</html>

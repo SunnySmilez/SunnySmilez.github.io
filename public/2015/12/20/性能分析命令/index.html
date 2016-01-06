@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>性能分析命令 | 狂奔的菜鸟</title>
+  <meta name="author" content="狂奔的菜鸟">
+  
+  <meta name="description" content="狂奔的菜鸟">
+  
+  
+  <meta property="og:title" content="性能分析命令"/>
+  <meta property="og:site_name" content="狂奔的菜鸟"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">狂奔的菜鸟</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Mysql/">Mysql</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/PHP/">PHP</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Linux/">Linux</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Redis/">Redis</a><li>
+    
+      <li class="cell"><a class="next" href="/categories/Other/">Other</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscrible</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=3692190582&verifier=5de9dfab&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Linux/">Linux</a><small>12</small></li>
+  
+    <li><a href="/categories/Mysql/">Mysql</a><small>4</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>6</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>3</small></li>
+  
+    <li><a href="/categories/Redis/">Redis</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a><a href="/tags/Other/" style="font-size: 16.67px;">Other</a><a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a><a href="/tags/Redis/" style="font-size: 10px;">Redis</a><a href="/tags/innodb-storage-engine/" style="font-size: 10px;">innodb_storage_engine</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 狂奔的菜鸟
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1254841266&web_id=1254841266&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">狂奔的菜鸟</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">性能分析命令</h1>
+  
+
+      <time datetime="2015-12-20T02:35:45.000Z"><a href="/2015/12/20/性能分析命令/">2015-12-20</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="环境准备">环境准备</h1><ul>
+<li>首先你得拥有一个linux环境</li>
+<li>安装sysstat包 <code>yum install sysstat</code></li>
+<li>安装procps包 <code>yum install procps</code></li>
+</ul>
+<h1 id="需要执行的命令">需要执行的命令</h1><p><code>updime</code><br>    $ uptime<br>    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00</p>
+<pre><code>显示的是过去1分钟，五分钟，十五分钟系统的平均负载情况，通过数据可以了解服务器负载是趋于紧张还是趋于缓解
+</code></pre><p><code>dmesg | tail</code></p>
+<pre><code>该命令会输出系统日志的最后<span class="keyword">n</span>行。这些日志可以帮助排查性能问题。千万不要忘了这一步。
+</code></pre><p><code>vmstat 1</code></p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- --system-- -----<span class="built_in">cpu</span>-----
+ r  b   swpd   free   buff  cache   <span class="literal">si</span>   so    bi    bo   <span class="keyword">in</span>   <span class="literal">cs</span> us sy id wa <span class="literal">st</span>
+ <span class="number">0</span>  <span class="number">0</span> <span class="number">558844</span>  <span class="number">24696</span> <span class="number">150984</span>  <span class="number">65156</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">2</span>   <span class="number">150</span>    <span class="number">1</span>    <span class="number">2</span>  <span class="number">0</span>  <span class="number">1</span> <span class="number">99</span>  <span class="number">0</span>  <span class="number">0</span>
+ <span class="number">0</span>  <span class="number">0</span> <span class="number">558844</span>  <span class="number">24688</span> <span class="number">150984</span>  <span class="number">65160</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>   <span class="number">51</span>   <span class="number">72</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span>  <span class="number">0</span>  <span class="number">0</span>
+ <span class="number">0</span>  <span class="number">0</span> <span class="number">558844</span>  <span class="number">24688</span> <span class="number">150984</span>  <span class="number">65160</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>   <span class="number">50</span>   <span class="number">75</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span>  <span class="number">0</span>  <span class="number">0</span>
+ <span class="number">0</span>  <span class="number">0</span> <span class="number">558844</span>  <span class="number">24688</span> <span class="number">150984</span>  <span class="number">65160</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>   <span class="number">55</span>   <span class="number">80</span>  <span class="number">0</span>  <span class="number">1</span> <span class="number">99</span>  <span class="number">0</span>  <span class="number">0</span>
+ <span class="number">0</span>  <span class="number">0</span> <span class="number">558844</span>  <span class="number">24688</span> <span class="number">150984</span>  <span class="number">65160</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>   <span class="number">44</span>   <span class="number">67</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span>  <span class="number">0</span>  <span class="number">0</span>
+
+
+每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数<span class="number">1</span>，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：
+
+<span class="number">1.</span>r：等待在<span class="built_in">CPU</span>资源的进程数。这个数据比平均负载更加能够体现<span class="built_in">CPU</span>负载情况，数据中不包含等待IO的进程。如果这个数值大于机器<span class="built_in">CPU</span>核数，那么机器的<span class="built_in">CPU</span>资源已经饱和。
+<span class="number">2.</span>free：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。
+<span class="number">3.</span><span class="literal">si</span>, so：交换区写入和读取的数量。如果这个数据不为<span class="number">0</span>，说明系统已经在使用交换区（swap），机器物理内存已经不足。
+<span class="number">4.</span>us, sy, id, wa, <span class="literal">st</span>：这些都代表了<span class="built_in">CPU</span>时间的消耗，它们分别表示用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen，一般被其他虚拟机消耗）。
+
+一般情况下，如果用户时间和系统时间相加非常大，<span class="built_in">CPU</span>出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。
+</code></pre><p><code>mpstat -P ALL 1</code></p>
+<pre><code>Linux <span class="number">2.6</span>.32-<span class="number">431.</span>el6.x86_64 (localhost.localdomain)     <span class="number">2015</span>年<span class="number">12</span>月<span class="number">27</span>日     _x86_64_    (<span class="number">1</span> CPU)
+
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">48</span>秒  CPU    <span class="variable">%usr</span>   <span class="variable">%nice</span>    <span class="variable">%sys</span> <span class="variable">%iowait</span>    <span class="variable">%irq</span>   <span class="variable">%soft</span>  <span class="variable">%steal</span>  <span class="variable">%guest</span>   <span class="variable">%idle</span>
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">49</span>秒  all    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">49</span>秒    <span class="number">0</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">49</span>秒  CPU    <span class="variable">%usr</span>   <span class="variable">%nice</span>    <span class="variable">%sys</span> <span class="variable">%iowait</span>    <span class="variable">%irq</span>   <span class="variable">%soft</span>  <span class="variable">%steal</span>  <span class="variable">%guest</span>   <span class="variable">%idle</span>
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">50</span>秒  all    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+<span class="number">18</span>时<span class="number">45</span>分<span class="number">50</span>秒    <span class="number">0</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+
+显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的
+</code></pre><p><code>pidstat 1</code></p>
+<pre><code>Linux <span class="number">2.6</span>.32-<span class="number">431.</span>el6.x86_64 (localhost.localdomain)     <span class="number">2015</span>年<span class="number">12</span>月<span class="number">27</span>日     _x86_64_    (<span class="number">1</span> CPU)
+
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">22</span>秒       PID    <span class="variable">%usr</span> <span class="variable">%system</span>  <span class="variable">%guest</span>    <span class="variable">%CPU</span>   CPU  Command
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">23</span>秒     <span class="number">24331</span>    <span class="number">0.98</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.98</span>     <span class="number">0</span>  redis-server
+
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">23</span>秒       PID    <span class="variable">%usr</span> <span class="variable">%system</span>  <span class="variable">%guest</span>    <span class="variable">%CPU</span>   CPU  Command
+
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">24</span>秒       PID    <span class="variable">%usr</span> <span class="variable">%system</span>  <span class="variable">%guest</span>    <span class="variable">%CPU</span>   CPU  Command
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">25</span>秒         <span class="number">7</span>    <span class="number">0.00</span>    <span class="number">1.01</span>    <span class="number">0.00</span>    <span class="number">1.01</span>     <span class="number">0</span>  events/<span class="number">0</span>
+<span class="number">18</span>时<span class="number">47</span>分<span class="number">25</span>秒     <span class="number">27624</span>    <span class="number">0.00</span>    <span class="number">2.02</span>    <span class="number">0.00</span>    <span class="number">2.02</span>     <span class="number">0</span>  pidstat
+
+pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态
+</code></pre><p><code>iostat -xz 1</code></p>
+<pre><code>Linux <span class="number">2.6</span>.32-<span class="number">431.</span>el6.x86_64 (localhost.localdomain)     <span class="number">2015</span>年<span class="number">12</span>月<span class="number">27</span>日     _x86_64_    (<span class="number">1</span> CPU)
+
+avg-cpu:  <span class="variable">%user</span>   <span class="variable">%nice</span> <span class="variable">%system</span> <span class="variable">%iowait</span>  <span class="variable">%steal</span>   <span class="variable">%idle</span>
+           <span class="number">0.41</span>    <span class="number">0.00</span>    <span class="number">0.52</span>    <span class="number">0.23</span>    <span class="number">0.00</span>   <span class="number">98.85</span>
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  <span class="variable">%util</span>
+sda               <span class="number">0.04</span>    <span class="number">29.67</span>    <span class="number">0.08</span>    <span class="number">8.22</span>     <span class="number">4.77</span>   <span class="number">299.70</span>    <span class="number">36.67</span>     <span class="number">0.11</span>   <span class="number">12.74</span>   <span class="number">0.66</span>   <span class="number">0.55</span>
+dm-<span class="number">0</span>              <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">0.11</span>   <span class="number">37.40</span>     <span class="number">4.63</span>   <span class="number">299.11</span>     <span class="number">8.10</span>     <span class="number">0.50</span>   <span class="number">13.35</span>   <span class="number">0.15</span>   <span class="number">0.55</span>
+dm-<span class="number">1</span>              <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">0.02</span>    <span class="number">0.07</span>     <span class="number">0.14</span>     <span class="number">0.59</span>     <span class="number">8.00</span>     <span class="number">0.00</span>   <span class="number">27.85</span>   <span class="number">0.76</span>   <span class="number">0.01</span>
+
+avg-cpu:  <span class="variable">%user</span>   <span class="variable">%nice</span> <span class="variable">%system</span> <span class="variable">%iowait</span>  <span class="variable">%steal</span>   <span class="variable">%idle</span>
+           <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">2.00</span>    <span class="number">0.00</span>   <span class="number">98.00</span>
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  <span class="variable">%util</span>
+sda               <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">1.00</span>    <span class="number">0.00</span>    <span class="number">16.00</span>     <span class="number">0.00</span>    <span class="number">16.00</span>     <span class="number">0.01</span>   <span class="number">15.00</span>  <span class="number">15.00</span>   <span class="number">1.50</span>
+
+avg-cpu:  <span class="variable">%user</span>   <span class="variable">%nice</span> <span class="variable">%system</span> <span class="variable">%iowait</span>  <span class="variable">%steal</span>   <span class="variable">%idle</span>
+           <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  <span class="variable">%util</span>
+
+avg-cpu:  <span class="variable">%user</span>   <span class="variable">%nice</span> <span class="variable">%system</span> <span class="variable">%iowait</span>  <span class="variable">%steal</span>   <span class="variable">%idle</span>
+           <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.00</span>  <span class="number">100.00</span>
+
+iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：
+
+r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
+await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
+avgqu-sz：向设备发出的请求平均数量。如果这个数值大于<span class="number">1</span>，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
+<span class="variable">%util</span>：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过<span class="number">60</span>，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达<span class="number">100</span><span class="variable">%，</span>说明硬件设备已经饱和。
+如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能
+</code></pre><p><code>free -m</code><br>                 total       used       free     shared    buffers     cached<br>    Mem:           458        435         23          0        147         63<br>    -/+ buffers/cache:        223        234<br>    Swap:          927        545        382</p>
+<pre><code><span class="built_in">free</span>命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需 要注意的是，第二行-/+ buffers/cache，一般缓存会占用大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会 立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。
+
+如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。
+</code></pre><p><code>sar -n DEV 1</code></p>
+<pre><code><span class="number">18</span>时<span class="number">52</span>分<span class="number">14</span>秒     IFACE   rxpck<span class="regexp">/s   txpck/</span>s    rxkB<span class="regexp">/s    txkB/</span>s   rxcmp<span class="regexp">/s   txcmp/</span>s  rxmcst/s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">15</span>秒        lo      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">15</span>秒      eth0      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">15</span>秒      eth1      <span class="number">1.01</span>      <span class="number">0.00</span>      <span class="number">0.07</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">15</span>秒     IFACE   rxpck<span class="regexp">/s   txpck/</span>s    rxkB<span class="regexp">/s    txkB/</span>s   rxcmp<span class="regexp">/s   txcmp/</span>s  rxmcst/s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">16</span>秒        lo      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">16</span>秒      eth0      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">16</span>秒      eth1      <span class="number">1.01</span>      <span class="number">1.01</span>      <span class="number">0.07</span>      <span class="number">0.49</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+
+sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。
+</code></pre><p><code>sar -n TCP,ETCP 1</code></p>
+<pre><code>Linux <span class="number">2.6</span>.32-<span class="number">431.</span>el6.x86_64 (localhost.localdomain)     <span class="number">2015</span>年<span class="number">12</span>月<span class="number">27</span>日     _x86_64_    (<span class="number">1</span> CPU)
+
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">36</span>秒  active<span class="regexp">/s passive/</span>s    iseg<span class="regexp">/s    oseg/</span>s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">37</span>秒      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">36</span>秒  atmptf<span class="regexp">/s  estres/</span>s retrans<span class="regexp">/s isegerr/</span>s   orsts/s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">37</span>秒      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">37</span>秒  active<span class="regexp">/s passive/</span>s    iseg<span class="regexp">/s    oseg/</span>s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">38</span>秒      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">2.00</span>      <span class="number">2.00</span>
+
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">37</span>秒  atmptf<span class="regexp">/s  estres/</span>s retrans<span class="regexp">/s isegerr/</span>s   orsts/s
+<span class="number">18</span>时<span class="number">52</span>分<span class="number">38</span>秒      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>
+
+sar命令在这里用于查看TCP连接状态，其中包括：
+
+active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；
+passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；
+retrans/s：每秒TCP重传数量；
+TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。
+</code></pre><p><code>top</code></p>
+<pre><code>top - <span class="number">18</span>:<span class="number">53</span>:<span class="number">43</span> up <span class="number">53</span> days,  <span class="number">3</span>:<span class="number">55</span>,  <span class="number">1</span> <span class="keyword">user</span>,  load average: <span class="number">0</span>.<span class="number">00</span>, <span class="number">0</span>.<span class="number">00</span>, <span class="number">0</span>.<span class="number">02</span>
+<span class="constant">Tasks</span>:  <span class="number">86</span> total,   <span class="number">1</span> <span class="literal">running</span>,  <span class="number">85</span> sleeping,   <span class="number">0</span> stopped,   <span class="number">0</span> zombie
+<span class="constant">Cpu</span>(s):  <span class="number">0</span>.<span class="number">4</span>%us,  <span class="number">0</span>.<span class="number">4</span>%sy,  <span class="number">0</span>.<span class="number">0</span>%ni, <span class="number">98.8</span>%<span class="built_in">id</span>,  <span class="number">0</span>.<span class="number">2</span>%wa,  <span class="number">0</span>.<span class="number">0</span>%hi,  <span class="number">0</span>.<span class="number">1</span>%si,  <span class="number">0</span>.<span class="number">0</span>%st
+<span class="constant">Mem</span>:    <span class="number">469452</span>k total,   <span class="number">446128</span>k used,    <span class="number">23324</span>k free,   <span class="number">151644</span>k buffers
+<span class="constant">Swap</span>:   <span class="number">950264</span>k total,   <span class="number">558844</span>k used,   <span class="number">391420</span>k free,    <span class="number">65716</span>k cached
+
+  <span class="constant">P</span>ID <span class="constant">U</span>SER      <span class="constant">P</span>R  <span class="constant">N</span>I  <span class="constant">V</span>IRT  <span class="constant">R</span>ES  <span class="constant">S</span>HR <span class="constant">S</span> %<span class="constant">C</span>PU %<span class="constant">M</span>EM    <span class="constant">T</span>IME+  <span class="constant">C</span>OMMAND
+    <span class="number">1</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span> <span class="number">19232</span>  <span class="number">520</span>  <span class="number">348</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">1</span>   <span class="number">0</span>:<span class="number">44.68</span> init
+    <span class="number">2</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">03</span> kthreadd
+    <span class="number">3</span> <span class="literal">root</span>      <span class="constant">R</span>T   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> migration/<span class="number">0</span>
+    <span class="number">4</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">38</span>:<span class="number">03</span>.<span class="number">76</span> ksoftirqd/<span class="number">0</span>
+    <span class="number">5</span> <span class="literal">root</span>      <span class="constant">R</span>T   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> migration/<span class="number">0</span>
+    <span class="number">6</span> <span class="literal">root</span>      <span class="constant">R</span>T   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">15.98</span> watchdog/<span class="number">0</span>
+    <span class="number">7</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">57</span>:<span class="number">02</span>.<span class="number">33</span> events/<span class="number">0</span>
+    <span class="number">8</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> cgroup
+    <span class="number">9</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> khelper
+   <span class="number">10</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> netns
+   <span class="number">11</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> async/mgr
+   <span class="number">12</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> pm
+   <span class="number">13</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">31.42</span> sync_supers
+   <span class="number">14</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">33.01</span> bdi-<span class="keyword">default</span>
+   <span class="number">15</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kintegrityd/<span class="number">0</span>
+   <span class="number">16</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">32</span>:<span class="number">20.76</span> kblockd/<span class="number">0</span>
+   <span class="number">17</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kacpid
+   <span class="number">18</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kacpi_notify
+   <span class="number">19</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kacpi_hotplug
+   <span class="number">20</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> ata_aux
+   <span class="number">21</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">21</span> ata_sff/<span class="number">0</span>
+   <span class="number">22</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> ksuspend_usbd
+   <span class="number">23</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> khubd
+   <span class="number">24</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kseriod
+   <span class="number">25</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> md/<span class="number">0</span>
+   <span class="number">26</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> md_misc/<span class="number">0</span>
+   <span class="number">27</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> linkwatch
+   <span class="number">28</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">02</span>.<span class="number">11</span> khungtaskd
+   <span class="number">29</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">27.30</span> kswapd<span class="number">0</span>
+   <span class="number">30</span> <span class="literal">root</span>      <span class="number">25</span>   <span class="number">5</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> ksmd
+   <span class="number">31</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> aio/<span class="number">0</span>
+   <span class="number">32</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> crypto/<span class="number">0</span>
+   <span class="number">37</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kthrotld/<span class="number">0</span>
+   <span class="number">39</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kpsmoused
+   <span class="number">40</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> usbhid_resumer
+   <span class="number">70</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> kstriped
+  <span class="number">128</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">02</span>.<span class="number">82</span> scsi_eh_<span class="number">0</span>
+  <span class="number">129</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>   <span class="number">0</span>:<span class="number">00</span>.<span class="number">00</span> scsi_eh_1
+  <span class="number">215</span> <span class="literal">root</span>      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> <span class="constant">S</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">0</span>.<span class="number">0</span>  <span class="number">13</span>:<span class="number">53.06</span> kdmflush
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://www.cxyteam.com/about/"><strong>SunnySmilez</strong></a> - 2015-12-20</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://www.cxyteam.com"><strong>狂奔的菜鸟</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/Linux/">Linux</a>
+  </div>
+
+       		
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+     		  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style addthis addthis_toolbox addthis_default_style" style="color: black">
+	<span class="jiathis_txt"></span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1784645" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=phpchengxuyuan@sina.com" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=phpchengxuyuan@sina.com" async=""></script>
+</section>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Mysql/">Mysql</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/PHP/">PHP</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Linux/">Linux</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Redis/">Redis</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/categories/Other/">Other</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscrible</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>
