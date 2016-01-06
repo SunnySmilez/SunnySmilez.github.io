@@ -64,3 +64,6 @@ than from [Yahoo](http://search.yahoo.com/ "Yahoo Search") or
 
 [Google]: http://google.com/
 [foo]: http://example.com/  "Optional Title Here"
+
+[hover]: http://www.google.com.sg "Google Sg 更快，更好用。好，现在单击吧"
+字号和颜色直接使用HTML标签<font size="+1" color="red">示例</font>
