@@ -1,0 +1,962 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
+
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(centos5.x的默认文件系统)
+    日志功能,常规应用
+
+jfs
+
+Centos5.x常规选用ext3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件系统NFS">
+<meta property="og:url" content="http://www.cxyteam.com/2016/05/04/文件系统NFS/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
+
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(centos5.x的默认文件系统)
+    日志功能,常规应用
+
+jfs
+
+Centos5.x常规选用ext3">
+<meta property="og:updated_time" content="2016-06-02T13:45:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件系统NFS">
+<meta name="twitter:description" content="文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
+
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(centos5.x的默认文件系统)
+    日志功能,常规应用
+
+jfs
+
+Centos5.x常规选用ext3">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 文件系统NFS | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                文件系统NFS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-04T21:58:22+08:00" content="2016-05-04">
+              2016-05-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><pre><code>reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
+
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(centos5.x的默认文件系统)
+    日志功能,常规应用
+
+jfs
+
+Centos5.x常规选用ext3文件系统
+Centos6.x常规选用ext4文件系统
+xfs,reiserfs这两个文件都需要单独安装,默认不支持,维护可能不方便
+</code></pre><h1 id="文件系统选择"><a href="#文件系统选择" class="headerlink" title="文件系统选择"></a>文件系统选择</h1><pre><code>维护成本
+性能
+可靠
+</code></pre><h1 id="NFS服务端"><a href="#NFS服务端" class="headerlink" title="NFS服务端"></a>NFS服务端</h1><pre><code>1.打印系统版本
+    cat /etc/redhat-release
+    uname -r
+    uname -m
+
+2.检查并安装NFS服务
+    rpm -aq nfs-utils portmap rpcbind
+    LANG=EN
+    yum grouplist
+    yum install nfs-utils rpcbind -y
+    rpm -aq nfs-utils portmap rpcbind
+
+3.启动RPC服务
+    /etc/init.d/rpcbind start
+    ps -ef | grep rpc
+    /etc/init.d/rpcbind status
+    rpcinfo -p localhost
+
+4.NFS服务
+    /etc/init.d/nfs start
+    rpcinfo -p localhost
+
+5.设置开机自启动
+    chkconfig nfs on
+    chkconfig rpcbind on
+
+6.检查开机自启动
+    chkconfig --list nfs
+    chkconfig --list rpcbind
+
+7.配置共享数据目录
+    vim /etc/exports
+    添加如下内容:
+        /data 10.0.0.0/24(rw,sync)
+    cat /etc/exports
+
+8.创建共享目录
+    mkdir /data
+    chown -R nfsnobody.nfsnobody /data
+
+9.加载NFS
+    /etc/init.d/nfs reload
+    showmount -e localhost
+</code></pre><h1 id="NFS客户端"><a href="#NFS客户端" class="headerlink" title="NFS客户端"></a>NFS客户端</h1><pre><code>1.检查系统版本
+    hostname nfsclient
+    uname -r
+    uname -m
+
+2.安装rpc服务
+    rpm -aq nfs-utils portmap rpcbind
+    yum groupinstall &quot;NFS file server&quot; -y
+    rpm -aq nfs-utils portmap rpcbind
+
+3.启动rpc服务
+    /etc/init.d/rpcbind start
+    /etc/init.d/rpcbind status
+
+4.设置开机自启动
+    chkconfig rpcbind
+    chkconfig --list rpcbind
+
+5.检查服务端的NFS
+    showmount -e 10.0.0.7
+
+    故障排查:
+        ping 10.0.0.7
+        telnet 10.0.0.7 111
+
+6.挂载
+    mount -t nfs 10.0.0.7:/data /mnt
+
+7.测试
+    可以创建删除编辑文件,看是否同步
+
+8.卸载
+    umount /mnt                 注意要不要在/mnt目录下,否则需要强制卸载:umount -lf /mnt
+</code></pre><h1 id="服务及进程说明"><a href="#服务及进程说明" class="headerlink" title="服务及进程说明"></a>服务及进程说明</h1><pre><code>nfsd(rpc.nfsd)              管理NFS客户端是否能够登入NFS服务端主机,包含登入者的ID判别
+mountd(rpc.mountd)          管理NFS文件系统,当NFS客户端顺利通过rpc.nfsd登入NFS服务端之后,在它使用NFS服务器数据之前,与NFS配置文件/etc/exports进行对比权限,验证完成后,还会和服务端本地的文件系统的使用权限进行认证.
+lockd(rpc.lockd)            锁定文件,进行并发控制
+</code></pre><h1 id="NFS配置文件路径"><a href="#NFS配置文件路径" class="headerlink" title="NFS配置文件路径"></a>NFS配置文件路径</h1><pre><code>/etc/exports                NFS服务主配置文件,配置NFS具体共享服务的地点,默认内容为空,以行为单位   eg:/data1/ 172.16.17.0/24(rw,async) *(ro)
+/usr/sbin/exportfs          NFS服务管理命令. eg:exportfs -r == /etc/init.d/nfs reload
+/usr/sbin/showmount         在客户端产看NFS配置及挂载结果的命令
+/var/lib/nfs/etab           NFS配置文件的完整参数设定的文件
+/var/lib/nfs/xtab           记录NFS挂载过的客户端的信息
+</code></pre><h1 id="配置文件书写"><a href="#配置文件书写" class="headerlink" title="配置文件书写"></a>配置文件书写</h1><pre><code>/data 10.0.0.0/24(rw,sync)              -- 挂载/data目录到10.0.0的网段,改网段的所有机器都具有读写权限
+10.0.0.30                               单个机器可以访问
+10.0.0.0/24                             整个网段都可以访问
+10.0.0.*                                整个网段都可以访问
+rw                                      读写权限
+ro                                      只读权限
+sync                                    同步请求或写入数据
+async                                   异步请求或写入数据
+no_root_squash                          如果访问者是root的话,对共享目录具有root权限
+root_squash                             访问者是root的话,权限压缩成匿名用户,同时UID和GID都以nobody或nfsnobody的账号身份
+all_squash                              所有访问者,权限都被压缩成匿名用户的权限
+anonuid                                 所有的匿名用户它的UID的值通常为nobody或nfsnobody的UID值.
+anongid                                 所有的匿名用户它的GID的值通常为nobody或nfsnobody的GID值.
+</code></pre><h1 id="查看挂载参数"><a href="#查看挂载参数" class="headerlink" title="查看挂载参数"></a>查看挂载参数</h1><pre><code>grep mnt /proc/mounts
+</code></pre><h1 id="挂载参数"><a href="#挂载参数" class="headerlink" title="挂载参数"></a>挂载参数</h1><pre><code>安全优化
+    nosuid,noexec              不能在共享目录执行脚本,包括脚本,程序命令,二进制程序(不限制指定解释器执行,例如:sh /mnt/demo.sh这样的形式执行)
+    mount -t nfs -o nosuid,noexec,rw 10.0.0.7:/data /mnt
+
+性能优化
+    rsize                       设置单次读取文件的大小
+    wsize                       设置单词写入文件的大小
+    noatime                     不设置文件的修改时间
+    nodiratime                  不设置目录的修改时间
+    mount -t nfs -o rsize=1024,wsize=1024,noexec,rw 10.0.0.7:/data /mnt
+
+测试命令
+    time dd if=/dev/zero of=/mnt/testfile bs=9k count=20000
+
+内核优化
+    查看:
+    cat /proc/sys/net/core/rmem_default                     接收套接字缓冲区大小的缺省值
+    cat /proc/sys/net/core/rmem_max                         接收套接字缓冲区大小的最大值
+
+    设置:
+    echo 8388608 /proc/sys/net/core/rmem_default
+    echo 16777216 /proc/sys/net/core/rmem_max
+    或者:
+    vim /etc/sysctl.conf
+    net.core.wmem_default = 8388608                         发送套接字缓冲区大小的缺省值
+    net.core.rmem_default = 8388608
+    net.core.rmem_max = 16777216
+    net.core.wmem_max = 16777216                            发送套接字缓冲区大小的最大值
+
+    查看结果:
+    sysctl -p
+</code></pre><h1 id="NFS共享存储优化"><a href="#NFS共享存储优化" class="headerlink" title="NFS共享存储优化"></a>NFS共享存储优化</h1><pre><code>1.硬件:sas/ssd磁盘,买多块,raid0/raid10,网卡好
+2.服务器端/data 10.0.0.0/24(rw,async,all_squash,async,anonuid=555,anongid=555参数设置)
+3.客户端挂载:rsize,wsize,noatime,nodirtime,nosuid,noexec,soft(hard,intr)
+</code></pre><h1 id="NFS故障"><a href="#NFS故障" class="headerlink" title="NFS故障"></a>NFS故障</h1><pre><code>showmount -e                           报错:clnt_create: RPC: Program not registered                                                     原因:在服务器端查看挂载情况,应该在客户端查看挂载情况
+shoymount -e 10.0.0.7                  报错:clnt_create: RPC: Port mapper failure - Unable to receive: errno 111(Connection refused)     原因:rpc服务没起来
+先
+mount -t nfs 10.0.0.7:/data /data      报错:mount.nfs:access denied by server while mounting 10.0.0.7:/data/
+再
+showmount -e                           报错:clnt_create: RPC: Program not registered
+判断nfs未注册,先启动rpc再启动nfs
+</code></pre><h1 id="NFS优点"><a href="#NFS优点" class="headerlink" title="NFS优点"></a>NFS优点</h1><pre><code>简单,容易上手,容易掌握,数据在文件系统之上的
+方便,快速部署,维护简单
+可靠,从软件层面来看,数据可靠性高,经久耐用
+稳定
+</code></pre><h1 id="NFS缺点"><a href="#NFS缺点" class="headerlink" title="NFS缺点"></a>NFS缺点</h1><pre><code>存在单点故障
+在高并发场景中,NFS效率性有限(2千万一下pv/天没有问题)
+客户端认证时基于ip和主机名,权限根据IP识别,安全性一般
+NFS数据是明文的,对数据完整性不做验证
+多台机器挂载NFS服务器时,连接管理维护麻烦(可用autofs解决)
+</code></pre><h1 id="配置autofs"><a href="#配置autofs" class="headerlink" title="配置autofs"></a>配置autofs</h1><pre><code>yum install autofs
+vim /etc/auto.master
+/misc   /etc/auto.misc                                      ----- 这里设置的是挂载目录
+
+vim /etc/auto.misc
+nfsdata         -fstype=nfs             172.16.17.11:/data1 ----- 这里设置的是挂载目录下的文件夹
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/01/磁盘/" rel="next" title="磁盘">
+                <i class="fa fa-chevron-left"></i> 磁盘
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/11/ssh介绍/" rel="prev" title="ssh介绍">
+                ssh介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件系统"><span class="nav-number">1.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件系统选择"><span class="nav-number">2.</span> <span class="nav-text">文件系统选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS服务端"><span class="nav-number">3.</span> <span class="nav-text">NFS服务端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS客户端"><span class="nav-number">4.</span> <span class="nav-text">NFS客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务及进程说明"><span class="nav-number">5.</span> <span class="nav-text">服务及进程说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS配置文件路径"><span class="nav-number">6.</span> <span class="nav-text">NFS配置文件路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件书写"><span class="nav-number">7.</span> <span class="nav-text">配置文件书写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看挂载参数"><span class="nav-number">8.</span> <span class="nav-text">查看挂载参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#挂载参数"><span class="nav-number">9.</span> <span class="nav-text">挂载参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS共享存储优化"><span class="nav-number">10.</span> <span class="nav-text">NFS共享存储优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS故障"><span class="nav-number">11.</span> <span class="nav-text">NFS故障</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS优点"><span class="nav-number">12.</span> <span class="nav-text">NFS优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS缺点"><span class="nav-number">13.</span> <span class="nav-text">NFS缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置autofs"><span class="nav-number">14.</span> <span class="nav-text">配置autofs</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

@@ -1,0 +1,1018 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="if-elif-else-fi用法（方括号为可选部分）if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+例子#!/bin/bash
+if
+        ls | grep &amp;apos;demo.log&amp;apos;
+then
+        echo &amp;apos;found demo.log&amp;apos;
+eli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell语句块">
+<meta property="og:url" content="http://www.cxyteam.com/2016/01/17/shell语句块/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="if-elif-else-fi用法（方括号为可选部分）if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+例子#!/bin/bash
+if
+        ls | grep &amp;apos;demo.log&amp;apos;
+then
+        echo &amp;apos;found demo.log&amp;apos;
+eli">
+<meta property="og:updated_time" content="2016-02-17T02:36:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell语句块">
+<meta name="twitter:description" content="if-elif-else-fi用法（方括号为可选部分）if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+例子#!/bin/bash
+if
+        ls | grep &amp;apos;demo.log&amp;apos;
+then
+        echo &amp;apos;found demo.log&amp;apos;
+eli">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> shell语句块 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                shell语句块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-17T10:31:13+08:00" content="2016-01-17">
+              2016-01-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="if-elif-else-fi"><a href="#if-elif-else-fi" class="headerlink" title="if-elif-else-fi"></a>if-elif-else-fi</h1><h4 id="用法（方括号为可选部分）"><a href="#用法（方括号为可选部分）" class="headerlink" title="用法（方括号为可选部分）"></a>用法（方括号为可选部分）</h4><pre><code>if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+</code></pre><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+if
+        ls | grep &apos;demo.log&apos;
+then
+        echo &apos;found demo.log&apos;
+elif
+        ls | grep &apos;test&apos;
+then
+        echo &apos;found test&apos;
+else
+        echo &apos;not found&apos;
+fi
+</code></pre><h1 id="case语句"><a href="#case语句" class="headerlink" title="case语句"></a>case语句</h1><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><pre><code>case $1 in
+条件一)
+    结果
+    ;;
+条件二)
+    结果
+    ;;
+*)
+    结果
+    ;;
+esac
+</code></pre><h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+case $1 in
+&quot;hello&quot;)
+    echo &quot;this is hello&quot;
+    ;;
+&quot;world&quot;)
+    echo &quot;this is world&quot;
+    ;;
+*)
+    echo &quot;please input hello or world&quot;
+    ;;
+esac
+</code></pre><h1 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h1><h4 id="带列表"><a href="#带列表" class="headerlink" title="带列表"></a>带列表</h4><pre><code>for
+    variable in {list}
+do
+    做处理
+done
+</code></pre><h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+for i in $1
+do
+        echo $i
+done
+</code></pre><h4 id="不带列表"><a href="#不带列表" class="headerlink" title="不带列表"></a>不带列表</h4><pre><code>for variable
+do
+    做处理
+done
+</code></pre><h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+for argument
+do
+        echo &quot;$argument&quot;
+done
+</code></pre><h4 id="类c风格"><a href="#类c风格" class="headerlink" title="类c风格"></a>类c风格</h4><pre><code>for((i=variable;i&lt;=variable;i++))
+do
+    做处理
+done
+</code></pre><h4 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+for ((i=1;i&lt;=10;i++))
+do
+        echo $i
+done
+</code></pre><h1 id="while与until循环"><a href="#while与until循环" class="headerlink" title="while与until循环"></a>while与until循环</h1><h4 id="while用法"><a href="#while用法" class="headerlink" title="while用法"></a>while用法</h4><pre><code>while
+    条件
+do
+    做处理
+done
+</code></pre><h4 id="while例子"><a href="#while例子" class="headerlink" title="while例子"></a>while例子</h4><pre><code>#!/bin/bash
+i=1;
+while((i&lt;=$1))
+do
+        echo $i;
+        let &quot;i+=1&quot;;
+done
+</code></pre><h4 id="until用法-注意是条件为假的时候才会执行"><a href="#until用法-注意是条件为假的时候才会执行" class="headerlink" title="until用法(注意是条件为假的时候才会执行)"></a>until用法(注意是条件为假的时候才会执行)</h4><pre><code>until
+    条件
+do
+    做处理
+done
+</code></pre><h4 id="until例子"><a href="#until例子" class="headerlink" title="until例子"></a>until例子</h4><pre><code>#!/bin/bash
+
+i=0
+
+until [[ &quot;$i&quot; -gt 5 ]]
+do
+    let &quot;square=i*i&quot;
+    echo &quot;$i * $i = $square&quot;
+    let &quot;i++&quot;
+done
+</code></pre><h1 id="break与continue（分别是退出循环和结束本次循环）"><a href="#break与continue（分别是退出循环和结束本次循环）" class="headerlink" title="break与continue（分别是退出循环和结束本次循环）"></a>break与continue（分别是退出循环和结束本次循环）</h1><pre><code>#!/bin/bash
+for ((i=1;i&lt;10;i++))
+do
+        if
+                test $i = 1
+        then
+                continue
+        elif
+                test $i = 6
+        then
+                break
+        else
+                echo $i
+        fi
+done
+</code></pre><h1 id="select结构"><a href="#select结构" class="headerlink" title="select结构"></a>select结构</h1><pre><code>它是bash的扩展结构用于交互式菜单显示，功能类似于case结构比case的交互性要好
+</code></pre><h4 id="select用法"><a href="#select用法" class="headerlink" title="select用法"></a>select用法</h4><pre><code>select variable in list
+do
+    做处理
+    break
+done
+</code></pre><h4 id="例子-5"><a href="#例子-5" class="headerlink" title="例子"></a>例子</h4><pre><code>select number in &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;
+do
+        break
+done
+echo &quot;you have select $number&quot;
+</code></pre><h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h4 id="例子-6"><a href="#例子-6" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+function a {
+        echo &apos;test&apos;
+}
+a #函数引用
+
+#!/bin/bash
+b() {
+        echo &apos;test12&apos;
+}
+b #函数引用
+</code></pre><h1 id="test-主要用来测试文件属性，比较字符串及比较数字"><a href="#test-主要用来测试文件属性，比较字符串及比较数字" class="headerlink" title="test[主要用来测试文件属性，比较字符串及比较数字]"></a>test[主要用来测试文件属性，比较字符串及比较数字]</h1><pre><code>运算符                    如果...则为真
+string                   string不是null
+-b file                  file为块设备
+-c file                  file为字符设备
+-d file                  file为目录
+-e file                  file存在
+-f file                  file为一般文件
+-g file                  file有设置它的setgid位
+-h file                  file为符号链接（与-L 同）
+-k file                  file设置了粘滞位（sticky bit）
+-L file                  file为符号链接（与-h同）
+-O file                  file用户拥有该文件
+-p file                  file为命名管道
+-r file                  file（对用户）可读
+-s file                  file不是空的（长度大于0字节）
+-S file                  file存在且为套接字（socket）
+-t fd                    file描述符与终端相关联
+-u file                  file属性位set-user-id置1
+-w file                  file（对用户）可写
+-x file                  file（对用户）可执行
+-n string                字符串是非null (长度大于0字节)
+-z string                字符串为空（长度为0字节)
+expr1 -a expr2           两个表达式皆为真(逻辑与)
+expr1 -o expr2           两个表达式至少有一个为真(逻辑或)
+file1 -nt file           第一个文件比第二个文件新（利用修改时间戳比较）
+file1 -ot file           第一个文件比第二个文件旧（利用修改时间 戳比较）
+file1 -ef file           两个文件由链接关联在一起（硬链接或符号链接）
+var1 = var2              第一个字符串与第二个字符串相同
+var1 != var2             第一个字符串与第二个字符串不相同
+var1 -eq var2            第一个整数与第二个整数相等
+var1 -ne var2            第一个整数不等于第二个整数
+var1 -lt var2            第一个整数小于第二个整数
+var1 -le var2            第一个整数小于或等于第二个整数量
+var1 -gt var2            第一个整数大于第二个整数
+var1 -ge var2            第一个整数大于或等于第二个整数
+</code></pre><h4 id="例子-7"><a href="#例子-7" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+num1=100
+num2=100
+
+if
+        test $[num1] == $[num2]
+then
+        echo &apos;equal&apos;
+else
+        echo &apos;not equal&apos;
+fi
+</code></pre><h1 id="expr"><a href="#expr" class="headerlink" title="expr"></a>expr</h1><pre><code>计算整数变量值,需要注意的是expr与操作数据，以及操作数据与运算符之间都需要用空格隔开
+</code></pre><h4 id="例子-直接在终端运行"><a href="#例子-直接在终端运行" class="headerlink" title="例子(直接在终端运行)"></a>例子(直接在终端运行)</h4><pre><code>s=`expr 2 + 3`
+expr $s \* 3
+
+或者（一步计算）
+
+expr `expr 2 + 3` \* 4
+</code></pre><h1 id="let"><a href="#let" class="headerlink" title="let"></a>let</h1><pre><code>计算整数变量值,需要注意的是运算符与操作数据之间不必用空格分开，但表达式与表达式之间必须要用空格分开
+</code></pre><h4 id="例子-8"><a href="#例子-8" class="headerlink" title="例子"></a>例子</h4><pre><code>let s=(2+3)*4
+echo $s
+</code></pre><h1 id="shift"><a href="#shift" class="headerlink" title="shift"></a>shift</h1><pre><code>使位置变量下移一位（$2代替$1、$3代替$2，并使$#变量递减），当最后一个参数显示给用户，$#会等于0，$*也等于空
+</code></pre><h4 id="例子-9"><a href="#例子-9" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+while [[ &quot;$*&quot; != &quot;&quot; ]]
+do
+        echo &quot;$1&quot;
+        shift
+done
+</code></pre><h1 id="getopts"><a href="#getopts" class="headerlink" title="getopts"></a>getopts</h1><pre><code>可以获取用户在命令下的参数，然后根据参数进行不同的提示或者不同的执行
+./test.sh -a hello
+getopts一共有两个参数，第一个是-a这样的选项，第二个参数是 hello这样的参数
+选项之间可以通过冒号:进行分隔，也可以直接相连接，：表示选项后面必须带有参数，如果没有可以不加实际值进行传递比如输入./test.sh -c 不会报错，但是输入./test.sh -a会报错
+</code></pre><h4 id="例子-10"><a href="#例子-10" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+while getopts &quot;ca:b:&quot; opt;
+do
+case $opt in
+        a)
+                echo &quot;this is -a the arg is $OPTARG&quot;
+                ;;
+        b)
+                echo &quot;this is -b the arg is $OPTARG&quot;
+                ;;
+        c)
+                echo &quot;this is -c&quot;
+                ;;
+esac
+done
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/10/shell预定义变量及标准变量/" rel="next" title="shell预定义变量及标准变量">
+                <i class="fa fa-chevron-left"></i> shell预定义变量及标准变量
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/17/shell的输入输出/" rel="prev" title="shell的输入输出">
+                shell的输入输出 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#if-elif-else-fi"><span class="nav-number">1.</span> <span class="nav-text">if-elif-else-fi</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法（方括号为可选部分）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">用法（方括号为可选部分）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#case语句"><span class="nav-number">2.</span> <span class="nav-text">case语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-1"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for语句"><span class="nav-number">3.</span> <span class="nav-text">for语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#带列表"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">带列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-2"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不带列表"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">不带列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-3"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类c风格"><span class="nav-number">3.0.0.5.</span> <span class="nav-text">类c风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-4"><span class="nav-number">3.0.0.6.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#while与until循环"><span class="nav-number">4.</span> <span class="nav-text">while与until循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#while用法"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">while用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while例子"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">while例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#until用法-注意是条件为假的时候才会执行"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">until用法(注意是条件为假的时候才会执行)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#until例子"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">until例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#break与continue（分别是退出循环和结束本次循环）"><span class="nav-number">5.</span> <span class="nav-text">break与continue（分别是退出循环和结束本次循环）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#select结构"><span class="nav-number">6.</span> <span class="nav-text">select结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select用法"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">select用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-5"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-6"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#test-主要用来测试文件属性，比较字符串及比较数字"><span class="nav-number">8.</span> <span class="nav-text">test[主要用来测试文件属性，比较字符串及比较数字]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-7"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#expr"><span class="nav-number">9.</span> <span class="nav-text">expr</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-直接在终端运行"><span class="nav-number">9.0.0.1.</span> <span class="nav-text">例子(直接在终端运行)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#let"><span class="nav-number">10.</span> <span class="nav-text">let</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-8"><span class="nav-number">10.0.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shift"><span class="nav-number">11.</span> <span class="nav-text">shift</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-9"><span class="nav-number">11.0.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getopts"><span class="nav-number">12.</span> <span class="nav-text">getopts</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-10"><span class="nav-number">12.0.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

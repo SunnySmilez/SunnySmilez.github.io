@@ -1,0 +1,987 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
+例如:
+    定义新结构
+    /*
+        注意fish只是结构的名字
+    */
+    struct fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言结构">
+<meta property="og:url" content="http://www.cxyteam.com/2016/07/26/C语言结构/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
+例如:
+    定义新结构
+    /*
+        注意fish只是结构的名字
+    */
+    struct fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const c">
+<meta property="og:updated_time" content="2016-11-07T02:03:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言结构">
+<meta name="twitter:description" content="结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
+例如:
+    定义新结构
+    /*
+        注意fish只是结构的名字
+    */
+    struct fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const c">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> C语言结构 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C语言结构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-26T08:14:25+08:00" content="2016-07-26">
+              2016-07-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><pre><code>把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
+例如:
+    定义新结构
+    /*
+        注意fish只是结构的名字
+    */
+    struct fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    };
+
+    创建数据
+    struct fish snappy = {&quot;snappy&quot;, &quot;piranha&quot;, 69, 4}
+
+    复制结构内容
+    struct fish snappy1 = snappy;
+</code></pre><h1 id="读取结构内容"><a href="#读取结构内容" class="headerlink" title="读取结构内容"></a>读取结构内容</h1><pre><code>尽管结构可以向数组那样在结构中保存字段,但读取时只能按名访问;可以使用&quot;.&quot;运算符访问结构字段
+fish.c的文件:
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    struct fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    };
+
+    struct fish snappy = {
+        /*
+            注意依然不能使用单引号
+        */
+        &quot;snappy&quot;,
+        &quot;piranha&quot;,
+        69,
+        4
+    };
+
+    /*
+        获取的时候是定义的结构数据的名字,而不是结构本身的名字(是snappy而不是fish)
+    */
+    printf(&quot;%s,%s,%i,%i&quot;, snappy.name, snappy.species, snappy.teeth, snappy.age);
+
+    return 0;
+}
+
+使用make编译:make fish &amp;&amp; ./fish
+</code></pre><h1 id="存储器中的结构"><a href="#存储器中的结构" class="headerlink" title="存储器中的结构"></a>存储器中的结构</h1><pre><code>在定义结构时,并没有让计算机在存储器中创建任何东西,只是给了计算机一个模板,告诉它你希望新的数据类型长什么样子
+当定义新变量时,计算机则需要在存储器中为结构的实例创建空间,这块空间必须足够大,以装下结构中的所有字段
+把一个结构变量赋给另一个结构变量时,计算机会创建一个全新的结构副本,也就是说,计算机需要再分配一块存储器空间,大小和原来相同,然后把每个字段都复制过去
+</code></pre><h1 id="结构的嵌套"><a href="#结构的嵌套" class="headerlink" title="结构的嵌套"></a>结构的嵌套</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    /*
+        注意结束的分号不要忘记打,这个不是数组
+    */
+    struct preferences {
+        /*
+            此处结尾是分号,不是逗号
+        */
+        const char *food;
+        float exercise_hours;
+    };
+
+    struct fish {
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+        /*
+            结构的嵌套:在结构中定义结构
+            此处定义的不是一个结构体,而是一个结构创建后的数据(是struct preferences care而不是struct preferences)
+        */
+        struct preferences care;
+    };
+
+    struct fish snappy = {
+        &quot;snappy&quot;,
+        &quot;piranha&quot;,
+        69,
+        4,
+        {
+            &quot;fish&quot;,
+            4.00
+        }
+    };
+
+    /*
+        获取嵌套的结构中的数据注意care是嵌套的结构的名字
+    */
+    printf(&quot;%s,%f&quot;, snappy.care.food, snappy.care.exercise_hours);
+}
+</code></pre><h1 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h1><pre><code>使用typedef将struct name重命名rename,在后续创建结构数据的时候,可以直接使用rename
+其实struct name是结构名,rename是类型名
+typedef struct name {} rename;
+
+例子:
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    typedef struct big_fish {
+        /*
+            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
+        */
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    } fish;
+
+    fish snappy = {
+        /*
+            注意依然不能使用单引号
+        */
+        &quot;snappy&quot;,
+        &quot;piranha&quot;,
+        69,
+        4
+    };
+
+    printf(&quot;%s,%s,%i,%i&quot;, snappy.name, snappy.species, snappy.teeth, snappy.age);
+    return 0;
+}
+</code></pre><h1 id="匿名结构"><a href="#匿名结构" class="headerlink" title="匿名结构"></a>匿名结构</h1><pre><code>typeof struct {} rename
+不存在name(结构名)只存在rename(类型名)
+</code></pre><h1 id="更新结构"><a href="#更新结构" class="headerlink" title="更新结构"></a>更新结构</h1><pre><code>#include &lt;stdio.h&gt;
+
+typedef struct {
+    const char *name;
+    const char *species;
+    int age;
+} turtle;
+
+void happy_birthday(turtle t)
+{
+    /*
+        关键在此处更新结构
+    */
+    t.age = t.age + 1;
+    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, t.name, t.age);
+}
+
+int main()
+{
+    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
+    happy_birthday(myrtle);
+    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
+
+    return 0;
+}
+
+为什么最终输出来的值是:
+    happy birthday Myrtle,you are 100 years old!
+    Myrtle&apos;s age is now 99
+
+为什么传给函数happy_birthday的时候age递增1变成100,调用完之后再次查看age的值结果是99?
+因为你传入的是结构的值,不是结构的指针,所以他会对结构的值进行复制
+</code></pre><h1 id="指针更新结构"><a href="#指针更新结构" class="headerlink" title="指针更新结构"></a>指针更新结构</h1><pre><code>#include &lt;stdio.h&gt;
+
+typedef struct {
+    const char *name;
+    const char *species;
+    int age;
+} turtle;
+
+void happy_birthday(turtle *t)
+{
+    /*
+        (*t)表示myrtle指针指向的值,一定要打括号,表示一个整体
+        (*t).age表示的是t指向的结构的指针,最后得到的是年龄
+        *t.age表示的是t.age这个存储器单元中的内容
+    */
+    (*t).age = (*t).age + 1;
+    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, (*t).name, (*t).age);
+}
+
+int main()
+{
+    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
+    /*
+        注意此处传入的是结构的指针,使用&apos;&amp;&apos;获取指针
+    */
+    happy_birthday((&amp;myrtle));
+    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
+
+    return 0;
+}
+</code></pre><h1 id="易读的表达方式"><a href="#易读的表达方式" class="headerlink" title="易读的表达方式"></a>易读的表达方式</h1><pre><code>#include &lt;stdio.h&gt;
+
+typedef struct {
+    const char *name;
+    const char *species;
+    int age;
+} turtle;
+
+void happy_birthday(turtle *t)
+{
+    /*
+        (*t).age == t-&gt;age
+    */
+    t-&gt;age = t-&gt;age + 1;
+    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, (*t).name, (*t).age);
+}
+
+int main()
+{
+    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
+    happy_birthday((&amp;myrtle));
+    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
+
+    return 0;
+}6
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/24/C语言使用多个源文件/" rel="next" title="C语言声明与定义分离">
+                <i class="fa fa-chevron-left"></i> C语言声明与定义分离
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/27/C语言联合/" rel="prev" title="C语言联合">
+                C语言联合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结构"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读取结构内容"><span class="nav-number">2.</span> <span class="nav-text">读取结构内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器中的结构"><span class="nav-number">3.</span> <span class="nav-text">存储器中的结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构的嵌套"><span class="nav-number">4.</span> <span class="nav-text">结构的嵌套</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建别名"><span class="nav-number">5.</span> <span class="nav-text">创建别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匿名结构"><span class="nav-number">6.</span> <span class="nav-text">匿名结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新结构"><span class="nav-number">7.</span> <span class="nav-text">更新结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针更新结构"><span class="nav-number">8.</span> <span class="nav-text">指针更新结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#易读的表达方式"><span class="nav-number">9.</span> <span class="nav-text">易读的表达方式</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
