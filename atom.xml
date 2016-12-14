@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2016-12-01T07:15:57.000Z</updated>
+  <updated>2016-12-14T08:21:41.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,12 +15,114 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[安装lnmp环境]]></title>
+    <link href="http://www.cxyteam.com/2016/12/14/%E5%AE%89%E8%A3%85lnmp%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2016/12/14/安装lnmp环境/</id>
+    <published>2016-12-14T07:21:17.000Z</published>
+    <updated>2016-12-14T08:21:41.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum  install zlib-devel pcre-devel openssl-devel
+</code></pre><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>wget http://nginx.org/download/nginx-1.10.2.tar.gz
+tar -zxvf nginx-1.10.2.tar.gz
+cd nginx-1.10.2.tar.gz
+./configure --prefix=/usr/local/nginx --with-openssl=/usr/include/openssl --with-pcre --with-http_stub_status_module &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h5><pre><code>/usr/local/nginx/sbin/nginx
+</code></pre><h5 id="查看端口是否启动"><a href="#查看端口是否启动" class="headerlink" title="查看端口是否启动"></a>查看端口是否启动</h5><pre><code>ss -tlun | grep 80  或者 netstat -antlp ¦ grep 80
+</code></pre><h2 id="安装mysql依赖"><a href="#安装mysql依赖" class="headerlink" title="安装mysql依赖"></a>安装mysql依赖</h2><pre><code>yum install ncurses-devel
+</code></pre><h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><pre><code>wget http://dev.mysql.com/get/Downloads/MySQL-5.0/mysql-5.0.95.tar.gz/from/http://mysql.cdpa.nsysu.edu.tw/
+useradd -M -s /sbin/nologin mysql # -M 不添加家目录，-s不能指定shell登录
+
+tar -zxvf mysql-5.0.95.tar.gz
+cd mysql-5.0.95
+./configure --prefix=/usr/local/mysql --without-debug --with-extra-charsets=utf8,gbk --enable-assembler --with-mysqld-ldflags=-all-static --with-client-ldflags=-all-static --with-unix-socket-path=/tmp/mysql.sock --with-ssl &amp;&amp; make &amp;&amp; make install
+
+cp support-files/my-medium.cnf /etc/my.cnf              #复制mysql配置文件
+cp support-files/mysql.server /etc/init.d/mysqld        #复制启动脚本
+chmod +x /etc/init.d/mysqld                             #添加执行权限
+</code></pre><h5 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h5><pre><code>mysql_install_db --user=mysql
+chown -R root.mysql /usr/local/mysql/ 
+chown -R mysql.mysql /usr/local/mysql/var/
+</code></pre><h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><pre><code>mysqladmin -u root password &quot;123123&quot;                   #账号为root密码为123123
+</code></pre><h5 id="添加mysql软连接，php编译安装的时候依赖"><a href="#添加mysql软连接，php编译安装的时候依赖" class="headerlink" title="添加mysql软连接，php编译安装的时候依赖"></a>添加mysql软连接，php编译安装的时候依赖</h5><pre><code>ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/         
+ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/
+</code></pre><h5 id="启动mysql检查端口启动"><a href="#启动mysql检查端口启动" class="headerlink" title="启动mysql检查端口启动"></a>启动mysql检查端口启动</h5><pre><code>service mysqld start
+netstat -antlp ¦ grep 3306 或者 ss -tlun | grep 3306
+</code></pre><h2 id="安装php依赖"><a href="#安装php依赖" class="headerlink" title="安装php依赖"></a>安装php依赖</h2><h5 id="安装libmcrypt"><a href="#安装libmcrypt" class="headerlink" title="安装libmcrypt"></a>安装libmcrypt</h5><pre><code>wget -O libmcrypt-2.5.8.tar.bz2 http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.bz2/download
+tar -jxvf libmcrypt-2.5.8.tar.bz2
+cd libmcrypt-2.5.8
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="安装mhash"><a href="#安装mhash" class="headerlink" title="安装mhash"></a>安装mhash</h5><pre><code>wget -O mhash-0.9.9.9.tar.bz2 http://sourceforge.net/projects/mhash/files/mhash/0.9.9.9/mhash-0.9.9.9.tar.bz2/download
+tar -jxvf mhash-0.9.9.9.tar.bz2
+cd mhash-0.9.9.9
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="解决mcrypt依赖"><a href="#解决mcrypt依赖" class="headerlink" title="解决mcrypt依赖"></a>解决mcrypt依赖</h5><pre><code>ln -s /usr/local/lib/libmcrypt* /usr/lib
+ln -s /usr/local/lib/libmhash.* /usr/lib/
+ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
+ln -s /usr/lib64/liblber* /usr/lib/
+</code></pre><h4 id="安装mcrypt"><a href="#安装mcrypt" class="headerlink" title="安装mcrypt"></a>安装mcrypt</h4><pre><code>wget -O mcrypt-2.6.8.tar.gz http://sourceforge.net/projects/mcrypt/files/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz/download
+tar -zxvf mcrypt-2.6.8.tar.gz
+cd mcrypt-2.6.8
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="解决php其他依赖"><a href="#解决php其他依赖" class="headerlink" title="解决php其他依赖"></a>解决php其他依赖</h5><pre><code>yum install libxml2-devel curl-devel libpng-devel openldap-devel
+ln -s /usr/lib64/libldap* /usr/lib/
+</code></pre><h5 id="编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可"><a href="#编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可" class="headerlink" title="编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可"></a>编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可</h5><h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><pre><code>wget -O php-7.0.14.tar.gz http://cn2.php.net/get/php-7.0.14.tar.gz/from/this/mirror
+tar -jxvf php-7.0.14.tar.gz
+./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysqli=/usr/local/mysql/ --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql  --with-iconv-dir=/usr/local/ --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-sysvshm --enable-inline-optimization --with-curl  --enable-mbregex  --enable-fpm --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap=/usr/ --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap --enable-opcache --enable-ftp --enable-calendar --with-xsl --with-gettext --enable-session --enable-ctype --with-kerberos --with-libdir=/lib/ --with-pcre-regex --enable-exif --with-bz2 &amp;&amp; make &amp;&amp; make install
+cp php.ini-production /usr/local/php/php.ini
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+ln -s /usr/local/php/bin/php /usr/bin/
+cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/demo.conf
+/usr/local/php/sbin/php-fpm
+</code></pre><h2 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h2><h5 id="添加解析php文件"><a href="#添加解析php文件" class="headerlink" title="添加解析php文件"></a>添加解析php文件</h5><pre><code>location / {
+    root   /data/htdocs;                           # 设置代码根目录     
+    index  index.php index.html index.htm;         # 添加index.php的首页文件
+}
+</code></pre><h5 id="添加如下代码，解析php文件，注意SCRIPT-FILENAME"><a href="#添加如下代码，解析php文件，注意SCRIPT-FILENAME" class="headerlink" title="添加如下代码，解析php文件，注意SCRIPT_FILENAME"></a>添加如下代码，解析php文件，注意SCRIPT_FILENAME</h5><pre><code>location ~ \.php$ {
+    fastcgi_pass        127.0.0.1:9000;
+    fastcgi_index       index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name; #注意SCRIPT_FILENAME
+    include fastcgi_params;
+    include fastcgi.conf;
+}
+</code></pre><h5 id="重启ngixn-usr-local-nginx-sbin-nginx"><a href="#重启ngixn-usr-local-nginx-sbin-nginx" class="headerlink" title="重启ngixn /usr/local/nginx/sbin/nginx"></a>重启ngixn /usr/local/nginx/sbin/nginx</h5><h5 id="在-data-htdocs中添加php文件测试"><a href="#在-data-htdocs中添加php文件测试" class="headerlink" title="在/data/htdocs中添加php文件测试"></a>在/data/htdocs中添加php文件测试</h5>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum  install zlib-devel pcre-devel]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[rsyslog配置]]></title>
+    <link href="http://www.cxyteam.com/2016/12/06/rsyslog%E9%85%8D%E7%BD%AE/"/>
+    <id>http://www.cxyteam.com/2016/12/06/rsyslog配置/</id>
+    <published>2016-12-06T13:23:37.000Z</published>
+    <updated>2016-12-06T13:38:31.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
+http://huoding.com/2014/05/09/347
+http://blog.clanzx.net/2013/12/31/rsyslog.html
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[linux配置网络]]></title>
     <link href="http://www.cxyteam.com/2016/12/01/linux%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/"/>
     <id>http://www.cxyteam.com/2016/12/01/linux配置网络/</id>
     <published>2016-12-01T04:01:52.000Z</published>
-    <updated>2016-12-01T07:15:57.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
+    <updated>2016-12-03T09:43:03.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><code>service NetworkManager stop
+chkconfig NetworkManager off
+</code></pre><h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
 nameserver 8.8.8.8
 </code></pre><h1 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h1><h4 id="vi-etc-sysconfig-network"><a href="#vi-etc-sysconfig-network" class="headerlink" title="vi /etc/sysconfig/network"></a>vi /etc/sysconfig/network</h4><pre><code>NETWORKING=yes
 HOSTNAME=dev
@@ -33,7 +135,7 @@ ONBOOT=yes
 GATEWAY=192.168.1.1
 </code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="header]]>
+    <![CDATA[<h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><cod]]>
     </summary>
     
       <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
@@ -1691,455 +1793,6 @@ int main()
 例如:
     定义新结构
     /]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言声明与定义分离]]></title>
-    <link href="http://www.cxyteam.com/2016/07/24/C%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.cxyteam.com/2016/07/24/C语言使用多个源文件/</id>
-    <published>2016-07-24T09:56:26.000Z</published>
-    <updated>2016-09-11T08:48:01.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="为什么要使用声明与定义分离-它解决了什么问题"><a href="#为什么要使用声明与定义分离-它解决了什么问题" class="headerlink" title="为什么要使用声明与定义分离,它解决了什么问题"></a>为什么要使用声明与定义分离,它解决了什么问题</h1><pre><code>1.代码顺序的问题
-    #include &lt;stdio.h&gt;
-        /*
-            由于函数定义顺序产生的一个编译的错误
-        */
-        int main()
-        {
-            demo();
-
-            return 0;
-        }
-
-        float demo()
-        {
-            return 1.00;
-        }
-
-2.解决了代码的互相依赖的问题,在a方法中调用了b方法,在b方法中又调用了b方法
-    #include &lt;stdio.h&gt;
-    int demo()
-    {
-        test();
-    }
-
-    int test()
-    {
-        demo();
-    }
-
-    int main()
-    {
-        demo();
-        return 0;
-    }
-</code></pre><h1 id="如下代码为什么会报错"><a href="#如下代码为什么会报错" class="headerlink" title="如下代码为什么会报错"></a>如下代码为什么会报错</h1><pre><code>#include &lt;stdio.h&gt;
-/*
-    由于函数定义顺序产生的一个编译的错误
-*/
-int main()
-{
-    demo();
-
-    return 0;
-}
-
-float demo()
-{
-    return 1.00;
-}
-
-1.编译器看到不认识的函数调用(函数未定义),认为它会在之后的源文件中找到这个函数的详细信息。它会先记录下来,随后在文件中查找
-2.编译器需要知道函数的返回类型,由于函数未定义,所以不知道它的返回类型,所以只好假设它返回int
-3.等编译器看到实际的函数,返回&quot;conflicting types for &apos;demo&apos;&quot;的错误,因为编译器认为有两个同名的函数,一个是文件中的函数,一个是编译器假设返回int的那个
-</code></pre><h1 id="什么是声明与定义分离"><a href="#什么是声明与定义分离" class="headerlink" title="什么是声明与定义分离"></a>什么是声明与定义分离</h1><pre><code>如果在第二步函数就知道返回类型了,就不需要再找了,所以为了防止编译器假设函数的返回类型,可以显示的告诉他,告诉编译器函数会返回什么类型的语句就叫函数声明;一旦声明了,编译器就不需要假设了,完全可以先调用函数,再定义函数
-声明只是一个函数签名:一条包含函数名,形参类型与返回类型的记录
-</code></pre><h1 id="如何让声明与定义分离"><a href="#如何让声明与定义分离" class="headerlink" title="如何让声明与定义分离"></a>如何让声明与定义分离</h1><pre><code>例如:
-    #include &lt;stdio.h&gt;
-
-    /*
-        此处声明了函数
-    */
-    int demo();
-
-    int main()
-    {
-        demo();
-        puts(&quot;this is main function&quot;);
-
-        return 0;
-    }
-
-    /*
-        此处定义了函数
-    */
-    int demo()
-    {
-        puts(&quot;this is demo function&quot;);
-        return 0;
-    }
-</code></pre><h1 id="创建完全和函数体分离的头文件"><a href="#创建完全和函数体分离的头文件" class="headerlink" title="创建完全和函数体分离的头文件"></a>创建完全和函数体分离的头文件</h1><pre><code>demo.h文件内容:
-    int demo();
-
-函数体中的内容:
-    #include &lt;stdio.h&gt;
-    /*
-        注意这里是双引号,且没有分号,文件在当前目录下,是相对路径,里面之定义了头信息(就是函数的返回值以及类型)
-    */
-    #include &quot;demo.h&quot;
-
-    int main()
-    {
-        /*
-            调用未定义的函数,不报错(因为上面加载了函数头信息)
-        */
-        demo();
-        puts(&quot;this is main function&quot;);
-
-        return 0;
-    }
-
-    int demo()
-    {
-        puts(&quot;this is demo function&quot;);
-        return 0;
-    }
-</code></pre><h1 id="什么是预处理"><a href="#什么是预处理" class="headerlink" title="什么是预处理"></a>什么是预处理</h1><pre><code>预处理是把c源码转化成可执行文件的第一个阶段,预处理会在编译开始之前修改代码,创建一个新的源文件(为了提高效率,编译器通常会用管道在两个阶段之间发送数据)
-</code></pre><h1 id="include-lt-gt-和include-“”有什么区别"><a href="#include-lt-gt-和include-“”有什么区别" class="headerlink" title="include &lt;&gt; 和include “”有什么区别"></a>include &lt;&gt; 和include “”有什么区别</h1><pre><code>引号表示使用以相对路径查找头文件,如果不加目录名,只包含一个文件名,编译器就会在当前目录下查找头文件;如果遇到尖括号,会到标准库代码所在目录查找头文件
-</code></pre><h1 id="gcc一般会去哪些位置寻找头文件"><a href="#gcc一般会去哪些位置寻找头文件" class="headerlink" title="gcc一般会去哪些位置寻找头文件"></a>gcc一般会去哪些位置寻找头文件</h1><pre><code>gcc知道标准库的头文件被保存的位置,头文件一般保存在/usr/local/include,/usr/include这些地方
-</code></pre><h1 id="编译器是如何工作的"><a href="#编译器是如何工作的" class="headerlink" title="编译器是如何工作的"></a>编译器是如何工作的</h1><pre><code>1.预处理:修改代码
-    用include指令添加相关头文件;跳过程序中的某些代码;补充一些代码
-
-2.编译:转换成汇编代码
-    计算机只理解底层的机器代码指令,在这一步,会把语句或函数调用转化成一串汇编语言指令
-
-3.汇编:生成目标代码
-    编译器将符号代码汇编成机器代码或目标代码,也就是CPU内部电路执行的二进制代码
-
-4.链接:放在一起
-    一旦有了目标代码,就需要将它们拼在一起,构成可执行程序,当某个代码调用另外一个目标代码的函数时,编译器会把它们连接在一起。同时,链接还会确保程序能够调用库代码。最后程序会写到一个可执行程序文件中,文件格式视操作系统而定,操作系统根据文件格式把程序加载到存储器中运行
-</code></pre><h1 id="如何进行代码共享"><a href="#如何进行代码共享" class="headerlink" title="如何进行代码共享"></a>如何进行代码共享</h1><pre><code>例如在将数据写入到数据库中需要进行加密,在将数据写入到缓存中中也要进行加密,他们的加密方法是一致的,不需要在两个文件中都写一份加密的代码
-1.创建自己的头文件
-    encrypt.h文件
-        void encrypt(char *message);
-
-2.引用头文件
-    encrypt.c文件
-    #include &quot;encrypt.h&quot;
-
-    void encrypt(char *message)
-    {
-        char c;
-        while(*message) {
-            *message = *message ^ 31;
-            message++;
-        }
-    }
-
-    db.c文件
-    #include &lt;stdio.h&gt;
-    #include &quot;encrypt.h&quot;
-
-    int main()
-    {
-        char msg[80];
-        while(fgets(msg, 80, stdin)) {
-            encrypt(msg);
-            printf(&quot;%s\n&quot;, msg);
-        }
-    }
-
-3.执行命令(将多个文件编译成一个可执行文件)
-    gcc db.c encrypt.c -o db &amp;&amp; ./db
-</code></pre><h1 id="如果源文件很多-每次编译都需要耗费很长的时间-如何做到只重新编译改了的文件"><a href="#如果源文件很多-每次编译都需要耗费很长的时间-如何做到只重新编译改了的文件" class="headerlink" title="如果源文件很多,每次编译都需要耗费很长的时间,如何做到只重新编译改了的文件"></a>如果源文件很多,每次编译都需要耗费很长的时间,如何做到只重新编译改了的文件</h1><pre><code>回顾下编译器的工作原理,如果源文件没有进行变化的话,那么只有最后一步需要重新做(也就是链接);如果文件修改了毫无疑问需要重新编译
-</code></pre><h1 id="如何做能让gcc把目标代码保存在文件中-然后让编译器把目标文件链接起来"><a href="#如何做能让gcc把目标代码保存在文件中-然后让编译器把目标文件链接起来" class="headerlink" title="如何做能让gcc把目标代码保存在文件中?然后让编译器把目标文件链接起来?"></a>如何做能让gcc把目标代码保存在文件中?然后让编译器把目标文件链接起来?</h1><pre><code>1.首先把源代码编译为目标文件
-    gcc -c *.c
-
-2.把目标文件链接起来
-    gcc *.o -o demo
-</code></pre><h1 id="修改代码的编译流程变成了这样"><a href="#修改代码的编译流程变成了这样" class="headerlink" title="修改代码的编译流程变成了这样"></a>修改代码的编译流程变成了这样</h1><pre><code>1.首次编译
-    gcc *.c -o demo
-
-2.修改了test.c文件
-
-3.再次编译
-    gcc -c test.c
-
-4.再次链接
-    gcc *.o -o demo
-</code></pre><h1 id="如果我修改了很多文件-记录下来修改哪些文件也很麻烦"><a href="#如果我修改了很多文件-记录下来修改哪些文件也很麻烦" class="headerlink" title="如果我修改了很多文件,记录下来修改哪些文件也很麻烦"></a>如果我修改了很多文件,记录下来修改哪些文件也很麻烦</h1><pre><code>使用make工具自动化构建
-</code></pre><h1 id="make"><a href="#make" class="headerlink" title="make"></a>make</h1><pre><code>make是一个可以运行编译命令的工具。make会检查源文件和目标文件的时间戳,如果目标文件过期,make就会重新编译它
-</code></pre><h1 id="需要提供给make的条件"><a href="#需要提供给make的条件" class="headerlink" title="需要提供给make的条件"></a>需要提供给make的条件</h1><pre><code>1.依赖项;生成目标需要用哪些文件
-2.生成方法;生成该文件时要用哪些指令
-例如
-    将demo.c编译成demo.o,依赖项和生成方法分别是什么?
-    demo.o就是目标,因为需要生成这个文件,demo.c就是依赖项,因为编译器创建demo.o的时候需要它
-    生成方法就是将demo.c转化成demo.o的命令也就是gcc -c demo.c
-</code></pre><h1 id="怎样把依赖项和生成方法告诉make"><a href="#怎样把依赖项和生成方法告诉make" class="headerlink" title="怎样把依赖项和生成方法告诉make"></a>怎样把依赖项和生成方法告诉make</h1><pre><code>所有目标,依赖项和生成方法的细节信息需要保存在一个叫makefile或Makefile的文件中
-拿加密的例子说:
-最终的加密程序db由encrypt.o和db.o文件链接组成,这两个文件是由C文件和头文件编译而成,db.o依赖encrypt.h文件,因为db.o需要调用encrypt.c中的函数
-db.o: db.c encrypt.c encrypt.h
-    gcc -c db.c
-
-encrypt.o: encrypt.c encrypt.h
-    gcc -c encrypt.c
-
-db: db.o encrypt.o
-    gcc db.o encrypt.o -o db
-</code></pre><h1 id="创建makefile很麻烦"><a href="#创建makefile很麻烦" class="headerlink" title="创建makefile很麻烦"></a>创建makefile很麻烦</h1><pre><code>使用autoconf来自动生成makefile
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="为什么要使用声明与定义分离-它解决了什么问题"><a href="#为什么要使用声明与定义分离-它解决了什么问题" class="headerlink" title="为什么要使用声明与定义分离,它解决了什么问题"></a>为什么要使用声明与定义分离,它解决了什么]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言标准输入标准输出]]></title>
-    <link href="http://www.cxyteam.com/2016/07/22/C%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA/"/>
-    <id>http://www.cxyteam.com/2016/07/22/C语言标准输入标准输出/</id>
-    <published>2016-07-21T23:51:22.000Z</published>
-    <updated>2016-07-22T08:58:58.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h1><pre><code>将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
-eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
-</code></pre><h1 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h1><pre><code>将显示在屏幕的输出存储的位置(自己理解瞎定义的),一般使用&apos;&gt;&apos;操作符告诉操作系统,标准输出的位置,默认情况下会发送到显示器
-eg:./demo &gt; output.txt 表示运行demo程序产生的结果输出到output.txt文件
-</code></pre><h1 id="为什么要使用标准输入-标准输出"><a href="#为什么要使用标准输入-标准输出" class="headerlink" title="为什么要使用标准输入,标准输出?"></a>为什么要使用标准输入,标准输出?</h1><pre><code>因为一旦有了标准输入,标准输出,就可以重定向标准输入,标准输出,让程序从键盘以外的地方读取数据,往显示器以外的地方写数据
-</code></pre><h1 id="标准输入与标准输出的实例"><a href="#标准输入与标准输出的实例" class="headerlink" title="标准输入与标准输出的实例"></a>标准输入与标准输出的实例</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    float latitude;
-    float longitude;
-    char info[80];
-
-    int started=0;
-    puts(&quot;data=[&quot;);
-    while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-        if (started) {
-            printf(&quot;,\n&quot;);
-        } else {
-            started = 1;
-        }
-        printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
-    }
-    puts(&quot;\n]&quot;);
-
-    return 0;
-}
-
-input.txt内容为:
-    12.12,22.33,speed=21
-    33.33,45.21,speed=24
-    12.44,55.32,seppd=44
-    11.55,44.33,speed=22
-    423.63182,-71.095833,speed=22
-    28.345,-74.232,speed=44
-
-以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
-程序的标准输入是input.txt文件,标准输出到了output.txt文件
-</code></pre><h1 id="如果程序出错了如何看到结果"><a href="#如果程序出错了如何看到结果" class="headerlink" title="如果程序出错了如何看到结果?"></a>如果程序出错了如何看到结果?</h1><pre><code>程序执行完之后再终端输入:echo $?
-如果返回结果是0代表正常执行,如果返回结果是其他值,就是程序中报错的值(main函数正常返回0)
-</code></pre><h1 id="如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt"><a href="#如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt" class="headerlink" title="如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?"></a>如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?</h1><pre><code>我们需要将正常输出和异常输出分开来
-</code></pre><h1 id="标准错误"><a href="#标准错误" class="headerlink" title="标准错误"></a>标准错误</h1><pre><code>将错误的信息输出的位置,一般使用fprintf(stderr,msg)进行输出
-例子:
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        float latitude;
-        float longitude;
-        char info[80];
-        int started = 0;
-
-        puts(&quot;data=[&quot;);
-        while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-            if (started) {
-                printf(&quot;,\n&quot;);
-            } else {
-                started = 1;
-            }
-
-            if ((latitude &lt; -90.0) || (latitude &gt; 90.0)) {
-                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
-                return 2;
-            }
-
-            if ((longitude &lt; -180.0) || (longitude &gt; 180.0)) {
-                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
-                return 2;
-            }
-
-            printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
-        }
-        puts(&quot;\n]&quot;);
-        return 0;
-    }
-
-    以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
-    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
-</code></pre><h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><pre><code>将一个进程的标准输出与另一个进程的标准输入连接起来。用符号&apos;|&apos;表示
-
-一个例子:
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        float latitude;
-        float longitude;
-        char info[80];
-        while(scanf(&quot;%f, %f, %79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-            if ((latitude &gt; 26) &amp;&amp; (latitude &lt; 34)) {
-                if ((longitude &gt; -76) &amp;&amp; (longitude &lt; -64)) {
-                    printf(&quot;%f, %f, %s\n&quot;, latitude, longitude, info);
-                }
-            }
-        }
-
-        return 0;
-    }
-
-    以上程序在filter.c的文件中,gcc filter.c -o filter &amp;&amp; (./filter | ./tool &lt; input.txt &gt; output.txt
-    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
-</code></pre><h1 id="如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办"><a href="#如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办" class="headerlink" title="如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?"></a>如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?</h1><pre><code>需要在程序运行时创建自己的数据流
-</code></pre><h1 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h1><pre><code>FILE *in_file = fopen(&quot;input.txt&quot;, &quot;r&quot;);
-fscanf(in_file, &quot;%79[^\n]\n&quot;, demo);
-</code></pre><h1 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h1><pre><code>FILE *out_file = fopen(&quot;output.txt&quot;, &quot;w&quot;);
-fprintf(out_file, &quot;this is %s&quot;, &quot;demo&quot;);
-</code></pre><h1 id="关闭数据流"><a href="#关闭数据流" class="headerlink" title="关闭数据流"></a>关闭数据流</h1><pre><code>fclose(in_file);
-fclose(out_file);
-</code></pre><h1 id="创建数据流例子"><a href="#创建数据流例子" class="headerlink" title="创建数据流例子"></a>创建数据流例子</h1><pre><code>以下是file.c
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-
-/*
-    argc代表传入函数main的参数的个数
-    argv表示实际的参数数组
-*/
-int main(int argc, char *argv[])
-{
-    char line[80];
-
-    /*
-        argc第0个参数是函数名,所以一共有6个参数
-    */
-    if (argc != 6) {
-        fprintf(stderr, &quot;you need to give 5 arguments\n&quot;);
-        return 1;
-    }
-
-    /*
-        注意:一定要是双引号,写别的语言惹的祸
-    */
-    FILE *in = fopen(&quot;spooky.csv&quot;, &quot;r&quot;);
-    FILE *file1 = fopen(argv[2], &quot;w&quot;);
-    FILE *file2 = fopen(argv[4], &quot;w&quot;);
-    FILE *file3 = fopen(argv[5], &quot;w&quot;);
-    /*
-        用fscanf读取自定义数据流
-    */
-    while(fscanf(in, &quot;%79[^\n]\n&quot;, line) == 1) {
-        if (strstr(line, argv[1])) {
-            /*
-                用fprintf输出自定义数据流
-            */
-            fprintf(file1, &quot;%s\n&quot;, line);
-        } else if (strstr(line, argv[3])) {
-            fprintf(file2, &quot;%s\n&quot;, line);
-        } else {
-            fprintf(file3, &quot;%s\n&quot;, line);
-        }
-    }
-
-    fclose(file1);
-    fclose(file2);
-    fclose(file3);
-    return 0;
-}
-
-以下是spooky.csv
-
-30.453,-68.1212,Type=Yeti
-28.2342,-74.1212,Type=UFO
-29.303.-71.1323,Type=Ship
-28.1212,-62.2342,Type=Elvis
-27.1313,-68.1212,Type=Goatsucker
-30.12123,-73.12132,Type=Disappearance
-26.121,-71.123213,Type=UFO
-29.12,-66.1212,Type=Ship
-37.234,-69.23424,Type=Elvis
-22.234,-68.23424,Type=Elvis
-27.234,-87.23424,Type=Elvis
-
-运行:gcc file.c -o file &amp;&amp; ./file UFO aliens.txt Elvis elviss.txt the_rest.txt
-会得到多个自定义的输出流:aliens.txt,elviss.txt
-
-
-# 函数参数的传入太过复杂,该如何处理呢?
-    使用unistd.h替代函数参数的处理
-
-# 函数参数处理的例子
-    #include &lt;stdio.h&gt;
-    #include &lt;unistd.h&gt;
-
-    /*
-        argc代表传入函数main的参数的个数
-        argv表示实际的参数数组
-    */
-    int main(int argc, char *argv[])
-    {
-        char *delivery = &quot;&quot;;
-        int thick = 0;
-        int count = 0;
-        char ch;
-
-        while((ch = getopt(argc, argv, &quot;d:t&quot;)) != EOF) {
-            switch(ch) {
-                case &apos;d&apos;:
-                    delivery = optarg;
-                    break;
-                case &apos;t&apos;:
-                    thick = 1;
-                    break;
-                default:
-                    fprintf(stderr, &quot;Unknow option: &apos;%s&apos;\n&quot;, optarg);
-                    return 1;
-            }
-        }
-
-        argc -= optind;
-        argv += optind;
-
-        if (thick) {
-            puts(&quot;thick crust&quot;);
-        }
-
-        if (delivery[0]) {
-            printf(&quot;to be delivered %s.\n&quot;, delivery);
-        }
-
-        puts(&quot;Ingredients:&quot;);
-        for(count = 0; count&lt;argc;count++) {
-            puts(argv[count]);
-        }
-        return 0;
-    }
-
-    gcc unistd.c -o unistd
-    ./unistd Anchovies Pineapple
-    ./unistd -d now Anchovies Pineapple
-    ./unistd -d now -t Anchovies Pineapple
-    ./unistd -f
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h1><pre><code>将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉]]>
     </summary>
     
       <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>

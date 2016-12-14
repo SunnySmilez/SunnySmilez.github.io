@@ -59,31 +59,31 @@
 
 
 
-<meta name="description" content="设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
+<meta name="description" content="关闭NetworkManager服务service NetworkManager stop
+chkconfig NetworkManager off
+设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
 nameserver 8.8.8.8
 配置网关vi /etc/sysconfig/networkNETWORKING=yes
-HOSTNAME=dev
-配置IP地址vi /etc/sysconfig/network-scripts/ifcfg-eth0DEVICE=eth0
-BOOTP">
+HOSTN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux配置网络">
 <meta property="og:url" content="http://www.cxyteam.com/2016/12/01/linux配置网络/index.html">
 <meta property="og:site_name" content="狂奔的菜鸟">
-<meta property="og:description" content="设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
+<meta property="og:description" content="关闭NetworkManager服务service NetworkManager stop
+chkconfig NetworkManager off
+设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
 nameserver 8.8.8.8
 配置网关vi /etc/sysconfig/networkNETWORKING=yes
-HOSTNAME=dev
-配置IP地址vi /etc/sysconfig/network-scripts/ifcfg-eth0DEVICE=eth0
-BOOTP">
-<meta property="og:updated_time" content="2016-12-01T07:15:57.000Z">
+HOSTN">
+<meta property="og:updated_time" content="2016-12-03T09:43:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux配置网络">
-<meta name="twitter:description" content="设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
+<meta name="twitter:description" content="关闭NetworkManager服务service NetworkManager stop
+chkconfig NetworkManager off
+设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
 nameserver 8.8.8.8
 配置网关vi /etc/sysconfig/networkNETWORKING=yes
-HOSTNAME=dev
-配置IP地址vi /etc/sysconfig/network-scripts/ifcfg-eth0DEVICE=eth0
-BOOTP">
+HOSTN">
 
 
 
@@ -268,7 +268,9 @@ BOOTP">
       
 
       
-        <h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
+        <h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><code>service NetworkManager stop
+chkconfig NetworkManager off
+</code></pre><h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
 nameserver 8.8.8.8
 </code></pre><h1 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h1><h4 id="vi-etc-sysconfig-network"><a href="#vi-etc-sysconfig-network" class="headerlink" title="vi /etc/sysconfig/network"></a>vi /etc/sysconfig/network</h4><pre><code>NETWORKING=yes
 HOSTNAME=dev
@@ -303,6 +305,10 @@ GATEWAY=192.168.1.1
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/06/rsyslog配置/" rel="prev" title="rsyslog配置">
+                rsyslog配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -370,7 +376,7 @@ GATEWAY=192.168.1.1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">99</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -456,7 +462,7 @@ GATEWAY=192.168.1.1
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设置网络为桥接模式"><span class="nav-number">1.</span> <span class="nav-text">设置网络为桥接模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置DNS"><span class="nav-number">2.</span> <span class="nav-text">配置DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-resolv-conf"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">vi /etc/resolv.conf</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置网关"><span class="nav-number">3.</span> <span class="nav-text">配置网关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-sysconfig-network"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">vi /etc/sysconfig/network</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置IP地址"><span class="nav-number">4.</span> <span class="nav-text">配置IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-sysconfig-network-scripts-ifcfg-eth0"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭NetworkManager服务"><span class="nav-number">1.</span> <span class="nav-text">关闭NetworkManager服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置网络为桥接模式"><span class="nav-number">2.</span> <span class="nav-text">设置网络为桥接模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置DNS"><span class="nav-number">3.</span> <span class="nav-text">配置DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-resolv-conf"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">vi /etc/resolv.conf</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置网关"><span class="nav-number">4.</span> <span class="nav-text">配置网关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-sysconfig-network"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">vi /etc/sysconfig/network</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置IP地址"><span class="nav-number">5.</span> <span class="nav-text">配置IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-etc-sysconfig-network-scripts-ifcfg-eth0"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
