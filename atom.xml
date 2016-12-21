@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2016-12-14T08:21:41.000Z</updated>
+  <updated>2016-12-21T03:22:16.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,35 +15,188 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[环境变量的设置]]></title>
+    <link href="http://www.cxyteam.com/2016/12/21/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://www.cxyteam.com/2016/12/21/环境变量的设置/</id>
+    <published>2016-12-21T03:06:19.000Z</published>
+    <updated>2016-12-21T03:22:16.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-profile" class="headerlink" title="修改/etc/profile"></a>修改/etc/profile</h6><h6 id="添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同"><a href="#添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同" class="headerlink" title="添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同"></a>添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同</h6><pre><code>pathmunge () {
+    case &quot;:${PATH}:&quot; in
+        *:&quot;$1&quot;:*)
+            ;;
+        *)
+            if [ &quot;$2&quot; = &quot;after&quot; ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+        PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/sbin:/usr/local/php/sbin:/usr/local/php/bin:/usr/local/nginx/sbin
+}
+</code></pre><h6 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source /etc/profile"></a>source /etc/profile</h6><h1 id="永久对当前用户生效（注意要重新登录才生效）"><a href="#永久对当前用户生效（注意要重新登录才生效）" class="headerlink" title="永久对当前用户生效（注意要重新登录才生效）"></a>永久对当前用户生效（注意要重新登录才生效）</h1><h6 id="修改-bash-profile"><a href="#修改-bash-profile" class="headerlink" title="修改~/.bash_profile"></a>修改~/.bash_profile</h6><pre><code>PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+</code></pre><h6 id="source-bash-profile"><a href="#source-bash-profile" class="headerlink" title="source ~/.bash_profile"></a>source ~/.bash_profile</h6><h1 id="临时对当前终端生效（终端断开，换将变量就需要重新设置）"><a href="#临时对当前终端生效（终端断开，换将变量就需要重新设置）" class="headerlink" title="临时对当前终端生效（终端断开，换将变量就需要重新设置）"></a>临时对当前终端生效（终端断开，换将变量就需要重新设置）</h1><h6 id="终端执行命令"><a href="#终端执行命令" class="headerlink" title="终端执行命令"></a>终端执行命令</h6><pre><code>export PATH=$PATH:/usr/local/mysql/sbin
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-prof]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[rsyslog搭建日志系统]]></title>
+    <link href="http://www.cxyteam.com/2016/12/19/rsyslog%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://www.cxyteam.com/2016/12/19/rsyslog搭建日志系统/</id>
+    <published>2016-12-19T11:09:44.000Z</published>
+    <updated>2016-12-21T07:36:12.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="安装rsyslog-请跳转：安装rsyslog"><a href="#安装rsyslog-请跳转：安装rsyslog" class="headerlink" title="安装rsyslog, 请跳转：安装rsyslog"></a>安装rsyslog, 请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/rsyslog" title="rsyslog搭建日志系统" target="_blank" rel="external">安装rsyslog</a></h2><h6 id="整体部署如图所示："><a href="#整体部署如图所示：" class="headerlink" title="整体部署如图所示："></a>整体部署如图所示：</h6><p><img src="/img/rsyslog/rsyslog_alarm.png" alt="Alt text" title="运行结果"></p>
+<h2 id="配置client日志收集到本地"><a href="#配置client日志收集到本地" class="headerlink" title="配置client日志收集到本地"></a>配置client日志收集到本地</h2><h6 id="在-etc-rsyslog-conf中添加一行"><a href="#在-etc-rsyslog-conf中添加一行" class="headerlink" title="在/etc/rsyslog.conf中添加一行"></a>在/etc/rsyslog.conf中添加一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="注释一行"><a href="#注释一行" class="headerlink" title="注释一行"></a>注释一行</h6><pre><code>#$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="配置日志收集到本地样例"><a href="#配置日志收集到本地样例" class="headerlink" title="配置日志收集到本地样例"></a><a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/rsyslog_local.conf" title="配置日志收集到本地" target="_blank" rel="external">配置日志收集到本地样例</a></h6><h6 id="检验配置文件正确性"><a href="#检验配置文件正确性" class="headerlink" title="检验配置文件正确性"></a>检验配置文件正确性</h6><pre><code>rsyslogd -f /etc/rsyslog.conf -N1
+</code></pre><h6 id="查看错误信息"><a href="#查看错误信息" class="headerlink" title="查看错误信息"></a>查看错误信息</h6><pre><code>tail -n 100 /var/log/messages
+</code></pre><h6 id="重启rsyslog"><a href="#重启rsyslog" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
+</code></pre><h6 id="测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php"><a href="#测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php" class="headerlink" title="测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)"></a>测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)</h6><pre><code>&lt;?php
+    $message=&apos;this is test&apos;;
+    openlog(&apos;this is test, do you know&apos;, LOG_ODELAY, LOG_LOCAL7);
+    syslog(LOG_DEBUG, $message);
+    closelog();
+</code></pre><h6 id="或者在终端运行（local7指定运行级别）"><a href="#或者在终端运行（local7指定运行级别）" class="headerlink" title="或者在终端运行（local7指定运行级别）"></a>或者在终端运行（local7指定运行级别）</h6><pre><code>#-p 指定自定义的日志设备，和配置文件的local5.*对应
+logger -it error  -p local5.info &quot;hello world&quot;
+</code></pre><h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><h6 id="运行脚本-usr-local-php-bin-php为你php的命令路径"><a href="#运行脚本-usr-local-php-bin-php为你php的命令路径" class="headerlink" title="运行脚本(/usr/local/php/bin/php为你php的命令路径)"></a>运行脚本(/usr/local/php/bin/php为你php的命令路径)</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
+</code></pre><h6 id="安装php环境，请跳转：安装php运行环境"><a href="#安装php环境，请跳转：安装php运行环境" class="headerlink" title="安装php环境，请跳转：安装php运行环境"></a>安装php环境，请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/lnmp" title="安装php运行环境" target="_blank" rel="external">安装php运行环境</a></h6><h6 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h6><pre><code>在/tmp/rsyslog.log中查看，会有我们记录的内容
+</code></pre><h2 id="client传输日志到server"><a href="#client传输日志到server" class="headerlink" title="client传输日志到server"></a>client传输日志到server</h2><h6 id="在-etc-rsyslog-conf文件中删除一行"><a href="#在-etc-rsyslog-conf文件中删除一行" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行"><a href="#在-etc-rsyslog-conf文件中添加一行" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="在-etc-rsyslog-d-添加文件client-conf"><a href="#在-etc-rsyslog-d-添加文件client-conf" class="headerlink" title="在/etc/rsyslog.d/添加文件client.conf"></a>在/etc/rsyslog.d/添加文件client.conf</h6><h6 id="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"><a href="#需要注意的是target是你的server的地址，配置client传输日志到server文件样例" class="headerlink" title="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"></a>需要注意的是target是你的server的地址，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/client.conf" title="配置client传输日志到server文件样例" target="_blank" rel="external">配置client传输日志到server文件样例</a></h6><pre><code>if ($syslogfacility-text == &apos;local6&apos;) or ($syslogfacility-text == &apos;local7&apos;) or ($syslogtag == &apos;php:&apos;) or ($msg startswith &apos;PHP&apos;) then {
+        action(type=&quot;omfwd&quot;
+                        target=&quot;192.168.1.12&quot; port=&quot;514&quot; protocol=&quot;tcp&quot;
+                        queue.type=&quot;linkedList&quot;
+                        queue.spoolDirectory=&quot;/var/spool/rsyslog&quot;
+                        queue.fileName=&quot;fwd_rsyslog.com&quot;
+                        queue.maxDiskSpace=&quot;5g&quot;
+                        queue.saveOnShutdown=&quot;on&quot;
+                        action.resumeRetryCount=&quot;-1&quot;
+              )
+                ~
+}
+</code></pre><h6 id="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"><a href="#按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因" class="headerlink" title="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"></a>按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因</h6><h2 id="配置server日志交给脚本处理"><a href="#配置server日志交给脚本处理" class="headerlink" title="配置server日志交给脚本处理"></a>配置server日志交给脚本处理</h2><h6 id="编辑日志处理脚本-data1-htdocs-rsyslog-php"><a href="#编辑日志处理脚本-data1-htdocs-rsyslog-php" class="headerlink" title="编辑日志处理脚本,/data1/htdocs/rsyslog.php"></a>编辑日志处理脚本,/data1/htdocs/rsyslog.php</h6><pre><code>&lt;?php
+while(!feof(STDIN)){
+        $line = trim(fgets(STDIN));
+        if (empty($line)) {
+                continue;
+        }
+
+        file_put_contents(&apos;/tmp/rsyslog2.log&apos;, $line, FILE_APPEND);
+}
+</code></pre><h6 id="在-etc-rsyslog-conf文件中删除一行-1"><a href="#在-etc-rsyslog-conf文件中删除一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行-1"><a href="#在-etc-rsyslog-conf文件中添加一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例"><a href="#在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例" class="headerlink" title="在/etc/rsyslog.d/添加文件server.conf，server收集日志交给脚本处理配置文件样例"></a>在/etc/rsyslog.d/添加文件server.conf，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/server.conf" title="server收集日志交给脚本处理配置文件样例" target="_blank" rel="external">server收集日志交给脚本处理配置文件样例</a></h6><pre><code>module(load=&quot;omprog&quot;)
+
+template(name=&quot;log&quot; type=&quot;string&quot; string=&quot;%fromhost-ip% %syslogtag% %msg%\n&quot;)
+
+*.* action(type=&quot;omprog&quot; binary=&quot;/usr/local/php/bin/php /data1/htdocs/rsyslog.php&quot; template=&quot;log&quot;)
+*.* ~
+</code></pre><h6 id="重启rsyslog-1"><a href="#重启rsyslog-1" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
+</code></pre><h6 id="在client端写入日志"><a href="#在client端写入日志" class="headerlink" title="在client端写入日志"></a>在client端写入日志</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
+</code></pre><h6 id="在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"><a href="#在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本" class="headerlink" title="在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"></a>在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本</h6><h2 id="将nginx日志接入rsyslog"><a href="#将nginx日志接入rsyslog" class="headerlink" title="将nginx日志接入rsyslog"></a>将nginx日志接入rsyslog</h2><h6 id="男性交友网站有一个nginx的补丁包-nginx-syslog-patch"><a href="#男性交友网站有一个nginx的补丁包-nginx-syslog-patch" class="headerlink" title="男性交友网站有一个nginx的补丁包,nginx_syslog_patch"></a>男性交友网站有一个nginx的补丁包,<a href="https://github.com/yaoweibin/nginx_syslog_patch" title="nginx_syslog_patch" target="_blank" rel="external">nginx_syslog_patch</a></h6><h6 id="下载包（注意是整个包，不是一个patch的文件）"><a href="#下载包（注意是整个包，不是一个patch的文件）" class="headerlink" title="下载包（注意是整个包，不是一个patch的文件）"></a>下载包（注意是整个包，不是一个patch的文件）</h6><pre><code>git clone https://github.com/splitice/nginx_syslog_patch
+</code></pre><h5 id="进入到nginx的安装目录，然后进行patch"><a href="#进入到nginx的安装目录，然后进行patch" class="headerlink" title="进入到nginx的安装目录，然后进行patch"></a>进入到nginx的安装目录，然后进行patch</h5><pre><code>cd /usr/local/nginx-1.4.7 &amp;&amp; patch -p1 &lt; /usr/local/nginx_syslog_patch/syslog_1.4.0.patch
+./configure --add-module=/usr/local/nginx_syslog_patch/ --prefix=/usr/local/nginx &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><pre><code>worker_processes  1;
+#syslog logcal6 nginx这个很重要哦，只写一次就可以，当然也要看你放在哪里了
+syslog local6 nginx;
+events {
+        worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  &apos;$remote_addr - $remote_user [$time_local] $request &apos;
+        &apos;&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; &apos;
+        &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+    server {
+        listen       80;
+        server_name  localhost;
+        #send the log to syslog and file.
+        access_log  syslog:notice|logs/kinggoo.access.log main;
+         error_log syslog:notice|logs/kinggoo.error.log;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+    server {
+        listen       80;
+        server_name  www.example.com;
+
+        access_log  syslog:warn|logs/host2.access.log main;
+        error_log syslog:warn|logs/host2.error.log;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+    server {
+        listen       80;
+        server_name  www.test.com;
+
+        #send the log just to syslog.
+        access_log  syslog:error main;
+        error_log syslog:error;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+}
+</code></pre><h6 id="重启nginx"><a href="#重启nginx" class="headerlink" title="重启nginx"></a>重启nginx</h6><pre><code>/usr/local/nginx/sbin/nginx -s reload
+</code></pre><h6 id="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"><a href="#最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）" class="headerlink" title="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"></a>最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）</h6><h6 id="访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志"><a href="#访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志" class="headerlink" title="访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志"></a>访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志</h6><h2 id="将php日志写入rsyslog"><a href="#将php日志写入rsyslog" class="headerlink" title="将php日志写入rsyslog"></a>将php日志写入rsyslog</h2><h6 id="修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询"><a href="#修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询" class="headerlink" title="修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)"></a>修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)</h6><pre><code>打开error_log = syslog这一行的注释，没有就添加吧
+</code></pre><h6 id="重启php-fpm"><a href="#重启php-fpm" class="headerlink" title="重启php-fpm"></a>重启php-fpm</h6><pre><code>killall php-fpm &amp;&amp; /usr/local/php/sbin/php-fpm
+</code></pre><h6 id="测试（故意写了语法错误）"><a href="#测试（故意写了语法错误）" class="headerlink" title="测试（故意写了语法错误）"></a>测试（故意写了语法错误）</h6><pre><code>php -r &quot;echo 11&quot;
+</code></pre><h5 id="查看server的-tmp-rsyslog2-log中是否存在日志"><a href="#查看server的-tmp-rsyslog2-log中是否存在日志" class="headerlink" title="查看server的/tmp/rsyslog2.log中是否存在日志"></a>查看server的/tmp/rsyslog2.log中是否存在日志</h5>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="安装rsyslog-请跳转：安装rsyslog"><a href="#安装rsyslog-请跳转：安装rsyslog" class="headerlink" title="安装rsyslog, 请跳转：安装rsyslog"></a>安装rsyslog, 请跳转：<]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[安装lnmp环境]]></title>
     <link href="http://www.cxyteam.com/2016/12/14/%E5%AE%89%E8%A3%85lnmp%E7%8E%AF%E5%A2%83/"/>
     <id>http://www.cxyteam.com/2016/12/14/安装lnmp环境/</id>
     <published>2016-12-14T07:21:17.000Z</published>
-    <updated>2016-12-14T08:21:41.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum  install zlib-devel pcre-devel openssl-devel
-</code></pre><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>wget http://nginx.org/download/nginx-1.10.2.tar.gz
-tar -zxvf nginx-1.10.2.tar.gz
-cd nginx-1.10.2.tar.gz
+    <updated>2016-12-20T12:38:56.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）"><a href="#注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）" class="headerlink" title="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）"></a>注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）</h2><h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum install gcc zlib-devel pcre-devel openssl-devel 
+</code></pre><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>wget http://nginx.org/download/nginx-1.4.7.tar.gz
+tar -zxvf nginx-1.4.7.tar.gz
+cd nginx-1.4.7
 ./configure --prefix=/usr/local/nginx --with-openssl=/usr/include/openssl --with-pcre --with-http_stub_status_module &amp;&amp; make &amp;&amp; make install
+useradd www
+groupadd www
+useradd -g www www
 </code></pre><h5 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h5><pre><code>/usr/local/nginx/sbin/nginx
 </code></pre><h5 id="查看端口是否启动"><a href="#查看端口是否启动" class="headerlink" title="查看端口是否启动"></a>查看端口是否启动</h5><pre><code>ss -tlun | grep 80  或者 netstat -antlp ¦ grep 80
-</code></pre><h2 id="安装mysql依赖"><a href="#安装mysql依赖" class="headerlink" title="安装mysql依赖"></a>安装mysql依赖</h2><pre><code>yum install ncurses-devel
-</code></pre><h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><pre><code>wget http://dev.mysql.com/get/Downloads/MySQL-5.0/mysql-5.0.95.tar.gz/from/http://mysql.cdpa.nsysu.edu.tw/
+</code></pre><h2 id="安装mysql依赖"><a href="#安装mysql依赖" class="headerlink" title="安装mysql依赖"></a>安装mysql依赖</h2><pre><code>yum install ncurses-devel perl-Data-Dumper.x86_64 libaio*
+</code></pre><h2 id="安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了"><a href="#安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了" class="headerlink" title="安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)"></a>安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)</h2><pre><code>wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
 useradd -M -s /sbin/nologin mysql # -M 不添加家目录，-s不能指定shell登录
 
-tar -zxvf mysql-5.0.95.tar.gz
-cd mysql-5.0.95
-./configure --prefix=/usr/local/mysql --without-debug --with-extra-charsets=utf8,gbk --enable-assembler --with-mysqld-ldflags=-all-static --with-client-ldflags=-all-static --with-unix-socket-path=/tmp/mysql.sock --with-ssl &amp;&amp; make &amp;&amp; make install
+tar -zxvf mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
+cp -R mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz /usr/local/mysql
+</code></pre><h5 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h5><pre><code>cd /usr/local/mysql
+chown -R mysql:mysql ./
+scripts/mysql_install_db --user=mysql
+chown -R root:root ./
 
-cp support-files/my-medium.cnf /etc/my.cnf              #复制mysql配置文件
 cp support-files/mysql.server /etc/init.d/mysqld        #复制启动脚本
 chmod +x /etc/init.d/mysqld                             #添加执行权限
-</code></pre><h5 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h5><pre><code>mysql_install_db --user=mysql
-chown -R root.mysql /usr/local/mysql/ 
-chown -R mysql.mysql /usr/local/mysql/var/
 </code></pre><h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><pre><code>mysqladmin -u root password &quot;123123&quot;                   #账号为root密码为123123
 </code></pre><h5 id="添加mysql软连接，php编译安装的时候依赖"><a href="#添加mysql软连接，php编译安装的时候依赖" class="headerlink" title="添加mysql软连接，php编译安装的时候依赖"></a>添加mysql软连接，php编译安装的时候依赖</h5><pre><code>ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/         
-ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/
+ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib64/
 </code></pre><h5 id="启动mysql检查端口启动"><a href="#启动mysql检查端口启动" class="headerlink" title="启动mysql检查端口启动"></a>启动mysql检查端口启动</h5><pre><code>service mysqld start
 netstat -antlp ¦ grep 3306 或者 ss -tlun | grep 3306
 </code></pre><h2 id="安装php依赖"><a href="#安装php依赖" class="headerlink" title="安装php依赖"></a>安装php依赖</h2><h5 id="安装libmcrypt"><a href="#安装libmcrypt" class="headerlink" title="安装libmcrypt"></a>安装libmcrypt</h5><pre><code>wget -O libmcrypt-2.5.8.tar.bz2 http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.bz2/download
@@ -55,24 +208,29 @@ tar -jxvf mhash-0.9.9.9.tar.bz2
 cd mhash-0.9.9.9
 ./configure &amp;&amp; make &amp;&amp; make install
 </code></pre><h5 id="解决mcrypt依赖"><a href="#解决mcrypt依赖" class="headerlink" title="解决mcrypt依赖"></a>解决mcrypt依赖</h5><pre><code>ln -s /usr/local/lib/libmcrypt* /usr/lib
+ln -s /usr/local/lib/libmcrypt* /usr/lib64
 ln -s /usr/local/lib/libmhash.* /usr/lib/
+ln -s /usr/local/lib/libmhash.* /usr/lib64/
 ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
 ln -s /usr/lib64/liblber* /usr/lib/
+ln -s /usr/lib64/liblber* /usr/lib64/
 </code></pre><h4 id="安装mcrypt"><a href="#安装mcrypt" class="headerlink" title="安装mcrypt"></a>安装mcrypt</h4><pre><code>wget -O mcrypt-2.6.8.tar.gz http://sourceforge.net/projects/mcrypt/files/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz/download
 tar -zxvf mcrypt-2.6.8.tar.gz
 cd mcrypt-2.6.8
 ./configure &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="解决php其他依赖"><a href="#解决php其他依赖" class="headerlink" title="解决php其他依赖"></a>解决php其他依赖</h5><pre><code>yum install libxml2-devel curl-devel libpng-devel openldap-devel
+</code></pre><h5 id="解决php其他依赖"><a href="#解决php其他依赖" class="headerlink" title="解决php其他依赖"></a>解决php其他依赖</h5><pre><code>yum install -y gcc gcc-c++  make zlib zlib-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers libxslt-devel autoconf
 ln -s /usr/lib64/libldap* /usr/lib/
+ln -s /usr/lib64/libldap* /usr/lib64/
 </code></pre><h5 id="编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可"><a href="#编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可" class="headerlink" title="编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可"></a>编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可</h5><h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><pre><code>wget -O php-7.0.14.tar.gz http://cn2.php.net/get/php-7.0.14.tar.gz/from/this/mirror
 tar -jxvf php-7.0.14.tar.gz
+cd php-7.0.14
 ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysqli=/usr/local/mysql/ --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql  --with-iconv-dir=/usr/local/ --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-sysvshm --enable-inline-optimization --with-curl  --enable-mbregex  --enable-fpm --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap=/usr/ --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap --enable-opcache --enable-ftp --enable-calendar --with-xsl --with-gettext --enable-session --enable-ctype --with-kerberos --with-libdir=/lib/ --with-pcre-regex --enable-exif --with-bz2 &amp;&amp; make &amp;&amp; make install
-cp php.ini-production /usr/local/php/php.ini
+cp php.ini-production /usr/local/php/etc/php.ini
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
 ln -s /usr/local/php/bin/php /usr/bin/
 cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/demo.conf
 /usr/local/php/sbin/php-fpm
-</code></pre><h2 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h2><h5 id="添加解析php文件"><a href="#添加解析php文件" class="headerlink" title="添加解析php文件"></a>添加解析php文件</h5><pre><code>location / {
+</code></pre><h2 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h2><h5 id="编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件"><a href="#编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件" class="headerlink" title="编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件"></a>编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件</h5><pre><code>location / {
     root   /data/htdocs;                           # 设置代码根目录     
     index  index.php index.html index.htm;         # 添加index.php的首页文件
 }
@@ -83,9 +241,34 @@ cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/de
     include fastcgi_params;
     include fastcgi.conf;
 }
-</code></pre><h5 id="重启ngixn-usr-local-nginx-sbin-nginx"><a href="#重启ngixn-usr-local-nginx-sbin-nginx" class="headerlink" title="重启ngixn /usr/local/nginx/sbin/nginx"></a>重启ngixn /usr/local/nginx/sbin/nginx</h5><h5 id="在-data-htdocs中添加php文件测试"><a href="#在-data-htdocs中添加php文件测试" class="headerlink" title="在/data/htdocs中添加php文件测试"></a>在/data/htdocs中添加php文件测试</h5>]]></content>
+</code></pre><h5 id="重启nginx-usr-local-nginx-sbin-nginx"><a href="#重启nginx-usr-local-nginx-sbin-nginx" class="headerlink" title="重启nginx /usr/local/nginx/sbin/nginx"></a>重启nginx /usr/local/nginx/sbin/nginx</h5><h5 id="在-data-htdocs中添加php文件测试"><a href="#在-data-htdocs中添加php文件测试" class="headerlink" title="在/data/htdocs中添加php文件测试"></a>在/data/htdocs中添加php文件测试</h5><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><pre><code>yum install redis
+redis-server &amp;
+</code></pre><h2 id="添加reids拓展"><a href="#添加reids拓展" class="headerlink" title="添加reids拓展"></a>添加reids拓展</h2><h5 id="下载php7对应的redis拓展"><a href="#下载php7对应的redis拓展" class="headerlink" title="下载php7对应的redis拓展"></a>下载php7对应的redis拓展</h5><pre><code>wget https://github.com/phpredis/phpredis/archive/php7.zip
+unzip php7.zip
+cd phpredis-php7/
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="编辑配置文件，添加redis-so拓展"><a href="#编辑配置文件，添加redis-so拓展" class="headerlink" title="编辑配置文件，添加redis.so拓展"></a>编辑配置文件，添加redis.so拓展</h5><pre><code>vim /usr/local/php/etc/php.ini
+添加如下行：
+extension=redis.so
+</code></pre><h5 id="重启nginx-php-fpm"><a href="#重启nginx-php-fpm" class="headerlink" title="重启nginx,php-fpm"></a>重启nginx,php-fpm</h5><h5 id="查看安装结果"><a href="#查看安装结果" class="headerlink" title="查看安装结果"></a>查看安装结果</h5><pre><code>php -i | grep redis
+</code></pre><h2 id="安装yaf拓展-用不到yaf框架可以进行以下步骤"><a href="#安装yaf拓展-用不到yaf框架可以进行以下步骤" class="headerlink" title="安装yaf拓展(用不到yaf框架可以进行以下步骤)"></a>安装yaf拓展(用不到yaf框架可以进行以下步骤)</h2><pre><code>wget pecl.php.net//get/yaf-3.0.4.tgz
+tar -zxvf yaf-3.0.4.tgz
+cd yaf-3.0.4
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
+vim /usr/local/php/etc/php.ini
+</code></pre><h6 id="修改php-ini配置-添加如下配置"><a href="#修改php-ini配置-添加如下配置" class="headerlink" title="修改php.ini配置(添加如下配置)"></a>修改php.ini配置(添加如下配置)</h6><pre><code>[yaf]
+extension=yaf.so
+yaf.library=/data1/phplib
+yaf.name_suffix=0
+yaf.use_namespace=1
+yaf.name_separator=&quot;_&quot;
+yaf.action_prefer=0
+yaf.environ=dev
+</code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum  install zlib-devel pcre-devel]]>
+    <![CDATA[<h2 id="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）"><a href="#注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）]]>
     </summary>
     
       <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
@@ -1468,331 +1651,6 @@ void display(island *start) {
     <summary type="html">
     <![CDATA[<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><pre><code>是一种抽象的数据结构
 </code></pre><h1 id="使用场景"><a href="#使用场景" class="h]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言联合]]></title>
-    <link href="http://www.cxyteam.com/2016/07/27/C%E8%AF%AD%E8%A8%80%E8%81%94%E5%90%88/"/>
-    <id>http://www.cxyteam.com/2016/07/27/C语言联合/</id>
-    <published>2016-07-26T23:42:29.000Z</published>
-    <updated>2016-07-27T00:32:47.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h1><pre><code>用union关键字定义的一个叫&quot;量&quot;的数据类型
-typedef union {
-    short count;
-    float volume;
-    float weight;
-} quantity;
-</code></pre><h1 id="联合的特点"><a href="#联合的特点" class="headerlink" title="联合的特点"></a>联合的特点</h1><pre><code>1.可以有效的使用存储器空间
-    当定义联合的时候,计算机只为其中一个最大的字段分配空间,然后由你决定里面保存什么值(上面例子的name,age,weight都会存储在一个位置)
-</code></pre><h1 id="如何使用联合"><a href="#如何使用联合" class="headerlink" title="如何使用联合"></a>如何使用联合</h1><pre><code>1.c89方式:只能设置联合的第一个字段也就是上述中的name字段
-    例子:quantity a = {1};
-
-2.指定初始化器:按名设置联合字段的值
-    quantity b = {.volume = 4.6};
-
-3.点表示法:先创建变量,在设置字段的值
-    quantity c;
-    c.weight = 3.7;
-
-注意:无论哪种方法设置联合的值,都只会保存一条数据。联合只是提供了一种让你创建支持不同数据类型的变量的方法
-实例:
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        typedef union {
-            short count;
-            float volume;
-            float weight;
-        } quantity;
-
-        quantity a = {1};
-
-        quantity b = {.volume = 4.6};
-
-        quantity c;
-        c.weight = 3.7;
-        printf(&quot;%i,%f,%f&quot;, a.count, b.volume, c.weight);
-        return 0;
-    }
-</code></pre><h1 id="结构和联合一起使用"><a href="#结构和联合一起使用" class="headerlink" title="结构和联合一起使用"></a>结构和联合一起使用</h1><pre><code>#include &lt;stdio.h&gt;
-
-typedef union {
-    short count;
-    float volume;
-    float weight;
-} quantity;
-
-typedef struct {
-    const char *name;
-    const char *country;
-    quantity amount;
-} fruit_order;
-
-int main()
-{
-    /*
-        此处的.amount表示fruit_order中的amount字段,.count表示quantity中的字段
-    */
-    fruit_order apples = {&quot;apple&quot;, &quot;china&quot;, .amount.count = 20};
-    printf(&quot;%s,%s,%i&quot;, apples.name, apples.country, apples.amount.count);
-
-    return 0;
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h1><pre><code>用union关键字定义的一个叫&quot;量&quot;的数据类型
-typedef union {
-    short co]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言结构]]></title>
-    <link href="http://www.cxyteam.com/2016/07/26/C%E8%AF%AD%E8%A8%80%E7%BB%93%E6%9E%84/"/>
-    <id>http://www.cxyteam.com/2016/07/26/C语言结构/</id>
-    <published>2016-07-26T00:14:25.000Z</published>
-    <updated>2016-11-07T02:03:39.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><pre><code>把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
-例如:
-    定义新结构
-    /*
-        注意fish只是结构的名字
-    */
-    struct fish {
-        /*
-            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
-        */
-        const char *name;
-        const char *species;
-        int teeth;
-        int age;
-    };
-
-    创建数据
-    struct fish snappy = {&quot;snappy&quot;, &quot;piranha&quot;, 69, 4}
-
-    复制结构内容
-    struct fish snappy1 = snappy;
-</code></pre><h1 id="读取结构内容"><a href="#读取结构内容" class="headerlink" title="读取结构内容"></a>读取结构内容</h1><pre><code>尽管结构可以向数组那样在结构中保存字段,但读取时只能按名访问;可以使用&quot;.&quot;运算符访问结构字段
-fish.c的文件:
-#include &lt;stdio.h&gt;
-
-int main()
-{
-    struct fish {
-        /*
-            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
-        */
-        const char *name;
-        const char *species;
-        int teeth;
-        int age;
-    };
-
-    struct fish snappy = {
-        /*
-            注意依然不能使用单引号
-        */
-        &quot;snappy&quot;,
-        &quot;piranha&quot;,
-        69,
-        4
-    };
-
-    /*
-        获取的时候是定义的结构数据的名字,而不是结构本身的名字(是snappy而不是fish)
-    */
-    printf(&quot;%s,%s,%i,%i&quot;, snappy.name, snappy.species, snappy.teeth, snappy.age);
-
-    return 0;
-}
-
-使用make编译:make fish &amp;&amp; ./fish
-</code></pre><h1 id="存储器中的结构"><a href="#存储器中的结构" class="headerlink" title="存储器中的结构"></a>存储器中的结构</h1><pre><code>在定义结构时,并没有让计算机在存储器中创建任何东西,只是给了计算机一个模板,告诉它你希望新的数据类型长什么样子
-当定义新变量时,计算机则需要在存储器中为结构的实例创建空间,这块空间必须足够大,以装下结构中的所有字段
-把一个结构变量赋给另一个结构变量时,计算机会创建一个全新的结构副本,也就是说,计算机需要再分配一块存储器空间,大小和原来相同,然后把每个字段都复制过去
-</code></pre><h1 id="结构的嵌套"><a href="#结构的嵌套" class="headerlink" title="结构的嵌套"></a>结构的嵌套</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    /*
-        注意结束的分号不要忘记打,这个不是数组
-    */
-    struct preferences {
-        /*
-            此处结尾是分号,不是逗号
-        */
-        const char *food;
-        float exercise_hours;
-    };
-
-    struct fish {
-        const char *name;
-        const char *species;
-        int teeth;
-        int age;
-        /*
-            结构的嵌套:在结构中定义结构
-            此处定义的不是一个结构体,而是一个结构创建后的数据(是struct preferences care而不是struct preferences)
-        */
-        struct preferences care;
-    };
-
-    struct fish snappy = {
-        &quot;snappy&quot;,
-        &quot;piranha&quot;,
-        69,
-        4,
-        {
-            &quot;fish&quot;,
-            4.00
-        }
-    };
-
-    /*
-        获取嵌套的结构中的数据注意care是嵌套的结构的名字
-    */
-    printf(&quot;%s,%f&quot;, snappy.care.food, snappy.care.exercise_hours);
-}
-</code></pre><h1 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h1><pre><code>使用typedef将struct name重命名rename,在后续创建结构数据的时候,可以直接使用rename
-其实struct name是结构名,rename是类型名
-typedef struct name {} rename;
-
-例子:
-#include &lt;stdio.h&gt;
-
-int main()
-{
-    typedef struct big_fish {
-        /*
-            const char * 是用来保存不想修改的字符串,也就是字符串的字面值
-        */
-        const char *name;
-        const char *species;
-        int teeth;
-        int age;
-    } fish;
-
-    fish snappy = {
-        /*
-            注意依然不能使用单引号
-        */
-        &quot;snappy&quot;,
-        &quot;piranha&quot;,
-        69,
-        4
-    };
-
-    printf(&quot;%s,%s,%i,%i&quot;, snappy.name, snappy.species, snappy.teeth, snappy.age);
-    return 0;
-}
-</code></pre><h1 id="匿名结构"><a href="#匿名结构" class="headerlink" title="匿名结构"></a>匿名结构</h1><pre><code>typeof struct {} rename
-不存在name(结构名)只存在rename(类型名)
-</code></pre><h1 id="更新结构"><a href="#更新结构" class="headerlink" title="更新结构"></a>更新结构</h1><pre><code>#include &lt;stdio.h&gt;
-
-typedef struct {
-    const char *name;
-    const char *species;
-    int age;
-} turtle;
-
-void happy_birthday(turtle t)
-{
-    /*
-        关键在此处更新结构
-    */
-    t.age = t.age + 1;
-    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, t.name, t.age);
-}
-
-int main()
-{
-    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
-    happy_birthday(myrtle);
-    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
-
-    return 0;
-}
-
-为什么最终输出来的值是:
-    happy birthday Myrtle,you are 100 years old!
-    Myrtle&apos;s age is now 99
-
-为什么传给函数happy_birthday的时候age递增1变成100,调用完之后再次查看age的值结果是99?
-因为你传入的是结构的值,不是结构的指针,所以他会对结构的值进行复制
-</code></pre><h1 id="指针更新结构"><a href="#指针更新结构" class="headerlink" title="指针更新结构"></a>指针更新结构</h1><pre><code>#include &lt;stdio.h&gt;
-
-typedef struct {
-    const char *name;
-    const char *species;
-    int age;
-} turtle;
-
-void happy_birthday(turtle *t)
-{
-    /*
-        (*t)表示myrtle指针指向的值,一定要打括号,表示一个整体
-        (*t).age表示的是t指向的结构的指针,最后得到的是年龄
-        *t.age表示的是t.age这个存储器单元中的内容
-    */
-    (*t).age = (*t).age + 1;
-    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, (*t).name, (*t).age);
-}
-
-int main()
-{
-    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
-    /*
-        注意此处传入的是结构的指针,使用&apos;&amp;&apos;获取指针
-    */
-    happy_birthday((&amp;myrtle));
-    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
-
-    return 0;
-}
-</code></pre><h1 id="易读的表达方式"><a href="#易读的表达方式" class="headerlink" title="易读的表达方式"></a>易读的表达方式</h1><pre><code>#include &lt;stdio.h&gt;
-
-typedef struct {
-    const char *name;
-    const char *species;
-    int age;
-} turtle;
-
-void happy_birthday(turtle *t)
-{
-    /*
-        (*t).age == t-&gt;age
-    */
-    t-&gt;age = t-&gt;age + 1;
-    printf(&quot;happy birthday %s,you are %i years old!\n&quot;, (*t).name, (*t).age);
-}
-
-int main()
-{
-    turtle myrtle = {&quot;Myrtle&quot;, &quot;Leatherback sea turtle&quot;, 99};
-    happy_birthday((&amp;myrtle));
-    printf(&quot;%s&apos;s age is now %i\n&quot;, myrtle.name, myrtle.age);
-
-    return 0;
-}6
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><pre><code>把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
-例如:
-    定义新结构
-    /]]>
     </summary>
     
       <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
