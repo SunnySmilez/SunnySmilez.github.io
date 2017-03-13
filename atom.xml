@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2016-12-21T03:22:16.000Z</updated>
+  <updated>2017-03-12T08:46:56.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,1676 +15,2076 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[环境变量的设置]]></title>
-    <link href="http://www.cxyteam.com/2016/12/21/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://www.cxyteam.com/2016/12/21/环境变量的设置/</id>
-    <published>2016-12-21T03:06:19.000Z</published>
-    <updated>2016-12-21T03:22:16.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-profile" class="headerlink" title="修改/etc/profile"></a>修改/etc/profile</h6><h6 id="添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同"><a href="#添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同" class="headerlink" title="添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同"></a>添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同</h6><pre><code>pathmunge () {
-    case &quot;:${PATH}:&quot; in
-        *:&quot;$1&quot;:*)
-            ;;
-        *)
-            if [ &quot;$2&quot; = &quot;after&quot; ] ; then
-                PATH=$PATH:$1
-            else
-                PATH=$1:$PATH
-            fi
-    esac
-        PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/sbin:/usr/local/php/sbin:/usr/local/php/bin:/usr/local/nginx/sbin
-}
-</code></pre><h6 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source /etc/profile"></a>source /etc/profile</h6><h1 id="永久对当前用户生效（注意要重新登录才生效）"><a href="#永久对当前用户生效（注意要重新登录才生效）" class="headerlink" title="永久对当前用户生效（注意要重新登录才生效）"></a>永久对当前用户生效（注意要重新登录才生效）</h1><h6 id="修改-bash-profile"><a href="#修改-bash-profile" class="headerlink" title="修改~/.bash_profile"></a>修改~/.bash_profile</h6><pre><code>PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
-</code></pre><h6 id="source-bash-profile"><a href="#source-bash-profile" class="headerlink" title="source ~/.bash_profile"></a>source ~/.bash_profile</h6><h1 id="临时对当前终端生效（终端断开，换将变量就需要重新设置）"><a href="#临时对当前终端生效（终端断开，换将变量就需要重新设置）" class="headerlink" title="临时对当前终端生效（终端断开，换将变量就需要重新设置）"></a>临时对当前终端生效（终端断开，换将变量就需要重新设置）</h1><h6 id="终端执行命令"><a href="#终端执行命令" class="headerlink" title="终端执行命令"></a>终端执行命令</h6><pre><code>export PATH=$PATH:/usr/local/mysql/sbin
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-prof]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[rsyslog搭建日志系统]]></title>
-    <link href="http://www.cxyteam.com/2016/12/19/rsyslog%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://www.cxyteam.com/2016/12/19/rsyslog搭建日志系统/</id>
-    <published>2016-12-19T11:09:44.000Z</published>
-    <updated>2016-12-21T08:45:53.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="安装rsyslog-请跳转：安装rsyslog"><a href="#安装rsyslog-请跳转：安装rsyslog" class="headerlink" title="安装rsyslog, 请跳转：安装rsyslog"></a>安装rsyslog, 请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/rsyslog" title="rsyslog搭建日志系统" target="_blank" rel="external">安装rsyslog</a></h2><h6 id="整体部署如图所示："><a href="#整体部署如图所示：" class="headerlink" title="整体部署如图所示："></a>整体部署如图所示：</h6><p><img src="/img/rsyslog/rsyslog_alarm.png" alt="Alt text" title="运行结果"></p>
-<h2 id="配置client日志收集到本地"><a href="#配置client日志收集到本地" class="headerlink" title="配置client日志收集到本地"></a>配置client日志收集到本地</h2><h6 id="在-etc-rsyslog-conf中添加一行"><a href="#在-etc-rsyslog-conf中添加一行" class="headerlink" title="在/etc/rsyslog.conf中添加一行"></a>在/etc/rsyslog.conf中添加一行</h6><pre><code>*.* /tmp/rsyslog.log
-</code></pre><h6 id="注释一行"><a href="#注释一行" class="headerlink" title="注释一行"></a>注释一行</h6><pre><code>#$IncludeConfig /etc/rsyslog.d/*.conf
-</code></pre><h6 id="配置日志收集到本地样例"><a href="#配置日志收集到本地样例" class="headerlink" title="配置日志收集到本地样例"></a><a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/rsyslog_local.conf" title="配置日志收集到本地" target="_blank" rel="external">配置日志收集到本地样例</a></h6><h6 id="检验配置文件正确性"><a href="#检验配置文件正确性" class="headerlink" title="检验配置文件正确性"></a>检验配置文件正确性</h6><pre><code>rsyslogd -f /etc/rsyslog.conf -N1
-</code></pre><h6 id="查看错误信息"><a href="#查看错误信息" class="headerlink" title="查看错误信息"></a>查看错误信息</h6><pre><code>tail -n 100 /var/log/messages
-</code></pre><h6 id="重启rsyslog"><a href="#重启rsyslog" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
-</code></pre><h6 id="测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php"><a href="#测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php" class="headerlink" title="测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)"></a>测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)</h6><pre><code>&lt;?php
-    $message=&apos;this is test&apos;;
-    openlog(&apos;this is test, do you know&apos;, LOG_ODELAY, LOG_LOCAL7);
-    syslog(LOG_DEBUG, $message);
-    closelog();
-</code></pre><h6 id="或者在终端运行（local7指定运行级别）"><a href="#或者在终端运行（local7指定运行级别）" class="headerlink" title="或者在终端运行（local7指定运行级别）"></a>或者在终端运行（local7指定运行级别）</h6><pre><code>#-p 指定自定义的日志设备，和配置文件的local5.*对应
-logger -it error  -p local5.info &quot;hello world&quot;
-</code></pre><h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><h6 id="运行脚本-usr-local-php-bin-php为你php的命令路径"><a href="#运行脚本-usr-local-php-bin-php为你php的命令路径" class="headerlink" title="运行脚本(/usr/local/php/bin/php为你php的命令路径)"></a>运行脚本(/usr/local/php/bin/php为你php的命令路径)</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
-</code></pre><h6 id="安装php环境，请跳转：安装php运行环境"><a href="#安装php环境，请跳转：安装php运行环境" class="headerlink" title="安装php环境，请跳转：安装php运行环境"></a>安装php环境，请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/lnmp" title="安装php运行环境" target="_blank" rel="external">安装php运行环境</a></h6><h6 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h6><pre><code>在/tmp/rsyslog.log中查看，会有我们记录的内容
-</code></pre><h2 id="client传输日志到server"><a href="#client传输日志到server" class="headerlink" title="client传输日志到server"></a>client传输日志到server</h2><h6 id="在-etc-rsyslog-conf文件中删除一行"><a href="#在-etc-rsyslog-conf文件中删除一行" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
-</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行"><a href="#在-etc-rsyslog-conf文件中添加一行" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
-</code></pre><h6 id="在-etc-rsyslog-d-添加文件client-conf"><a href="#在-etc-rsyslog-d-添加文件client-conf" class="headerlink" title="在/etc/rsyslog.d/添加文件client.conf"></a>在/etc/rsyslog.d/添加文件client.conf</h6><h6 id="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"><a href="#需要注意的是target是你的server的地址，配置client传输日志到server文件样例" class="headerlink" title="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"></a>需要注意的是target是你的server的地址，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/client.conf" title="配置client传输日志到server文件样例" target="_blank" rel="external">配置client传输日志到server文件样例</a></h6><pre><code>if ($syslogfacility-text == &apos;local6&apos;) or ($syslogfacility-text == &apos;local7&apos;) or ($syslogtag == &apos;php:&apos;) or ($msg startswith &apos;PHP&apos;) then {
-        action(type=&quot;omfwd&quot;
-                        target=&quot;192.168.1.12&quot; port=&quot;514&quot; protocol=&quot;tcp&quot;
-                        queue.type=&quot;linkedList&quot;
-                        queue.spoolDirectory=&quot;/var/spool/rsyslog&quot;
-                        queue.fileName=&quot;fwd_rsyslog.com&quot;
-                        queue.maxDiskSpace=&quot;5g&quot;
-                        queue.saveOnShutdown=&quot;on&quot;
-                        action.resumeRetryCount=&quot;-1&quot;
-              )
-                ~
-}
-</code></pre><h6 id="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"><a href="#按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因" class="headerlink" title="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"></a>按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因</h6><h2 id="配置server日志交给脚本处理"><a href="#配置server日志交给脚本处理" class="headerlink" title="配置server日志交给脚本处理"></a>配置server日志交给脚本处理</h2><h6 id="编辑日志处理脚本-data1-htdocs-rsyslog-php"><a href="#编辑日志处理脚本-data1-htdocs-rsyslog-php" class="headerlink" title="编辑日志处理脚本,/data1/htdocs/rsyslog.php"></a>编辑日志处理脚本,/data1/htdocs/rsyslog.php</h6><pre><code>&lt;?php
-while(!feof(STDIN)){
-        $line = trim(fgets(STDIN));
-        if (empty($line)) {
-                continue;
+    <title><![CDATA[go学习笔记并发-channel]]></title>
+    <link href="http://www.cxyteam.com/2017/03/08/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B9%B6%E5%8F%91-channel/"/>
+    <id>http://www.cxyteam.com/2017/03/08/go学习笔记并发-channel/</id>
+    <published>2017-03-08T12:43:15.000Z</published>
+    <updated>2017-03-12T08:46:56.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"><a href="#引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒" class="headerlink" title="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"></a>引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    data := make(chan int)      //数据交换队列
+    exit := make(chan bool)     //退出通知
+
+    go func() {
+        for d := range data {   //从队列迭代接收数据，直到close
+            fmt.Println(d)
         }
 
-        file_put_contents(&apos;/tmp/rsyslog2.log&apos;, $line, FILE_APPEND);
+        fmt.Println(&quot;recv over.&quot;)
+        exit &lt;- true            //发送退出通知
+    }()
+
+    data &lt;- 1                   //发送数据
+    data &lt;- 2
+    data &lt;- 3
+    close(data)                 //关闭队列
+
+    fmt.Println(&quot;send over.&quot;)
+    &lt;-exit                      //等待退出通知
 }
-</code></pre><h6 id="在-etc-rsyslog-conf文件中删除一行-1"><a href="#在-etc-rsyslog-conf文件中删除一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
-</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行-1"><a href="#在-etc-rsyslog-conf文件中添加一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
-</code></pre><h6 id="在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例"><a href="#在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例" class="headerlink" title="在/etc/rsyslog.d/添加文件server.conf，server收集日志交给脚本处理配置文件样例"></a>在/etc/rsyslog.d/添加文件server.conf，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/server.conf" title="server收集日志交给脚本处理配置文件样例" target="_blank" rel="external">server收集日志交给脚本处理配置文件样例</a></h6><pre><code>module(load=&quot;omprog&quot;)
+</code></pre><h6 id="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"><a href="#异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞" class="headerlink" title="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"></a>异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞</h6><pre><code>package main
 
-template(name=&quot;log&quot; type=&quot;string&quot; string=&quot;%fromhost-ip% %syslogtag% %msg%\n&quot;)
+import (
+    &quot;fmt&quot;
+)
 
-*.* action(type=&quot;omprog&quot; binary=&quot;/usr/local/php/bin/php /data1/htdocs/rsyslog.php&quot; template=&quot;log&quot;)
-*.* ~
-</code></pre><h6 id="重启rsyslog-1"><a href="#重启rsyslog-1" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
-</code></pre><h6 id="在client端写入日志"><a href="#在client端写入日志" class="headerlink" title="在client端写入日志"></a>在client端写入日志</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
-</code></pre><h6 id="在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"><a href="#在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本" class="headerlink" title="在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"></a>在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本</h6><h2 id="将nginx日志接入rsyslog-nginx主动推送"><a href="#将nginx日志接入rsyslog-nginx主动推送" class="headerlink" title="将nginx日志接入rsyslog(nginx主动推送)"></a>将nginx日志接入rsyslog(nginx主动推送)</h2><h6 id="男性交友网站有一个nginx的补丁包-nginx-syslog-patch"><a href="#男性交友网站有一个nginx的补丁包-nginx-syslog-patch" class="headerlink" title="男性交友网站有一个nginx的补丁包,nginx_syslog_patch"></a>男性交友网站有一个nginx的补丁包,<a href="https://github.com/yaoweibin/nginx_syslog_patch" title="nginx_syslog_patch" target="_blank" rel="external">nginx_syslog_patch</a></h6><h6 id="下载包（注意是整个包，不是一个patch的文件）"><a href="#下载包（注意是整个包，不是一个patch的文件）" class="headerlink" title="下载包（注意是整个包，不是一个patch的文件）"></a>下载包（注意是整个包，不是一个patch的文件）</h6><pre><code>git clone https://github.com/splitice/nginx_syslog_patch
-</code></pre><h5 id="进入到nginx的安装目录，然后进行patch"><a href="#进入到nginx的安装目录，然后进行patch" class="headerlink" title="进入到nginx的安装目录，然后进行patch"></a>进入到nginx的安装目录，然后进行patch</h5><pre><code>cd /usr/local/nginx-1.4.7 &amp;&amp; patch -p1 &lt; /usr/local/nginx_syslog_patch/syslog_1.4.0.patch
-./configure --add-module=/usr/local/nginx_syslog_patch/ --prefix=/usr/local/nginx &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><pre><code>worker_processes  1;
-#syslog logcal6 nginx这个很重要哦，只写一次就可以，当然也要看你放在哪里了
-syslog local6 nginx;
-events {
-        worker_connections  1024;
-}
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    log_format  main  &apos;$remote_addr - $remote_user [$time_local] $request &apos;
-        &apos;&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; &apos;
-        &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
-    server {
-        listen       80;
-        server_name  localhost;
-        #send the log to syslog and file.
-        access_log  syslog:notice|logs/kinggoo.access.log main;
-         error_log syslog:notice|logs/kinggoo.error.log;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-        }
-    }
-    server {
-        listen       80;
-        server_name  www.example.com;
-
-        access_log  syslog:warn|logs/host2.access.log main;
-        error_log syslog:warn|logs/host2.error.log;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-        }
-    }
-    server {
-        listen       80;
-        server_name  www.test.com;
-
-        #send the log just to syslog.
-        access_log  syslog:error main;
-        error_log syslog:error;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-        }
-    }
-}
-</code></pre><h6 id="重启nginx"><a href="#重启nginx" class="headerlink" title="重启nginx"></a>重启nginx</h6><pre><code>/usr/local/nginx/sbin/nginx -s reload
-</code></pre><h6 id="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"><a href="#最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）" class="headerlink" title="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"></a>最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）</h6><h6 id="访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志"><a href="#访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志" class="headerlink" title="访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志"></a>访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志</h6><h2 id="将php日志写入rsyslog"><a href="#将php日志写入rsyslog" class="headerlink" title="将php日志写入rsyslog"></a>将php日志写入rsyslog</h2><h6 id="修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询"><a href="#修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询" class="headerlink" title="修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)"></a>修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)</h6><pre><code>打开error_log = syslog这一行的注释，没有就添加吧
-</code></pre><h6 id="重启php-fpm"><a href="#重启php-fpm" class="headerlink" title="重启php-fpm"></a>重启php-fpm</h6><pre><code>killall php-fpm &amp;&amp; /usr/local/php/sbin/php-fpm
-</code></pre><h6 id="测试（故意写了语法错误）"><a href="#测试（故意写了语法错误）" class="headerlink" title="测试（故意写了语法错误）"></a>测试（故意写了语法错误）</h6><pre><code>php -r &quot;echo 11&quot;
-</code></pre><h5 id="查看server的-tmp-rsyslog2-log中是否存在日志"><a href="#查看server的-tmp-rsyslog2-log中是否存在日志" class="headerlink" title="查看server的/tmp/rsyslog2.log中是否存在日志"></a>查看server的/tmp/rsyslog2.log中是否存在日志</h5><h2 id="拉取nginx日志"><a href="#拉取nginx日志" class="headerlink" title="拉取nginx日志"></a>拉取nginx日志</h2><h6 id="添加-etc-rsyslog-d-nginx-biglog-conf文件"><a href="#添加-etc-rsyslog-d-nginx-biglog-conf文件" class="headerlink" title="添加/etc/rsyslog.d/nginx-biglog.conf文件"></a>添加/etc/rsyslog.d/nginx-biglog.conf文件</h6><pre><code>$ModLoad imfile
-$InputFilePollInterval 10
-$WorkDirectory /var/spool/rsyslog
-$PrivDropToGroup adm
-
-## Nginx访问日志文件路径，根据实际情况修改:
-$InputFileName /usr/local/nginx/logs/access.log
-$InputFileTag nginx-access:
-$InputFileStateFile stat-nginx-access
-$InputFileSeverity info
-$InputFilePersistStateInterval 25000
-$InputRunFileMonitor
-
-## Nginx错误日志文件路径，根据实际情况修改:
-$InputFileName /usr/local/nginx/logs/error.log
-$InputFileTag nginx-error:
-$InputFileStateFile stat-nginx-error
-$InputFileSeverity error
-$InputFilePersistStateInterval 25000
-$InputRunFileMonitor
-
-## 指定日志格式模板：
-$template BiglogFormatNginx,&quot;%msg%\n&quot;
-
-## 注意syslog日志服务器接收地址，根据实际情况修改：
-if $programname == &apos;nginx-access&apos; then @10.x.x.x:514;BiglogFormatNginx
-if $programname == &apos;nginx-access&apos; then ~
-if $programname == &apos;nginx-error&apos; then @10.x.x.x:514;BiglogFormatNginx
-if $programname == &apos;nginx-error&apos; then ~
-</code></pre><h6 id="重启rsyslog-2"><a href="#重启rsyslog-2" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><h6 id="查看server的-tmp-rsyslog2-log中是否存在日志-1"><a href="#查看server的-tmp-rsyslog2-log中是否存在日志-1" class="headerlink" title="查看server的/tmp/rsyslog2.log中是否存在日志"></a>查看server的/tmp/rsyslog2.log中是否存在日志</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="安装rsyslog-请跳转：安装rsyslog"><a href="#安装rsyslog-请跳转：安装rsyslog" class="headerlink" title="安装rsyslog, 请跳转：安装rsyslog"></a>安装rsyslog, 请跳转：<]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[安装lnmp环境]]></title>
-    <link href="http://www.cxyteam.com/2016/12/14/%E5%AE%89%E8%A3%85lnmp%E7%8E%AF%E5%A2%83/"/>
-    <id>http://www.cxyteam.com/2016/12/14/安装lnmp环境/</id>
-    <published>2016-12-14T07:21:17.000Z</published>
-    <updated>2016-12-20T12:38:56.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）"><a href="#注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）" class="headerlink" title="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）"></a>注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）</h2><h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum install gcc zlib-devel pcre-devel openssl-devel 
-</code></pre><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>wget http://nginx.org/download/nginx-1.4.7.tar.gz
-tar -zxvf nginx-1.4.7.tar.gz
-cd nginx-1.4.7
-./configure --prefix=/usr/local/nginx --with-openssl=/usr/include/openssl --with-pcre --with-http_stub_status_module &amp;&amp; make &amp;&amp; make install
-useradd www
-groupadd www
-useradd -g www www
-</code></pre><h5 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h5><pre><code>/usr/local/nginx/sbin/nginx
-</code></pre><h5 id="查看端口是否启动"><a href="#查看端口是否启动" class="headerlink" title="查看端口是否启动"></a>查看端口是否启动</h5><pre><code>ss -tlun | grep 80  或者 netstat -antlp ¦ grep 80
-</code></pre><h2 id="安装mysql依赖"><a href="#安装mysql依赖" class="headerlink" title="安装mysql依赖"></a>安装mysql依赖</h2><pre><code>yum install ncurses-devel perl-Data-Dumper.x86_64 libaio*
-</code></pre><h2 id="安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了"><a href="#安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了" class="headerlink" title="安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)"></a>安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)</h2><pre><code>wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
-useradd -M -s /sbin/nologin mysql # -M 不添加家目录，-s不能指定shell登录
-
-tar -zxvf mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
-cp -R mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz /usr/local/mysql
-</code></pre><h5 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h5><pre><code>cd /usr/local/mysql
-chown -R mysql:mysql ./
-scripts/mysql_install_db --user=mysql
-chown -R root:root ./
-
-cp support-files/mysql.server /etc/init.d/mysqld        #复制启动脚本
-chmod +x /etc/init.d/mysqld                             #添加执行权限
-</code></pre><h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><pre><code>mysqladmin -u root password &quot;123123&quot;                   #账号为root密码为123123
-</code></pre><h5 id="添加mysql软连接，php编译安装的时候依赖"><a href="#添加mysql软连接，php编译安装的时候依赖" class="headerlink" title="添加mysql软连接，php编译安装的时候依赖"></a>添加mysql软连接，php编译安装的时候依赖</h5><pre><code>ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/         
-ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib64/
-</code></pre><h5 id="启动mysql检查端口启动"><a href="#启动mysql检查端口启动" class="headerlink" title="启动mysql检查端口启动"></a>启动mysql检查端口启动</h5><pre><code>service mysqld start
-netstat -antlp ¦ grep 3306 或者 ss -tlun | grep 3306
-</code></pre><h2 id="安装php依赖"><a href="#安装php依赖" class="headerlink" title="安装php依赖"></a>安装php依赖</h2><h5 id="安装libmcrypt"><a href="#安装libmcrypt" class="headerlink" title="安装libmcrypt"></a>安装libmcrypt</h5><pre><code>wget -O libmcrypt-2.5.8.tar.bz2 http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.bz2/download
-tar -jxvf libmcrypt-2.5.8.tar.bz2
-cd libmcrypt-2.5.8
-./configure &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="安装mhash"><a href="#安装mhash" class="headerlink" title="安装mhash"></a>安装mhash</h5><pre><code>wget -O mhash-0.9.9.9.tar.bz2 http://sourceforge.net/projects/mhash/files/mhash/0.9.9.9/mhash-0.9.9.9.tar.bz2/download
-tar -jxvf mhash-0.9.9.9.tar.bz2
-cd mhash-0.9.9.9
-./configure &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="解决mcrypt依赖"><a href="#解决mcrypt依赖" class="headerlink" title="解决mcrypt依赖"></a>解决mcrypt依赖</h5><pre><code>ln -s /usr/local/lib/libmcrypt* /usr/lib
-ln -s /usr/local/lib/libmcrypt* /usr/lib64
-ln -s /usr/local/lib/libmhash.* /usr/lib/
-ln -s /usr/local/lib/libmhash.* /usr/lib64/
-ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
-ln -s /usr/lib64/liblber* /usr/lib/
-ln -s /usr/lib64/liblber* /usr/lib64/
-</code></pre><h4 id="安装mcrypt"><a href="#安装mcrypt" class="headerlink" title="安装mcrypt"></a>安装mcrypt</h4><pre><code>wget -O mcrypt-2.6.8.tar.gz http://sourceforge.net/projects/mcrypt/files/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz/download
-tar -zxvf mcrypt-2.6.8.tar.gz
-cd mcrypt-2.6.8
-./configure &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="解决php其他依赖"><a href="#解决php其他依赖" class="headerlink" title="解决php其他依赖"></a>解决php其他依赖</h5><pre><code>yum install -y gcc gcc-c++  make zlib zlib-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers libxslt-devel autoconf
-ln -s /usr/lib64/libldap* /usr/lib/
-ln -s /usr/lib64/libldap* /usr/lib64/
-</code></pre><h5 id="编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可"><a href="#编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可" class="headerlink" title="编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可"></a>编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可</h5><h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><pre><code>wget -O php-7.0.14.tar.gz http://cn2.php.net/get/php-7.0.14.tar.gz/from/this/mirror
-tar -jxvf php-7.0.14.tar.gz
-cd php-7.0.14
-./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysqli=/usr/local/mysql/ --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql  --with-iconv-dir=/usr/local/ --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-sysvshm --enable-inline-optimization --with-curl  --enable-mbregex  --enable-fpm --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap=/usr/ --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap --enable-opcache --enable-ftp --enable-calendar --with-xsl --with-gettext --enable-session --enable-ctype --with-kerberos --with-libdir=/lib/ --with-pcre-regex --enable-exif --with-bz2 &amp;&amp; make &amp;&amp; make install
-cp php.ini-production /usr/local/php/etc/php.ini
-cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
-ln -s /usr/local/php/bin/php /usr/bin/
-cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/demo.conf
-/usr/local/php/sbin/php-fpm
-</code></pre><h2 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h2><h5 id="编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件"><a href="#编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件" class="headerlink" title="编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件"></a>编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件</h5><pre><code>location / {
-    root   /data/htdocs;                           # 设置代码根目录     
-    index  index.php index.html index.htm;         # 添加index.php的首页文件
-}
-</code></pre><h5 id="添加如下代码，解析php文件，注意SCRIPT-FILENAME"><a href="#添加如下代码，解析php文件，注意SCRIPT-FILENAME" class="headerlink" title="添加如下代码，解析php文件，注意SCRIPT_FILENAME"></a>添加如下代码，解析php文件，注意SCRIPT_FILENAME</h5><pre><code>location ~ \.php$ {
-    fastcgi_pass        127.0.0.1:9000;
-    fastcgi_index       index.php;
-    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name; #注意SCRIPT_FILENAME
-    include fastcgi_params;
-    include fastcgi.conf;
-}
-</code></pre><h5 id="重启nginx-usr-local-nginx-sbin-nginx"><a href="#重启nginx-usr-local-nginx-sbin-nginx" class="headerlink" title="重启nginx /usr/local/nginx/sbin/nginx"></a>重启nginx /usr/local/nginx/sbin/nginx</h5><h5 id="在-data-htdocs中添加php文件测试"><a href="#在-data-htdocs中添加php文件测试" class="headerlink" title="在/data/htdocs中添加php文件测试"></a>在/data/htdocs中添加php文件测试</h5><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><pre><code>yum install redis
-redis-server &amp;
-</code></pre><h2 id="添加reids拓展"><a href="#添加reids拓展" class="headerlink" title="添加reids拓展"></a>添加reids拓展</h2><h5 id="下载php7对应的redis拓展"><a href="#下载php7对应的redis拓展" class="headerlink" title="下载php7对应的redis拓展"></a>下载php7对应的redis拓展</h5><pre><code>wget https://github.com/phpredis/phpredis/archive/php7.zip
-unzip php7.zip
-cd phpredis-php7/
-/usr/local/php/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
-</code></pre><h5 id="编辑配置文件，添加redis-so拓展"><a href="#编辑配置文件，添加redis-so拓展" class="headerlink" title="编辑配置文件，添加redis.so拓展"></a>编辑配置文件，添加redis.so拓展</h5><pre><code>vim /usr/local/php/etc/php.ini
-添加如下行：
-extension=redis.so
-</code></pre><h5 id="重启nginx-php-fpm"><a href="#重启nginx-php-fpm" class="headerlink" title="重启nginx,php-fpm"></a>重启nginx,php-fpm</h5><h5 id="查看安装结果"><a href="#查看安装结果" class="headerlink" title="查看安装结果"></a>查看安装结果</h5><pre><code>php -i | grep redis
-</code></pre><h2 id="安装yaf拓展-用不到yaf框架可以进行以下步骤"><a href="#安装yaf拓展-用不到yaf框架可以进行以下步骤" class="headerlink" title="安装yaf拓展(用不到yaf框架可以进行以下步骤)"></a>安装yaf拓展(用不到yaf框架可以进行以下步骤)</h2><pre><code>wget pecl.php.net//get/yaf-3.0.4.tgz
-tar -zxvf yaf-3.0.4.tgz
-cd yaf-3.0.4
-/usr/local/php/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
-vim /usr/local/php/etc/php.ini
-</code></pre><h6 id="修改php-ini配置-添加如下配置"><a href="#修改php-ini配置-添加如下配置" class="headerlink" title="修改php.ini配置(添加如下配置)"></a>修改php.ini配置(添加如下配置)</h6><pre><code>[yaf]
-extension=yaf.so
-yaf.library=/data1/phplib
-yaf.name_suffix=0
-yaf.use_namespace=1
-yaf.name_separator=&quot;_&quot;
-yaf.action_prefer=0
-yaf.environ=dev
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）"><a href="#注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[rsyslog配置]]></title>
-    <link href="http://www.cxyteam.com/2016/12/06/rsyslog%E9%85%8D%E7%BD%AE/"/>
-    <id>http://www.cxyteam.com/2016/12/06/rsyslog配置/</id>
-    <published>2016-12-06T13:23:37.000Z</published>
-    <updated>2016-12-06T13:38:31.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
-http://huoding.com/2014/05/09/347
-http://blog.clanzx.net/2013/12/31/rsyslog.html
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux配置网络]]></title>
-    <link href="http://www.cxyteam.com/2016/12/01/linux%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/"/>
-    <id>http://www.cxyteam.com/2016/12/01/linux配置网络/</id>
-    <published>2016-12-01T04:01:52.000Z</published>
-    <updated>2016-12-03T09:43:03.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><code>service NetworkManager stop
-chkconfig NetworkManager off
-</code></pre><h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
-nameserver 8.8.8.8
-</code></pre><h1 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h1><h4 id="vi-etc-sysconfig-network"><a href="#vi-etc-sysconfig-network" class="headerlink" title="vi /etc/sysconfig/network"></a>vi /etc/sysconfig/network</h4><pre><code>NETWORKING=yes
-HOSTNAME=dev
-</code></pre><h1 id="配置IP地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h1><h4 id="vi-etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#vi-etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="vi /etc/sysconfig/network-scripts/ifcfg-eth0"></a>vi /etc/sysconfig/network-scripts/ifcfg-eth0</h4><pre><code>DEVICE=eth0
-BOOTPROTO=static
-HWADDR=08:00:27:94:F4:CB
-IPADDR=192.168.1.11
-NETMASK=255.255.255.0
-ONBOOT=yes
-GATEWAY=192.168.1.1
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><cod]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis源码-目录结构]]></title>
-    <link href="http://www.cxyteam.com/2016/11/04/redis%E6%BA%90%E7%A0%81-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
-    <id>http://www.cxyteam.com/2016/11/04/redis源码-目录结构/</id>
-    <published>2016-11-04T01:15:12.000Z</published>
-    <updated>2016-11-04T06:59:24.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><pre><code>|
-|--deps
-|
-|-- src
-   -- adlist.c          双链表结构,用于定义list
-   -- ae.c              用于事件的处理
-   -- ae_epoll.c        处理epoll事件
-   -- ae_evport.c       通过event ports实现处理结构
-   -- ae_kqueue.c       实现消息队列的处理
-   -- ae_select.c       处理select事件
-   -- anet.c            网络处理
-   -- aof.c             实现aof模式
-   -- asciilogo.h       定义欢迎界面的logo
-   -- bio.c             在后台通过线程模式实现io处理
-   -- bitops.c          与setbit,getbit相关的位操作
-   -- blocked.c         支持类似blpop,wait的阻塞操作
-   -- cluster.c         与集群创建,通信相关操作
-   -- config.c          配置文件的解析
-   -- crc16.c           基于CCITT标准的过滤算法
-   -- crc64.c
-   -- db.c              c-level数据库api实现
-   -- debug.c           调试库和日志输出
-   -- dict.c            字典实现
-   -- endiancov.c       主机字节序编解码, redis致力于使用little endian来编码
-   -- fmacros.h         用于Mac下的兼容性处理
-   -- help.h            辅助于命令的提示信息
-   -- hyperloglog.c
-   -- intset.c          int集合类型实现
-   -- lzf_c.c           lzf压缩算法
-   -- lzf_d.c
-   -- memtest.c         内存测试
-   -- muti.c            批量命令操作的原子实现
-   -- networking.c      网络通信实现
-   -- notify.c
-   -- object.c          对象存储类型
-   -- pqsort.c          一种快速排序的实现
-   -- pubsub.c          用于订阅模式的实现，有点类似于Client广播发送的方式
-   -- rand.c            随机序列的生产
-   -- rdb.c             rdb数据的load和dump
-   -- redis.c           redis数据库的主程序入口
-   -- redis-benchmark.c redis基准测试入口
-   -- redis-check-aof.c aof文件检查入口
-   -- redis-check-dump.c dump文件检查入口
-   -- redis-cli.c       redis的shell的客户端
-   -- release.c         版本发布信息
-   -- replication.c     数据的主从备份
-   -- rio.c             流式I/O的读写接口
-   -- scripting.c       redis相关协议转换到lua环境下执行
-   -- sds.c             强大的字符串处理机制
-   -- sentinel.c        redis集群的监护程序
-   -- setproctitle.c    程序名信息相关
-   -- sha1.c            sha1加密算法
-   -- slowlog.c         记录最近一段时间的查询等操作
-   -- sort.c            排序算法及辅助函数
-   -- syncio.c          同步io的实现
-   -- t_hash.c          hash结构
-   -- t_list.c          list结构
-   -- t_set.c           set结构
-   -- t_string.c        string结构
-   -- t_zset.c          用两种数据结构存储同一个数据体
-   -- util.c            辅助函数
-   -- ziplist.c         ziplist结构
-   -- zipmap.c          zipmap结构
-   -- zmalloc.c         在malloc上进行封装,增加内存开销统计
-|
-|--tests
-|
-|--utils
-</code></pre><h1 id="源码阅读顺序"><a href="#源码阅读顺序" class="headerlink" title="源码阅读顺序"></a><a href="https://github.com/huangz1990/blog/blob/master/diary/2014/how-to-read-redis-source-code.rst" title="源码阅读顺序" target="_blank" rel="external">源码阅读顺序</a></h1><h3 id="数据结构实现"><a href="#数据结构实现" class="headerlink" title="数据结构实现"></a>数据结构实现</h3><p>sds.h,sds.c                 动态字符串实现<br>adlist.h,adlist.c           双端链表实现<br>dict.h,dict.c               字典的实现</p>
-<p>redis.h中的zskiplist结构和zskiplistNode结构,以及t_zset.c中所有以zsl开头的函数,比如zslCreate,zslInsert,zslDeleteNode                 跳跃表实现</p>
-<p>hyperloglog.c中的hllhdr结构,以及所有以hll开头的函数。                      HyperLogLog实现</p>
-<h3 id="阅读内存编码数据结构实现"><a href="#阅读内存编码数据结构实现" class="headerlink" title="阅读内存编码数据结构实现"></a>阅读内存编码数据结构实现</h3><p>intset.c            整数集合数据结构。<br>ziplist.c           压缩列表数据结构</p>
-<h3 id="阅读数据类型实现"><a href="#阅读数据类型实现" class="headerlink" title="阅读数据类型实现"></a>阅读数据类型实现</h3><p>object.c            对象系统实现<br>t_string.c          字符串键的实现<br>t_list.c            列表键的实现<br>t_hash.c            散列键的实现<br>t_set.c             集合键的实现<br>t_zset.c中除zsl开头的函数之外的所有函数           有序集合键的实现<br>hyperloglog.c中所有以pf开头的函数                HyperLogLog 键的实现</p>
-<h3 id="阅读数据库实现相关代码"><a href="#阅读数据库实现相关代码" class="headerlink" title="阅读数据库实现相关代码"></a>阅读数据库实现相关代码</h3><p>redis.h文件中的redisDb结构,以及 db.c文件              Redis的数据库实现<br>notify.c                Redis的数据库通知功能实现代码<br>rdb.h和rdb.c             Redis的RDB持久化实现代码<br>aof.c                   Redis 的 AOF 持久化实现代码</p>
-<h3 id="选读"><a href="#选读" class="headerlink" title="选读"></a>选读</h3><p>redis.h文件的pubsubPattern结构,以及pubsub.c文件              发布与订阅功能的实现<br>redis.h文件的multiState结构以及multiCmd结构,multi.c文件       事务功能的实现<br>sort.c                      SORT命令的实现<br>bitops.c                    GETBIT,SETBIT等二进制位操作命令的实现</p>
-<h3 id="阅读客户端和服务器的相关代码"><a href="#阅读客户端和服务器的相关代码" class="headerlink" title="阅读客户端和服务器的相关代码"></a>阅读客户端和服务器的相关代码</h3><p>ae.c,以及任意一个 ae_*.c文件（取决于你所使用的多路复用库）         Redis 的事件处理器实现<br>networking.c                Redis 的网络连接库，负责发送命令回复和接受命令请求， 同时也负责创建/销毁客户端， 以及通信协议分析等工作<br>redis.h和redis.c中和单机Redis服务器有关的部分            单机 Redis 服务器的实现</p>
-<h3 id="选读-1"><a href="#选读-1" class="headerlink" title="选读"></a>选读</h3><p>scripting.c                 Lua 脚本功能的实现<br>slowlog.c                   慢查询功能的实现<br>monitor.c                   监视器功能的实现</p>
-<h3 id="阅读多机功能的实现"><a href="#阅读多机功能的实现" class="headerlink" title="阅读多机功能的实现"></a>阅读多机功能的实现</h3><p>replication.c               复制功能的实现代码<br>sentinel.c                  Redis Sentinel 的实现代码<br>cluster.c                   Redis 集群的实现代码</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><pre><code>|
-|--deps
-|
-|-- src
-   -- adlist.c          双链表结构,用于定义]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[gdb调试redis]]></title>
-    <link href="http://www.cxyteam.com/2016/11/02/gdb%E8%B0%83%E8%AF%95redis/"/>
-    <id>http://www.cxyteam.com/2016/11/02/gdb调试redis/</id>
-    <published>2016-11-02T02:46:04.000Z</published>
-    <updated>2016-11-02T03:02:53.000Z</updated>
-    <content type="html"><![CDATA[<p>#<br>启动redis redis-server<br>连接redis redis-cli<br>获取进程id redis-cli info | grep process_id<br>gdb调试进程id sudo gdb -p pid<br>gdb查询代码 list<br>gdb 设置断点 break main</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#<br>启动redis redis-server<br>连接redis redis-cli<br>获取进程id redis-cli info | grep process_id<br>gdb调试进程id sudo gdb -p pid<br>gdb查询代码 list<br]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[gdb调试]]></title>
-    <link href="http://www.cxyteam.com/2016/10/26/gdb%E8%B0%83%E8%AF%95/"/>
-    <id>http://www.cxyteam.com/2016/10/26/gdb调试/</id>
-    <published>2016-10-25T23:44:26.000Z</published>
-    <updated>2016-11-01T06:27:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="调试文件内容gdb-c"><a href="#调试文件内容gdb-c" class="headerlink" title="调试文件内容gdb.c"></a>调试文件内容gdb.c</h1><pre><code>#include &lt;stdio.h&gt;
-
-int add_range(int low, int high)
-{
-        int i, sum;
-        for (i = low; i &lt;= high; i++)
-                sum = sum + i;
-        return sum;
-}
-
-int main(void)
-{
-        int result[100];
-        result[0] = add_range(1, 10);
-        result[1] = add_range(1, 100);
-        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
-        return 0;
-}
-</code></pre><h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><pre><code>gcc -g gdb.c -o gdbtest
-</code></pre><h1 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h1><pre><code>./gdbtest
-</code></pre><p><img src="/img/gdb_test/result.png" alt="Alt text" title="运行结果"><br>很明显运行的结果是不对的:1加到10的结果是55,但是1加到100的,结果应该是5050才对,而不是5105,下面用两种gdb方式进行调试</p>
-<h1 id="启动gdb"><a href="#启动gdb" class="headerlink" title="启动gdb"></a>启动gdb</h1><pre><code>sudo gdb gdbtest
-</code></pre><p><img src="/img/gdb_test/gdb.png" alt="Alt text" title="启动gdb"></p>
-<h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><pre><code>l
-</code></pre><p>l以后直接进行回车能够查看到后续的内容<br><img src="/img/gdb_test/list.png" alt="Alt text" title="启动gdb"></p>
-<h1 id="断点调试法"><a href="#断点调试法" class="headerlink" title="断点调试法"></a>断点调试法</h1><h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><pre><code>break 16                #设置16行为断点
-break add_range         #设置add_range函数为断点
-info break              #查看断点信息
-break在你认为关键的,需要输出的位置进行设置
-</code></pre><p><img src="/img/gdb_test/break.png" alt="Alt text" title="启动gdb"></p>
-<h3 id="开启调试"><a href="#开启调试" class="headerlink" title="开启调试"></a>开启调试</h3><pre><code>start               #运行程序
-n                   #单条语句执行，进入下一条
-print i             #达因变量i的值
-print sum
-c                   #可以想象成continue的功能
-当执行完c之后不知道代码执行到那个位置了,可以使用bt进行查看
-</code></pre><p><img src="/img/gdb_test/start_break.png" alt="Alt text" title="断点输出"></p>
-<h3 id="bt查看函数的堆栈"><a href="#bt查看函数的堆栈" class="headerlink" title="bt查看函数的堆栈"></a>bt查看函数的堆栈</h3><pre><code>如下图,表示在gdb.c的文件的第15行的main函数中调用了gdb.c文件中第六航的add_range函数,参数为low=1,high=100
-    #0  add_range (low=1, high=100) at gdb.c:6
-    #1  0x0000000100000f07 in main () at gdb.c:15
-</code></pre><p><img src="/img/gdb_test/bt.png" alt="Alt text" title="查看函数堆栈"></p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><pre><code>当我们在调试的时候,可以看出i和sum没有被初始化,而在循环中i进行了初始化,所以问题不大,sum执行完第一次调用后的值是55,所以最终运行完1到10相加,再运行1到100相加的最终结果是5105
-</code></pre><h1 id="顺序调试"><a href="#顺序调试" class="headerlink" title="顺序调试"></a>顺序调试</h1><h3 id="查看mian函数-不能发现问题处在哪"><a href="#查看mian函数-不能发现问题处在哪" class="headerlink" title="查看mian函数,不能发现问题处在哪"></a>查看mian函数,不能发现问题处在哪</h3><pre><code>首先我们看到gdb停在第14行的位置,执行了add_range的函数调用,正等待我们执行命令
-14        result[0] = add_range(1, 10);
-接着我们执行了n,gdb执行下一条命令,
-15        result[1] = add_range(1, 100);
-最后知道输出结果
-</code></pre><p><img src="/img/gdb_test/step_start.png" alt="Alt text" title="调试main函数"></p>
-<h3 id="进入子函数add-range中-查看具体的执行步骤"><a href="#进入子函数add-range中-查看具体的执行步骤" class="headerlink" title="进入子函数add_range中,查看具体的执行步骤"></a>进入子函数add_range中,查看具体的执行步骤</h3><pre><code>调试子函数的第一次调用,gdb停留在add_range(1,10)这行代码的位置,直接使用s进入子函数
-Temporary breakpoint 3, main () at gdb.c:14
-14        result[0] = add_range(1, 10);
-(gdb) s
-add_range (low=1, high=10) at gdb.c:6
-6        for (i = low; i &lt;= high; i++)
-
-接着直接回车进入下一步,在使用info locals进行当前栈帧局部变量的值,也就是add_range函数中i和sum的值
-在使用f 1进入1号栈帧也就是main函数中,查看main栈帧局部变量的值(info locals)
-本次调用(add_range(1,10))没有错误,直接使用finish运行完当前函数,并让gdb回到main函数中,等待命令发出
-</code></pre><p><img src="/img/gdb_test/subfunc_start.png" alt="Alt text" title="调试子函数"></p>
-<pre><code>让gdb进入下一条命令(n),
-(gdb) n
-    15        result[1] = add_range(1, 100);
-
-再进入子函数(add_range(1,100))中,并查看当前栈帧局部变量的值
-(gdb) s
-    add_range (low=1, high=100) at gdb.c:6
-    6        for (i = low; i &lt;= high; i++)
-
-发现当前的i和sum没有进行初始化,还是上次函数add_range(1,10)执行完后的结果
-(gdb) info locals
-i = 11
-sum = 55
-
-使用bt查看函数的调用栈(当前调用add_range的蚕食是low=1,high=100),
-(gdb) bt
-    #0  add_range (low=1, high=100) at gdb.c:6
-    #1  0x0000000100000f07 in main () at gdb.c:15
-
-并进入下一步,设置i和sum的初始值(set var i=0),
-(gdb) set var i=0
-    (gdb) set var sum=0
-    (gdb) s
-    7            sum = sum + i;
-
-接着确认当前i和sum的值(p i),
-(gdb) p i
-    $2 = 1
-    (gdb) p sum
-    $3 = 0
-
-在用finish连续运行完当前函数,结果返回的值为5050
-(gdb) finish
-    Run till exit from #0  add_range (low=1, high=100) at gdb.c:7
-    0x0000000100000f07 in main () at gdb.c:15
-    15        result[1] = add_range(1, 100);
-    Value returned is $4 = 5050
-
-也就是说,函数返回了正确的结果,错误原因是在第一次add_range的调用之后,没有对i和sum进行初始化
-</code></pre><p><img src="/img/gdb_test/subfunc_end.png" alt="Alt text" title="调试子函数"></p>
-<h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><pre><code>命令                           描述
-backtrace（或bt）              查看各级函数调用及参数
-finish                        连续运行到当前函数返回为止，然后停下来等待命令
-frame（或f）                   帧编号    选择栈帧
-info（或i）locals              查看当前栈帧局部变量的值
-list（或l）                      列出源代码，接着上次的位置往下列，每次列10行
-list 行号                      列出从第几行开始的源代码
-list 函数名                      列出某个函数的源代码
-next（或n）                      执行下一行语句
-print（或p）                      打印表达式的值，通过表达式可以修改变量的值或者调用函数
-quit（或q）                      退出gdb调试环境
-set var                          修改变量的值
-start                          开始执行程序，停在main函数第一行语句前面等待命令
-step（或s）                      执行下一行语句，如果有函数调用则进入到函数中
-next(或n)                     执行下一条语句
-break 行号                     在源码的行数设置断点
-break 函数名                   在函数的入口处,设置断点
-info break                    查看断点信息
-continue(或c)                 继续运行程序
-print(或p) 变量名名            打印变量的值
-frame(或f)                    选择栈帧
-set var                       修改变量的值
-
-
-==========
-其他事例中没用到的命令
-call 函数                     调用函数
-print 函数                    调用函数
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="调试文件内容gdb-c"><a href="#调试文件内容gdb-c" class="headerlink" title="调试文件内容gdb.c"></a>调试文件内容gdb.c</h1><pre><code>#include &lt;stdio.h&gt;
-
-]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mac安装gdb]]></title>
-    <link href="http://www.cxyteam.com/2016/10/21/mac%E5%AE%89%E8%A3%85gdb/"/>
-    <id>http://www.cxyteam.com/2016/10/21/mac安装gdb/</id>
-    <published>2016-10-21T09:32:25.000Z</published>
-    <updated>2016-10-25T00:33:18.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="Mac安装GDB"><a href="#Mac安装GDB" class="headerlink" title="Mac安装GDB"></a>Mac安装GDB</h1><h3 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h3><pre><code>brew install gdb
-</code></pre><h1 id="使用gdb进行调试"><a href="#使用gdb进行调试" class="headerlink" title="使用gdb进行调试"></a>使用gdb进行调试</h1><h3 id="gbd-c文件中的内容"><a href="#gbd-c文件中的内容" class="headerlink" title="gbd.c文件中的内容"></a>gbd.c文件中的内容</h3><pre><code>#include &lt;stdio.h&gt;
-
-int add_range(int low, int high)
-{
-        int i, sum;
-        for (i = low; i &lt;= high; i++)
-                sum = sum + i;
-        return sum;
-}
-
-int main(void)
-{
-        int result[100];
-        result[0] = add_range(1, 10);
-        result[1] = add_range(1, 100);
-        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
-        return 0;
-}
-</code></pre><h3 id="编译并使用gdb"><a href="#编译并使用gdb" class="headerlink" title="编译并使用gdb"></a>编译并使用gdb</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; gdb gdbtest
-</code></pre><h3 id="gdb开始调试"><a href="#gdb开始调试" class="headerlink" title="gdb开始调试"></a>gdb开始调试</h3><pre><code>start
-</code></pre><h3 id="mac下出现如下错误"><a href="#mac下出现如下错误" class="headerlink" title="mac下出现如下错误"></a>mac下出现如下错误</h3><p><img src="/img/mac_gdb/gdb-error.png" alt="Alt text" title="gdb错误信息"></p>
-<h3 id="mac下对gdb进行签名"><a href="#mac下对gdb进行签名" class="headerlink" title="mac下对gdb进行签名"></a>mac下对gdb进行签名</h3><p><img src="/img/mac_gdb/key.png" alt="Alt text" title="启动key"></p>
-<p><img src="/img/mac_gdb/create-key.png" alt="Alt text" title="创建证书"></p>
-<p><img src="/img/mac_gdb/gdb-cert-first.png" alt="Alt text" title="选择代码签名"></p>
-<p><img src="/img/mac_gdb/gdb-cert-second.png" alt="Alt text" title="设置过期时间"></p>
-<h3 id="接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统"><a href="#接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统" class="headerlink" title="接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统"></a>接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统</h3><p><img src="/img/mac_gdb/gdb-cert-third.png" alt="Alt text" title="选择存储位置"></p>
-<h3 id="创建的证书"><a href="#创建的证书" class="headerlink" title="创建的证书"></a>创建的证书</h3><p><img src="/img/mac_gdb/gdb-cert-last.png" alt="Alt text" title="证书"></p>
-<h3 id="设置信任"><a href="#设置信任" class="headerlink" title="设置信任"></a>设置信任</h3><p><img src="/img/mac_gdb/gdb-auth-1.png" alt="Alt text" title="找到证书简介"><br><img src="/img/mac_gdb/gdb-auth-2.png" alt="Alt text" title="设置代码签名始终信任"></p>
-<h1 id="对gdb进行代码签名"><a href="#对gdb进行代码签名" class="headerlink" title="对gdb进行代码签名"></a>对gdb进行代码签名</h1><h3 id="关闭taskgated进程"><a href="#关闭taskgated进程" class="headerlink" title="关闭taskgated进程"></a>关闭taskgated进程</h3><p><img src="/img/mac_gdb/gdb-cert-sign-1.png" alt="Alt text" title="打开活动检测器"><br><img src="/img/mac_gdb/taskgated.png" alt="Alt text" title="检索taskgated进程并退出"></p>
-<h3 id="对gdb进行签名"><a href="#对gdb进行签名" class="headerlink" title="对gdb进行签名"></a>对gdb进行签名</h3><pre><code>codesign -s gdb-cert /usr/local/bin/gdb
-</code></pre><h3 id="检测是否安装成功"><a href="#检测是否安装成功" class="headerlink" title="检测是否安装成功"></a>检测是否安装成功</h3><pre><code>codesign -v gdb (`如果没有任何信息输出代表签名成功`)
-</code></pre><h3 id="再次使用gdb进行调试"><a href="#再次使用gdb进行调试" class="headerlink" title="再次使用gdb进行调试"></a>再次使用gdb进行调试</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; sudo gdb gdbtest (`注意sudo不能少,这个坑我趟了好几个小时,最终在google找到答案`)
-start
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Mac安装GDB"><a href="#Mac安装GDB" class="headerlink" title="Mac安装GDB"></a>Mac安装GDB</h1><h3 id="安装GDB"><a href="#安装GDB" class="headerlink]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis源码阅读-准备工作]]></title>
-    <link href="http://www.cxyteam.com/2016/10/21/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/"/>
-    <id>http://www.cxyteam.com/2016/10/21/redis源码阅读-准备工作/</id>
-    <published>2016-10-21T09:29:44.000Z</published>
-    <updated>2016-11-04T02:33:01.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><h1 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><h1 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Primary script unknown排查]]></title>
-    <link href="http://www.cxyteam.com/2016/10/21/Primary-script-unknown%E6%8E%92%E6%9F%A5/"/>
-    <id>http://www.cxyteam.com/2016/10/21/Primary-script-unknown排查/</id>
-    <published>2016-10-21T04:21:14.000Z</published>
-    <updated>2016-10-21T09:27:14.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>#<br>    tcpdump  -i  lo -Anns0 port 9000</p>
-<p>#<br>    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’<br>    strace</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>#<br>    tcpdump  -i  lo -Anns0 port 9000</p>
-<p>#<br>    ps aux|grep ]]>
-    </summary>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/tags/PHP/"/>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/categories/PHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言进程间通信]]></title>
-    <link href="http://www.cxyteam.com/2016/10/16/C%E8%AF%AD%E8%A8%80%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
-    <id>http://www.cxyteam.com/2016/10/16/C语言进程间通信/</id>
-    <published>2016-10-16T08:02:11.000Z</published>
-    <updated>2016-10-18T02:14:12.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h1><pre><code>标准输入:stdin          对应描述符:0
-标准输出:stdout         对应描述符:1
-标准错误:stderr         对应描述符:2
-</code></pre><h1 id="重定向数据流"><a href="#重定向数据流" class="headerlink" title="重定向数据流"></a>重定向数据流</h1><pre><code>重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
-重定向输入数据流 &quot;&lt;&quot;,&quot;&lt;&lt;&quot;
-</code></pre><h1 id="fileni返回描述符号"><a href="#fileni返回描述符号" class="headerlink" title="fileni返回描述符号"></a>fileni返回描述符号</h1><h1 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h1><pre><code>标准输入:stdin          对应描述符:0
-标准输出:stdout         对应描述符:1
-标准]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言进程与系统调用]]></title>
-    <link href="http://www.cxyteam.com/2016/10/14/C%E8%AF%AD%E8%A8%80%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    <id>http://www.cxyteam.com/2016/10/14/C语言进程与系统调用/</id>
-    <published>2016-10-14T02:34:53.000Z</published>
-    <updated>2016-10-16T07:57:42.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="execl-execlp-execle"><a href="#execl-execlp-execle" class="headerlink" title="execl,execlp,execle"></a>execl,execlp,execle</h1><pre><code>第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
-第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
-中间都被当做脚本所需要的参数
-最后一个参数是NULL,告诉函数没有其他参数了
-如果是以e结尾的exec系列函数(例如execle),还可以传递环境变量数组
-
-例子:
-execl(&apos;/tmp/test&apos;, &apos;/tmp/test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL);
-execlp(&apos;test&apos;, &apos;test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL);
-execle(&apos;/tmp/test&apos;, &apos;/tmp/test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL, env_vars);
-</code></pre><h1 id="execv-execvp-execve"><a href="#execv-execvp-execve" class="headerlink" title="execv,execvp,execve"></a>execv,execvp,execve</h1><pre><code>参数类型,只是把后面的参数传递给了数组
-
-例子:
-execv(&apos;/tmp/test&apos;, my_args);
-execvp(&apos;test&apos;, my_args);
-</code></pre><h1 id="错误信息的一些规定"><a href="#错误信息的一些规定" class="headerlink" title="错误信息的一些规定"></a>错误信息的一些规定</h1><pre><code>不允许操作               1
-没有该文件或目录          2
-没有改进程               3
-错误                    -1
-正常返回                 0
-</code></pre><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><pre><code>#include &lt;stdio.h&gt;
-/*
-    为了使用exec函数
-*/
-#include &lt;unistd.h&gt;
-/*
-    为了使用errno变量
-*/
-#include &lt;errno.h&gt;
-#include &lt;string.h&gt;
-
-int main()
-{
-    if (execl(&quot;/sbin/ifconfig&quot;, &quot;/sbin/ifconfig&quot;, NULL) == -1)
-    {
-        if (execlp(&quot;ipconfig&quot;, &quot;ipconfig&quot;, NULL) == -1)
-        {
-            fprintf(stderr, &quot;Cannot run ipconfig: %s&quot;, strerror(errno));
-
-            return 1;
-        }
-    }
-
-    return 0;
-}
-</code></pre><h1 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h1><pre><code>fork会向子进程返回0,父进程返回非0值
-</code></pre><h1 id="copy-on-write"><a href="#copy-on-write" class="headerlink" title="copy-on-write"></a>copy-on-write</h1><pre><code>为了让fork进程变快,操作系统做了很多技巧,比如操作系统不会真的复制父进程的数据,而是让父子进程共享数据,当子进程需要修改存储器,就会为他复制一份数据
-</code></pre><h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><pre><code>exec系列函数执行的时候会启动一个进程,后面的代码不会运行
-伪代码:
-    code1
-    exec系列函数
-    code2
-    此例中的code2代码不会再运行
-
-如果需要运行获取多个exec系列函数的结果需要使用fork进行
-伪代码:
-    code1
-    pid_t pid_t = fork();
-    exec系列函数
-    pid_t pid_t = fork();
-    exec系列函数
-</code></pre><h1 id="事例-此事例中需要安装python环境-下载rss-gossip脚本https-github-com-dogriffiths-rssgossip-zipball-master"><a href="#事例-此事例中需要安装python环境-下载rss-gossip脚本https-github-com-dogriffiths-rssgossip-zipball-master" class="headerlink" title="事例(此事例中需要安装python环境,下载rss gossip脚本https://github.com/dogriffiths/rssgossip/zipball/master)"></a>事例(此事例中需要安装python环境,下载rss gossip脚本<a href="https://github.com/dogriffiths/rssgossip/zipball/master" target="_blank" rel="external">https://github.com/dogriffiths/rssgossip/zipball/master</a>)</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;errno.h&gt;
-
- int main(int argc, char *argv[])
- {
-    char *feeds[] = {&quot;http://wwww.cnn.com/rss/celebs.xml&quot;,
-                    &quot;http://www.rollingstone/rock.xml&quot;,
-                    &quot;http://eonline.com/gossip.xml&quot;
-                    };
-    int times = 3;
-    char *phrase = argv[1];
-    int i;
-    for(i = 0; i&lt; times; i++) {
-        char var[255];
-        sprintf(var, &quot;RSS_FEED=%s&quot;, feeds[i]);
-        char *vars[] = {var, NULL};
-        /*
-            pid_t是可以理解成一种int的类型
-        */
-        pid_t pid_t = fork();
-        if (pid_t == -1) {
-            fprintf(stderr, &quot;can&apos;t fork process:%s\n&quot;, strerror(errno));
-            return 1;
+func main() {
+    data := make(chan int, 3)
+    exit := make(chan bool)
+    data &lt;- 1
+    data &lt;- 2
+    data &lt;- 3
+    go func() {
+        for d := range data {
+            fmt.Println(d)
         }
 
-        if (!pid_t &amp;&amp; execle(&quot;/usr/bin/python&quot;, &quot;/usr/bin/python&quot;, &quot;./rssgossip.py&quot;, phrase, NULL, vars) == -1) {
-            fprintf(stderr, &quot;can&apos;t run script:%s\n&quot;, strerror(errno));
-            return 1;
+        exit &lt;- true
+    }()
+
+    data &lt;- 4
+    data &lt;- 5
+    close(data)
+
+    &lt;- exit
+}
+</code></pre><h6 id="可以将channel隐士转换为单向队列，只收或只发"><a href="#可以将channel隐士转换为单向队列，只收或只发" class="headerlink" title="可以将channel隐士转换为单向队列，只收或只发"></a>可以将channel隐士转换为单向队列，只收或只发</h6><pre><code>package main
+
+import (
+)
+
+func main() {
+    c := make(chan int, 3)
+    var send chan &lt;- int = c
+    var recv &lt;- chan int = c
+    send &lt;- 1
+    //&lt;- send           //receive from send-only type chan&lt;- int
+    //recv &lt;- 2         //send to receive-only type &lt;-chan int
+    &lt;- recv
+}
+</code></pre><h6 id="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case"><a href="#如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case" class="headerlink" title="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case"></a>如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case</h6>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记并发]]></title>
+    <link href="http://www.cxyteam.com/2017/03/03/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B9%B6%E5%8F%91/"/>
+    <id>http://www.cxyteam.com/2017/03/03/go学习笔记并发/</id>
+    <published>2017-03-03T10:47:39.000Z</published>
+    <updated>2017-03-08T12:42:03.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="只需在函数调用语句前添加go关键字，就可创建并发执行单元"><a href="#只需在函数调用语句前添加go关键字，就可创建并发执行单元" class="headerlink" title="只需在函数调用语句前添加go关键字，就可创建并发执行单元"></a>只需在函数调用语句前添加go关键字，就可创建并发执行单元</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;runtime&quot;
+)
+
+func say(s string) {
+    for i := 0; i &lt; 3; i++ {
+        runtime.Gosched()
+        fmt.Println(s) }
+    }
+
+func main() {
+    go say(&quot;world&quot;)     //开一个新的Goroutines执行
+    say(&quot;hello&quot;)        //当前Goroutines执行
+}
+</code></pre><h6 id="Goexit-退出当前执行的goroutine，但是defer函数还会继续调用"><a href="#Goexit-退出当前执行的goroutine，但是defer函数还会继续调用" class="headerlink" title="Goexit 退出当前执行的goroutine，但是defer函数还会继续调用"></a>Goexit 退出当前执行的goroutine，但是defer函数还会继续调用</h6><h6 id="NumCPU-返回CPU核数量"><a href="#NumCPU-返回CPU核数量" class="headerlink" title="NumCPU 返回CPU核数量"></a>NumCPU 返回CPU核数量</h6><h6 id="NumGoroutine-返回正在执行和排队的任务总数"><a href="#NumGoroutine-返回正在执行和排队的任务总数" class="headerlink" title="NumGoroutine 返回正在执行和排队的任务总数"></a>NumGoroutine 返回正在执行和排队的任务总数</h6><h6 id="GOMAXPROCS-用来设置可以运行的CPU核数"><a href="#GOMAXPROCS-用来设置可以运行的CPU核数" class="headerlink" title="GOMAXPROCS 用来设置可以运行的CPU核数"></a>GOMAXPROCS 用来设置可以运行的CPU核数</h6><h6 id="sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"><a href="#sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成" class="headerlink" title="sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"></a>sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成</h6><h6 id="Add-添加或者减少等待goroutine的数量"><a href="#Add-添加或者减少等待goroutine的数量" class="headerlink" title="Add 添加或者减少等待goroutine的数量"></a>Add 添加或者减少等待goroutine的数量</h6><h6 id="Done-相当于Add-1"><a href="#Done-相当于Add-1" class="headerlink" title="Done 相当于Add(-1)"></a>Done 相当于Add(-1)</h6><h6 id="Wait-执行阻塞，直到所有的WaitGroup数量变成0"><a href="#Wait-执行阻塞，直到所有的WaitGroup数量变成0" class="headerlink" title="Wait 执行阻塞，直到所有的WaitGroup数量变成0"></a>Wait 执行阻塞，直到所有的WaitGroup数量变成0</h6><pre><code>package main
+
+import (
+    &quot;runtime&quot;
+    &quot;sync&quot;
+)
+
+func main() {
+    wg := new(sync.WaitGroup)
+    wg.Add(1)
+
+    go func() {
+        defer wg.Done()
+        defer println(&quot;A.defer&quot;)
+
+        func() {
+            defer println(&quot;B.defer&quot;)
+            runtime.Goexit()
+            println(&quot;B&quot;)
+        }()
+
+        println(&quot;A&quot;)
+    }()
+    wg.Wait()
+}
+</code></pre><h6 id="Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"><a href="#Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行" class="headerlink" title="Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"></a>Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行</h6><pre><code>package main
+
+import (
+    &quot;runtime&quot;
+    &quot;sync&quot;
+)
+
+func main() {
+    //它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成
+    wg := new(sync.WaitGroup)
+    //添加或者减少等待goroutine的数量
+    wg.Add(2)
+
+    go func() {
+        //相当于Add(-1)
+        defer wg.Done()
+
+        for i := 0; i &lt; 6; i++ {
+            println(i)
+            if i == 3 { runtime.Gosched() }
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+        println(&quot;hello,world!&quot;)
+    }()
+
+    //执行阻塞，直到所有的WaitGroup数量变成0
+    wg.Wait()
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="只需在函数调用语句前添加go关键字，就可创建并发执行单元"><a href="#只需在函数调用语句前添加go关键字，就可创建并发执]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记接口]]></title>
+    <link href="http://www.cxyteam.com/2017/03/01/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://www.cxyteam.com/2017/03/01/go学习笔记接口/</id>
+    <published>2017-03-01T07:06:44.000Z</published>
+    <updated>2017-03-01T12:05:45.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明"><a href="#接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明" class="headerlink" title="接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明"></a>接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明</h6><h6 id="所谓接口对应方法，是指有相同名称，参数列表以及返回值。"><a href="#所谓接口对应方法，是指有相同名称，参数列表以及返回值。" class="headerlink" title="所谓接口对应方法，是指有相同名称，参数列表以及返回值。"></a>所谓接口对应方法，是指有相同名称，参数列表以及返回值。</h6><h6 id="接口命名习惯以er结尾，结构体"><a href="#接口命名习惯以er结尾，结构体" class="headerlink" title="接口命名习惯以er结尾，结构体"></a>接口命名习惯以er结尾，结构体</h6><h6 id="接口只有方法签名，没有实现"><a href="#接口只有方法签名，没有实现" class="headerlink" title="接口只有方法签名，没有实现"></a>接口只有方法签名，没有实现</h6><h6 id="接口没有数据字段"><a href="#接口没有数据字段" class="headerlink" title="接口没有数据字段"></a>接口没有数据字段</h6><h6 id="可在接口中嵌入其他接口"><a href="#可在接口中嵌入其他接口" class="headerlink" title="可在接口中嵌入其他接口"></a>可在接口中嵌入其他接口</h6><h6 id="类型可实现多个接口"><a href="#类型可实现多个接口" class="headerlink" title="类型可实现多个接口"></a>类型可实现多个接口</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Stringer interface {
+    String() string         //定义了一个接口
+}
+
+type Printer interface {
+    Stringer                //嵌套接口
+    Print()
+}
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self *User) String() string {
+    return fmt.Sprintf(&quot;user %d, %s&quot;, self.id, self.name)
+}
+
+func (self *User) Print() {
+    fmt.Println(self.String())
+}
+
+func main() {
+    var t Printer = &amp;User{1, &quot;Tom&quot;}
+    t.Print()       //user 1, Tom
+}
+</code></pre><h6 id="空接口interface-没有任何方法签名，也就意味着任何类型都实现了空接口。"><a href="#空接口interface-没有任何方法签名，也就意味着任何类型都实现了空接口。" class="headerlink" title="空接口interface{}没有任何方法签名，也就意味着任何类型都实现了空接口。"></a>空接口interface{}没有任何方法签名，也就意味着任何类型都实现了空接口。</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func Print(v interface{}) {
+    fmt.Printf(&quot;%T,%v\n&quot;, v, v)
+}
+
+func main() {
+    Print(1)                    //int,1
+    Print(&quot;Hello, world!&quot;)      //string,Hello, world!
+}
+</code></pre><h6 id="匿名接口可用作变量类型或结构成员"><a href="#匿名接口可用作变量类型或结构成员" class="headerlink" title="匿名接口可用作变量类型或结构成员"></a>匿名接口可用作变量类型或结构成员</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Tester struct {
+    s interface {
+        String() string
+    }
+}
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self *User) String() string {
+    return fmt.Sprintf(&quot;User %d, %s&quot;, self.id, self.name)
+}
+
+func main() {
+    t := Tester{&amp;User{1, &quot;Tom&quot;}}
+    fmt.Println(t.s.String())
+}
+</code></pre><h6 id="数据指针持有的是目标对象的只读复制品，赋值完整对象或指针"><a href="#数据指针持有的是目标对象的只读复制品，赋值完整对象或指针" class="headerlink" title="数据指针持有的是目标对象的只读复制品，赋值完整对象或指针"></a>数据指针持有的是目标对象的只读复制品，赋值完整对象或指针</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func main() {
+    u := User{1, &quot;Tom&quot;}
+    var i interface{} = u
+
+    u.id = 2
+    u.name = &quot;jack&quot;
+
+    fmt.Printf(&quot;%v\n&quot;, u)           //{2 jack}
+    fmt.Printf(&quot;%v\n&quot;, i.(User))    //{1 Tom}
+}
+</code></pre><h6 id="接口转型返回临时对象，只有使用指针才能修改其状态"><a href="#接口转型返回临时对象，只有使用指针才能修改其状态" class="headerlink" title="接口转型返回临时对象，只有使用指针才能修改其状态"></a>接口转型返回临时对象，只有使用指针才能修改其状态</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func main() {
+    u := User{1, &quot;Tom&quot;}
+    var vi,pi interface{} = u, &amp;u
+
+    //vi.(User).name = &quot;jim&quot;    //报错，不能这样修改值
+    pi.(*User).name = &quot;Jack&quot;
+
+
+    fmt.Printf(&quot;%v\n&quot;, vi.(User))     //{1 Tom}
+    fmt.Printf(&quot;%v\n&quot;, pi.(*User))    //&amp;{1 Jack}
+}
+</code></pre><h6 id="利用类型推断，可判断接口对象是否某个具体的接口或类型"><a href="#利用类型推断，可判断接口对象是否某个具体的接口或类型" class="headerlink" title="利用类型推断，可判断接口对象是否某个具体的接口或类型"></a>利用类型推断，可判断接口对象是否某个具体的接口或类型</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self *User) String() string {
+    return fmt.Sprintf(&quot;%d, %s&quot;, self.id, self.name)
+}
+
+func main() {
+    var o interface{} = &amp;User{1, &quot;Tom&quot;}
+
+    if i,ok := o.(fmt.Stringer); ok {
+        fmt.Println(i)      //1, Tom
+    }
+
+
+    u := o.(*User)
+    //u := o.(User)         //报错
+    fmt.Println(u)          //1, Tom
+}
+</code></pre><h6 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+
+func main() {
+    var o interface{} = &amp;User{1, &quot;Tom&quot;}
+
+    switch v := o.(type) {
+    case nil :                  //nil类型
+        fmt.Println(&quot;nil&quot;)
+    case fmt.Stringer:          //interface
+        fmt.Println(v)
+    case func() string:         //func
+        fmt.Println(v())
+    case *User:
+        fmt.Printf(&quot;%d, %s\n&quot;, v.id, v.name)
+    default:
+        fmt.Println(&quot;unknow&quot;)
+    }
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记方法表达式]]></title>
+    <link href="http://www.cxyteam.com/2017/03/01/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://www.cxyteam.com/2017/03/01/go学习笔记方法表达式/</id>
+    <published>2017-03-01T03:23:27.000Z</published>
+    <updated>2017-03-01T12:05:56.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><h6 id="instance-method-args…-gt-method-value"><a href="#instance-method-args…-gt-method-value" class="headerlink" title="instance.method(args…) =&gt; method value"></a>instance.method(args…) =&gt; method value</h6><h6 id="func-instance-args-gt-method-expression"><a href="#func-instance-args-gt-method-expression" class="headerlink" title=".func(instance, args)  =&gt; method expression"></a><type>.func(instance, args)  =&gt; method expression</type></h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self *User) Test() {
+    fmt.Printf(&quot;%p, %v\n&quot;, self, self)
+}
+
+func main() {
+    u := User{1, &quot;Tom&quot;}
+    u.Test()        //0xc42000e1e0, &amp;{1 Tom}
+
+    mValue := u.Test
+    mValue()        //0xc42000e1e0, &amp;{1 Tom} 隐式传递receiver
+
+    mExpression := (*User).Test
+    mExpression(&amp;u) //0xc42000e1e0, &amp;{1 Tom} 显示传递receiver
+}
+</code></pre><h6 id="method-value会复制receiver"><a href="#method-value会复制receiver" class="headerlink" title="method value会复制receiver"></a>method value会复制receiver</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self User) Test() {
+    fmt.Println(self)
+}
+
+func main() {
+    u := User{1, &quot;Tom&quot;}
+    mValue := u.Test
+
+    u.id, u.name = 2, &quot;Jack&quot;
+    u.Test()        //{2 Jack}
+    mValue()        //{1 Tom}
+}
+</code></pre><h6 id="注意receiver类型差异"><a href="#注意receiver类型差异" class="headerlink" title="注意receiver类型差异"></a>注意receiver类型差异</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+func (self *User) TestPointer() {
+    fmt.Printf(&quot;TestPointer:%p, %v\n&quot;, self, self)
+}
+
+func (self User) TestValue() {
+    fmt.Printf(&quot;TestValue:%p, %v\n&quot;, &amp;self, self)
+}
+
+func main() {
+    u := User{1, &quot;Tom&quot;}
+    m := User.TestValue
+    m(u)        //TestValue:0xc42000e200, {1 Tom}
+
+    a := (*User).TestPointer
+    a(&amp;u)       //TestPointer:0xc42000e1e0, &amp;{1 Tom}
+
+    b := (*User).TestValue  //*User方法集包含TestValue，前面变为func TestValue(self *User) 事迹依然是receiver value copy
+    b(&amp;u)       //TestValue:0xc42000e280, {1 Tom}
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><h6 id="instance-method-args…-gt-method-value"><a href="#instance-met]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记方法集]]></title>
+    <link href="http://www.cxyteam.com/2017/03/01/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E9%9B%86/"/>
+    <id>http://www.cxyteam.com/2017/03/01/go学习笔记方法集/</id>
+    <published>2017-03-01T03:17:08.000Z</published>
+    <updated>2017-03-01T12:06:01.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="类型T方法集包含全部receiver-T方法"><a href="#类型T方法集包含全部receiver-T方法" class="headerlink" title="类型T方法集包含全部receiver T方法"></a>类型T方法集包含全部receiver T方法</h6><h6 id="类型T方法集合包含全部receiver-T-T方法"><a href="#类型T方法集合包含全部receiver-T-T方法" class="headerlink" title="类型T方法集合包含全部receiver T+T方法"></a>类型<em>T方法集合包含全部receiver T+</em>T方法</h6><h6 id="如类型S包含匿名字段T，则S方法集包含T方法"><a href="#如类型S包含匿名字段T，则S方法集包含T方法" class="headerlink" title="如类型S包含匿名字段T，则S方法集包含T方法"></a>如类型S包含匿名字段T，则S方法集包含T方法</h6><h6 id="如类型S包含匿名字段T，则S方法集包含T-T方法"><a href="#如类型S包含匿名字段T，则S方法集包含T-T方法" class="headerlink" title="如类型S包含匿名字段T，则S方法集包含T+T方法"></a>如类型S包含匿名字段<em>T，则S方法集包含T+</em>T方法</h6><h6 id="不管嵌入T或T，S方法集总是包含T-T方法"><a href="#不管嵌入T或T，S方法集总是包含T-T方法" class="headerlink" title="不管嵌入T或T，S方法集总是包含T+*T方法"></a>不管嵌入T或<em>T，</em>S方法集总是包含T+*T方法</h6>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="类型T方法集包含全部receiver-T方法"><a href="#类型T方法集包含全部receiver-T方法" class="]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记方法定义]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记方法定义/</id>
+    <published>2017-02-28T12:30:49.000Z</published>
+    <updated>2017-03-01T12:05:51.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="方法总是绑定对象实例，并隐式将实例作为第一实参"><a href="#方法总是绑定对象实例，并隐式将实例作为第一实参" class="headerlink" title="方法总是绑定对象实例，并隐式将实例作为第一实参"></a>方法总是绑定对象实例，并隐式将实例作为第一实参</h6><h6 id="只能为当前包内命名类型定义方法"><a href="#只能为当前包内命名类型定义方法" class="headerlink" title="只能为当前包内命名类型定义方法"></a>只能为当前包内命名类型定义方法</h6><h6 id="参数receiver可任意命名。如方法中未曾使用，可省略参数名"><a href="#参数receiver可任意命名。如方法中未曾使用，可省略参数名" class="headerlink" title="参数receiver可任意命名。如方法中未曾使用，可省略参数名"></a>参数receiver可任意命名。如方法中未曾使用，可省略参数名</h6><h6 id="参数receiver类型可以使T（值复制）或-T（引用或指针复制）。基类型T不能是接口或指针"><a href="#参数receiver类型可以使T（值复制）或-T（引用或指针复制）。基类型T不能是接口或指针" class="headerlink" title="参数receiver类型可以使T（值复制）或*T（引用或指针复制）。基类型T不能是接口或指针"></a>参数receiver类型可以使T（值复制）或*T（引用或指针复制）。基类型T不能是接口或指针</h6><h6 id="不支持方法重载，receiver只是参数签名的组成部分"><a href="#不支持方法重载，receiver只是参数签名的组成部分" class="headerlink" title="不支持方法重载，receiver只是参数签名的组成部分"></a>不支持方法重载，receiver只是参数签名的组成部分</h6><h6 id="可用实例value或pointer调用全部方法，编译器自动转换"><a href="#可用实例value或pointer调用全部方法，编译器自动转换" class="headerlink" title="可用实例value或pointer调用全部方法，编译器自动转换"></a>可用实例value或pointer调用全部方法，编译器自动转换</h6><h6 id="简单工厂模式返回对象事例（然而我没看懂）"><a href="#简单工厂模式返回对象事例（然而我没看懂）" class="headerlink" title="简单工厂模式返回对象事例（然而我没看懂）"></a>简单工厂模式返回对象事例（然而我没看懂）</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Queue struct {
+    elements []interface{}
+}
+
+func NewQueue() *Queue {
+    return &amp;Queue{make([]interface{}, 10)}
+}
+
+func (*Queue) Push(e interface{}) error {
+    panic(&quot;not implemented&quot;)
+}
+
+func (self *Queue) length() int {
+    return len(self.elements)
+}
+</code></pre><h6 id="看看receiver-T和-T的区别"><a href="#看看receiver-T和-T的区别" class="headerlink" title="看看receiver T和*T的区别"></a>看看receiver T和*T的区别</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Data struct {
+    x int
+}
+
+func (self Data) ValueTest() {
+    fmt.Printf(&quot;Value:%p\n&quot;, &amp;self)
+}
+
+func (self *Data) PointerTest() {
+    fmt.Printf(&quot;Pointer:%p\n&quot;, self)
+}
+
+func main() {
+    d := Data{}
+    p := &amp;d
+    fmt.Printf(&quot;Data:%p\n&quot;, p)
+
+    d.ValueTest()
+    d.PointerTest()
+
+    p.ValueTest()
+    p.PointerTest()
+}
+</code></pre><h6 id="匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找"><a href="#匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找" class="headerlink" title="匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找"></a>匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+type Manager struct {
+    User
+}
+
+func (self *User) Tostring() string {   //receiver = &amp;(Manager.User)
+    return fmt.Sprintf(&quot;User:%p, %v&quot;, self, self)
+}
+
+func main() {
+    m := Manager{User{1, &quot;Tom&quot;}}
+    fmt.Printf(&quot;Manager:%p\n&quot;, &amp;m)      //Manager:0xc42007e060
+    fmt.Println(m.Tostring())           //User:0xc42000e1a0, &amp;{1 Tom}
+}
+</code></pre><h6 id="通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”"><a href="#通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”" class="headerlink" title="通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”"></a>通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id      int
+    name    string
+}
+
+type Manager struct {
+    User
+    title string
+}
+
+func (self *User) Tostring() string {   //receiver = &amp;(Manager.User)
+    return fmt.Sprintf(&quot;User:%p, %v&quot;, self, self)
+}
+
+func (self *Manager) Tostring() string {   //receiver = &amp;(Manager.User)
+    return fmt.Sprintf(&quot;Manager:%p, %v&quot;, self, self)
+}
+
+func main() {
+    m := Manager{User{1, &quot;Tom&quot;}, &quot;admin&quot;}
+    fmt.Println(m.Tostring())           //Manager:0xc420014120, &amp;{{1 Tom} admin}
+    fmt.Println(m.User.Tostring())      //User:0xc420014120, &amp;{1 Tom}
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="方法总是绑定对象实例，并隐式将实例作为第一实参"><a href="#方法总是绑定对象实例，并隐式将实例作为第一实参" class]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记面向对象]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记面向对象/</id>
+    <published>2017-02-28T12:13:38.000Z</published>
+    <updated>2017-03-01T12:06:28.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"><a href="#面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等" class="headerlink" title="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"></a>面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id int
+    name string
+}
+
+
+type Manager struct {
+    User
+    title string
+}
+
+func main() {
+    m := Manager{User{1, &quot;Tom&quot;}, &quot;admin&quot;}
+    var u User = m.User //同类型拷贝
+    //var u User = m  //这个类型不一样，无法拷贝
+    fmt.Println(u)
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"><a href="#面向对象三大特征，go仅支持封装。]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记struct]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0struct/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记struct/</id>
+    <published>2017-02-28T09:07:11.000Z</published>
+    <updated>2017-03-01T12:05:16.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员" class="headerlink" title="值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员"></a>值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Node struct {
+    _       int
+    id      int
+    data    *byte
+    next    *Node
+}
+
+func main() {
+    n1 := Node{
+        id  : 1,
+        data: nil,
+    }
+
+    n2 := Node{
+        id  : 2,
+        data: nil,
+        next: &amp;n1,
+    }
+
+    fmt.Println(n1, n2)
+}
+</code></pre><h6 id="顺序初始化必须包含全部字段，否则会出错"><a href="#顺序初始化必须包含全部字段，否则会出错" class="headerlink" title="顺序初始化必须包含全部字段，否则会出错"></a>顺序初始化必须包含全部字段，否则会出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    name    string
+    age     int
+}
+
+func main() {
+    u1 := User{&quot;Tom&quot;, 20}
+    //u2 := User{&quot;Tom&quot;}     //会报错，缺少字段
+    fmt.Println(u1)
+}
+</code></pre><h6 id="支持匿名结构，可用作结构成员或定义变量"><a href="#支持匿名结构，可用作结构成员或定义变量" class="headerlink" title="支持匿名结构，可用作结构成员或定义变量"></a>支持匿名结构，可用作结构成员或定义变量</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type File struct {
+    name    string
+    size     int
+    attr struct {
+        perm    int
+        owner   int
+    }
+}
+
+func main() {
+    f := File{
+        name : &quot;test.txt&quot;,
+        size : 1024,
+        //attr : {0755,1} //这样赋值会报错
+    }
+
+    f.attr.owner = 1
+    f.attr.perm = 0755
+
+    fmt.Println(f)
+
+    d := File{
+        name : &quot;a.txt&quot;,
+        size : 512,
+    }
+
+    var attr = struct {
+        perm int
+        owner int
+    }{2, 0755}
+
+    d.attr = attr
+
+    fmt.Println(d)
+}
+</code></pre><h6 id="注意m的赋值方式"><a href="#注意m的赋值方式" class="headerlink" title="注意m的赋值方式"></a>注意m的赋值方式</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id     int
+    name    string
+}
+
+func main() {
+    m := map[User]int{
+        User{1, &quot;Tom&quot;} : 100,
+    }
+
+    fmt.Println(m)      //100
+}
+</code></pre><h6 id="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"><a href="#匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错" class="headerlink" title="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"></a>匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+}
+
+
+type Manager struct {
+    User
+    title string
+}
+
+type User struct {
+    Resource    //匿名字段，相当于引用上面的Resource结构
+    name string
+}
+
+func main() {
+    var m Manager
+    m.id = 1
+    m.name = &quot;Jack&quot;
+    m.title = &quot;Admin&quot;
+
+    fmt.Println(m)      //{{{1} Jack} Admin}
+}
+</code></pre><h6 id="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"><a href="#外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名" class="headerlink" title="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"></a>外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+    name string
+}
+
+
+type Classify struct {
+    id int
+}
+
+type User struct {
+    Resource
+    Classify
+    name string
+}
+
+func main() {
+    u := User{
+        Resource{1, &quot;pepple&quot;},
+        Classify{100},
+        &quot;Jack&quot;,
+    }
+
+    fmt.Println(u)
+    fmt.Println(u.name)
+    fmt.Println(u.Resource.id)
+    fmt.Println(u.Classify.id)
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记map]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0map/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记map/</id>
+    <published>2017-02-28T08:20:07.000Z</published>
+    <updated>2017-03-01T12:05:02.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制" class="headerlink" title="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"></a>引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[int]struct{
+        name string
+        age int
+    }{
+        1 : {&quot;user1&quot;, 10},
+        2 : {&quot;user2&quot;, 20},
+    }
+
+    fmt.Println(m[1].name)
+}
+</code></pre><h6 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[string]int{    //判断key是否存在
+        &quot;a&quot; : 1,
+    }
+
+    if v,ok := m[&quot;a&quot;];ok {
+        println(v, ok)      //1 true
+    }
+
+    fmt.Println(m[&quot;c&quot;])     //0   对于不存在的key，直接返回\0,不报错
+    m[&quot;b&quot;] = 2              //新增或修改
+    delete(m, &quot;c&quot;)          //删除，如果key不存在，不会出错
+    println(len(m))         //2    获取键值对数量。cap无效
+
+    for k, v := range m {   //迭代，可仅返回key。随机顺序返回，每次都不相同
+        println(k, v)       //b 2       a 1
+    }
+}
+</code></pre><h6 id="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"><a href="#从map中取回的是一个value临时复制品，对其成员的修改是没有意义的" class="headerlink" title="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"></a>从map中取回的是一个value临时复制品，对其成员的修改是没有意义的</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   type user struct{ name string }
+   m := map[int]user{
+        1 : {&quot;user1&quot;},
+   }
+
+   fmt.Println(m[1].name)
+   //m[1].name = &quot;Tom&quot;     //这样赋值会报错
+   u := m[1]
+   u.name = &quot;Tom&quot;
+   m[1] = u
+   fmt.Println(m[1].name)
+
+   m2 := map[int]*user{
+        1 : &amp;user{&quot;user1&quot;},
+   }
+   m2[1].name = &quot;jack&quot;
+   fmt.Println(m2[1].name)      //返回的是指针复制品，透过指针修改原对象是允许的
+}
+</code></pre><h6 id="可以在迭代时安全删除键值-最好不要做新增操作"><a href="#可以在迭代时安全删除键值-最好不要做新增操作" class="headerlink" title="可以在迭代时安全删除键值,最好不要做新增操作"></a>可以在迭代时安全删除键值,最好不要做新增操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    for i := 0; i &lt; 5;i++ {
+        m := map[int]string{
+            0:&quot;a&quot;, 1:&quot;a&quot;, 2:&quot;a&quot;, 3:&quot;a&quot;, 4:&quot;a&quot;,
+            5:&quot;a&quot;, 6:&quot;a&quot;, 7:&quot;a&quot;, 8:&quot;a&quot;, 9:&quot;a&quot;,
+        }
+
+        for k := range m {
+            m[k+k] = &quot;k&quot;
+            delete(m, k)
+        }
+
+        fmt.Println(m)
+    }
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记copy]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0copy/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记copy/</id>
+    <published>2017-02-28T08:09:06.000Z</published>
+    <updated>2017-03-01T12:04:53.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"><a href="#函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠" class="headerlink" title="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"></a>函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    s := data[8:]
+    s2 := data[:5]
+    fmt.Println(s2)         //[0 1 2 3 4]
+    copy(s2, s)
+
+    fmt.Println(s)          //[8 9]
+    fmt.Println(s2)         //[8 9 2 3 4]
+    fmt.Println(data)       //[8 9 2 3 4 5 6 7 8 9]
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"><a hre]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记append]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0append/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记append/</id>
+    <published>2017-02-28T07:38:23.000Z</published>
+    <updated>2017-03-01T12:04:44.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="append"><a href="#append" class="headerlink" title="append"></a>append</h1><h6 id="向slice尾部添加数据，返回新的slice对象"><a href="#向slice尾部添加数据，返回新的slice对象" class="headerlink" title="向slice尾部添加数据，返回新的slice对象"></a>向slice尾部添加数据，返回新的slice对象</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := make([]int, 0, 5)
+    fmt.Printf(&quot;%p\n&quot;, &amp;s)      //0xc42000e1a0
+
+    s2 := append(s, 1)
+    fmt.Printf(&quot;%p\n&quot;, &amp;s2)     //0xc42000e1c0
+
+    fmt.Println(s, s2)          //[] [1]
+}
+</code></pre><h6 id="append多个值"><a href="#append多个值" class="headerlink" title="append多个值"></a>append多个值</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    s := data[:3]
+    s2 := append(s, 100, 200)
+
+    fmt.Println(data)           //[0 1 2 100 200 5 6 7 8 9]
+    fmt.Println(s)              //[0 1 2]
+    fmt.Println(s2)             //[0 1 2 100 200]
+}
+</code></pre><h6 id="一旦超出原slice-cap限制，就会重新分配底层数组，即便原数组并未填满"><a href="#一旦超出原slice-cap限制，就会重新分配底层数组，即便原数组并未填满" class="headerlink" title="一旦超出原slice.cap限制，就会重新分配底层数组，即便原数组并未填满"></a>一旦超出原slice.cap限制，就会重新分配底层数组，即便原数组并未填满</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 10:0}
+    s := data[:2:3]
+    s = append(s, 100, 200) //一次append两个值，超出s.cap限制，append后的s重新分配了底层数组，并复制数据，如果只追加一个值，则不会重新分配底层数组
+
+    fmt.Println(s, data)    //重新分配底层数组，与原数组无关
+    fmt.Println(&amp;s[0], &amp;data[0])    //比对底层数组起始指针
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="append"><a href="#append" class="headerlink" title="append"></a>append</h1><h6 id="向slice尾部添加数据，返回新的slice对象"><a href="#向slice尾部添加数据，]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记reslice]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0reslice/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记reslice/</id>
+    <published>2017-02-28T06:44:03.000Z</published>
+    <updated>2017-03-01T12:05:05.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"><a href="#基于已有slice创建新slice对象，以便在cap允许范围内调整属性" class="headerlink" title="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"></a>基于已有slice创建新slice对象，以便在cap允许范围内调整属性</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
+    s1 := s[2:5]            //[10 31 4]
+    s2 := s1[2:6:7]         //[4 5 6 7]     注意要在新的s1上进行截取
+    //s3 := s2[3:6]           //报错
+    fmt.Println(s1, s2)
+}
+</code></pre><h6 id="新对象依旧指向原底层数组"><a href="#新对象依旧指向原底层数组" class="headerlink" title="新对象依旧指向原底层数组"></a>新对象依旧指向原底层数组</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
+    s1 := s[2:5]    //[10 31 4]
+    fmt.Println(s1)
+    s1[2] = 100
+    s2 := s1[2:6]
+    fmt.Println(s2) //[100 5 6 7]
+    s2[3] = 200
+
+    fmt.Println(s)  //[0 11 10 31 100 5 6 200 8 9]
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"><a href="#基于已有slice创建新slice对]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记slice]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0slice/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记slice/</id>
+    <published>2017-02-28T03:52:55.000Z</published>
+    <updated>2017-03-01T12:05:10.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="#slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案" class="headerlink" title="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"></a>slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案</h6><h6 id="slice引用类型，但自身是结构体，值拷贝传递"><a href="#slice引用类型，但自身是结构体，值拷贝传递" class="headerlink" title="slice引用类型，但自身是结构体，值拷贝传递"></a>slice引用类型，但自身是结构体，值拷贝传递</h6><pre><code>//在runtime.h中的源码
+struct slice
+{
+    byte* array;
+    uintgo len;     //表示可用元素数量，读写操作不能超过该限制
+    uintgo cap;     //表示最大扩张容量，不能超出数组限制
+}
+</code></pre><h6 id="slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a"><a href="#slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a" class="headerlink" title="slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a"></a>slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6}
+    slice := data[1:4:5]
+    fmt.Println(slice)      //[1 2 3]
+}
+</code></pre><h6 id="slice使用举例"><a href="#slice使用举例" class="headerlink" title="slice使用举例"></a>slice使用举例</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    slice := data[:6:8]
+    slice1 := data[5:]
+    slice2 := data[:3]
+    slice3 := data[:]
+    fmt.Println(slice, slice1, slice2, slice3)  //[0 1 2 3 4 5] [5 6 7 8 9] [0 1 2] [0 1 2 3 4 5 6 7 8 9]
+}
+</code></pre><h6 id="slice读写操作实际目标是底层数组，只需要注意索引号的差别"><a href="#slice读写操作实际目标是底层数组，只需要注意索引号的差别" class="headerlink" title="slice读写操作实际目标是底层数组，只需要注意索引号的差别"></a>slice读写操作实际目标是底层数组，只需要注意索引号的差别</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    slice := data[6:8]
+    slice[0] += 100
+    slice[1] += 200
+    fmt.Println(slice)  //[106 207]
+    fmt.Println(data)   //[0 1 2 3 4 5 106 207 8 9]
+}
+</code></pre><h6 id="直接创建slice对象，自动分配底层数组"><a href="#直接创建slice对象，自动分配底层数组" class="headerlink" title="直接创建slice对象，自动分配底层数组"></a>直接创建slice对象，自动分配底层数组</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 8:100}
+    fmt.Println(data, len(data), cap(data)) //[0 1 2 3 0 0 0 0 100] 9 9
+
+    s2 := make([]int, 6, 8)
+    fmt.Println(s2, len(s2), cap(s2))   //[0 0 0 0 0 0] 6 8 没有初始化值，直接用0填充
+
+    s3 := make([]int, 6)
+    fmt.Println(s3, len(s3), cap(s3))   //[0 0 0 0 0 0] 6 6 省略cap那么久默认cap=len
+}
+</code></pre><h6 id="可以用指针直接访问底层数组，退化成普通数组操作"><a href="#可以用指针直接访问底层数组，退化成普通数组操作" class="headerlink" title="可以用指针直接访问底层数组，退化成普通数组操作"></a>可以用指针直接访问底层数组，退化成普通数组操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := []int{0, 1, 2, 3, 4}
+    p := &amp;s[2]      //直接使用指针修改数组底层的值
+    *p += 100
+    fmt.Println(s)
+}
+</code></pre><h6 id="依然是二维数组"><a href="#依然是二维数组" class="headerlink" title="依然是二维数组"></a>依然是二维数组</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [][]int{
+        []int{1, 2, 3},
+        []int{100, 200},
+        []int{11, 22, 33, 44},
+    }
+
+    fmt.Println(data)       //[[1 2 3] [100 200] [11 22 33 44]]
+}
+</code></pre><h6 id="可直接修改struct-array成员"><a href="#可直接修改struct-array成员" class="headerlink" title="可直接修改struct array成员"></a>可直接修改struct array成员</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    d := [5]struct {
+        x int
+    }{}
+
+    s := d[:]   //这里是引用
+
+    d[1].x = 10
+    s[2].x = 20
+    fmt.Println(d)      //[{0} {10} {20} {0} {0}]
+    fmt.Printf(&quot;%p, %p\n&quot;, &amp;d, &amp;d[0])       //0xc4200720c0, 0xc4200720c0
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记array]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0array/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记array/</id>
+    <published>2017-02-28T03:21:50.000Z</published>
+    <updated>2017-03-01T12:04:48.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#数组是值类型，赋值和传参会复制整个数组，而不是指针" class="headerlink" title="数组是值类型，赋值和传参会复制整个数组，而不是指针"></a>数组是值类型，赋值和传参会复制整个数组，而不是指针</h6><h6 id="数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型"><a href="#数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型" class="headerlink" title="数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型"></a>数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型</h6><h6 id="支持”-”，”！-”操作符，因为内存总是被初始化过"><a href="#支持”-”，”！-”操作符，因为内存总是被初始化过" class="headerlink" title="支持”==”，”！=”操作符，因为内存总是被初始化过"></a>支持”==”，”！=”操作符，因为内存总是被初始化过</h6><h6 id="指针数组-n-T-数组指针-n-T"><a href="#指针数组-n-T-数组指针-n-T" class="headerlink" title="指针数组[n]T,数组指针[n]T"></a>指针数组[n]<em>T,数组指针</em>[n]T</h6><h1 id="定义数组的方式"><a href="#定义数组的方式" class="headerlink" title="定义数组的方式"></a>定义数组的方式</h1><h6 id="直接初始化"><a href="#直接初始化" class="headerlink" title="直接初始化"></a>直接初始化</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [3]int{1,2}    //定义了数组有三个元素，未初始化元素值为0
+    fmt.Println(a)      //[1 2 0]
+}
+
+
+package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [...]int{1, 2, 3, 4, 5}    //通过初始化值确定数组长度
+    fmt.Println(a)      //[1 2 3 4 5]
+}
+
+package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [5]int{2:100, 4:200}   //指定了数组对应的键，索引从0开始以0的值进行补齐到指定的数组长度
+    fmt.Println(a)      //[0 0 100 0 200]
+}
+</code></pre><h6 id="先struct方式定义数组格式，再初始化值"><a href="#先struct方式定义数组格式，再初始化值" class="headerlink" title="先struct方式定义数组格式，再初始化值"></a>先struct方式定义数组格式，再初始化值</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [...]struct{
+        name string
+        age uint8
+    }{
+        {&quot;user1&quot;, 10},
+        {&quot;user2&quot;, 20},  //都好不能省略
+    }
+
+    fmt.Println(a)      //[{user1 10} {user2 20}]
+}
+</code></pre><h6 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [2][3]int{{1,2,3}, {4,5,6}}    //指定每一层的元素个数
+
+    fmt.Println(a)      //[[1 2 3] [4 5 6]]
+}
+
+
+package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [...][3]int{{1,2,3}, {4,5,6}}  //省略第一维的元素个数，第二维不能省略
+
+    fmt.Println(a)      //[[1 2 3] [4 5 6]]
+}
+</code></pre><h6 id="数组会有值拷贝行为，建议使用后slice，或数组指针"><a href="#数组会有值拷贝行为，建议使用后slice，或数组指针" class="headerlink" title="数组会有值拷贝行为，建议使用后slice，或数组指针"></a>数组会有值拷贝行为，建议使用后slice，或数组指针</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func test(x [2]int) {
+    fmt.Printf(&quot;x:%p&quot;, &amp;x)  //x:0xc42000a2d0    指针位置发生了改变，说明是重新复制了值
+    x[1] = 1000
+}
+
+func main() {
+    a := [2]int{1,2}
+    fmt.Printf(&quot;a:%p&quot;, &amp;a)  //a:0xc42000a2a0
+    test(a)
+    fmt.Println(a)  //[1 2] 由于是值复制，因此当前的数组还是原来的值
+}
+</code></pre><h6 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    a := [2]int{1,2}
+    fmt.Println(len(a), cap(a))  //2,2
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记延迟调用]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%BB%B6%E8%BF%9F%E8%B0%83%E7%94%A8/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记延迟调用/</id>
+    <published>2017-02-28T03:18:53.000Z</published>
+    <updated>2017-03-01T12:05:35.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"><a href="#使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理" class="headerlink" title="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"></a>使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理</h6><pre><code>package main
+
+import &quot;os&quot;
+
+func test() error {
+    f, err := os.Create(&quot;test.txt&quot;) //创建一个文件
+
+    if err != nil { return err }    //创建失败返回错误信息
+
+    defer f.Close()     //不管是否出现错误都会关闭文件，defer会在ret之前执行
+    f.WriteString(&quot;Hello,world!&quot;)   //往文件中写入内容
+    return nil
+}
+
+func main() {
+    test()
+}
+</code></pre><h6 id="多个defer注册，按FILO次序执行"><a href="#多个defer注册，按FILO次序执行" class="headerlink" title="多个defer注册，按FILO次序执行"></a>多个defer注册，按FILO次序执行</h6><pre><code>package main
+
+func test(x int) int {
+    defer println(&quot;a&quot;)
+    defer println(&quot;b&quot;)
+
+    defer func() {
+        println(100 / x)
+    }()
+
+    defer println(&quot;c&quot;)
+
+    return 1
+}
+
+func main() {
+    test(20)        //输出结果为c 5 b a
+}
+</code></pre><h6 id="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"><a href="#延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取" class="headerlink" title="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"></a>延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取</h6><pre><code>package main
+
+func test() {
+    x, y := 10, 20
+
+    defer func(i int) {
+        println(&quot;defer:&quot;, i, y) //y闭包引用
+    }(x)    //x被复制
+
+    x += 10
+    y += 100
+    println(&quot;x=&quot;, x, &quot;y=&quot;, y)
+}
+
+func main() {
+    test()
+    //结果为:x= 20 y= 120   defer: 10 120
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记异常处理]]></title>
+    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    <id>http://www.cxyteam.com/2017/02/28/go学习笔记异常处理/</id>
+    <published>2017-02-28T03:17:53.000Z</published>
+    <updated>2017-03-01T12:05:39.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h6 id="没有结构化异常，使用panic抛出错误，recover捕获错误"><a href="#没有结构化异常，使用panic抛出错误，recover捕获错误" class="headerlink" title="没有结构化异常，使用panic抛出错误，recover捕获错误"></a>没有结构化异常，使用panic抛出错误，recover捕获错误</h6><pre><code>package main
+
+func test() {
+    defer func() {
+        if err := recover();err != nil {    //相当于php的错误异常处理的try
+            println(err.(string))       //将interface转换成string类型
+        }
+    }()
+
+    panic(&quot;panic error!&quot;)   //相当于php的throw
+}
+
+func main() {
+    test()  //输出panic error!
+}
+</code></pre><h6 id="由于panic，recover参数类型为interface-，因此可抛出任何类型对象"><a href="#由于panic，recover参数类型为interface-，因此可抛出任何类型对象" class="headerlink" title="由于panic，recover参数类型为interface{}，因此可抛出任何类型对象"></a>由于panic，recover参数类型为interface{}，因此可抛出任何类型对象</h6><pre><code>func panic(v interface{})   //不太理解
+func recover() interface{}
+</code></pre><h6 id="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"><a href="#延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获" class="headerlink" title="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"></a>延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func test() {
+    defer func() {
+        fmt.Println(recover())
+    }()
+
+    defer func() {
+        panic(&quot;defer panic&quot;)
+    }()
+
+    panic(&quot;test panic&quot;)
+}
+
+func main() {
+    test()  //输出结果为: defer panic
+}
+</code></pre><h6 id="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"><a href="#捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递" class="headerlink" title="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"></a>捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func test() {
+    defer recover() //无效
+    defer fmt.Println(recover())    //无效
+    defer func() {
+        //recover() //只有在此处才能捕获异常
+        func() {
+            println(&quot;defer inner&quot;)
+            recover()   //无效
+        }()
+    }()
+
+    panic(&quot;test panic&quot;)
+}
+
+func main() {
+    test()
+}
+</code></pre><h6 id="使用error-New和fmt-Errorf函数创建error接口的错误对象"><a href="#使用error-New和fmt-Errorf函数创建error接口的错误对象" class="headerlink" title="使用error.New和fmt.Errorf函数创建error接口的错误对象"></a>使用error.New和fmt.Errorf函数创建error接口的错误对象</h6><pre><code>package main
+
+import &quot;errors&quot;
+
+type error interface {
+    Error() string
+}
+
+var ErrDivByZero = errors.New(&quot;division by zero&quot;)   //使用error.New创建error错误对象
+
+func div(x, y int) (int, error) {
+    if y == 0 { return 0, ErrDivByZero }
+    return x / y, nil       //返回结果和异常
+}
+
+func main() {
+    switch z, err := div(10, 0); err {  //初始化变量，然后再匹配异常err的信息
+    case nil:
+        println(z)
+    case ErrDivByZero:
+        panic(err)
+    }
+}
+</code></pre><h6 id="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"><a href="#区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值" class="headerlink" title="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"></a>区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值</h6>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h6 id="没有结构化异常，使用panic抛出错误，recover捕获错误"><a href="#没有结构化异常，使用pani]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记函数]]></title>
+    <link href="http://www.cxyteam.com/2017/02/24/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%87%BD%E6%95%B0/"/>
+    <id>http://www.cxyteam.com/2017/02/24/go学习笔记函数/</id>
+    <published>2017-02-24T09:10:31.000Z</published>
+    <updated>2017-03-01T12:05:22.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h6 id="不支持嵌套，重载和默认参数"><a href="#不支持嵌套，重载和默认参数" class="headerlink" title="不支持嵌套，重载和默认参数"></a>不支持嵌套，重载和默认参数</h6><h6 id="无需声明原型"><a href="#无需声明原型" class="headerlink" title="无需声明原型"></a>无需声明原型</h6><h6 id="支持不定长变参"><a href="#支持不定长变参" class="headerlink" title="支持不定长变参"></a>支持不定长变参</h6><h6 id="支持多返回值"><a href="#支持多返回值" class="headerlink" title="支持多返回值"></a>支持多返回值</h6><h6 id="支持命名返回参数"><a href="#支持命名返回参数" class="headerlink" title="支持命名返回参数"></a>支持命名返回参数</h6><h6 id="支持匿名函数和闭包"><a href="#支持匿名函数和闭包" class="headerlink" title="支持匿名函数和闭包"></a>支持匿名函数和闭包</h6><h6 id="使用func定义函数，左大括号依旧不能另起一行"><a href="#使用func定义函数，左大括号依旧不能另起一行" class="headerlink" title="使用func定义函数，左大括号依旧不能另起一行"></a>使用func定义函数，左大括号依旧不能另起一行</h6><pre><code>package main
+
+func test (x, y int, s string) (int, string) {  //需要定义返回参数的类型，可以返回多个数值
+    n := x + y
+    return n, s
+}
+
+func main() {
+    x,y := test(1, 2, &quot;a&quot;)  //接收返回的值
+    println(x,y)
+}
+</code></pre><h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><h6 id="函数是第一类对象，可作为参数传递"><a href="#函数是第一类对象，可作为参数传递" class="headerlink" title="函数是第一类对象，可作为参数传递"></a>函数是第一类对象，可作为参数传递</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func test(fn func() int) int {  //参数可以传入函数
+    return fn()
+}
+
+type FormatFunc func(s string, x, y int) string //定义函数类型
+
+func format(fn FormatFunc, s string, x, y int) string {
+    return fn(s, x, y)
+}
+
+func main() {
+    s1 := test(func() int { return 100 })
+    s2 := format(func(s string, x, y int) string {
+        return fmt.Sprintf(s, x, y)
+    }, &quot;%d, %d&quot;, 10, 20)
+
+    println(s1, s2)
+}
+</code></pre><h6 id="只能有一个，且必须是最后一个"><a href="#只能有一个，且必须是最后一个" class="headerlink" title="只能有一个，且必须是最后一个"></a>只能有一个，且必须是最后一个</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func test(s string, n ...int) string {  //变参
+    var x int
+    for _, i := range n {
+        x += i
+    }
+
+    return fmt.Sprintf(s, x)
+}
+
+func main() {
+    println(test(&quot;sum:%d&quot;, 1, 2, 3))
+}
+</code></pre><h1 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h1><h6 id="只能用变量接收返回值或者-忽略返回值"><a href="#只能用变量接收返回值或者-忽略返回值" class="headerlink" title="只能用变量接收返回值或者_忽略返回值"></a>只能用变量接收返回值或者_忽略返回值</h6><pre><code>package main
+
+func test() (int, int) {
+    return 1,2
+}
+
+func main() {
+    a,_ := test()
+    println(a)
+}
+</code></pre><h6 id="多返回值可直接作为其他函数调用实参"><a href="#多返回值可直接作为其他函数调用实参" class="headerlink" title="多返回值可直接作为其他函数调用实参"></a>多返回值可直接作为其他函数调用实参</h6><pre><code>package main
+
+func test() (int, int) {
+    return 1,2
+}
+
+func add(x, y int) int {
+    return x+y
+}
+
+func sum(n ...int) int {    //变参
+    var x int
+    for _,i := range n {    //循环，舍弃键
+        x += i
+    }
+
+    return x
+}
+
+func main() {
+    println(add(test()))
+    println(sum(test()))
+}
+</code></pre><h6 id="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"><a href="#命名返回参数可看做与形参类似的局部变量，最后由return隐式返回" class="headerlink" title="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"></a>命名返回参数可看做与形参类似的局部变量，最后由return隐式返回</h6><pre><code>package main
+
+func add(x, y int) (z int) {
+    z = x + y
+    return  //虽然没返回z，但是函数定义了返回的值是z而且是int类型
+}
+
+func main() {
+    println(add(1, 2))
+}
+</code></pre><h6 id="命名返回的参数可被同名局部变量遮蔽，需要显示返回"><a href="#命名返回的参数可被同名局部变量遮蔽，需要显示返回" class="headerlink" title="命名返回的参数可被同名局部变量遮蔽，需要显示返回"></a>命名返回的参数可被同名局部变量遮蔽，需要显示返回</h6><pre><code>package main
+
+func add(x, y int) (z int) {
+    {   //不能在一个级别定义z，否则会报错
+        var z = x + y
+        return z    //必须要显示返回
+    }
+}
+
+func main() {
+    println(add(1, 2))
+}
+
+//命名返回参数允许defer延迟调用通过闭包读取和修改
+package main
+
+func add(x, y int) (z int) {
+    defer func() {
+        println(z)  //输出3
+        z += 100
+    }()
+    z = x + y
+    return
+}
+
+func main() {
+    println(add(1, 2))  //输出103
+}
+</code></pre><h6 id="显式return返回前，会先修改命名返回参数"><a href="#显式return返回前，会先修改命名返回参数" class="headerlink" title="显式return返回前，会先修改命名返回参数"></a>显式return返回前，会先修改命名返回参数</h6><pre><code>package main
+
+func add(x, y int) (z int) {
+    defer func() {
+        println(z)//输出结果为203
+    }()
+    z = x + y
+    println(z)//输出结果为3
+    return z + 200  //执行顺序:z = x + y =&gt; z + 200 =&gt; call defer =&gt; return
+}
+
+func main() {
+    println(add(1, 2))
+}
+</code></pre><h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><h6 id="匿名函数-做为变量"><a href="#匿名函数-做为变量" class="headerlink" title="匿名函数,做为变量"></a>匿名函数,做为变量</h6><pre><code>package main
+
+func main() {
+    fn := func() { println(&quot;hello world&quot;)}
+    fn()
+}
+</code></pre><h6 id="匿名函数，做为collection"><a href="#匿名函数，做为collection" class="headerlink" title="匿名函数，做为collection"></a>匿名函数，做为collection</h6><pre><code>package main
+
+func main() {
+    fns := [](func(x int) int) {
+        func(x int) int { return x + 1 },
+        func(x int) int { return x + 2 },
+    }
+
+    println(fns[0](100))
+}
+</code></pre><h6 id="匿名函数，做为字段"><a href="#匿名函数，做为字段" class="headerlink" title="匿名函数，做为字段"></a>匿名函数，做为字段</h6><pre><code>package main
+
+func main() {
+    d := struct {
+        fn func() string
+    }{
+        fn: func() string { return &quot;hello,world!&quot; },
+    }
+
+    println(d.fn())
+}
+</code></pre><h6 id="匿名函数，做为channel"><a href="#匿名函数，做为channel" class="headerlink" title="匿名函数，做为channel"></a>匿名函数，做为channel</h6><pre><code>package main
+
+func main() {
+    fc := make(chan func() string, 2)//声明一个chan，定义一个函数
+    fc &lt;- func() string { return &quot;Hello,World!&quot; }   //把函数的值发送给fc
+    println((&lt;-fc)())
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h6 id="不支持嵌套，重载和默认参数"><a href="#不支持嵌套，重载和默认参数" class="headerlink]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go学习笔记表达式]]></title>
+    <link href="http://www.cxyteam.com/2017/02/22/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://www.cxyteam.com/2017/02/22/go学习笔记表达式/</id>
+    <published>2017-02-22T02:54:47.000Z</published>
+    <updated>2017-03-01T12:06:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" title="在程序中不可以使用的名字"></a>在程序中不可以使用的名字</h6><pre><code>break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
+package,switch,const,fallthrough,if,range,type,continue,for,import,return,var
+</code></pre><h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>+       &amp;        +=       &amp;=        &amp;&amp;       ==       !=       (       )
+-       |        -=       |=        ||       &lt;        &lt;=       [       ]
+*       ^        *=       ^=        &lt;-       &gt;        &gt;=       {       }
+/       &lt;&lt;       /=       &lt;&lt;=       ++       =        :=       ,       ;
+%       &gt;&gt;       %=       &gt;&gt;=       --       !        ...      .       :
+&amp;^      &amp;^=
+</code></pre><h1 id="简单位运算符"><a href="#简单位运算符" class="headerlink" title="简单位运算符"></a>简单位运算符</h1><pre><code>0110 &amp;  1011 = 0010     //AND 都为1
+0110 |  1011 = 1111     //OR 至少一个为1
+0110 ^  1011 = 1101     //XOR 只能一个为1
+0110 &amp;^ 1011 = 0100     //AND NOT 清楚标志位 m &amp;^ n 下面的数字是n的二进制是1值为0，二进制是0值为m中对应的值
+</code></pre><h1 id="标志位操作"><a href="#标志位操作" class="headerlink" title="标志位操作"></a>标志位操作</h1><pre><code>a := 0
+a |= 1 &lt;&lt; 2             //&lt;&lt;左移运算符 比如：1&lt;&lt;2 则表示：1的二进制表示为：000...0001(这里1前面0的个数和int的位数有关,32位机器,gcc里有31个0)，那么像左移动两位则是000...000100
+a |= 1 &lt;&lt; 6             //a|=b表示的意思就是a=a|b（注意OR运算是需要先转换成二进制的）
+a = a &amp;^ (1 &lt;&lt; 6)
+</code></pre><h1 id="不支持运算符重载"><a href="#不支持运算符重载" class="headerlink" title="不支持运算符重载"></a>不支持运算符重载</h1><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    n := 0
+    p := &amp;n
+    //b := n++          //报错
+    //if n++ == 1 {}    //报错
+    //++n               //报错
+    n++
+    *p++
+
+    fmt.Println(n, p)
+}
+</code></pre><h1 id="没有’-’，取反运算也用’-’"><a href="#没有’-’，取反运算也用’-’" class="headerlink" title="没有’~’，取反运算也用’^’"></a>没有’~’，取反运算也用’^’</h1><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    x := 1
+    x = ^x
+
+    fmt.Println(x)
+}
+</code></pre><h1 id="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"><a href="#初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部" class="headerlink" title="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"></a>初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部</h1><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    //var a struct{ x int } = { 100 }     //报错
+    //var b []int = { 1, 2, 3 }           //报错
+    //c := struct { x int; y string }     //报错
+    //{
+    //}
+    var a = struct { x int } { 100 }
+    var b = []int{  //可以分行
+                    1,
+                    2,
+                    3,  //分开的话，最后一行要一个&apos;,&apos;
+    }
+
+    var c = []int{  //可以分行
+                        1,
+                        2,
+                        3}  //分开的话，最后一行要一个&apos;}&apos;
+
+    fmt.Println(a, b, c)
+}
+</code></pre><h1 id="IF语句"><a href="#IF语句" class="headerlink" title="IF语句"></a>IF语句</h1><h6 id="可省略条件表达式括号"><a href="#可省略条件表达式括号" class="headerlink" title="可省略条件表达式括号"></a>可省略条件表达式括号</h6><h6 id="支持初始化语句，可定义代码块局部变量"><a href="#支持初始化语句，可定义代码块局部变量" class="headerlink" title="支持初始化语句，可定义代码块局部变量"></a>支持初始化语句，可定义代码块局部变量</h6><h6 id="代码块左大括号必须在条件表达式尾部"><a href="#代码块左大括号必须在条件表达式尾部" class="headerlink" title="代码块左大括号必须在条件表达式尾部"></a>代码块左大括号必须在条件表达式尾部</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    x := 0
+
+    if n := &quot;abc&quot;; x&gt;10 {
+       fmt.Println(n[1])
+    } else if x &lt;0 {
+        fmt.Println(n[2])
+    } else {
+        println(n[0])
+    }
+}
+</code></pre><h1 id="不支持三元运算符"><a href="#不支持三元运算符" class="headerlink" title="不支持三元运算符"></a>不支持三元运算符</h1><pre><code>package main
+
+func main() {
+    a := 0
+    b := 1
+
+    c := a &gt; b ? a : b      //报错
+    println(c)
+}
+</code></pre><h1 id="For（循环语句）"><a href="#For（循环语句）" class="headerlink" title="For（循环语句）"></a>For（循环语句）</h1><pre><code>package main
+
+func main() {
+    s := &quot;abc&quot;
+    //常见的for循环方式
+    for i,n :=0, len(s); i &lt; n; i++ {
+        println(i)
+    }
+
+    //while的for循环方式
+    n := len(s)
+    for n &gt; 0 {
+        println(n)
+        n--
+    }
+
+    //while(true) {} 死循环
+    for {
+        println(s)
+    }
+}
+</code></pre><h1 id="Range-类似迭代器操作，返回键值"><a href="#Range-类似迭代器操作，返回键值" class="headerlink" title="Range(类似迭代器操作，返回键值)"></a>Range(类似迭代器操作，返回键值)</h1><pre><code>package main
+
+func main() {
+    s := &quot;abc&quot;
+
+    for i := range s {      //默认忽略值，只把键赋值给了i变量
+        println(i, s[i])
+    }
+
+    for _, c := range s {   //默认丢弃了键，把值赋给了c变量
+        println(c)
+    }
+
+    var d = 0
+    for range s {           //抛弃键值，只循环
+        d++
+    }
+
+    println(d)
+
+    m := map[string]int{&quot;a&quot;:1, &quot;b&quot;:2}
+    for k,v := range m {        //遍历出键值
+        println(k,v)
+    }
+}
+</code></pre><h1 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h1><pre><code>package main
+
+func main() {
+    x := []int{1, 2, 3}
+    i := 3
+    switch i {
+        case x[1]:
+            println(&quot;a&quot;)
+        case x[2], 1:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+
+
+package main
+
+func main() {
+    x := 10
+    switch x {
+        case 10:
+            println(&quot;a&quot;)
+            fallthrough //需要继续下一分支，使用fallthrough
+        case 0:
+            println(&quot;c&quot;)
+    }
+}
+
+package main
+
+func main() {
+    x := []int{1, 2, 3}
+    switch {
+        case x[1] &gt; 0:      //当做if else使用 
+            println(&quot;a&quot;)
+        case x[1] &lt; 0:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+
+package main
+
+func main() {
+    x := []int{1, 2, 3}
+    switch i := x[2]; { //带初始值
+        case i &gt; 0:
+            println(&quot;a&quot;)
+        case i &lt; 0:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+</code></pre><h1 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h1><pre><code>package main
+
+func main() {
+    var i int
+    for {
+        println(i)
+        i++
+        if i &gt; 2 {
+            goto TEST
         }
     }
 
-    return 0;
- }
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="execl-execlp-execle"><a href="#execl-execlp-execle" class="headerlink" title="execl,execlp,execle"></a>execl,execlp,execle</h1><pre>]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言静态库和动态库]]></title>
-    <link href="http://www.cxyteam.com/2016/09/11/C%E8%AF%AD%E8%A8%80%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/"/>
-    <id>http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/</id>
-    <published>2016-09-11T08:51:13.000Z</published>
-    <updated>2016-09-13T10:10:26.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="实现文件共享"><a href="#实现文件共享" class="headerlink" title="实现文件共享"></a>实现文件共享</h1><pre><code>例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --encrypt.h
-|--checksum.c
-|--encrypt.c
-|--test.c
-|--myObject
-
-在myHeader文件中建立头文件checksum.h
-int checksum(char *message);
-在myHeader文件中建立头文件encrypt.h
-void encrypt(char *message);
-
-checksum.c内容:
-#include &lt;checksum.h&gt;
-
-int checksum(char *message)
-{
- int c = 0;
- while (*message) {
-     c += c ^ (int)(*message);
-     message++;
- }
-
- return c;
+    TEST:
+        println(&quot;break&quot;)
 }
+</code></pre><h1 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h1><pre><code>package main
 
-encrypt.c内容:
-#include &quot;./myHeader/encrypt.h&quot;
+func main() {
+    L1:
+        for x := 0;x &lt; 3; x++ {
+    L2:
+            for y := 0;y &lt; 5;y++ {
+                if y &gt; 2 {
+                    continue L2
+                }
 
-void encrypt(char *message)
-{
- char c;
- while(*message) {
-     *message = *message ^ 31;
-     message++;
- }
-}
+                if x &gt; 1 {
+                    break L1        //break可用于for,switch,select而continue只能用于for循环
+                }
 
-test.c的内容:
-#include &lt;stdio.h&gt;
-#include &quot;./myHeader/encrypt.h&quot;
-#include &quot;./myHeader/checksum.h&quot;
-
-int main()
-{
-     char s[] = &quot;Speak friend and enter&quot;;
-     encrypt(s);
-     printf(&quot;Encrypt to &apos;%s&apos;\n&quot;, s);
-     printf(&quot;checksum is %i\n&quot;, checksum(s));
-     encrypt(s);
-     printf(&quot;Decrypt to &apos;%s&apos;\n&quot;, s);
-     printf(&quot;checksum is %i\n&quot;, checksum(s));
-     return 0;
-}
-
-/*
-    把头文件和编译后的文件都保存在固定的文件中方便共享(myHeader和myObject)
-    -I告诉编译器去哪里找头文件
-*/
-执行命令:(执行命令每次都要指定.o的文件路径,是不是太麻烦?)
-    gcc -I ./myHeader -c checksum.c -o ./myObject/checksum.o
-    gcc -I ./myHeader -c encrypt.c -o ./myObject/encrypt.o
-    gcc -I ./myHeader test.c ./myObject/checksum.o ./myObject/encrypt.o -o test &amp;&amp; ./test
-</code></pre><h1 id="创建静态库的方式"><a href="#创建静态库的方式" class="headerlink" title="创建静态库的方式"></a>创建静态库的方式</h1><pre><code>/*
-    r:如果.a文件存在就更新它
-    c:表示创建存档时不显示反馈信息
-    s:告诉ar要在.a文件开头建立索引
-    创建的文件名:libhfsecurity.a
-    ** 静态库名字的命名规范一般是:libxxx.a的形式,不然编译器无法找到它
-*/
-ar -rcs libhfsecurity.a encrypt.o checksum.o
-
-/*
-    可以查看.a文件是由那些文件组成
-*/
-ar -t libhfsecurity.a
-
-/*
-    lhfsecurity对应去寻找上面创建的静态库的名字:libhfsecurity.a
-    -I指定头文件位置
-    -L告诉编译器去哪寻找存档
-    当然如果你把.a的文件放在/usr/local/lib(用来存放本地自定义库或者系统类库/usr/lib)中,可以不指定-L参数
-    gcc test.c  -lhfsecurity -o test
-*/
-gcc -I ./myHeader test.c -L myObject -lhfsecurity -o test &amp;&amp; ./test
-</code></pre><h1 id="静态库例子"><a href="#静态库例子" class="headerlink" title="静态库例子"></a>静态库例子</h1><pre><code>目录结构:
-|--myHeader
-  --hfcal.h
-|--myObject
-|--treadmill
-  --elliptical.c
-  --hfcal.c
-
-hfcal.h中的内容:
-    void display_calories(float weight, float distance, float coeff);
-
-hfcal.c文件中的内容:
-    #include &lt;stdio.h&gt;
-    #include &lt;hfcal.h&gt;
-
-    void display_calories(float weight, float distance, float coeff)
-    {
-        printf(&quot;Weight:%3.2f lbs\n&quot;, weight);
-        printf(&quot;Distance:%3.2f miles\n&quot;, distance);
-        printf(&quot;Calories burned:%4.2f cal\n&quot;, coeff * weight * distance);
-    }
-
-elliptical.c文件中的内容:
-    #include &lt;stdio.h&gt;
-    #include &lt;hfcal.h&gt;
-
-    int main()
-    {
-        display_calories(115.2, 11.3, 0.79);
-        return 0;
-    }
-
-cd treadmill
-gcc -I ../myHeader -c hfcal.c -o ../myObject/hfcal.o
-gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
-ar -rcs ../myObject/libhfcal.a ../myObject/hfcal.o
-cd ../myObject
-gcc elliptical.o -L ./ -lhfcal -o elliptical
-</code></pre><h1 id="创建动态库"><a href="#创建动态库" class="headerlink" title="创建动态库"></a>创建动态库</h1><pre><code>/*
-    -I指定头文件目录,-c不要链接代码,-fPIC创建位置无关代码创建库
-*/
-gcc -I ../myHeader -fPIC -c hfcal.c -o ../myObject/hfcal.o
-
-/*
-    --shared告诉gcc把目标文件转化为动态库
-    动态库在每个系统的后缀名都不一样
-    windows中后缀名是.dll
-    在linux和unix尚后缀名是.so
-   在mac上后缀名是是.dylib
-*/
-cd ../myObject/
-
-
-/*
-    在一些稍微老一点的mac系统上,没有-shared选项,可以使用-dynamiclib代替
-*/
-                        libhfcal.dll.a      #windows上的cygwin
-                        libhfcal.dylib         #mac
-gcc -shared hfcal.o -o  hfcal.dll           #windows上的mingw
-                        libhfcal.so         #linux或unix
-
-cd ../treadmill/
-gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
-cd ../myObject/
-
-/*
-    在linux和大部分unix中,编译器只会记录libhfcal.so库的文件名,而不会包含路径名,也就是说如果不把hfcal库保存到标准目录(/usr/lib),程序就找不到它
-    一般解决方法是:把库目录添加到LD_LIBRARY_PATH中,并export它
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
-*/
-gcc elliptical.o -L ./ -lhfcal -o elliptical
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="实现文件共享"><a href="#实现文件共享" class="headerlink" title="实现文件共享"></a>实现文件共享</h1><pre><code>例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --enc]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[代码设计]]></title>
-    <link href="http://www.cxyteam.com/2016/09/09/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
-    <id>http://www.cxyteam.com/2016/09/09/代码设计/</id>
-    <published>2016-09-09T09:29:39.000Z</published>
-    <updated>2016-09-11T08:07:51.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="暂未找到合适的表述方法"><a href="#暂未找到合适的表述方法" class="headerlink" title="暂未找到合适的表述方法"></a>暂未找到合适的表述方法</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="暂未找到合适的表述方法"><a href="#暂未找到合适的表述方法" class="headerlink" title="暂未找到合适的表述方法"></a>暂未找到合适的表述方法</h1>]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git的使用]]></title>
-    <link href="http://www.cxyteam.com/2016/09/02/git%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://www.cxyteam.com/2016/09/02/git的使用/</id>
-    <published>2016-09-02T04:17:48.000Z</published>
-    <updated>2016-09-07T11:21:40.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="初始化一个git项目"><a href="#初始化一个git项目" class="headerlink" title="初始化一个git项目"></a>初始化一个git项目</h1><pre><code>git init
-</code></pre><h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><pre><code>git add filename
-</code></pre><h1 id="添加目录"><a href="#添加目录" class="headerlink" title="添加目录"></a>添加目录</h1><pre><code>git add .
-</code></pre><h1 id="只提交已提交过得文件-不添加新增文件-只添加修改的文件"><a href="#只提交已提交过得文件-不添加新增文件-只添加修改的文件" class="headerlink" title="只提交已提交过得文件(不添加新增文件,只添加修改的文件)"></a>只提交已提交过得文件(不添加新增文件,只添加修改的文件)</h1><pre><code>git add -u
-</code></pre><h1 id="查看当前工作区文件提交的状态"><a href="#查看当前工作区文件提交的状态" class="headerlink" title="查看当前工作区文件提交的状态"></a>查看当前工作区文件提交的状态</h1><pre><code>git status
-git status -s 查看简便信息
-</code></pre><h1 id="提交文件到本地"><a href="#提交文件到本地" class="headerlink" title="提交文件到本地"></a>提交文件到本地</h1><pre><code>git commit filename -m &apos;注释&apos;
-</code></pre><h1 id="删除本地git提交"><a href="#删除本地git提交" class="headerlink" title="删除本地git提交"></a>删除本地git提交</h1><pre><code>git rm --cached .
-</code></pre><h1 id="将文件推送到远程服务器"><a href="#将文件推送到远程服务器" class="headerlink" title="将文件推送到远程服务器"></a>将文件推送到远程服务器</h1><pre><code>git push
-</code></pre><h1 id="将文件从远程拉取回来"><a href="#将文件从远程拉取回来" class="headerlink" title="将文件从远程拉取回来"></a>将文件从远程拉取回来</h1><pre><code>git pull
-</code></pre><h1 id="添加忽略文件"><a href="#添加忽略文件" class="headerlink" title="添加忽略文件"></a>添加忽略文件</h1><pre><code>添加.gitignore到git项目目录
-编辑.gitignore,添加.idea/(此处idea为需要提交时候忽略的文件)
-</code></pre><h1 id="下载远程项目"><a href="#下载远程项目" class="headerlink" title="下载远程项目"></a>下载远程项目</h1><pre><code>git clone git_path
-</code></pre><h1 id="创建裸版本库"><a href="#创建裸版本库" class="headerlink" title="创建裸版本库"></a>创建裸版本库</h1><pre><code>git clone --bare project_name path
-</code></pre><h1 id="查看文件提交记录"><a href="#查看文件提交记录" class="headerlink" title="查看文件提交记录"></a>查看文件提交记录</h1><pre><code>git log filename
-</code></pre><h1 id="查看修改文件差异-只能比较工作区和暂存区信息"><a href="#查看修改文件差异-只能比较工作区和暂存区信息" class="headerlink" title="查看修改文件差异(只能比较工作区和暂存区信息)"></a>查看修改文件差异(只能比较工作区和暂存区信息)</h1><pre><code>git diff file_name
-git diff HEAD
-</code></pre><h1 id="查看提交详细记录"><a href="#查看提交详细记录" class="headerlink" title="查看提交详细记录"></a>查看提交详细记录</h1><pre><code>git show file_name
-</code></pre><h1 id="使用git移动修改文件-修改完之后-文件的日志记录都没了"><a href="#使用git移动修改文件-修改完之后-文件的日志记录都没了" class="headerlink" title="使用git移动修改文件(修改完之后,文件的日志记录都没了)"></a>使用git移动修改文件(修改完之后,文件的日志记录都没了)</h1><pre><code>git mv old_file_name new_file_name
-</code></pre><h1 id="从git中删除"><a href="#从git中删除" class="headerlink" title="从git中删除"></a>从git中删除</h1><pre><code>git rm file_name
-</code></pre><h1 id="删除非git管理文件-也就是没有add到git管理中的"><a href="#删除非git管理文件-也就是没有add到git管理中的" class="headerlink" title="删除非git管理文件(也就是没有add到git管理中的)"></a>删除非git管理文件(也就是没有add到git管理中的)</h1><pre><code>git clean
-</code></pre><h1 id="查看即将被删除的非git管理文件"><a href="#查看即将被删除的非git管理文件" class="headerlink" title="查看即将被删除的非git管理文件"></a>查看即将被删除的非git管理文件</h1><pre><code>git clean -n
-</code></pre><h1 id="删除非git管理文件-包含-gitignore中指定的文件"><a href="#删除非git管理文件-包含-gitignore中指定的文件" class="headerlink" title="删除非git管理文件,包含.gitignore中指定的文件"></a>删除非git管理文件,包含.gitignore中指定的文件</h1><pre><code>git clean -x
-</code></pre><h1 id="强制删除所有的git非管理文件-git-clean需要设置clean-requireForce"><a href="#强制删除所有的git非管理文件-git-clean需要设置clean-requireForce" class="headerlink" title="强制删除所有的git非管理文件(git clean需要设置clean.requireForce)"></a>强制删除所有的git非管理文件(git clean需要设置clean.requireForce)</h1><pre><code>git clean -f
-</code></pre><h1 id="还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源"><a href="#还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源" class="headerlink" title="还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)"></a>还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)</h1><pre><code>git checkout file_name
-</code></pre><h1 id="删除已提交过的文件-把状态从add修改回来-可以使用checkout操作"><a href="#删除已提交过的文件-把状态从add修改回来-可以使用checkout操作" class="headerlink" title="删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)"></a>删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)</h1><pre><code>git reset HEAD file_name
-</code></pre><h1 id="创建一个分支"><a href="#创建一个分支" class="headerlink" title="创建一个分支"></a>创建一个分支</h1><pre><code>git branch dirname
-</code></pre><h1 id="查看存在的分支"><a href="#查看存在的分支" class="headerlink" title="查看存在的分支"></a>查看存在的分支</h1><pre><code>git branch
-git branch -a 查看所有的分支
-</code></pre><h1 id="切换到分支"><a href="#切换到分支" class="headerlink" title="切换到分支"></a>切换到分支</h1><pre><code>git checkout branch_name
-</code></pre><h1 id="在某个版本上创建分支并求换"><a href="#在某个版本上创建分支并求换" class="headerlink" title="在某个版本上创建分支并求换"></a>在某个版本上创建分支并求换</h1><pre><code>git checkout commit_name -b branch_name
-</code></pre><h1 id="切换到主干"><a href="#切换到主干" class="headerlink" title="切换到主干"></a>切换到主干</h1><pre><code>git checkout master
-</code></pre><h1 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h1><pre><code>git merge branch_name
-</code></pre><h1 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h1><pre><code>git branch -d branch_name
-</code></pre><h1 id="强制删除分支"><a href="#强制删除分支" class="headerlink" title="强制删除分支"></a>强制删除分支</h1><pre><code>git branch -D branch_name
-</code></pre><h1 id="查看所有的远程的分支"><a href="#查看所有的远程的分支" class="headerlink" title="查看所有的远程的分支"></a>查看所有的远程的分支</h1><pre><code>git branch -r
-</code></pre><h1 id="重置提交-重置最近三次的提交"><a href="#重置提交-重置最近三次的提交" class="headerlink" title="重置提交(重置最近三次的提交)"></a>重置提交(重置最近三次的提交)</h1><pre><code>git reset --hard HEAD~3
-</code></pre><h1 id="在分支上执行rebase"><a href="#在分支上执行rebase" class="headerlink" title="在分支上执行rebase"></a>在分支上执行rebase</h1><pre><code>git checkout branch_name
-git rebase master
-</code></pre><h1 id="rebase之后修改冲突-再提交"><a href="#rebase之后修改冲突-再提交" class="headerlink" title="rebase之后修改冲突,再提交"></a>rebase之后修改冲突,再提交</h1><pre><code>git add conflict_file
-git rebase --continue
-</code></pre><h1 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h1><pre><code>git tag tag_name
-</code></pre><h1 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h1><pre><code>git tag
-</code></pre><h1 id="显示包含标签资料的历史记录"><a href="#显示包含标签资料的历史记录" class="headerlink" title="显示包含标签资料的历史记录"></a>显示包含标签资料的历史记录</h1><pre><code>git log --decorate
-</code></pre><h1 id="查看git提交的注释"><a href="#查看git提交的注释" class="headerlink" title="查看git提交的注释"></a>查看git提交的注释</h1><pre><code>git log
-</code></pre><h1 id="编辑tag注释"><a href="#编辑tag注释" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -a tag_name
-然后再文件中输入注释
-</code></pre><h1 id="编辑tag注释-1"><a href="#编辑tag注释-1" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -am &quot;注释&quot; tag_name
-</code></pre><h1 id="查看标签的提交记录"><a href="#查看标签的提交记录" class="headerlink" title="查看标签的提交记录"></a>查看标签的提交记录</h1><pre><code>git show tag
-</code></pre><h1 id="查看tag注释"><a href="#查看tag注释" class="headerlink" title="查看tag注释"></a>查看tag注释</h1><pre><code>git tag -n
-</code></pre><h1 id="删除tag"><a href="#删除tag" class="headerlink" title="删除tag"></a>删除tag</h1><pre><code>git tag -d tag_name
-</code></pre><h1 id="合并提交注释"><a href="#合并提交注释" class="headerlink" title="合并提交注释"></a>合并提交注释</h1><pre><code>git commit --amend
-进入编辑器,然后进行注释修改(使用git log进行提交注释查看)
-</code></pre><h1 id="取消上一次提交"><a href="#取消上一次提交" class="headerlink" title="取消上一次提交"></a>取消上一次提交</h1><pre><code>git revert HEAD
-</code></pre><h1 id="删除最近提交"><a href="#删除最近提交" class="headerlink" title="删除最近提交"></a>删除最近提交</h1><pre><code>git reset --hart HEAD~~
-</code></pre><h1 id="查看远程git地址"><a href="#查看远程git地址" class="headerlink" title="查看远程git地址"></a>查看远程git地址</h1><pre><code>git remote -v
-</code></pre><h1 id="查看git配置项"><a href="#查看git配置项" class="headerlink" title="查看git配置项"></a>查看git配置项</h1><pre><code>git config --list
-</code></pre><h1 id="编辑git配置"><a href="#编辑git配置" class="headerlink" title="编辑git配置"></a>编辑git配置</h1><pre><code>git config -e
-</code></pre><h1 id="保存本地工作进度"><a href="#保存本地工作进度" class="headerlink" title="保存本地工作进度"></a>保存本地工作进度</h1><pre><code>git stash
-</code></pre><h1 id="查看保存的快照"><a href="#查看保存的快照" class="headerlink" title="查看保存的快照"></a>查看保存的快照</h1><pre><code>git stash list
-</code></pre><h1 id="恢复stash中的内容到工作区"><a href="#恢复stash中的内容到工作区" class="headerlink" title="恢复stash中的内容到工作区"></a>恢复stash中的内容到工作区</h1><pre><code>git stash pop
-</code></pre><h1 id="恢复缓冲区内容"><a href="#恢复缓冲区内容" class="headerlink" title="恢复缓冲区内容"></a>恢复缓冲区内容</h1><pre><code>git stash apply stash_name
-</code></pre><h1 id="删除缓冲区中的内容"><a href="#删除缓冲区中的内容" class="headerlink" title="删除缓冲区中的内容"></a>删除缓冲区中的内容</h1><pre><code>git clear
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="初始化一个git项目"><a href="#初始化一个git项目" class="headerlink" title="初始化一个git项目"></a>初始化一个git项目</h1><pre><code>git init
-</code></pre><h1 id="]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言高级函数使用]]></title>
-    <link href="http://www.cxyteam.com/2016/08/15/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/"/>
-    <id>http://www.cxyteam.com/2016/08/15/C语言高级函数使用/</id>
-    <published>2016-08-15T00:17:17.000Z</published>
-    <updated>2016-09-11T08:49:52.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="函数的指针"><a href="#函数的指针" class="headerlink" title="函数的指针"></a>函数的指针</h1><pre><code>当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
-</code></pre><h1 id="创建函数指针"><a href="#创建函数指针" class="headerlink" title="创建函数指针"></a>创建函数指针</h1><pre><code>int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
-warp_fn = test;
-warp_fn(4);             #等同于调用test函数
-
-char** (*names_fn)(char*, int);                     #创建一个names_fn的变量用来保存test函数
-names_fn = test;
-char** results = name_fn(1972);
-</code></pre><h1 id="函数指针应用"><a href="#函数指针应用" class="headerlink" title="函数指针应用"></a>函数指针应用</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int NUM_ADS = 7;
-char *ADS[] = {
-    &quot;William:SBM GSON likes sport,TV,dining&quot;,
-    &quot;Matt:SWM NS likes art,movies,theather&quot;,
-    &quot;Luis:SLM ND likes books,theater,art&quot;,
-    &quot;MIKE:DWM DS likes truncks,sports and bieber&quot;,
-    &quot;Peter:SAM likes chess,working out and art&quot;,
-    &quot;Josh:SJM likes sports,movies and theater&quot;,
-    &quot;Jed:DBM likes theater,books and dining&quot;
-};
-/**
- * 都要定义哦
- */
-void find();
-int sports_no_bieber(char *s);
-int sports_or_workout(char *s);
-int ns_theater(char *s);
-
-int main()
-{
-    find(sports_no_bieber);
-    find(sports_or_workout);
-    find(ns_theater);
-    return 0;
-}
-
-/**
- * 注意find中传入的参数是函数的指针
- * char** 表示返回类型
- * *func 表示指针变量
- * char* 表示参数类型
- */
-void find(char** (*func)(char*))
-{
-    int i;
-    puts(&quot;Search results:&quot;);
-    puts(&quot;---------------------&quot;);
-
-    for(i=0;i&lt;NUM_ADS;i++) {
-        if (func(ADS[i])) {
-            printf(&quot;%s\n&quot;, ADS[i]);
-        }
-    }
-
-    puts(&quot;----------------&quot;);
-}
-
-int sports_no_bieber(char *s)
-{
-    return strstr(s, &quot;sports&quot;) &amp;&amp; !strstr(s, &quot;bieber&quot;);
-}
-
-int sports_or_workout(char *s)
-{
-    return strstr(&quot;s&quot;, &quot;sports&quot;) || strstr(s, &quot;working out&quot;);
-}
-
-int ns_theater(char *s)
-{
-    return strstr(s, &quot;NS&quot;) &amp;&amp; strstr(s, &quot;theater&quot;);
-}
-</code></pre><h1 id="qsort使用"><a href="#qsort使用" class="headerlink" title="qsort使用"></a>qsort使用</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-
-int compare_scores(const void * scores_a, const void * scores_b);
-
-typedef struct {
-    int width;
-    int height;
-} rectangle;
-
-int compare_areas(const void* a, const void* b);
-
-int compare_name(const void* a, const void* b);
-
-int main()
-{
-    int scores[] = {2,3,123,345,456,7,11,3,5,6};
-    qsort(scores, 10, sizeof(int), compare_scores);
-    int i;
-
-    for(i=0;i&lt;10;i++) {
-        printf(&quot;%i\n&quot;, scores[i]);
-    }
-
-    int areas[] = {2,3,345,123,1};
-    qsort(areas, 5, sizeof(int), compare_areas);
-    int x;
-
-    for(x=0;x&lt;5;x++) {
-        printf(&quot;%i\n&quot;, areas[x]);
-    }
-
-    char *names[] = {&quot;c&quot;, &quot;a&quot;,&quot;b&quot;};
-    qsort(names, 3, sizeof(char*), compare_name);
-    int z;
-
-    for(z=0;z&lt;3;z++) {
-        printf(&quot;%s\n&quot;, names[z]);
-    }
-
-    return 0;
-}
-
-/**
-    void指针可以保存任何类型数据的地址,但使用前必须把它转换成具体类型
-*/
-int compare_scores(const void * scores_a, const void * scores_b)
-{
-    /**
-        int * 把void指针转换成整形指针
-        *(int *)获取获取scores_a中的整形值
-    */
-    int a = *(int *)scores_a;
-    int b = *(int *)scores_b;
-
-    return b-a;
-}
-
-int compare_areas(const void *a, const void *b)
-{
-    /**
-        把指针转换成相应的类型
-    */
-    rectangle *ia = (rectangle*)a;
-    rectangle *ib = (rectangle*)b;
-    /**
-        矩形面积计算
-    */
-    int area_a = (ia-&gt;width * ia-&gt;height);
-    int area_b = (ia-&gt;width * ia-&gt;height);
-
-    return area_a-area_b;
-}
-
-int compare_name(const void* a, const void* b)
-{
-    /**
-        char** 代表的是指向字符指针的指针
-    */
-    char** sa = (char**)a;
-    char** sb = (char**)b;
-
-    /**
-        strcmp接收的是char*的值,而char**是指针地址
-    */
-    return strcmp(*sa, *sb);
-}
-</code></pre><h1 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h1><pre><code>void(*function_name[])(response)={function_a,function_b};
-void            声明返回类型
-*               声明函数指针
-function_name   变量名
-[]              表明是函数数组
-response        参数类型
-例子:
-    #include &lt;stdio.h&gt;
-
-    enum response_type {DUMP, SECOND_CHANCE, MARRIAGE};
-
-    typedef struct {
-        char* name;
-        enum response_type type;
-    }response;
-
-    void dump(response r);
-    void second_chance(response r);
-    void marriage(response r);
-
-    int main()
-    {
-        response ra[] = {
-            {&quot;test&quot;, DUMP},
-            {&quot;test2&quot;, SECOND_CHANCE},
-        };
-
-        /**
-            定义函数数组
-        */
-        void(*func_arr[])(response) = {dump, second_chance, marriage};
-
-        int i;
-        for (i=0;i&lt;2;i++) {
-            /**
-                使用函数数组定义的方法
-            */
-            (func_arr[ra[i].type])(ra[i]);
-
-            /**
-                受用switch的方法
-            */
-            switch(ra[i].type) {
-                case DUMP:
-                    dump(ra[i]);
-                break;
-                case SECOND_CHANCE:
-                    second_chance(ra[i]);
-                break;
-                default:
-                    marriage(ra[i]);
-                break;
+                print(x, &quot;:&quot;, y, &quot; &quot;)
             }
+
+            println()
         }
-
-        return 0;
-    }
-
-    void dump(response r)
-    {
-        printf(&quot;hello,i&apos;m dump, you are %s\n&quot;, r.name);
-    }
-
-    void second_chance(response r)
-    {
-        printf(&quot;hello,i&apos;m second_chance, you are %s\n&quot;, r.name);
-    }
-
-    void marriage(response r)
-    {
-        printf(&quot;hello,i&apos;m marriage, you are %s\n&quot;, r.name);
-    }
-</code></pre><h1 id="可变参数个数"><a href="#可变参数个数" class="headerlink" title="可变参数个数"></a>可变参数个数</h1><pre><code>在C标准库中有一组宏可以建立自己的可变参数函数,&lt;stdarg.h&gt;
-例子
-#include &lt;stdio.h&gt;
-#include &lt;stdarg.h&gt;
-
-void print_ints(int args, ...)
-{
-    /*
-        保存传给函数的其他参数
-    */
-    va_list ap;
-
-    /*
-        表示可变参数从哪开始
-    */
-    va_start(ap, args);
-    int i;
-    /*
-        循环遍历所有其他参数,args保存了参数的数目
-    */
-    for(i=0;i&lt;args;i++) {
-        printf(&quot;argument:%i\n&quot;, va_arg(ap, int));
-    }
-
-    va_end(ap);
-}
-
-int main()
-{
-    print_ints(3, 79, 101, 32);
 }
 </code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="函数的指针"><a href="#函数的指针" class="headerlink" title="函数的指针"></a>函数的指针</h1><pre><code>当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
-</code]]>
+    <![CDATA[<h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" titl]]>
     </summary>
     
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
     
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[C语言内存泄露检测Valgrind]]></title>
-    <link href="http://www.cxyteam.com/2016/08/11/C%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%A3%80%E6%B5%8BValgrind/"/>
-    <id>http://www.cxyteam.com/2016/08/11/C语言内存泄露检测Valgrind/</id>
-    <published>2016-08-11T01:05:15.000Z</published>
-    <updated>2016-08-12T00:41:15.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="valgrind使用场景"><a href="#valgrind使用场景" class="headerlink" title="valgrind使用场景"></a>valgrind使用场景</h1><pre><code>检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
-</code></pre><h1 id="valgrind工作原理"><a href="#valgrind工作原理" class="headerlink" title="valgrind工作原理"></a>valgrind工作原理</h1><pre><code>通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪段代码分配了哪段存储器,结束的时候,valgrind会汇报堆上有哪些数据,并告诉你这些数据由哪段代码创建
-</code></pre><h1 id="安装valgrind"><a href="#安装valgrind" class="headerlink" title="安装valgrind"></a>安装valgrind</h1><pre><code>curl -O http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2
-tar -xjvf valgrind-3.11.0.tar.bz2
-cd valgrind-3.11.0
-./configure &amp;&amp; make &amp;&amp; make install
-valgrind --version
-</code></pre><h1 id="使用valgrind"><a href="#使用valgrind" class="headerlink" title="使用valgrind"></a>使用valgrind</h1><pre><code>gcc -g test.c -o test (其中-g是告诉编译器要记录需编译代码的行号)
-valgrind --leak-check=full ./test
-</code></pre><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><pre><code>createByMalloc.c
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
+    <title><![CDATA[go学习笔记类型]]></title>
+    <link href="http://www.cxyteam.com/2017/02/20/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://www.cxyteam.com/2017/02/20/go学习笔记类型/</id>
+    <published>2017-02-20T11:33:27.000Z</published>
+    <updated>2017-03-01T12:06:18.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><pre><code>package main
 
-//结构定义函数体的外面多个函数才能共享
-typedef struct island {
-    char *name;
-    char *open;
-    char *close;
-    struct island *next;
-} island;
-
-
-void display(island *start);
-island* create(char *name);
-
-int main()
-{
-    char name[80];
-    fgets(name, 80, stdin);
-    island *i = create(name);
-
-    fgets(name, 80, stdin);
-    island *i1 = create(name);
-    i-&gt;next = i1;
-    display(i);
-    release(i);
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
 }
+</code></pre><h1 id="其他值不能当作bool值使用"><a href="#其他值不能当作bool值使用" class="headerlink" title="其他值不能当作bool值使用"></a>其他值不能当作bool值使用</h1><pre><code>package main
 
-island* create (char *name)
-{
-    island *i = malloc(sizeof(island));
-    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
-    i-&gt;name = strdup(name);
-    i-&gt;open = &quot;09:00&quot;;
-    i-&gt;close = &quot;17:00&quot;;
-    i-&gt;next = NULL;
-
-    return i;
-}
-
-
-void display(island *start) {
-    island *i = start;
-    for (;i!=NULL;i=i-&gt;next) {
-        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+func main() {
+    a := 100
+    if a {
+        printf(&quot;aaa&quot;)
     }
 }
+</code></pre><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h6 id="字符串是不可变值类型，内部用指针指向UTF-8字节数组"><a href="#字符串是不可变值类型，内部用指针指向UTF-8字节数组" class="headerlink" title="字符串是不可变值类型，内部用指针指向UTF-8字节数组"></a>字符串是不可变值类型，内部用指针指向UTF-8字节数组</h6><h6 id="默认值是控制符串””"><a href="#默认值是控制符串””" class="headerlink" title="默认值是控制符串””"></a>默认值是控制符串””</h6><h6 id="用索引号访问某字节，如s-i"><a href="#用索引号访问某字节，如s-i" class="headerlink" title="用索引号访问某字节，如s[i]"></a>用索引号访问某字节，如s[i]</h6><h6 id="不能用序号获取字节元素指针。-amp-s-i-非法"><a href="#不能用序号获取字节元素指针。-amp-s-i-非法" class="headerlink" title="不能用序号获取字节元素指针。&amp;s[i]非法"></a>不能用序号获取字节元素指针。&amp;s[i]非法</h6><h6 id="不可变类型，无法修改字节数组"><a href="#不可变类型，无法修改字节数组" class="headerlink" title="不可变类型，无法修改字节数组"></a>不可变类型，无法修改字节数组</h6><h6 id="字节数组尾部不包含NULL"><a href="#字节数组尾部不包含NULL" class="headerlink" title="字节数组尾部不包含NULL"></a>字节数组尾部不包含NULL</h6><h6 id="使用反引号定义不做转义处理的原始字符串，支持跨行"><a href="#使用反引号定义不做转义处理的原始字符串，支持跨行" class="headerlink" title="使用反引号定义不做转义处理的原始字符串，支持跨行"></a>使用反引号定义不做转义处理的原始字符串，支持跨行</h6><pre><code>package main
 
-gcc -g createByMalloc.c -o createByMalloc
-valgrind --leak-check=full ./createByMalloc
-</code></pre><p><img src="/img/c_code/list/valgrind.png" alt="Alt text" title="错误信息图片"></p>
-<pre><code>1.total heap usage: 520 allocs, 100 frees, 49,567 bytes allocated
-    表示520次存储器,100次被释放
-
-2.at 0x100007EA1: malloc (vg_replace_malloc.c:303)
-  by 0x100000D7A: create (createByMalloc.c:33)
-  by 0x100000CED: main (createByMalloc.c:23)
-    明确指出了可能出问题的行,查看代码可以发现是create的33行分配的堆上的存储器没有被释放,所以加上释放代码就好了
-
-正确例子:
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-
-//结构定义函数体的外面多个函数才能共享
-typedef struct island {
-    char *name;
-    char *open;
-    char *close;
-    struct island *next;
-} island;
-
-
-void display(island *start);
-void release1(island *start);
-void release(island *start);
-island* create(char *name);
-
-int main()
-{
-    char name[80];
-    fgets(name, 80, stdin);
-    island *i = create(name);
-
-    fgets(name, 80, stdin);
-    island *i1 = create(name);
-    i-&gt;next = i1;
-    display(i);
+func main() {
+    s := `abc
+    asdfa
+    c
+    `
+    println(s)  //结果就是字符串
 }
+</code></pre><h6 id="连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误"><a href="#连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误" class="headerlink" title="连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误"></a>连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误</h6><pre><code>package main
 
-island* create (char *name)
-{
-    island *i = malloc(sizeof(island));
-    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
-    i-&gt;name = strdup(name);
-    i-&gt;open = &quot;09:00&quot;;
-    i-&gt;close = &quot;17:00&quot;;
-    i-&gt;next = NULL;
+func main() {
+    s := &quot;hello！&quot; +
+        &quot;world!&quot;
 
-    return i;
+    println(s)  //输出结果为hello！world!
 }
+</code></pre><h6 id="支持用两个索引号返回子串"><a href="#支持用两个索引号返回子串" class="headerlink" title="支持用两个索引号返回子串"></a>支持用两个索引号返回子串</h6><pre><code>package main
 
+func main() {
+    s := &quot;hello,&quot; +
+        &quot;world!&quot;
 
-void display(island *start) {
-    island *i = start;
-    for (;i!=NULL;i=i-&gt;next) {
-        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    s1 := s[:5]
+    s2 := s[7:]
+    s3 := s[1:7]
+    println(s1, s2, s3) //hello orld! ello,w
+}
+</code></pre><h6 id="单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式"><a href="#单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式" class="headerlink" title="单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式"></a>单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式</h6><pre><code>package main
+
+func main() {
+    println(&quot;%T\n&quot;, &apos;a&apos;)
+    var c1, c2 rune = &apos;\u6211&apos;, &apos; &apos;
+    println(c1 == &apos; &apos;, string(c2) == &quot;\xe4\xbb\xac&quot;)
+}
+</code></pre><h6 id="要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"><a href="#要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组" class="headerlink" title="要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"></a>要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组</h6><pre><code>package main
+
+func main() {
+    s := &quot;abcd&quot;
+    bs := []byte(s)
+    bs[1] = &apos;B&apos;
+    println(string(bs)) //aBcd
+
+    u := &quot;电脑&quot;
+    us := []rune(u)
+    us[1] = &apos;话&apos;
+    println(string(us)) //电话
+}
+</code></pre><h6 id="用for循环遍历字符串时，也有byte和rune两种方式"><a href="#用for循环遍历字符串时，也有byte和rune两种方式" class="headerlink" title="用for循环遍历字符串时，也有byte和rune两种方式"></a>用for循环遍历字符串时，也有byte和rune两种方式</h6><pre><code>package main
+import &quot;fmt&quot;
+
+func main() {
+    s := &quot;abcd语言&quot;
+    for i := 0; i&lt;len(s); i++ {
+        fmt.Printf(&quot;%c&quot;, s[i])  //abcdè¯­è¨    byte方式
+    }
+
+    for _, r := range s {
+        fmt.Printf(&quot;%c&quot;, r)     //abcd语言    rune方式
     }
 }
+</code></pre><h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h6 id="默认值为nil，没有NULL常量"><a href="#默认值为nil，没有NULL常量" class="headerlink" title="默认值为nil，没有NULL常量"></a>默认值为nil，没有NULL常量</h6><h6 id="操作符”-amp-”取变量地址，”-”透过指针访问目标对象"><a href="#操作符”-amp-”取变量地址，”-”透过指针访问目标对象" class="headerlink" title="操作符”&amp;”取变量地址，”*”透过指针访问目标对象"></a>操作符”&amp;”取变量地址，”*”透过指针访问目标对象</h6><h6 id="不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员"><a href="#不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员" class="headerlink" title="不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员"></a>不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员</h6><pre><code>package main
+import &quot;fmt&quot;
 
-void release1(island *start) {
-    island *i = NULL;
-    for(i=start;i!=NULL;i=i-&gt;next) {
-        free(i-&gt;name);
-        free(i);
+func main() {
+    type data struct{   //申明一个data的数据结构
+        a int
+    }
+
+    var d = data{1234}  //赋值d的初始值为data类型
+
+    var p *data //申明p的类型
+    p = &amp;d
+
+    fmt.Printf(&quot;%p, %v\n&quot;, p, p.a)  //0xc42000a2a0, 1234
+}
+</code></pre><h6 id="不能用指针做加减法运算"><a href="#不能用指针做加减法运算" class="headerlink" title="不能用指针做加减法运算"></a>不能用指针做加减法运算</h6><pre><code>package main
+
+func main() {
+    x := 1234
+    p := &amp;x
+    p++ //报错
+}
+</code></pre><h6 id="可以在unsafe-Pointer和任意类型指针间进行转换"><a href="#可以在unsafe-Pointer和任意类型指针间进行转换" class="headerlink" title="可以在unsafe.Pointer和任意类型指针间进行转换"></a>可以在unsafe.Pointer和任意类型指针间进行转换</h6><pre><code>package main
+import (
+    &quot;fmt&quot;
+    &quot;unsafe&quot;
+)
+
+func main() {
+    x := 0x12345678
+    p := unsafe.Pointer(&amp;x)
+    n := (*[4]byte)(p)
+    for i := 0; i &lt; len(n); i++ {
+        fmt.Printf(&quot;%X &quot;, n[i]) //78 56 34 12
     }
 }
+</code></pre><h6 id="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上"><a href="#返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上" class="headerlink" title="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上"></a>返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上</h6><pre><code>package main
 
-void release(island *start) {
-    island *i = start;
-    island *next = NULL;
-    for(;i!=NULL;i=next) {
-        next = i-&gt;next;
-        free(i-&gt;name);
-        free(i);
-    }
+func main() {
+    println(test())
+}
+
+func test() *int {
+    x := 100
+    return &amp;x
+}
+</code></pre><h6 id="将Pointer转换成uintptr，可变相进行指针运算"><a href="#将Pointer转换成uintptr，可变相进行指针运算" class="headerlink" title="将Pointer转换成uintptr，可变相进行指针运算"></a>将Pointer转换成uintptr，可变相进行指针运算</h6><pre><code>package main
+
+import (
+        &quot;fmt&quot;
+        &quot;unsafe&quot;
+)
+
+func main() {
+    d := struct {
+        s string
+        x int
+    }{&quot;abc&quot;, 100}
+
+    //uintptr是goland的内置类型，是存储指针的整型，用于指针运算的；unsafe.Pointer是单纯的通用指针类型，用于转换不同类型指针，它不可以参与指针运算
+    p := uintptr(unsafe.Pointer(&amp;d))
+    //获取x的偏移量
+    p += unsafe.Offsetof(d.x)
+    //unsafe.Pointer指向一个Int类型的地址
+    p2 := unsafe.Pointer(p)
+    px := (*int)(p2)
+    *px = 200
+
+    fmt.Printf(&quot;%#v\n&quot;, d)  //struct { s string; x int }{s:&quot;abc&quot;, x:200}
+}
+</code></pre><h1 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h1><h6 id="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"><a href="#可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型" class="headerlink" title="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"></a>可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型</h6><h6 id="具有相同基类型的指针"><a href="#具有相同基类型的指针" class="headerlink" title="具有相同基类型的指针"></a>具有相同基类型的指针</h6><h6 id="具有相同元素类型和长度的array"><a href="#具有相同元素类型和长度的array" class="headerlink" title="具有相同元素类型和长度的array"></a>具有相同元素类型和长度的array</h6><h6 id="具有相同元素类型的slice"><a href="#具有相同元素类型的slice" class="headerlink" title="具有相同元素类型的slice"></a>具有相同元素类型的slice</h6><h6 id="具有相同键值类型的map"><a href="#具有相同键值类型的map" class="headerlink" title="具有相同键值类型的map"></a>具有相同键值类型的map</h6><h6 id="具有相同元素类型和传送方向的channel"><a href="#具有相同元素类型和传送方向的channel" class="headerlink" title="具有相同元素类型和传送方向的channel"></a>具有相同元素类型和传送方向的channel</h6><h6 id="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"><a href="#具有相同字段序列（字段名，类型，标签，顺序）的匿名struct" class="headerlink" title="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"></a>具有相同字段序列（字段名，类型，标签，顺序）的匿名struct</h6><h6 id="签名相同（参数和返回值，不包括参数名称）的function"><a href="#签名相同（参数和返回值，不包括参数名称）的function" class="headerlink" title="签名相同（参数和返回值，不包括参数名称）的function"></a>签名相同（参数和返回值，不包括参数名称）的function</h6><h6 id="方法集相同（方法名，方法签名相同和次序无关）的interface"><a href="#方法集相同（方法名，方法签名相同和次序无关）的interface" class="headerlink" title="方法集相同（方法名，方法签名相同和次序无关）的interface"></a>方法集相同（方法名，方法签名相同和次序无关）的interface</h6><h6 id="可用type在全局或函数内定义新类型"><a href="#可用type在全局或函数内定义新类型" class="headerlink" title="可用type在全局或函数内定义新类型"></a>可用type在全局或函数内定义新类型</h6><pre><code>package main
+
+func main() {
+    type bigint int64
+    var x bigint = 100
+    println(x)
+}
+</code></pre><h6 id="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"><a href="#新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换" class="headerlink" title="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"></a>新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    type bigint int64
+    x := 1234
+    var b bigint = bigint(x)
+    var b2 int64 = int64(b)
+
+    fmt.Println(b,b2)
 }
 </code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="valgrind使用场景"><a href="#valgrind使用场景" class="headerlink" title="valgrind使用场景"></a>valgrind使用场景</h1><pre><code>检查代码中在堆上分配存储器,但是没释放的位置]]>
+    <![CDATA[<h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><pre><code>package main
+
+func main() {
+    var b byte = 100
+    v]]>
     </summary>
     
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
     
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[C语言动态存储]]></title>
-    <link href="http://www.cxyteam.com/2016/08/10/C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8/"/>
-    <id>http://www.cxyteam.com/2016/08/10/C语言动态存储/</id>
-    <published>2016-08-10T00:12:39.000Z</published>
-    <updated>2016-08-11T00:52:09.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="动态数据存储的位置"><a href="#动态数据存储的位置" class="headerlink" title="动态数据存储的位置"></a>动态数据存储的位置</h1><pre><code>堆,它是程序中用来保存长期使用数据的地方
-</code></pre><h1 id="获取空间"><a href="#获取空间" class="headerlink" title="获取空间"></a>获取空间</h1><pre><code>使用malloc()函数进行申请
-</code></pre><h1 id="如何释放"><a href="#如何释放" class="headerlink" title="如何释放"></a>如何释放</h1><pre><code>使用free()函数进行释放
-</code></pre><h1 id="使用malloc"><a href="#使用malloc" class="headerlink" title="使用malloc"></a>使用malloc</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
+    <title><![CDATA[go学习笔记枚举]]></title>
+    <link href="http://www.cxyteam.com/2017/02/20/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%9E%9A%E4%B8%BE/"/>
+    <id>http://www.cxyteam.com/2017/02/20/go学习笔记枚举/</id>
+    <published>2017-02-20T11:32:10.000Z</published>
+    <updated>2017-03-01T12:06:07.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h6 id="关键字iota定义常量数组中从0开始安航基数的自增枚举值"><a href="#关键字iota定义常量数组中从0开始安航基数的自增枚举值" class="headerlink" title="关键字iota定义常量数组中从0开始安航基数的自增枚举值"></a>关键字iota定义常量数组中从0开始安航基数的自增枚举值</h6><pre><code>package main
 
-//结构定义函数体的外面多个函数才能共享
-typedef struct island {
-    char *name;
-    char *open;
-    char *close;
-    struct island *next;
-} island;
-void display(island *start);
-void release(island *start);
-island* create();
+func main() {
+    const (
+        a = iota
+        b
+        c
+        d
+    )
 
-int main()
-{
-    char name[80];
-    fgets(name, 80, stdin);
-    island *i = create(name);
-
-    fgets(name, 80, stdin);
-    island *i1 = create(name);
-    i-&gt;next = i1;
-    display(i);
-    release(i);
+    println(a,b,c,d)    //0 1 2 3
 }
+</code></pre><h6 id="同一个常量组中可以提供多个iota，它们各自增长"><a href="#同一个常量组中可以提供多个iota，它们各自增长" class="headerlink" title="同一个常量组中可以提供多个iota，它们各自增长"></a>同一个常量组中可以提供多个iota，它们各自增长</h6><pre><code>package main
 
-island* create (char *name)
-{
-    island *i = malloc(sizeof(island));
-    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
-    i-&gt;name = strdup(name);
-    i-&gt;open = &quot;09:00&quot;;
-    i-&gt;close = &quot;17:00&quot;;
-    i-&gt;next = NULL;
+func main() {
+    const (
+        a,b = iota, iota
+        c,d
+        e,f
+    )
 
-    return i;
+    println(c,d)    //1 1
 }
+</code></pre><h6 id="如果iota自增被打断，须显示恢复"><a href="#如果iota自增被打断，须显示恢复" class="headerlink" title="如果iota自增被打断，须显示恢复"></a>如果iota自增被打断，须显示恢复</h6><pre><code>package main
 
+func main() {
+    const (
+        a = iota
+        b = &quot;a&quot;
+        c = 100
+        d = iota
+        e
+    )
 
-void display(island *start) {
-    island *i = start;
-    for (;i!=NULL;i=i-&gt;next) {
-        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
-    }
+    println(d, e)   //3 4 常量值d进行了显示恢复iota的值，计算的时候算上了b,c两行
 }
+</code></pre><h6 id="可通过自定义类型来限制枚举类型限制"><a href="#可通过自定义类型来限制枚举类型限制" class="headerlink" title="可通过自定义类型来限制枚举类型限制"></a>可通过自定义类型来限制枚举类型限制</h6><pre><code>package main
 
-void release(island *start) {
-    island *i = NULL;
-    island *next = NULL;
+type test int   //声明一个自定义类型
 
-    for(;i!=NULL;i=next) {
-        next = i-&gt;next;
-        free(i-&gt;name);
-        free(i);
-    }
+const (
+    black test = iota   //注意black需要制定一个test类型
+    red
+    blue
+)
+
+func demo(c test) {}    //函数指定传入test类型
+
+func main() {
+    x := red
+    demo(x)
+    x := 1
+    demo(x)         //报错，此处的x类型已经变成了int类型
 }
-</code></pre><h1 id="为什么island在堆上申请了内存-name还需要在堆上申请内存"><a href="#为什么island在堆上申请了内存-name还需要在堆上申请内存" class="headerlink" title="为什么island在堆上申请了内存,name还需要在堆上申请内存?"></a>为什么island在堆上申请了内存,name还需要在堆上申请内存?</h1><pre><code>因为结构只是把不同类型的数据写在一起,封装成一个大的数据类型,它不是创建了一个类型把所有数据都存储在它里面
-</code></pre><h1 id="使用release的时候需要释放那些堆上的内存"><a href="#使用release的时候需要释放那些堆上的内存" class="headerlink" title="使用release的时候需要释放那些堆上的内存?"></a>使用release的时候需要释放那些堆上的内存?</h1><pre><code>因为name,和island在堆上申请了内存,所以只要释放他们的内存就好了,但是需要注意的是先释放name的内存,不然先释放了island就找不到name了
 </code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="动态数据存储的位置"><a href="#动态数据存储的位置" class="headerlink" title="动态数据存储的位置"></a>动态数据存储的位置</h1><pre><code>堆,它是程序中用来保存长期使用数据的地方
-</code></pre>]]>
+    <![CDATA[<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h6 id="关键字iota定义常量数组中从0开始安航基数的自增枚举值"><a href="#关键字iota定义常量数组中从0开始安航基数的自增]]>
     </summary>
     
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
     
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[C语言链表]]></title>
-    <link href="http://www.cxyteam.com/2016/08/09/C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/"/>
-    <id>http://www.cxyteam.com/2016/08/09/C语言链表/</id>
-    <published>2016-08-08T23:57:33.000Z</published>
-    <updated>2016-08-10T00:13:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><pre><code>是一种抽象的数据结构
-</code></pre><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><pre><code>为了保存可变数量的数据,需要一样比数组更灵活的东西
-</code></pre><h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><pre><code>保存了一条数据和链向另一条数据的链接
-</code></pre><h1 id="创建链表"><a href="#创建链表" class="headerlink" title="创建链表"></a>创建链表</h1><pre><code>#include &lt;stdio.h&gt;
-//注意要先定义函数在main函数的外部
-void display();
-//结构定义函数体的外面多个函数才能共享
-typedef struct island {
-    char *name;
-    char *open;
-    char *close;
-    struct island *next;
-} island;
-
-int main()
-{
-    island amity = {&quot;Amity&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
-    island craggy = {&quot;craggy&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
-    island shutter = {&quot;shutter&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
-
-    amity.next = &amp;craggy;
-    craggy.next = &amp;shutter;
-
-    display(&amp;amity);
-    return 0;
-}
-
-void display(island *start) {
-    island *i = start;
-    for (;i!=NULL;i=i-&gt;next) {
-        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
-    }
-}
-</code></pre><h1 id="递归结构"><a href="#递归结构" class="headerlink" title="递归结构"></a>递归结构</h1><pre><code>如果一个结构中包含一个链向同种结构的链接,那么这个结构就被称为递归结构
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><pre><code>是一种抽象的数据结构
-</code></pre><h1 id="使用场景"><a href="#使用场景" class="h]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
     
   </entry>
   

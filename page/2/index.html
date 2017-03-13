@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/04/redis源码-目录结构/" itemprop="url">
-                  redis源码-目录结构
+                <a class="post-title-link" href="/2017/02/28/go学习笔记方法定义/" itemprop="url">
+                  go学习笔记方法定义
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-04T09:15:12+08:00" content="2016-11-04">
-              2016-11-04
+            <time itemprop="dateCreated" datetime="2017-02-28T20:30:49+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -265,18 +265,11 @@
       
         
           
-          目录结构|
-|--deps
-|
-|-- src
-   -- adlist.c          双链表结构,用于定义list
-   -- ae.c              用于事件的处理
-   -- ae_epoll.c        处理epoll事件
-   -- ae_evport.c    
+          定义方法总是绑定对象实例，并隐式将实例作为第一实参只能为当前包内命名类型定义方法参数receiver可任意命名。如方法中未曾使用，可省略参数名参数receiver类型可以使T（值复制）或*T（引用或指针复制）。基类型T不能是接口或指针不支持方法重载，receiver只是参数签名的组成部分可用实例va
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/04/redis源码-目录结构/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记方法定义/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -319,8 +312,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/02/gdb调试redis/" itemprop="url">
-                  gdb调试redis
+                <a class="post-title-link" href="/2017/02/28/go学习笔记面向对象/" itemprop="url">
+                  go学习笔记面向对象
                 </a>
               
             
@@ -333,8 +326,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-02T10:46:04+08:00" content="2016-11-02">
-              2016-11-02
+            <time itemprop="dateCreated" datetime="2017-02-28T20:13:38+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -347,8 +340,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -380,126 +373,22 @@
       
         
           
-          #启动redis redis-server连接redis redis-cli获取进程id redis-cli info | grep process_idgdb调试进程id sudo gdb -p pidgdb查询代码 listgdb 设置断点 break main
+          定义面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等package main
 
-          
+import &quot;fmt&quot;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/02/gdb调试redis/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+type User struct {
+    id int
+    name string
+}
 
 
-    
-      
-
+type Manager struct {
   
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">
-                  gdb调试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T07:44:26+08:00" content="2016-10-26">
-              2016-10-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          调试文件内容gdb.c#include &lt;stdio.h&gt;
-
-int add_range(int low, int high)
-{
-        int i, sum;
-        for (i = low; i &lt;= high; i++)
-                s
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/gdb调试/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记面向对象/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -542,8 +431,8 @@ int add_range(int low, int high)
             
               
                 
-                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">
-                  mac安装gdb
+                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">
+                  go学习笔记struct
                 </a>
               
             
@@ -556,103 +445,8 @@ int add_range(int low, int high)
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T17:32:25+08:00" content="2016-10-21">
-              2016-10-21
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Mac安装GDB安装GDBbrew install gdb
-使用gdb进行调试gbd.c文件中的内容#include &lt;stdio.h&gt;
-
-int add_range(int low, int high)
-{
-        int i, sum;
-        for (i = lo
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/mac安装gdb/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">
-                  redis源码阅读-准备工作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T17:29:44+08:00" content="2016-10-21">
-              2016-10-21
+            <time itemprop="dateCreated" datetime="2017-02-28T17:07:11+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -665,8 +459,8 @@ int add_range(int low, int high)
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -698,11 +492,246 @@ int add_range(int low, int high)
       
         
           
-          编辑器调试器
-          
+          定义值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员package main
+
+import &quot;fmt&quot;
+
+type Node struct {
+    _       int
+    id      int
+    data    *byte
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/redis源码阅读-准备工作/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记struct/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">
+                  go学习笔记map
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T16:20:07+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          定义引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[int]struct{
+        name string
+        age int
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记map/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记copy/" itemprop="url">
+                  go学习笔记copy
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T16:09:06+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          定义函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记copy/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -729,7 +758,7 @@ int add_range(int low, int high)
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -770,7 +799,7 @@ int add_range(int low, int high)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -778,7 +807,7 @@ int add_range(int low, int high)
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -787,7 +816,7 @@ int add_range(int low, int high)
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">
-                  cut的使用
+                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
+                  linux目录结构
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T10:48:06+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
+              2016-03-13
             </time>
           </span>
 
@@ -265,15 +265,19 @@
       
         
           
-          cut使用案例1.按字节切割
-tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
-
-2.指定分隔符切割
-tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
+          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/cut的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +320,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">
-                  awk的使用
+                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
+                  linux系统优化
                 </a>
               
             
@@ -330,8 +334,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:42:03+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
+              2016-03-13
             </time>
           </span>
 
@@ -377,14 +381,13 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          awk使用案例1.以每一行为输入，指定分隔符，输出指定域
-    tail -n 10 test.txt | awk -F &apos; &apos;  &apos;{print $1&quot;,\t&quot;$2}&apos;（以空格为分隔符，输出第一个域与第二个域并以,和tab连接）
-
-2.
+          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
+调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
+    net.ipv4.tcp_fin_timeout=2    
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/awk的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -427,8 +430,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">
-                  sed的使用
+                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">
+                  ssh配置修改
                 </a>
               
             
@@ -441,8 +444,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:41:56+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-03-09T22:52:57+08:00" content="2016-03-09">
+              2016-03-09
             </time>
           </span>
 
@@ -488,14 +491,14 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          sed使用场景1.获取指定行数
-sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
-sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
-sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
+          调试ssh -v vagrant@172.16.17.11
+备份cp /etc/ssh/sshd_config /etc/ssh/sshd_config
+sshd_config修改端口(端口范围:0-65535)Port 2231
+不允许root用户通过ssh登录PermitRootLogin no
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/09/ssh配置修改/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -538,8 +541,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">
-                  shell常识
+                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">
+                  替换yum源
                 </a>
               
             
@@ -552,8 +555,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T09:53:00+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-03-09T22:07:54+08:00" content="2016-03-09">
+              2016-03-09
             </time>
           </span>
 
@@ -599,17 +602,19 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
       
         
           
-          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
+          设置yum源为163的镜像原# 进入yum源目录
+    cd /etc/yum.repos.d
 
-环境
+# 下载国内yum源
+    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
+
+# 备份之前的yum源
+ mv
+cp Cent
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+            <a class="btn" href="/2016/03/09/替换yum源/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -652,8 +657,8 @@ echo $PATH（查看环境变量）
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">
-                  获取终端输出
+                <a class="post-title-link" href="/2016/03/08/linux系统设备只是介绍/" itemprop="url">
+                  linux系统设备只是介绍
                 </a>
               
             
@@ -666,8 +671,8 @@ echo $PATH（查看环境变量）
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T00:04:53+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-03-08T21:15:36+08:00" content="2016-03-08">
+              2016-03-08
             </time>
           </span>
 
@@ -713,16 +718,14 @@ echo $PATH（查看环境变量）
       
         
           
-          获取终端输出两种方式
-方法一：  who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）
-
-方法二：  cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输
+          磁盘分区# 磁盘在使用前先要进行分区
+# 磁盘主要分为:主分区,拓展分区,逻辑分区
+# 一块硬盘最多可有4个主分区,其中一个主分区的位置可以用一个拓展分区代替,且一块硬盘只能有一个扩展分区3p+e(primary+ext)
+# 扩展分区不能用,必须在扩展分区上划分多个逻辑分区,然后格式化(创建文件系
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/获取终端输出/#more" rel="contents">
+            <a class="btn" href="/2016/03/08/linux系统设备只是介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +752,7 @@ echo $PATH（查看环境变量）
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -790,7 +793,7 @@ echo $PATH（查看环境变量）
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -798,7 +801,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -807,7 +810,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

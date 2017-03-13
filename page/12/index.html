@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">
-                  linux文件类型及属性
+                <a class="post-title-link" href="/2016/07/12/arp/" itemprop="url">
+                  arp
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T22:44:23+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-07-12T00:36:04+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -265,16 +265,15 @@
       
         
           
-          文件含义ls -lhi /data
-1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
-
-1966317         表示inode索引节点编号
-drwxrwxrwx      文件类型及权限
-2               硬链接
+          ARP协议(地址解析协议)使用ARP协议可实现通过IP地址获得对应主机的物理地址
+ARP缓存表每台安装有TCP/IP协议的电脑都有一个ARP缓存表,表里的IP地址和MAC地址是一一对应的
+eg:
+    查看          ARP -a
+    ping         ping 192.168
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
+            <a class="btn" href="/2016/07/12/arp/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -317,8 +316,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
-                  linux目录结构
+                <a class="post-title-link" href="/2016/07/05/fast-cgi简单介绍及工作原理/" itemprop="url">
+                  fast-cgi简单介绍及工作原理
                 </a>
               
             
@@ -331,8 +330,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-07-05T23:36:04+08:00" content="2016-07-05">
+              2016-07-05
             </time>
           </span>
 
@@ -345,8 +344,8 @@ drwxrwxrwx      文件类型及权限
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -378,19 +377,13 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
-应用程序/usr/bin
-数据文件/usr/share
-用户程序,及数据,帮助文件等目录/usr
-设备目录/dev/
-配置文件/etc/
-启动命令/etc/init.d
-/存放系统相关的程序
-/
+          CGI(Common Getway Interface)HTTP服务器与后端服务器或其他机器上的程序进行通信的一种工具,CGI程序必须运行在网络服务器上
+缺点:性能较差(每次HTTP服务器遇到动态程序都需要重新启动脚本解析器来执行解析,然后返回结果给HTTP服务器),安全性能也表较差
+FastCGI
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
+            <a class="btn" href="/2016/07/05/fast-cgi简单介绍及工作原理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -433,8 +426,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
-                  linux系统优化
+                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">
+                  php.ini基本参数设置
                 </a>
               
             
@@ -447,8 +440,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-07-05T23:03:14+08:00" content="2016-07-05">
+              2016-07-05
             </time>
           </span>
 
@@ -461,8 +454,8 @@ drwxrwxrwx      文件类型及权限
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -494,13 +487,14 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
-调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
-    net.ipv4.tcp_fin_timeout=2    
+          开启安全模式(阻止php调用部分函数,比如system())safe_mode = On
+禁用函数disable_functions=system,exec,shell_exec
+关闭php版本信息在header信息中泄露expose_php = Off
+关闭注册全局变量register_globa
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
+            <a class="btn" href="/2016/07/05/php-ini基本参数设置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -543,8 +537,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">
-                  ssh配置修改
+                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">
+                  如何防盗链
                 </a>
               
             
@@ -557,8 +551,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:52:57+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-07-01T01:06:42+08:00" content="2016-07-01">
+              2016-07-01
             </time>
           </span>
 
@@ -604,14 +598,15 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          调试ssh -v vagrant@172.16.17.11
-备份cp /etc/ssh/sshd_config /etc/ssh/sshd_config
-sshd_config修改端口(端口范围:0-65535)Port 2231
-不允许root用户通过ssh登录PermitRootLogin no
+          资源盗链某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
+
+解决办法:
+    1.图片,视频打水印,logo
+    2.防火墙控制,根据ip控
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/ssh配置修改/#more" rel="contents">
+            <a class="btn" href="/2016/07/01/如何防盗链/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -654,8 +649,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">
-                  替换yum源
+                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">
+                  apache常用的prefork和worker模式
                 </a>
               
             
@@ -668,8 +663,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:07:54+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-07-01T00:33:59+08:00" content="2016-07-01">
+              2016-07-01
             </time>
           </span>
 
@@ -715,19 +710,15 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
       
         
           
-          设置yum源为163的镜像原# 进入yum源目录
-    cd /etc/yum.repos.d
+          prefork模式(实现fork好子进程,等待请求)使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
 
-# 下载国内yum源
-    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
+工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
 
-# 备份之前的yum源
- mv
-cp Cent
+优点:效率高,稳定
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/替换yum源/#more" rel="contents">
+            <a class="btn" href="/2016/07/01/apache常用的prefork和worker模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -754,7 +745,7 @@ cp Cent
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -795,7 +786,7 @@ cp Cent
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -803,7 +794,7 @@ cp Cent
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -812,7 +803,7 @@ cp Cent
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

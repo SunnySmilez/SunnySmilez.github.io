@@ -1,0 +1,938 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="GO," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="类型转换package main
+
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
+}
+其他值不能当作bool值使用package main
+
+func main() {
+    a := 100
+    if a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go学习笔记类型">
+<meta property="og:url" content="http://www.cxyteam.com/2017/02/20/go学习笔记类型/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="类型转换package main
+
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
+}
+其他值不能当作bool值使用package main
+
+func main() {
+    a := 100
+    if a">
+<meta property="og:updated_time" content="2017-03-01T12:06:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go学习笔记类型">
+<meta name="twitter:description" content="类型转换package main
+
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
+}
+其他值不能当作bool值使用package main
+
+func main() {
+    a := 100
+    if a">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> go学习笔记类型 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                go学习笔记类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-20T19:33:27+08:00" content="2017-02-20">
+              2017-02-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><pre><code>package main
+
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
+}
+</code></pre><h1 id="其他值不能当作bool值使用"><a href="#其他值不能当作bool值使用" class="headerlink" title="其他值不能当作bool值使用"></a>其他值不能当作bool值使用</h1><pre><code>package main
+
+func main() {
+    a := 100
+    if a {
+        printf(&quot;aaa&quot;)
+    }
+}
+</code></pre><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h6 id="字符串是不可变值类型，内部用指针指向UTF-8字节数组"><a href="#字符串是不可变值类型，内部用指针指向UTF-8字节数组" class="headerlink" title="字符串是不可变值类型，内部用指针指向UTF-8字节数组"></a>字符串是不可变值类型，内部用指针指向UTF-8字节数组</h6><h6 id="默认值是控制符串””"><a href="#默认值是控制符串””" class="headerlink" title="默认值是控制符串””"></a>默认值是控制符串””</h6><h6 id="用索引号访问某字节，如s-i"><a href="#用索引号访问某字节，如s-i" class="headerlink" title="用索引号访问某字节，如s[i]"></a>用索引号访问某字节，如s[i]</h6><h6 id="不能用序号获取字节元素指针。-amp-s-i-非法"><a href="#不能用序号获取字节元素指针。-amp-s-i-非法" class="headerlink" title="不能用序号获取字节元素指针。&amp;s[i]非法"></a>不能用序号获取字节元素指针。&amp;s[i]非法</h6><h6 id="不可变类型，无法修改字节数组"><a href="#不可变类型，无法修改字节数组" class="headerlink" title="不可变类型，无法修改字节数组"></a>不可变类型，无法修改字节数组</h6><h6 id="字节数组尾部不包含NULL"><a href="#字节数组尾部不包含NULL" class="headerlink" title="字节数组尾部不包含NULL"></a>字节数组尾部不包含NULL</h6><h6 id="使用反引号定义不做转义处理的原始字符串，支持跨行"><a href="#使用反引号定义不做转义处理的原始字符串，支持跨行" class="headerlink" title="使用反引号定义不做转义处理的原始字符串，支持跨行"></a>使用反引号定义不做转义处理的原始字符串，支持跨行</h6><pre><code>package main
+
+func main() {
+    s := `abc
+    asdfa
+    c
+    `
+    println(s)  //结果就是字符串
+}
+</code></pre><h6 id="连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误"><a href="#连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误" class="headerlink" title="连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误"></a>连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误</h6><pre><code>package main
+
+func main() {
+    s := &quot;hello！&quot; +
+        &quot;world!&quot;
+
+    println(s)  //输出结果为hello！world!
+}
+</code></pre><h6 id="支持用两个索引号返回子串"><a href="#支持用两个索引号返回子串" class="headerlink" title="支持用两个索引号返回子串"></a>支持用两个索引号返回子串</h6><pre><code>package main
+
+func main() {
+    s := &quot;hello,&quot; +
+        &quot;world!&quot;
+
+    s1 := s[:5]
+    s2 := s[7:]
+    s3 := s[1:7]
+    println(s1, s2, s3) //hello orld! ello,w
+}
+</code></pre><h6 id="单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式"><a href="#单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式" class="headerlink" title="单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式"></a>单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式</h6><pre><code>package main
+
+func main() {
+    println(&quot;%T\n&quot;, &apos;a&apos;)
+    var c1, c2 rune = &apos;\u6211&apos;, &apos; &apos;
+    println(c1 == &apos; &apos;, string(c2) == &quot;\xe4\xbb\xac&quot;)
+}
+</code></pre><h6 id="要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"><a href="#要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组" class="headerlink" title="要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"></a>要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组</h6><pre><code>package main
+
+func main() {
+    s := &quot;abcd&quot;
+    bs := []byte(s)
+    bs[1] = &apos;B&apos;
+    println(string(bs)) //aBcd
+
+    u := &quot;电脑&quot;
+    us := []rune(u)
+    us[1] = &apos;话&apos;
+    println(string(us)) //电话
+}
+</code></pre><h6 id="用for循环遍历字符串时，也有byte和rune两种方式"><a href="#用for循环遍历字符串时，也有byte和rune两种方式" class="headerlink" title="用for循环遍历字符串时，也有byte和rune两种方式"></a>用for循环遍历字符串时，也有byte和rune两种方式</h6><pre><code>package main
+import &quot;fmt&quot;
+
+func main() {
+    s := &quot;abcd语言&quot;
+    for i := 0; i&lt;len(s); i++ {
+        fmt.Printf(&quot;%c&quot;, s[i])  //abcdè¯­è¨    byte方式
+    }
+
+    for _, r := range s {
+        fmt.Printf(&quot;%c&quot;, r)     //abcd语言    rune方式
+    }
+}
+</code></pre><h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h6 id="默认值为nil，没有NULL常量"><a href="#默认值为nil，没有NULL常量" class="headerlink" title="默认值为nil，没有NULL常量"></a>默认值为nil，没有NULL常量</h6><h6 id="操作符”-amp-”取变量地址，”-”透过指针访问目标对象"><a href="#操作符”-amp-”取变量地址，”-”透过指针访问目标对象" class="headerlink" title="操作符”&amp;”取变量地址，”*”透过指针访问目标对象"></a>操作符”&amp;”取变量地址，”*”透过指针访问目标对象</h6><h6 id="不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员"><a href="#不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员" class="headerlink" title="不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员"></a>不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员</h6><pre><code>package main
+import &quot;fmt&quot;
+
+func main() {
+    type data struct{   //申明一个data的数据结构
+        a int
+    }
+
+    var d = data{1234}  //赋值d的初始值为data类型
+
+    var p *data //申明p的类型
+    p = &amp;d
+
+    fmt.Printf(&quot;%p, %v\n&quot;, p, p.a)  //0xc42000a2a0, 1234
+}
+</code></pre><h6 id="不能用指针做加减法运算"><a href="#不能用指针做加减法运算" class="headerlink" title="不能用指针做加减法运算"></a>不能用指针做加减法运算</h6><pre><code>package main
+
+func main() {
+    x := 1234
+    p := &amp;x
+    p++ //报错
+}
+</code></pre><h6 id="可以在unsafe-Pointer和任意类型指针间进行转换"><a href="#可以在unsafe-Pointer和任意类型指针间进行转换" class="headerlink" title="可以在unsafe.Pointer和任意类型指针间进行转换"></a>可以在unsafe.Pointer和任意类型指针间进行转换</h6><pre><code>package main
+import (
+    &quot;fmt&quot;
+    &quot;unsafe&quot;
+)
+
+func main() {
+    x := 0x12345678
+    p := unsafe.Pointer(&amp;x)
+    n := (*[4]byte)(p)
+    for i := 0; i &lt; len(n); i++ {
+        fmt.Printf(&quot;%X &quot;, n[i]) //78 56 34 12
+    }
+}
+</code></pre><h6 id="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上"><a href="#返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上" class="headerlink" title="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上"></a>返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上</h6><pre><code>package main
+
+func main() {
+    println(test())
+}
+
+func test() *int {
+    x := 100
+    return &amp;x
+}
+</code></pre><h6 id="将Pointer转换成uintptr，可变相进行指针运算"><a href="#将Pointer转换成uintptr，可变相进行指针运算" class="headerlink" title="将Pointer转换成uintptr，可变相进行指针运算"></a>将Pointer转换成uintptr，可变相进行指针运算</h6><pre><code>package main
+
+import (
+        &quot;fmt&quot;
+        &quot;unsafe&quot;
+)
+
+func main() {
+    d := struct {
+        s string
+        x int
+    }{&quot;abc&quot;, 100}
+
+    //uintptr是goland的内置类型，是存储指针的整型，用于指针运算的；unsafe.Pointer是单纯的通用指针类型，用于转换不同类型指针，它不可以参与指针运算
+    p := uintptr(unsafe.Pointer(&amp;d))
+    //获取x的偏移量
+    p += unsafe.Offsetof(d.x)
+    //unsafe.Pointer指向一个Int类型的地址
+    p2 := unsafe.Pointer(p)
+    px := (*int)(p2)
+    *px = 200
+
+    fmt.Printf(&quot;%#v\n&quot;, d)  //struct { s string; x int }{s:&quot;abc&quot;, x:200}
+}
+</code></pre><h1 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h1><h6 id="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"><a href="#可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型" class="headerlink" title="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"></a>可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型</h6><h6 id="具有相同基类型的指针"><a href="#具有相同基类型的指针" class="headerlink" title="具有相同基类型的指针"></a>具有相同基类型的指针</h6><h6 id="具有相同元素类型和长度的array"><a href="#具有相同元素类型和长度的array" class="headerlink" title="具有相同元素类型和长度的array"></a>具有相同元素类型和长度的array</h6><h6 id="具有相同元素类型的slice"><a href="#具有相同元素类型的slice" class="headerlink" title="具有相同元素类型的slice"></a>具有相同元素类型的slice</h6><h6 id="具有相同键值类型的map"><a href="#具有相同键值类型的map" class="headerlink" title="具有相同键值类型的map"></a>具有相同键值类型的map</h6><h6 id="具有相同元素类型和传送方向的channel"><a href="#具有相同元素类型和传送方向的channel" class="headerlink" title="具有相同元素类型和传送方向的channel"></a>具有相同元素类型和传送方向的channel</h6><h6 id="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"><a href="#具有相同字段序列（字段名，类型，标签，顺序）的匿名struct" class="headerlink" title="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"></a>具有相同字段序列（字段名，类型，标签，顺序）的匿名struct</h6><h6 id="签名相同（参数和返回值，不包括参数名称）的function"><a href="#签名相同（参数和返回值，不包括参数名称）的function" class="headerlink" title="签名相同（参数和返回值，不包括参数名称）的function"></a>签名相同（参数和返回值，不包括参数名称）的function</h6><h6 id="方法集相同（方法名，方法签名相同和次序无关）的interface"><a href="#方法集相同（方法名，方法签名相同和次序无关）的interface" class="headerlink" title="方法集相同（方法名，方法签名相同和次序无关）的interface"></a>方法集相同（方法名，方法签名相同和次序无关）的interface</h6><h6 id="可用type在全局或函数内定义新类型"><a href="#可用type在全局或函数内定义新类型" class="headerlink" title="可用type在全局或函数内定义新类型"></a>可用type在全局或函数内定义新类型</h6><pre><code>package main
+
+func main() {
+    type bigint int64
+    var x bigint = 100
+    println(x)
+}
+</code></pre><h6 id="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"><a href="#新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换" class="headerlink" title="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"></a>新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    type bigint int64
+    x := 1234
+    var b bigint = bigint(x)
+    var b2 int64 = int64(b)
+
+    fmt.Println(b,b2)
+}
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GO/" rel="tag">#GO</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/20/go学习笔记枚举/" rel="next" title="go学习笔记枚举">
+                <i class="fa fa-chevron-left"></i> go学习笔记枚举
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/22/go学习笔记表达式/" rel="prev" title="go学习笔记表达式">
+                go学习笔记表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">125</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类型转换"><span class="nav-number">1.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他值不能当作bool值使用"><span class="nav-number">2.</span> <span class="nav-text">其他值不能当作bool值使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串是不可变值类型，内部用指针指向UTF-8字节数组"><span class="nav-number">3.0.0.0.0.1.</span> <span class="nav-text">字符串是不可变值类型，内部用指针指向UTF-8字节数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#默认值是控制符串””"><span class="nav-number">3.0.0.0.0.2.</span> <span class="nav-text">默认值是控制符串””</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用索引号访问某字节，如s-i"><span class="nav-number">3.0.0.0.0.3.</span> <span class="nav-text">用索引号访问某字节，如s[i]</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不能用序号获取字节元素指针。-amp-s-i-非法"><span class="nav-number">3.0.0.0.0.4.</span> <span class="nav-text">不能用序号获取字节元素指针。&s[i]非法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不可变类型，无法修改字节数组"><span class="nav-number">3.0.0.0.0.5.</span> <span class="nav-text">不可变类型，无法修改字节数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字节数组尾部不包含NULL"><span class="nav-number">3.0.0.0.0.6.</span> <span class="nav-text">字节数组尾部不包含NULL</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用反引号定义不做转义处理的原始字符串，支持跨行"><span class="nav-number">3.0.0.0.0.7.</span> <span class="nav-text">使用反引号定义不做转义处理的原始字符串，支持跨行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误"><span class="nav-number">3.0.0.0.0.8.</span> <span class="nav-text">连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#支持用两个索引号返回子串"><span class="nav-number">3.0.0.0.0.9.</span> <span class="nav-text">支持用两个索引号返回子串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式"><span class="nav-number">3.0.0.0.0.10.</span> <span class="nav-text">单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"><span class="nav-number">3.0.0.0.0.11.</span> <span class="nav-text">要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用for循环遍历字符串时，也有byte和rune两种方式"><span class="nav-number">3.0.0.0.0.12.</span> <span class="nav-text">用for循环遍历字符串时，也有byte和rune两种方式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针"><span class="nav-number">4.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#默认值为nil，没有NULL常量"><span class="nav-number">4.0.0.0.0.1.</span> <span class="nav-text">默认值为nil，没有NULL常量</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#操作符”-amp-”取变量地址，”-”透过指针访问目标对象"><span class="nav-number">4.0.0.0.0.2.</span> <span class="nav-text">操作符”&”取变量地址，”*”透过指针访问目标对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员"><span class="nav-number">4.0.0.0.0.3.</span> <span class="nav-text">不支持指针运算，不支持”->”运算符，直接用”.”访问目标成员</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不能用指针做加减法运算"><span class="nav-number">4.0.0.0.0.4.</span> <span class="nav-text">不能用指针做加减法运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#可以在unsafe-Pointer和任意类型指针间进行转换"><span class="nav-number">4.0.0.0.0.5.</span> <span class="nav-text">可以在unsafe.Pointer和任意类型指针间进行转换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上"><span class="nav-number">4.0.0.0.0.6.</span> <span class="nav-text">返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#将Pointer转换成uintptr，可变相进行指针运算"><span class="nav-number">4.0.0.0.0.7.</span> <span class="nav-text">将Pointer转换成uintptr，可变相进行指针运算</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义类型"><span class="nav-number">5.</span> <span class="nav-text">自定义类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"><span class="nav-number">5.0.0.0.0.1.</span> <span class="nav-text">可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同基类型的指针"><span class="nav-number">5.0.0.0.0.2.</span> <span class="nav-text">具有相同基类型的指针</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同元素类型和长度的array"><span class="nav-number">5.0.0.0.0.3.</span> <span class="nav-text">具有相同元素类型和长度的array</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同元素类型的slice"><span class="nav-number">5.0.0.0.0.4.</span> <span class="nav-text">具有相同元素类型的slice</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同键值类型的map"><span class="nav-number">5.0.0.0.0.5.</span> <span class="nav-text">具有相同键值类型的map</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同元素类型和传送方向的channel"><span class="nav-number">5.0.0.0.0.6.</span> <span class="nav-text">具有相同元素类型和传送方向的channel</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"><span class="nav-number">5.0.0.0.0.7.</span> <span class="nav-text">具有相同字段序列（字段名，类型，标签，顺序）的匿名struct</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#签名相同（参数和返回值，不包括参数名称）的function"><span class="nav-number">5.0.0.0.0.8.</span> <span class="nav-text">签名相同（参数和返回值，不包括参数名称）的function</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#方法集相同（方法名，方法签名相同和次序无关）的interface"><span class="nav-number">5.0.0.0.0.9.</span> <span class="nav-text">方法集相同（方法名，方法签名相同和次序无关）的interface</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#可用type在全局或函数内定义新类型"><span class="nav-number">5.0.0.0.0.10.</span> <span class="nav-text">可用type在全局或函数内定义新类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"><span class="nav-number">5.0.0.0.0.11.</span> <span class="nav-text">新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/27/C语言联合/" itemprop="url">
-                  C语言联合
+                <a class="post-title-link" href="/2017/02/20/go学习笔记常量/" itemprop="url">
+                  go学习笔记常量
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-27T07:42:29+08:00" content="2016-07-27">
-              2016-07-27
+            <time itemprop="dateCreated" datetime="2017-02-20T19:31:27+08:00" content="2017-02-20">
+              2017-02-20
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -265,18 +265,19 @@
       
         
           
-          联合用union关键字定义的一个叫&quot;量&quot;的数据类型
-typedef union {
-    short count;
-    float volume;
-    float weight;
-} quantity;
-联合的特点1.可以有效的使用存储器空间
-    当定义联合的时候,
+          常量常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误package main
+
+const a int = 1
+const b = &quot;aaa&quot;
+const c = false
+
+func main() {
+    const d = 2
+    print
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/27/C语言联合/#more" rel="contents">
+            <a class="btn" href="/2017/02/20/go学习笔记常量/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -319,8 +320,8 @@ typedef union {
             
               
                 
-                <a class="post-title-link" href="/2016/07/26/C语言结构/" itemprop="url">
-                  C语言结构
+                <a class="post-title-link" href="/2017/02/20/go学习笔记变量/" itemprop="url">
+                  go学习笔记变量
                 </a>
               
             
@@ -333,8 +334,8 @@ typedef union {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-26T08:14:25+08:00" content="2016-07-26">
-              2016-07-26
+            <time itemprop="dateCreated" datetime="2017-02-20T11:57:06+08:00" content="2017-02-20">
+              2017-02-20
             </time>
           </span>
 
@@ -347,8 +348,8 @@ typedef union {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -380,19 +381,21 @@ typedef union {
       
         
           
-          结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
-例如:
-    定义新结构
-    /*
-        注意fish只是结构的名字
-    */
-    struct fish {
-        /*
-            const char * 是
+          声明变量定义没有初始值的变量，必须带类型package main
+
+func main() {
+    var n int
+    n = 1
+    println(n)
+}
+有初始值不必须定义类型package main
+
+func main() {
+    var a = &quot;aaa&
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/26/C语言结构/#more" rel="contents">
+            <a class="btn" href="/2017/02/20/go学习笔记变量/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -435,8 +438,8 @@ typedef union {
             
               
                 
-                <a class="post-title-link" href="/2016/07/24/C语言使用多个源文件/" itemprop="url">
-                  C语言声明与定义分离
+                <a class="post-title-link" href="/2017/02/20/go学习笔记环境搭建/" itemprop="url">
+                  go环境搭建
                 </a>
               
             
@@ -449,11 +452,30 @@ typedef union {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-24T17:56:26+08:00" content="2016-07-24">
-              2016-07-24
+            <time itemprop="dateCreated" datetime="2017-02-20T10:43:31+08:00" content="2017-02-20">
+              2017-02-20
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -477,18 +499,11 @@ typedef union {
       
         
           
-          为什么要使用声明与定义分离,它解决了什么问题1.代码顺序的问题
-    #include &lt;stdio.h&gt;
-        /*
-            由于函数定义顺序产生的一个编译的错误
-        */
-        int main()
-        {
-       
+          下载go在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz设置环境变
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/24/C语言使用多个源文件/#more" rel="contents">
+            <a class="btn" href="/2017/02/20/go学习笔记环境搭建/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -531,8 +546,8 @@ typedef union {
             
               
                 
-                <a class="post-title-link" href="/2016/07/22/C语言标准输入标准输出/" itemprop="url">
-                  C语言标准输入标准输出
+                <a class="post-title-link" href="/2017/01/29/2016年总结/" itemprop="url">
+                  2016年总结
                 </a>
               
             
@@ -545,8 +560,8 @@ typedef union {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-22T07:51:22+08:00" content="2016-07-22">
-              2016-07-22
+            <time itemprop="dateCreated" datetime="2017-01-29T17:41:34+08:00" content="2017-01-29">
+              2017-01-29
             </time>
           </span>
 
@@ -559,8 +574,8 @@ typedef union {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -592,13 +607,14 @@ typedef union {
       
         
           
-          标准输入将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
-eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
-标准输出将显示在屏幕
+          生活健身
+体重从135斤飚升到了145斤，主要变化是两个时间点：
+1.在坚持了将近1个月去健身房的记录之后，体重飚升5斤，在健身房主要是跑步20-30分钟，做5-10分钟的器械，30个仰卧起坐，然后学习游泳，最大的收获就是学会了游泳（蛙泳）
+2.在坚持了两个周之后的keep以后，然后体重毅然又飚升了
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/22/C语言标准输入标准输出/#more" rel="contents">
+            <a class="btn" href="/2017/01/29/2016年总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -641,8 +657,8 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
             
               
                 
-                <a class="post-title-link" href="/2016/07/20/C语言标准库/" itemprop="url">
-                  C语言标准库
+                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">
+                  环境变量的设置
                 </a>
               
             
@@ -655,8 +671,8 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-20T09:18:20+08:00" content="2016-07-20">
-              2016-07-20
+            <time itemprop="dateCreated" datetime="2016-12-21T11:06:19+08:00" content="2016-12-21">
+              2016-12-21
             </time>
           </span>
 
@@ -669,8 +685,8 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -702,18 +718,13 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
       
         
           
-          stdio.h提供标准输入输出,比如sprintf,scanf
-string.h提供字符串的处理
-unistd.h用来处理传入参数
-stdlib.h里面包含使用malloc和free函数
-stdarg.h可变参数列表
-unistd.h系统函数库
-errno.h错误信息
-
-          
+          永久对所有用户生效修改/etc/profile添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同pathmunge () {
+    case &quot;:${PATH}:&quot; in
+        *:&quot;$1&quot;:*
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/20/C语言标准库/#more" rel="contents">
+            <a class="btn" href="/2016/12/21/环境变量的设置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -740,7 +751,7 @@ errno.h错误信息
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -781,7 +792,7 @@ errno.h错误信息
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -789,7 +800,7 @@ errno.h错误信息
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -798,7 +809,7 @@ errno.h错误信息
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

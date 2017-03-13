@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">
-                  apache常用的prefork和worker模式
+                <a class="post-title-link" href="/2016/10/16/C语言进程间通信/" itemprop="url">
+                  C语言进程间通信
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T00:33:59+08:00" content="2016-07-01">
-              2016-07-01
+            <time itemprop="dateCreated" datetime="2016-10-16T16:02:11+08:00" content="2016-10-16">
+              2016-10-16
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -265,15 +265,15 @@
       
         
           
-          prefork模式(实现fork好子进程,等待请求)使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
-
-工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
-
-优点:效率高,稳定
+          数据流标准输入:stdin          对应描述符:0
+标准输出:stdout         对应描述符:1
+标准错误:stderr         对应描述符:2
+重定向数据流重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
+重定向输入数据流 &
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/apache常用的prefork和worker模式/#more" rel="contents">
+            <a class="btn" href="/2016/10/16/C语言进程间通信/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +316,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/29/批量创建文件及替换文件名/" itemprop="url">
-                  批量创建文件及替换文件名
+                <a class="post-title-link" href="/2016/10/14/C语言进程与系统调用/" itemprop="url">
+                  C语言进程与系统调用
                 </a>
               
             
@@ -330,8 +330,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T01:03:07+08:00" content="2016-06-29">
-              2016-06-29
+            <time itemprop="dateCreated" datetime="2016-10-14T10:34:53+08:00" content="2016-10-14">
+              2016-10-14
             </time>
           </span>
 
@@ -344,8 +344,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -377,17 +377,14 @@
       
         
           
-          批量创建文件写入需要创建的文件名
-    file.txt 内容如下:test1.big.jpg
-                     test2.big.jpg
-                     test1.big.jpg
-
-创建文件
-    touch `cat file.txt |
+          execl,execlp,execle第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
+第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
+中间都被当做脚本所需要的参数
+最后一个参数是NULL,告诉函
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/29/批量创建文件及替换文件名/#more" rel="contents">
+            <a class="btn" href="/2016/10/14/C语言进程与系统调用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -430,8 +427,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/12/nginx简介/" itemprop="url">
-                  nginx简介
+                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">
+                  C语言静态库和动态库
                 </a>
               
             
@@ -444,8 +441,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T23:44:31+08:00" content="2016-06-12">
-              2016-06-12
+            <time itemprop="dateCreated" datetime="2016-09-11T16:51:13+08:00" content="2016-09-11">
+              2016-09-11
             </time>
           </span>
 
@@ -458,8 +455,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -491,20 +488,22 @@
       
         
           
-          nginx功能1.提供web服务
-2.负载均衡
-3.静态资源缓存
-nginx优点1.高并发
-2.占用资源少
-3.功能种类较多,但每个功能都不是很强
-4.支持epoll模型,使得nginx支持高并发
-5.利用nginx对ip限速,可以限制连接数
-6.简单配置,更灵活
-应用场景静态服务器(图片,视频服务
+          实现文件共享例子:
+目录结构如下:
+|--myHeader
+  --checksum.h
+  --encrypt.h
+|--checksum.c
+|--encrypt.c
+|--test.c
+|--myObject
+
+在myHeader文件中建立头文件checksum.h
+int checksum(
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/nginx简介/#more" rel="contents">
+            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -547,8 +546,8 @@ nginx优点1.高并发
             
               
                 
-                <a class="post-title-link" href="/2016/06/12/流量统计单位/" itemprop="url">
-                  流量统计单位
+                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">
+                  代码设计
                 </a>
               
             
@@ -561,8 +560,8 @@ nginx优点1.高并发
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T20:56:28+08:00" content="2016-06-12">
-              2016-06-12
+            <time itemprop="dateCreated" datetime="2016-09-09T17:29:39+08:00" content="2016-09-09">
+              2016-09-09
             </time>
           </span>
 
@@ -575,8 +574,8 @@ nginx优点1.高并发
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -608,17 +607,11 @@ nginx优点1.高并发
       
         
           
-          IP(Internet Protocol)独立IP,不同IP地址的计算机访问网站的总次数
-独立IP书度量网站访问量,不是很精确,国内的上网多数都是NAT上网,一个独立IP背后可能有多个客户端访问
-
-统计方法:
-    1.分析web服务的访问日志
-    2.在所有的页面结尾,嵌入js进行统计
-PV
-          ...
+          暂未找到合适的表述方法
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/流量统计单位/#more" rel="contents">
+            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -661,8 +654,8 @@ PV
             
               
                 
-                <a class="post-title-link" href="/2016/06/10/服务对应常见端口/" itemprop="url">
-                  服务对应常见端口
+                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">
+                  git的使用
                 </a>
               
             
@@ -675,8 +668,8 @@ PV
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-10T23:46:26+08:00" content="2016-06-10">
-              2016-06-10
+            <time itemprop="dateCreated" datetime="2016-09-02T12:17:48+08:00" content="2016-09-02">
+              2016-09-02
             </time>
           </span>
 
@@ -689,8 +682,8 @@ PV
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -722,15 +715,17 @@ PV
       
         
           
-          服务对应常见端口服务                      端口
-ftp                       21
-sftp/ssh                  22
-smtp                      25
-mysql                     33
+          初始化一个git项目git init
+添加文件git add filename
+添加目录git add .
+只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
+查看当前工作区文件提交的状态git status
+git status -s 查看简便信息
+提交文件到本地git 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/10/服务对应常见端口/#more" rel="contents">
+            <a class="btn" href="/2016/09/02/git的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -757,7 +752,7 @@ mysql                     33
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -798,7 +793,7 @@ mysql                     33
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -806,7 +801,7 @@ mysql                     33
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -815,7 +810,7 @@ mysql                     33
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

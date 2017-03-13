@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">
-                  Primary script unknown排查
+                <a class="post-title-link" href="/2017/02/28/go学习笔记append/" itemprop="url">
+                  go学习笔记append
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T12:21:14+08:00" content="2016-10-21">
-              2016-10-21
+            <time itemprop="dateCreated" datetime="2017-02-28T15:38:23+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -265,125 +265,17 @@
       
         
           
-          现象#    tcpdump  -i  lo -Anns0 port 9000
-#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
+          append向slice尾部添加数据，返回新的slice对象package main
 
-          
+import &quot;fmt&quot;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/16/C语言进程间通信/" itemprop="url">
-                  C语言进程间通信
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-16T16:02:11+08:00" content="2016-10-16">
-              2016-10-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          数据流标准输入:stdin          对应描述符:0
-标准输出:stdout         对应描述符:1
-标准错误:stderr         对应描述符:2
-重定向数据流重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
-重定向输入数据流 &
+func main() {
+    s := make([]int, 0, 5)
+    fmt.Printf(&quot;%p\n&quot;, &amp;s) 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/16/C语言进程间通信/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记append/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -426,8 +318,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/14/C语言进程与系统调用/" itemprop="url">
-                  C语言进程与系统调用
+                <a class="post-title-link" href="/2017/02/28/go学习笔记reslice/" itemprop="url">
+                  go学习笔记reslice
                 </a>
               
             
@@ -440,8 +332,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-14T10:34:53+08:00" content="2016-10-14">
-              2016-10-14
+            <time itemprop="dateCreated" datetime="2017-02-28T14:44:03+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -454,8 +346,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -487,14 +379,17 @@
       
         
           
-          execl,execlp,execle第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
-第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
-中间都被当做脚本所需要的参数
-最后一个参数是NULL,告诉函
+          定义基于已有slice创建新slice对象，以便在cap允许范围内调整属性package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
+    s1 := s[2
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/14/C语言进程与系统调用/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记reslice/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -537,8 +432,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">
-                  C语言静态库和动态库
+                <a class="post-title-link" href="/2017/02/28/go学习笔记slice/" itemprop="url">
+                  go学习笔记slice
                 </a>
               
             
@@ -551,8 +446,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-11T16:51:13+08:00" content="2016-09-11">
-              2016-09-11
+            <time itemprop="dateCreated" datetime="2017-02-28T11:52:55+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -565,8 +460,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -598,22 +493,15 @@
       
         
           
-          实现文件共享例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --encrypt.h
-|--checksum.c
-|--encrypt.c
-|--test.c
-|--myObject
-
-在myHeader文件中建立头文件checksum.h
-int checksum(
+          sliceslice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案slice引用类型，但自身是结构体，值拷贝传递//在runtime.h中的源码
+struct slice
+{
+    byte* array;
+    uintgo len;     //表示可用元素数量，
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记slice/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -656,8 +544,8 @@ int checksum(
             
               
                 
-                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">
-                  代码设计
+                <a class="post-title-link" href="/2017/02/28/go学习笔记array/" itemprop="url">
+                  go学习笔记array
                 </a>
               
             
@@ -670,8 +558,8 @@ int checksum(
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-09T17:29:39+08:00" content="2016-09-09">
-              2016-09-09
+            <time itemprop="dateCreated" datetime="2017-02-28T11:21:50+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -684,8 +572,8 @@ int checksum(
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -717,11 +605,126 @@ int checksum(
       
         
           
-          暂未找到合适的表述方法
-          
+          Array类型数据数组是值类型，赋值和传参会复制整个数组，而不是指针数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型支持”==”，”！=”操作符，因为内存总是被初始化过指针数组[n]T,数组指针[n]T定义数组的方式直接初始化package main
+
+import &q
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记array/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记延迟调用/" itemprop="url">
+                  go学习笔记延迟调用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T11:18:53+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          延迟调用使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理package main
+
+import &quot;os&quot;
+
+func test() error {
+    f, err := os.Create(&quo
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记延迟调用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -748,7 +751,7 @@ int checksum(
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -789,7 +792,7 @@ int checksum(
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -797,7 +800,7 @@ int checksum(
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -806,7 +809,7 @@ int checksum(
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

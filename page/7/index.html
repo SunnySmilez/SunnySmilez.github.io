@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/12/lvs与keepalived/" itemprop="url">
-                  lvs与keepalived
+                <a class="post-title-link" href="/2016/11/02/gdb调试redis/" itemprop="url">
+                  gdb调试redis
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T01:32:55+08:00" content="2016-07-12">
-              2016-07-12
+            <time itemprop="dateCreated" datetime="2016-11-02T10:46:04+08:00" content="2016-11-02">
+              2016-11-02
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -265,22 +265,12 @@
       
         
           
-          集群一组相互独立的计算机,利用高速通信网络组成的一个计算机系统,每个集群节点都是运行其自己进程的一个独立服务器
-集群特点1.高性能
-2.价格有效性
-3.可伸缩性
-4.高可用性
-集群优势1.透明性
-2.高性能
-3.高可用性
-4.可伸缩性
-5.可管理性
-6.可编程性
-负载均衡提供一种廉价,有效,透明的方
-          ...
+          #启动redis redis-server连接redis redis-cli获取进程id redis-cli info | grep process_idgdb调试进程id sudo gdb -p pidgdb查询代码 listgdb 设置断点 break main
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/12/lvs与keepalived/#more" rel="contents">
+            <a class="btn" href="/2016/11/02/gdb调试redis/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -323,8 +313,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/12/arp/" itemprop="url">
-                  arp
+                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">
+                  gdb调试
                 </a>
               
             
@@ -337,8 +327,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T00:36:04+08:00" content="2016-07-12">
-              2016-07-12
+            <time itemprop="dateCreated" datetime="2016-10-26T07:44:26+08:00" content="2016-10-26">
+              2016-10-26
             </time>
           </span>
 
@@ -351,8 +341,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -384,15 +374,17 @@
       
         
           
-          ARP协议(地址解析协议)使用ARP协议可实现通过IP地址获得对应主机的物理地址
-ARP缓存表每台安装有TCP/IP协议的电脑都有一个ARP缓存表,表里的IP地址和MAC地址是一一对应的
-eg:
-    查看          ARP -a
-    ping         ping 192.168
+          调试文件内容gdb.c#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = low; i &lt;= high; i++)
+                s
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/12/arp/#more" rel="contents">
+            <a class="btn" href="/2016/10/26/gdb调试/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -435,8 +427,8 @@ eg:
             
               
                 
-                <a class="post-title-link" href="/2016/07/05/fast-cgi简单介绍及工作原理/" itemprop="url">
-                  fast-cgi简单介绍及工作原理
+                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">
+                  mac安装gdb
                 </a>
               
             
@@ -449,8 +441,211 @@ eg:
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:36:04+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-10-21T17:32:25+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Mac安装GDB安装GDBbrew install gdb
+使用gdb进行调试gbd.c文件中的内容#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = lo
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/21/mac安装gdb/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">
+                  redis源码阅读-准备工作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T17:29:44+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          编辑器调试器
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/21/redis源码阅读-准备工作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">
+                  Primary script unknown排查
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T12:21:14+08:00" content="2016-10-21">
+              2016-10-21
             </time>
           </span>
 
@@ -496,236 +691,13 @@ eg:
       
         
           
-          CGI(Common Getway Interface)HTTP服务器与后端服务器或其他机器上的程序进行通信的一种工具,CGI程序必须运行在网络服务器上
-缺点:性能较差(每次HTTP服务器遇到动态程序都需要重新启动脚本解析器来执行解析,然后返回结果给HTTP服务器),安全性能也表较差
-FastCGI
-          ...
+          现象#    tcpdump  -i  lo -Anns0 port 9000
+#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/05/fast-cgi简单介绍及工作原理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">
-                  php.ini基本参数设置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:03:14+08:00" content="2016-07-05">
-              2016-07-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          开启安全模式(阻止php调用部分函数,比如system())safe_mode = On
-禁用函数disable_functions=system,exec,shell_exec
-关闭php版本信息在header信息中泄露expose_php = Off
-关闭注册全局变量register_globa
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/05/php-ini基本参数设置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">
-                  如何防盗链
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T01:06:42+08:00" content="2016-07-01">
-              2016-07-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          资源盗链某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
-
-解决办法:
-    1.图片,视频打水印,logo
-    2.防火墙控制,根据ip控
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/如何防盗链/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -752,7 +724,7 @@ FastCGI
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -793,7 +765,7 @@ FastCGI
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">125</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -801,7 +773,7 @@ FastCGI
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -810,7 +782,7 @@ FastCGI
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
