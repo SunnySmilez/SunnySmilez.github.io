@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2017-04-17T09:40:24.000Z</updated>
+  <updated>2017-04-27T04:01:57.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,17 +15,219 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[一个产品的诞生]]></title>
+    <link href="http://www.cxyteam.com/2017/04/26/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E8%AF%9E%E7%94%9F/"/>
+    <id>http://www.cxyteam.com/2017/04/26/一个产品的诞生/</id>
+    <published>2017-04-26T09:11:55.000Z</published>
+    <updated>2017-04-27T04:01:57.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><h5 id="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"><a href="#此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码" class="headerlink" title="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"></a>此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码</h5><p><img src="/img/zfeasyloan/jieduan.png" alt="Alt text" title="历经阶段"></p>
+<h1 id="项目起源"><a href="#项目起源" class="headerlink" title="项目起源"></a>项目起源</h1><h5 id="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"><a href="#在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知" class="headerlink" title="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"></a>在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知</h5><h1 id="找出痛点"><a href="#找出痛点" class="headerlink" title="找出痛点"></a>找出痛点</h1><h5 id="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："><a href="#这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：" class="headerlink" title="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："></a>这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：</h5><p><img src="/img/zfeasyloan/tongdian.png" alt="Alt text" title="找出痛点的阶段"></p>
+<h3 id="贴近用户"><a href="#贴近用户" class="headerlink" title="贴近用户"></a>贴近用户</h3><ol>
+<li><p>向前线索要情报</p>
+<ul>
+<li>夜一提供助贷流程图</li>
+<li>索隆提供培训资料<br><img src="/img/zfeasyloan/process1.png" alt="Alt text" title="助贷流程">    </li>
+</ul>
+</li>
+<li><p>参与战斗</p>
+<ul>
+<li>跟商务线下跑触点，谈合作</li>
+<li>和运营去和用户面聊，参与整个跟单（由于调研期间没有订单，所以更多的是询问有跟单经验的小伙伴）</li>
+</ul>
+</li>
+</ol>
+<h3 id="访谈用户"><a href="#访谈用户" class="headerlink" title="访谈用户"></a>访谈用户</h3><ol>
+<li><p>制作MRD</p>
+<ul>
+<li>进行市场调研，参加商务的早晚效率（由于团队成员中阿葵亚对运营很了解，所以重心点放在商务）</li>
+<li>驻扎前线，反馈信息（阿葵亚驻扎深圳战场），最终出具MRD文档，用户画像，行业报告<br><img src="/img/zfeasyloan/youli.png" alt="Alt text" title="MRD文档要点-尤里，空波提供">   </li>
+</ul>
+</li>
+<li><p>准备调查问卷</p>
+<ul>
+<li>获取到的信息的疑惑点，想要了解的信息以问卷的方式进行调查（这一步最终没做）</li>
+<li>问题需要具备非开放式，尽量设置成是或者否的方式</li>
+<li>问问题方式不具备引导性</li>
+</ul>
+</li>
+<li><p>进行竞品分析</p>
+<ul>
+<li>快鸽</li>
+<li>按揭帮</li>
+<li>数据项，数据名称，数据排版的理由</li>
+<li>理解对方的业务流程</li>
+<li>思考为什么会有这个功能点</li>
+<li>服务的对象，产品的定位</li>
+</ul>
+</li>
+</ol>
+<h3 id="成为用户"><a href="#成为用户" class="headerlink" title="成为用户"></a>成为用户</h3><ol>
+<li>把自己当做自己的用户实际的去思考，我在工作的时候什么状态是不满的</li>
+<li>以下是我在当时状态下了解到各个角色的工作内容以后，把自己当做该角色提出的疑惑点<br><img src="/img/zfeasyloan/shangwu.png" alt="Alt text" title="我是商务"><br><img src="/img/zfeasyloan/chudian.png" alt="Alt text" title="我是触点"><br><img src="/img/zfeasyloan/yunying.png" alt="Alt text" title="我是运营"> </li>
+</ol>
+<h3 id="这一阶段的产出，了解到需要解决的痛点"><a href="#这一阶段的产出，了解到需要解决的痛点" class="headerlink" title="这一阶段的产出，了解到需要解决的痛点"></a>这一阶段的产出，了解到需要解决的痛点</h3><ol>
+<li>内部：商务和运营同步信息</li>
+<li>外部：用户和触点及时看到信息</li>
+</ol>
+<h1 id="缕清需求"><a href="#缕清需求" class="headerlink" title="缕清需求"></a>缕清需求</h1><h5 id="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："><a href="#在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：" class="headerlink" title="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："></a>在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：</h5><p><img src="/img/zfeasyloan/xuqiu.png" alt="Alt text" title="缕清阶段"></p>
+<h3 id="制定use-case"><a href="#制定use-case" class="headerlink" title="制定use case"></a>制定use case</h3><ol>
+<li>找出报单到最后反润中的整个流程的场景，分离出来</li>
+</ol>
+<ul>
+<li>反思：在这个过程，没有进行场景划分，导致我把很多调研的小块小块的需求堆积在一起，没有主次之分，也没办法串联各个小块的需求<br>初期我的原型图是这样的(看目录就能看出来很乱)：<br><img src="/img/zfeasyloan/chuqi.png" alt="Alt text" title="混乱的原型"></li>
+</ul>
+<ol>
+<li>按实际的use case为路径，串联参与的角色需要做的事，梳理出整个系统应具备的功能</li>
+</ol>
+<ul>
+<li>反思：在这个过程中，我是按照各个角色去梳理他们需要参与的事情，导致会缺少部分功能</li>
+</ul>
+<ol>
+<li>永远只给用户一种方案做一件事情，当你自己都拿不准方案的时候，用户一定比你更懵</li>
+</ol>
+<ul>
+<li>反思：在触点注册的时候，由于对需求的把握不准，提供了两种方案：一种是商务注册，一种是触点注册</li>
+</ul>
+<h3 id="美化PRD"><a href="#美化PRD" class="headerlink" title="美化PRD"></a>美化PRD</h3><ol>
+<li>如何使用Axure（找无所不能的产品经理教你吧，或许下次会有简单的教程）</li>
+<li>判断整个保留下来的use case是否保证闭环了，比如说你有商务在进行操作，但是商务的角色在哪产生都没去想，这就是明显的错误了</li>
+<li>按照use case画出各个参与方的整体流程图</li>
+</ol>
+<ul>
+<li>反思：在做这个的时候，我是直接在各个页面之间加了点击事件，企图模拟出整个流程，你可以想象一下，当我给大家在将我的流程的时候，我不断的在页面间切换来切换去，别人不断问你这个是谁的页面的时候的想死的心情，废话不多说，贴出整体的页面流程图：<br><img src="/img/zfeasyloan/process_all_1.png" alt="Alt text" title="整体的页面切换原型"><br><img src="/img/zfeasyloan/process_all_2.png" alt="Alt text" title="整体的流程"></li>
+</ul>
+<ol>
+<li>细化每个小页面的图</li>
+<li>参考竞品，按最优的方式展示，包括页面元素，最重要的是字段展示顺序</li>
+<li>注重小细节，用户操作习惯，比如说如果是订单显示，这个时候，用户有疑问，能否在页尾就找到负责人电话</li>
+</ol>
+<ul>
+<li>反思：对于这几个点个人建议还是交给专业的人，让我们万能的产品来做吧，毕竟这些东西不是一蹴而就的，当然如果你够强，那我也不拦你</li>
+<li>没有对比就没有伤害，看看下面两幅图<br><img src="/img/zfeasyloan/bad_face.png" alt="Alt text" title="我做的"><br><img src="/img/zfeasyloan/good_face.png" alt="Alt text" title="不知道谁做的"></li>
+</ul>
+<h3 id="出UI图"><a href="#出UI图" class="headerlink" title="出UI图"></a>出UI图</h3><ol>
+<li>可以提前做一些颜色基调的设计，基础元素的设计，比如按钮，导航等</li>
+<li>有类似logo之类的设计，可以并行做</li>
+<li>尽快把PRD敲定</li>
+</ol>
+<ul>
+<li>反思：由于对设计师工作的不太了解，没能提前的让设计参与进来，尤其是logo图，到了临了才发现原来还有logo没做</li>
+</ul>
+<h1 id="写出代码"><a href="#写出代码" class="headerlink" title="写出代码"></a>写出代码</h1><h5 id="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："><a href="#作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：" class="headerlink" title="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："></a>作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：</h5><p><img src="/img/zfeasyloan/code.png" alt="Alt text" title="写出代码"></p>
+<h3 id="做出计划"><a href="#做出计划" class="headerlink" title="做出计划"></a>做出计划</h3><ol>
+<li>按照倒推的方式进行时间规划（deadline摆在那）</li>
+</ol>
+<ul>
+<li>从后往前推，上线需要多长时间部署，测试需要多长时间，联调需要多长时间，那么剩下的就是开发时间了，不够？那就从别的地方挤时间吧</li>
+</ul>
+<ol>
+<li>划分出所有能够并行的任务</li>
+</ol>
+<ul>
+<li>比如微信公众号认证，模板消息申请，域名，线上环境部署，前后端分离开发…</li>
+</ul>
+<ol>
+<li>制定好时间节点后，同步让大家知道，留下邮件</li>
+</ol>
+<ul>
+<li>定好没个时间节点应出的东西，然后小组达成一致，最后再邮件通知大家</li>
+<li>反思：在这个过程中，定好了时间节点，在实施的时候，有的东西未能到位，比如说：10号截止需求的变更，理论上是需要在10号的时候，所有的东西都定下来，然后再12号才拿到设计好的ui图；最终没能邮件通知到大家，只是过了一个会，这个相当于是一个承诺式的工作方式，过会后，需要把结论发送邮件给大家，避免大家忘记各个时间节点或者有部分突然的变更</li>
+</ul>
+<ol>
+<li>反馈进度</li>
+</ol>
+<ul>
+<li>这个当然不用说，实时的反馈进度，让整个小组，关心这个项目的人员清楚，现在我们在哪一个阶段，需要什么帮助，有什么风险点</li>
+<li>反思：在这个阶段是做的最不好的，项目进入开发的时候，就相当于进入黑盒了，知道最后上完线，大家才恍然大悟，原来上线了；给自己找几个小借口，项目时间太紧了，可能反馈进度，需要花费时间，所以偷懒了；其次，项目功能不太多，没法进行阶段性反馈（其实都是借口，哪怕花一分钟的时间，大概说下做完哪些了，大家心里也有数）</li>
+</ul>
+<h3 id="并行开发"><a href="#并行开发" class="headerlink" title="并行开发"></a>并行开发</h3><ol>
+<li>并行并不是说各自开发各自的，到联调的时候再进行沟通，需要时刻保持沟通</li>
+</ol>
+<ul>
+<li>比如说在开发的时候，遇到多种角色如何传递角色id的情况，页面判断如何做，及时的沟通，达到一致后，再开始干活</li>
+<li>这块做的其实还不错，鼓励下自己，可能是前端是合作的老伙伴了，得心应手</li>
+</ul>
+<ol>
+<li>规范好接口，写好接口文档，能够减少很多沟通成本</li>
+</ol>
+<ul>
+<li>接口做好规范，命名，数据返回格式（看着设计图来，尽量把格式都转换好），避免前端关键字，比如分页时候的length，返回的时候读返回json数组，一会对象一会数组，还是很容易抓狂的，该get就get该post就post（get，post区别不知道？google去吧）</li>
+<li>必要的接口文档，至少得说明：接口地址是什么，上送值是什么，返回数据的含义</li>
+<li>这块也做的不错，接口文档，返回数据格式各方面能想到的还是去做好了，虽然最后接口字段可能不断地在变，这也不可避免</li>
+</ul>
+<h3 id="测试上线"><a href="#测试上线" class="headerlink" title="测试上线"></a>测试上线</h3><ol>
+<li>执行use case</li>
+</ol>
+<ul>
+<li>这个比较简单，直接按照PRD走正常流程就行，一般都没问题，开发就是按照这个流程做的</li>
+</ul>
+<ol>
+<li>执行异常逻辑</li>
+</ol>
+<ul>
+<li>特殊的场景，比如注册了，没完善信息报单会如何，注册了，商务未登录过消息怎么发送</li>
+<li>这块没有去专门的列所有的场景然后进行测试，而是发动了群众的力量进行测试（测试完之后内心还是忐忑的）</li>
+</ul>
+<h1 id="最初的计划"><a href="#最初的计划" class="headerlink" title="最初的计划"></a>最初的计划</h1><h3 id="最后晒一个设想的开发计划，自己感受下"><a href="#最后晒一个设想的开发计划，自己感受下" class="headerlink" title="最后晒一个设想的开发计划，自己感受下"></a>最后晒一个设想的开发计划，自己感受下</h3><h6 id="友情提示，记得和第一张图对比着看，理想和现实的差距"><a href="#友情提示，记得和第一张图对比着看，理想和现实的差距" class="headerlink" title="友情提示，记得和第一张图对比着看，理想和现实的差距"></a>友情提示，记得和第一张图对比着看，理想和现实的差距</h6><p><img src="/img/zfeasyloan/plan.png" alt="Alt text" title="初期计划"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><h5 id="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go命令]]></title>
+    <link href="http://www.cxyteam.com/2017/04/18/go%E5%91%BD%E4%BB%A4/"/>
+    <id>http://www.cxyteam.com/2017/04/18/go命令/</id>
+    <published>2017-04-17T16:45:19.000Z</published>
+    <updated>2017-04-17T16:45:19.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go项目的运行]]></title>
+    <link href="http://www.cxyteam.com/2017/04/18/go%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%BF%90%E8%A1%8C/"/>
+    <id>http://www.cxyteam.com/2017/04/18/go项目的运行/</id>
+    <published>2017-04-17T16:40:15.000Z</published>
+    <updated>2017-04-17T16:40:15.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[redis安全]]></title>
     <link href="http://www.cxyteam.com/2017/04/16/redis%E5%AE%89%E5%85%A8/"/>
     <id>http://www.cxyteam.com/2017/04/16/redis安全/</id>
     <published>2017-04-16T11:27:37.000Z</published>
-    <updated>2017-04-17T09:40:24.000Z</updated>
+    <updated>2017-04-17T12:00:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h6 id="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"><a href="#场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的" class="headerlink" title="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"></a>场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的</h6><h6 id="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"><a href="#场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决" class="headerlink" title="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"></a>场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决</h6><pre><code>1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
 2，应用部署在多台机器上，使用负载均衡进行访问，redis部署在独立的机器上
 </code></pre><h6 id="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><a href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题" class="headerlink" title="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"></a>这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</h6><h6 id="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><a href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接" class="headerlink" title="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"></a>举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</h6><h3 id="解决办法（设置redis密码）"><a href="#解决办法（设置redis密码）" class="headerlink" title="解决办法（设置redis密码）"></a>解决办法（设置redis密码）</h3><h6 id="打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><a href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行" class="headerlink" title="打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行"></a>打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</h6><p><img src="/img/redis-pwd/redis-net-work.png" alt="Alt text" title="打开redis公网访问"></p>
 <h6 id="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><a href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码" class="headerlink" title="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"></a>设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</h6><p><img src="/img/redis-pwd/redis-pwd.png" alt="Alt text" title="设置redis访问密码"></p>
 <h6 id="使用auth进行连接，使用auth进行连接，redis提供了auth接口"><a href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口" class="headerlink" title="使用auth进行连接，使用auth进行连接，redis提供了auth接口"></a>使用auth进行连接，使用auth进行连接，redis提供了auth接口</h6><p><img src="/img/redis-pwd/auth.png" alt="Alt text" title="auth连接"></p>
-]]></content>
+<h3 id="延伸两点"><a href="#延伸两点" class="headerlink" title="延伸两点"></a>延伸两点</h3><h6 id="危险命令重命名"><a href="#危险命令重命名" class="headerlink" title="危险命令重命名"></a>危险命令重命名</h6><pre><code>编辑配置文件，添加如下行：
+    rename-command FLUSHALL &quot;&quot;
+</code></pre><h6 id="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"><a href="#使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）" class="headerlink" title="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"></a>使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）</h6>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h6 id="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访]]>
     </summary>
@@ -1334,540 +1536,6 @@ func main() {
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记异常处理]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记异常处理/</id>
-    <published>2017-02-28T03:17:53.000Z</published>
-    <updated>2017-03-01T12:05:39.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h6 id="没有结构化异常，使用panic抛出错误，recover捕获错误"><a href="#没有结构化异常，使用panic抛出错误，recover捕获错误" class="headerlink" title="没有结构化异常，使用panic抛出错误，recover捕获错误"></a>没有结构化异常，使用panic抛出错误，recover捕获错误</h6><pre><code>package main
-
-func test() {
-    defer func() {
-        if err := recover();err != nil {    //相当于php的错误异常处理的try
-            println(err.(string))       //将interface转换成string类型
-        }
-    }()
-
-    panic(&quot;panic error!&quot;)   //相当于php的throw
-}
-
-func main() {
-    test()  //输出panic error!
-}
-</code></pre><h6 id="由于panic，recover参数类型为interface-，因此可抛出任何类型对象"><a href="#由于panic，recover参数类型为interface-，因此可抛出任何类型对象" class="headerlink" title="由于panic，recover参数类型为interface{}，因此可抛出任何类型对象"></a>由于panic，recover参数类型为interface{}，因此可抛出任何类型对象</h6><pre><code>func panic(v interface{})   //不太理解
-func recover() interface{}
-</code></pre><h6 id="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"><a href="#延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获" class="headerlink" title="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"></a>延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test() {
-    defer func() {
-        fmt.Println(recover())
-    }()
-
-    defer func() {
-        panic(&quot;defer panic&quot;)
-    }()
-
-    panic(&quot;test panic&quot;)
-}
-
-func main() {
-    test()  //输出结果为: defer panic
-}
-</code></pre><h6 id="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"><a href="#捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递" class="headerlink" title="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"></a>捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test() {
-    defer recover() //无效
-    defer fmt.Println(recover())    //无效
-    defer func() {
-        //recover() //只有在此处才能捕获异常
-        func() {
-            println(&quot;defer inner&quot;)
-            recover()   //无效
-        }()
-    }()
-
-    panic(&quot;test panic&quot;)
-}
-
-func main() {
-    test()
-}
-</code></pre><h6 id="使用error-New和fmt-Errorf函数创建error接口的错误对象"><a href="#使用error-New和fmt-Errorf函数创建error接口的错误对象" class="headerlink" title="使用error.New和fmt.Errorf函数创建error接口的错误对象"></a>使用error.New和fmt.Errorf函数创建error接口的错误对象</h6><pre><code>package main
-
-import &quot;errors&quot;
-
-type error interface {
-    Error() string
-}
-
-var ErrDivByZero = errors.New(&quot;division by zero&quot;)   //使用error.New创建error错误对象
-
-func div(x, y int) (int, error) {
-    if y == 0 { return 0, ErrDivByZero }
-    return x / y, nil       //返回结果和异常
-}
-
-func main() {
-    switch z, err := div(10, 0); err {  //初始化变量，然后再匹配异常err的信息
-    case nil:
-        println(z)
-    case ErrDivByZero:
-        panic(err)
-    }
-}
-</code></pre><h6 id="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"><a href="#区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值" class="headerlink" title="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"></a>区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h6 id="没有结构化异常，使用panic抛出错误，recover捕获错误"><a href="#没有结构化异常，使用pani]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记函数]]></title>
-    <link href="http://www.cxyteam.com/2017/02/24/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%87%BD%E6%95%B0/"/>
-    <id>http://www.cxyteam.com/2017/02/24/go学习笔记函数/</id>
-    <published>2017-02-24T09:10:31.000Z</published>
-    <updated>2017-03-01T12:05:22.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h6 id="不支持嵌套，重载和默认参数"><a href="#不支持嵌套，重载和默认参数" class="headerlink" title="不支持嵌套，重载和默认参数"></a>不支持嵌套，重载和默认参数</h6><h6 id="无需声明原型"><a href="#无需声明原型" class="headerlink" title="无需声明原型"></a>无需声明原型</h6><h6 id="支持不定长变参"><a href="#支持不定长变参" class="headerlink" title="支持不定长变参"></a>支持不定长变参</h6><h6 id="支持多返回值"><a href="#支持多返回值" class="headerlink" title="支持多返回值"></a>支持多返回值</h6><h6 id="支持命名返回参数"><a href="#支持命名返回参数" class="headerlink" title="支持命名返回参数"></a>支持命名返回参数</h6><h6 id="支持匿名函数和闭包"><a href="#支持匿名函数和闭包" class="headerlink" title="支持匿名函数和闭包"></a>支持匿名函数和闭包</h6><h6 id="使用func定义函数，左大括号依旧不能另起一行"><a href="#使用func定义函数，左大括号依旧不能另起一行" class="headerlink" title="使用func定义函数，左大括号依旧不能另起一行"></a>使用func定义函数，左大括号依旧不能另起一行</h6><pre><code>package main
-
-func test (x, y int, s string) (int, string) {  //需要定义返回参数的类型，可以返回多个数值
-    n := x + y
-    return n, s
-}
-
-func main() {
-    x,y := test(1, 2, &quot;a&quot;)  //接收返回的值
-    println(x,y)
-}
-</code></pre><h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><h6 id="函数是第一类对象，可作为参数传递"><a href="#函数是第一类对象，可作为参数传递" class="headerlink" title="函数是第一类对象，可作为参数传递"></a>函数是第一类对象，可作为参数传递</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(fn func() int) int {  //参数可以传入函数
-    return fn()
-}
-
-type FormatFunc func(s string, x, y int) string //定义函数类型
-
-func format(fn FormatFunc, s string, x, y int) string {
-    return fn(s, x, y)
-}
-
-func main() {
-    s1 := test(func() int { return 100 })
-    s2 := format(func(s string, x, y int) string {
-        return fmt.Sprintf(s, x, y)
-    }, &quot;%d, %d&quot;, 10, 20)
-
-    println(s1, s2)
-}
-</code></pre><h6 id="只能有一个，且必须是最后一个"><a href="#只能有一个，且必须是最后一个" class="headerlink" title="只能有一个，且必须是最后一个"></a>只能有一个，且必须是最后一个</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(s string, n ...int) string {  //变参
-    var x int
-    for _, i := range n {
-        x += i
-    }
-
-    return fmt.Sprintf(s, x)
-}
-
-func main() {
-    println(test(&quot;sum:%d&quot;, 1, 2, 3))
-}
-</code></pre><h1 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h1><h6 id="只能用变量接收返回值或者-忽略返回值"><a href="#只能用变量接收返回值或者-忽略返回值" class="headerlink" title="只能用变量接收返回值或者_忽略返回值"></a>只能用变量接收返回值或者_忽略返回值</h6><pre><code>package main
-
-func test() (int, int) {
-    return 1,2
-}
-
-func main() {
-    a,_ := test()
-    println(a)
-}
-</code></pre><h6 id="多返回值可直接作为其他函数调用实参"><a href="#多返回值可直接作为其他函数调用实参" class="headerlink" title="多返回值可直接作为其他函数调用实参"></a>多返回值可直接作为其他函数调用实参</h6><pre><code>package main
-
-func test() (int, int) {
-    return 1,2
-}
-
-func add(x, y int) int {
-    return x+y
-}
-
-func sum(n ...int) int {    //变参
-    var x int
-    for _,i := range n {    //循环，舍弃键
-        x += i
-    }
-
-    return x
-}
-
-func main() {
-    println(add(test()))
-    println(sum(test()))
-}
-</code></pre><h6 id="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"><a href="#命名返回参数可看做与形参类似的局部变量，最后由return隐式返回" class="headerlink" title="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"></a>命名返回参数可看做与形参类似的局部变量，最后由return隐式返回</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    z = x + y
-    return  //虽然没返回z，但是函数定义了返回的值是z而且是int类型
-}
-
-func main() {
-    println(add(1, 2))
-}
-</code></pre><h6 id="命名返回的参数可被同名局部变量遮蔽，需要显示返回"><a href="#命名返回的参数可被同名局部变量遮蔽，需要显示返回" class="headerlink" title="命名返回的参数可被同名局部变量遮蔽，需要显示返回"></a>命名返回的参数可被同名局部变量遮蔽，需要显示返回</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    {   //不能在一个级别定义z，否则会报错
-        var z = x + y
-        return z    //必须要显示返回
-    }
-}
-
-func main() {
-    println(add(1, 2))
-}
-
-//命名返回参数允许defer延迟调用通过闭包读取和修改
-package main
-
-func add(x, y int) (z int) {
-    defer func() {
-        println(z)  //输出3
-        z += 100
-    }()
-    z = x + y
-    return
-}
-
-func main() {
-    println(add(1, 2))  //输出103
-}
-</code></pre><h6 id="显式return返回前，会先修改命名返回参数"><a href="#显式return返回前，会先修改命名返回参数" class="headerlink" title="显式return返回前，会先修改命名返回参数"></a>显式return返回前，会先修改命名返回参数</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    defer func() {
-        println(z)//输出结果为203
-    }()
-    z = x + y
-    println(z)//输出结果为3
-    return z + 200  //执行顺序:z = x + y =&gt; z + 200 =&gt; call defer =&gt; return
-}
-
-func main() {
-    println(add(1, 2))
-}
-</code></pre><h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><h6 id="匿名函数-做为变量"><a href="#匿名函数-做为变量" class="headerlink" title="匿名函数,做为变量"></a>匿名函数,做为变量</h6><pre><code>package main
-
-func main() {
-    fn := func() { println(&quot;hello world&quot;)}
-    fn()
-}
-</code></pre><h6 id="匿名函数，做为collection"><a href="#匿名函数，做为collection" class="headerlink" title="匿名函数，做为collection"></a>匿名函数，做为collection</h6><pre><code>package main
-
-func main() {
-    fns := [](func(x int) int) {
-        func(x int) int { return x + 1 },
-        func(x int) int { return x + 2 },
-    }
-
-    println(fns[0](100))
-}
-</code></pre><h6 id="匿名函数，做为字段"><a href="#匿名函数，做为字段" class="headerlink" title="匿名函数，做为字段"></a>匿名函数，做为字段</h6><pre><code>package main
-
-func main() {
-    d := struct {
-        fn func() string
-    }{
-        fn: func() string { return &quot;hello,world!&quot; },
-    }
-
-    println(d.fn())
-}
-</code></pre><h6 id="匿名函数，做为channel"><a href="#匿名函数，做为channel" class="headerlink" title="匿名函数，做为channel"></a>匿名函数，做为channel</h6><pre><code>package main
-
-func main() {
-    fc := make(chan func() string, 2)//声明一个chan，定义一个函数
-    fc &lt;- func() string { return &quot;Hello,World!&quot; }   //把函数的值发送给fc
-    println((&lt;-fc)())
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h6 id="不支持嵌套，重载和默认参数"><a href="#不支持嵌套，重载和默认参数" class="headerlink]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记表达式]]></title>
-    <link href="http://www.cxyteam.com/2017/02/22/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>http://www.cxyteam.com/2017/02/22/go学习笔记表达式/</id>
-    <published>2017-02-22T02:54:47.000Z</published>
-    <updated>2017-03-01T12:06:24.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" title="在程序中不可以使用的名字"></a>在程序中不可以使用的名字</h6><pre><code>break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
-package,switch,const,fallthrough,if,range,type,continue,for,import,return,var
-</code></pre><h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>+       &amp;        +=       &amp;=        &amp;&amp;       ==       !=       (       )
--       |        -=       |=        ||       &lt;        &lt;=       [       ]
-*       ^        *=       ^=        &lt;-       &gt;        &gt;=       {       }
-/       &lt;&lt;       /=       &lt;&lt;=       ++       =        :=       ,       ;
-%       &gt;&gt;       %=       &gt;&gt;=       --       !        ...      .       :
-&amp;^      &amp;^=
-</code></pre><h1 id="简单位运算符"><a href="#简单位运算符" class="headerlink" title="简单位运算符"></a>简单位运算符</h1><pre><code>0110 &amp;  1011 = 0010     //AND 都为1
-0110 |  1011 = 1111     //OR 至少一个为1
-0110 ^  1011 = 1101     //XOR 只能一个为1
-0110 &amp;^ 1011 = 0100     //AND NOT 清楚标志位 m &amp;^ n 下面的数字是n的二进制是1值为0，二进制是0值为m中对应的值
-</code></pre><h1 id="标志位操作"><a href="#标志位操作" class="headerlink" title="标志位操作"></a>标志位操作</h1><pre><code>a := 0
-a |= 1 &lt;&lt; 2             //&lt;&lt;左移运算符 比如：1&lt;&lt;2 则表示：1的二进制表示为：000...0001(这里1前面0的个数和int的位数有关,32位机器,gcc里有31个0)，那么像左移动两位则是000...000100
-a |= 1 &lt;&lt; 6             //a|=b表示的意思就是a=a|b（注意OR运算是需要先转换成二进制的）
-a = a &amp;^ (1 &lt;&lt; 6)
-</code></pre><h1 id="不支持运算符重载"><a href="#不支持运算符重载" class="headerlink" title="不支持运算符重载"></a>不支持运算符重载</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    n := 0
-    p := &amp;n
-    //b := n++          //报错
-    //if n++ == 1 {}    //报错
-    //++n               //报错
-    n++
-    *p++
-
-    fmt.Println(n, p)
-}
-</code></pre><h1 id="没有’-’，取反运算也用’-’"><a href="#没有’-’，取反运算也用’-’" class="headerlink" title="没有’~’，取反运算也用’^’"></a>没有’~’，取反运算也用’^’</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    x := 1
-    x = ^x
-
-    fmt.Println(x)
-}
-</code></pre><h1 id="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"><a href="#初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部" class="headerlink" title="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"></a>初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    //var a struct{ x int } = { 100 }     //报错
-    //var b []int = { 1, 2, 3 }           //报错
-    //c := struct { x int; y string }     //报错
-    //{
-    //}
-    var a = struct { x int } { 100 }
-    var b = []int{  //可以分行
-                    1,
-                    2,
-                    3,  //分开的话，最后一行要一个&apos;,&apos;
-    }
-
-    var c = []int{  //可以分行
-                        1,
-                        2,
-                        3}  //分开的话，最后一行要一个&apos;}&apos;
-
-    fmt.Println(a, b, c)
-}
-</code></pre><h1 id="IF语句"><a href="#IF语句" class="headerlink" title="IF语句"></a>IF语句</h1><h6 id="可省略条件表达式括号"><a href="#可省略条件表达式括号" class="headerlink" title="可省略条件表达式括号"></a>可省略条件表达式括号</h6><h6 id="支持初始化语句，可定义代码块局部变量"><a href="#支持初始化语句，可定义代码块局部变量" class="headerlink" title="支持初始化语句，可定义代码块局部变量"></a>支持初始化语句，可定义代码块局部变量</h6><h6 id="代码块左大括号必须在条件表达式尾部"><a href="#代码块左大括号必须在条件表达式尾部" class="headerlink" title="代码块左大括号必须在条件表达式尾部"></a>代码块左大括号必须在条件表达式尾部</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    x := 0
-
-    if n := &quot;abc&quot;; x&gt;10 {
-       fmt.Println(n[1])
-    } else if x &lt;0 {
-        fmt.Println(n[2])
-    } else {
-        println(n[0])
-    }
-}
-</code></pre><h1 id="不支持三元运算符"><a href="#不支持三元运算符" class="headerlink" title="不支持三元运算符"></a>不支持三元运算符</h1><pre><code>package main
-
-func main() {
-    a := 0
-    b := 1
-
-    c := a &gt; b ? a : b      //报错
-    println(c)
-}
-</code></pre><h1 id="For（循环语句）"><a href="#For（循环语句）" class="headerlink" title="For（循环语句）"></a>For（循环语句）</h1><pre><code>package main
-
-func main() {
-    s := &quot;abc&quot;
-    //常见的for循环方式
-    for i,n :=0, len(s); i &lt; n; i++ {
-        println(i)
-    }
-
-    //while的for循环方式
-    n := len(s)
-    for n &gt; 0 {
-        println(n)
-        n--
-    }
-
-    //while(true) {} 死循环
-    for {
-        println(s)
-    }
-}
-</code></pre><h1 id="Range-类似迭代器操作，返回键值"><a href="#Range-类似迭代器操作，返回键值" class="headerlink" title="Range(类似迭代器操作，返回键值)"></a>Range(类似迭代器操作，返回键值)</h1><pre><code>package main
-
-func main() {
-    s := &quot;abc&quot;
-
-    for i := range s {      //默认忽略值，只把键赋值给了i变量
-        println(i, s[i])
-    }
-
-    for _, c := range s {   //默认丢弃了键，把值赋给了c变量
-        println(c)
-    }
-
-    var d = 0
-    for range s {           //抛弃键值，只循环
-        d++
-    }
-
-    println(d)
-
-    m := map[string]int{&quot;a&quot;:1, &quot;b&quot;:2}
-    for k,v := range m {        //遍历出键值
-        println(k,v)
-    }
-}
-</code></pre><h1 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h1><pre><code>package main
-
-func main() {
-    x := []int{1, 2, 3}
-    i := 3
-    switch i {
-        case x[1]:
-            println(&quot;a&quot;)
-        case x[2], 1:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-
-
-package main
-
-func main() {
-    x := 10
-    switch x {
-        case 10:
-            println(&quot;a&quot;)
-            fallthrough //需要继续下一分支，使用fallthrough
-        case 0:
-            println(&quot;c&quot;)
-    }
-}
-
-package main
-
-func main() {
-    x := []int{1, 2, 3}
-    switch {
-        case x[1] &gt; 0:      //当做if else使用 
-            println(&quot;a&quot;)
-        case x[1] &lt; 0:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-
-package main
-
-func main() {
-    x := []int{1, 2, 3}
-    switch i := x[2]; { //带初始值
-        case i &gt; 0:
-            println(&quot;a&quot;)
-        case i &lt; 0:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-</code></pre><h1 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h1><pre><code>package main
-
-func main() {
-    var i int
-    for {
-        println(i)
-        i++
-        if i &gt; 2 {
-            goto TEST
-        }
-    }
-
-    TEST:
-        println(&quot;break&quot;)
-}
-</code></pre><h1 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h1><pre><code>package main
-
-func main() {
-    L1:
-        for x := 0;x &lt; 3; x++ {
-    L2:
-            for y := 0;y &lt; 5;y++ {
-                if y &gt; 2 {
-                    continue L2
-                }
-
-                if x &gt; 1 {
-                    break L1        //break可用于for,switch,select而continue只能用于for循环
-                }
-
-                print(x, &quot;:&quot;, y, &quot; &quot;)
-            }
-
-            println()
-        }
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" titl]]>
     </summary>
     
       <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>

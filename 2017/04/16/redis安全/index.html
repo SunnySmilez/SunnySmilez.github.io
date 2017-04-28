@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://www.cxyteam.com/img/redis-pwd/redis-net-work.png">
 <meta property="og:image" content="http://www.cxyteam.com/img/redis-pwd/redis-pwd.png">
 <meta property="og:image" content="http://www.cxyteam.com/img/redis-pwd/auth.png">
-<meta property="og:updated_time" content="2017-04-17T09:40:24.000Z">
+<meta property="og:updated_time" content="2017-04-17T12:00:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis安全">
 <meta name="twitter:description" content="应用场景场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
@@ -268,7 +268,9 @@
 </code></pre><h6 id="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><a href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题" class="headerlink" title="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"></a>这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</h6><h6 id="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><a href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接" class="headerlink" title="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"></a>举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</h6><h3 id="解决办法（设置redis密码）"><a href="#解决办法（设置redis密码）" class="headerlink" title="解决办法（设置redis密码）"></a>解决办法（设置redis密码）</h3><h6 id="打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><a href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行" class="headerlink" title="打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行"></a>打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</h6><p><img src="/img/redis-pwd/redis-net-work.png" alt="Alt text" title="打开redis公网访问"></p>
 <h6 id="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><a href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码" class="headerlink" title="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"></a>设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</h6><p><img src="/img/redis-pwd/redis-pwd.png" alt="Alt text" title="设置redis访问密码"></p>
 <h6 id="使用auth进行连接，使用auth进行连接，redis提供了auth接口"><a href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口" class="headerlink" title="使用auth进行连接，使用auth进行连接，redis提供了auth接口"></a>使用auth进行连接，使用auth进行连接，redis提供了auth接口</h6><p><img src="/img/redis-pwd/auth.png" alt="Alt text" title="auth连接"></p>
-
+<h3 id="延伸两点"><a href="#延伸两点" class="headerlink" title="延伸两点"></a>延伸两点</h3><h6 id="危险命令重命名"><a href="#危险命令重命名" class="headerlink" title="危险命令重命名"></a>危险命令重命名</h6><pre><code>编辑配置文件，添加如下行：
+    rename-command FLUSHALL &quot;&quot;
+</code></pre><h6 id="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"><a href="#使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）" class="headerlink" title="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"></a>使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）</h6>
       
     </div>
 
@@ -292,6 +294,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/18/go项目的运行/" rel="prev" title="go项目的运行">
+                go项目的运行 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -359,7 +365,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">127</span>
+              <span class="site-state-item-count">130</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -445,7 +451,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法（设置redis密码）"><span class="nav-number">1.0.1.</span> <span class="nav-text">解决办法（设置redis密码）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><span class="nav-number">1.0.1.0.0.1.</span> <span class="nav-text">打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><span class="nav-number">1.0.1.0.0.2.</span> <span class="nav-text">设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口"><span class="nav-number">1.0.1.0.0.3.</span> <span class="nav-text">使用auth进行连接，使用auth进行连接，redis提供了auth接口</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法（设置redis密码）"><span class="nav-number">1.0.1.</span> <span class="nav-text">解决办法（设置redis密码）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><span class="nav-number">1.0.1.0.0.1.</span> <span class="nav-text">打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><span class="nav-number">1.0.1.0.0.2.</span> <span class="nav-text">设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口"><span class="nav-number">1.0.1.0.0.3.</span> <span class="nav-text">使用auth进行连接，使用auth进行连接，redis提供了auth接口</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延伸两点"><span class="nav-number">1.0.2.</span> <span class="nav-text">延伸两点</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#危险命令重命名"><span class="nav-number">1.0.2.0.0.1.</span> <span class="nav-text">危险命令重命名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"><span class="nav-number">1.0.2.0.0.2.</span> <span class="nav-text">使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
