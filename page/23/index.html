@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">
-                  cut的使用
+                <a class="post-title-link" href="/2016/01/17/shell的输入输出/" itemprop="url">
+                  shell的输入输出
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T10:48:06+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-01-17T16:52:01+08:00" content="2016-01-17">
+              2016-01-17
             </time>
           </span>
 
@@ -265,15 +265,13 @@
       
         
           
-          cut使用案例1.按字节切割
-tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
-
-2.指定分隔符切割
-tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
+          read将信息传递给shell程序的重要方式之一
+自标准输入读取行后，通过shell字段切割功能（IFS）进行切分。第一个单词复制给第一个变量，第二个单词复制给第二个变量，如果单词多余变量，则剩下的单词，全赋值给最后一个变量
+例子读取终端输入name=&apos;zhangsan&apos;;pri
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/cut的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/17/shell的输入输出/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +314,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">
-                  awk的使用
+                <a class="post-title-link" href="/2016/01/17/shell语句块/" itemprop="url">
+                  shell语句块
                 </a>
               
             
@@ -330,8 +328,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:42:03+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-01-17T10:31:13+08:00" content="2016-01-17">
+              2016-01-17
             </time>
           </span>
 
@@ -377,14 +375,28 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          awk使用案例1.以每一行为输入，指定分隔符，输出指定域
-    tail -n 10 test.txt | awk -F &apos; &apos;  &apos;{print $1&quot;,\t&quot;$2}&apos;（以空格为分隔符，输出第一个域与第二个域并以,和tab连接）
-
-2.
+          if-elif-else-fi用法（方括号为可选部分）if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+例子#!/bin/bash
+if
+        ls | grep &apos;demo.log&apos
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/awk的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/17/shell语句块/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -427,8 +439,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">
-                  sed的使用
+                <a class="post-title-link" href="/2016/01/10/shell预定义变量及标准变量/" itemprop="url">
+                  shell预定义变量及标准变量
                 </a>
               
             
@@ -441,8 +453,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:41:56+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-01-10T16:14:12+08:00" content="2016-01-10">
+              2016-01-10
             </time>
           </span>
 
@@ -488,14 +500,20 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          sed使用场景1.获取指定行数
-sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
-sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
-sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
+          export,readonly
+export 用于修改或打印环境变量
+
+export name[=word] 修改环境变量 export PATH=$PATH:/home/bin
+export -p 打印出环境变量的名称与值
+
+
+readonly 使变量不能修改
+
+readonly name[=wo
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/10/shell预定义变量及标准变量/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -538,8 +556,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">
-                  shell常识
+                <a class="post-title-link" href="/2016/01/05/2015年个人总结/" itemprop="url">
+                  2015年个人总结
                 </a>
               
             
@@ -552,8 +570,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T09:53:00+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-01-05T20:37:22+08:00" content="2016-01-05">
+              2016-01-05
             </time>
           </span>
 
@@ -566,8 +584,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -599,17 +617,22 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
       
         
           
-          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
+          阅读
+选书：
 
-环境
+先选择大概一个学习的方向，比如说mysql，redis，linux等
+再选择典型性的书籍（每个方面都会有几本特别经典的书籍）
+
+
+阅读：
+
+先查阅目录，思考为什么会是这些章节，这个技术大概涵盖哪些内容
+再选择阅读的章节，思考作者写作思路，为什么先写这块知识，再写这块，有什么必然联系
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+            <a class="btn" href="/2016/01/05/2015年个人总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -652,8 +675,8 @@ echo $PATH（查看环境变量）
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">
-                  获取终端输出
+                <a class="post-title-link" href="/2015/12/29/wc的使用/" itemprop="url">
+                  wc的使用
                 </a>
               
             
@@ -666,8 +689,8 @@ echo $PATH（查看环境变量）
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T00:04:53+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2015-12-29T10:05:34+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -713,16 +736,12 @@ echo $PATH（查看环境变量）
       
         
           
-          获取终端输出两种方式
-方法一：  who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）
+          ###
 
-方法二：  cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/获取终端输出/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/wc的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +768,7 @@ echo $PATH（查看环境变量）
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/24/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/24/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -790,7 +809,7 @@ echo $PATH（查看环境变量）
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -798,7 +817,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -807,7 +826,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

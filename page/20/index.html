@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/27/seq的使用/" itemprop="url">
-                  seq的使用
+                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
+                  linux目录结构
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T22:19:37+08:00" content="2016-01-27">
-              2016-01-27
+            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
+              2016-03-13
             </time>
           </span>
 
@@ -265,122 +265,19 @@
       
         
           
-          ###
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/seq的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/27/top的使用/" itemprop="url">
-                  top的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T09:29:17+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          top命令的作用使用来监控linux系统状况.包括CPU、内存、运行时间、交换分区、执行的线程等信息
-top值详解top - 15:57:23 up 56 min,  2 users,  load average: 0.00, 0.00, 0.00
-Tasks: 114 total,   1 run
+          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/top的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -423,8 +320,8 @@ Tasks: 114 total,   1 run
             
               
                 
-                <a class="post-title-link" href="/2016/01/27/lsof的使用/" itemprop="url">
-                  lsof的使用
+                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
+                  linux系统优化
                 </a>
               
             
@@ -437,8 +334,8 @@ Tasks: 114 total,   1 run
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T09:29:07+08:00" content="2016-01-27">
-              2016-01-27
+            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
+              2016-03-13
             </time>
           </span>
 
@@ -484,14 +381,13 @@ Tasks: 114 total,   1 run
       
         
           
-          lsof命令的作用
-用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。
-
-lsof详解COMMAND  PID  USER   FD   TYPE     
+          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
+调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
+    net.ipv4.tcp_fin_timeout=2    
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/lsof的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -534,8 +430,8 @@ lsof详解COMMAND  PID  USER   FD   TYPE
             
               
                 
-                <a class="post-title-link" href="/2016/01/26/du命令使用/" itemprop="url">
-                  du命令使用
+                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">
+                  ssh配置修改
                 </a>
               
             
@@ -548,8 +444,8 @@ lsof详解COMMAND  PID  USER   FD   TYPE
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-26T23:58:02+08:00" content="2016-01-26">
-              2016-01-26
+            <time itemprop="dateCreated" datetime="2016-03-09T22:52:57+08:00" content="2016-03-09">
+              2016-03-09
             </time>
           </span>
 
@@ -595,12 +491,14 @@ lsof详解COMMAND  PID  USER   FD   TYPE
       
         
           
-          ###
-
-          
+          调试ssh -v vagrant@172.16.17.11
+备份cp /etc/ssh/sshd_config /etc/ssh/sshd_config
+sshd_config修改端口(端口范围:0-65535)Port 2231
+不允许root用户通过ssh登录PermitRootLogin no
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/26/du命令使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/09/ssh配置修改/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -643,8 +541,8 @@ lsof详解COMMAND  PID  USER   FD   TYPE
             
               
                 
-                <a class="post-title-link" href="/2016/01/26/set的使用/" itemprop="url">
-                  set的使用
+                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">
+                  替换yum源
                 </a>
               
             
@@ -657,8 +555,8 @@ lsof详解COMMAND  PID  USER   FD   TYPE
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-26T12:56:29+08:00" content="2016-01-26">
-              2016-01-26
+            <time itemprop="dateCreated" datetime="2016-03-09T22:07:54+08:00" content="2016-03-09">
+              2016-03-09
             </time>
           </span>
 
@@ -704,12 +602,130 @@ lsof详解COMMAND  PID  USER   FD   TYPE
       
         
           
-          ###
+          设置yum源为163的镜像原# 进入yum源目录
+    cd /etc/yum.repos.d
+
+# 下载国内yum源
+    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
+
+# 备份之前的yum源
+ mv
+cp Cent
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/09/替换yum源/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/08/linux系统设备只是介绍/" itemprop="url">
+                  linux系统设备只是介绍
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-08T21:15:36+08:00" content="2016-03-08">
+              2016-03-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
 
           
 
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          磁盘分区# 磁盘在使用前先要进行分区
+# 磁盘主要分为:主分区,拓展分区,逻辑分区
+# 一块硬盘最多可有4个主分区,其中一个主分区的位置可以用一个拓展分区代替,且一块硬盘只能有一个扩展分区3p+e(primary+ext)
+# 扩展分区不能用,必须在扩展分区上划分多个逻辑分区,然后格式化(创建文件系
+          ...
+
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/26/set的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/08/linux系统设备只是介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -736,7 +752,7 @@ lsof详解COMMAND  PID  USER   FD   TYPE
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -777,7 +793,7 @@ lsof详解COMMAND  PID  USER   FD   TYPE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -785,7 +801,7 @@ lsof详解COMMAND  PID  USER   FD   TYPE
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -794,7 +810,7 @@ lsof详解COMMAND  PID  USER   FD   TYPE
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

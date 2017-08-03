@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">
-                  Primary script unknown排查
+                <a class="post-title-link" href="/2016/12/19/rsyslog搭建日志系统/" itemprop="url">
+                  rsyslog搭建日志系统
                 </a>
               
             
@@ -218,30 +218,11 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T12:21:14+08:00" content="2016-10-21">
-              2016-10-21
+            <time itemprop="dateCreated" datetime="2016-12-19T19:09:44+08:00" content="2016-12-19">
+              2016-12-19
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -265,125 +246,14 @@
       
         
           
-          现象#    tcpdump  -i  lo -Anns0 port 9000
-#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/16/C语言进程间通信/" itemprop="url">
-                  C语言进程间通信
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-16T16:02:11+08:00" content="2016-10-16">
-              2016-10-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          数据流标准输入:stdin          对应描述符:0
-标准输出:stdout         对应描述符:1
-标准错误:stderr         对应描述符:2
-重定向数据流重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
-重定向输入数据流 &
+          安装rsyslog, 请跳转：安装rsyslog整体部署如图所示：
+配置client日志收集到本地在/etc/rsyslog.conf中添加一行*.* /tmp/rsyslog.log
+注释一行#$IncludeConfig /etc/rsyslog.d/*.conf
+配置日志收集到本地样例检验配置
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/16/C语言进程间通信/#more" rel="contents">
+            <a class="btn" href="/2016/12/19/rsyslog搭建日志系统/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -426,8 +296,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/14/C语言进程与系统调用/" itemprop="url">
-                  C语言进程与系统调用
+                <a class="post-title-link" href="/2016/12/14/安装lnmp环境/" itemprop="url">
+                  安装lnmp环境
                 </a>
               
             
@@ -440,8 +310,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-14T10:34:53+08:00" content="2016-10-14">
-              2016-10-14
+            <time itemprop="dateCreated" datetime="2016-12-14T15:21:17+08:00" content="2016-12-14">
+              2016-12-14
             </time>
           </span>
 
@@ -454,8 +324,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -487,14 +357,12 @@
       
         
           
-          execl,execlp,execle第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
-第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
-中间都被当做脚本所需要的参数
-最后一个参数是NULL,告诉函
+          注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）安装nginx依赖yum install gcc zlib-devel pcre-devel openssl-devel gcc-c++ gcc-g77
+安装nginxwget 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/14/C语言进程与系统调用/#more" rel="contents">
+            <a class="btn" href="/2016/12/14/安装lnmp环境/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -537,8 +405,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">
-                  C语言静态库和动态库
+                <a class="post-title-link" href="/2016/12/06/rsyslog配置/" itemprop="url">
+                  rsyslog配置
                 </a>
               
             
@@ -551,8 +419,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-11T16:51:13+08:00" content="2016-09-11">
-              2016-09-11
+            <time itemprop="dateCreated" datetime="2016-12-06T21:23:37+08:00" content="2016-12-06">
+              2016-12-06
             </time>
           </span>
 
@@ -565,8 +433,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -598,22 +466,13 @@
       
         
           
-          实现文件共享例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --encrypt.h
-|--checksum.c
-|--encrypt.c
-|--test.c
-|--myObject
-
-在myHeader文件中建立头文件checksum.h
-int checksum(
+          推荐阅读http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
+http://huoding.com/2014/05/09/347
+http://blog.clanzx.net/2013/12/31/rsyslog.html
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
+            <a class="btn" href="/2016/12/06/rsyslog配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -656,8 +515,8 @@ int checksum(
             
               
                 
-                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">
-                  代码设计
+                <a class="post-title-link" href="/2016/12/01/linux配置网络/" itemprop="url">
+                  linux配置网络
                 </a>
               
             
@@ -670,8 +529,8 @@ int checksum(
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-09T17:29:39+08:00" content="2016-09-09">
-              2016-09-09
+            <time itemprop="dateCreated" datetime="2016-12-01T12:01:52+08:00" content="2016-12-01">
+              2016-12-01
             </time>
           </span>
 
@@ -684,8 +543,8 @@ int checksum(
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -717,11 +576,129 @@ int checksum(
       
         
           
-          暂未找到合适的表述方法
-          
+          关闭NetworkManager服务service NetworkManager stop
+chkconfig NetworkManager off
+设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
+nameserver 8.8.8.8
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
+            <a class="btn" href="/2016/12/01/linux配置网络/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/04/redis源码-目录结构/" itemprop="url">
+                  redis源码-目录结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-04T09:15:12+08:00" content="2016-11-04">
+              2016-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          目录结构|
+|--deps
+|
+|-- src
+   -- adlist.c          双链表结构,用于定义list
+   -- ae.c              用于事件的处理
+   -- ae_epoll.c        处理epoll事件
+   -- ae_evport.c    
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/04/redis源码-目录结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -748,7 +725,7 @@ int checksum(
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -789,7 +766,7 @@ int checksum(
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -797,7 +774,7 @@ int checksum(
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -806,7 +783,7 @@ int checksum(
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

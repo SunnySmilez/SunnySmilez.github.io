@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">
-                  分页的思考
+                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">
+                  awk的使用
                 </a>
               
             
@@ -218,354 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T16:53:46+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          需求
-交易记录条数过多，需要分页处理
-
-坑
-当进行翻页的时候会有重复的数据数据出现。
-原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/分页的思考/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/04/decrby的一个坑/" itemprop="url">
-                  decrby的一个坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T12:56:11+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          需求
-随着销售的进行，理财产品的总剩余额度需要进行记录
-
-坑
-使用了redis进行落地存储，并使用decrby进行递减操作，结果数字到达一定的值以后不进行递减少了
-
-选择理由
-销售总金额的变化频繁，所以采用redis进行存储
-用decrby不用get，set依次操作的的理由是把数据的减少操作交给re
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/decrby的一个坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/04/float遇到的一个坑/" itemprop="url">
-                  float遇到的一个坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T12:50:05+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          需求
-数据库需要存储金钱的数值单位为元，保留两位小数，需要选择mysql数据类型
-
-坑
-使用了float进行存储，结果导致了，内部的金额计算会有部分错误
-
-选择理由
-decimal用于存储精确的小数，支持精确计算（5.0以后），会影响列到空间消耗
-float使用4个字节存储
-浮点类型存储同样返回的值
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/float遇到的一个坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/04/Strace命令使用/" itemprop="url">
-                  Strace命令使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T00:00:59+08:00" content="2015-11-04">
-              2015-11-04
+            <time itemprop="dateCreated" datetime="2015-12-24T09:42:03+08:00" content="2015-12-24">
+              2015-12-24
             </time>
           </span>
 
@@ -611,16 +265,14 @@ float使用4个字节存储
       
         
           
-          主要功能
-会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值，每一行都是一条系统调用，等号左边是系统调用的函数名及其参数，右边是该调用的返回值
+          awk使用案例1.以每一行为输入，指定分隔符，输出指定域
+    tail -n 10 test.txt | awk -F &apos; &apos;  &apos;{print $1&quot;,\t&quot;$2}&apos;（以空格为分隔符，输出第一个域与第二个域并以,和tab连接）
 
-我的应用场景
-strace mysql（找不到配置文件的时候，可以使用它查看它打开文件的记录，了解到配置文件的路径.）
-ps aux |
+2.
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/Strace命令使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/24/awk的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -663,8 +315,8 @@ ps aux |
             
               
                 
-                <a class="post-title-link" href="/2015/05/29/Mysql-InnnoDB需要学习那些内容/" itemprop="url">
-                  Mysql InnnoDB需要学习那些内容
+                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">
+                  sed的使用
                 </a>
               
             
@@ -677,8 +329,8 @@ ps aux |
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-29T23:01:40+08:00" content="2015-05-29">
-              2015-05-29
+            <time itemprop="dateCreated" datetime="2015-12-24T09:41:56+08:00" content="2015-12-24">
+              2015-12-24
             </time>
           </span>
 
@@ -691,8 +343,8 @@ ps aux |
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -724,11 +376,354 @@ ps aux |
       
         
           
-          Myslq 体系结构Myslq 存储引擎了解及对比InnoDB 体系结构InnoDB 工作方式InnoDB 特性InnoDB 涉及的文件InnoDB 表的存储方式InnoDB 索引及算法InnoDB 锁InnoDB 事务InnoDB 备份和恢复InnoDB 性能调优
-          
+          sed使用场景1.获取指定行数
+sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
+sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
+sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/29/Mysql-InnnoDB需要学习那些内容/#more" rel="contents">
+            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">
+                  shell常识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-22T09:53:00+08:00" content="2015-12-22">
+              2015-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
+echo $PATH（查看目前执行shell寻找的目录）
+:（表示查找的优先级）
+PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
+echo $PATH（查看环境变量）
+
+环境
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">
+                  获取终端输出
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-22T00:04:53+08:00" content="2015-12-22">
+              2015-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          获取终端输出两种方式
+方法一：  who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
+  tail -n 100 output.txt（查看文件的末尾100行）
+
+方法二：  cat &gt; output.txt（建立文件使用cat复制终端输出）
+  who（终端输
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/获取终端输出/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/20/性能分析命令/" itemprop="url">
+                  性能分析命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-20T10:35:45+08:00" content="2015-12-20">
+              2015-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          环境准备
+首先你得拥有一个linux环境
+安装sysstat包 yum install sysstat
+安装procps包 yum install procps
+
+需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  l
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/20/性能分析命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -755,7 +750,7 @@ ps aux |
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -796,7 +791,7 @@ ps aux |
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -804,7 +799,7 @@ ps aux |
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -813,7 +808,7 @@ ps aux |
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

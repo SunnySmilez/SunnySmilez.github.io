@@ -1,0 +1,937 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="docker安装（mac）docker查询命令docker info查看docker信息
+docker ps -a查看所有的容器，包括运行的和退出的
+docker ps查看所有的运行的容器
+docker inspect container_id/names查看容器的详细信息
+docker search tutorial搜索nginx镜像
+docker pull egamas/docker-tuto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker命令">
+<meta property="og:url" content="http://www.cxyteam.com/2017/06/01/docker入门/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="docker安装（mac）docker查询命令docker info查看docker信息
+docker ps -a查看所有的容器，包括运行的和退出的
+docker ps查看所有的运行的容器
+docker inspect container_id/names查看容器的详细信息
+docker search tutorial搜索nginx镜像
+docker pull egamas/docker-tuto">
+<meta property="og:updated_time" content="2017-06-20T01:24:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker命令">
+<meta name="twitter:description" content="docker安装（mac）docker查询命令docker info查看docker信息
+docker ps -a查看所有的容器，包括运行的和退出的
+docker ps查看所有的运行的容器
+docker inspect container_id/names查看容器的详细信息
+docker search tutorial搜索nginx镜像
+docker pull egamas/docker-tuto">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> docker命令 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                docker命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-01T19:24:33+08:00" content="2017-06-01">
+              2017-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="#docker查询命令" class="headerlink" title="docker查询命令"></a>docker查询命令</h1><h6 id="docker-info"><a href="#docker-info" class="headerlink" title="docker info"></a>docker info</h6><pre><code>查看docker信息
+</code></pre><h6 id="docker-ps-a"><a href="#docker-ps-a" class="headerlink" title="docker ps -a"></a>docker ps -a</h6><pre><code>查看所有的容器，包括运行的和退出的
+</code></pre><h6 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h6><pre><code>查看所有的运行的容器
+</code></pre><h6 id="docker-inspect-container-id-names"><a href="#docker-inspect-container-id-names" class="headerlink" title="docker inspect container_id/names"></a>docker inspect container_id/names</h6><pre><code>查看容器的详细信息
+</code></pre><h6 id="docker-search-tutorial"><a href="#docker-search-tutorial" class="headerlink" title="docker search tutorial"></a>docker search tutorial</h6><pre><code>搜索nginx镜像
+</code></pre><h6 id="docker-pull-egamas-docker-tutorial"><a href="#docker-pull-egamas-docker-tutorial" class="headerlink" title="docker pull egamas/docker-tutorial"></a>docker pull egamas/docker-tutorial</h6><pre><code>拉取egamas/docker-tutorial镜像
+</code></pre><h6 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h6><pre><code>查看所有的镜像
+docker image - since=mongo:3.2
+docker images -before=mongo:3.2
+</code></pre><h6 id="docker-attach-container-id-names"><a href="#docker-attach-container-id-names" class="headerlink" title="docker attach container_id/names"></a>docker attach container_id/names</h6><pre><code>登录web容器
+</code></pre><h6 id="docker-exec-it-container-names-bin-bash"><a href="#docker-exec-it-container-names-bin-bash" class="headerlink" title="docker exec -it  container_names /bin/bash"></a>docker exec -it  container_names /bin/bash</h6><pre><code>登录容器中(容器已经启动的)
+</code></pre><h6 id="docker-rm-container-id-names"><a href="#docker-rm-container-id-names" class="headerlink" title="docker rm container_id/names"></a>docker rm container_id/names</h6><pre><code>删除停止状态的容器
+</code></pre><h6 id="docker-rm-f-container-id-names"><a href="#docker-rm-f-container-id-names" class="headerlink" title="docker rm -f container_id/names"></a>docker rm -f container_id/names</h6><pre><code>删除开启状态的容器
+</code></pre><h6 id="docker-push-source"><a href="#docker-push-source" class="headerlink" title="docker push source"></a>docker push source</h6><h6 id="docker-port-id"><a href="#docker-port-id" class="headerlink" title="docker port id"></a>docker port id</h6><h6 id="docker-top-id"><a href="#docker-top-id" class="headerlink" title="docker top id"></a>docker top id</h6><h6 id="docker-rmi-image-id"><a href="#docker-rmi-image-id" class="headerlink" title="docker rmi image_id"></a>docker rmi image_id</h6><pre><code>删除镜像
+</code></pre><h6 id="docker-image-rm-id"><a href="#docker-image-rm-id" class="headerlink" title="docker image rm id"></a>docker image rm id</h6><h6 id="docker-diff-image-name"><a href="#docker-diff-image-name" class="headerlink" title="docker diff image_name"></a>docker diff image_name</h6><pre><code>查看容器的具体变更内容（和基础的镜像相比，所作的变更，比如说在容器中安装了vim，这个时候就会显示出具体安装vim新增的文件）
+</code></pre><h6 id="docker-commit-container-id-image-id"><a href="#docker-commit-container-id-image-id" class="headerlink" title="docker commit container_id image_id"></a>docker commit container_id image_id</h6><pre><code>将修改的容器内容提交到镜像中，形成新的基础镜像(一般来说不这么干，都用Dockerfile)
+</code></pre><h6 id="docker-build-t-image-name-PATH"><a href="#docker-build-t-image-name-PATH" class="headerlink" title="docker build -t image_name PATH"></a>docker build -t image_name PATH</h6><pre><code>在PATH目录下，按照Dockerfile建立一个新的image_name镜像
+path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
+</code></pre><h6 id="docker-import-SOURCE-PATH-TARGET-PATH"><a href="#docker-import-SOURCE-PATH-TARGET-PATH" class="headerlink" title="docker import SOURCE_PATH TARGET_PATH"></a>docker import SOURCE_PATH TARGET_PATH</h6><pre><code>   docker import \
+       http://download.openvz.org/template/precreated/ubuntu-14.04-x86_64-minimal.tar.gz \
+       web1/ubuntu:14.04
+
+http://www.kancloud.cn/lyric/docker-intro/79899
+</code></pre><h6 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h6><pre><code>保存镜像为归档文件
+docker save web | gzip &gt; web.tar.gz
+</code></pre><h6 id="dcoker-load"><a href="#dcoker-load" class="headerlink" title="dcoker load"></a>dcoker load</h6><pre><code>将归档文件复制到另一个机器上
+docker load -i web.tar.gz
+</code></pre><h6 id="docker-run-option-image-name-command"><a href="#docker-run-option-image-name-command" class="headerlink" title="docker run [option] image_name [command]"></a>docker run [option] image_name [command]</h6><pre><code>启动容器
+在终端输出:hello world(注意nginx是镜像名称，在运行之后会创建一个容器，可执行docker ps -a查看，然后使用docker rm 进行删除)
+    sudo docker run nginx /bin/echo &apos;Hello world&apos;
+
+ 创建一个基于image_name的镜像（以nginx为镜像构建一个容器，命名为web）  
+       docker run -t -i --name web nginx /bin/bash 
+
+ 运行bash终端，允许用户进行交互(-t分配给docker一个伪终端，-i让容器的标准输入保持打开)
+    sudo docker run -it nginx /bin/bash
+
+ docker run创建容器时，Docker会在后台运行包含以下：
+    检查本地是否存在指定的镜像，不存在就从公有仓库下载
+    利用镜像创建并启动一个容器
+    分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+    从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+    从地址池配置一个 ip 地址给容器
+    执行用户指定的应用程序
+    执行完毕后容器被终止
+</code></pre><h6 id="docker-start-container-id-names"><a href="#docker-start-container-id-names" class="headerlink" title="docker start container_id/names"></a>docker start container_id/names</h6><pre><code>运行容器
+</code></pre><h6 id="docker-stop-container-id-names"><a href="#docker-stop-container-id-names" class="headerlink" title="docker stop container_id/names"></a>docker stop container_id/names</h6><pre><code>停止运行容器    
+</code></pre><h6 id="docker-后台运行"><a href="#docker-后台运行" class="headerlink" title="docker 后台运行"></a>docker 后台运行</h6><pre><code>-d 让Dockre在后台运行而不是直接把执行命令的结果输出在当前宿主机下
+sudo docker run nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+sudo docker run -d nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+</code></pre><h6 id="docker-logs-container-id"><a href="#docker-logs-container-id" class="headerlink" title="docker logs [container_id]"></a>docker logs [container_id]</h6><pre><code>获取容器的输出信息
+</code></pre><h6 id="进入Docker容器"><a href="#进入Docker容器" class="headerlink" title="进入Docker容器"></a>进入Docker容器</h6><pre><code>attach
+    sudo docker run -idt nginx
+    sudo docker ps
+    sudo docker attach quizzical_kilby
+    多个窗口同时 attach 到同一个容器的时候，所有窗口都会同步显示。当某个窗口因命令阻塞时,其他窗口也无法执行操作了
+
+nsenter
+    这个太复杂了，反正我也不会用
+</code></pre><h6 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h6><pre><code>导出容器快照到本地文件
+docker export web &gt; web.tar
+</code></pre><h6 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h6><pre><code>导入本地容器快照为镜像
+docker import web.tar test
+</code></pre><h6 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h6><pre><code>数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性
+数据卷可以在容器之间共享和重用
+对数据卷的修改会立马生效
+对数据卷的更新，不会影响镜像
+数据卷默认会一直存在，即使容器被删除
+注意：数据卷的使用，类似于 Linux 下对目录或文件进行 mount，镜像中的被指定为挂载点的目录中的文件会隐藏掉，能显示看的是挂载的数据卷。
+</code></pre><h6 id="创建数据卷"><a href="#创建数据卷" class="headerlink" title="创建数据卷"></a>创建数据卷</h6><pre><code>docker run -d -P --name web -v /webapp nginx
+可以使用:docker exec -it web /bin/bash登录容器进行查看
+</code></pre><h6 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h6><pre><code>docker rm -fv web
+-v移除数据卷
+</code></pre><h6 id="挂载一个主机目录作为数据卷（也可以挂载文件）"><a href="#挂载一个主机目录作为数据卷（也可以挂载文件）" class="headerlink" title="挂载一个主机目录作为数据卷（也可以挂载文件）"></a>挂载一个主机目录作为数据卷（也可以挂载文件）</h6><pre><code>第一反应的作用是，本地可以写代码不用上传了，实时的在docker中运行
+docker run -d -P --name web -v /src/webapp:/opt/webapp nginx
+主机目录：/src/webapp 容器目录：/opt/webapp
+</code></pre><h6 id="查看数据卷的信息"><a href="#查看数据卷的信息" class="headerlink" title="查看数据卷的信息"></a>查看数据卷的信息</h6><pre><code>docker inspect web
+可以看到volumes字样
+</code></pre><h6 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h6><pre><code>数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
+创建一个容器（作为数据卷）：
+    docker run -d -v /dbdata --name dbdata nginx
+把dbdata容器指定为数据卷容器：
+    docker run -d --volumes-from dbdata --name db1 nginx
+</code></pre><h6 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h6><pre><code>sudo docker run --volumes-from dbdata -v $(pwd):/backup nginx tar cvf /backup/backup.tar /dbdata
+首先使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从主机挂载当前目录到容器的 /backup 目录，容器启动后，使用了 tar 命令来将 dbdata 卷备份为容器中 /backup/backup.tar 文件，也就是主机当前目录下的名为 backup.tar 的文件
+</code></pre><h6 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h6><pre><code>如果要恢复数据到一个容器，首先创建一个带有空数据卷的容器 dbdata2
+docker run -v /dbdata --name dbdata2 nginx /bin/bash
+
+然后创建另一个容器，挂载 dbdata2 容器卷中的数据卷，并使用 untar 解压备份文件到挂载的容器卷中
+sudo docker run --volumes-from dbdata2 -v $(pwd):/backup nginx tar xvf /backup/backup.tar
+
+为了查看/验证恢复的数据，可以再启动一个容器挂载同样的容器卷来查看
+sudo docker run --volumes-from dbdata2 nginx /bin/ls /dbdata
+</code></pre><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h6 id="映射到指定端口"><a href="#映射到指定端口" class="headerlink" title="映射到指定端口"></a>映射到指定端口</h6><pre><code>docker run -d -p 5000:5000 --name web2 nginx
+docker run -d -p 5000:5000 -p 80:80 --name=web2 nginx
+</code></pre><h6 id="查看映射端口配置"><a href="#查看映射端口配置" class="headerlink" title="查看映射端口配置"></a>查看映射端口配置</h6><pre><code>docker port web2 5000
+</code></pre><h6 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h6><pre><code>docker run -d -P --name web2 --link web1:web1 nginx
+
+--link参数的格式为 --link name:alias，其中name是要连接容器的名称，alias是这个连接的别名
+Docker 在两个互联的容器之间创建了一个安全隧道，而且不用映射它们的端口到宿主主机上
+在启动 db 容器的时候并没有使用 -p 和 -P 标记，从而避免了暴露数据库端口到外部网络上
+
+Docker 通过两种方式为容器公开连接信息：
+环境变量
+    docker exec -it web2 /bin/bash  (登录docker容器)
+    env （使用env查看web2容器环境变量）
+
+    查询结果如下
+    HOSTNAME=b64578555fd9
+    WEB1_PORT_80_TCP=tcp://172.17.0.2:80
+    NJS_VERSION=1.13.1.0.1.10-1~stretch
+    NGINX_VERSION=1.13.1-1~stretch
+    WEB1_PORT_80_TCP_PROTO=tcp
+    WEB1_PORT_80_TCP_ADDR=172.17.0.2
+    WEB1_PORT=tcp://172.17.0.2:80
+    PWD=/
+    HOME=/root
+    WEB1_ENV_NGINX_VERSION=1.13.1-1~stretch
+    WEB1_PORT_80_TCP_PORT=80
+    TERM=xterm
+    SHLVL=1
+    WEB1_NAME=/web2/web1
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    WEB1_ENV_NJS_VERSION=1.13.1.0.1.10-1~stretch
+    _=/usr/bin/env
+
+    以WEB1_开头的环境变量是供web2容器连接web1容器使用
+
+
+添加host信息到父容器的/etc/hosts的文件    
+    docker exec -it web2 /bin/bash  (登录docker容器)
+    cat /etc/hosts(查看hosts文件)
+
+    127.0.0.1    localhost
+    ::1    localhost ip6-localhost ip6-loopback
+    fe00::0    ip6-localnet
+    ff00::0    ip6-mcastprefix
+    ff02::1    ip6-allnodes
+    ff02::2    ip6-allrouters
+    172.17.0.2    web1 979e62ebf622
+    172.17.0.3    b64578555fd9
+
+    docker exec -it web1 /bin/bash  (登录docker容器)
+    cat /etc/hosts(查看hosts文件)
+    127.0.0.1    localhost
+    ::1    localhost ip6-localhost ip6-loopback
+    fe00::0    ip6-localnet
+    ff00::0    ip6-mcastprefix
+    ff02::1    ip6-allnodes
+    ff02::2    ip6-allrouters
+    172.17.0.2    979e62ebf622
+</code></pre><h3 id="高级网络配置"><a href="#高级网络配置" class="headerlink" title="高级网络配置"></a>高级网络配置</h3><pre><code>下面是一个跟 Docker 网络相关的命令列表，其中有些命令选项只有在 Docker 服务启动的时候才能配置，而且不能马上生效。
+      -b BRIDGE or --bridge=BRIDGE --指定容器挂载的网桥
+      --bip=CIDR --定制 docker0 的掩码
+      -H SOCKET... or --host=SOCKET... --Docker 服务端接收命令的通道
+      --icc=true|false --是否支持容器之间进行通信
+      --ip-forward=true|false --请看下文容器之间的通信
+      --iptables=true|false --是否允许 Docker 添加 iptables 规则
+      --mtu=BYTES --容器网络中的 MTU
+
+下面2个命令选项既可以在启动服务时指定，也可以 Docker 容器启动（docker run）时候指定
+    --dns=IP_ADDRESS... --使用指定的DNS服务器
+    --dns-search=DOMAIN... --指定DNS搜索域
+</code></pre><h3 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h3><pre><code>利用虚拟文件来挂载到来容器的 3 个相关配置文件
+
+在容器中使用mount可以看到挂载信息
+    /dev/vda1 on /etc/resolv.conf type ext4 (rw,relatime,data=ordered)
+    /dev/vda1 on /etc/hostname type ext4 (rw,relatime,data=ordered)
+    /dev/vda1 on /etc/hosts type ext4 (rw,relatime,data=ordered)
+
+ 这种机制可以让宿主主机 DNS 信息发生更新后，所有 Docker 容器的 dns 配置通过 /etc/resolv.conf 文件立刻得到更新
+</code></pre><h6 id="配置hostname"><a href="#配置hostname" class="headerlink" title="配置hostname"></a>配置hostname</h6><pre><code>-h HOSTNAME or --hostname=HOSTNAM
+注意：HOSTNAME会被写到容器内的 /etc/hostname 和 /etc/hosts；但它在容器外部看不到，既不会在 docker ps 中显示，也不会在其他的容器的 /etc/hosts 看到
+</code></pre><h6 id="配置alias"><a href="#配置alias" class="headerlink" title="配置alias"></a>配置alias</h6><pre><code>--link=CONTAINER_NAME:ALIAS
+在创建容器的时候，添加一个其他容器的主机名到 /etc/hosts 文件中，让新容器的进程可以使用主机名 ALIAS 就可以连接它
+</code></pre><h6 id="添加dns"><a href="#添加dns" class="headerlink" title="添加dns"></a>添加dns</h6><pre><code>--dns=IP_ADDRESS
+添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在 /etc/hosts 中的主机名
+</code></pre><h6 id="设定搜索域"><a href="#设定搜索域" class="headerlink" title="设定搜索域"></a>设定搜索域</h6><pre><code>--dns-search=DOMAIN
+设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com
+</code></pre><h3 id="容器访问控制"><a href="#容器访问控制" class="headerlink" title="容器访问控制"></a>容器访问控制</h3><pre><code>主要是通过linux上的iptables防火墙进行管理和实现的
+</code></pre><h6 id="容器访问外部网络"><a href="#容器访问外部网络" class="headerlink" title="容器访问外部网络"></a>容器访问外部网络</h6><pre><code>sysctl net.ipv4.ip_forward  查看是否值为1，如果不是则：
+sysctl -w net.ipv4.ip_forward=1
+或者在启动的时候设定：--ip-forward=true
+</code></pre><h6 id="容器之间访问"><a href="#容器之间访问" class="headerlink" title="容器之间访问"></a>容器之间访问</h6><pre><code>容器的网络拓扑是否已经互联
+本地系统的防火墙软件
+</code></pre><h6 id="访问所有端口"><a href="#访问所有端口" class="headerlink" title="访问所有端口"></a>访问所有端口</h6><pre><code>当启动 Docker 服务时候，默认会添加一条转发策略到 iptables 的 FORWARD 链上。策略为通过（ACCEPT）还是禁止（DROP）取决于配置--icc=true（缺省值）还是 --icc=false。当然，如果手动指定 --iptables=false 则不会添加 iptables 规则。
+可见，默认情况下，不同容器之间是允许网络互通的。如果为了安全考虑，可以在 /etc/default/docker 文件中配置 DOCKER_OPTS=--icc=false 来禁止它
+</code></pre><h6 id="访问指定端口"><a href="#访问指定端口" class="headerlink" title="访问指定端口"></a>访问指定端口</h6><pre><code>在通过 -icc=false 关闭网络访问后，还可以通过 --link=CONTAINER_NAME:ALIAS 选项来访问容器的开放端口
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag">#Docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/12/编写makefile/" rel="next" title="编写makefile">
+                <i class="fa fa-chevron-left"></i> 编写makefile
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/02/docker的应用场景/" rel="prev" title="docker的应用场景">
+                docker的应用场景 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">140</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker安装（mac）"><span class="nav-number">1.</span> <span class="nav-text">docker安装（mac）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker查询命令"><span class="nav-number">2.</span> <span class="nav-text">docker查询命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-info"><span class="nav-number">2.0.0.0.0.1.</span> <span class="nav-text">docker info</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-ps-a"><span class="nav-number">2.0.0.0.0.2.</span> <span class="nav-text">docker ps -a</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-ps"><span class="nav-number">2.0.0.0.0.3.</span> <span class="nav-text">docker ps</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-inspect-container-id-names"><span class="nav-number">2.0.0.0.0.4.</span> <span class="nav-text">docker inspect container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-search-tutorial"><span class="nav-number">2.0.0.0.0.5.</span> <span class="nav-text">docker search tutorial</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-pull-egamas-docker-tutorial"><span class="nav-number">2.0.0.0.0.6.</span> <span class="nav-text">docker pull egamas/docker-tutorial</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-images"><span class="nav-number">2.0.0.0.0.7.</span> <span class="nav-text">docker images</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-attach-container-id-names"><span class="nav-number">2.0.0.0.0.8.</span> <span class="nav-text">docker attach container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-exec-it-container-names-bin-bash"><span class="nav-number">2.0.0.0.0.9.</span> <span class="nav-text">docker exec -it  container_names /bin/bash</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-rm-container-id-names"><span class="nav-number">2.0.0.0.0.10.</span> <span class="nav-text">docker rm container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-rm-f-container-id-names"><span class="nav-number">2.0.0.0.0.11.</span> <span class="nav-text">docker rm -f container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-push-source"><span class="nav-number">2.0.0.0.0.12.</span> <span class="nav-text">docker push source</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-port-id"><span class="nav-number">2.0.0.0.0.13.</span> <span class="nav-text">docker port id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-top-id"><span class="nav-number">2.0.0.0.0.14.</span> <span class="nav-text">docker top id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-rmi-image-id"><span class="nav-number">2.0.0.0.0.15.</span> <span class="nav-text">docker rmi image_id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-image-rm-id"><span class="nav-number">2.0.0.0.0.16.</span> <span class="nav-text">docker image rm id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-diff-image-name"><span class="nav-number">2.0.0.0.0.17.</span> <span class="nav-text">docker diff image_name</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-commit-container-id-image-id"><span class="nav-number">2.0.0.0.0.18.</span> <span class="nav-text">docker commit container_id image_id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-build-t-image-name-PATH"><span class="nav-number">2.0.0.0.0.19.</span> <span class="nav-text">docker build -t image_name PATH</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-import-SOURCE-PATH-TARGET-PATH"><span class="nav-number">2.0.0.0.0.20.</span> <span class="nav-text">docker import SOURCE_PATH TARGET_PATH</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-save"><span class="nav-number">2.0.0.0.0.21.</span> <span class="nav-text">docker save</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#dcoker-load"><span class="nav-number">2.0.0.0.0.22.</span> <span class="nav-text">dcoker load</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-run-option-image-name-command"><span class="nav-number">2.0.0.0.0.23.</span> <span class="nav-text">docker run [option] image_name [command]</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-start-container-id-names"><span class="nav-number">2.0.0.0.0.24.</span> <span class="nav-text">docker start container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-stop-container-id-names"><span class="nav-number">2.0.0.0.0.25.</span> <span class="nav-text">docker stop container_id/names</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-后台运行"><span class="nav-number">2.0.0.0.0.26.</span> <span class="nav-text">docker 后台运行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-logs-container-id"><span class="nav-number">2.0.0.0.0.27.</span> <span class="nav-text">docker logs [container_id]</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#进入Docker容器"><span class="nav-number">2.0.0.0.0.28.</span> <span class="nav-text">进入Docker容器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-export"><span class="nav-number">2.0.0.0.0.29.</span> <span class="nav-text">docker export</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#docker-import"><span class="nav-number">2.0.0.0.0.30.</span> <span class="nav-text">docker import</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数据卷"><span class="nav-number">2.0.0.0.0.31.</span> <span class="nav-text">数据卷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建数据卷"><span class="nav-number">2.0.0.0.0.32.</span> <span class="nav-text">创建数据卷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除数据卷"><span class="nav-number">2.0.0.0.0.33.</span> <span class="nav-text">删除数据卷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#挂载一个主机目录作为数据卷（也可以挂载文件）"><span class="nav-number">2.0.0.0.0.34.</span> <span class="nav-text">挂载一个主机目录作为数据卷（也可以挂载文件）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看数据卷的信息"><span class="nav-number">2.0.0.0.0.35.</span> <span class="nav-text">查看数据卷的信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数据卷容器"><span class="nav-number">2.0.0.0.0.36.</span> <span class="nav-text">数据卷容器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#备份"><span class="nav-number">2.0.0.0.0.37.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#恢复"><span class="nav-number">2.0.0.0.0.38.</span> <span class="nav-text">恢复</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络"><span class="nav-number">2.0.1.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#映射到指定端口"><span class="nav-number">2.0.1.0.0.1.</span> <span class="nav-text">映射到指定端口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看映射端口配置"><span class="nav-number">2.0.1.0.0.2.</span> <span class="nav-text">查看映射端口配置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#容器互联"><span class="nav-number">2.0.1.0.0.3.</span> <span class="nav-text">容器互联</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级网络配置"><span class="nav-number">2.0.2.</span> <span class="nav-text">高级网络配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置DNS"><span class="nav-number">2.0.3.</span> <span class="nav-text">配置DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#配置hostname"><span class="nav-number">2.0.3.0.0.1.</span> <span class="nav-text">配置hostname</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#配置alias"><span class="nav-number">2.0.3.0.0.2.</span> <span class="nav-text">配置alias</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#添加dns"><span class="nav-number">2.0.3.0.0.3.</span> <span class="nav-text">添加dns</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设定搜索域"><span class="nav-number">2.0.3.0.0.4.</span> <span class="nav-text">设定搜索域</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器访问控制"><span class="nav-number">2.0.4.</span> <span class="nav-text">容器访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#容器访问外部网络"><span class="nav-number">2.0.4.0.0.1.</span> <span class="nav-text">容器访问外部网络</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#容器之间访问"><span class="nav-number">2.0.4.0.0.2.</span> <span class="nav-text">容器之间访问</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#访问所有端口"><span class="nav-number">2.0.4.0.0.3.</span> <span class="nav-text">访问所有端口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#访问指定端口"><span class="nav-number">2.0.4.0.0.4.</span> <span class="nav-text">访问指定端口</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

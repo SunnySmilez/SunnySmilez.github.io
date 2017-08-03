@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">
-                  linux文件类型及属性
+                <a class="post-title-link" href="/2016/05/04/文件系统NFS/" itemprop="url">
+                  文件系统NFS
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T22:44:23+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-05-04T21:58:22+08:00" content="2016-05-04">
+              2016-05-04
             </time>
           </span>
 
@@ -265,16 +265,23 @@
       
         
           
-          文件含义ls -lhi /data
-1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
+          文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
 
-1966317         表示inode索引节点编号
-drwxrwxrwx      文件类型及权限
-2               硬链接
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(cento
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
+            <a class="btn" href="/2016/05/04/文件系统NFS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -317,8 +324,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
-                  linux目录结构
+                <a class="post-title-link" href="/2016/05/01/磁盘/" itemprop="url">
+                  磁盘
                 </a>
               
             
@@ -331,8 +338,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-05-01T18:02:38+08:00" content="2016-05-01">
+              2016-05-01
             </time>
           </span>
 
@@ -378,19 +385,13 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
-应用程序/usr/bin
-数据文件/usr/share
-用户程序,及数据,帮助文件等目录/usr
-设备目录/dev/
-配置文件/etc/
-启动命令/etc/init.d
-/存放系统相关的程序
-/
+          磁盘(disk)磁盘在格式化时被划分成许多同心圆,这些同心圆的规矩叫做磁道,磁道从外向内依次从0开始编号
+磁头(head)扇区(sector)盘面由圆心向四周画直线,不同的磁道被直线分成许多扇形的区域,每个扇形区域叫做扇区,大小一般为512字节
+扇区标识符(扇区头标)指的是定位扇区的信息,包括扇区所
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
+            <a class="btn" href="/2016/05/01/磁盘/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -433,8 +434,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
-                  linux系统优化
+                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">
+                  网络
                 </a>
               
             
@@ -447,8 +448,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-04-28T21:48:39+08:00" content="2016-04-28">
+              2016-04-28
             </time>
           </span>
 
@@ -494,13 +495,15 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
-调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
-    net.ipv4.tcp_fin_timeout=2    
+          私有IP地址A类: 10.0.0.0 - 10.255.255.255
+B类: 172.16.0.0 - 172.31.255.255
+C类: 192.168.0.0 - 192.168.255.255
+访问网站基本流程(主要解释DNS)1.输入网址(www.demo.com.)
+2.访问本地hos
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
+            <a class="btn" href="/2016/04/28/网络/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -543,8 +546,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">
-                  ssh配置修改
+                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">
+                  su命令执行流程
                 </a>
               
             
@@ -557,8 +560,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:52:57+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-04-27T22:34:53+08:00" content="2016-04-27">
+              2016-04-27
             </time>
           </span>
 
@@ -604,14 +607,17 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          调试ssh -v vagrant@172.16.17.11
-备份cp /etc/ssh/sshd_config /etc/ssh/sshd_config
-sshd_config修改端口(端口范围:0-65535)Port 2231
-不允许root用户通过ssh登录PermitRootLogin no
+          流程1.普通用户运行sudo
+2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
+3.如果过期,需要用户输入自己的口令
+4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
+5.无权限则退出sudo
+6.有权限则执行命令并返回结果,退出sudo
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/ssh配置修改/#more" rel="contents">
+            <a class="btn" href="/2016/04/27/su命令执行流程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -654,8 +660,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">
-                  替换yum源
+                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">
+                  定时任务
                 </a>
               
             
@@ -668,8 +674,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:07:54+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-04-26T00:14:41+08:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -715,19 +721,19 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
       
         
           
-          设置yum源为163的镜像原# 进入yum源目录
-    cd /etc/yum.repos.d
+          系统定时任务ls /etc | grep cron
+用户定时任务* * * * * (分时日月周)
+符号*
+    表示任意时间
+    eg: * * * * * 表示每分钟都执行
 
-# 下载国内yum源
-    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
-
-# 备份之前的yum源
- mv
-cp Cent
+-
+    a-b,表示在a到b的范围内,包括a,b
+    eg:30 1-3 * * * 表示在1点30,2点
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/替换yum源/#more" rel="contents">
+            <a class="btn" href="/2016/04/26/定时任务/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -754,7 +760,7 @@ cp Cent
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -795,7 +801,7 @@ cp Cent
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -803,7 +809,7 @@ cp Cent
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -812,7 +818,7 @@ cp Cent
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

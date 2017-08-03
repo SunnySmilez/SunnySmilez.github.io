@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2017-05-08T12:53:28.000Z</updated>
+  <updated>2017-08-03T01:33:49.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,11 +15,662 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[登录docker容器]]></title>
+    <link href="http://www.cxyteam.com/2017/08/02/%E7%99%BB%E5%BD%95docker%E5%AE%B9%E5%99%A8/"/>
+    <id>http://www.cxyteam.com/2017/08/02/登录docker容器/</id>
+    <published>2017-08-02T13:48:26.000Z</published>
+    <updated>2017-08-03T01:33:49.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h1><h6 id="查看启动的容器"><a href="#查看启动的容器" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
+注意：CONTAINER ID，NAMES这两个信息下面命令会用到
+</code></pre><h6 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker attach contain_id(CONTAINER ID)
+docker attach contain_name(NAMES)
+</code></pre><h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><h6 id="查看启动的容器-1"><a href="#查看启动的容器-1" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
+</code></pre><h6 id="登录容器-1"><a href="#登录容器-1" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker exec -it  contain_id(CONTAINER ID) /bin/bash
+docker exec contain_name(NAMES) /bin/bash
+</code></pre><h1 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h1><h6 id="这应该是很传统的连接方式，但是不建议用这种方式进入容器"><a href="#这应该是很传统的连接方式，但是不建议用这种方式进入容器" class="headerlink" title="这应该是很传统的连接方式，但是不建议用这种方式进入容器"></a>这应该是很传统的连接方式，但是不建议用这种方式进入容器</h6><blockquote>
+<p><a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp" title="为什么不需要在docker中运行sshd" target="_blank" rel="external">为什么不需要在docker中运行sshd</a></p>
+</blockquote>
+<h1 id="nesenter"><a href="#nesenter" class="headerlink" title="nesenter"></a>nesenter</h1><h6 id="查看启动的容器-2"><a href="#查看启动的容器-2" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
+</code></pre><h6 id="查看容器详细信息"><a href="#查看容器详细信息" class="headerlink" title="查看容器详细信息"></a>查看容器详细信息</h6><pre><code>docker inspect contain_id(CONTAINER ID)
+docker inspect contain_name(NAMES)
+</code></pre><h6 id="登录容器-2"><a href="#登录容器-2" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>nsenter --target $pid --mount --uts --ipc --net --pid
+$pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装的，自己去google吧
+</code></pre><blockquote>
+<p><a href="https://github.com/jpetazzo/nsenter" title="什么是nesenter" target="_blank" rel="external">什么是nesenter</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h1><h6 id="查看启动的容器"><a href="#查看启动的容器" class="headerlink" ti]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[mac无法ping通docker容器]]></title>
+    <link href="http://www.cxyteam.com/2017/08/01/mac%E6%97%A0%E6%B3%95ping%E9%80%9Adocker%E5%AE%B9%E5%99%A8/"/>
+    <id>http://www.cxyteam.com/2017/08/01/mac无法ping通docker容器/</id>
+    <published>2017-08-01T02:02:03.000Z</published>
+    <updated>2017-08-03T01:34:55.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="不能ping通的原因"><a href="#不能ping通的原因" class="headerlink" title="不能ping通的原因"></a>不能ping通的原因</h1><pre><code>由于Docker for mac的网络实现方式，不能够创建docker0虚拟网卡，实际上它存在于HyperKit
+由于macox的限制，不能将流量转发给容器
+</code></pre><blockquote>
+<p><a href="https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos" title="mac不能ping通docker的原因" target="_blank" rel="external">mac不能ping通docker的原因</a></p>
+</blockquote>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h5 id="映射端口"><a href="#映射端口" class="headerlink" title="映射端口"></a>映射端口</h5><pre><code>docker run -d -p 80:80 --name webserver nginx
+</code></pre><h5 id="注意：需要查看80端口是否被占用"><a href="#注意：需要查看80端口是否被占用" class="headerlink" title="注意：需要查看80端口是否被占用"></a>注意：需要查看80端口是否被占用</h5><pre><code>lsof -P | grep &apos;:80&apos;
+</code></pre><h5 id="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"><a href="#如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）" class="headerlink" title="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"></a>如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）</h5><pre><code>docker run -d -p 80:80 -v /data1/htdocs/code /data1/htdocs/code --name webserver nginx
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="不能ping通的原因"><a href="#不能ping通的原因" class="headerlink" title="不能ping通的原因"></a>不能ping通的原因</h1><pre><code>由于Docker for mac的网络实现方式，不能够创建d]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[如何编写一个dockerfile]]></title>
+    <link href="http://www.cxyteam.com/2017/07/14/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdockerfile/"/>
+    <id>http://www.cxyteam.com/2017/07/14/如何编写一个dockerfile/</id>
+    <published>2017-07-14T01:22:39.000Z</published>
+    <updated>2017-08-03T01:37:33.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li>更快的构建速度</li>
+<li>更小的Docker镜像大小</li>
+<li>更少的Docker镜像层</li>
+<li>充分利用镜像缓存</li>
+<li>增加Dockerfile可读性</li>
+<li>让Docker容器使用起来更简单</li>
+</ul>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>容器只运行单个应用</li>
+<li>将多个RUN指令合并为一个</li>
+<li>基础镜像的标签不要用latest</li>
+<li>每个RUN指令后删除多余文件</li>
+<li>选择合适的基础镜像(alpine版本最好，不过个人还是喜欢centos)</li>
+<li>设置WORKDIR和CMD</li>
+<li>COPY与ADD优先使用前者</li>
+<li>合理调整COPY与RUN的顺序</li>
+<li>设置默认的环境变量，映射端口和数据卷</li>
+<li>使用LABEL设置镜像元数据</li>
+<li>添加HEALTHCHECK</li>
+<li>使用ENTRYPOINT (可选，可以用于做不同环境的判断，不如dev，product)</li>
+<li>在entrypoint脚本中使用exec</li>
+</ul>
+<h1 id="编写步骤"><a href="#编写步骤" class="headerlink" title="编写步骤"></a>编写步骤</h1><blockquote>
+<p><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/" title="编写dockerfile" target="_blank" rel="external">编写dockerfile</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li>更快的构建速度</li>
+<li>更小的Docker镜像大小</li>
+<li>更少的Docker镜像层</li>
+<li>充分]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go的应用场景]]></title>
+    <link href="http://www.cxyteam.com/2017/06/10/go%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+    <id>http://www.cxyteam.com/2017/06/10/go的应用场景/</id>
+    <published>2017-06-10T09:26:53.000Z</published>
+    <updated>2017-06-10T09:45:57.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
+</code></pre><h3 id="并发性好"><a href="#并发性好" class="headerlink" title="并发性好"></a>并发性好</h3><pre><code>goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
+单个go应用能有效利用多个CPU内核，并行执行性能好
+</code></pre><h3 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h3><h3 id="丰富的标准库"><a href="#丰富的标准库" class="headerlink" title="丰富的标准库"></a>丰富的标准库</h3><h3 id="活跃的社区支持"><a href="#活跃的社区支持" class="headerlink" title="活跃的社区支持"></a>活跃的社区支持</h3>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
+</code></pre><h3 id="并]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于产品设计的几个小思考]]></title>
+    <link href="http://www.cxyteam.com/2017/06/06/%E5%85%B3%E4%BA%8E%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%80%9D%E8%80%83/"/>
+    <id>http://www.cxyteam.com/2017/06/06/关于产品设计的几个小思考/</id>
+    <published>2017-06-06T02:42:49.000Z</published>
+    <updated>2017-06-06T06:14:38.000Z</updated>
+    <content type="html"><![CDATA[<h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
+</code></pre><h6 id="明确的目标用户"><a href="#明确的目标用户" class="headerlink" title="明确的目标用户"></a>明确的目标用户</h6><pre><code>这个至关重要，是产品定位的大基调
+能够更精准的确定获取目标用户的渠道
+能够精准的给用户设计产品功能
+比如说：
+    我的目标用户是青年人，那么理想的状态是我会推广一个文章能够触达到我的青年用户，在获取
+    青年用户的同时希望能够剔除掉非青年用户（毕竟用户的运营也是有成本的，这里指的是个性化
+    运营，并不是群发文章之类的）
+</code></pre><h6 id="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？"><a href="#为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？" class="headerlink" title="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？"></a>为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？</h6><pre><code>提醒用户，首屏下面还有内容，网站是可以滚动的    
+</code></pre><p><img src="/img/product/think/home_part_negative.png" alt="Alt text" title="首屏是完整的页面"><br><img src="/img/product/think/home_part_positive.png" alt="Alt text" title="首屏只显示部分页面"></p>
+<h6 id="关注首屏"><a href="#关注首屏" class="headerlink" title="关注首屏"></a>关注首屏</h6><pre><code>首屏是决定用户是否继续浏览的关键因素
+解决用户的信任问题
+放足够吸引用户的东西
+依旧举个例子（如下图）：
+    1、首先打开官网最打眼的2的位置，一个大红包这是足够吸引我去看红包是怎么回事
+    2、3的位置很巧妙，2的位置引导眼球的时候，在视线的下方位置，
+       观看到3的红色的免费字样，接着我的视线一定会移动到3所在的功能块，这个时候又是
+       10位置的红色字样直接吸引过来，接着应该是顺理成章的做评估了，设计者最后在
+       8的位置还把评估的人数显示上来，低调的解除了用户的不信任危机
+    3、再者是7的位置和传统的轮播图比他的优势在于右边的文字，一次性列举出了所有
+       的轮播图的作用（不是像传统的那样就是两个箭头或者几个数字点击能够进行切换，作为
+       用户我哪来的耐心去猜测你的箭头会切换到哪个轮播图？）
+    4、再看1的位置，在导航栏中做了重点的突出，应该是吸引用户的一个重要功能，很
+       希望用户去点
+    5、看4，5的位置我认为都在解决一个信任的问题，首先是4的位置介绍我的资质，这
+       个是比较有说服力的客观事实你如果还不信的话可以到5的位置去看关于我们
+</code></pre><p><img src="/img/product/think/hainabian_home.png" alt="Alt text" title="优质首页分析"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
+</code></pre><h6 id="明确的]]>
+    </summary>
+    
+      <category term="产品&amp;运营" scheme="http://www.cxyteam.com/tags/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
+    
+      <category term="产品&amp;运营" scheme="http://www.cxyteam.com/categories/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Dockerfile的编写]]></title>
+    <link href="http://www.cxyteam.com/2017/06/04/Dockerfile%E7%9A%84%E7%BC%96%E5%86%99/"/>
+    <id>http://www.cxyteam.com/2017/06/04/Dockerfile的编写/</id>
+    <published>2017-06-04T08:21:31.000Z</published>
+    <updated>2017-06-12T01:29:51.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
+</code></pre><h1 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h1><h3 id="docker-build-其他用法"><a href="#docker-build-其他用法" class="headerlink" title="docker build 其他用法"></a>docker build 其他用法</h3><h6 id="标准用法"><a href="#标准用法" class="headerlink" title="标准用法"></a>标准用法</h6><pre><code>docker build -t image_name PATH
+在PATH目录下，按照Dockerfile建立一个新的image_name镜像
+path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
+</code></pre><h6 id="直接用-Git-repo-进行构建"><a href="#直接用-Git-repo-进行构建" class="headerlink" title="直接用 Git repo 进行构建"></a>直接用 Git repo 进行构建</h6><pre><code>docker build https://github.com/twang2218/gitlab-ce-zh.git#:8.14
+指定了构建所需的 Git repo，并且指定默认的 master 分支，构建目录为 /8.14/，然后 Docker 就会自己去 git clone 这个项目、切换到指定分支、并进入到指定目录后开始构建
+</code></pre><h6 id="用给定的-tar-压缩包构建"><a href="#用给定的-tar-压缩包构建" class="headerlink" title="用给定的 tar 压缩包构建"></a>用给定的 tar 压缩包构建</h6><pre><code>docker build http://server/context.tar.gz
+Docker 引擎会下载这个包，并自动解压缩，以其作为上下文，开始构建
+</code></pre><h6 id="从标准输入中读取-Dockerfile-进行构建"><a href="#从标准输入中读取-Dockerfile-进行构建" class="headerlink" title="从标准输入中读取 Dockerfile 进行构建"></a>从标准输入中读取 Dockerfile 进行构建</h6><pre><code>docker build - &lt; Dockerfile或者cat Dockerfile | docker build -
+如果标准输入传入的是文本文件，则将其视为 Dockerfile，并开始构建。这种形式由于直接从标准输入中读取 Dockerfile 的内容，它没有上下文，因此不可以像其他方法那样可以将本地文件 COPY 进镜像之类的事情
+</code></pre><h6 id="从标准输入中读取上下文压缩包进行构建"><a href="#从标准输入中读取上下文压缩包进行构建" class="headerlink" title="从标准输入中读取上下文压缩包进行构建"></a>从标准输入中读取上下文压缩包进行构建</h6><pre><code>docker build - &lt; context.tar.gz
+如果发现标准输入的文件格式是 gzip、bzip2 以及 xz 的话，将会使其为上下文压缩包，直接将其展开，将里面视为上下文，并开始构建
+</code></pre><h6 id="From"><a href="#From" class="headerlink" title="From"></a>From</h6><pre><code>指定基础镜像，在其上进行定制
+</code></pre><h6 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h6><pre><code>执行命令行的命令，比如：RUN apt-get update是执行apt-get update命令
+执行此命令的时候需要注意，在Dockerfile中没执行一个指令都会新建一层(目前有个最大层的限制是127层)，所以每执行一个RUN就会和我们在执行安装软件然后执行commit一样，苟静一层镜像。因此在执行多个命令的时候使用&quot;&amp;&quot;符连接，用一个RUN执行，这样就只会新建一个层
+不可这样：
+RUN apt-get update
+RUN apt-get -y install vim
+应当改为：
+RUN apt-get update \
+    &amp;&amp; apt-get -y install vim
+</code></pre><h6 id="COPY-source-path-target-path"><a href="#COPY-source-path-target-path" class="headerlink" title="COPY source_path target_path"></a>COPY source_path target_path</h6><pre><code>将本地的source_path复制到新的一层镜像内的target_path位置（如果source_path是相对路径，那么需要注意的是他是相对于docker build -t image_name PATH时指定的PATH也就是上下文环境）
+source_path支持通配符
+target_path可以是容器的绝对路径，也可以是相对于工作目录的相对路径（工作目录用WORKDIR指令来指定）
+需要注意的是所有的source_path的文件属性都会保留（包含读写执行权限等）
+</code></pre><h6 id="ADD-source-path-target-path"><a href="#ADD-source-path-target-path" class="headerlink" title="ADD source_path target_path"></a>ADD source_path target_path</h6><pre><code>使用方式和COPY一样，但是添加了一些新的功能
+source_path可以是一个 URL，这种情况下，Docker 引擎会试图去下载这个链接的文件放到 target_path去。下载后的文件权限自动设置为 600，另外，如果下载的是个压缩包，需要解压缩，如果对权限不满足或者需要进行解压缩，那就需要再使用RUN命令调整
+如果source_path是一个tar压缩文件的话，ADD会将文件解压缩后到target_path中
+</code></pre><h6 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h6><pre><code>CMD与RUN类似
+shell格式：CMD 命令
+exec格式：CMD [&quot;可执行文件&quot;, &quot;参数1&quot;, &quot;参数2&quot;...]
+参数列表格式：CMD [&quot;参数1&quot;, &quot;参数2&quot;...]。在指定了 ENTRYPOINT 指令后，用 CMD 指定具体的参数
+需要注意的是：Docker 不是虚拟机，容器就是进程，容器就是为了主进程而存在的，主进程退出，容器就失去了存在的意义，从而退出，其它辅助进程不是它需要关心的东西(这块实验并没有成功，暂时忽略，有坑能想到这块就行)
+什么意思呢？重启nginx的时候可能会写成这样：CMD service nginx start
+在执行的时候会被理解为：CMD [ &quot;sh&quot;, &quot;-c&quot;, &quot;service nginx start&quot;]，因此主进程实际是sh，当service nginx start结束之后，sh也就结束了，sh作为主进程退出，自然容器也就退出了
+正确的做法是直接执行nginx可执行文件
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</code></pre><h6 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h6><pre><code>和cmd的命令差不多，两个应用场景
+1、启动一个服务前的准备工作
+    FROM alpine:3.4
+    ...
+    RUN addgroup -S redis &amp;&amp; adduser -S -G redis redis
+    ...
+    ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]
+
+    EXPOSE 6379
+    CMD [ &quot;redis-server&quot; ]
+
+
+    docker-entrypoint.sh的脚本
+    #!/bin/sh
+    ...
+    # allow the container to be started with `--user`
+    if [ &quot;$1&quot; = &apos;redis-server&apos; -a &quot;$(id -u)&quot; = &apos;0&apos; ]; then
+        chown -R redis .
+        exec su-exec redis &quot;$0&quot; &quot;$@&quot;
+    fi
+
+    exec &quot;$@&quot;
+    这时候的ENTRYPOINT会判断CMD的内容，如果是redis-server就切换redis用户身份启动服务器，否则用root身份执行
+
+2、让镜像像命令一样
+    FROM ubuntu:16.04
+    RUN apt-get update \
+        &amp;&amp; apt-get install -y curl \
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+    CMD [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
+
+    如上我们在构建好镜像之后，执行docker run container_name就会执行curl http://ip.cn
+    如果这个时候我想显示当前的http头信息，就需要加上-i的参数了，假如我们执行docker run container_name -I 命令会变成curl -I http://ip.cn？
+    记住在镜像的后面只能跟command，运行时会替换CMD的默认值，所以在这里的-i是把整个的CMD给替换了，而-I这个命令是不存在的，显然我们需要docker run container_name curl -I http://ip.cn这么写
+    如果我们换成这种写法
+    FROM ubuntu:16.04
+    RUN apt-get update \
+        &amp;&amp; apt-get install -y curl \
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+    ENTRYPOINT [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
+
+    这样写就能构建完镜像之后，执行docker run container_name就能获取header信息
+    因为CMD的内容将会作为参数传给ENTRYPOINT，因此原本命令是curl http://ip.cn，CMD命令是-I所以最终执行的命令是curl -I http://ip.cn
+</code></pre><h6 id="ENV设置环境变量"><a href="#ENV设置环境变量" class="headerlink" title="ENV设置环境变量"></a>ENV设置环境变量</h6><pre><code>ENV key val
+ENV key1=val1 key2=val2
+ENV VERSION=1.01 NAME=&quot;TEST&quot;
+</code></pre><h6 id="ARG构建参数"><a href="#ARG构建参数" class="headerlink" title="ARG构建参数"></a>ARG构建参数</h6><pre><code>ARG key=val
+和ENV一样是设置环境变量，ARG构建的环境变量，在容器运行时不会存在这些环境变量（貌似就是一个临时的环境变量的概念，但是他能用docker history查看，所以不要以为真的是临时变量，直接传入账号密码）
+</code></pre><h6 id="VOLUME定义匿名卷"><a href="#VOLUME定义匿名卷" class="headerlink" title="VOLUME定义匿名卷"></a>VOLUME定义匿名卷</h6><pre><code>容器运行的时候，我们应该尽量保持容器存储层不发生写操作，对于数据库类需要动态保存数据的应用/或者上传文件的目录，我们应该把这些文件保存在卷中，比如在Dockerfile中，我们事先指定 /data/mysqldata为匿名卷，这样做会保证容器存储层无变化，说白了就是你把当前的容器做build的时候不会把mysqldata文件给打包进去
+VOLUME /data/mysqldata
+在执行：docker run -d -v mydata:/data/mysqldata container_name的时候是可以覆盖掉匿名卷的
+</code></pre><h6 id="EXPOSE暴露端口"><a href="#EXPOSE暴露端口" class="headerlink" title="EXPOSE暴露端口"></a>EXPOSE暴露端口</h6><pre><code>EXPOSE 端口1 端口2
+这样写在容器运行的时候也不会开启这个端口的服务
+他有两个作用：提醒，告诉镜像使用者理解这个服务的使用的端口；占用随机应用端口，
+</code></pre><h6 id="WORKDIR指定工作目录"><a href="#WORKDIR指定工作目录" class="headerlink" title="WORKDIR指定工作目录"></a>WORKDIR指定工作目录</h6><pre><code>指定工作目录，以后各层的当前目录就改为指定的目录
+</code></pre><h6 id="USER指定当前用户"><a href="#USER指定当前用户" class="headerlink" title="USER指定当前用户"></a>USER指定当前用户</h6><pre><code>切换到指定用户，该用户必须事先存在
+</code></pre><h6 id="HEALTHCHECK健康检查"><a href="#HEALTHCHECK健康检查" class="headerlink" title="HEALTHCHECK健康检查"></a>HEALTHCHECK健康检查</h6><pre><code>--interval  两次健康检查的间隔时间
+--timeout   监看检查命令运行超时时间，如果超过这个时间，本次健康检查视为失败，默认30s
+--retries   当连续失败命令运行
+
+FROM nginx
+RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*
+HEALTHCHECK --interval=5s --timeout=3s \
+  CMD curl -fs http://localhost/ || exit 1
+
+这里设置每隔5s检查一次，如果健康检查命令超过3s没响应就视为失败，并使用curl -fs http://localhost/ || exit 1作为健康检查命令
+</code></pre><h6 id="onbulid"><a href="#onbulid" class="headerlink" title="onbulid"></a>onbulid</h6><pre><code>他后面跟其他的指令，例如RUN,COPY等，而这些指令，在当前镜像构建时并不会被执行，只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行
+1、先编写一个Dockerfile文件，内容如下：
+    FROM web1
+    ONBUILD RUN mkdir /test
+
+2、利用上面的Dockerfile构建镜像：docker build -t web1
+    这个时候你在web1镜像中不会看到有/test文件夹
+
+3、在编写一个Dockerfile，内容如下
+    FROM web1
+
+4、构建镜像：docker build -t web2
+    这个时候你会看到镜像web2中有/test文件夹
+</code></pre><h6 id="dockerignore"><a href="#dockerignore" class="headerlink" title=".dockerignore"></a>.dockerignore</h6><pre><code>如果在docker build指定的上下文环境中有不需要COPY的文件，可以像.gitignore这样的语法写在.dockerignore
+.path/*
+.file_name
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker的应用场景]]></title>
+    <link href="http://www.cxyteam.com/2017/06/02/docker%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+    <id>http://www.cxyteam.com/2017/06/02/docker的应用场景/</id>
+    <published>2017-06-02T02:31:31.000Z</published>
+    <updated>2017-06-02T03:42:54.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
+统技术管理镜像，能极大简化环境运维过程，相对于VM，docker在其轻量、配置复杂度以及资源利用率方
+面有着明显的优势
+</code></pre><h1 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h1><pre><code>    虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的平台（软件、系统），Docker在
+降低额外开销的情况下提供了同样的功能。它能让你将运行环境和配置放在代码中然后部署，同一个
+Docker的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度
+</code></pre><h1 id="代码流水线管理"><a href="#代码流水线管理" class="headerlink" title="代码流水线管理"></a>代码流水线管理</h1><pre><code>    代码从开发机到最终的生产环境的部署，需要经过很多的中间环境，Docker给应用提供了一个一致
+的环境，让代码的流水线变得简单
+</code></pre><h1 id="提高开发效率"><a href="#提高开发效率" class="headerlink" title="提高开发效率"></a>提高开发效率</h1><pre><code>    在开发的过程中，对于环境，我们永远避不开两件事：1.快速的搭建开发环境 2.让开发环境和生产
+环境无限保持一致
+</code></pre><h1 id="隔离应用"><a href="#隔离应用" class="headerlink" title="隔离应用"></a>隔离应用</h1><pre><code>    在开发或者生产环境中，出于节约服务器资源的考虑，通常会出现这样的情况，一台服务器上部署多
+个应用，这样部署应用一般会导致修改某些文件会导致应用之间互相干扰，比如修改nginx配置
+</code></pre><h1 id="整合服务器"><a href="#整合服务器" class="headerlink" title="整合服务器"></a>整合服务器</h1><pre><code>在一台服务器上部署多个应用
+</code></pre><h1 id="调试能力"><a href="#调试能力" class="headerlink" title="调试能力"></a>调试能力</h1><pre><code>Docker提供了很多的工具
+</code></pre><h1 id="多租户环境"><a href="#多租户环境" class="headerlink" title="多租户环境"></a>多租户环境</h1><h1 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h1><pre><code>    在虚拟机之前，引入新的硬件资源需要消耗几天的时间。虚拟化技术（Virtualization）将这个时间
+缩短到了分钟级别，而Docker通过为进程仅仅创建一个容器而无需启动一个操作系统，再次将这个过程缩短
+到了秒级
+
+
+http://get.ftqq.com/7115.get
+http://dockone.io/article/126
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
+统技术管理镜像，能极]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker命令]]></title>
+    <link href="http://www.cxyteam.com/2017/06/01/docker%E5%85%A5%E9%97%A8/"/>
+    <id>http://www.cxyteam.com/2017/06/01/docker入门/</id>
+    <published>2017-06-01T11:24:33.000Z</published>
+    <updated>2017-06-20T01:24:33.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="#docker查询命令" class="headerlink" title="docker查询命令"></a>docker查询命令</h1><h6 id="docker-info"><a href="#docker-info" class="headerlink" title="docker info"></a>docker info</h6><pre><code>查看docker信息
+</code></pre><h6 id="docker-ps-a"><a href="#docker-ps-a" class="headerlink" title="docker ps -a"></a>docker ps -a</h6><pre><code>查看所有的容器，包括运行的和退出的
+</code></pre><h6 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h6><pre><code>查看所有的运行的容器
+</code></pre><h6 id="docker-inspect-container-id-names"><a href="#docker-inspect-container-id-names" class="headerlink" title="docker inspect container_id/names"></a>docker inspect container_id/names</h6><pre><code>查看容器的详细信息
+</code></pre><h6 id="docker-search-tutorial"><a href="#docker-search-tutorial" class="headerlink" title="docker search tutorial"></a>docker search tutorial</h6><pre><code>搜索nginx镜像
+</code></pre><h6 id="docker-pull-egamas-docker-tutorial"><a href="#docker-pull-egamas-docker-tutorial" class="headerlink" title="docker pull egamas/docker-tutorial"></a>docker pull egamas/docker-tutorial</h6><pre><code>拉取egamas/docker-tutorial镜像
+</code></pre><h6 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h6><pre><code>查看所有的镜像
+docker image - since=mongo:3.2
+docker images -before=mongo:3.2
+</code></pre><h6 id="docker-attach-container-id-names"><a href="#docker-attach-container-id-names" class="headerlink" title="docker attach container_id/names"></a>docker attach container_id/names</h6><pre><code>登录web容器
+</code></pre><h6 id="docker-exec-it-container-names-bin-bash"><a href="#docker-exec-it-container-names-bin-bash" class="headerlink" title="docker exec -it  container_names /bin/bash"></a>docker exec -it  container_names /bin/bash</h6><pre><code>登录容器中(容器已经启动的)
+</code></pre><h6 id="docker-rm-container-id-names"><a href="#docker-rm-container-id-names" class="headerlink" title="docker rm container_id/names"></a>docker rm container_id/names</h6><pre><code>删除停止状态的容器
+</code></pre><h6 id="docker-rm-f-container-id-names"><a href="#docker-rm-f-container-id-names" class="headerlink" title="docker rm -f container_id/names"></a>docker rm -f container_id/names</h6><pre><code>删除开启状态的容器
+</code></pre><h6 id="docker-push-source"><a href="#docker-push-source" class="headerlink" title="docker push source"></a>docker push source</h6><h6 id="docker-port-id"><a href="#docker-port-id" class="headerlink" title="docker port id"></a>docker port id</h6><h6 id="docker-top-id"><a href="#docker-top-id" class="headerlink" title="docker top id"></a>docker top id</h6><h6 id="docker-rmi-image-id"><a href="#docker-rmi-image-id" class="headerlink" title="docker rmi image_id"></a>docker rmi image_id</h6><pre><code>删除镜像
+</code></pre><h6 id="docker-image-rm-id"><a href="#docker-image-rm-id" class="headerlink" title="docker image rm id"></a>docker image rm id</h6><h6 id="docker-diff-image-name"><a href="#docker-diff-image-name" class="headerlink" title="docker diff image_name"></a>docker diff image_name</h6><pre><code>查看容器的具体变更内容（和基础的镜像相比，所作的变更，比如说在容器中安装了vim，这个时候就会显示出具体安装vim新增的文件）
+</code></pre><h6 id="docker-commit-container-id-image-id"><a href="#docker-commit-container-id-image-id" class="headerlink" title="docker commit container_id image_id"></a>docker commit container_id image_id</h6><pre><code>将修改的容器内容提交到镜像中，形成新的基础镜像(一般来说不这么干，都用Dockerfile)
+</code></pre><h6 id="docker-build-t-image-name-PATH"><a href="#docker-build-t-image-name-PATH" class="headerlink" title="docker build -t image_name PATH"></a>docker build -t image_name PATH</h6><pre><code>在PATH目录下，按照Dockerfile建立一个新的image_name镜像
+path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
+</code></pre><h6 id="docker-import-SOURCE-PATH-TARGET-PATH"><a href="#docker-import-SOURCE-PATH-TARGET-PATH" class="headerlink" title="docker import SOURCE_PATH TARGET_PATH"></a>docker import SOURCE_PATH TARGET_PATH</h6><pre><code>   docker import \
+       http://download.openvz.org/template/precreated/ubuntu-14.04-x86_64-minimal.tar.gz \
+       web1/ubuntu:14.04
+
+http://www.kancloud.cn/lyric/docker-intro/79899
+</code></pre><h6 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h6><pre><code>保存镜像为归档文件
+docker save web | gzip &gt; web.tar.gz
+</code></pre><h6 id="dcoker-load"><a href="#dcoker-load" class="headerlink" title="dcoker load"></a>dcoker load</h6><pre><code>将归档文件复制到另一个机器上
+docker load -i web.tar.gz
+</code></pre><h6 id="docker-run-option-image-name-command"><a href="#docker-run-option-image-name-command" class="headerlink" title="docker run [option] image_name [command]"></a>docker run [option] image_name [command]</h6><pre><code>启动容器
+在终端输出:hello world(注意nginx是镜像名称，在运行之后会创建一个容器，可执行docker ps -a查看，然后使用docker rm 进行删除)
+    sudo docker run nginx /bin/echo &apos;Hello world&apos;
+
+ 创建一个基于image_name的镜像（以nginx为镜像构建一个容器，命名为web）  
+       docker run -t -i --name web nginx /bin/bash 
+
+ 运行bash终端，允许用户进行交互(-t分配给docker一个伪终端，-i让容器的标准输入保持打开)
+    sudo docker run -it nginx /bin/bash
+
+ docker run创建容器时，Docker会在后台运行包含以下：
+    检查本地是否存在指定的镜像，不存在就从公有仓库下载
+    利用镜像创建并启动一个容器
+    分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+    从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+    从地址池配置一个 ip 地址给容器
+    执行用户指定的应用程序
+    执行完毕后容器被终止
+</code></pre><h6 id="docker-start-container-id-names"><a href="#docker-start-container-id-names" class="headerlink" title="docker start container_id/names"></a>docker start container_id/names</h6><pre><code>运行容器
+</code></pre><h6 id="docker-stop-container-id-names"><a href="#docker-stop-container-id-names" class="headerlink" title="docker stop container_id/names"></a>docker stop container_id/names</h6><pre><code>停止运行容器    
+</code></pre><h6 id="docker-后台运行"><a href="#docker-后台运行" class="headerlink" title="docker 后台运行"></a>docker 后台运行</h6><pre><code>-d 让Dockre在后台运行而不是直接把执行命令的结果输出在当前宿主机下
+sudo docker run nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+sudo docker run -d nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+</code></pre><h6 id="docker-logs-container-id"><a href="#docker-logs-container-id" class="headerlink" title="docker logs [container_id]"></a>docker logs [container_id]</h6><pre><code>获取容器的输出信息
+</code></pre><h6 id="进入Docker容器"><a href="#进入Docker容器" class="headerlink" title="进入Docker容器"></a>进入Docker容器</h6><pre><code>attach
+    sudo docker run -idt nginx
+    sudo docker ps
+    sudo docker attach quizzical_kilby
+    多个窗口同时 attach 到同一个容器的时候，所有窗口都会同步显示。当某个窗口因命令阻塞时,其他窗口也无法执行操作了
+
+nsenter
+    这个太复杂了，反正我也不会用
+</code></pre><h6 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h6><pre><code>导出容器快照到本地文件
+docker export web &gt; web.tar
+</code></pre><h6 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h6><pre><code>导入本地容器快照为镜像
+docker import web.tar test
+</code></pre><h6 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h6><pre><code>数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性
+数据卷可以在容器之间共享和重用
+对数据卷的修改会立马生效
+对数据卷的更新，不会影响镜像
+数据卷默认会一直存在，即使容器被删除
+注意：数据卷的使用，类似于 Linux 下对目录或文件进行 mount，镜像中的被指定为挂载点的目录中的文件会隐藏掉，能显示看的是挂载的数据卷。
+</code></pre><h6 id="创建数据卷"><a href="#创建数据卷" class="headerlink" title="创建数据卷"></a>创建数据卷</h6><pre><code>docker run -d -P --name web -v /webapp nginx
+可以使用:docker exec -it web /bin/bash登录容器进行查看
+</code></pre><h6 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h6><pre><code>docker rm -fv web
+-v移除数据卷
+</code></pre><h6 id="挂载一个主机目录作为数据卷（也可以挂载文件）"><a href="#挂载一个主机目录作为数据卷（也可以挂载文件）" class="headerlink" title="挂载一个主机目录作为数据卷（也可以挂载文件）"></a>挂载一个主机目录作为数据卷（也可以挂载文件）</h6><pre><code>第一反应的作用是，本地可以写代码不用上传了，实时的在docker中运行
+docker run -d -P --name web -v /src/webapp:/opt/webapp nginx
+主机目录：/src/webapp 容器目录：/opt/webapp
+</code></pre><h6 id="查看数据卷的信息"><a href="#查看数据卷的信息" class="headerlink" title="查看数据卷的信息"></a>查看数据卷的信息</h6><pre><code>docker inspect web
+可以看到volumes字样
+</code></pre><h6 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h6><pre><code>数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
+创建一个容器（作为数据卷）：
+    docker run -d -v /dbdata --name dbdata nginx
+把dbdata容器指定为数据卷容器：
+    docker run -d --volumes-from dbdata --name db1 nginx
+</code></pre><h6 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h6><pre><code>sudo docker run --volumes-from dbdata -v $(pwd):/backup nginx tar cvf /backup/backup.tar /dbdata
+首先使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从主机挂载当前目录到容器的 /backup 目录，容器启动后，使用了 tar 命令来将 dbdata 卷备份为容器中 /backup/backup.tar 文件，也就是主机当前目录下的名为 backup.tar 的文件
+</code></pre><h6 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h6><pre><code>如果要恢复数据到一个容器，首先创建一个带有空数据卷的容器 dbdata2
+docker run -v /dbdata --name dbdata2 nginx /bin/bash
+
+然后创建另一个容器，挂载 dbdata2 容器卷中的数据卷，并使用 untar 解压备份文件到挂载的容器卷中
+sudo docker run --volumes-from dbdata2 -v $(pwd):/backup nginx tar xvf /backup/backup.tar
+
+为了查看/验证恢复的数据，可以再启动一个容器挂载同样的容器卷来查看
+sudo docker run --volumes-from dbdata2 nginx /bin/ls /dbdata
+</code></pre><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h6 id="映射到指定端口"><a href="#映射到指定端口" class="headerlink" title="映射到指定端口"></a>映射到指定端口</h6><pre><code>docker run -d -p 5000:5000 --name web2 nginx
+docker run -d -p 5000:5000 -p 80:80 --name=web2 nginx
+</code></pre><h6 id="查看映射端口配置"><a href="#查看映射端口配置" class="headerlink" title="查看映射端口配置"></a>查看映射端口配置</h6><pre><code>docker port web2 5000
+</code></pre><h6 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h6><pre><code>docker run -d -P --name web2 --link web1:web1 nginx
+
+--link参数的格式为 --link name:alias，其中name是要连接容器的名称，alias是这个连接的别名
+Docker 在两个互联的容器之间创建了一个安全隧道，而且不用映射它们的端口到宿主主机上
+在启动 db 容器的时候并没有使用 -p 和 -P 标记，从而避免了暴露数据库端口到外部网络上
+
+Docker 通过两种方式为容器公开连接信息：
+环境变量
+    docker exec -it web2 /bin/bash  (登录docker容器)
+    env （使用env查看web2容器环境变量）
+
+    查询结果如下
+    HOSTNAME=b64578555fd9
+    WEB1_PORT_80_TCP=tcp://172.17.0.2:80
+    NJS_VERSION=1.13.1.0.1.10-1~stretch
+    NGINX_VERSION=1.13.1-1~stretch
+    WEB1_PORT_80_TCP_PROTO=tcp
+    WEB1_PORT_80_TCP_ADDR=172.17.0.2
+    WEB1_PORT=tcp://172.17.0.2:80
+    PWD=/
+    HOME=/root
+    WEB1_ENV_NGINX_VERSION=1.13.1-1~stretch
+    WEB1_PORT_80_TCP_PORT=80
+    TERM=xterm
+    SHLVL=1
+    WEB1_NAME=/web2/web1
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    WEB1_ENV_NJS_VERSION=1.13.1.0.1.10-1~stretch
+    _=/usr/bin/env
+
+    以WEB1_开头的环境变量是供web2容器连接web1容器使用
+
+
+添加host信息到父容器的/etc/hosts的文件    
+    docker exec -it web2 /bin/bash  (登录docker容器)
+    cat /etc/hosts(查看hosts文件)
+
+    127.0.0.1    localhost
+    ::1    localhost ip6-localhost ip6-loopback
+    fe00::0    ip6-localnet
+    ff00::0    ip6-mcastprefix
+    ff02::1    ip6-allnodes
+    ff02::2    ip6-allrouters
+    172.17.0.2    web1 979e62ebf622
+    172.17.0.3    b64578555fd9
+
+    docker exec -it web1 /bin/bash  (登录docker容器)
+    cat /etc/hosts(查看hosts文件)
+    127.0.0.1    localhost
+    ::1    localhost ip6-localhost ip6-loopback
+    fe00::0    ip6-localnet
+    ff00::0    ip6-mcastprefix
+    ff02::1    ip6-allnodes
+    ff02::2    ip6-allrouters
+    172.17.0.2    979e62ebf622
+</code></pre><h3 id="高级网络配置"><a href="#高级网络配置" class="headerlink" title="高级网络配置"></a>高级网络配置</h3><pre><code>下面是一个跟 Docker 网络相关的命令列表，其中有些命令选项只有在 Docker 服务启动的时候才能配置，而且不能马上生效。
+      -b BRIDGE or --bridge=BRIDGE --指定容器挂载的网桥
+      --bip=CIDR --定制 docker0 的掩码
+      -H SOCKET... or --host=SOCKET... --Docker 服务端接收命令的通道
+      --icc=true|false --是否支持容器之间进行通信
+      --ip-forward=true|false --请看下文容器之间的通信
+      --iptables=true|false --是否允许 Docker 添加 iptables 规则
+      --mtu=BYTES --容器网络中的 MTU
+
+下面2个命令选项既可以在启动服务时指定，也可以 Docker 容器启动（docker run）时候指定
+    --dns=IP_ADDRESS... --使用指定的DNS服务器
+    --dns-search=DOMAIN... --指定DNS搜索域
+</code></pre><h3 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h3><pre><code>利用虚拟文件来挂载到来容器的 3 个相关配置文件
+
+在容器中使用mount可以看到挂载信息
+    /dev/vda1 on /etc/resolv.conf type ext4 (rw,relatime,data=ordered)
+    /dev/vda1 on /etc/hostname type ext4 (rw,relatime,data=ordered)
+    /dev/vda1 on /etc/hosts type ext4 (rw,relatime,data=ordered)
+
+ 这种机制可以让宿主主机 DNS 信息发生更新后，所有 Docker 容器的 dns 配置通过 /etc/resolv.conf 文件立刻得到更新
+</code></pre><h6 id="配置hostname"><a href="#配置hostname" class="headerlink" title="配置hostname"></a>配置hostname</h6><pre><code>-h HOSTNAME or --hostname=HOSTNAM
+注意：HOSTNAME会被写到容器内的 /etc/hostname 和 /etc/hosts；但它在容器外部看不到，既不会在 docker ps 中显示，也不会在其他的容器的 /etc/hosts 看到
+</code></pre><h6 id="配置alias"><a href="#配置alias" class="headerlink" title="配置alias"></a>配置alias</h6><pre><code>--link=CONTAINER_NAME:ALIAS
+在创建容器的时候，添加一个其他容器的主机名到 /etc/hosts 文件中，让新容器的进程可以使用主机名 ALIAS 就可以连接它
+</code></pre><h6 id="添加dns"><a href="#添加dns" class="headerlink" title="添加dns"></a>添加dns</h6><pre><code>--dns=IP_ADDRESS
+添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在 /etc/hosts 中的主机名
+</code></pre><h6 id="设定搜索域"><a href="#设定搜索域" class="headerlink" title="设定搜索域"></a>设定搜索域</h6><pre><code>--dns-search=DOMAIN
+设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com
+</code></pre><h3 id="容器访问控制"><a href="#容器访问控制" class="headerlink" title="容器访问控制"></a>容器访问控制</h3><pre><code>主要是通过linux上的iptables防火墙进行管理和实现的
+</code></pre><h6 id="容器访问外部网络"><a href="#容器访问外部网络" class="headerlink" title="容器访问外部网络"></a>容器访问外部网络</h6><pre><code>sysctl net.ipv4.ip_forward  查看是否值为1，如果不是则：
+sysctl -w net.ipv4.ip_forward=1
+或者在启动的时候设定：--ip-forward=true
+</code></pre><h6 id="容器之间访问"><a href="#容器之间访问" class="headerlink" title="容器之间访问"></a>容器之间访问</h6><pre><code>容器的网络拓扑是否已经互联
+本地系统的防火墙软件
+</code></pre><h6 id="访问所有端口"><a href="#访问所有端口" class="headerlink" title="访问所有端口"></a>访问所有端口</h6><pre><code>当启动 Docker 服务时候，默认会添加一条转发策略到 iptables 的 FORWARD 链上。策略为通过（ACCEPT）还是禁止（DROP）取决于配置--icc=true（缺省值）还是 --icc=false。当然，如果手动指定 --iptables=false 则不会添加 iptables 规则。
+可见，默认情况下，不同容器之间是允许网络互通的。如果为了安全考虑，可以在 /etc/default/docker 文件中配置 DOCKER_OPTS=--icc=false 来禁止它
+</code></pre><h6 id="访问指定端口"><a href="#访问指定端口" class="headerlink" title="访问指定端口"></a>访问指定端口</h6><pre><code>在通过 -icc=false 关闭网络访问后，还可以通过 --link=CONTAINER_NAME:ALIAS 选项来访问容器的开放端口
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[编写makefile]]></title>
+    <link href="http://www.cxyteam.com/2017/05/12/%E7%BC%96%E5%86%99makefile/"/>
+    <id>http://www.cxyteam.com/2017/05/12/编写makefile/</id>
+    <published>2017-05-12T01:52:04.000Z</published>
+    <updated>2017-05-16T15:50:00.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="什么是makefile"><a href="#什么是makefile" class="headerlink" title="什么是makefile"></a>什么是makefile</h1><h6 id="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"><a href="#用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件" class="headerlink" title="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"></a>用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件</h6><h1 id="makefile规则"><a href="#makefile规则" class="headerlink" title="makefile规则"></a>makefile规则</h1><pre><code>target ... : prerequisites ...
+    command
+    ...
+    ...
+</code></pre><h6 id="target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签"><a href="#target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签" class="headerlink" title="target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签"></a>target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签</h6><h6 id="prerequisites是要生成target所需要的文件"><a href="#prerequisites是要生成target所需要的文件" class="headerlink" title="prerequisites是要生成target所需要的文件"></a>prerequisites是要生成target所需要的文件</h6><h6 id="command是make需要执行的命令"><a href="#command是make需要执行的命令" class="headerlink" title="command是make需要执行的命令"></a>command是make需要执行的命令</h6><h6 id="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"><a href="#这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行" class="headerlink" title="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"></a>这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行</h6><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h6 id="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"><a href="#一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的" class="headerlink" title="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"></a>一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的</h6><pre><code>edit : main.o kbd.o command.o display.o /
+       insert.o search.o files.o utils.o
+    cc -o edit main.o kbd.o command.o display.o /
+        insert.o search.o files.o utils.o
+
+main.o : main.c defs.h
+    cc -c main.c
+kbd.o : kbd.c defs.h command.h
+    cc -c kbd.c
+command.o : command.c defs.h command.h
+    cc -c command.c
+display.o : display.c defs.h buffer.h
+    cc -c display.c
+insert.o : insert.c defs.h buffer.h
+    cc -c insert.c
+search.o : search.c defs.h buffer.h
+    cc -c search.c
+files.o : files.c defs.h buffer.h command.h
+    cc -c files.c
+utils.o : utils.c defs.h
+    cc -c utils.c
+clean :
+    rm edit main.o kbd.o command.o display.o /
+           insert.o search.o files.o utils.o
+</code></pre><h6 id="反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行"><a href="#反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行" class="headerlink" title="反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行"></a>反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行</h6><h6 id="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"><a href="#在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的" class="headerlink" title="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"></a>在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的</h6><h6 id="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"><a href="#在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令" class="headerlink" title="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"></a>在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令</h6><h6 id="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"><a href="#clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等" class="headerlink" title="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"></a>clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等</h6><h1 id="make工作流程"><a href="#make工作流程" class="headerlink" title="make工作流程"></a>make工作流程</h1><h6 id="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。"><a href="#1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。" class="headerlink" title="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。"></a>1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。</h6><h6 id="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"><a href="#2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。" class="headerlink" title="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"></a>2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。</h6><h6 id="3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"><a href="#3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。" class="headerlink" title="3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"></a>3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。</h6><h6 id="4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）"><a href="#4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）" class="headerlink" title="4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）"></a>4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</h6><h6 id="5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。"><a href="#5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。" class="headerlink" title="5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。"></a>5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。</h6><h1 id="makefile中使用变量"><a href="#makefile中使用变量" class="headerlink" title="makefile中使用变量"></a>makefile中使用变量</h1><pre><code>edit : main.o kbd.o command.o display.o /
+                  insert.o search.o files.o utils.o
+    cc -o edit main.o kbd.o command.o display.o /
+                       insert.o search.o files.o utils.o
+</code></pre><h6 id="我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"><a href="#我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量" class="headerlink" title="我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"></a>我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量</h6><h4 id="例子，在makefile的文件开头定义一个变量obj"><a href="#例子，在makefile的文件开头定义一个变量obj" class="headerlink" title="例子，在makefile的文件开头定义一个变量obj"></a>例子，在makefile的文件开头定义一个变量obj</h4><pre><code>obj = main.o kbd.o command.o display.o /
+      insert.o search.o files.o utils.o
+objects = main.o kbd.o command.o display.o /
+          insert.o search.o files.o utils.o
+
+edit : $(objects)
+        cc -o edit $(objects)
+</code></pre><h1 id="让make自动推导"><a href="#让make自动推导" class="headerlink" title="让make自动推导"></a>让make自动推导</h1><h6 id="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂"><a href="#GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂" class="headerlink" title="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂"></a>GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂</h6><pre><code>objects = main.o kbd.o command.o display.o /
+    insert.o search.o files.o utils.o
+
+edit : $(objects)
+    cc -o edit $(objects)
+
+main.o : defs.h
+kbd.o : defs.h command.h
+command.o : defs.h command.h
+display.o : defs.h buffer.h
+insert.o : defs.h buffer.h
+search.o : defs.h buffer.h
+files.o : defs.h buffer.h command.h
+utils.o : defs.h
+
+.PHONY : clean
+clean :
+    rm edit $(objects)
+</code></pre><h6 id="“-PHONY”表示，clean是个伪目标文件"><a href="#“-PHONY”表示，clean是个伪目标文件" class="headerlink" title="“.PHONY”表示，clean是个伪目标文件"></a>“.PHONY”表示，clean是个伪目标文件</h6><h1 id="凌乱风格makefile"><a href="#凌乱风格makefile" class="headerlink" title="凌乱风格makefile"></a>凌乱风格makefile</h1><h6 id="看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？"><a href="#看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？" class="headerlink" title="看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？"></a>看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？</h6><pre><code>objects = main.o kbd.o command.o display.o /
+          insert.o search.o files.o utils.o
+
+edit : $(objects)
+    cc -o edit $(objects)
+
+$(objects) : defs.h
+kbd.o command.o files.o : command.h
+display.o insert.o search.o files.o : buffer.h
+
+.PHONY : clean
+clean :
+    rm edit $(objects)
+</code></pre><h6 id="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h"><a href="#上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h" class="headerlink" title="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h"></a>上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h</h6><h1 id="清空目标文件的规则"><a href="#清空目标文件的规则" class="headerlink" title="清空目标文件的规则"></a>清空目标文件的规则</h1><h6 id="每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"><a href="#每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁" class="headerlink" title="每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"></a>每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁</h6><h6 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h6><pre><code>clean:
+    rm edit $(objects)
+</code></pre><h6 id="稳妥写法"><a href="#稳妥写法" class="headerlink" title="稳妥写法"></a>稳妥写法</h6><pre><code>.PHONY : clean
+clean :
+    -rm edit $(objects)
+</code></pre><h6 id="PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"><a href="#PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾" class="headerlink" title=".PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"></a>.PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾</h6><h1 id="引用其他文件"><a href="#引用其他文件" class="headerlink" title="引用其他文件"></a>引用其他文件</h1><h6 id="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"><a href="#使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）" class="headerlink" title="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"></a>使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）</h6><pre><code>include &lt;filename&gt;
+</code></pre><h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><h6 id="你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk"><a href="#你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk" class="headerlink" title="你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk"></a>你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk</h6><pre><code>include foo.make *.mk $(bar)
+</code></pre><h6 id="等价于"><a href="#等价于" class="headerlink" title="等价于"></a>等价于</h6><pre><code>include foo.make a.mk b.mk c.mk e.mk f.mk
+</code></pre><h6 id="需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开"><a href="#需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开" class="headerlink" title="需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和可以用一个或多个空格隔开"></a>需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和<filename>可以用一个或多个空格隔开</filename></h6><h6 id="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找"><a href="#include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找" class="headerlink" title="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找"></a>include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录<prefix>/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找</prefix></h6><h6 id="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："><a href="#如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：" class="headerlink" title="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："></a>如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：</h6><pre><code>-include &lt;filename&gt;
+</code></pre><h1 id="环境变量makefiles"><a href="#环境变量makefiles" class="headerlink" title="环境变量makefiles"></a>环境变量makefiles</h1><h6 id="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"><a href="#如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的" class="headerlink" title="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"></a>如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的</h6><h1 id="make的工作方式"><a href="#make的工作方式" class="headerlink" title="make的工作方式"></a>make的工作方式</h1><h6 id="1、读入所有的Makefile。"><a href="#1、读入所有的Makefile。" class="headerlink" title="1、读入所有的Makefile。"></a>1、读入所有的Makefile。</h6><h6 id="2、读入被include的其它Makefile。"><a href="#2、读入被include的其它Makefile。" class="headerlink" title="2、读入被include的其它Makefile。"></a>2、读入被include的其它Makefile。</h6><h6 id="3、初始化文件中的变量。"><a href="#3、初始化文件中的变量。" class="headerlink" title="3、初始化文件中的变量。"></a>3、初始化文件中的变量。</h6><h6 id="4、推导隐晦规则，并分析所有规则。"><a href="#4、推导隐晦规则，并分析所有规则。" class="headerlink" title="4、推导隐晦规则，并分析所有规则。"></a>4、推导隐晦规则，并分析所有规则。</h6><h6 id="5、为所有的目标文件创建依赖关系链。"><a href="#5、为所有的目标文件创建依赖关系链。" class="headerlink" title="5、为所有的目标文件创建依赖关系链。"></a>5、为所有的目标文件创建依赖关系链。</h6><h6 id="6、根据依赖关系，决定哪些目标要重新生成。"><a href="#6、根据依赖关系，决定哪些目标要重新生成。" class="headerlink" title="6、根据依赖关系，决定哪些目标要重新生成。"></a>6、根据依赖关系，决定哪些目标要重新生成。</h6><h6 id="7、执行生成命令。"><a href="#7、执行生成命令。" class="headerlink" title="7、执行生成命令。"></a>7、执行生成命令。</h6><p><a href="http://blog.csdn.net/haoel/article/details/2886/" title="makefile原文链接" target="_blank" rel="external">makefile原文链接</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="什么是makefile"><a href="#什么是makefile" class="headerlink" title="什么是makefile"></a>什么是makefile</h1><h6 id="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的]]>
+    </summary>
+    
+      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
+    
+      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[编译reids的sds文件]]></title>
     <link href="http://www.cxyteam.com/2017/05/08/%E7%BC%96%E8%AF%91reids%E7%9A%84sds%E6%96%87%E4%BB%B6/"/>
     <id>http://www.cxyteam.com/2017/05/08/编译reids的sds文件/</id>
     <published>2017-05-08T12:30:02.000Z</published>
-    <updated>2017-05-08T12:53:28.000Z</updated>
+    <updated>2017-05-09T01:51:49.000Z</updated>
     <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><a href="#在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来" class="headerlink" title="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"></a>在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来</h6><h1 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h1><h6 id="想当然的，sds-c的文件嘛，直接使用如下命令"><a href="#想当然的，sds-c的文件嘛，直接使用如下命令" class="headerlink" title="想当然的，sds.c的文件嘛，直接使用如下命令"></a>想当然的，sds.c的文件嘛，直接使用如下命令</h6><pre><code>gcc sds.c -o sds.o
 </code></pre><h6 id="结果也很想当然的报错"><a href="#结果也很想当然的报错" class="headerlink" title="结果也很想当然的报错"></a>结果也很想当然的报错</h6><p><img src="/img/redis/sds_gcc_error.png" alt="Alt text" title="写出代码"></p>
 <h5 id="本能的去指定头文件-依旧报错"><a href="#本能的去指定头文件-依旧报错" class="headerlink" title="本能的去指定头文件,依旧报错"></a>本能的去指定头文件,依旧报错</h5><pre><code>gcc -I sds.h zmalloc.h sds.c -o sds.o
@@ -735,764 +1386,6 @@ func main() {
     <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="类型T方法集包含全部receiver-T方法"><a href="#类型T方法集包含全部receiver-T方法" class="headerlink" title="类型T方法集包含全部receiver T方法"></a>类型T方法集包含全部receiver T方法</h6><h6 id="类型T方法集合包含全部receiver-T-T方法"><a href="#类型T方法集合包含全部receiver-T-T方法" class="headerlink" title="类型T方法集合包含全部receiver T+T方法"></a>类型<em>T方法集合包含全部receiver T+</em>T方法</h6><h6 id="如类型S包含匿名字段T，则S方法集包含T方法"><a href="#如类型S包含匿名字段T，则S方法集包含T方法" class="headerlink" title="如类型S包含匿名字段T，则S方法集包含T方法"></a>如类型S包含匿名字段T，则S方法集包含T方法</h6><h6 id="如类型S包含匿名字段T，则S方法集包含T-T方法"><a href="#如类型S包含匿名字段T，则S方法集包含T-T方法" class="headerlink" title="如类型S包含匿名字段T，则S方法集包含T+T方法"></a>如类型S包含匿名字段<em>T，则S方法集包含T+</em>T方法</h6><h6 id="不管嵌入T或T，S方法集总是包含T-T方法"><a href="#不管嵌入T或T，S方法集总是包含T-T方法" class="headerlink" title="不管嵌入T或T，S方法集总是包含T+*T方法"></a>不管嵌入T或<em>T，</em>S方法集总是包含T+*T方法</h6>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="类型T方法集包含全部receiver-T方法"><a href="#类型T方法集包含全部receiver-T方法" class="]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记方法定义]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记方法定义/</id>
-    <published>2017-02-28T12:30:49.000Z</published>
-    <updated>2017-03-01T12:05:51.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="方法总是绑定对象实例，并隐式将实例作为第一实参"><a href="#方法总是绑定对象实例，并隐式将实例作为第一实参" class="headerlink" title="方法总是绑定对象实例，并隐式将实例作为第一实参"></a>方法总是绑定对象实例，并隐式将实例作为第一实参</h6><h6 id="只能为当前包内命名类型定义方法"><a href="#只能为当前包内命名类型定义方法" class="headerlink" title="只能为当前包内命名类型定义方法"></a>只能为当前包内命名类型定义方法</h6><h6 id="参数receiver可任意命名。如方法中未曾使用，可省略参数名"><a href="#参数receiver可任意命名。如方法中未曾使用，可省略参数名" class="headerlink" title="参数receiver可任意命名。如方法中未曾使用，可省略参数名"></a>参数receiver可任意命名。如方法中未曾使用，可省略参数名</h6><h6 id="参数receiver类型可以使T（值复制）或-T（引用或指针复制）。基类型T不能是接口或指针"><a href="#参数receiver类型可以使T（值复制）或-T（引用或指针复制）。基类型T不能是接口或指针" class="headerlink" title="参数receiver类型可以使T（值复制）或*T（引用或指针复制）。基类型T不能是接口或指针"></a>参数receiver类型可以使T（值复制）或*T（引用或指针复制）。基类型T不能是接口或指针</h6><h6 id="不支持方法重载，receiver只是参数签名的组成部分"><a href="#不支持方法重载，receiver只是参数签名的组成部分" class="headerlink" title="不支持方法重载，receiver只是参数签名的组成部分"></a>不支持方法重载，receiver只是参数签名的组成部分</h6><h6 id="可用实例value或pointer调用全部方法，编译器自动转换"><a href="#可用实例value或pointer调用全部方法，编译器自动转换" class="headerlink" title="可用实例value或pointer调用全部方法，编译器自动转换"></a>可用实例value或pointer调用全部方法，编译器自动转换</h6><h6 id="简单工厂模式返回对象事例（然而我没看懂）"><a href="#简单工厂模式返回对象事例（然而我没看懂）" class="headerlink" title="简单工厂模式返回对象事例（然而我没看懂）"></a>简单工厂模式返回对象事例（然而我没看懂）</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Queue struct {
-    elements []interface{}
-}
-
-func NewQueue() *Queue {
-    return &amp;Queue{make([]interface{}, 10)}
-}
-
-func (*Queue) Push(e interface{}) error {
-    panic(&quot;not implemented&quot;)
-}
-
-func (self *Queue) length() int {
-    return len(self.elements)
-}
-</code></pre><h6 id="看看receiver-T和-T的区别"><a href="#看看receiver-T和-T的区别" class="headerlink" title="看看receiver T和*T的区别"></a>看看receiver T和*T的区别</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Data struct {
-    x int
-}
-
-func (self Data) ValueTest() {
-    fmt.Printf(&quot;Value:%p\n&quot;, &amp;self)
-}
-
-func (self *Data) PointerTest() {
-    fmt.Printf(&quot;Pointer:%p\n&quot;, self)
-}
-
-func main() {
-    d := Data{}
-    p := &amp;d
-    fmt.Printf(&quot;Data:%p\n&quot;, p)
-
-    d.ValueTest()
-    d.PointerTest()
-
-    p.ValueTest()
-    p.PointerTest()
-}
-</code></pre><h6 id="匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找"><a href="#匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找" class="headerlink" title="匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找"></a>匿名字段，可以像字段成员那样访问匿名字段方法，编译器负责查找</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-type Manager struct {
-    User
-}
-
-func (self *User) Tostring() string {   //receiver = &amp;(Manager.User)
-    return fmt.Sprintf(&quot;User:%p, %v&quot;, self, self)
-}
-
-func main() {
-    m := Manager{User{1, &quot;Tom&quot;}}
-    fmt.Printf(&quot;Manager:%p\n&quot;, &amp;m)      //Manager:0xc42007e060
-    fmt.Println(m.Tostring())           //User:0xc42000e1a0, &amp;{1 Tom}
-}
-</code></pre><h6 id="通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”"><a href="#通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”" class="headerlink" title="通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”"></a>通过匿名字段，可获得和继承类似的复用能力。依据编译器查找次序，只需在外层定义同名方法，就可以实现”override”</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-type Manager struct {
-    User
-    title string
-}
-
-func (self *User) Tostring() string {   //receiver = &amp;(Manager.User)
-    return fmt.Sprintf(&quot;User:%p, %v&quot;, self, self)
-}
-
-func (self *Manager) Tostring() string {   //receiver = &amp;(Manager.User)
-    return fmt.Sprintf(&quot;Manager:%p, %v&quot;, self, self)
-}
-
-func main() {
-    m := Manager{User{1, &quot;Tom&quot;}, &quot;admin&quot;}
-    fmt.Println(m.Tostring())           //Manager:0xc420014120, &amp;{{1 Tom} admin}
-    fmt.Println(m.User.Tostring())      //User:0xc420014120, &amp;{1 Tom}
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="方法总是绑定对象实例，并隐式将实例作为第一实参"><a href="#方法总是绑定对象实例，并隐式将实例作为第一实参" class]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记面向对象]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记面向对象/</id>
-    <published>2017-02-28T12:13:38.000Z</published>
-    <updated>2017-03-01T12:06:28.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"><a href="#面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等" class="headerlink" title="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"></a>面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id int
-    name string
-}
-
-
-type Manager struct {
-    User
-    title string
-}
-
-func main() {
-    m := Manager{User{1, &quot;Tom&quot;}, &quot;admin&quot;}
-    var u User = m.User //同类型拷贝
-    //var u User = m  //这个类型不一样，无法拷贝
-    fmt.Println(u)
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等"><a href="#面向对象三大特征，go仅支持封装。]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记struct]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0struct/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记struct/</id>
-    <published>2017-02-28T09:07:11.000Z</published>
-    <updated>2017-03-01T12:05:16.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员" class="headerlink" title="值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员"></a>值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Node struct {
-    _       int
-    id      int
-    data    *byte
-    next    *Node
-}
-
-func main() {
-    n1 := Node{
-        id  : 1,
-        data: nil,
-    }
-
-    n2 := Node{
-        id  : 2,
-        data: nil,
-        next: &amp;n1,
-    }
-
-    fmt.Println(n1, n2)
-}
-</code></pre><h6 id="顺序初始化必须包含全部字段，否则会出错"><a href="#顺序初始化必须包含全部字段，否则会出错" class="headerlink" title="顺序初始化必须包含全部字段，否则会出错"></a>顺序初始化必须包含全部字段，否则会出错</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    name    string
-    age     int
-}
-
-func main() {
-    u1 := User{&quot;Tom&quot;, 20}
-    //u2 := User{&quot;Tom&quot;}     //会报错，缺少字段
-    fmt.Println(u1)
-}
-</code></pre><h6 id="支持匿名结构，可用作结构成员或定义变量"><a href="#支持匿名结构，可用作结构成员或定义变量" class="headerlink" title="支持匿名结构，可用作结构成员或定义变量"></a>支持匿名结构，可用作结构成员或定义变量</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type File struct {
-    name    string
-    size     int
-    attr struct {
-        perm    int
-        owner   int
-    }
-}
-
-func main() {
-    f := File{
-        name : &quot;test.txt&quot;,
-        size : 1024,
-        //attr : {0755,1} //这样赋值会报错
-    }
-
-    f.attr.owner = 1
-    f.attr.perm = 0755
-
-    fmt.Println(f)
-
-    d := File{
-        name : &quot;a.txt&quot;,
-        size : 512,
-    }
-
-    var attr = struct {
-        perm int
-        owner int
-    }{2, 0755}
-
-    d.attr = attr
-
-    fmt.Println(d)
-}
-</code></pre><h6 id="注意m的赋值方式"><a href="#注意m的赋值方式" class="headerlink" title="注意m的赋值方式"></a>注意m的赋值方式</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id     int
-    name    string
-}
-
-func main() {
-    m := map[User]int{
-        User{1, &quot;Tom&quot;} : 100,
-    }
-
-    fmt.Println(m)      //100
-}
-</code></pre><h6 id="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"><a href="#匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错" class="headerlink" title="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"></a>匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Resource struct {
-    id int
-}
-
-
-type Manager struct {
-    User
-    title string
-}
-
-type User struct {
-    Resource    //匿名字段，相当于引用上面的Resource结构
-    name string
-}
-
-func main() {
-    var m Manager
-    m.id = 1
-    m.name = &quot;Jack&quot;
-    m.title = &quot;Admin&quot;
-
-    fmt.Println(m)      //{{{1} Jack} Admin}
-}
-</code></pre><h6 id="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"><a href="#外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名" class="headerlink" title="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"></a>外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Resource struct {
-    id int
-    name string
-}
-
-
-type Classify struct {
-    id int
-}
-
-type User struct {
-    Resource
-    Classify
-    name string
-}
-
-func main() {
-    u := User{
-        Resource{1, &quot;pepple&quot;},
-        Classify{100},
-        &quot;Jack&quot;,
-    }
-
-    fmt.Println(u)
-    fmt.Println(u.name)
-    fmt.Println(u.Resource.id)
-    fmt.Println(u.Classify.id)
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记map]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0map/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记map/</id>
-    <published>2017-02-28T08:20:07.000Z</published>
-    <updated>2017-03-01T12:05:02.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制" class="headerlink" title="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"></a>引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    m := map[int]struct{
-        name string
-        age int
-    }{
-        1 : {&quot;user1&quot;, 10},
-        2 : {&quot;user2&quot;, 20},
-    }
-
-    fmt.Println(m[1].name)
-}
-</code></pre><h6 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    m := map[string]int{    //判断key是否存在
-        &quot;a&quot; : 1,
-    }
-
-    if v,ok := m[&quot;a&quot;];ok {
-        println(v, ok)      //1 true
-    }
-
-    fmt.Println(m[&quot;c&quot;])     //0   对于不存在的key，直接返回\0,不报错
-    m[&quot;b&quot;] = 2              //新增或修改
-    delete(m, &quot;c&quot;)          //删除，如果key不存在，不会出错
-    println(len(m))         //2    获取键值对数量。cap无效
-
-    for k, v := range m {   //迭代，可仅返回key。随机顺序返回，每次都不相同
-        println(k, v)       //b 2       a 1
-    }
-}
-</code></pre><h6 id="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"><a href="#从map中取回的是一个value临时复制品，对其成员的修改是没有意义的" class="headerlink" title="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"></a>从map中取回的是一个value临时复制品，对其成员的修改是没有意义的</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-   type user struct{ name string }
-   m := map[int]user{
-        1 : {&quot;user1&quot;},
-   }
-
-   fmt.Println(m[1].name)
-   //m[1].name = &quot;Tom&quot;     //这样赋值会报错
-   u := m[1]
-   u.name = &quot;Tom&quot;
-   m[1] = u
-   fmt.Println(m[1].name)
-
-   m2 := map[int]*user{
-        1 : &amp;user{&quot;user1&quot;},
-   }
-   m2[1].name = &quot;jack&quot;
-   fmt.Println(m2[1].name)      //返回的是指针复制品，透过指针修改原对象是允许的
-}
-</code></pre><h6 id="可以在迭代时安全删除键值-最好不要做新增操作"><a href="#可以在迭代时安全删除键值-最好不要做新增操作" class="headerlink" title="可以在迭代时安全删除键值,最好不要做新增操作"></a>可以在迭代时安全删除键值,最好不要做新增操作</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    for i := 0; i &lt; 5;i++ {
-        m := map[int]string{
-            0:&quot;a&quot;, 1:&quot;a&quot;, 2:&quot;a&quot;, 3:&quot;a&quot;, 4:&quot;a&quot;,
-            5:&quot;a&quot;, 6:&quot;a&quot;, 7:&quot;a&quot;, 8:&quot;a&quot;, 9:&quot;a&quot;,
-        }
-
-        for k := range m {
-            m[k+k] = &quot;k&quot;
-            delete(m, k)
-        }
-
-        fmt.Println(m)
-    }
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记copy]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0copy/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记copy/</id>
-    <published>2017-02-28T08:09:06.000Z</published>
-    <updated>2017-03-01T12:04:53.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"><a href="#函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠" class="headerlink" title="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"></a>函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    s := data[8:]
-    s2 := data[:5]
-    fmt.Println(s2)         //[0 1 2 3 4]
-    copy(s2, s)
-
-    fmt.Println(s)          //[8 9]
-    fmt.Println(s2)         //[8 9 2 3 4]
-    fmt.Println(data)       //[8 9 2 3 4 5 6 7 8 9]
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"><a hre]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记append]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0append/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记append/</id>
-    <published>2017-02-28T07:38:23.000Z</published>
-    <updated>2017-03-01T12:04:44.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="append"><a href="#append" class="headerlink" title="append"></a>append</h1><h6 id="向slice尾部添加数据，返回新的slice对象"><a href="#向slice尾部添加数据，返回新的slice对象" class="headerlink" title="向slice尾部添加数据，返回新的slice对象"></a>向slice尾部添加数据，返回新的slice对象</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := make([]int, 0, 5)
-    fmt.Printf(&quot;%p\n&quot;, &amp;s)      //0xc42000e1a0
-
-    s2 := append(s, 1)
-    fmt.Printf(&quot;%p\n&quot;, &amp;s2)     //0xc42000e1c0
-
-    fmt.Println(s, s2)          //[] [1]
-}
-</code></pre><h6 id="append多个值"><a href="#append多个值" class="headerlink" title="append多个值"></a>append多个值</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    s := data[:3]
-    s2 := append(s, 100, 200)
-
-    fmt.Println(data)           //[0 1 2 100 200 5 6 7 8 9]
-    fmt.Println(s)              //[0 1 2]
-    fmt.Println(s2)             //[0 1 2 100 200]
-}
-</code></pre><h6 id="一旦超出原slice-cap限制，就会重新分配底层数组，即便原数组并未填满"><a href="#一旦超出原slice-cap限制，就会重新分配底层数组，即便原数组并未填满" class="headerlink" title="一旦超出原slice.cap限制，就会重新分配底层数组，即便原数组并未填满"></a>一旦超出原slice.cap限制，就会重新分配底层数组，即便原数组并未填满</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 10:0}
-    s := data[:2:3]
-    s = append(s, 100, 200) //一次append两个值，超出s.cap限制，append后的s重新分配了底层数组，并复制数据，如果只追加一个值，则不会重新分配底层数组
-
-    fmt.Println(s, data)    //重新分配底层数组，与原数组无关
-    fmt.Println(&amp;s[0], &amp;data[0])    //比对底层数组起始指针
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="append"><a href="#append" class="headerlink" title="append"></a>append</h1><h6 id="向slice尾部添加数据，返回新的slice对象"><a href="#向slice尾部添加数据，]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记reslice]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0reslice/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记reslice/</id>
-    <published>2017-02-28T06:44:03.000Z</published>
-    <updated>2017-03-01T12:05:05.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"><a href="#基于已有slice创建新slice对象，以便在cap允许范围内调整属性" class="headerlink" title="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"></a>基于已有slice创建新slice对象，以便在cap允许范围内调整属性</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
-    s1 := s[2:5]            //[10 31 4]
-    s2 := s1[2:6:7]         //[4 5 6 7]     注意要在新的s1上进行截取
-    //s3 := s2[3:6]           //报错
-    fmt.Println(s1, s2)
-}
-</code></pre><h6 id="新对象依旧指向原底层数组"><a href="#新对象依旧指向原底层数组" class="headerlink" title="新对象依旧指向原底层数组"></a>新对象依旧指向原底层数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
-    s1 := s[2:5]    //[10 31 4]
-    fmt.Println(s1)
-    s1[2] = 100
-    s2 := s1[2:6]
-    fmt.Println(s2) //[100 5 6 7]
-    s2[3] = 200
-
-    fmt.Println(s)  //[0 11 10 31 100 5 6 200 8 9]
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="基于已有slice创建新slice对象，以便在cap允许范围内调整属性"><a href="#基于已有slice创建新slice对]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记slice]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0slice/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记slice/</id>
-    <published>2017-02-28T03:52:55.000Z</published>
-    <updated>2017-03-01T12:05:10.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="#slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案" class="headerlink" title="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"></a>slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案</h6><h6 id="slice引用类型，但自身是结构体，值拷贝传递"><a href="#slice引用类型，但自身是结构体，值拷贝传递" class="headerlink" title="slice引用类型，但自身是结构体，值拷贝传递"></a>slice引用类型，但自身是结构体，值拷贝传递</h6><pre><code>//在runtime.h中的源码
-struct slice
-{
-    byte* array;
-    uintgo len;     //表示可用元素数量，读写操作不能超过该限制
-    uintgo cap;     //表示最大扩张容量，不能超出数组限制
-}
-</code></pre><h6 id="slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a"><a href="#slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a" class="headerlink" title="slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a"></a>slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6}
-    slice := data[1:4:5]
-    fmt.Println(slice)      //[1 2 3]
-}
-</code></pre><h6 id="slice使用举例"><a href="#slice使用举例" class="headerlink" title="slice使用举例"></a>slice使用举例</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[:6:8]
-    slice1 := data[5:]
-    slice2 := data[:3]
-    slice3 := data[:]
-    fmt.Println(slice, slice1, slice2, slice3)  //[0 1 2 3 4 5] [5 6 7 8 9] [0 1 2] [0 1 2 3 4 5 6 7 8 9]
-}
-</code></pre><h6 id="slice读写操作实际目标是底层数组，只需要注意索引号的差别"><a href="#slice读写操作实际目标是底层数组，只需要注意索引号的差别" class="headerlink" title="slice读写操作实际目标是底层数组，只需要注意索引号的差别"></a>slice读写操作实际目标是底层数组，只需要注意索引号的差别</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[6:8]
-    slice[0] += 100
-    slice[1] += 200
-    fmt.Println(slice)  //[106 207]
-    fmt.Println(data)   //[0 1 2 3 4 5 106 207 8 9]
-}
-</code></pre><h6 id="直接创建slice对象，自动分配底层数组"><a href="#直接创建slice对象，自动分配底层数组" class="headerlink" title="直接创建slice对象，自动分配底层数组"></a>直接创建slice对象，自动分配底层数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 8:100}
-    fmt.Println(data, len(data), cap(data)) //[0 1 2 3 0 0 0 0 100] 9 9
-
-    s2 := make([]int, 6, 8)
-    fmt.Println(s2, len(s2), cap(s2))   //[0 0 0 0 0 0] 6 8 没有初始化值，直接用0填充
-
-    s3 := make([]int, 6)
-    fmt.Println(s3, len(s3), cap(s3))   //[0 0 0 0 0 0] 6 6 省略cap那么久默认cap=len
-}
-</code></pre><h6 id="可以用指针直接访问底层数组，退化成普通数组操作"><a href="#可以用指针直接访问底层数组，退化成普通数组操作" class="headerlink" title="可以用指针直接访问底层数组，退化成普通数组操作"></a>可以用指针直接访问底层数组，退化成普通数组操作</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := []int{0, 1, 2, 3, 4}
-    p := &amp;s[2]      //直接使用指针修改数组底层的值
-    *p += 100
-    fmt.Println(s)
-}
-</code></pre><h6 id="依然是二维数组"><a href="#依然是二维数组" class="headerlink" title="依然是二维数组"></a>依然是二维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [][]int{
-        []int{1, 2, 3},
-        []int{100, 200},
-        []int{11, 22, 33, 44},
-    }
-
-    fmt.Println(data)       //[[1 2 3] [100 200] [11 22 33 44]]
-}
-</code></pre><h6 id="可直接修改struct-array成员"><a href="#可直接修改struct-array成员" class="headerlink" title="可直接修改struct array成员"></a>可直接修改struct array成员</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    d := [5]struct {
-        x int
-    }{}
-
-    s := d[:]   //这里是引用
-
-    d[1].x = 10
-    s[2].x = 20
-    fmt.Println(d)      //[{0} {10} {20} {0} {0}]
-    fmt.Printf(&quot;%p, %p\n&quot;, &amp;d, &amp;d[0])       //0xc4200720c0, 0xc4200720c0
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记array]]></title>
-    <link href="http://www.cxyteam.com/2017/02/28/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0array/"/>
-    <id>http://www.cxyteam.com/2017/02/28/go学习笔记array/</id>
-    <published>2017-02-28T03:21:50.000Z</published>
-    <updated>2017-03-01T12:04:48.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#数组是值类型，赋值和传参会复制整个数组，而不是指针" class="headerlink" title="数组是值类型，赋值和传参会复制整个数组，而不是指针"></a>数组是值类型，赋值和传参会复制整个数组，而不是指针</h6><h6 id="数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型"><a href="#数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型" class="headerlink" title="数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型"></a>数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型</h6><h6 id="支持”-”，”！-”操作符，因为内存总是被初始化过"><a href="#支持”-”，”！-”操作符，因为内存总是被初始化过" class="headerlink" title="支持”==”，”！=”操作符，因为内存总是被初始化过"></a>支持”==”，”！=”操作符，因为内存总是被初始化过</h6><h6 id="指针数组-n-T-数组指针-n-T"><a href="#指针数组-n-T-数组指针-n-T" class="headerlink" title="指针数组[n]T,数组指针[n]T"></a>指针数组[n]<em>T,数组指针</em>[n]T</h6><h1 id="定义数组的方式"><a href="#定义数组的方式" class="headerlink" title="定义数组的方式"></a>定义数组的方式</h1><h6 id="直接初始化"><a href="#直接初始化" class="headerlink" title="直接初始化"></a>直接初始化</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [3]int{1,2}    //定义了数组有三个元素，未初始化元素值为0
-    fmt.Println(a)      //[1 2 0]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]int{1, 2, 3, 4, 5}    //通过初始化值确定数组长度
-    fmt.Println(a)      //[1 2 3 4 5]
-}
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [5]int{2:100, 4:200}   //指定了数组对应的键，索引从0开始以0的值进行补齐到指定的数组长度
-    fmt.Println(a)      //[0 0 100 0 200]
-}
-</code></pre><h6 id="先struct方式定义数组格式，再初始化值"><a href="#先struct方式定义数组格式，再初始化值" class="headerlink" title="先struct方式定义数组格式，再初始化值"></a>先struct方式定义数组格式，再初始化值</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]struct{
-        name string
-        age uint8
-    }{
-        {&quot;user1&quot;, 10},
-        {&quot;user2&quot;, 20},  //都好不能省略
-    }
-
-    fmt.Println(a)      //[{user1 10} {user2 20}]
-}
-</code></pre><h6 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2][3]int{{1,2,3}, {4,5,6}}    //指定每一层的元素个数
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...][3]int{{1,2,3}, {4,5,6}}  //省略第一维的元素个数，第二维不能省略
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-</code></pre><h6 id="数组会有值拷贝行为，建议使用后slice，或数组指针"><a href="#数组会有值拷贝行为，建议使用后slice，或数组指针" class="headerlink" title="数组会有值拷贝行为，建议使用后slice，或数组指针"></a>数组会有值拷贝行为，建议使用后slice，或数组指针</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(x [2]int) {
-    fmt.Printf(&quot;x:%p&quot;, &amp;x)  //x:0xc42000a2d0    指针位置发生了改变，说明是重新复制了值
-    x[1] = 1000
-}
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Printf(&quot;a:%p&quot;, &amp;a)  //a:0xc42000a2a0
-    test(a)
-    fmt.Println(a)  //[1 2] 由于是值复制，因此当前的数组还是原来的值
-}
-</code></pre><h6 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Println(len(a), cap(a))  //2,2
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#]]>
     </summary>
     
       <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>

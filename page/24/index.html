@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/性能分析命令/" itemprop="url">
-                  性能分析命令
+                <a class="post-title-link" href="/2015/12/29/fmt的使用/" itemprop="url">
+                  fmt的使用
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T10:35:45+08:00" content="2015-12-20">
-              2015-12-20
+            <time itemprop="dateCreated" datetime="2015-12-29T10:05:16+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -265,16 +265,12 @@
       
         
           
-          环境准备
-首先你得拥有一个linux环境
-安装sysstat包 yum install sysstat
-安装procps包 yum install procps
+          ###
 
-需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  l
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/性能分析命令/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/fmt的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -317,8 +313,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/18/服务器如何设置的cookie/" itemprop="url">
-                  服务器如何设置的cookie
+                <a class="post-title-link" href="/2015/12/29/uniq的使用/" itemprop="url">
+                  uniq的使用
                 </a>
               
             
@@ -331,8 +327,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-18T15:05:40+08:00" content="2015-12-18">
-              2015-12-18
+            <time itemprop="dateCreated" datetime="2015-12-29T09:41:50+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -345,8 +341,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -378,15 +374,17 @@
       
         
           
-          一个joke&lt;?php
-    setcookie(&apos;key&apos;, &apos;value&apos;, time()+1000, &apos;/&apos;, &apos;hostname&apos;);
-    var_dump($_COOKIE);
+          uniq的使用场景uniq的参数说明用法：uniq [选项]... [文件]
+从输入文件或者标准输入中筛选相邻的匹配行并写入到输出文件或标准输出。
 
-为什么不能打印出c
+不附加任何选项时匹配行将在首次出现处被合并。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+  -c, --count        在每行前加
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/18/服务器如何设置的cookie/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/uniq的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -429,8 +427,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/17/siege压测工具的安装与使用/" itemprop="url">
-                  siege压测工具的安装与使用
+                <a class="post-title-link" href="/2015/12/29/sort的使用/" itemprop="url">
+                  sort的使用
                 </a>
               
             
@@ -443,8 +441,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-17T14:18:08+08:00" content="2015-12-17">
-              2015-12-17
+            <time itemprop="dateCreated" datetime="2015-12-29T09:32:36+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -457,8 +455,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -490,14 +488,18 @@
       
         
           
-          siege的安装wget http://soft.vpser.net/test/siege/siege-2.67.tar.gz（国内的一个镜像站地址）
-tar -zxvf siege-2.67.tar.gz
-cd siege-2.67
-./configure &amp;&amp; make &amp
+          sort使用场景用法：sort [选项]... [文件]...
+　或：sort [选项]... --files0-from=F
+串联排序所有指定文件并将结果写到标准输出。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+排序选项：
+
+  -b, --ignore-leading-blanks  
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/17/siege压测工具的安装与使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/sort的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -540,8 +542,8 @@ cd siege-2.67
             
               
                 
-                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">
-                  ab压测工具的安装与使用
+                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">
+                  join的使用
                 </a>
               
             
@@ -554,8 +556,8 @@ cd siege-2.67
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-17T10:03:33+08:00" content="2015-12-17">
-              2015-12-17
+            <time itemprop="dateCreated" datetime="2015-12-26T10:17:46+08:00" content="2015-12-26">
+              2015-12-26
             </time>
           </span>
 
@@ -568,8 +570,8 @@ cd siege-2.67
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -601,14 +603,22 @@ cd siege-2.67
       
         
           
-          安装yum install httpd-tools
-使用ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
-命令执行结果分析Server Software:
-Server Hostname:        hostname(*服
+          join的使用案例1.文件内容cat month_cn.txt
+1       一月
+2       二月
+3       三月
+4       四月
+5       五月
+6       六月
+7       七月
+8       八月
+9       九月
+10      十月
+11      
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/17/ab压测工具的安装与使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/26/join的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -651,8 +661,8 @@ Server Hostname:        hostname(*服
             
               
                 
-                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">
-                  Redis集群的安装与配置
+                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">
+                  cut的使用
                 </a>
               
             
@@ -665,8 +675,8 @@ Server Hostname:        hostname(*服
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-03T18:23:49+08:00" content="2015-12-03">
-              2015-12-03
+            <time itemprop="dateCreated" datetime="2015-12-24T10:48:06+08:00" content="2015-12-24">
+              2015-12-24
             </time>
           </span>
 
@@ -679,8 +689,8 @@ Server Hostname:        hostname(*服
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -712,14 +722,15 @@ Server Hostname:        hostname(*服
       
         
           
-          Redis集群安装
-wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;(下载redis-3.0.tar.gz)
-tar zxvf redis-3.0.tar.gz(解压安装包)
-cd redis-3.0.0-beta
+          cut使用案例1.按字节切割
+tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
+
+2.指定分隔符切割
+tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/03/Redis集群的安装与配置/#more" rel="contents">
+            <a class="btn" href="/2015/12/24/cut的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -746,7 +757,7 @@ cd redis-3.0.0-beta
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -787,7 +798,7 @@ cd redis-3.0.0-beta
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -795,7 +806,7 @@ cd redis-3.0.0-beta
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -804,7 +815,7 @@ cd redis-3.0.0-beta
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

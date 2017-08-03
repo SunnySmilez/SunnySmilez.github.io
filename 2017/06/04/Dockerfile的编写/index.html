@@ -1,0 +1,860 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Dockerfile 作用定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
+Dockerfile指令docker build 其他用法标准用法docker build -t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile的编写">
+<meta property="og:url" content="http://www.cxyteam.com/2017/06/04/Dockerfile的编写/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="Dockerfile 作用定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
+Dockerfile指令docker build 其他用法标准用法docker build -t">
+<meta property="og:updated_time" content="2017-06-12T01:29:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dockerfile的编写">
+<meta name="twitter:description" content="Dockerfile 作用定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
+Dockerfile指令docker build 其他用法标准用法docker build -t">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Dockerfile的编写 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Dockerfile的编写
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-04T16:21:31+08:00" content="2017-06-04">
+              2017-06-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
+</code></pre><h1 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h1><h3 id="docker-build-其他用法"><a href="#docker-build-其他用法" class="headerlink" title="docker build 其他用法"></a>docker build 其他用法</h3><h6 id="标准用法"><a href="#标准用法" class="headerlink" title="标准用法"></a>标准用法</h6><pre><code>docker build -t image_name PATH
+在PATH目录下，按照Dockerfile建立一个新的image_name镜像
+path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
+</code></pre><h6 id="直接用-Git-repo-进行构建"><a href="#直接用-Git-repo-进行构建" class="headerlink" title="直接用 Git repo 进行构建"></a>直接用 Git repo 进行构建</h6><pre><code>docker build https://github.com/twang2218/gitlab-ce-zh.git#:8.14
+指定了构建所需的 Git repo，并且指定默认的 master 分支，构建目录为 /8.14/，然后 Docker 就会自己去 git clone 这个项目、切换到指定分支、并进入到指定目录后开始构建
+</code></pre><h6 id="用给定的-tar-压缩包构建"><a href="#用给定的-tar-压缩包构建" class="headerlink" title="用给定的 tar 压缩包构建"></a>用给定的 tar 压缩包构建</h6><pre><code>docker build http://server/context.tar.gz
+Docker 引擎会下载这个包，并自动解压缩，以其作为上下文，开始构建
+</code></pre><h6 id="从标准输入中读取-Dockerfile-进行构建"><a href="#从标准输入中读取-Dockerfile-进行构建" class="headerlink" title="从标准输入中读取 Dockerfile 进行构建"></a>从标准输入中读取 Dockerfile 进行构建</h6><pre><code>docker build - &lt; Dockerfile或者cat Dockerfile | docker build -
+如果标准输入传入的是文本文件，则将其视为 Dockerfile，并开始构建。这种形式由于直接从标准输入中读取 Dockerfile 的内容，它没有上下文，因此不可以像其他方法那样可以将本地文件 COPY 进镜像之类的事情
+</code></pre><h6 id="从标准输入中读取上下文压缩包进行构建"><a href="#从标准输入中读取上下文压缩包进行构建" class="headerlink" title="从标准输入中读取上下文压缩包进行构建"></a>从标准输入中读取上下文压缩包进行构建</h6><pre><code>docker build - &lt; context.tar.gz
+如果发现标准输入的文件格式是 gzip、bzip2 以及 xz 的话，将会使其为上下文压缩包，直接将其展开，将里面视为上下文，并开始构建
+</code></pre><h6 id="From"><a href="#From" class="headerlink" title="From"></a>From</h6><pre><code>指定基础镜像，在其上进行定制
+</code></pre><h6 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h6><pre><code>执行命令行的命令，比如：RUN apt-get update是执行apt-get update命令
+执行此命令的时候需要注意，在Dockerfile中没执行一个指令都会新建一层(目前有个最大层的限制是127层)，所以每执行一个RUN就会和我们在执行安装软件然后执行commit一样，苟静一层镜像。因此在执行多个命令的时候使用&quot;&amp;&quot;符连接，用一个RUN执行，这样就只会新建一个层
+不可这样：
+RUN apt-get update
+RUN apt-get -y install vim
+应当改为：
+RUN apt-get update \
+    &amp;&amp; apt-get -y install vim
+</code></pre><h6 id="COPY-source-path-target-path"><a href="#COPY-source-path-target-path" class="headerlink" title="COPY source_path target_path"></a>COPY source_path target_path</h6><pre><code>将本地的source_path复制到新的一层镜像内的target_path位置（如果source_path是相对路径，那么需要注意的是他是相对于docker build -t image_name PATH时指定的PATH也就是上下文环境）
+source_path支持通配符
+target_path可以是容器的绝对路径，也可以是相对于工作目录的相对路径（工作目录用WORKDIR指令来指定）
+需要注意的是所有的source_path的文件属性都会保留（包含读写执行权限等）
+</code></pre><h6 id="ADD-source-path-target-path"><a href="#ADD-source-path-target-path" class="headerlink" title="ADD source_path target_path"></a>ADD source_path target_path</h6><pre><code>使用方式和COPY一样，但是添加了一些新的功能
+source_path可以是一个 URL，这种情况下，Docker 引擎会试图去下载这个链接的文件放到 target_path去。下载后的文件权限自动设置为 600，另外，如果下载的是个压缩包，需要解压缩，如果对权限不满足或者需要进行解压缩，那就需要再使用RUN命令调整
+如果source_path是一个tar压缩文件的话，ADD会将文件解压缩后到target_path中
+</code></pre><h6 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h6><pre><code>CMD与RUN类似
+shell格式：CMD 命令
+exec格式：CMD [&quot;可执行文件&quot;, &quot;参数1&quot;, &quot;参数2&quot;...]
+参数列表格式：CMD [&quot;参数1&quot;, &quot;参数2&quot;...]。在指定了 ENTRYPOINT 指令后，用 CMD 指定具体的参数
+需要注意的是：Docker 不是虚拟机，容器就是进程，容器就是为了主进程而存在的，主进程退出，容器就失去了存在的意义，从而退出，其它辅助进程不是它需要关心的东西(这块实验并没有成功，暂时忽略，有坑能想到这块就行)
+什么意思呢？重启nginx的时候可能会写成这样：CMD service nginx start
+在执行的时候会被理解为：CMD [ &quot;sh&quot;, &quot;-c&quot;, &quot;service nginx start&quot;]，因此主进程实际是sh，当service nginx start结束之后，sh也就结束了，sh作为主进程退出，自然容器也就退出了
+正确的做法是直接执行nginx可执行文件
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</code></pre><h6 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h6><pre><code>和cmd的命令差不多，两个应用场景
+1、启动一个服务前的准备工作
+    FROM alpine:3.4
+    ...
+    RUN addgroup -S redis &amp;&amp; adduser -S -G redis redis
+    ...
+    ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]
+
+    EXPOSE 6379
+    CMD [ &quot;redis-server&quot; ]
+
+
+    docker-entrypoint.sh的脚本
+    #!/bin/sh
+    ...
+    # allow the container to be started with `--user`
+    if [ &quot;$1&quot; = &apos;redis-server&apos; -a &quot;$(id -u)&quot; = &apos;0&apos; ]; then
+        chown -R redis .
+        exec su-exec redis &quot;$0&quot; &quot;$@&quot;
+    fi
+
+    exec &quot;$@&quot;
+    这时候的ENTRYPOINT会判断CMD的内容，如果是redis-server就切换redis用户身份启动服务器，否则用root身份执行
+
+2、让镜像像命令一样
+    FROM ubuntu:16.04
+    RUN apt-get update \
+        &amp;&amp; apt-get install -y curl \
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+    CMD [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
+
+    如上我们在构建好镜像之后，执行docker run container_name就会执行curl http://ip.cn
+    如果这个时候我想显示当前的http头信息，就需要加上-i的参数了，假如我们执行docker run container_name -I 命令会变成curl -I http://ip.cn？
+    记住在镜像的后面只能跟command，运行时会替换CMD的默认值，所以在这里的-i是把整个的CMD给替换了，而-I这个命令是不存在的，显然我们需要docker run container_name curl -I http://ip.cn这么写
+    如果我们换成这种写法
+    FROM ubuntu:16.04
+    RUN apt-get update \
+        &amp;&amp; apt-get install -y curl \
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+    ENTRYPOINT [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
+
+    这样写就能构建完镜像之后，执行docker run container_name就能获取header信息
+    因为CMD的内容将会作为参数传给ENTRYPOINT，因此原本命令是curl http://ip.cn，CMD命令是-I所以最终执行的命令是curl -I http://ip.cn
+</code></pre><h6 id="ENV设置环境变量"><a href="#ENV设置环境变量" class="headerlink" title="ENV设置环境变量"></a>ENV设置环境变量</h6><pre><code>ENV key val
+ENV key1=val1 key2=val2
+ENV VERSION=1.01 NAME=&quot;TEST&quot;
+</code></pre><h6 id="ARG构建参数"><a href="#ARG构建参数" class="headerlink" title="ARG构建参数"></a>ARG构建参数</h6><pre><code>ARG key=val
+和ENV一样是设置环境变量，ARG构建的环境变量，在容器运行时不会存在这些环境变量（貌似就是一个临时的环境变量的概念，但是他能用docker history查看，所以不要以为真的是临时变量，直接传入账号密码）
+</code></pre><h6 id="VOLUME定义匿名卷"><a href="#VOLUME定义匿名卷" class="headerlink" title="VOLUME定义匿名卷"></a>VOLUME定义匿名卷</h6><pre><code>容器运行的时候，我们应该尽量保持容器存储层不发生写操作，对于数据库类需要动态保存数据的应用/或者上传文件的目录，我们应该把这些文件保存在卷中，比如在Dockerfile中，我们事先指定 /data/mysqldata为匿名卷，这样做会保证容器存储层无变化，说白了就是你把当前的容器做build的时候不会把mysqldata文件给打包进去
+VOLUME /data/mysqldata
+在执行：docker run -d -v mydata:/data/mysqldata container_name的时候是可以覆盖掉匿名卷的
+</code></pre><h6 id="EXPOSE暴露端口"><a href="#EXPOSE暴露端口" class="headerlink" title="EXPOSE暴露端口"></a>EXPOSE暴露端口</h6><pre><code>EXPOSE 端口1 端口2
+这样写在容器运行的时候也不会开启这个端口的服务
+他有两个作用：提醒，告诉镜像使用者理解这个服务的使用的端口；占用随机应用端口，
+</code></pre><h6 id="WORKDIR指定工作目录"><a href="#WORKDIR指定工作目录" class="headerlink" title="WORKDIR指定工作目录"></a>WORKDIR指定工作目录</h6><pre><code>指定工作目录，以后各层的当前目录就改为指定的目录
+</code></pre><h6 id="USER指定当前用户"><a href="#USER指定当前用户" class="headerlink" title="USER指定当前用户"></a>USER指定当前用户</h6><pre><code>切换到指定用户，该用户必须事先存在
+</code></pre><h6 id="HEALTHCHECK健康检查"><a href="#HEALTHCHECK健康检查" class="headerlink" title="HEALTHCHECK健康检查"></a>HEALTHCHECK健康检查</h6><pre><code>--interval  两次健康检查的间隔时间
+--timeout   监看检查命令运行超时时间，如果超过这个时间，本次健康检查视为失败，默认30s
+--retries   当连续失败命令运行
+
+FROM nginx
+RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*
+HEALTHCHECK --interval=5s --timeout=3s \
+  CMD curl -fs http://localhost/ || exit 1
+
+这里设置每隔5s检查一次，如果健康检查命令超过3s没响应就视为失败，并使用curl -fs http://localhost/ || exit 1作为健康检查命令
+</code></pre><h6 id="onbulid"><a href="#onbulid" class="headerlink" title="onbulid"></a>onbulid</h6><pre><code>他后面跟其他的指令，例如RUN,COPY等，而这些指令，在当前镜像构建时并不会被执行，只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行
+1、先编写一个Dockerfile文件，内容如下：
+    FROM web1
+    ONBUILD RUN mkdir /test
+
+2、利用上面的Dockerfile构建镜像：docker build -t web1
+    这个时候你在web1镜像中不会看到有/test文件夹
+
+3、在编写一个Dockerfile，内容如下
+    FROM web1
+
+4、构建镜像：docker build -t web2
+    这个时候你会看到镜像web2中有/test文件夹
+</code></pre><h6 id="dockerignore"><a href="#dockerignore" class="headerlink" title=".dockerignore"></a>.dockerignore</h6><pre><code>如果在docker build指定的上下文环境中有不需要COPY的文件，可以像.gitignore这样的语法写在.dockerignore
+.path/*
+.file_name
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag">#Docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/docker的应用场景/" rel="next" title="docker的应用场景">
+                <i class="fa fa-chevron-left"></i> docker的应用场景
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/06/关于产品设计的几个小思考/" rel="prev" title="关于产品设计的几个小思考">
+                关于产品设计的几个小思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">140</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile-作用"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile 作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile指令"><span class="nav-number">2.</span> <span class="nav-text">Dockerfile指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-build-其他用法"><span class="nav-number">2.0.1.</span> <span class="nav-text">docker build 其他用法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#标准用法"><span class="nav-number">2.0.1.0.0.1.</span> <span class="nav-text">标准用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#直接用-Git-repo-进行构建"><span class="nav-number">2.0.1.0.0.2.</span> <span class="nav-text">直接用 Git repo 进行构建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用给定的-tar-压缩包构建"><span class="nav-number">2.0.1.0.0.3.</span> <span class="nav-text">用给定的 tar 压缩包构建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#从标准输入中读取-Dockerfile-进行构建"><span class="nav-number">2.0.1.0.0.4.</span> <span class="nav-text">从标准输入中读取 Dockerfile 进行构建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#从标准输入中读取上下文压缩包进行构建"><span class="nav-number">2.0.1.0.0.5.</span> <span class="nav-text">从标准输入中读取上下文压缩包进行构建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#From"><span class="nav-number">2.0.1.0.0.6.</span> <span class="nav-text">From</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#RUN"><span class="nav-number">2.0.1.0.0.7.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#COPY-source-path-target-path"><span class="nav-number">2.0.1.0.0.8.</span> <span class="nav-text">COPY source_path target_path</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ADD-source-path-target-path"><span class="nav-number">2.0.1.0.0.9.</span> <span class="nav-text">ADD source_path target_path</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CMD"><span class="nav-number">2.0.1.0.0.10.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">2.0.1.0.0.11.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ENV设置环境变量"><span class="nav-number">2.0.1.0.0.12.</span> <span class="nav-text">ENV设置环境变量</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ARG构建参数"><span class="nav-number">2.0.1.0.0.13.</span> <span class="nav-text">ARG构建参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#VOLUME定义匿名卷"><span class="nav-number">2.0.1.0.0.14.</span> <span class="nav-text">VOLUME定义匿名卷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#EXPOSE暴露端口"><span class="nav-number">2.0.1.0.0.15.</span> <span class="nav-text">EXPOSE暴露端口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#WORKDIR指定工作目录"><span class="nav-number">2.0.1.0.0.16.</span> <span class="nav-text">WORKDIR指定工作目录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#USER指定当前用户"><span class="nav-number">2.0.1.0.0.17.</span> <span class="nav-text">USER指定当前用户</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HEALTHCHECK健康检查"><span class="nav-number">2.0.1.0.0.18.</span> <span class="nav-text">HEALTHCHECK健康检查</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#onbulid"><span class="nav-number">2.0.1.0.0.19.</span> <span class="nav-text">onbulid</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#dockerignore"><span class="nav-number">2.0.1.0.0.20.</span> <span class="nav-text">.dockerignore</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

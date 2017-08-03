@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/22/sersync/" itemprop="url">
-                  sersync
+                <a class="post-title-link" href="/2016/07/12/arp/" itemprop="url">
+                  arp
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-22T15:57:30+08:00" content="2016-05-22">
-              2016-05-22
+            <time itemprop="dateCreated" datetime="2016-07-12T00:36:04+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -265,15 +265,15 @@
       
         
           
-          sersync利用inotify和rsync技术实现对服务器数据实时同步的解决方案
-优点1.使用c++编写,对linux系统文件产生的临时文件和重复文件操作进行过滤,在结合rsync同步的时候,会减少运行时消耗本地及网络资源,因此它速度更快
-2.配置简单
-3.使用多线程同步
-4.自带出错处理机制,通
+          ARP协议(地址解析协议)使用ARP协议可实现通过IP地址获得对应主机的物理地址
+ARP缓存表每台安装有TCP/IP协议的电脑都有一个ARP缓存表,表里的IP地址和MAC地址是一一对应的
+eg:
+    查看          ARP -a
+    ping         ping 192.168
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/22/sersync/#more" rel="contents">
+            <a class="btn" href="/2016/07/12/arp/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +316,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/22/rsync-inotify实时备份/" itemprop="url">
-                  rsync+inotify实时备份
+                <a class="post-title-link" href="/2016/07/05/fast-cgi简单介绍及工作原理/" itemprop="url">
+                  fast-cgi简单介绍及工作原理
                 </a>
               
             
@@ -330,8 +330,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-22T13:07:39+08:00" content="2016-05-22">
-              2016-05-22
+            <time itemprop="dateCreated" datetime="2016-07-05T23:36:04+08:00" content="2016-07-05">
+              2016-07-05
             </time>
           </span>
 
@@ -344,8 +344,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -377,17 +377,13 @@
       
         
           
-          Inotify强大的,细粒度的,异步的文件系统事件监控机制
-Inotify实现的软件inotify
-sersync
-lsyncd
-安装Inotify1.验证系统支持inotify
-    ls /proc/sys/fs/inotify/
-        存在三个文件:max_queued_event
+          CGI(Common Getway Interface)HTTP服务器与后端服务器或其他机器上的程序进行通信的一种工具,CGI程序必须运行在网络服务器上
+缺点:性能较差(每次HTTP服务器遇到动态程序都需要重新启动脚本解析器来执行解析,然后返回结果给HTTP服务器),安全性能也表较差
+FastCGI
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/22/rsync-inotify实时备份/#more" rel="contents">
+            <a class="btn" href="/2016/07/05/fast-cgi简单介绍及工作原理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -430,8 +426,8 @@ lsyncd
             
               
                 
-                <a class="post-title-link" href="/2016/05/17/rsync安装和使用/" itemprop="url">
-                  rsync安装和使用
+                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">
+                  php.ini基本参数设置
                 </a>
               
             
@@ -444,8 +440,8 @@ lsyncd
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-17T22:19:14+08:00" content="2016-05-17">
-              2016-05-17
+            <time itemprop="dateCreated" datetime="2016-07-05T23:03:14+08:00" content="2016-07-05">
+              2016-07-05
             </time>
           </span>
 
@@ -458,8 +454,8 @@ lsyncd
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -491,17 +487,14 @@ lsyncd
       
         
           
-          简介开源的,快速的,多功能的,可实现全量和增量的本地或远程数据同步的工具
-
-1.支持拷贝特殊文件如链接文件,设备等
-2.可以排除指定文件或目录同步的功能,相当于打包命令tar的排除功能
-3.可以保持源文件或目录的权限,时间,软硬链接,属组,主等所有属性均不改变
-4.可实现增量同步
-5.可以使用rcp
+          开启安全模式(阻止php调用部分函数,比如system())safe_mode = On
+禁用函数disable_functions=system,exec,shell_exec
+关闭php版本信息在header信息中泄露expose_php = Off
+关闭注册全局变量register_globa
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/17/rsync安装和使用/#more" rel="contents">
+            <a class="btn" href="/2016/07/05/php-ini基本参数设置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -544,8 +537,8 @@ lsyncd
             
               
                 
-                <a class="post-title-link" href="/2016/05/15/分发无权限文件/" itemprop="url">
-                  分发无权限文件
+                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">
+                  如何防盗链
                 </a>
               
             
@@ -558,8 +551,8 @@ lsyncd
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T15:00:34+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-07-01T01:06:42+08:00" content="2016-07-01">
+              2016-07-01
             </time>
           </span>
 
@@ -605,14 +598,15 @@ lsyncd
       
         
           
-          利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)分发到家目录scp demo.txt /home/vagrant
-赋予用户cp权限visudo修改
-在最后添加:(赋予vagrant用户cp的权限)
-vagrant    ALL=(ALL)       N
+          资源盗链某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
+
+解决办法:
+    1.图片,视频打水印,logo
+    2.防火墙控制,根据ip控
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/15/分发无权限文件/#more" rel="contents">
+            <a class="btn" href="/2016/07/01/如何防盗链/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -655,8 +649,8 @@ vagrant    ALL=(ALL)       N
             
               
                 
-                <a class="post-title-link" href="/2016/05/15/ssh实现免密批量登陆/" itemprop="url">
-                  ssh实现免密批量登陆
+                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">
+                  apache常用的prefork和worker模式
                 </a>
               
             
@@ -669,8 +663,8 @@ vagrant    ALL=(ALL)       N
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T13:26:32+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-07-01T00:33:59+08:00" content="2016-07-01">
+              2016-07-01
             </time>
           </span>
 
@@ -716,18 +710,15 @@ vagrant    ALL=(ALL)       N
       
         
           
-          创建用户生成密钥对1.以dsa的数字算法进行密钥生成
-    ssh-keygen -t dsa
-2.默认路径以及不给密码(接下来的是选项直接回车)
-分发公钥1.默认端口
-ssh-copy-id -i id_dsa.pub vagrant@172.16.17.11
+          prefork模式(实现fork好子进程,等待请求)使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
 
-2.非默认端口
-ssh-copy
+工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
+
+优点:效率高,稳定
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/15/ssh实现免密批量登陆/#more" rel="contents">
+            <a class="btn" href="/2016/07/01/apache常用的prefork和worker模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -754,7 +745,7 @@ ssh-copy
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -795,7 +786,7 @@ ssh-copy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -803,7 +794,7 @@ ssh-copy
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -812,7 +803,7 @@ ssh-copy
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

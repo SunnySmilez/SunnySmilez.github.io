@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">
-                  环境变量的设置
+                <a class="post-title-link" href="/2017/02/28/go学习笔记异常处理/" itemprop="url">
+                  go学习笔记异常处理
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-21T11:06:19+08:00" content="2016-12-21">
-              2016-12-21
+            <time itemprop="dateCreated" datetime="2017-02-28T11:17:53+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -265,13 +265,16 @@
       
         
           
-          永久对所有用户生效修改/etc/profile添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同pathmunge () {
-    case &quot;:${PATH}:&quot; in
-        *:&quot;$1&quot;:*
+          异常处理没有结构化异常，使用panic抛出错误，recover捕获错误package main
+
+func test() {
+    defer func() {
+        if err := recover();err != nil {    //相当于php的错误异常处理的try
+    
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/21/环境变量的设置/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记异常处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -314,8 +317,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/19/rsyslog搭建日志系统/" itemprop="url">
-                  rsyslog搭建日志系统
+                <a class="post-title-link" href="/2017/02/24/go学习笔记函数/" itemprop="url">
+                  go学习笔记函数
                 </a>
               
             
@@ -328,11 +331,30 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-19T19:09:44+08:00" content="2016-12-19">
-              2016-12-19
+            <time itemprop="dateCreated" datetime="2017-02-24T17:10:31+08:00" content="2017-02-24">
+              2017-02-24
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -356,14 +378,13 @@
       
         
           
-          安装rsyslog, 请跳转：安装rsyslog整体部署如图所示：
-配置client日志收集到本地在/etc/rsyslog.conf中添加一行*.* /tmp/rsyslog.log
-注释一行#$IncludeConfig /etc/rsyslog.d/*.conf
-配置日志收集到本地样例检验配置
+          函数定义不支持嵌套，重载和默认参数无需声明原型支持不定长变参支持多返回值支持命名返回参数支持匿名函数和闭包使用func定义函数，左大括号依旧不能另起一行package main
+
+func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/19/rsyslog搭建日志系统/#more" rel="contents">
+            <a class="btn" href="/2017/02/24/go学习笔记函数/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -406,8 +427,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/14/安装lnmp环境/" itemprop="url">
-                  安装lnmp环境
+                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">
+                  go学习笔记表达式
                 </a>
               
             
@@ -420,8 +441,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-14T15:21:17+08:00" content="2016-12-14">
-              2016-12-14
+            <time itemprop="dateCreated" datetime="2017-02-22T10:54:47+08:00" content="2017-02-22">
+              2017-02-22
             </time>
           </span>
 
@@ -434,8 +455,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -467,12 +488,12 @@
       
         
           
-          注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）安装nginx依赖yum install gcc zlib-devel pcre-devel openssl-devel gcc-c++ gcc-g77
-安装nginxwget 
+          保留字在程序中不可以使用的名字break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
+package,switch,const,fallthrough,if,range,type,continue,f
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/14/安装lnmp环境/#more" rel="contents">
+            <a class="btn" href="/2017/02/22/go学习笔记表达式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -515,8 +536,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/06/rsyslog配置/" itemprop="url">
-                  rsyslog配置
+                <a class="post-title-link" href="/2017/02/20/go学习笔记类型/" itemprop="url">
+                  go学习笔记类型
                 </a>
               
             
@@ -529,8 +550,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-06T21:23:37+08:00" content="2016-12-06">
-              2016-12-06
+            <time itemprop="dateCreated" datetime="2017-02-20T19:33:27+08:00" content="2017-02-20">
+              2017-02-20
             </time>
           </span>
 
@@ -543,8 +564,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -576,13 +597,19 @@
       
         
           
-          推荐阅读http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
-http://huoding.com/2014/05/09/347
-http://blog.clanzx.net/2013/12/31/rsyslog.html
+          类型转换package main
+
+func main() {
+    var b byte = 100
+    var n int = b // //隐式转换不支持，会报错
+    //var n int = int(b)//显示转换
+    println(n)
+}
+其他值不能当作bool值使用
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/06/rsyslog配置/#more" rel="contents">
+            <a class="btn" href="/2017/02/20/go学习笔记类型/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -625,8 +652,8 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
             
               
                 
-                <a class="post-title-link" href="/2016/12/01/linux配置网络/" itemprop="url">
-                  linux配置网络
+                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">
+                  go学习笔记枚举
                 </a>
               
             
@@ -639,8 +666,8 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T12:01:52+08:00" content="2016-12-01">
-              2016-12-01
+            <time itemprop="dateCreated" datetime="2017-02-20T19:32:10+08:00" content="2017-02-20">
+              2017-02-20
             </time>
           </span>
 
@@ -653,8 +680,8 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -686,14 +713,21 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
       
         
           
-          关闭NetworkManager服务service NetworkManager stop
-chkconfig NetworkManager off
-设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
-nameserver 8.8.8.8
+          枚举关键字iota定义常量数组中从0开始安航基数的自增枚举值package main
+
+func main() {
+    const (
+        a = iota
+        b
+        c
+        d
+    )
+
+    println(a,b,c,d)    //
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/linux配置网络/#more" rel="contents">
+            <a class="btn" href="/2017/02/20/go学习笔记枚举/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -720,7 +754,7 @@ nameserver 8.8.8.8
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -761,7 +795,7 @@ nameserver 8.8.8.8
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -769,7 +803,7 @@ nameserver 8.8.8.8
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -778,7 +812,7 @@ nameserver 8.8.8.8
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

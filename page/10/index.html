@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">
-                  git的使用
+                <a class="post-title-link" href="/2016/11/02/gdb调试redis/" itemprop="url">
+                  gdb调试redis
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-02T12:17:48+08:00" content="2016-09-02">
-              2016-09-02
+            <time itemprop="dateCreated" datetime="2016-11-02T10:46:04+08:00" content="2016-11-02">
+              2016-11-02
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -265,17 +265,12 @@
       
         
           
-          初始化一个git项目git init
-添加文件git add filename
-添加目录git add .
-只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
-查看当前工作区文件提交的状态git status
-git status -s 查看简便信息
-提交文件到本地git 
-          ...
+          #启动redis redis-server连接redis redis-cli获取进程id redis-cli info | grep process_idgdb调试进程id sudo gdb -p pidgdb查询代码 listgdb 设置断点 break main
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/02/git的使用/#more" rel="contents">
+            <a class="btn" href="/2016/11/02/gdb调试redis/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -318,8 +313,8 @@ git status -s 查看简便信息
             
               
                 
-                <a class="post-title-link" href="/2016/08/15/C语言高级函数使用/" itemprop="url">
-                  C语言高级函数使用
+                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">
+                  gdb调试
                 </a>
               
             
@@ -332,8 +327,8 @@ git status -s 查看简便信息
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T08:17:17+08:00" content="2016-08-15">
-              2016-08-15
+            <time itemprop="dateCreated" datetime="2016-10-26T07:44:26+08:00" content="2016-10-26">
+              2016-10-26
             </time>
           </span>
 
@@ -379,14 +374,17 @@ git status -s 查看简便信息
       
         
           
-          函数的指针当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
-创建函数指针int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
-warp_fn = test;
-warp_fn(4);             #
+          调试文件内容gdb.c#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = low; i &lt;= high; i++)
+                s
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/15/C语言高级函数使用/#more" rel="contents">
+            <a class="btn" href="/2016/10/26/gdb调试/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -429,8 +427,8 @@ warp_fn(4);             #
             
               
                 
-                <a class="post-title-link" href="/2016/08/11/C语言内存泄露检测Valgrind/" itemprop="url">
-                  C语言内存泄露检测Valgrind
+                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">
+                  mac安装gdb
                 </a>
               
             
@@ -443,30 +441,11 @@ warp_fn(4);             #
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T09:05:15+08:00" content="2016-08-11">
-              2016-08-11
+            <time itemprop="dateCreated" datetime="2016-10-21T17:32:25+08:00" content="2016-10-21">
+              2016-10-21
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -490,12 +469,17 @@ warp_fn(4);             #
       
         
           
-          valgrind使用场景检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
-valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪
+          Mac安装GDB安装GDBbrew install gdb
+使用gdb进行调试gbd.c文件中的内容#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = lo
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/11/C语言内存泄露检测Valgrind/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/mac安装gdb/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -538,8 +522,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
             
               
                 
-                <a class="post-title-link" href="/2016/08/10/C语言动态存储/" itemprop="url">
-                  C语言动态存储
+                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">
+                  redis源码阅读-准备工作
                 </a>
               
             
@@ -552,8 +536,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-10T08:12:39+08:00" content="2016-08-10">
-              2016-08-10
+            <time itemprop="dateCreated" datetime="2016-10-21T17:29:44+08:00" content="2016-10-21">
+              2016-10-21
             </time>
           </span>
 
@@ -566,8 +550,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -599,16 +583,11 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
       
         
           
-          动态数据存储的位置堆,它是程序中用来保存长期使用数据的地方
-获取空间使用malloc()函数进行申请
-如何释放使用free()函数进行释放
-使用malloc#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h
-          ...
+          编辑器调试器
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/10/C语言动态存储/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/redis源码阅读-准备工作/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -651,8 +630,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
             
               
                 
-                <a class="post-title-link" href="/2016/08/09/C语言链表/" itemprop="url">
-                  C语言链表
+                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">
+                  Primary script unknown排查
                 </a>
               
             
@@ -665,8 +644,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-09T07:57:33+08:00" content="2016-08-09">
-              2016-08-09
+            <time itemprop="dateCreated" datetime="2016-10-21T12:21:14+08:00" content="2016-10-21">
+              2016-10-21
             </time>
           </span>
 
@@ -679,8 +658,8 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -712,17 +691,13 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
       
         
           
-          链表是一种抽象的数据结构
-使用场景为了保存可变数量的数据,需要一样比数组更灵活的东西
-工作原理保存了一条数据和链向另一条数据的链接
-创建链表#include &lt;stdio.h&gt;
-//注意要先定义函数在main函数的外部
-void display();
-//结构定义函数体的外面多个函数才能
-          ...
+          现象#    tcpdump  -i  lo -Anns0 port 9000
+#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/C语言链表/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +724,7 @@ void display();
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -790,7 +765,7 @@ void display();
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -798,7 +773,7 @@ void display();
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -807,7 +782,7 @@ void display();
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

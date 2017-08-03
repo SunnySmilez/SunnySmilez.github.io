@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/11/ssh介绍/" itemprop="url">
-                  ssh介绍
+                <a class="post-title-link" href="/2016/06/29/批量创建文件及替换文件名/" itemprop="url">
+                  批量创建文件及替换文件名
                 </a>
               
             
@@ -218,101 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-11T20:55:25+08:00" content="2016-05-11">
-              2016-05-11
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          SSH提供的功能(支持:RSA,DSA加密方式)安全加密协议,远程联机访问,类似telnet
-类似FTP服务的sftp-server,借助SSH协议传输数据,提供更安全的SFTP服务(加密)
-RSA,DSA的区别RSA:既可以进行加密,也可以进行数字签名实现认证
-DSA:只能进行数字签名实现认证
-工
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/11/ssh介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/04/文件系统NFS/" itemprop="url">
-                  文件系统NFS
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-04T21:58:22+08:00" content="2016-05-04">
-              2016-05-04
+            <time itemprop="dateCreated" datetime="2016-06-29T01:03:07+08:00" content="2016-06-29">
+              2016-06-29
             </time>
           </span>
 
@@ -358,23 +265,17 @@ DSA:只能进行数字签名实现认证
       
         
           
-          文件系统reiserfs
-    大量小文件业务首选reiserfs(几十到上百K)
+          批量创建文件写入需要创建的文件名
+    file.txt 内容如下:test1.big.jpg
+                     test2.big.jpg
+                     test1.big.jpg
 
-xfs
-    数据库MySQL业务,门户案例
-
-ext4
-    视频下载,流媒体,数据库,小文件业务也OK
-
-ext2(数据恢复困难)
-    蓝汛的cache业务,CDN网站加速服务
-
-ext3(cento
+创建文件
+    touch `cat file.txt |
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/04/文件系统NFS/#more" rel="contents">
+            <a class="btn" href="/2016/06/29/批量创建文件及替换文件名/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -417,8 +318,8 @@ ext3(cento
             
               
                 
-                <a class="post-title-link" href="/2016/05/01/磁盘/" itemprop="url">
-                  磁盘
+                <a class="post-title-link" href="/2016/06/12/nginx简介/" itemprop="url">
+                  nginx简介
                 </a>
               
             
@@ -431,8 +332,8 @@ ext3(cento
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-01T18:02:38+08:00" content="2016-05-01">
-              2016-05-01
+            <time itemprop="dateCreated" datetime="2016-06-12T23:44:31+08:00" content="2016-06-12">
+              2016-06-12
             </time>
           </span>
 
@@ -478,13 +379,20 @@ ext3(cento
       
         
           
-          磁盘(disk)磁盘在格式化时被划分成许多同心圆,这些同心圆的规矩叫做磁道,磁道从外向内依次从0开始编号
-磁头(head)扇区(sector)盘面由圆心向四周画直线,不同的磁道被直线分成许多扇形的区域,每个扇形区域叫做扇区,大小一般为512字节
-扇区标识符(扇区头标)指的是定位扇区的信息,包括扇区所
+          nginx功能1.提供web服务
+2.负载均衡
+3.静态资源缓存
+nginx优点1.高并发
+2.占用资源少
+3.功能种类较多,但每个功能都不是很强
+4.支持epoll模型,使得nginx支持高并发
+5.利用nginx对ip限速,可以限制连接数
+6.简单配置,更灵活
+应用场景静态服务器(图片,视频服务
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/01/磁盘/#more" rel="contents">
+            <a class="btn" href="/2016/06/12/nginx简介/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -527,8 +435,8 @@ ext3(cento
             
               
                 
-                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">
-                  网络
+                <a class="post-title-link" href="/2016/06/12/流量统计单位/" itemprop="url">
+                  流量统计单位
                 </a>
               
             
@@ -541,8 +449,8 @@ ext3(cento
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-28T21:48:39+08:00" content="2016-04-28">
-              2016-04-28
+            <time itemprop="dateCreated" datetime="2016-06-12T20:56:28+08:00" content="2016-06-12">
+              2016-06-12
             </time>
           </span>
 
@@ -588,15 +496,17 @@ ext3(cento
       
         
           
-          私有IP地址A类: 10.0.0.0 - 10.255.255.255
-B类: 172.16.0.0 - 172.31.255.255
-C类: 192.168.0.0 - 192.168.255.255
-访问网站基本流程(主要解释DNS)1.输入网址(www.demo.com.)
-2.访问本地hos
+          IP(Internet Protocol)独立IP,不同IP地址的计算机访问网站的总次数
+独立IP书度量网站访问量,不是很精确,国内的上网多数都是NAT上网,一个独立IP背后可能有多个客户端访问
+
+统计方法:
+    1.分析web服务的访问日志
+    2.在所有的页面结尾,嵌入js进行统计
+PV
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/28/网络/#more" rel="contents">
+            <a class="btn" href="/2016/06/12/流量统计单位/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -639,8 +549,8 @@ C类: 192.168.0.0 - 192.168.255.255
             
               
                 
-                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">
-                  su命令执行流程
+                <a class="post-title-link" href="/2016/06/10/服务对应常见端口/" itemprop="url">
+                  服务对应常见端口
                 </a>
               
             
@@ -653,8 +563,8 @@ C类: 192.168.0.0 - 192.168.255.255
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T22:34:53+08:00" content="2016-04-27">
-              2016-04-27
+            <time itemprop="dateCreated" datetime="2016-06-10T23:46:26+08:00" content="2016-06-10">
+              2016-06-10
             </time>
           </span>
 
@@ -700,17 +610,127 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          流程1.普通用户运行sudo
-2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
-3.如果过期,需要用户输入自己的口令
-4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
-5.无权限则退出sudo
-6.有权限则执行命令并返回结果,退出sudo
-
+          服务对应常见端口服务                      端口
+ftp                       21
+sftp/ssh                  22
+smtp                      25
+mysql                     33
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/27/su命令执行流程/#more" rel="contents">
+            <a class="btn" href="/2016/06/10/服务对应常见端口/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/22/sersync/" itemprop="url">
+                  sersync
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-22T15:57:30+08:00" content="2016-05-22">
+              2016-05-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          sersync利用inotify和rsync技术实现对服务器数据实时同步的解决方案
+优点1.使用c++编写,对linux系统文件产生的临时文件和重复文件操作进行过滤,在结合rsync同步的时候,会减少运行时消耗本地及网络资源,因此它速度更快
+2.配置简单
+3.使用多线程同步
+4.自带出错处理机制,通
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/22/sersync/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -737,7 +757,7 @@ C类: 192.168.0.0 - 192.168.255.255
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -778,7 +798,7 @@ C类: 192.168.0.0 - 192.168.255.255
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -786,7 +806,7 @@ C类: 192.168.0.0 - 192.168.255.255
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -795,7 +815,7 @@ C类: 192.168.0.0 - 192.168.255.255
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
