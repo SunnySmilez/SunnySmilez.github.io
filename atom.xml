@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2017-08-15T03:52:37.000Z</updated>
+  <updated>2017-08-15T07:02:42.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[git钩子介绍]]></title>
+    <link href="http://www.cxyteam.com/2017/08/15/git%E9%92%A9%E5%AD%90%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://www.cxyteam.com/2017/08/15/git钩子介绍/</id>
+    <published>2017-08-15T04:03:38.000Z</published>
+    <updated>2017-08-15T07:02:42.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="常用本地钩子"><a href="#常用本地钩子" class="headerlink" title="常用本地钩子"></a>常用本地钩子</h1><h6 id="pre-commit"><a href="#pre-commit" class="headerlink" title="pre-commit"></a>pre-commit</h6><h6 id="prepare-commit-msg"><a href="#prepare-commit-msg" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h6><h6 id="commit-msg"><a href="#commit-msg" class="headerlink" title="commit-msg"></a>commit-msg</h6><h6 id="post-commit"><a href="#post-commit" class="headerlink" title="post-commit"></a>post-commit</h6><h6 id="post-checkout"><a href="#post-checkout" class="headerlink" title="post-checkout"></a>post-checkout</h6><h6 id="pre-rebase"><a href="#pre-rebase" class="headerlink" title="pre-rebase"></a>pre-rebase</h6><h6 id="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"><a href="#前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知" class="headerlink" title="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"></a>前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知</h6><h1 id="pre-commit-1"><a href="#pre-commit-1" class="headerlink" title="pre-commit"></a>pre-commit</h1><h6 id="在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"><a href="#在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。" class="headerlink" title="在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"></a>在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。</h6><h1 id="prepare-commit-msg-1"><a href="#prepare-commit-msg-1" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h1><h6 id="在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交"><a href="#在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交" class="headerlink" title="在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交"></a>在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交</h6><h1 id="commit-msg-1"><a href="#commit-msg-1" class="headerlink" title="commit-msg"></a>commit-msg</h1><h6 id="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交"><a href="#commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交" class="headerlink" title="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交"></a>commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交</h6><h1 id="post-commit-1"><a href="#post-commit-1" class="headerlink" title="post-commit"></a>post-commit</h1><h6 id="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"><a href="#post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交" class="headerlink" title="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"></a>post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交</h6><h1 id="post-checkout-1"><a href="#post-checkout-1" class="headerlink" title="post-checkout"></a>post-checkout</h1><h6 id="post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout"><a href="#post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout" class="headerlink" title="post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout"></a>post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout</h6><h1 id="pre-rebase-1"><a href="#pre-rebase-1" class="headerlink" title="pre-rebase"></a>pre-rebase</h1><h6 id="pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"><a href="#pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。" class="headerlink" title="pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"></a>pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。</h6><h1 id="服务端钩子"><a href="#服务端钩子" class="headerlink" title="服务端钩子"></a>服务端钩子</h1><h6 id="pre-receive"><a href="#pre-receive" class="headerlink" title="pre-receive"></a>pre-receive</h6><h6 id="update"><a href="#update" class="headerlink" title="update"></a>update</h6><h6 id="post-receive"><a href="#post-receive" class="headerlink" title="post-receive"></a>post-receive</h6><h6 id="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"><a href="#服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的" class="headerlink" title="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"></a>服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的</h6><h1 id="pre-receive-1"><a href="#pre-receive-1" class="headerlink" title="pre-receive"></a>pre-receive</h1><h6 id="当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："><a href="#当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：" class="headerlink" title="当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："></a>当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：</h6><pre><code>&lt;old-value&gt; &lt;new-value&gt; &lt;ref-name&gt;
+</code></pre><h6 id="常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"><a href="#常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交" class="headerlink" title="常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"></a>常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交</h6><h1 id="update-1"><a href="#update-1" class="headerlink" title="update"></a>update</h1><h6 id="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称"><a href="#update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称" class="headerlink" title="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称"></a>update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称</h6><h1 id="post-receive-1"><a href="#post-receive-1" class="headerlink" title="post-receive"></a>post-receive</h1><h6 id="成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取"><a href="#成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取" class="headerlink" title="成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取"></a>成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取</h6>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="常用本地钩子"><a href="#常用本地钩子" class="headerlink" title="常用本地钩子"></a>常用本地钩子</h1><h6 id="pre-commit"><a href="#pre-commit" class="headerli]]>
+    </summary>
+    
+      <category term="GIT" scheme="http://www.cxyteam.com/tags/GIT/"/>
+    
+      <category term="GIT" scheme="http://www.cxyteam.com/categories/GIT/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[添加git语法检查钩子]]></title>
@@ -1158,96 +1176,6 @@ func main() {
 </code></pre><h6 id="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case"><a href="#如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case" class="headerlink" title="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case"></a>如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case</h6>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记并发]]></title>
-    <link href="http://www.cxyteam.com/2017/03/03/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B9%B6%E5%8F%91/"/>
-    <id>http://www.cxyteam.com/2017/03/03/go学习笔记并发/</id>
-    <published>2017-03-03T10:47:39.000Z</published>
-    <updated>2017-03-08T12:42:03.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="只需在函数调用语句前添加go关键字，就可创建并发执行单元"><a href="#只需在函数调用语句前添加go关键字，就可创建并发执行单元" class="headerlink" title="只需在函数调用语句前添加go关键字，就可创建并发执行单元"></a>只需在函数调用语句前添加go关键字，就可创建并发执行单元</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-    &quot;runtime&quot;
-)
-
-func say(s string) {
-    for i := 0; i &lt; 3; i++ {
-        runtime.Gosched()
-        fmt.Println(s) }
-    }
-
-func main() {
-    go say(&quot;world&quot;)     //开一个新的Goroutines执行
-    say(&quot;hello&quot;)        //当前Goroutines执行
-}
-</code></pre><h6 id="Goexit-退出当前执行的goroutine，但是defer函数还会继续调用"><a href="#Goexit-退出当前执行的goroutine，但是defer函数还会继续调用" class="headerlink" title="Goexit 退出当前执行的goroutine，但是defer函数还会继续调用"></a>Goexit 退出当前执行的goroutine，但是defer函数还会继续调用</h6><h6 id="NumCPU-返回CPU核数量"><a href="#NumCPU-返回CPU核数量" class="headerlink" title="NumCPU 返回CPU核数量"></a>NumCPU 返回CPU核数量</h6><h6 id="NumGoroutine-返回正在执行和排队的任务总数"><a href="#NumGoroutine-返回正在执行和排队的任务总数" class="headerlink" title="NumGoroutine 返回正在执行和排队的任务总数"></a>NumGoroutine 返回正在执行和排队的任务总数</h6><h6 id="GOMAXPROCS-用来设置可以运行的CPU核数"><a href="#GOMAXPROCS-用来设置可以运行的CPU核数" class="headerlink" title="GOMAXPROCS 用来设置可以运行的CPU核数"></a>GOMAXPROCS 用来设置可以运行的CPU核数</h6><h6 id="sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"><a href="#sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成" class="headerlink" title="sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"></a>sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成</h6><h6 id="Add-添加或者减少等待goroutine的数量"><a href="#Add-添加或者减少等待goroutine的数量" class="headerlink" title="Add 添加或者减少等待goroutine的数量"></a>Add 添加或者减少等待goroutine的数量</h6><h6 id="Done-相当于Add-1"><a href="#Done-相当于Add-1" class="headerlink" title="Done 相当于Add(-1)"></a>Done 相当于Add(-1)</h6><h6 id="Wait-执行阻塞，直到所有的WaitGroup数量变成0"><a href="#Wait-执行阻塞，直到所有的WaitGroup数量变成0" class="headerlink" title="Wait 执行阻塞，直到所有的WaitGroup数量变成0"></a>Wait 执行阻塞，直到所有的WaitGroup数量变成0</h6><pre><code>package main
-
-import (
-    &quot;runtime&quot;
-    &quot;sync&quot;
-)
-
-func main() {
-    wg := new(sync.WaitGroup)
-    wg.Add(1)
-
-    go func() {
-        defer wg.Done()
-        defer println(&quot;A.defer&quot;)
-
-        func() {
-            defer println(&quot;B.defer&quot;)
-            runtime.Goexit()
-            println(&quot;B&quot;)
-        }()
-
-        println(&quot;A&quot;)
-    }()
-    wg.Wait()
-}
-</code></pre><h6 id="Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"><a href="#Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行" class="headerlink" title="Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"></a>Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行</h6><pre><code>package main
-
-import (
-    &quot;runtime&quot;
-    &quot;sync&quot;
-)
-
-func main() {
-    //它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成
-    wg := new(sync.WaitGroup)
-    //添加或者减少等待goroutine的数量
-    wg.Add(2)
-
-    go func() {
-        //相当于Add(-1)
-        defer wg.Done()
-
-        for i := 0; i &lt; 6; i++ {
-            println(i)
-            if i == 3 { runtime.Gosched() }
-        }
-    }()
-
-    go func() {
-        defer wg.Done()
-        println(&quot;hello,world!&quot;)
-    }()
-
-    //执行阻塞，直到所有的WaitGroup数量变成0
-    wg.Wait()
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="只需在函数调用语句前添加go关键字，就可创建并发执行单元"><a href="#只需在函数调用语句前添加go关键字，就可创建并发执]]>
     </summary>
     
       <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
