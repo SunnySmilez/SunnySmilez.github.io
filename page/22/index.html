@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/29/技术词汇学习/" itemprop="url">
-                  技术词汇学习
+                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">
+                  linux文件满了删除不了
                 </a>
               
             
@@ -218,120 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-29T10:00:20+08:00" content="2016-02-29">
-              2016-02-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          第一天determine                确定，决定，判定
-Indicates                指示，显示
-transmitted                传输；传送
-regardless                不管；不顾；不注意
-infrequently 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/29/技术词汇学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/21/nginx信号/" itemprop="url">
-                  nginx信号
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-21T17:30:24+08:00" content="2016-02-21">
-              2016-02-21
+            <time itemprop="dateCreated" datetime="2016-04-16T17:45:21+08:00" content="2016-04-16">
+              2016-04-16
             </time>
           </span>
 
@@ -377,20 +265,18 @@ infrequently
       
         
           
-          nginx关闭信号* kill signal pid
-
-
-* TERM,INT
-    * 快速杀掉进程(kill -INT pid, kill -TERM pid,kill -9 pid)
-
-* QUIT
-    * 优雅的关闭进程,等待请求结束后再关闭(kill -QUIT pid)
-
-* HU
+          
+问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%  原因:
+有硬链接
+lsof | grep del  该文件被某些服务占用,导致不能及时释放
+磁盘空间维护出现问题
+  解决方案:
+1.删除文件,重启服务
+2.清空
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/21/nginx信号/#more" rel="contents">
+            <a class="btn" href="/2016/04/16/linux文件满了删除不了/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -433,8 +319,8 @@ infrequently
             
               
                 
-                <a class="post-title-link" href="/2016/02/02/xdebug的安装与调试/" itemprop="url">
-                  xdebug的安装与调试
+                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">
+                  linux扩展名的作用
                 </a>
               
             
@@ -447,119 +333,8 @@ infrequently
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T17:57:35+08:00" content="2016-02-02">
-              2016-02-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          xdebug的安装
-下载  wget https://xdebug.org/files/xdebug-2.4.0rc4.tgz
-
-安装  tar zxvf xdebug-2.4.0rc4.tgz  /data1/php/bin/phpize  ./configure –with-php=/data1
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/02/xdebug的安装与调试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/27/seq的使用/" itemprop="url">
-                  seq的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T22:19:37+08:00" content="2016-01-27">
-              2016-01-27
+            <time itemprop="dateCreated" datetime="2016-03-14T23:46:59+08:00" content="2016-03-14">
+              2016-03-14
             </time>
           </span>
 
@@ -605,12 +380,15 @@ infrequently
       
         
           
-          ###
-
-          
+          压缩文件.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
+shell脚本文件.sh,一般通过shell语言开发的程序
+perl语言文件.pl,通过perl语言开发的程序
+python语言文件.py,python语言开发的程序
+网页语言的文件.html,.htm,.ph
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/seq的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/14/linux扩展名的作用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -653,8 +431,8 @@ infrequently
             
               
                 
-                <a class="post-title-link" href="/2016/01/27/top的使用/" itemprop="url">
-                  top的使用
+                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">
+                  linux文件类型及属性
                 </a>
               
             
@@ -667,8 +445,8 @@ infrequently
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T09:29:17+08:00" content="2016-01-27">
-              2016-01-27
+            <time itemprop="dateCreated" datetime="2016-03-14T22:44:23+08:00" content="2016-03-14">
+              2016-03-14
             </time>
           </span>
 
@@ -714,13 +492,242 @@ infrequently
       
         
           
-          top命令的作用使用来监控linux系统状况.包括CPU、内存、运行时间、交换分区、执行的线程等信息
-top值详解top - 15:57:23 up 56 min,  2 users,  load average: 0.00, 0.00, 0.00
-Tasks: 114 total,   1 run
+          文件含义ls -lhi /data
+1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
+
+1966317         表示inode索引节点编号
+drwxrwxrwx      文件类型及权限
+2               硬链接
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/top的使用/#more" rel="contents">
+            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
+                  linux目录结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
+              2016-03-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
+                  linux系统优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
+              2016-03-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
+调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
+    net.ipv4.tcp_fin_timeout=2    
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -747,7 +754,7 @@ Tasks: 114 total,   1 run
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -788,7 +795,7 @@ Tasks: 114 total,   1 run
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -796,7 +803,7 @@ Tasks: 114 total,   1 run
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -805,7 +812,7 @@ Tasks: 114 total,   1 run
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -879,7 +886,7 @@ Tasks: 114 total,   1 run
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

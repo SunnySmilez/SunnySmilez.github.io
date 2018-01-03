@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/24/go学习笔记函数/" itemprop="url">
-                  go学习笔记函数
+                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">
+                  go学习笔记struct
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-24T17:10:31+08:00" content="2017-02-24">
-              2017-02-24
+            <time itemprop="dateCreated" datetime="2017-02-28T17:07:11+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -265,13 +265,18 @@
       
         
           
-          函数定义不支持嵌套，重载和默认参数无需声明原型支持不定长变参支持多返回值支持命名返回参数支持匿名函数和闭包使用func定义函数，左大括号依旧不能另起一行package main
+          定义值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员package main
 
-func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
+import &quot;fmt&quot;
+
+type Node struct {
+    _       int
+    id      int
+    data    *byte
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/24/go学习笔记函数/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记struct/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -314,8 +319,8 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
             
               
                 
-                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">
-                  go学习笔记表达式
+                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">
+                  go学习笔记map
                 </a>
               
             
@@ -328,8 +333,8 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-22T10:54:47+08:00" content="2017-02-22">
-              2017-02-22
+            <time itemprop="dateCreated" datetime="2017-02-28T16:20:07+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -375,128 +380,18 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
       
         
           
-          保留字在程序中不可以使用的名字break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
-package,switch,const,fallthrough,if,range,type,continue,f
-          ...
+          定义引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/22/go学习笔记表达式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/20/go学习笔记类型/" itemprop="url">
-                  go学习笔记类型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:33:27+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          类型转换package main
+import &quot;fmt&quot;
 
 func main() {
-    var b byte = 100
-    var n int = b // //隐式转换不支持，会报错
-    //var n int = int(b)//显示转换
-    println(n)
-}
-其他值不能当作bool值使用
+    m := map[int]struct{
+        name string
+        age int
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记类型/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记map/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -539,8 +434,8 @@ func main() {
             
               
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">
-                  go学习笔记枚举
+                <a class="post-title-link" href="/2017/02/28/go学习笔记copy/" itemprop="url">
+                  go学习笔记copy
                 </a>
               
             
@@ -553,8 +448,8 @@ func main() {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:32:10+08:00" content="2017-02-20">
-              2017-02-20
+            <time itemprop="dateCreated" datetime="2017-02-28T16:09:06+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -600,21 +495,16 @@ func main() {
       
         
           
-          枚举关键字iota定义常量数组中从0开始安航基数的自增枚举值package main
+          定义函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠package main
+
+import &quot;fmt&quot;
 
 func main() {
-    const (
-        a = iota
-        b
-        c
-        d
-    )
-
-    println(a,b,c,d)    //
+    data := [...]int{0, 1, 2, 3, 4, 5, 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记枚举/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记copy/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -657,8 +547,8 @@ func main() {
             
               
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记常量/" itemprop="url">
-                  go学习笔记常量
+                <a class="post-title-link" href="/2017/02/28/go学习笔记append/" itemprop="url">
+                  go学习笔记append
                 </a>
               
             
@@ -671,8 +561,8 @@ func main() {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:31:27+08:00" content="2017-02-20">
-              2017-02-20
+            <time itemprop="dateCreated" datetime="2017-02-28T15:38:23+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -718,19 +608,131 @@ func main() {
       
         
           
-          常量常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误package main
+          append向slice尾部添加数据，返回新的slice对象package main
 
-const a int = 1
-const b = &quot;aaa&quot;
-const c = false
+import &quot;fmt&quot;
 
 func main() {
-    const d = 2
-    print
+    s := make([]int, 0, 5)
+    fmt.Printf(&quot;%p\n&quot;, &amp;s) 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记常量/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记append/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记reslice/" itemprop="url">
+                  go学习笔记reslice
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T14:44:03+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          定义基于已有slice创建新slice对象，以便在cap允许范围内调整属性package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
+    s1 := s[2
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记reslice/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -757,7 +759,7 @@ func main() {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -798,7 +800,7 @@ func main() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -806,7 +808,7 @@ func main() {
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -815,7 +817,7 @@ func main() {
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -889,7 +891,7 @@ func main() {
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

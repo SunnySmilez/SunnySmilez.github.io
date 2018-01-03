@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">
-                  linux运行级别
+                <a class="post-title-link" href="/2016/05/15/分发无权限文件/" itemprop="url">
+                  分发无权限文件
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T12:45:52+08:00" content="2016-04-24">
-              2016-04-24
+            <time itemprop="dateCreated" datetime="2016-05-15T15:00:34+08:00" content="2016-05-15">
+              2016-05-15
             </time>
           </span>
 
@@ -265,23 +265,14 @@
       
         
           
-          
-linux运行级别的含义
-0: 关机模式
-1: 单用户模式(破解root密码)
-2: 无网络支持的多用户模式
-3: 有网络支持的多用户模式
-4: 保留,未使用
-5: 有网络支持的X-Window支持的多用户模式
-6: 重启
-
-
-
-
-          
+          利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)分发到家目录scp demo.txt /home/vagrant
+赋予用户cp权限visudo修改
+在最后添加:(赋予vagrant用户cp的权限)
+vagrant    ALL=(ALL)       N
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/24/linux运行级别/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/分发无权限文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -324,8 +315,8 @@ linux运行级别的含义
             
               
                 
-                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">
-                  linux文件满了删除不了
+                <a class="post-title-link" href="/2016/05/15/ssh实现免密批量登陆/" itemprop="url">
+                  ssh实现免密批量登陆
                 </a>
               
             
@@ -338,8 +329,8 @@ linux运行级别的含义
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-16T17:45:21+08:00" content="2016-04-16">
-              2016-04-16
+            <time itemprop="dateCreated" datetime="2016-05-15T13:26:32+08:00" content="2016-05-15">
+              2016-05-15
             </time>
           </span>
 
@@ -385,18 +376,18 @@ linux运行级别的含义
       
         
           
-          
-问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%  原因:
-有硬链接
-lsof | grep del  该文件被某些服务占用,导致不能及时释放
-磁盘空间维护出现问题
-  解决方案:
-1.删除文件,重启服务
-2.清空
+          创建用户生成密钥对1.以dsa的数字算法进行密钥生成
+    ssh-keygen -t dsa
+2.默认路径以及不给密码(接下来的是选项直接回车)
+分发公钥1.默认端口
+ssh-copy-id -i id_dsa.pub vagrant@172.16.17.11
+
+2.非默认端口
+ssh-copy
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/16/linux文件满了删除不了/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/ssh实现免密批量登陆/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -439,8 +430,8 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
             
               
                 
-                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">
-                  linux扩展名的作用
+                <a class="post-title-link" href="/2016/05/11/ssh介绍/" itemprop="url">
+                  ssh介绍
                 </a>
               
             
@@ -453,30 +444,11 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T23:46:59+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-05-11T20:55:25+08:00" content="2016-05-11">
+              2016-05-11
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -500,15 +472,15 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
       
         
           
-          压缩文件.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
-shell脚本文件.sh,一般通过shell语言开发的程序
-perl语言文件.pl,通过perl语言开发的程序
-python语言文件.py,python语言开发的程序
-网页语言的文件.html,.htm,.ph
+          SSH提供的功能(支持:RSA,DSA加密方式)安全加密协议,远程联机访问,类似telnet
+类似FTP服务的sftp-server,借助SSH协议传输数据,提供更安全的SFTP服务(加密)
+RSA,DSA的区别RSA:既可以进行加密,也可以进行数字签名实现认证
+DSA:只能进行数字签名实现认证
+工
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux扩展名的作用/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/ssh介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -551,8 +523,8 @@ python语言文件.py,python语言开发的程序
             
               
                 
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">
-                  linux文件类型及属性
+                <a class="post-title-link" href="/2016/05/04/文件系统NFS/" itemprop="url">
+                  文件系统NFS
                 </a>
               
             
@@ -565,8 +537,8 @@ python语言文件.py,python语言开发的程序
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T22:44:23+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-05-04T21:58:22+08:00" content="2016-05-04">
+              2016-05-04
             </time>
           </span>
 
@@ -612,16 +584,23 @@ python语言文件.py,python语言开发的程序
       
         
           
-          文件含义ls -lhi /data
-1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
+          文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
 
-1966317         表示inode索引节点编号
-drwxrwxrwx      文件类型及权限
-2               硬链接
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(cento
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
+            <a class="btn" href="/2016/05/04/文件系统NFS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -664,8 +643,8 @@ drwxrwxrwx      文件类型及权限
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
-                  linux目录结构
+                <a class="post-title-link" href="/2016/05/01/磁盘/" itemprop="url">
+                  磁盘
                 </a>
               
             
@@ -678,8 +657,8 @@ drwxrwxrwx      文件类型及权限
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-05-01T18:02:38+08:00" content="2016-05-01">
+              2016-05-01
             </time>
           </span>
 
@@ -725,19 +704,13 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
-应用程序/usr/bin
-数据文件/usr/share
-用户程序,及数据,帮助文件等目录/usr
-设备目录/dev/
-配置文件/etc/
-启动命令/etc/init.d
-/存放系统相关的程序
-/
+          磁盘(disk)磁盘在格式化时被划分成许多同心圆,这些同心圆的规矩叫做磁道,磁道从外向内依次从0开始编号
+磁头(head)扇区(sector)盘面由圆心向四周画直线,不同的磁道被直线分成许多扇形的区域,每个扇形区域叫做扇区,大小一般为512字节
+扇区标识符(扇区头标)指的是定位扇区的信息,包括扇区所
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
+            <a class="btn" href="/2016/05/01/磁盘/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -764,7 +737,7 @@ drwxrwxrwx      文件类型及权限
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -805,7 +778,7 @@ drwxrwxrwx      文件类型及权限
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -813,7 +786,7 @@ drwxrwxrwx      文件类型及权限
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -822,7 +795,7 @@ drwxrwxrwx      文件类型及权限
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -896,7 +869,7 @@ drwxrwxrwx      文件类型及权限
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

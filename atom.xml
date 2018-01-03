@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2017-08-15T07:02:42.000Z</updated>
+  <updated>2018-01-03T13:40:25.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,515 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[redis-sds源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/01/03/redis-sds%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/01/03/redis-sds源码阅读/</id>
+    <published>2018-01-03T03:57:42.000Z</published>
+    <updated>2018-01-03T13:40:25.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
+
+    /** buf 中已占用空间的长度*/
+    int len;
+
+    /** buf 中剩余可用空间的长度*/
+    int free;
+
+    /** 数据空间*/ 
+    /** 柔性数组*/
+    char buf[];
+};
+</code></pre><p><img src="/img/redis/sds.jpg" alt="Alt text" title="sds结构"></p>
+<h1 id="获取字符串长度复杂度为O-1"><a href="#获取字符串长度复杂度为O-1" class="headerlink" title="获取字符串长度复杂度为O(1)"></a>获取字符串长度复杂度为O(1)</h1><pre><code>在sds的结构中，保存了sds的占用空间的长度，可以使用sdslen进行读取，代码实现如下：
+
+static inline size_t sdslen(const sds s) {
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    return sh-&gt;len;
+}
+</code></pre><h1 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h1><pre><code>二进制安全：比如说在c语言中，strlen计算长度，是依赖于特殊的字符&apos;\0&apos;来判断是否到达字符串的最末尾，所以对于&quot;aaa\0bbb&quot;来说，它就不是二进制安全的
+sds的二进制安全，它不仅仅根据&quot;\0&quot;来判断是否到达字符串的末尾，还根据len的长度来进行计算
+</code></pre><h1 id="杜绝缓冲区溢出"><a href="#杜绝缓冲区溢出" class="headerlink" title="杜绝缓冲区溢出"></a>杜绝缓冲区溢出</h1><pre><code>缓冲区溢出，指的是在修改字符串的时候，没有对该字符串分配足够的空间
+sds在对字符串进行修改的时候，都会使用（sdsMakeRoomFor）判断是否有足够的空间
+sds sdscatlen(sds s, const void *t, size_t len) {
+    struct sdshdr *sh;
+    // 原有字符串长度
+    size_t curlen = sdslen(s);
+
+    // 扩展 sds 空间
+    // T = O(N)
+    s = sdsMakeRoomFor(s, len);
+
+    // 内存不足？直接返回
+    if (s == NULL) {
+        return NULL;
+    }
+
+    // 复制 t 中的内容到字符串后部
+    // T = O(N)
+    sh = (void*) (s - (sizeof(struct sdshdr)));
+    memcpy(s + curlen, t, len);
+
+    // 更新属性
+    sh-&gt;len = curlen + len;
+    sh-&gt;free = sh-&gt;free - len;
+
+    // 添加新结尾符号
+    s[curlen + len] = &apos;\0&apos;;
+
+    // 返回新 sds
+    return s;
+}
+</code></pre><h1 id="动态扩展，空间预分配"><a href="#动态扩展，空间预分配" class="headerlink" title="动态扩展，空间预分配"></a>动态扩展，空间预分配</h1><pre><code>对字符串进行修改的时候，会判断sds的剩余空间，如果大小不足够会重新进行分配，具体分配逻辑如下：
+    1、如果新长度小于SDS_MAX_PREALLOC定义的最大空间，就分配两倍所需空间；
+    2、否则在目前的长度上再增加SDS_MAX_PREALLOC定义的最大空间
+
+代码实现如下：
+/*
+ * 对 sds 中 buf 的长度进行扩展，确保在函数执行之后，
+ * buf 至少会有 addlen + 1 长度的空余空间
+ * （额外的 1 字节是为 \0 准备的）
+ *
+ * 返回值
+ *  sds ：扩展成功返回扩展后的 sds
+ *        扩展失败返回 NULL
+ *
+ * 复杂度
+ *  T = O(N)
+ */
+sds sdsMakeRoomFor(sds s, size_t addlen) {
+    struct sdshdr *sh, *newsh;
+
+    // 获取 s 目前的空余空间长度
+    size_t free = sdsavail(s);
+
+    size_t len, newlen;
+
+    // s 目前的空余空间已经足够，无须再进行扩展，直接返回
+    if (free &gt;= addlen) {
+        return s;
+    }
+
+    // 获取 s 目前已占用空间的长度
+    len = sdslen(s);
+    sh = (void*)(s - (sizeof(struct sdshdr)));
+
+    // s 最少需要的长度
+    newlen = (len + addlen);
+
+    // 根据新长度，为 s 分配新空间所需的大小
+    // 如果当前占用内存小于1M那么就分配两倍于当前长度的内存
+    // 如果当前占用内存大于等于1M那么就分配当前长度+1M的内存
+    // 内存增长策略*****
+    if (newlen &lt; SDS_MAX_PREALLOC) {
+        // 如果新长度小于 SDS_MAX_PREALLOC 
+        // 那么为它分配两倍于所需长度的空间
+        newlen *= 2;
+    } else {
+        // 否则，分配长度为目前长度加上 SDS_MAX_PREALLOC
+        newlen += SDS_MAX_PREALLOC;
+    }
+
+    // T = O(N)
+    newsh = zrealloc(sh, sizeof(struct sdshdr) + newlen + 1);
+
+    // 内存不足，分配失败，返回
+    if (newsh == NULL) { 
+        return NULL;
+    }
+
+    // 更新 sds 的空余长度
+    newsh-&gt;free = newlen - len;
+
+    // 返回 sds
+    return newsh-&gt;buf;
+}
+</code></pre><h1 id="惰性释放，减少内存分配次数"><a href="#惰性释放，减少内存分配次数" class="headerlink" title="惰性释放，减少内存分配次数"></a>惰性释放，减少内存分配次数</h1><pre><code>对sds字符串进行缩减操作的时候，不会对空间进行释放，仅仅只是改变len属性和free属性的值
+
+void sdsclear(sds s) {
+
+    // 取出 sdshdr
+    struct sdshdr *sh = (void*) (s - (sizeof(struct sdshdr)));
+
+    // 重新计算属性
+    sh-&gt;free += sh-&gt;len;
+    sh-&gt;len = 0;
+
+    // 将结束符放到最前面（相当于惰性地删除 buf 中的内容）
+    sh-&gt;buf[0] = &apos;\0&apos;;
+}
+</code></pre><h1 id="long数值转字符串"><a href="#long数值转字符串" class="headerlink" title="long数值转字符串"></a>long数值转字符串</h1><pre><code>这个函数比较有意思，他将long long类型的数值转换成string类型
+    1、将数值按照10取模，取模后的值保存，在除10（相当于是对当前位的上一位进行获取 12345第一次取模的值是5，除10变成1234.5取模的值变成4）（注意101.1与10取模是1不是1.1）
+    2、将保存的字符串再进行翻转
+    比如：
+        12345 取模后得到的值依次是5，4，3，2，1 连接成最后的字符串是54321
+        再进行倒转以后变成12345
+
+int sdsll2str(char *s, long long value) {
+    char *p, aux;
+    unsigned long long v;
+    size_t l;
+
+    /* Generate the string representation, this method produces
+     * an reversed string. */
+    v = (value &lt; 0) ? -value : value;
+    p = s;
+    do {
+        *p++ = &apos;0&apos; + (v%10);
+        v /= 10;
+    } while(v);
+    if (value &lt; 0) *p++ = &apos;-&apos;;
+
+    /* Compute length and add null term. */
+    l = p - s;
+    *p = &apos;\0&apos;;
+
+    /* Reverse the string. */
+    p--;
+    while(s &lt; p) {
+        aux = *s;
+        *s = *p;
+        *p = aux;
+        s++;
+        p--;
+    }
+    return l;
+}
+
+为什么要&apos;0&apos;+单个数字？
+参考ascii表，字符串1对应的ascii码是49，&apos;0&apos;对应的ancii值是48，比如说数字3想存储到字符串中表示也为&apos;3&apos;，那么它对应的ascii就是3+48也就是3+&apos;0&apos;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
+
+    /** buf 中已占用空间的长度*/
+    int l]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis对象类型及数据结构]]></title>
+    <link href="http://www.cxyteam.com/2018/01/02/redis%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/</id>
+    <published>2018-01-02T09:42:59.000Z</published>
+    <updated>2018-01-02T11:06:05.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
+如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
+可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
+</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
+因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
+</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
+    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
+    2、列表对象保存的元素数量小于 512 个
+</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
+    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
+    2、哈希对象保存的键值对数量小于 512 个；
+</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
+    1、集合对象保存的所有元素都是整数值；
+    2、集合对象保存的元素数量不超过 512 个；
+</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
+    1、有序集合保存的元素数量小于 128 个；
+    2、有序集合保存的所有元素成员的长度都小于 64 字节；
+</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[常用命令]]></title>
+    <link href="http://www.cxyteam.com/2017/12/28/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://www.cxyteam.com/2017/12/28/常用命令/</id>
+    <published>2017-12-28T02:29:39.000Z</published>
+    <updated>2017-12-28T02:44:39.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis源码断点调试]]></title>
+    <link href="http://www.cxyteam.com/2017/12/13/redis%E6%BA%90%E7%A0%81%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95/"/>
+    <id>http://www.cxyteam.com/2017/12/13/redis源码断点调试/</id>
+    <published>2017-12-13T12:37:19.000Z</published>
+    <updated>2017-12-13T12:54:32.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="redis断点调试的方式有两种"><a href="#redis断点调试的方式有两种" class="headerlink" title="redis断点调试的方式有两种"></a>redis断点调试的方式有两种</h1><h6 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h6><h6 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h6><h3 id="记录日志-1"><a href="#记录日志-1" class="headerlink" title="记录日志"></a>记录日志</h3><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)</code></p>
+<h5 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h5><h6 id="在t-string-c的getCommand方法中添加如下内容"><a href="#在t-string-c的getCommand方法中添加如下内容" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;);
+return ;</code></p>
+<h6 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h6><p><code>make &amp;&amp; src/redis-server</code></p>
+<h6 id="连接redis"><a href="#连接redis" class="headerlink" title="连接redis"></a>连接redis</h6><p><code>src/redis-cli</code></p>
+<h6 id="查看结果（注意是在redis-server查看结果）"><a href="#查看结果（注意是在redis-server查看结果）" class="headerlink" title="查看结果（注意是在redis-server查看结果）"></a>查看结果（注意是在redis-server查看结果）</h6><p><code>get name</code></p>
+<h6 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h6><pre><code>由于getCommand是定义的get命令的操作，因此get name命令能够触发redisLog记录日志
+</code></pre><h3 id="printf-1"><a href="#printf-1" class="headerlink" title="printf"></a>printf</h3><h6 id="在t-string-c的getCommand方法中添加如下内容-1"><a href="#在t-string-c的getCommand方法中添加如下内容-1" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>printf(&quot;hello world!&quot;)</code></p>
+<h6 id="启动redis，连接redis，查看结果和上述流程一直"><a href="#启动redis，连接redis，查看结果和上述流程一直" class="headerlink" title="启动redis，连接redis，查看结果和上述流程一直"></a>启动redis，连接redis，查看结果和上述流程一直</h6><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h6 id="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"><a href="#每次操作完成之后都要进行编译，并重新启动服务端和连接redis" class="headerlink" title="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"></a>每次操作完成之后都要进行编译，并重新启动服务端和连接redis</h6><h6 id="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"><a href="#执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢" class="headerlink" title="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"></a>执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢</h6><h6 id="redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）"><a href="#redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）" class="headerlink" title="redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）"></a>redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）</h6><h6 id="printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr"><a href="#printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr" class="headerlink" title="printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));"></a>printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));</h6>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="redis断点调试的方式有两种"><a href="#redis断点调试的方式有两种" class="headerlink" title="redis断点调试的方式有两种"></a>redis断点调试的方式有两种</h1><h6 id="记录日志"><a href]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis用到的函数]]></title>
+    <link href="http://www.cxyteam.com/2017/12/12/redis%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%BD%E6%95%B0/"/>
+    <id>http://www.cxyteam.com/2017/12/12/redis用到的函数/</id>
+    <published>2017-12-12T15:18:48.000Z</published>
+    <updated>2017-12-12T15:23:19.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
+触发记录hello world日志
+例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&quot;);return ;
+当你启动redis-server后，在客户端，执行get name命令，会在redis-server终端输出&quot;hello world！&quot;
+</code></pre><p># </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
+触发记录]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[安装laravel环境]]></title>
+    <link href="http://www.cxyteam.com/2017/12/04/%E5%AE%89%E8%A3%85laravel%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2017/12/04/安装laravel环境/</id>
+    <published>2017-12-04T08:46:07.000Z</published>
+    <updated>2017-12-04T10:23:08.000Z</updated>
+    <content type="html"><![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
+</code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
+</code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
+</code></pre><h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><pre><code>使用brew安装php，mysql，redis
+</code></pre><h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><pre><code>curl -sS https://getcomposer.org/installer | php 
+失败尝试：php -r &quot;readfile(&apos;https://getcomposer.org/installer&apos;);&quot; | php
+全局有效：mv composer.phar /usr/local/bin/composer
+验证：composer --version
+</code></pre><h1 id="通过composer安装valet"><a href="#通过composer安装valet" class="headerlink" title="通过composer安装valet"></a>通过composer安装valet</h1><pre><code>添加环境变量：
+    PATH=$PATH:~/.composer/vendor/bin
+
+修改composer源（默认的是国外的，需要翻墙）
+    1、查询composer配置文件所在位置
+        composer config -l -g
+
+    2、查看显示的home选项（就是composer所在配置的目录）
+        [home] /Users/sunnysmilez/.composer
+
+    3、在配置文件添加下载路径
+        vim /Users/sunnysmilez/.composer/config.json         
+        内容如下：
+            {
+                &quot;config&quot;: {
+                },
+                &quot;repositories&quot;: {
+                    &quot;packagist&quot;: {
+                        &quot;type&quot;: &quot;composer&quot;,
+                        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;
+                    }
+                }
+            }
+
+下载安装：valet
+    composer global require laravel/valet
+</code></pre><h1 id="安装valet"><a href="#安装valet" class="headerlink" title="安装valet"></a>安装valet</h1><pre><code>安装：
+    valet install
+
+测试：（127.0.0.1会响应所有*.dev的域名）
+    ping foobar.dev
+</code></pre><h1 id="设置code目录"><a href="#设置code目录" class="headerlink" title="设置code目录"></a>设置code目录</h1><pre><code>cd code
+valet park
+</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>composer create-project laravel/laravel=5.2.* hello --prefer-dist
+
+不知道为什么反正我的laravel new hello 不能使用
+项目使用的5.2的版本，如果你需要更高版本请自行更改
+</code></pre><h1 id="启动valet"><a href="#启动valet" class="headerlink" title="启动valet"></a>启动valet</h1><pre><code>valet start
+</code></pre><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><pre><code>http://hello.dev/
+</code></pre><h1 id="valet补充"><a href="#valet补充" class="headerlink" title="valet补充"></a>valet补充</h1><pre><code>valet start         启动valet
+valet stop          停止valet
+valet restart       重启valet
+valet share         共享项目（比较有意思）
+valet uninstall     卸载valet
+valet park          设置代码目录
+valet paths         查看代码目录
+等
+</code></pre><h1 id="各种错误"><a href="#各种错误" class="headerlink" title="各种错误"></a>各种错误</h1><h3 id="composer错误"><a href="#composer错误" class="headerlink" title="composer错误"></a>composer错误</h3><pre><code>类似此种下载不成功的，直接替换composer源
+[Composer\Downloader\TransportException]
+      The &quot;http://packagist.org/p/laravel/valet%2439296a873ae09b56ed010fd93604f08291f6223ad85ddf3bc5cb02af8a4035f3.json&quot; file could not be downloaded (HTTP/1.1 302 Found)
+
+[Composer\Downloader\TransportException]
+       Your configuration does not allow connections to http://pkg.phpcomposer.com/repo/packagist/packages.json. See https://getcomposer.org/doc/06-config.md#secure-http for details. 
+[Composer\Downloader\TransportException]
+      The &quot;http://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 301 Moved Permanently)
+
+[Composer\Downloader\TransportException]
+ The &quot;https://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 404 Not Found)
+</code></pre><h3 id="valet-install错误"><a href="#valet-install错误" class="headerlink" title="valet install错误"></a>valet install错误</h3><pre><code>Brew was unable to install [dnsmasq].
+    手动安装dnsmasq：brew install dnsmasq（报下面的错误）
+
+Error: Xcode alone is not sufficient on Sierra.
+    执行：xcode-select --install
+
+执行：valet install       
+</code></pre><h3 id="valet权限错误（在安装的过程中使用了sudo）"><a href="#valet权限错误（在安装的过程中使用了sudo）" class="headerlink" title="valet权限错误（在安装的过程中使用了sudo）"></a>valet权限错误（在安装的过程中使用了sudo）</h3><pre><code>Warning: file_get_contents(/var/root/.valet/config.json): failed to open stream: Permission denied in /Users/Username/.composer/vendor/laravel/valet/server.php on line 23
+
+Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/vendor/laravel/valet/server.php on line 47
+404 - Not Found
+
+修改权限为当前用户：
+    cd ~/.composer/
+    sudo chown -R $(whoami) vendor
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
+</code></pre><h1 i]]>
+    </summary>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[phpsttorm添加laravel代码提示]]></title>
+    <link href="http://www.cxyteam.com/2017/11/27/phpsttorm%E6%B7%BB%E5%8A%A0laravel%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/"/>
+    <id>http://www.cxyteam.com/2017/11/27/phpsttorm添加laravel代码提示/</id>
+    <published>2017-11-26T16:58:03.000Z</published>
+    <updated>2017-12-04T10:29:42.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
+</code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
+<h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
+&quot;require&quot;: {
+        &quot;laravel/framework&quot;: &quot;5.5.*&quot;,
+        &quot;barryvdh/laravel-ide-helper&quot;: &quot;dev-master&quot;
+},
+</code></pre><h1 id="composer加载插件"><a href="#composer加载插件" class="headerlink" title="composer加载插件"></a>composer加载插件</h1><pre><code>在项目根目录运行：composer update
+</code></pre><h1 id="添加service-provider"><a href="#添加service-provider" class="headerlink" title="添加service provider"></a>添加service provider</h1><pre><code>在项目下的config/app.php在providers中添加一行&quot;&apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;&quot;
+
+&apos;providers&apos; =&gt; [
+    &apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;
+    //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//具体什么方式添加看版本
+]
+</code></pre><h1 id="执行artisan命令"><a href="#执行artisan命令" class="headerlink" title="执行artisan命令"></a>执行artisan命令</h1><pre><code>php artisan ide-helper:generate
+最终生成_ide_helper.php的文件
+</code></pre><h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><pre><code>如果没效果，重启下编辑器试试
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
+</code></pre>]]>
+    </summary>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker创建laravel环境]]></title>
+    <link href="http://www.cxyteam.com/2017/11/26/docker%E5%88%9B%E5%BB%BAlaravel%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2017/11/26/docker创建laravel环境/</id>
+    <published>2017-11-26T10:39:18.000Z</published>
+    <updated>2017-11-26T10:56:19.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜像" class="headerlink" title="拉取laravel镜像"></a>拉取laravel镜像</h1><pre><code>docker pull laraedit/laraedit
+</code></pre><h1 id="创建laravel容器"><a href="#创建laravel容器" class="headerlink" title="创建laravel容器"></a>创建laravel容器</h1><pre><code>docker run --name laravel -itd -p 8080:80 -v ~/Desktop/laravel:/var/www/html/app laraedit/laraedit
+--name 指定新建容器名称
+-p 端口映射，指定本地端口8080映射到容器的80端口
+-v 目录挂载，本机目录:容器目录
+-d 在后台运行
+</code></pre><h1 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h1><pre><code>docker exec -it laravel /bim/bash
+</code></pre><h1 id="创建项目-容器内"><a href="#创建项目-容器内" class="headerlink" title="创建项目(容器内)"></a>创建项目(容器内)</h1><pre><code>cd /var/www/html/
+laravel new app
+</code></pre><h1 id="查看应用日志（容器内）"><a href="#查看应用日志（容器内）" class="headerlink" title="查看应用日志（容器内）"></a>查看应用日志（容器内）</h1><pre><code>tail -f /var/www/html/app/storage/logs/laravel.log
+</code></pre><h1 id="查看容器日志-容器外"><a href="#查看容器日志-容器外" class="headerlink" title="查看容器日志(容器外)"></a>查看容器日志(容器外)</h1><pre><code>docker logs -f laravel
+</code></pre><h1 id="创建文件（容器内）"><a href="#创建文件（容器内）" class="headerlink" title="创建文件（容器内）"></a>创建文件（容器内）</h1><pre><code>touch /var/www/html/app/.env
+添加内容如下：
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_LOG_LEVEL=debug
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+</code></pre><h1 id="生成key"><a href="#生成key" class="headerlink" title="生成key"></a>生成key</h1><pre><code>php /var/www/html/app/artisan key:generate
+</code></pre><h1 id="测试安装成功"><a href="#测试安装成功" class="headerlink" title="测试安装成功"></a>测试安装成功</h1><pre><code>访问127.0.0.1:8080会看到laravel首页，否则的话就查日志看看原因吧
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜]]>
+    </summary>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
+    
+      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在小公司的成长]]></title>
+    <link href="http://www.cxyteam.com/2017/11/01/%E5%9C%A8%E5%B0%8F%E5%85%AC%E5%8F%B8%E7%9A%84%E6%88%90%E9%95%BF/"/>
+    <id>http://www.cxyteam.com/2017/11/01/在小公司的成长/</id>
+    <published>2017-10-31T16:51:10.000Z</published>
+    <updated>2017-10-31T17:10:13.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><h1 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h1><h1 id="认知"><a href="#认知" class="headerlink" title="认知"></a>认知</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[git钩子介绍]]></title>
@@ -518,669 +1027,6 @@ http://dockone.io/article/126
       <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
     
       <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker命令]]></title>
-    <link href="http://www.cxyteam.com/2017/06/01/docker%E5%85%A5%E9%97%A8/"/>
-    <id>http://www.cxyteam.com/2017/06/01/docker入门/</id>
-    <published>2017-06-01T11:24:33.000Z</published>
-    <updated>2017-06-20T01:24:33.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="#docker查询命令" class="headerlink" title="docker查询命令"></a>docker查询命令</h1><h6 id="docker-info"><a href="#docker-info" class="headerlink" title="docker info"></a>docker info</h6><pre><code>查看docker信息
-</code></pre><h6 id="docker-ps-a"><a href="#docker-ps-a" class="headerlink" title="docker ps -a"></a>docker ps -a</h6><pre><code>查看所有的容器，包括运行的和退出的
-</code></pre><h6 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h6><pre><code>查看所有的运行的容器
-</code></pre><h6 id="docker-inspect-container-id-names"><a href="#docker-inspect-container-id-names" class="headerlink" title="docker inspect container_id/names"></a>docker inspect container_id/names</h6><pre><code>查看容器的详细信息
-</code></pre><h6 id="docker-search-tutorial"><a href="#docker-search-tutorial" class="headerlink" title="docker search tutorial"></a>docker search tutorial</h6><pre><code>搜索nginx镜像
-</code></pre><h6 id="docker-pull-egamas-docker-tutorial"><a href="#docker-pull-egamas-docker-tutorial" class="headerlink" title="docker pull egamas/docker-tutorial"></a>docker pull egamas/docker-tutorial</h6><pre><code>拉取egamas/docker-tutorial镜像
-</code></pre><h6 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h6><pre><code>查看所有的镜像
-docker image - since=mongo:3.2
-docker images -before=mongo:3.2
-</code></pre><h6 id="docker-attach-container-id-names"><a href="#docker-attach-container-id-names" class="headerlink" title="docker attach container_id/names"></a>docker attach container_id/names</h6><pre><code>登录web容器
-</code></pre><h6 id="docker-exec-it-container-names-bin-bash"><a href="#docker-exec-it-container-names-bin-bash" class="headerlink" title="docker exec -it  container_names /bin/bash"></a>docker exec -it  container_names /bin/bash</h6><pre><code>登录容器中(容器已经启动的)
-</code></pre><h6 id="docker-rm-container-id-names"><a href="#docker-rm-container-id-names" class="headerlink" title="docker rm container_id/names"></a>docker rm container_id/names</h6><pre><code>删除停止状态的容器
-</code></pre><h6 id="docker-rm-f-container-id-names"><a href="#docker-rm-f-container-id-names" class="headerlink" title="docker rm -f container_id/names"></a>docker rm -f container_id/names</h6><pre><code>删除开启状态的容器
-</code></pre><h6 id="docker-push-source"><a href="#docker-push-source" class="headerlink" title="docker push source"></a>docker push source</h6><h6 id="docker-port-id"><a href="#docker-port-id" class="headerlink" title="docker port id"></a>docker port id</h6><h6 id="docker-top-id"><a href="#docker-top-id" class="headerlink" title="docker top id"></a>docker top id</h6><h6 id="docker-rmi-image-id"><a href="#docker-rmi-image-id" class="headerlink" title="docker rmi image_id"></a>docker rmi image_id</h6><pre><code>删除镜像
-</code></pre><h6 id="docker-image-rm-id"><a href="#docker-image-rm-id" class="headerlink" title="docker image rm id"></a>docker image rm id</h6><h6 id="docker-diff-image-name"><a href="#docker-diff-image-name" class="headerlink" title="docker diff image_name"></a>docker diff image_name</h6><pre><code>查看容器的具体变更内容（和基础的镜像相比，所作的变更，比如说在容器中安装了vim，这个时候就会显示出具体安装vim新增的文件）
-</code></pre><h6 id="docker-commit-container-id-image-id"><a href="#docker-commit-container-id-image-id" class="headerlink" title="docker commit container_id image_id"></a>docker commit container_id image_id</h6><pre><code>将修改的容器内容提交到镜像中，形成新的基础镜像(一般来说不这么干，都用Dockerfile)
-</code></pre><h6 id="docker-build-t-image-name-PATH"><a href="#docker-build-t-image-name-PATH" class="headerlink" title="docker build -t image_name PATH"></a>docker build -t image_name PATH</h6><pre><code>在PATH目录下，按照Dockerfile建立一个新的image_name镜像
-path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
-</code></pre><h6 id="docker-import-SOURCE-PATH-TARGET-PATH"><a href="#docker-import-SOURCE-PATH-TARGET-PATH" class="headerlink" title="docker import SOURCE_PATH TARGET_PATH"></a>docker import SOURCE_PATH TARGET_PATH</h6><pre><code>   docker import \
-       http://download.openvz.org/template/precreated/ubuntu-14.04-x86_64-minimal.tar.gz \
-       web1/ubuntu:14.04
-
-http://www.kancloud.cn/lyric/docker-intro/79899
-</code></pre><h6 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h6><pre><code>保存镜像为归档文件
-docker save web | gzip &gt; web.tar.gz
-</code></pre><h6 id="dcoker-load"><a href="#dcoker-load" class="headerlink" title="dcoker load"></a>dcoker load</h6><pre><code>将归档文件复制到另一个机器上
-docker load -i web.tar.gz
-</code></pre><h6 id="docker-run-option-image-name-command"><a href="#docker-run-option-image-name-command" class="headerlink" title="docker run [option] image_name [command]"></a>docker run [option] image_name [command]</h6><pre><code>启动容器
-在终端输出:hello world(注意nginx是镜像名称，在运行之后会创建一个容器，可执行docker ps -a查看，然后使用docker rm 进行删除)
-    sudo docker run nginx /bin/echo &apos;Hello world&apos;
-
- 创建一个基于image_name的镜像（以nginx为镜像构建一个容器，命名为web）  
-       docker run -t -i --name web nginx /bin/bash 
-
- 运行bash终端，允许用户进行交互(-t分配给docker一个伪终端，-i让容器的标准输入保持打开)
-    sudo docker run -it nginx /bin/bash
-
- docker run创建容器时，Docker会在后台运行包含以下：
-    检查本地是否存在指定的镜像，不存在就从公有仓库下载
-    利用镜像创建并启动一个容器
-    分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
-    从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
-    从地址池配置一个 ip 地址给容器
-    执行用户指定的应用程序
-    执行完毕后容器被终止
-</code></pre><h6 id="docker-start-container-id-names"><a href="#docker-start-container-id-names" class="headerlink" title="docker start container_id/names"></a>docker start container_id/names</h6><pre><code>运行容器
-</code></pre><h6 id="docker-stop-container-id-names"><a href="#docker-stop-container-id-names" class="headerlink" title="docker stop container_id/names"></a>docker stop container_id/names</h6><pre><code>停止运行容器    
-</code></pre><h6 id="docker-后台运行"><a href="#docker-后台运行" class="headerlink" title="docker 后台运行"></a>docker 后台运行</h6><pre><code>-d 让Dockre在后台运行而不是直接把执行命令的结果输出在当前宿主机下
-sudo docker run nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
-sudo docker run -d nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
-</code></pre><h6 id="docker-logs-container-id"><a href="#docker-logs-container-id" class="headerlink" title="docker logs [container_id]"></a>docker logs [container_id]</h6><pre><code>获取容器的输出信息
-</code></pre><h6 id="进入Docker容器"><a href="#进入Docker容器" class="headerlink" title="进入Docker容器"></a>进入Docker容器</h6><pre><code>attach
-    sudo docker run -idt nginx
-    sudo docker ps
-    sudo docker attach quizzical_kilby
-    多个窗口同时 attach 到同一个容器的时候，所有窗口都会同步显示。当某个窗口因命令阻塞时,其他窗口也无法执行操作了
-
-nsenter
-    这个太复杂了，反正我也不会用
-</code></pre><h6 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h6><pre><code>导出容器快照到本地文件
-docker export web &gt; web.tar
-</code></pre><h6 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h6><pre><code>导入本地容器快照为镜像
-docker import web.tar test
-</code></pre><h6 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h6><pre><code>数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性
-数据卷可以在容器之间共享和重用
-对数据卷的修改会立马生效
-对数据卷的更新，不会影响镜像
-数据卷默认会一直存在，即使容器被删除
-注意：数据卷的使用，类似于 Linux 下对目录或文件进行 mount，镜像中的被指定为挂载点的目录中的文件会隐藏掉，能显示看的是挂载的数据卷。
-</code></pre><h6 id="创建数据卷"><a href="#创建数据卷" class="headerlink" title="创建数据卷"></a>创建数据卷</h6><pre><code>docker run -d -P --name web -v /webapp nginx
-可以使用:docker exec -it web /bin/bash登录容器进行查看
-</code></pre><h6 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h6><pre><code>docker rm -fv web
--v移除数据卷
-</code></pre><h6 id="挂载一个主机目录作为数据卷（也可以挂载文件）"><a href="#挂载一个主机目录作为数据卷（也可以挂载文件）" class="headerlink" title="挂载一个主机目录作为数据卷（也可以挂载文件）"></a>挂载一个主机目录作为数据卷（也可以挂载文件）</h6><pre><code>第一反应的作用是，本地可以写代码不用上传了，实时的在docker中运行
-docker run -d -P --name web -v /src/webapp:/opt/webapp nginx
-主机目录：/src/webapp 容器目录：/opt/webapp
-</code></pre><h6 id="查看数据卷的信息"><a href="#查看数据卷的信息" class="headerlink" title="查看数据卷的信息"></a>查看数据卷的信息</h6><pre><code>docker inspect web
-可以看到volumes字样
-</code></pre><h6 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h6><pre><code>数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
-创建一个容器（作为数据卷）：
-    docker run -d -v /dbdata --name dbdata nginx
-把dbdata容器指定为数据卷容器：
-    docker run -d --volumes-from dbdata --name db1 nginx
-</code></pre><h6 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h6><pre><code>sudo docker run --volumes-from dbdata -v $(pwd):/backup nginx tar cvf /backup/backup.tar /dbdata
-首先使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从主机挂载当前目录到容器的 /backup 目录，容器启动后，使用了 tar 命令来将 dbdata 卷备份为容器中 /backup/backup.tar 文件，也就是主机当前目录下的名为 backup.tar 的文件
-</code></pre><h6 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h6><pre><code>如果要恢复数据到一个容器，首先创建一个带有空数据卷的容器 dbdata2
-docker run -v /dbdata --name dbdata2 nginx /bin/bash
-
-然后创建另一个容器，挂载 dbdata2 容器卷中的数据卷，并使用 untar 解压备份文件到挂载的容器卷中
-sudo docker run --volumes-from dbdata2 -v $(pwd):/backup nginx tar xvf /backup/backup.tar
-
-为了查看/验证恢复的数据，可以再启动一个容器挂载同样的容器卷来查看
-sudo docker run --volumes-from dbdata2 nginx /bin/ls /dbdata
-</code></pre><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h6 id="映射到指定端口"><a href="#映射到指定端口" class="headerlink" title="映射到指定端口"></a>映射到指定端口</h6><pre><code>docker run -d -p 5000:5000 --name web2 nginx
-docker run -d -p 5000:5000 -p 80:80 --name=web2 nginx
-</code></pre><h6 id="查看映射端口配置"><a href="#查看映射端口配置" class="headerlink" title="查看映射端口配置"></a>查看映射端口配置</h6><pre><code>docker port web2 5000
-</code></pre><h6 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h6><pre><code>docker run -d -P --name web2 --link web1:web1 nginx
-
---link参数的格式为 --link name:alias，其中name是要连接容器的名称，alias是这个连接的别名
-Docker 在两个互联的容器之间创建了一个安全隧道，而且不用映射它们的端口到宿主主机上
-在启动 db 容器的时候并没有使用 -p 和 -P 标记，从而避免了暴露数据库端口到外部网络上
-
-Docker 通过两种方式为容器公开连接信息：
-环境变量
-    docker exec -it web2 /bin/bash  (登录docker容器)
-    env （使用env查看web2容器环境变量）
-
-    查询结果如下
-    HOSTNAME=b64578555fd9
-    WEB1_PORT_80_TCP=tcp://172.17.0.2:80
-    NJS_VERSION=1.13.1.0.1.10-1~stretch
-    NGINX_VERSION=1.13.1-1~stretch
-    WEB1_PORT_80_TCP_PROTO=tcp
-    WEB1_PORT_80_TCP_ADDR=172.17.0.2
-    WEB1_PORT=tcp://172.17.0.2:80
-    PWD=/
-    HOME=/root
-    WEB1_ENV_NGINX_VERSION=1.13.1-1~stretch
-    WEB1_PORT_80_TCP_PORT=80
-    TERM=xterm
-    SHLVL=1
-    WEB1_NAME=/web2/web1
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    WEB1_ENV_NJS_VERSION=1.13.1.0.1.10-1~stretch
-    _=/usr/bin/env
-
-    以WEB1_开头的环境变量是供web2容器连接web1容器使用
-
-
-添加host信息到父容器的/etc/hosts的文件    
-    docker exec -it web2 /bin/bash  (登录docker容器)
-    cat /etc/hosts(查看hosts文件)
-
-    127.0.0.1    localhost
-    ::1    localhost ip6-localhost ip6-loopback
-    fe00::0    ip6-localnet
-    ff00::0    ip6-mcastprefix
-    ff02::1    ip6-allnodes
-    ff02::2    ip6-allrouters
-    172.17.0.2    web1 979e62ebf622
-    172.17.0.3    b64578555fd9
-
-    docker exec -it web1 /bin/bash  (登录docker容器)
-    cat /etc/hosts(查看hosts文件)
-    127.0.0.1    localhost
-    ::1    localhost ip6-localhost ip6-loopback
-    fe00::0    ip6-localnet
-    ff00::0    ip6-mcastprefix
-    ff02::1    ip6-allnodes
-    ff02::2    ip6-allrouters
-    172.17.0.2    979e62ebf622
-</code></pre><h3 id="高级网络配置"><a href="#高级网络配置" class="headerlink" title="高级网络配置"></a>高级网络配置</h3><pre><code>下面是一个跟 Docker 网络相关的命令列表，其中有些命令选项只有在 Docker 服务启动的时候才能配置，而且不能马上生效。
-      -b BRIDGE or --bridge=BRIDGE --指定容器挂载的网桥
-      --bip=CIDR --定制 docker0 的掩码
-      -H SOCKET... or --host=SOCKET... --Docker 服务端接收命令的通道
-      --icc=true|false --是否支持容器之间进行通信
-      --ip-forward=true|false --请看下文容器之间的通信
-      --iptables=true|false --是否允许 Docker 添加 iptables 规则
-      --mtu=BYTES --容器网络中的 MTU
-
-下面2个命令选项既可以在启动服务时指定，也可以 Docker 容器启动（docker run）时候指定
-    --dns=IP_ADDRESS... --使用指定的DNS服务器
-    --dns-search=DOMAIN... --指定DNS搜索域
-</code></pre><h3 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h3><pre><code>利用虚拟文件来挂载到来容器的 3 个相关配置文件
-
-在容器中使用mount可以看到挂载信息
-    /dev/vda1 on /etc/resolv.conf type ext4 (rw,relatime,data=ordered)
-    /dev/vda1 on /etc/hostname type ext4 (rw,relatime,data=ordered)
-    /dev/vda1 on /etc/hosts type ext4 (rw,relatime,data=ordered)
-
- 这种机制可以让宿主主机 DNS 信息发生更新后，所有 Docker 容器的 dns 配置通过 /etc/resolv.conf 文件立刻得到更新
-</code></pre><h6 id="配置hostname"><a href="#配置hostname" class="headerlink" title="配置hostname"></a>配置hostname</h6><pre><code>-h HOSTNAME or --hostname=HOSTNAM
-注意：HOSTNAME会被写到容器内的 /etc/hostname 和 /etc/hosts；但它在容器外部看不到，既不会在 docker ps 中显示，也不会在其他的容器的 /etc/hosts 看到
-</code></pre><h6 id="配置alias"><a href="#配置alias" class="headerlink" title="配置alias"></a>配置alias</h6><pre><code>--link=CONTAINER_NAME:ALIAS
-在创建容器的时候，添加一个其他容器的主机名到 /etc/hosts 文件中，让新容器的进程可以使用主机名 ALIAS 就可以连接它
-</code></pre><h6 id="添加dns"><a href="#添加dns" class="headerlink" title="添加dns"></a>添加dns</h6><pre><code>--dns=IP_ADDRESS
-添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在 /etc/hosts 中的主机名
-</code></pre><h6 id="设定搜索域"><a href="#设定搜索域" class="headerlink" title="设定搜索域"></a>设定搜索域</h6><pre><code>--dns-search=DOMAIN
-设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com
-</code></pre><h3 id="容器访问控制"><a href="#容器访问控制" class="headerlink" title="容器访问控制"></a>容器访问控制</h3><pre><code>主要是通过linux上的iptables防火墙进行管理和实现的
-</code></pre><h6 id="容器访问外部网络"><a href="#容器访问外部网络" class="headerlink" title="容器访问外部网络"></a>容器访问外部网络</h6><pre><code>sysctl net.ipv4.ip_forward  查看是否值为1，如果不是则：
-sysctl -w net.ipv4.ip_forward=1
-或者在启动的时候设定：--ip-forward=true
-</code></pre><h6 id="容器之间访问"><a href="#容器之间访问" class="headerlink" title="容器之间访问"></a>容器之间访问</h6><pre><code>容器的网络拓扑是否已经互联
-本地系统的防火墙软件
-</code></pre><h6 id="访问所有端口"><a href="#访问所有端口" class="headerlink" title="访问所有端口"></a>访问所有端口</h6><pre><code>当启动 Docker 服务时候，默认会添加一条转发策略到 iptables 的 FORWARD 链上。策略为通过（ACCEPT）还是禁止（DROP）取决于配置--icc=true（缺省值）还是 --icc=false。当然，如果手动指定 --iptables=false 则不会添加 iptables 规则。
-可见，默认情况下，不同容器之间是允许网络互通的。如果为了安全考虑，可以在 /etc/default/docker 文件中配置 DOCKER_OPTS=--icc=false 来禁止它
-</code></pre><h6 id="访问指定端口"><a href="#访问指定端口" class="headerlink" title="访问指定端口"></a>访问指定端口</h6><pre><code>在通过 -icc=false 关闭网络访问后，还可以通过 --link=CONTAINER_NAME:ALIAS 选项来访问容器的开放端口
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[编写makefile]]></title>
-    <link href="http://www.cxyteam.com/2017/05/12/%E7%BC%96%E5%86%99makefile/"/>
-    <id>http://www.cxyteam.com/2017/05/12/编写makefile/</id>
-    <published>2017-05-12T01:52:04.000Z</published>
-    <updated>2017-05-16T15:50:00.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="什么是makefile"><a href="#什么是makefile" class="headerlink" title="什么是makefile"></a>什么是makefile</h1><h6 id="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"><a href="#用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件" class="headerlink" title="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"></a>用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件</h6><h1 id="makefile规则"><a href="#makefile规则" class="headerlink" title="makefile规则"></a>makefile规则</h1><pre><code>target ... : prerequisites ...
-    command
-    ...
-    ...
-</code></pre><h6 id="target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签"><a href="#target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签" class="headerlink" title="target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签"></a>target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签</h6><h6 id="prerequisites是要生成target所需要的文件"><a href="#prerequisites是要生成target所需要的文件" class="headerlink" title="prerequisites是要生成target所需要的文件"></a>prerequisites是要生成target所需要的文件</h6><h6 id="command是make需要执行的命令"><a href="#command是make需要执行的命令" class="headerlink" title="command是make需要执行的命令"></a>command是make需要执行的命令</h6><h6 id="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"><a href="#这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行" class="headerlink" title="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"></a>这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行</h6><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h6 id="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"><a href="#一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的" class="headerlink" title="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"></a>一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的</h6><pre><code>edit : main.o kbd.o command.o display.o /
-       insert.o search.o files.o utils.o
-    cc -o edit main.o kbd.o command.o display.o /
-        insert.o search.o files.o utils.o
-
-main.o : main.c defs.h
-    cc -c main.c
-kbd.o : kbd.c defs.h command.h
-    cc -c kbd.c
-command.o : command.c defs.h command.h
-    cc -c command.c
-display.o : display.c defs.h buffer.h
-    cc -c display.c
-insert.o : insert.c defs.h buffer.h
-    cc -c insert.c
-search.o : search.c defs.h buffer.h
-    cc -c search.c
-files.o : files.c defs.h buffer.h command.h
-    cc -c files.c
-utils.o : utils.c defs.h
-    cc -c utils.c
-clean :
-    rm edit main.o kbd.o command.o display.o /
-           insert.o search.o files.o utils.o
-</code></pre><h6 id="反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行"><a href="#反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行" class="headerlink" title="反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行"></a>反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行</h6><h6 id="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"><a href="#在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的" class="headerlink" title="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"></a>在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的</h6><h6 id="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"><a href="#在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令" class="headerlink" title="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"></a>在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令</h6><h6 id="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"><a href="#clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等" class="headerlink" title="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"></a>clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等</h6><h1 id="make工作流程"><a href="#make工作流程" class="headerlink" title="make工作流程"></a>make工作流程</h1><h6 id="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。"><a href="#1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。" class="headerlink" title="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。"></a>1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。</h6><h6 id="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"><a href="#2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。" class="headerlink" title="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"></a>2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。</h6><h6 id="3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"><a href="#3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。" class="headerlink" title="3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"></a>3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。</h6><h6 id="4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）"><a href="#4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）" class="headerlink" title="4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）"></a>4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</h6><h6 id="5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。"><a href="#5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。" class="headerlink" title="5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。"></a>5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。</h6><h1 id="makefile中使用变量"><a href="#makefile中使用变量" class="headerlink" title="makefile中使用变量"></a>makefile中使用变量</h1><pre><code>edit : main.o kbd.o command.o display.o /
-                  insert.o search.o files.o utils.o
-    cc -o edit main.o kbd.o command.o display.o /
-                       insert.o search.o files.o utils.o
-</code></pre><h6 id="我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"><a href="#我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量" class="headerlink" title="我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"></a>我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量</h6><h4 id="例子，在makefile的文件开头定义一个变量obj"><a href="#例子，在makefile的文件开头定义一个变量obj" class="headerlink" title="例子，在makefile的文件开头定义一个变量obj"></a>例子，在makefile的文件开头定义一个变量obj</h4><pre><code>obj = main.o kbd.o command.o display.o /
-      insert.o search.o files.o utils.o
-objects = main.o kbd.o command.o display.o /
-          insert.o search.o files.o utils.o
-
-edit : $(objects)
-        cc -o edit $(objects)
-</code></pre><h1 id="让make自动推导"><a href="#让make自动推导" class="headerlink" title="让make自动推导"></a>让make自动推导</h1><h6 id="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂"><a href="#GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂" class="headerlink" title="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂"></a>GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂</h6><pre><code>objects = main.o kbd.o command.o display.o /
-    insert.o search.o files.o utils.o
-
-edit : $(objects)
-    cc -o edit $(objects)
-
-main.o : defs.h
-kbd.o : defs.h command.h
-command.o : defs.h command.h
-display.o : defs.h buffer.h
-insert.o : defs.h buffer.h
-search.o : defs.h buffer.h
-files.o : defs.h buffer.h command.h
-utils.o : defs.h
-
-.PHONY : clean
-clean :
-    rm edit $(objects)
-</code></pre><h6 id="“-PHONY”表示，clean是个伪目标文件"><a href="#“-PHONY”表示，clean是个伪目标文件" class="headerlink" title="“.PHONY”表示，clean是个伪目标文件"></a>“.PHONY”表示，clean是个伪目标文件</h6><h1 id="凌乱风格makefile"><a href="#凌乱风格makefile" class="headerlink" title="凌乱风格makefile"></a>凌乱风格makefile</h1><h6 id="看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？"><a href="#看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？" class="headerlink" title="看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？"></a>看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？</h6><pre><code>objects = main.o kbd.o command.o display.o /
-          insert.o search.o files.o utils.o
-
-edit : $(objects)
-    cc -o edit $(objects)
-
-$(objects) : defs.h
-kbd.o command.o files.o : command.h
-display.o insert.o search.o files.o : buffer.h
-
-.PHONY : clean
-clean :
-    rm edit $(objects)
-</code></pre><h6 id="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h"><a href="#上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h" class="headerlink" title="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h"></a>上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h</h6><h1 id="清空目标文件的规则"><a href="#清空目标文件的规则" class="headerlink" title="清空目标文件的规则"></a>清空目标文件的规则</h1><h6 id="每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"><a href="#每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁" class="headerlink" title="每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"></a>每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁</h6><h6 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h6><pre><code>clean:
-    rm edit $(objects)
-</code></pre><h6 id="稳妥写法"><a href="#稳妥写法" class="headerlink" title="稳妥写法"></a>稳妥写法</h6><pre><code>.PHONY : clean
-clean :
-    -rm edit $(objects)
-</code></pre><h6 id="PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"><a href="#PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾" class="headerlink" title=".PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"></a>.PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾</h6><h1 id="引用其他文件"><a href="#引用其他文件" class="headerlink" title="引用其他文件"></a>引用其他文件</h1><h6 id="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"><a href="#使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）" class="headerlink" title="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"></a>使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）</h6><pre><code>include &lt;filename&gt;
-</code></pre><h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><h6 id="你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk"><a href="#你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk" class="headerlink" title="你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk"></a>你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk</h6><pre><code>include foo.make *.mk $(bar)
-</code></pre><h6 id="等价于"><a href="#等价于" class="headerlink" title="等价于"></a>等价于</h6><pre><code>include foo.make a.mk b.mk c.mk e.mk f.mk
-</code></pre><h6 id="需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开"><a href="#需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开" class="headerlink" title="需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和可以用一个或多个空格隔开"></a>需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和<filename>可以用一个或多个空格隔开</filename></h6><h6 id="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找"><a href="#include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找" class="headerlink" title="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找"></a>include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录<prefix>/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找</prefix></h6><h6 id="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："><a href="#如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：" class="headerlink" title="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："></a>如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：</h6><pre><code>-include &lt;filename&gt;
-</code></pre><h1 id="环境变量makefiles"><a href="#环境变量makefiles" class="headerlink" title="环境变量makefiles"></a>环境变量makefiles</h1><h6 id="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"><a href="#如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的" class="headerlink" title="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"></a>如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的</h6><h1 id="make的工作方式"><a href="#make的工作方式" class="headerlink" title="make的工作方式"></a>make的工作方式</h1><h6 id="1、读入所有的Makefile。"><a href="#1、读入所有的Makefile。" class="headerlink" title="1、读入所有的Makefile。"></a>1、读入所有的Makefile。</h6><h6 id="2、读入被include的其它Makefile。"><a href="#2、读入被include的其它Makefile。" class="headerlink" title="2、读入被include的其它Makefile。"></a>2、读入被include的其它Makefile。</h6><h6 id="3、初始化文件中的变量。"><a href="#3、初始化文件中的变量。" class="headerlink" title="3、初始化文件中的变量。"></a>3、初始化文件中的变量。</h6><h6 id="4、推导隐晦规则，并分析所有规则。"><a href="#4、推导隐晦规则，并分析所有规则。" class="headerlink" title="4、推导隐晦规则，并分析所有规则。"></a>4、推导隐晦规则，并分析所有规则。</h6><h6 id="5、为所有的目标文件创建依赖关系链。"><a href="#5、为所有的目标文件创建依赖关系链。" class="headerlink" title="5、为所有的目标文件创建依赖关系链。"></a>5、为所有的目标文件创建依赖关系链。</h6><h6 id="6、根据依赖关系，决定哪些目标要重新生成。"><a href="#6、根据依赖关系，决定哪些目标要重新生成。" class="headerlink" title="6、根据依赖关系，决定哪些目标要重新生成。"></a>6、根据依赖关系，决定哪些目标要重新生成。</h6><h6 id="7、执行生成命令。"><a href="#7、执行生成命令。" class="headerlink" title="7、执行生成命令。"></a>7、执行生成命令。</h6><p><a href="http://blog.csdn.net/haoel/article/details/2886/" title="makefile原文链接" target="_blank" rel="external">makefile原文链接</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="什么是makefile"><a href="#什么是makefile" class="headerlink" title="什么是makefile"></a>什么是makefile</h1><h6 id="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的]]>
-    </summary>
-    
-      <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
-    
-      <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[编译reids的sds文件]]></title>
-    <link href="http://www.cxyteam.com/2017/05/08/%E7%BC%96%E8%AF%91reids%E7%9A%84sds%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.cxyteam.com/2017/05/08/编译reids的sds文件/</id>
-    <published>2017-05-08T12:30:02.000Z</published>
-    <updated>2017-05-09T01:51:49.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><a href="#在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来" class="headerlink" title="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"></a>在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来</h6><h1 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h1><h6 id="想当然的，sds-c的文件嘛，直接使用如下命令"><a href="#想当然的，sds-c的文件嘛，直接使用如下命令" class="headerlink" title="想当然的，sds.c的文件嘛，直接使用如下命令"></a>想当然的，sds.c的文件嘛，直接使用如下命令</h6><pre><code>gcc sds.c -o sds.o
-</code></pre><h6 id="结果也很想当然的报错"><a href="#结果也很想当然的报错" class="headerlink" title="结果也很想当然的报错"></a>结果也很想当然的报错</h6><p><img src="/img/redis/sds_gcc_error.png" alt="Alt text" title="写出代码"></p>
-<h5 id="本能的去指定头文件-依旧报错"><a href="#本能的去指定头文件-依旧报错" class="headerlink" title="本能的去指定头文件,依旧报错"></a>本能的去指定头文件,依旧报错</h5><pre><code>gcc -I sds.h zmalloc.h sds.c -o sds.o
-</code></pre><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h6 id="google后得知，是动态链接库没指定好"><a href="#google后得知，是动态链接库没指定好" class="headerlink" title="google后得知，是动态链接库没指定好"></a>google后得知，是动态链接库没指定好</h6><h6 id="首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"><a href="#首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果" class="headerlink" title="首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"></a>首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果</h6><h6 id="编译动态链接库"><a href="#编译动态链接库" class="headerlink" title="编译动态链接库"></a>编译动态链接库</h6><pre><code>gcc zmalloc.c -fPIC -shared -o libzmalloc.so
-命名的格式需要注意一下，lib+文件名+&apos;.so&apos;
-</code></pre><h6 id="指定动态链接库，编译sds-c"><a href="#指定动态链接库，编译sds-c" class="headerlink" title="指定动态链接库，编译sds.c"></a>指定动态链接库，编译sds.c</h6><pre><code>gcc sds.c -L. -l zmalloc -o sds.o
--L：添加库文件的搜索路径
--l：指定需要链接的库，该名字就是lib***.so中的名称
-</code></pre><h6 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h6><pre><code>./sds.o
-</code></pre><h6 id="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！"><a href="#非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！" class="headerlink" title="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！"></a>非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！</h6><p><img src="/img/redis/sds_gcc_succ.png" alt="Alt text" title="写出代码"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[一个产品的诞生]]></title>
-    <link href="http://www.cxyteam.com/2017/04/26/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E8%AF%9E%E7%94%9F/"/>
-    <id>http://www.cxyteam.com/2017/04/26/一个产品的诞生/</id>
-    <published>2017-04-26T09:11:55.000Z</published>
-    <updated>2017-04-27T04:01:57.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><h5 id="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"><a href="#此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码" class="headerlink" title="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"></a>此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码</h5><p><img src="/img/zfeasyloan/jieduan.png" alt="Alt text" title="历经阶段"></p>
-<h1 id="项目起源"><a href="#项目起源" class="headerlink" title="项目起源"></a>项目起源</h1><h5 id="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"><a href="#在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知" class="headerlink" title="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"></a>在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知</h5><h1 id="找出痛点"><a href="#找出痛点" class="headerlink" title="找出痛点"></a>找出痛点</h1><h5 id="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："><a href="#这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：" class="headerlink" title="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："></a>这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：</h5><p><img src="/img/zfeasyloan/tongdian.png" alt="Alt text" title="找出痛点的阶段"></p>
-<h3 id="贴近用户"><a href="#贴近用户" class="headerlink" title="贴近用户"></a>贴近用户</h3><ol>
-<li><p>向前线索要情报</p>
-<ul>
-<li>夜一提供助贷流程图</li>
-<li>索隆提供培训资料<br><img src="/img/zfeasyloan/process1.png" alt="Alt text" title="助贷流程">    </li>
-</ul>
-</li>
-<li><p>参与战斗</p>
-<ul>
-<li>跟商务线下跑触点，谈合作</li>
-<li>和运营去和用户面聊，参与整个跟单（由于调研期间没有订单，所以更多的是询问有跟单经验的小伙伴）</li>
-</ul>
-</li>
-</ol>
-<h3 id="访谈用户"><a href="#访谈用户" class="headerlink" title="访谈用户"></a>访谈用户</h3><ol>
-<li><p>制作MRD</p>
-<ul>
-<li>进行市场调研，参加商务的早晚效率（由于团队成员中阿葵亚对运营很了解，所以重心点放在商务）</li>
-<li>驻扎前线，反馈信息（阿葵亚驻扎深圳战场），最终出具MRD文档，用户画像，行业报告<br><img src="/img/zfeasyloan/youli.png" alt="Alt text" title="MRD文档要点-尤里，空波提供">   </li>
-</ul>
-</li>
-<li><p>准备调查问卷</p>
-<ul>
-<li>获取到的信息的疑惑点，想要了解的信息以问卷的方式进行调查（这一步最终没做）</li>
-<li>问题需要具备非开放式，尽量设置成是或者否的方式</li>
-<li>问问题方式不具备引导性</li>
-</ul>
-</li>
-<li><p>进行竞品分析</p>
-<ul>
-<li>快鸽</li>
-<li>按揭帮</li>
-<li>数据项，数据名称，数据排版的理由</li>
-<li>理解对方的业务流程</li>
-<li>思考为什么会有这个功能点</li>
-<li>服务的对象，产品的定位</li>
-</ul>
-</li>
-</ol>
-<h3 id="成为用户"><a href="#成为用户" class="headerlink" title="成为用户"></a>成为用户</h3><ol>
-<li>把自己当做自己的用户实际的去思考，我在工作的时候什么状态是不满的</li>
-<li>以下是我在当时状态下了解到各个角色的工作内容以后，把自己当做该角色提出的疑惑点<br><img src="/img/zfeasyloan/shangwu.png" alt="Alt text" title="我是商务"><br><img src="/img/zfeasyloan/chudian.png" alt="Alt text" title="我是触点"><br><img src="/img/zfeasyloan/yunying.png" alt="Alt text" title="我是运营"> </li>
-</ol>
-<h3 id="这一阶段的产出，了解到需要解决的痛点"><a href="#这一阶段的产出，了解到需要解决的痛点" class="headerlink" title="这一阶段的产出，了解到需要解决的痛点"></a>这一阶段的产出，了解到需要解决的痛点</h3><ol>
-<li>内部：商务和运营同步信息</li>
-<li>外部：用户和触点及时看到信息</li>
-</ol>
-<h1 id="缕清需求"><a href="#缕清需求" class="headerlink" title="缕清需求"></a>缕清需求</h1><h5 id="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："><a href="#在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：" class="headerlink" title="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："></a>在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：</h5><p><img src="/img/zfeasyloan/xuqiu.png" alt="Alt text" title="缕清阶段"></p>
-<h3 id="制定use-case"><a href="#制定use-case" class="headerlink" title="制定use case"></a>制定use case</h3><ol>
-<li>找出报单到最后反润中的整个流程的场景，分离出来</li>
-</ol>
-<ul>
-<li>反思：在这个过程，没有进行场景划分，导致我把很多调研的小块小块的需求堆积在一起，没有主次之分，也没办法串联各个小块的需求<br>初期我的原型图是这样的(看目录就能看出来很乱)：<br><img src="/img/zfeasyloan/chuqi.png" alt="Alt text" title="混乱的原型"></li>
-</ul>
-<ol>
-<li>按实际的use case为路径，串联参与的角色需要做的事，梳理出整个系统应具备的功能</li>
-</ol>
-<ul>
-<li>反思：在这个过程中，我是按照各个角色去梳理他们需要参与的事情，导致会缺少部分功能</li>
-</ul>
-<ol>
-<li>永远只给用户一种方案做一件事情，当你自己都拿不准方案的时候，用户一定比你更懵</li>
-</ol>
-<ul>
-<li>反思：在触点注册的时候，由于对需求的把握不准，提供了两种方案：一种是商务注册，一种是触点注册</li>
-</ul>
-<h3 id="美化PRD"><a href="#美化PRD" class="headerlink" title="美化PRD"></a>美化PRD</h3><ol>
-<li>如何使用Axure（找无所不能的产品经理教你吧，或许下次会有简单的教程）</li>
-<li>判断整个保留下来的use case是否保证闭环了，比如说你有商务在进行操作，但是商务的角色在哪产生都没去想，这就是明显的错误了</li>
-<li>按照use case画出各个参与方的整体流程图</li>
-</ol>
-<ul>
-<li>反思：在做这个的时候，我是直接在各个页面之间加了点击事件，企图模拟出整个流程，你可以想象一下，当我给大家在将我的流程的时候，我不断的在页面间切换来切换去，别人不断问你这个是谁的页面的时候的想死的心情，废话不多说，贴出整体的页面流程图：<br><img src="/img/zfeasyloan/process_all_1.png" alt="Alt text" title="整体的页面切换原型"><br><img src="/img/zfeasyloan/process_all_2.png" alt="Alt text" title="整体的流程"></li>
-</ul>
-<ol>
-<li>细化每个小页面的图</li>
-<li>参考竞品，按最优的方式展示，包括页面元素，最重要的是字段展示顺序</li>
-<li>注重小细节，用户操作习惯，比如说如果是订单显示，这个时候，用户有疑问，能否在页尾就找到负责人电话</li>
-</ol>
-<ul>
-<li>反思：对于这几个点个人建议还是交给专业的人，让我们万能的产品来做吧，毕竟这些东西不是一蹴而就的，当然如果你够强，那我也不拦你</li>
-<li>没有对比就没有伤害，看看下面两幅图<br><img src="/img/zfeasyloan/bad_face.png" alt="Alt text" title="我做的"><br><img src="/img/zfeasyloan/good_face.png" alt="Alt text" title="不知道谁做的"></li>
-</ul>
-<h3 id="出UI图"><a href="#出UI图" class="headerlink" title="出UI图"></a>出UI图</h3><ol>
-<li>可以提前做一些颜色基调的设计，基础元素的设计，比如按钮，导航等</li>
-<li>有类似logo之类的设计，可以并行做</li>
-<li>尽快把PRD敲定</li>
-</ol>
-<ul>
-<li>反思：由于对设计师工作的不太了解，没能提前的让设计参与进来，尤其是logo图，到了临了才发现原来还有logo没做</li>
-</ul>
-<h1 id="写出代码"><a href="#写出代码" class="headerlink" title="写出代码"></a>写出代码</h1><h5 id="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："><a href="#作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：" class="headerlink" title="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："></a>作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：</h5><p><img src="/img/zfeasyloan/code.png" alt="Alt text" title="写出代码"></p>
-<h3 id="做出计划"><a href="#做出计划" class="headerlink" title="做出计划"></a>做出计划</h3><ol>
-<li>按照倒推的方式进行时间规划（deadline摆在那）</li>
-</ol>
-<ul>
-<li>从后往前推，上线需要多长时间部署，测试需要多长时间，联调需要多长时间，那么剩下的就是开发时间了，不够？那就从别的地方挤时间吧</li>
-</ul>
-<ol>
-<li>划分出所有能够并行的任务</li>
-</ol>
-<ul>
-<li>比如微信公众号认证，模板消息申请，域名，线上环境部署，前后端分离开发…</li>
-</ul>
-<ol>
-<li>制定好时间节点后，同步让大家知道，留下邮件</li>
-</ol>
-<ul>
-<li>定好没个时间节点应出的东西，然后小组达成一致，最后再邮件通知大家</li>
-<li>反思：在这个过程中，定好了时间节点，在实施的时候，有的东西未能到位，比如说：10号截止需求的变更，理论上是需要在10号的时候，所有的东西都定下来，然后再12号才拿到设计好的ui图；最终没能邮件通知到大家，只是过了一个会，这个相当于是一个承诺式的工作方式，过会后，需要把结论发送邮件给大家，避免大家忘记各个时间节点或者有部分突然的变更</li>
-</ul>
-<ol>
-<li>反馈进度</li>
-</ol>
-<ul>
-<li>这个当然不用说，实时的反馈进度，让整个小组，关心这个项目的人员清楚，现在我们在哪一个阶段，需要什么帮助，有什么风险点</li>
-<li>反思：在这个阶段是做的最不好的，项目进入开发的时候，就相当于进入黑盒了，知道最后上完线，大家才恍然大悟，原来上线了；给自己找几个小借口，项目时间太紧了，可能反馈进度，需要花费时间，所以偷懒了；其次，项目功能不太多，没法进行阶段性反馈（其实都是借口，哪怕花一分钟的时间，大概说下做完哪些了，大家心里也有数）</li>
-</ul>
-<h3 id="并行开发"><a href="#并行开发" class="headerlink" title="并行开发"></a>并行开发</h3><ol>
-<li>并行并不是说各自开发各自的，到联调的时候再进行沟通，需要时刻保持沟通</li>
-</ol>
-<ul>
-<li>比如说在开发的时候，遇到多种角色如何传递角色id的情况，页面判断如何做，及时的沟通，达到一致后，再开始干活</li>
-<li>这块做的其实还不错，鼓励下自己，可能是前端是合作的老伙伴了，得心应手</li>
-</ul>
-<ol>
-<li>规范好接口，写好接口文档，能够减少很多沟通成本</li>
-</ol>
-<ul>
-<li>接口做好规范，命名，数据返回格式（看着设计图来，尽量把格式都转换好），避免前端关键字，比如分页时候的length，返回的时候读返回json数组，一会对象一会数组，还是很容易抓狂的，该get就get该post就post（get，post区别不知道？google去吧）</li>
-<li>必要的接口文档，至少得说明：接口地址是什么，上送值是什么，返回数据的含义</li>
-<li>这块也做的不错，接口文档，返回数据格式各方面能想到的还是去做好了，虽然最后接口字段可能不断地在变，这也不可避免</li>
-</ul>
-<h3 id="测试上线"><a href="#测试上线" class="headerlink" title="测试上线"></a>测试上线</h3><ol>
-<li>执行use case</li>
-</ol>
-<ul>
-<li>这个比较简单，直接按照PRD走正常流程就行，一般都没问题，开发就是按照这个流程做的</li>
-</ul>
-<ol>
-<li>执行异常逻辑</li>
-</ol>
-<ul>
-<li>特殊的场景，比如注册了，没完善信息报单会如何，注册了，商务未登录过消息怎么发送</li>
-<li>这块没有去专门的列所有的场景然后进行测试，而是发动了群众的力量进行测试（测试完之后内心还是忐忑的）</li>
-</ul>
-<h1 id="最初的计划"><a href="#最初的计划" class="headerlink" title="最初的计划"></a>最初的计划</h1><h3 id="最后晒一个设想的开发计划，自己感受下"><a href="#最后晒一个设想的开发计划，自己感受下" class="headerlink" title="最后晒一个设想的开发计划，自己感受下"></a>最后晒一个设想的开发计划，自己感受下</h3><h6 id="友情提示，记得和第一张图对比着看，理想和现实的差距"><a href="#友情提示，记得和第一张图对比着看，理想和现实的差距" class="headerlink" title="友情提示，记得和第一张图对比着看，理想和现实的差距"></a>友情提示，记得和第一张图对比着看，理想和现实的差距</h6><p><img src="/img/zfeasyloan/plan.png" alt="Alt text" title="初期计划"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><h5 id="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go命令]]></title>
-    <link href="http://www.cxyteam.com/2017/04/18/go%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.cxyteam.com/2017/04/18/go命令/</id>
-    <published>2017-04-17T16:45:19.000Z</published>
-    <updated>2017-04-17T16:45:19.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go项目的运行]]></title>
-    <link href="http://www.cxyteam.com/2017/04/18/go%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%BF%90%E8%A1%8C/"/>
-    <id>http://www.cxyteam.com/2017/04/18/go项目的运行/</id>
-    <published>2017-04-17T16:40:15.000Z</published>
-    <updated>2017-04-17T16:40:15.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis安全]]></title>
-    <link href="http://www.cxyteam.com/2017/04/16/redis%E5%AE%89%E5%85%A8/"/>
-    <id>http://www.cxyteam.com/2017/04/16/redis安全/</id>
-    <published>2017-04-16T11:27:37.000Z</published>
-    <updated>2017-04-17T12:00:48.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h6 id="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"><a href="#场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的" class="headerlink" title="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"></a>场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的</h6><h6 id="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"><a href="#场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决" class="headerlink" title="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"></a>场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决</h6><pre><code>1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
-2，应用部署在多台机器上，使用负载均衡进行访问，redis部署在独立的机器上
-</code></pre><h6 id="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><a href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题" class="headerlink" title="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"></a>这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</h6><h6 id="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><a href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接" class="headerlink" title="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"></a>举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</h6><h3 id="解决办法（设置redis密码）"><a href="#解决办法（设置redis密码）" class="headerlink" title="解决办法（设置redis密码）"></a>解决办法（设置redis密码）</h3><h6 id="打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><a href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行" class="headerlink" title="打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行"></a>打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</h6><p><img src="/img/redis-pwd/redis-net-work.png" alt="Alt text" title="打开redis公网访问"></p>
-<h6 id="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><a href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码" class="headerlink" title="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"></a>设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</h6><p><img src="/img/redis-pwd/redis-pwd.png" alt="Alt text" title="设置redis访问密码"></p>
-<h6 id="使用auth进行连接，使用auth进行连接，redis提供了auth接口"><a href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口" class="headerlink" title="使用auth进行连接，使用auth进行连接，redis提供了auth接口"></a>使用auth进行连接，使用auth进行连接，redis提供了auth接口</h6><p><img src="/img/redis-pwd/auth.png" alt="Alt text" title="auth连接"></p>
-<h3 id="延伸两点"><a href="#延伸两点" class="headerlink" title="延伸两点"></a>延伸两点</h3><h6 id="危险命令重命名"><a href="#危险命令重命名" class="headerlink" title="危险命令重命名"></a>危险命令重命名</h6><pre><code>编辑配置文件，添加如下行：
-    rename-command FLUSHALL &quot;&quot;
-</code></pre><h6 id="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"><a href="#使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）" class="headerlink" title="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"></a>使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h6 id="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[微信开发配置]]></title>
-    <link href="http://www.cxyteam.com/2017/04/06/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"/>
-    <id>http://www.cxyteam.com/2017/04/06/微信开发配置/</id>
-    <published>2017-04-06T08:29:56.000Z</published>
-    <updated>2017-04-14T03:11:49.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="公众号设置"><a href="#公众号设置" class="headerlink" title="公众号设置"></a>公众号设置</h1><h3 id="配置业务域名（公众号设置-gt-功能设置）"><a href="#配置业务域名（公众号设置-gt-功能设置）" class="headerlink" title="配置业务域名（公众号设置-&gt;功能设置）"></a>配置业务域名（公众号设置-&gt;功能设置）</h3><h6 id=""><a href="#" class="headerlink" title=""></a><img src="/img/wechat/domain.png" alt="Alt text" title="配置业务域名"></h6><h6 id="注意不需要输入http或者https"><a href="#注意不需要输入http或者https" class="headerlink" title="注意不需要输入http或者https"></a>注意不需要输入http或者https</h6><h6 id="如果是二级域名，需要一起填入"><a href="#如果是二级域名，需要一起填入" class="headerlink" title="如果是二级域名，需要一起填入"></a>如果是二级域名，需要一起填入</h6><h3 id="js接口安全域名，网页授权域名同理"><a href="#js接口安全域名，网页授权域名同理" class="headerlink" title="js接口安全域名，网页授权域名同理"></a>js接口安全域名，网页授权域名同理</h3><h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><h3 id="同意成为开发者"><a href="#同意成为开发者" class="headerlink" title="同意成为开发者"></a>同意成为开发者</h3><p><img src="/img/wechat/dev.png" alt="Alt text" title="成为开发者"></p>
-<h3 id="生成appsecret"><a href="#生成appsecret" class="headerlink" title="生成appsecret"></a>生成appsecret</h3><p><img src="/img/wechat/appsecret.png" alt="Alt text" title="生成appsecret"></p>
-<h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><p><img src="/img/wechat/config.png" alt="Alt text" title="服务器配置"></p>
-<h6 id="需要注意的是url需要输入http-https-在域名的最后需要添加’-‘"><a href="#需要注意的是url需要输入http-https-在域名的最后需要添加’-‘" class="headerlink" title="需要注意的是url需要输入http/https 在域名的最后需要添加’/‘"></a>需要注意的是url需要输入http/https 在域名的最后需要添加’/‘</h6><p><img src="/img/wechat/dev_conf.png" alt="Alt text" title="服务器配置样例"></p>
-<h3 id="token验证失败"><a href="#token验证失败" class="headerlink" title="token验证失败"></a>token验证失败</h3><h5 id="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"><a href="#验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）" class="headerlink" title="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"></a>验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）</h5><h6 id="首先去nginx中抓取请求"><a href="#首先去nginx中抓取请求" class="headerlink" title="首先去nginx中抓取请求"></a>首先去nginx中抓取请求</h6><h6 id="自己再本地测试看解密代码是否正常执行"><a href="#自己再本地测试看解密代码是否正常执行" class="headerlink" title="自己再本地测试看解密代码是否正常执行"></a>自己再本地测试看解密代码是否正常执行</h6><p><img src="/img/wechat/request.png" alt="Alt text" title="微信请求信息"></p>
-<h5 id="确认公众号信息全部完善"><a href="#确认公众号信息全部完善" class="headerlink" title="确认公众号信息全部完善"></a>确认公众号信息全部完善</h5><p><img src="/img/wechat/info.png" alt="Alt text" title="完善信息"></p>
-<h6 id="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"><a href="#最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业" class="headerlink" title="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"></a>最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业</h6><h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h3 id="获取access-token，jsapi-ticket"><a href="#获取access-token，jsapi-ticket" class="headerlink" title="获取access_token，jsapi_ticket"></a>获取access_token，jsapi_ticket</h3><h6 id="建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取"><a href="#建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取" class="headerlink" title="建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取"></a>建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取</h6><h1 id="redirect-uri参数错误"><a href="#redirect-uri参数错误" class="headerlink" title="redirect_uri参数错误"></a>redirect_uri参数错误</h1><h6 id="首先可能是你的appid等参数不正确，这个先排除"><a href="#首先可能是你的appid等参数不正确，这个先排除" class="headerlink" title="首先可能是你的appid等参数不正确，这个先排除"></a>首先可能是你的appid等参数不正确，这个先排除</h6><h6 id="其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"><a href="#其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的" class="headerlink" title="其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"></a>其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的</h6><h1 id="access-denied的坑"><a href="#access-denied的坑" class="headerlink" title="access denied的坑"></a>access denied的坑</h1><h6 id="在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"><a href="#在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限" class="headerlink" title="在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"></a>在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限</h6><pre><code>location = /MP_verify_Rj9V6BBuQjlS0myN.txt {
-        allow all;
-}
-</code></pre><h1 id="其余开发详情，后续再写"><a href="#其余开发详情，后续再写" class="headerlink" title="其余开发详情，后续再写"></a>其余开发详情，后续再写</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="公众号设置"><a href="#公众号设置" class="headerlink" title="公众号设置"></a>公众号设置</h1><h3 id="配置业务域名（公众号设置-gt-功能设置）"><a href="#配置业务域名（公众号设置-gt-功能设置]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go学习笔记并发-channel]]></title>
-    <link href="http://www.cxyteam.com/2017/03/08/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B9%B6%E5%8F%91-channel/"/>
-    <id>http://www.cxyteam.com/2017/03/08/go学习笔记并发-channel/</id>
-    <published>2017-03-08T12:43:15.000Z</published>
-    <updated>2017-03-12T08:46:56.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"><a href="#引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒" class="headerlink" title="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"></a>引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    data := make(chan int)      //数据交换队列
-    exit := make(chan bool)     //退出通知
-
-    go func() {
-        for d := range data {   //从队列迭代接收数据，直到close
-            fmt.Println(d)
-        }
-
-        fmt.Println(&quot;recv over.&quot;)
-        exit &lt;- true            //发送退出通知
-    }()
-
-    data &lt;- 1                   //发送数据
-    data &lt;- 2
-    data &lt;- 3
-    close(data)                 //关闭队列
-
-    fmt.Println(&quot;send over.&quot;)
-    &lt;-exit                      //等待退出通知
-}
-</code></pre><h6 id="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"><a href="#异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞" class="headerlink" title="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"></a>异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    data := make(chan int, 3)
-    exit := make(chan bool)
-    data &lt;- 1
-    data &lt;- 2
-    data &lt;- 3
-    go func() {
-        for d := range data {
-            fmt.Println(d)
-        }
-
-        exit &lt;- true
-    }()
-
-    data &lt;- 4
-    data &lt;- 5
-    close(data)
-
-    &lt;- exit
-}
-</code></pre><h6 id="可以将channel隐士转换为单向队列，只收或只发"><a href="#可以将channel隐士转换为单向队列，只收或只发" class="headerlink" title="可以将channel隐士转换为单向队列，只收或只发"></a>可以将channel隐士转换为单向队列，只收或只发</h6><pre><code>package main
-
-import (
-)
-
-func main() {
-    c := make(chan int, 3)
-    var send chan &lt;- int = c
-    var recv &lt;- chan int = c
-    send &lt;- 1
-    //&lt;- send           //receive from send-only type chan&lt;- int
-    //recv &lt;- 2         //send to receive-only type &lt;-chan int
-    &lt;- recv
-}
-</code></pre><h6 id="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case"><a href="#如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case" class="headerlink" title="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case"></a>如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
     
   </entry>
   

@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/12/nginx简介/" itemprop="url">
-                  nginx简介
+                <a class="post-title-link" href="/2016/07/14/C语言函数学习/" itemprop="url">
+                  C语言函数学习
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T23:44:31+08:00" content="2016-06-12">
-              2016-06-12
+            <time itemprop="dateCreated" datetime="2016-07-14T20:57:20+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -265,20 +265,16 @@
       
         
           
-          nginx功能1.提供web服务
-2.负载均衡
-3.静态资源缓存
-nginx优点1.高并发
-2.占用资源少
-3.功能种类较多,但每个功能都不是很强
-4.支持epoll模型,使得nginx支持高并发
-5.利用nginx对ip限速,可以限制连接数
-6.简单配置,更灵活
-应用场景静态服务器(图片,视频服务
+          puts将内容输入到终端
+例子:
+    puts(&quot;将内容输入到终端&quot;)
+printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表示整型)
+例子:
+    printf(&quot;%s说需要%i字节&quot;, &quot;小张&quot;, &quot;10
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/nginx简介/#more" rel="contents">
+            <a class="btn" href="/2016/07/14/C语言函数学习/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -321,8 +317,8 @@ nginx优点1.高并发
             
               
                 
-                <a class="post-title-link" href="/2016/06/12/流量统计单位/" itemprop="url">
-                  流量统计单位
+                <a class="post-title-link" href="/2016/07/14/C语言简单运行/" itemprop="url">
+                  C语言简单运行
                 </a>
               
             
@@ -335,8 +331,8 @@ nginx优点1.高并发
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T20:56:28+08:00" content="2016-06-12">
-              2016-06-12
+            <time itemprop="dateCreated" datetime="2016-07-14T20:39:10+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -349,8 +345,8 @@ nginx优点1.高并发
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -382,17 +378,21 @@ nginx优点1.高并发
       
         
           
-          IP(Internet Protocol)独立IP,不同IP地址的计算机访问网站的总次数
-独立IP书度量网站访问量,不是很精确,国内的上网多数都是NAT上网,一个独立IP背后可能有多个客户端访问
+          执行Hello World1.创建HelloWorld.c
 
-统计方法:
-    1.分析web服务的访问日志
-    2.在所有的页面结尾,嵌入js进行统计
-PV
+2.编写如下代码
+    /**
+      这是一段测试代码
+    */
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        puts(&quot;Hello Worl
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/流量统计单位/#more" rel="contents">
+            <a class="btn" href="/2016/07/14/C语言简单运行/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -435,8 +435,8 @@ PV
             
               
                 
-                <a class="post-title-link" href="/2016/06/10/服务对应常见端口/" itemprop="url">
-                  服务对应常见端口
+                <a class="post-title-link" href="/2016/07/12/lvs与keepalived/" itemprop="url">
+                  lvs与keepalived
                 </a>
               
             
@@ -449,8 +449,8 @@ PV
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-10T23:46:26+08:00" content="2016-06-10">
-              2016-06-10
+            <time itemprop="dateCreated" datetime="2016-07-12T01:32:55+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -496,15 +496,22 @@ PV
       
         
           
-          服务对应常见端口服务                      端口
-ftp                       21
-sftp/ssh                  22
-smtp                      25
-mysql                     33
+          集群一组相互独立的计算机,利用高速通信网络组成的一个计算机系统,每个集群节点都是运行其自己进程的一个独立服务器
+集群特点1.高性能
+2.价格有效性
+3.可伸缩性
+4.高可用性
+集群优势1.透明性
+2.高性能
+3.高可用性
+4.可伸缩性
+5.可管理性
+6.可编程性
+负载均衡提供一种廉价,有效,透明的方
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/10/服务对应常见端口/#more" rel="contents">
+            <a class="btn" href="/2016/07/12/lvs与keepalived/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -547,8 +554,8 @@ mysql                     33
             
               
                 
-                <a class="post-title-link" href="/2016/05/22/sersync/" itemprop="url">
-                  sersync
+                <a class="post-title-link" href="/2016/07/12/arp/" itemprop="url">
+                  arp
                 </a>
               
             
@@ -561,8 +568,8 @@ mysql                     33
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-22T15:57:30+08:00" content="2016-05-22">
-              2016-05-22
+            <time itemprop="dateCreated" datetime="2016-07-12T00:36:04+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -608,15 +615,15 @@ mysql                     33
       
         
           
-          sersync利用inotify和rsync技术实现对服务器数据实时同步的解决方案
-优点1.使用c++编写,对linux系统文件产生的临时文件和重复文件操作进行过滤,在结合rsync同步的时候,会减少运行时消耗本地及网络资源,因此它速度更快
-2.配置简单
-3.使用多线程同步
-4.自带出错处理机制,通
+          ARP协议(地址解析协议)使用ARP协议可实现通过IP地址获得对应主机的物理地址
+ARP缓存表每台安装有TCP/IP协议的电脑都有一个ARP缓存表,表里的IP地址和MAC地址是一一对应的
+eg:
+    查看          ARP -a
+    ping         ping 192.168
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/22/sersync/#more" rel="contents">
+            <a class="btn" href="/2016/07/12/arp/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -659,8 +666,8 @@ mysql                     33
             
               
                 
-                <a class="post-title-link" href="/2016/05/22/rsync-inotify实时备份/" itemprop="url">
-                  rsync+inotify实时备份
+                <a class="post-title-link" href="/2016/07/05/fast-cgi简单介绍及工作原理/" itemprop="url">
+                  fast-cgi简单介绍及工作原理
                 </a>
               
             
@@ -673,8 +680,8 @@ mysql                     33
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-22T13:07:39+08:00" content="2016-05-22">
-              2016-05-22
+            <time itemprop="dateCreated" datetime="2016-07-05T23:36:04+08:00" content="2016-07-05">
+              2016-07-05
             </time>
           </span>
 
@@ -687,8 +694,8 @@ mysql                     33
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -720,17 +727,13 @@ mysql                     33
       
         
           
-          Inotify强大的,细粒度的,异步的文件系统事件监控机制
-Inotify实现的软件inotify
-sersync
-lsyncd
-安装Inotify1.验证系统支持inotify
-    ls /proc/sys/fs/inotify/
-        存在三个文件:max_queued_event
+          CGI(Common Getway Interface)HTTP服务器与后端服务器或其他机器上的程序进行通信的一种工具,CGI程序必须运行在网络服务器上
+缺点:性能较差(每次HTTP服务器遇到动态程序都需要重新启动脚本解析器来执行解析,然后返回结果给HTTP服务器),安全性能也表较差
+FastCGI
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/22/rsync-inotify实时备份/#more" rel="contents">
+            <a class="btn" href="/2016/07/05/fast-cgi简单介绍及工作原理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -757,7 +760,7 @@ lsyncd
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -798,7 +801,7 @@ lsyncd
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -806,7 +809,7 @@ lsyncd
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -815,7 +818,7 @@ lsyncd
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -889,7 +892,7 @@ lsyncd
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

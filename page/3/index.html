@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/02/docker的应用场景/" itemprop="url">
-                  docker的应用场景
+                <a class="post-title-link" href="/2017/08/15/添加git语法检查钩子/" itemprop="url">
+                  添加git语法检查钩子
                 </a>
               
             
@@ -218,8 +218,118 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-02T10:31:31+08:00" content="2017-06-02">
-              2017-06-02
+            <time itemprop="dateCreated" datetime="2017-08-15T11:13:49+08:00" content="2017-08-15">
+              2017-08-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          添加pre-commit钩子vim app_code/.git/hooks/pre-commit
+备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
+添加语法检查内容my $commit_id = `git rev-parse --ver
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/15/添加git语法检查钩子/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/03/安装docker-swarm/" itemprop="url">
+                  安装docker-swarm
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-03T10:08:49+08:00" content="2017-08-03">
+              2017-08-03
             </time>
           </span>
 
@@ -265,14 +375,13 @@
       
         
           
-          优势    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
-统技术管理镜像，能极大简化环境运维过程，相对于VM，docker在其轻量、配置复杂度以及资源利用率方
-面有着明显的优势
-简化配置    虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的
+          在virtualbox安装centos7注意一定要是在centos7及以上的版本
+centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/02/docker的应用场景/#more" rel="contents">
+            <a class="btn" href="/2017/08/03/安装docker-swarm/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -315,8 +424,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/01/docker入门/" itemprop="url">
-                  docker命令
+                <a class="post-title-link" href="/2017/08/03/docker实践命令/" itemprop="url">
+                  docker实践命令
                 </a>
               
             
@@ -329,8 +438,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-01T19:24:33+08:00" content="2017-06-01">
-              2017-06-01
+            <time itemprop="dateCreated" datetime="2017-08-03T09:56:30+08:00" content="2017-08-03">
+              2017-08-03
             </time>
           </span>
 
@@ -376,15 +485,13 @@
       
         
           
-          docker安装（mac）docker查询命令docker info查看docker信息
-docker ps -a查看所有的容器，包括运行的和退出的
-docker ps查看所有的运行的容器
-docker inspect container_id/names查看容器的详细信息
-docker searc
+          查看docker容器的ipdocker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
+查看docker完整的额容器iddocker ps --no-trunc
+查看日志docker
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/01/docker入门/#more" rel="contents">
+            <a class="btn" href="/2017/08/03/docker实践命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -427,8 +534,8 @@ docker searc
             
               
                 
-                <a class="post-title-link" href="/2017/05/12/编写makefile/" itemprop="url">
-                  编写makefile
+                <a class="post-title-link" href="/2017/08/02/登录docker容器/" itemprop="url">
+                  登录docker容器
                 </a>
               
             
@@ -441,8 +548,8 @@ docker searc
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-12T09:52:04+08:00" content="2017-05-12">
-              2017-05-12
+            <time itemprop="dateCreated" datetime="2017-08-02T21:48:26+08:00" content="2017-08-02">
+              2017-08-02
             </time>
           </span>
 
@@ -455,8 +562,8 @@ docker searc
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
                   </a>
                 </span>
 
@@ -488,12 +595,15 @@ docker searc
       
         
           
-          什么是makefile用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件makefile规则target ... : prerequisites ...
- 
+          attach查看启动的容器docker ps
+注意：CONTAINER ID，NAMES这两个信息下面命令会用到
+登录容器docker attach contain_id(CONTAINER ID)
+docker attach contain_name(NAMES)
+exec查看启动的容器docke
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/12/编写makefile/#more" rel="contents">
+            <a class="btn" href="/2017/08/02/登录docker容器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -536,8 +646,8 @@ docker searc
             
               
                 
-                <a class="post-title-link" href="/2017/05/08/编译reids的sds文件/" itemprop="url">
-                  编译reids的sds文件
+                <a class="post-title-link" href="/2017/08/01/mac无法ping通docker容器/" itemprop="url">
+                  mac无法ping通docker容器
                 </a>
               
             
@@ -550,8 +660,8 @@ docker searc
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-08T20:30:02+08:00" content="2017-05-08">
-              2017-05-08
+            <time itemprop="dateCreated" datetime="2017-08-01T10:02:03+08:00" content="2017-08-01">
+              2017-08-01
             </time>
           </span>
 
@@ -564,8 +674,8 @@ docker searc
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
                   </a>
                 </span>
 
@@ -597,122 +707,16 @@ docker searc
       
         
           
-          问题在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来初试想当然的，sds.c的文件嘛，直接使用如下命令gcc sds.c -o sds.o
-结果也很想当然的报错
-本能的去指定头文件,依旧报错gcc -I sds.h zmal
+          不能ping通的原因由于Docker for mac的网络实现方式，不能够创建docker0虚拟网卡，实际上它存在于HyperKit
+由于macox的限制，不能将流量转发给容器
+
+mac不能ping通docker的原因
+
+解决办法映射端口docker run -d -p 80:80 --name w
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/08/编译reids的sds文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/26/一个产品的诞生/" itemprop="url">
-                  一个产品的诞生
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-26T17:11:55+08:00" content="2017-04-26">
-              2017-04-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          背景介绍此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码
-项目起源在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/26/一个产品的诞生/#more" rel="contents">
+            <a class="btn" href="/2017/08/01/mac无法ping通docker容器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -739,7 +743,7 @@ docker searc
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -780,7 +784,7 @@ docker searc
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -788,7 +792,7 @@ docker searc
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -797,7 +801,7 @@ docker searc
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -871,7 +875,7 @@ docker searc
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

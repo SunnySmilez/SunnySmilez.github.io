@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/21/phptrace安装与使用/" itemprop="url">
-                  phptrace安装与使用
+                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">
+                  ab压测工具的安装与使用
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-21T01:12:11+08:00" content="2015-05-21">
-              2015-05-21
+            <time itemprop="dateCreated" datetime="2015-12-17T10:03:33+08:00" content="2015-12-17">
+              2015-12-17
             </time>
           </span>
 
@@ -265,15 +265,14 @@
       
         
           
-          phptrace安装
-下载phpstrace，上传到服务器
-使用命令tar -zxf phptrace-{version}.tar.gz进行解压（phptrace-{version}.tar.gz就是你压缩包的位置）
-cd phptrace-{version}（进入解压后的文件夹）
-cd exten
+          安装yum install httpd-tools
+使用ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
+命令执行结果分析Server Software:
+Server Hostname:        hostname(*服
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/21/phptrace安装与使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/17/ab压测工具的安装与使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +315,8 @@ cd exten
             
               
                 
-                <a class="post-title-link" href="/2015/05/21/PHPUnit安装和使用/" itemprop="url">
-                  PHPUnit安装和使用
+                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">
+                  Redis集群的安装与配置
                 </a>
               
             
@@ -330,8 +329,8 @@ cd exten
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-21T00:35:37+08:00" content="2015-05-21">
-              2015-05-21
+            <time itemprop="dateCreated" datetime="2015-12-03T18:23:49+08:00" content="2015-12-03">
+              2015-12-03
             </time>
           </span>
 
@@ -344,8 +343,8 @@ cd exten
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -377,16 +376,14 @@ cd exten
       
         
           
-          PHPUnit 安装
-PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版本的匹配，也可以通过（wget https://phar.phpunit.de/phpunit.phar）直接下载
-
-通过scp直接上传文件到服务器
-
-将文件传到远程服务器(scp loc
+          Redis集群安装
+wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;(下载redis-3.0.tar.gz)
+tar zxvf redis-3.0.tar.gz(解压安装包)
+cd redis-3.0.0-beta
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/21/PHPUnit安装和使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/03/Redis集群的安装与配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -429,8 +426,8 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
             
               
                 
-                <a class="post-title-link" href="/2015/05/20/Innodb存储引擎-1-2/" itemprop="url">
-                  Innodb存储引擎-1.2
+                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">
+                  分页的思考
                 </a>
               
             
@@ -443,8 +440,237 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-20T01:32:02+08:00" content="2015-05-20">
-              2015-05-20
+            <time itemprop="dateCreated" datetime="2015-11-04T16:53:46+08:00" content="2015-11-04">
+              2015-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          需求
+交易记录条数过多，需要分页处理
+
+坑
+当进行翻页的时候会有重复的数据数据出现。
+原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/04/分页的思考/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/04/decrby的一个坑/" itemprop="url">
+                  decrby的一个坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-04T12:56:11+08:00" content="2015-11-04">
+              2015-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          需求
+随着销售的进行，理财产品的总剩余额度需要进行记录
+
+坑
+使用了redis进行落地存储，并使用decrby进行递减操作，结果数字到达一定的值以后不进行递减少了
+
+选择理由
+销售总金额的变化频繁，所以采用redis进行存储
+用decrby不用get，set依次操作的的理由是把数据的减少操作交给re
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/04/decrby的一个坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/04/float遇到的一个坑/" itemprop="url">
+                  float遇到的一个坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-04T12:50:05+08:00" content="2015-11-04">
+              2015-11-04
             </time>
           </span>
 
@@ -490,124 +716,20 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
       
         
           
-          Mysql数据库，Mysql数据库实例
-简单来说数据库是由一个个二进制文件组成的，而对这些文件进行操作就需要通过数据实例来完成
-因此说数据库是文件的集合，是依照某种数据模型组织起来的并存放于二级存储器中(指的是备份或归档来自主存储的存储服务器相连的辅助存储设备)的数据集合
-数据库实例是程序，是位于用
+          需求
+数据库需要存储金钱的数值单位为元，保留两位小数，需要选择mysql数据类型
+
+坑
+使用了float进行存储，结果导致了，内部的金额计算会有部分错误
+
+选择理由
+decimal用于存储精确的小数，支持精确计算（5.0以后），会影响列到空间消耗
+float使用4个字节存储
+浮点类型存储同样返回的值
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/20/Innodb存储引擎-1-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/19/Innodb存储引擎-1-1/" itemprop="url">
-                  Innodb存储引擎-1.1
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-19T00:58:56+08:00" content="2015-05-19">
-              2015-05-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          数据库物理操作系统文件或其他形式文件类型的集合(可能是存放在内存中的文件)。
-数据库文件
-.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/19/Innodb存储引擎-1-1/#more" rel="contents">
+            <a class="btn" href="/2015/11/04/float遇到的一个坑/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -634,7 +756,7 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -675,7 +797,7 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -683,7 +805,7 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -692,7 +814,7 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -766,7 +888,7 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

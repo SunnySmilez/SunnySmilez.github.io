@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
-                  linux系统优化
+                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">
+                  网络
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-04-28T21:48:39+08:00" content="2016-04-28">
+              2016-04-28
             </time>
           </span>
 
@@ -265,13 +265,15 @@
       
         
           
-          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
-调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
-    net.ipv4.tcp_fin_timeout=2    
+          私有IP地址A类: 10.0.0.0 - 10.255.255.255
+B类: 172.16.0.0 - 172.31.255.255
+C类: 192.168.0.0 - 192.168.255.255
+访问网站基本流程(主要解释DNS)1.输入网址(www.demo.com.)
+2.访问本地hos
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
+            <a class="btn" href="/2016/04/28/网络/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -314,8 +316,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">
-                  ssh配置修改
+                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">
+                  su命令执行流程
                 </a>
               
             
@@ -328,8 +330,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:52:57+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-04-27T22:34:53+08:00" content="2016-04-27">
+              2016-04-27
             </time>
           </span>
 
@@ -375,14 +377,17 @@
       
         
           
-          调试ssh -v vagrant@172.16.17.11
-备份cp /etc/ssh/sshd_config /etc/ssh/sshd_config
-sshd_config修改端口(端口范围:0-65535)Port 2231
-不允许root用户通过ssh登录PermitRootLogin no
+          流程1.普通用户运行sudo
+2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
+3.如果过期,需要用户输入自己的口令
+4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
+5.无权限则退出sudo
+6.有权限则执行命令并返回结果,退出sudo
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/ssh配置修改/#more" rel="contents">
+            <a class="btn" href="/2016/04/27/su命令执行流程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -425,8 +430,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
             
               
                 
-                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">
-                  替换yum源
+                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">
+                  定时任务
                 </a>
               
             
@@ -439,8 +444,8 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-09T22:07:54+08:00" content="2016-03-09">
-              2016-03-09
+            <time itemprop="dateCreated" datetime="2016-04-26T00:14:41+08:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -486,19 +491,19 @@ sshd_config修改端口(端口范围:0-65535)Port 2231
       
         
           
-          设置yum源为163的镜像原# 进入yum源目录
-    cd /etc/yum.repos.d
+          系统定时任务ls /etc | grep cron
+用户定时任务* * * * * (分时日月周)
+符号*
+    表示任意时间
+    eg: * * * * * 表示每分钟都执行
 
-# 下载国内yum源
-    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
-
-# 备份之前的yum源
- mv
-cp Cent
+-
+    a-b,表示在a到b的范围内,包括a,b
+    eg:30 1-3 * * * 表示在1点30,2点
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/替换yum源/#more" rel="contents">
+            <a class="btn" href="/2016/04/26/定时任务/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -541,8 +546,8 @@ cp Cent
             
               
                 
-                <a class="post-title-link" href="/2016/03/08/linux系统设备只是介绍/" itemprop="url">
-                  linux系统设备只是介绍
+                <a class="post-title-link" href="/2016/04/24/关机-重启-注销/" itemprop="url">
+                  关机-重启-注销
                 </a>
               
             
@@ -555,8 +560,8 @@ cp Cent
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-08T21:15:36+08:00" content="2016-03-08">
-              2016-03-08
+            <time itemprop="dateCreated" datetime="2016-04-24T15:02:19+08:00" content="2016-04-24">
+              2016-04-24
             </time>
           </span>
 
@@ -602,14 +607,21 @@ cp Cent
       
         
           
-          磁盘分区# 磁盘在使用前先要进行分区
-# 磁盘主要分为:主分区,拓展分区,逻辑分区
-# 一块硬盘最多可有4个主分区,其中一个主分区的位置可以用一个拓展分区代替,且一块硬盘只能有一个扩展分区3p+e(primary+ext)
-# 扩展分区不能用,必须在扩展分区上划分多个逻辑分区,然后格式化(创建文件系
+          
+关机  shutdown -h now 立刻关机
+  shutdown -h +1 1分钟以后关机
+  init 0
+  halt 立即停止系统,需要人工关闭电源
+  halt -p
+  poweroff 立即停止系统,并且关闭电源
+
+重启  reboot
+  shutdown -r now
+  
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/08/linux系统设备只是介绍/#more" rel="contents">
+            <a class="btn" href="/2016/04/24/关机-重启-注销/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -652,8 +664,8 @@ cp Cent
             
               
                 
-                <a class="post-title-link" href="/2016/03/04/linux常用命令/" itemprop="url">
-                  linux常用命令
+                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">
+                  linux运行级别
                 </a>
               
             
@@ -666,8 +678,8 @@ cp Cent
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-04T21:59:50+08:00" content="2016-03-04">
-              2016-03-04
+            <time itemprop="dateCreated" datetime="2016-04-24T12:45:52+08:00" content="2016-04-24">
+              2016-04-24
             </time>
           </span>
 
@@ -714,15 +726,22 @@ cp Cent
         
           
           
-mkdir  创建命令,mkdir -p(递归创建命令)
+linux运行级别的含义
+0: 关机模式
+1: 单用户模式(破解root密码)
+2: 无网络支持的多用户模式
+3: 有网络支持的多用户模式
+4: 保留,未使用
+5: 有网络支持的X-Window支持的多用户模式
+6: 重启
 
-ls  -l(long),-d(directory)显示目录或文件,ls -F添加不同的符号, 在目录后面添加斜线,-d显示目录,-p添加斜线,
 
-cd  切换目录层次(change  directiry),cd -(回到上一级目录), 
-          ...
+
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/04/linux常用命令/#more" rel="contents">
+            <a class="btn" href="/2016/04/24/linux运行级别/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +768,7 @@ cd  切换目录层次(change  directiry),cd -(回到上一级目录),
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -790,7 +809,7 @@ cd  切换目录层次(change  directiry),cd -(回到上一级目录),
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -798,7 +817,7 @@ cd  切换目录层次(change  directiry),cd -(回到上一级目录),
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -807,7 +826,7 @@ cd  切换目录层次(change  directiry),cd -(回到上一级目录),
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -881,7 +900,7 @@ cd  切换目录层次(change  directiry),cd -(回到上一级目录),
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

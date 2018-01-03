@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记面向对象/" itemprop="url">
-                  go学习笔记面向对象
+                <a class="post-title-link" href="/2017/04/18/go项目的运行/" itemprop="url">
+                  go项目的运行
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-28T20:13:38+08:00" content="2017-02-28">
-              2017-02-28
+            <time itemprop="dateCreated" datetime="2017-04-18T00:40:15+08:00" content="2017-04-18">
+              2017-04-18
             </time>
           </span>
 
@@ -265,22 +265,11 @@
       
         
           
-          定义面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id int
-    name string
-}
-
-
-type Manager struct {
-  
-          ...
+          
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记面向对象/#more" rel="contents">
+            <a class="btn" href="/2017/04/18/go项目的运行/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -323,8 +312,8 @@ type Manager struct {
             
               
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">
-                  go学习笔记struct
+                <a class="post-title-link" href="/2017/04/16/redis安全/" itemprop="url">
+                  redis安全
                 </a>
               
             
@@ -337,8 +326,8 @@ type Manager struct {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-28T17:07:11+08:00" content="2017-02-28">
-              2017-02-28
+            <time itemprop="dateCreated" datetime="2017-04-16T19:27:37+08:00" content="2017-04-16">
+              2017-04-16
             </time>
           </span>
 
@@ -351,8 +340,8 @@ type Manager struct {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -384,18 +373,12 @@ type Manager struct {
       
         
           
-          定义值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员package main
-
-import &quot;fmt&quot;
-
-type Node struct {
-    _       int
-    id      int
-    data    *byte
+          应用场景场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
+2，应
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记struct/#more" rel="contents">
+            <a class="btn" href="/2017/04/16/redis安全/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -438,8 +421,8 @@ type Node struct {
             
               
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">
-                  go学习笔记map
+                <a class="post-title-link" href="/2017/04/06/微信开发配置/" itemprop="url">
+                  微信开发配置
                 </a>
               
             
@@ -452,8 +435,8 @@ type Node struct {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-28T16:20:07+08:00" content="2017-02-28">
-              2017-02-28
+            <time itemprop="dateCreated" datetime="2017-04-06T16:29:56+08:00" content="2017-04-06">
+              2017-04-06
             </time>
           </span>
 
@@ -466,8 +449,8 @@ type Node struct {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -499,18 +482,15 @@ type Node struct {
       
         
           
-          定义引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制package main
-
-import &quot;fmt&quot;
-
-func main() {
-    m := map[int]struct{
-        name string
-        age int
+          公众号设置配置业务域名（公众号设置-&gt;功能设置）注意不需要输入http或者https如果是二级域名，需要一起填入js接口安全域名，网页授权域名同理基本配置同意成为开发者
+生成appsecret
+服务器配置
+需要注意的是url需要输入http/https 在域名的最后需要添加’/‘
+token验
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记map/#more" rel="contents">
+            <a class="btn" href="/2017/04/06/微信开发配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -553,8 +533,8 @@ func main() {
             
               
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记copy/" itemprop="url">
-                  go学习笔记copy
+                <a class="post-title-link" href="/2017/03/08/go学习笔记并发-channel/" itemprop="url">
+                  go学习笔记并发-channel
                 </a>
               
             
@@ -567,8 +547,8 @@ func main() {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-28T16:09:06+08:00" content="2017-02-28">
-              2017-02-28
+            <time itemprop="dateCreated" datetime="2017-03-08T20:43:15+08:00" content="2017-03-08">
+              2017-03-08
             </time>
           </span>
 
@@ -614,16 +594,17 @@ func main() {
       
         
           
-          定义函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠package main
+          定义引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒package main
 
-import &quot;fmt&quot;
+import (
+    &quot;fmt&quot;
+)
 
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 
+func main()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记copy/#more" rel="contents">
+            <a class="btn" href="/2017/03/08/go学习笔记并发-channel/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -666,8 +647,8 @@ func main() {
             
               
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记append/" itemprop="url">
-                  go学习笔记append
+                <a class="post-title-link" href="/2017/03/03/go学习笔记并发/" itemprop="url">
+                  go学习笔记并发
                 </a>
               
             
@@ -680,8 +661,8 @@ func main() {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-28T15:38:23+08:00" content="2017-02-28">
-              2017-02-28
+            <time itemprop="dateCreated" datetime="2017-03-03T18:47:39+08:00" content="2017-03-03">
+              2017-03-03
             </time>
           </span>
 
@@ -727,17 +708,19 @@ func main() {
       
         
           
-          append向slice尾部添加数据，返回新的slice对象package main
+          定义只需在函数调用语句前添加go关键字，就可创建并发执行单元package main
 
-import &quot;fmt&quot;
+import (
+    &quot;fmt&quot;
+    &quot;runtime&quot;
+)
 
-func main() {
-    s := make([]int, 0, 5)
-    fmt.Printf(&quot;%p\n&quot;, &amp;s) 
+func say(s string) {
+    for i := 0; i &lt; 3; i++
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记append/#more" rel="contents">
+            <a class="btn" href="/2017/03/03/go学习笔记并发/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -764,7 +747,7 @@ func main() {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -805,7 +788,7 @@ func main() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -813,7 +796,7 @@ func main() {
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -822,7 +805,7 @@ func main() {
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -896,7 +879,7 @@ func main() {
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

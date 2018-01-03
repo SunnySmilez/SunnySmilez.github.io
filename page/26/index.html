@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">
-                  sed的使用
+                <a class="post-title-link" href="/2016/01/10/shell预定义变量及标准变量/" itemprop="url">
+                  shell预定义变量及标准变量
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:41:56+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-01-10T16:14:12+08:00" content="2016-01-10">
+              2016-01-10
             </time>
           </span>
 
@@ -265,14 +265,20 @@
       
         
           
-          sed使用场景1.获取指定行数
-sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
-sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
-sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
+          export,readonly
+export 用于修改或打印环境变量
+
+export name[=word] 修改环境变量 export PATH=$PATH:/home/bin
+export -p 打印出环境变量的名称与值
+
+
+readonly 使变量不能修改
+
+readonly name[=wo
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/10/shell预定义变量及标准变量/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -315,8 +321,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">
-                  shell常识
+                <a class="post-title-link" href="/2016/01/05/2015年个人总结/" itemprop="url">
+                  2015年个人总结
                 </a>
               
             
@@ -329,8 +335,127 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T09:53:00+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-01-05T20:37:22+08:00" content="2016-01-05">
+              2016-01-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          阅读
+选书：
+
+先选择大概一个学习的方向，比如说mysql，redis，linux等
+再选择典型性的书籍（每个方面都会有几本特别经典的书籍）
+
+
+阅读：
+
+先查阅目录，思考为什么会是这些章节，这个技术大概涵盖哪些内容
+再选择阅读的章节，思考作者写作思路，为什么先写这块知识，再写这块，有什么必然联系
+
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/05/2015年个人总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/29/wc的使用/" itemprop="url">
+                  wc的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-29T10:05:34+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -376,17 +501,12 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
       
         
           
-          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
+          ###
 
-环境
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/wc的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -429,8 +549,8 @@ echo $PATH（查看环境变量）
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">
-                  获取终端输出
+                <a class="post-title-link" href="/2015/12/29/fmt的使用/" itemprop="url">
+                  fmt的使用
                 </a>
               
             
@@ -443,8 +563,8 @@ echo $PATH（查看环境变量）
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T00:04:53+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2015-12-29T10:05:16+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -490,16 +610,12 @@ echo $PATH（查看环境变量）
       
         
           
-          获取终端输出两种方式
-方法一：  who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）
+          ###
 
-方法二：  cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/获取终端输出/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/fmt的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -542,8 +658,8 @@ echo $PATH（查看环境变量）
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/性能分析命令/" itemprop="url">
-                  性能分析命令
+                <a class="post-title-link" href="/2015/12/29/uniq的使用/" itemprop="url">
+                  uniq的使用
                 </a>
               
             
@@ -556,8 +672,8 @@ echo $PATH（查看环境变量）
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T10:35:45+08:00" content="2015-12-20">
-              2015-12-20
+            <time itemprop="dateCreated" datetime="2015-12-29T09:41:50+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -603,128 +719,17 @@ echo $PATH（查看环境变量）
       
         
           
-          环境准备
-首先你得拥有一个linux环境
-安装sysstat包 yum install sysstat
-安装procps包 yum install procps
+          uniq的使用场景uniq的参数说明用法：uniq [选项]... [文件]
+从输入文件或者标准输入中筛选相邻的匹配行并写入到输出文件或标准输出。
 
-需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  l
+不附加任何选项时匹配行将在首次出现处被合并。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+  -c, --count        在每行前加
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/性能分析命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/18/服务器如何设置的cookie/" itemprop="url">
-                  服务器如何设置的cookie
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-18T15:05:40+08:00" content="2015-12-18">
-              2015-12-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一个joke&lt;?php
-    setcookie(&apos;key&apos;, &apos;value&apos;, time()+1000, &apos;/&apos;, &apos;hostname&apos;);
-    var_dump($_COOKIE);
-
-为什么不能打印出c
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/18/服务器如何设置的cookie/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/uniq的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -751,7 +756,7 @@ echo $PATH（查看环境变量）
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -792,7 +797,7 @@ echo $PATH（查看环境变量）
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -800,7 +805,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -809,7 +814,7 @@ echo $PATH（查看环境变量）
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -883,7 +888,7 @@ echo $PATH（查看环境变量）
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

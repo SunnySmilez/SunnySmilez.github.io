@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/08/15/git钩子介绍/" itemprop="url">
-                  git钩子介绍
+                <a class="post-title-link" href="/2018/01/03/redis-sds源码阅读/" itemprop="url">
+                  redis-sds源码阅读
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-15T12:03:38+08:00" content="2017-08-15">
-              2017-08-15
+            <time itemprop="dateCreated" datetime="2018-01-03T11:57:42+08:00" content="2018-01-03">
+              2018-01-03
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/GIT/" itemprop="url" rel="index">
-                    <span itemprop="name">GIT</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -265,11 +265,23 @@
       
         
           
-          常用本地钩子pre-commitprepare-commit-msgcommit-msgpost-commitpost-checkoutpre-rebase前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pr
+          sds结构struct sdshdr {
+
+    /** buf 中已占用空间的长度*/
+    int len;
+
+    /** buf 中剩余可用空间的长度*/
+    int free;
+
+    /** 数据空间*/ 
+    /** 柔性数组*/
+    char buf[];
+};
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/15/git钩子介绍/#more" rel="contents">
+            <a class="btn" href="/2018/01/03/redis-sds源码阅读/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -312,8 +324,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/08/15/添加git语法检查钩子/" itemprop="url">
-                  添加git语法检查钩子
+                <a class="post-title-link" href="/2018/01/02/redis对象类型及数据结构/" itemprop="url">
+                  redis对象类型及数据结构
                 </a>
               
             
@@ -326,8 +338,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-15T11:13:49+08:00" content="2017-08-15">
-              2017-08-15
+            <time itemprop="dateCreated" datetime="2018-01-02T17:42:59+08:00" content="2018-01-02">
+              2018-01-02
             </time>
           </span>
 
@@ -340,8 +352,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/GIT/" itemprop="url" rel="index">
-                    <span itemprop="name">GIT</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -373,13 +385,11 @@
       
         
           
-          添加pre-commit钩子vim app_code/.git/hooks/pre-commit
-备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
-添加语法检查内容my $commit_id = `git rev-parse --ver
+          字符创对象（REDIS_STRING | string）整数值（int）embstr编码的简单动态字符串（SDS）（embstr）动态字符串（raw）编码存储选择如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/15/添加git语法检查钩子/#more" rel="contents">
+            <a class="btn" href="/2018/01/02/redis对象类型及数据结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -422,8 +432,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/08/03/安装docker-swarm/" itemprop="url">
-                  安装docker-swarm
+                <a class="post-title-link" href="/2017/12/28/常用命令/" itemprop="url">
+                  常用命令
                 </a>
               
             
@@ -436,8 +446,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-03T10:08:49+08:00" content="2017-08-03">
-              2017-08-03
+            <time itemprop="dateCreated" datetime="2017-12-28T10:29:39+08:00" content="2017-12-28">
+              2017-12-28
             </time>
           </span>
 
@@ -450,8 +460,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -483,13 +493,12 @@
       
         
           
-          在virtualbox安装centos7注意一定要是在centos7及以上的版本
-centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+          linux杀死某个程序的多个进程ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
 
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/03/安装docker-swarm/#more" rel="contents">
+            <a class="btn" href="/2017/12/28/常用命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -532,8 +541,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
             
               
                 
-                <a class="post-title-link" href="/2017/08/03/docker实践命令/" itemprop="url">
-                  docker实践命令
+                <a class="post-title-link" href="/2017/12/13/redis源码断点调试/" itemprop="url">
+                  redis源码断点调试
                 </a>
               
             
@@ -546,8 +555,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-03T09:56:30+08:00" content="2017-08-03">
-              2017-08-03
+            <time itemprop="dateCreated" datetime="2017-12-13T20:37:19+08:00" content="2017-12-13">
+              2017-12-13
             </time>
           </span>
 
@@ -560,8 +569,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -593,13 +602,12 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
       
         
           
-          查看docker容器的ipdocker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
-查看docker完整的额容器iddocker ps --no-trunc
-查看日志docker
+          redis断点调试的方式有两种记录日志printf记录日志redisLog(REDIS_WARNING, &quot;hello world!&quot;)
+操作流程在t_string.c的getCommand方法中添加如下内容redisLog(REDIS_WARNING, &quot;hello 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/03/docker实践命令/#more" rel="contents">
+            <a class="btn" href="/2017/12/13/redis源码断点调试/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -642,8 +650,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
             
               
                 
-                <a class="post-title-link" href="/2017/08/02/登录docker容器/" itemprop="url">
-                  登录docker容器
+                <a class="post-title-link" href="/2017/12/12/redis用到的函数/" itemprop="url">
+                  redis用到的函数
                 </a>
               
             
@@ -656,8 +664,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-02T21:48:26+08:00" content="2017-08-02">
-              2017-08-02
+            <time itemprop="dateCreated" datetime="2017-12-12T23:18:48+08:00" content="2017-12-12">
+              2017-12-12
             </time>
           </span>
 
@@ -670,8 +678,8 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -703,15 +711,13 @@ centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.c
       
         
           
-          attach查看启动的容器docker ps
-注意：CONTAINER ID，NAMES这两个信息下面命令会用到
-登录容器docker attach contain_id(CONTAINER ID)
-docker attach contain_name(NAMES)
-exec查看启动的容器docke
+          记录日志redisLog(REDIS_WARNING, &quot;hello world!&quot;)
+触发记录hello world日志
+例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/02/登录docker容器/#more" rel="contents">
+            <a class="btn" href="/2017/12/12/redis用到的函数/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -738,7 +744,7 @@ exec查看启动的容器docke
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -779,7 +785,7 @@ exec查看启动的容器docke
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -787,7 +793,7 @@ exec查看启动的容器docke
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -796,7 +802,7 @@ exec查看启动的容器docke
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -870,7 +876,7 @@ exec查看启动的容器docke
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

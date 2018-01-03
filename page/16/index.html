@@ -204,8 +204,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/05/fast-cgi简单介绍及工作原理/" itemprop="url">
-                  fast-cgi简单介绍及工作原理
+                <a class="post-title-link" href="/2016/07/22/C语言标准输入标准输出/" itemprop="url">
+                  C语言标准输入标准输出
                 </a>
               
             
@@ -218,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:36:04+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-07-22T07:51:22+08:00" content="2016-07-22">
+              2016-07-22
             </time>
           </span>
 
@@ -232,8 +232,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -265,13 +265,13 @@
       
         
           
-          CGI(Common Getway Interface)HTTP服务器与后端服务器或其他机器上的程序进行通信的一种工具,CGI程序必须运行在网络服务器上
-缺点:性能较差(每次HTTP服务器遇到动态程序都需要重新启动脚本解析器来执行解析,然后返回结果给HTTP服务器),安全性能也表较差
-FastCGI
+          标准输入将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
+eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
+标准输出将显示在屏幕
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/05/fast-cgi简单介绍及工作原理/#more" rel="contents">
+            <a class="btn" href="/2016/07/22/C语言标准输入标准输出/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -314,8 +314,8 @@ FastCGI
             
               
                 
-                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">
-                  php.ini基本参数设置
+                <a class="post-title-link" href="/2016/07/20/C语言标准库/" itemprop="url">
+                  C语言标准库
                 </a>
               
             
@@ -328,8 +328,8 @@ FastCGI
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:03:14+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-07-20T09:18:20+08:00" content="2016-07-20">
+              2016-07-20
             </time>
           </span>
 
@@ -342,8 +342,8 @@ FastCGI
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -375,14 +375,18 @@ FastCGI
       
         
           
-          开启安全模式(阻止php调用部分函数,比如system())safe_mode = On
-禁用函数disable_functions=system,exec,shell_exec
-关闭php版本信息在header信息中泄露expose_php = Off
-关闭注册全局变量register_globa
-          ...
+          stdio.h提供标准输入输出,比如sprintf,scanf
+string.h提供字符串的处理
+unistd.h用来处理传入参数
+stdlib.h里面包含使用malloc和free函数
+stdarg.h可变参数列表
+unistd.h系统函数库
+errno.h错误信息
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/05/php-ini基本参数设置/#more" rel="contents">
+            <a class="btn" href="/2016/07/20/C语言标准库/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -425,8 +429,8 @@ FastCGI
             
               
                 
-                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">
-                  如何防盗链
+                <a class="post-title-link" href="/2016/07/18/C的存储器和指针/" itemprop="url">
+                  C的存储器和指针
                 </a>
               
             
@@ -439,8 +443,8 @@ FastCGI
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T01:06:42+08:00" content="2016-07-01">
-              2016-07-01
+            <time itemprop="dateCreated" datetime="2016-07-18T13:23:04+08:00" content="2016-07-18">
+              2016-07-18
             </time>
           </span>
 
@@ -453,8 +457,8 @@ FastCGI
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -486,15 +490,20 @@ FastCGI
       
         
           
-          资源盗链某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
+          指针存储器中某条数据的地址(用于保存存储器地址的变量)
+目的避免副本
+共享数据
+存储器计算机系统中的记忆设备，用来存放程序和数据
+它分为(低位到高位):
+    代码块
+        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
 
-解决办法:
-    1.图片,视频打水印,logo
-    2.防火墙控制,根据ip控
+    常量段
+        程序一
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/如何防盗链/#more" rel="contents">
+            <a class="btn" href="/2016/07/18/C的存储器和指针/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -537,8 +546,8 @@ FastCGI
             
               
                 
-                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">
-                  apache常用的prefork和worker模式
+                <a class="post-title-link" href="/2016/07/14/C语言语句/" itemprop="url">
+                  C语言语句
                 </a>
               
             
@@ -551,8 +560,8 @@ FastCGI
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T00:33:59+08:00" content="2016-07-01">
-              2016-07-01
+            <time itemprop="dateCreated" datetime="2016-07-14T21:41:07+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -565,8 +574,8 @@ FastCGI
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -598,15 +607,21 @@ FastCGI
       
         
           
-          prefork模式(实现fork好子进程,等待请求)使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
+          if语句if (condition) {
+    doSomething
+} elseif(condition) {
+    doSomething
+} else {
+    doSomething
+}
 
-工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
-
-优点:效率高,稳定
+例子:
+    #include &lt;stdio.h&gt;
+    int main()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/apache常用的prefork和worker模式/#more" rel="contents">
+            <a class="btn" href="/2016/07/14/C语言语句/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -649,8 +664,8 @@ FastCGI
             
               
                 
-                <a class="post-title-link" href="/2016/06/29/批量创建文件及替换文件名/" itemprop="url">
-                  批量创建文件及替换文件名
+                <a class="post-title-link" href="/2016/07/14/C语言数据类型/" itemprop="url">
+                  C语言数据类型
                 </a>
               
             
@@ -663,8 +678,8 @@ FastCGI
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T01:03:07+08:00" content="2016-06-29">
-              2016-06-29
+            <time itemprop="dateCreated" datetime="2016-07-14T21:17:42+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -677,8 +692,8 @@ FastCGI
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -710,17 +725,14 @@ FastCGI
       
         
           
-          批量创建文件写入需要创建的文件名
-    file.txt 内容如下:test1.big.jpg
-                     test2.big.jpg
-                     test1.big.jpg
-
-创建文件
-    touch `cat file.txt |
+          数据类型浮点型:float,double
+整型:short,long,int,char(char以字符编码保存,他们也是数字)
+char字符在计算机的存储器中以字符编码的形式保存,字符编码是一个数字,因此在计算机看来A(ASCII码)和数字65完全一样
+需要注意的点1.字符串会被当做数组来读取,这个
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/29/批量创建文件及替换文件名/#more" rel="contents">
+            <a class="btn" href="/2016/07/14/C语言数据类型/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -747,7 +759,7 @@ FastCGI
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -788,7 +800,7 @@ FastCGI
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives/">
-              <span class="site-state-item-count">144</span>
+              <span class="site-state-item-count">153</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -796,7 +808,7 @@ FastCGI
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -805,7 +817,7 @@ FastCGI
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -879,7 +891,7 @@ FastCGI
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
