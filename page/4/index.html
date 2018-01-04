@@ -233,6 +233,485 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/07/14/如何编写一个dockerfile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/14/如何编写一个dockerfile/" itemprop="url">如何编写一个dockerfile</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T09:22:39+08:00">
+                2017-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li>更快的构建速度</li>
+<li>更小的Docker镜像大小</li>
+<li>更少的Docker镜像层</li>
+<li>充分利用镜像缓存</li>
+<li>增加Dockerfile可读性</li>
+<li>让Docker容器使用起来更简单</li>
+</ul>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>容器只运行单个应用</li>
+<li>将多个RUN指令合并为一个</li>
+<li>基础镜像的标签不要用latest</li>
+<li>每个RUN指令后删除多余文件</li>
+<li>选择合适的基础镜像(alpine版本最好，不过个人还是喜欢centos)</li>
+<li>设置WORKDIR和CMD</li>
+<li>COPY与ADD优先使用前者</li>
+<li>合理调整COPY与RUN的顺序</li>
+<li>设置默认的环境变量，映射端口和数据卷</li>
+<li>使用LABEL设置镜像元数据</li>
+<li>添加HEALTHCHECK</li>
+<li>使用ENTRYPOINT (可选，可以用于做不同环境的判断，不如dev，product)</li>
+<li>在entrypoint脚本中使用exec</li>
+</ul>
+<h1 id="编写步骤"><a href="#编写步骤" class="headerlink" title="编写步骤"></a>编写步骤</h1><blockquote>
+<p><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/" title="编写dockerfile" target="_blank" rel="external">编写dockerfile</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/10/go的应用场景/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/10/go的应用场景/" itemprop="url">go的应用场景</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T17:26:53+08:00">
+                2017-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
+</code></pre><h3 id="并发性好"><a href="#并发性好" class="headerlink" title="并发性好"></a>并发性好</h3><pre><code>goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
+单个go应用能有效利用多个CPU内核，并行执行性能好
+</code></pre><h3 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h3><h3 id="丰富的标准库"><a href="#丰富的标准库" class="headerlink" title="丰富的标准库"></a>丰富的标准库</h3><h3 id="活跃的社区支持"><a href="#活跃的社区支持" class="headerlink" title="活跃的社区支持"></a>活跃的社区支持</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/06/关于产品设计的几个小思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/06/关于产品设计的几个小思考/" itemprop="url">关于产品设计的几个小思考</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T10:42:49+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/产品-运营/" itemprop="url" rel="index">
+                    <span itemprop="name">产品&运营</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
+</code></pre><h6 id="明确的目标用户"><a href="#明确的目标用户" class="headerlink" title="明确的目标用户"></a>明确的目标用户</h6><pre><code>这个至关重要，是产品定位的大基调
+能够更精准的确定获取目标用户的渠道
+能够精准的给用户设计产品功能
+比如说：
+    我的目标用户是青年人，那么理想的状态是我会推广一个文章能够触达到我的青年用户，在获取
+    青年用户的同时希望能够剔除掉非青年用户（毕竟用户的运营也是有成本的，这里指的是个性化
+    运营，并不是群发文章之类的）
+</code></pre><h6 id="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？"><a href="#为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？" class="headerlink" title="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？"></a>为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？</h6><pre><code>提醒用户，首屏下面还有内容，网站是可以滚动的    
+</code></pre><p><img src="/img/product/think/home_part_negative.png" alt="Alt text" title="首屏是完整的页面"><br><img src="/img/product/think/home_part_positive.png" alt="Alt text" title="首屏只显示部分页面"></p>
+<h6 id="关注首屏"><a href="#关注首屏" class="headerlink" title="关注首屏"></a>关注首屏</h6><pre><code>首屏是决定用户是否继续浏览的关键因素
+解决用户的信任问题
+放足够吸引用户的东西
+依旧举个例子（如下图）：
+    1、首先打开官网最打眼的2的位置，一个大红包这是足够吸引我去看红包是怎么回事
+    2、3的位置很巧妙，2的位置引导眼球的时候，在视线的下方位置，
+       观看到3的红色的免费字样，接着我的视线一定会移动到3所在的功能块，这个时候又是
+       10位置的红色字样直接吸引过来，接着应该是顺理成章的做评估了，设计者最后在
+       8的位置还把评估的人数显示上来，低调的解除了用户的不信任危机
+    3、再者是7的位置和传统的轮播图比他的优势在于右边的文字，一次性列举出了所有
+       的轮播图的作用（不是像传统的那样就是两个箭头或者几个数字点击能够进行切换，作为
+       用户我哪来的耐心去猜测你的箭头会切换到哪个轮播图？）
+    4、再看1的位置，在导航栏中做了重点的突出，应该是吸引用户的一个重要功能，很
+       希望用户去点
+    5、看4，5的位置我认为都在解决一个信任的问题，首先是4的位置介绍我的资质，这
+       个是比较有说服力的客观事实你如果还不信的话可以到5的位置去看关于我们
+</code></pre><p><img src="/img/product/think/hainabian_home.png" alt="Alt text" title="优质首页分析"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/04/Dockerfile的编写/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -643,712 +1122,11 @@ http://dockone.io/article/126
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/01/docker入门/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/01/docker入门/" itemprop="url">docker命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T19:24:33+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="docker安装（mac）"><a href="#docker安装（mac）" class="headerlink" title="docker安装（mac）"></a>docker安装（mac）</h1><h1 id="docker查询命令"><a href="#docker查询命令" class="headerlink" title="docker查询命令"></a>docker查询命令</h1><h6 id="docker-info"><a href="#docker-info" class="headerlink" title="docker info"></a>docker info</h6><pre><code>查看docker信息
-</code></pre><h6 id="docker-ps-a"><a href="#docker-ps-a" class="headerlink" title="docker ps -a"></a>docker ps -a</h6><pre><code>查看所有的容器，包括运行的和退出的
-</code></pre><h6 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h6><pre><code>查看所有的运行的容器
-</code></pre><h6 id="docker-inspect-container-id-names"><a href="#docker-inspect-container-id-names" class="headerlink" title="docker inspect container_id/names"></a>docker inspect container_id/names</h6><pre><code>查看容器的详细信息
-</code></pre><h6 id="docker-search-tutorial"><a href="#docker-search-tutorial" class="headerlink" title="docker search tutorial"></a>docker search tutorial</h6><pre><code>搜索nginx镜像
-</code></pre><h6 id="docker-pull-egamas-docker-tutorial"><a href="#docker-pull-egamas-docker-tutorial" class="headerlink" title="docker pull egamas/docker-tutorial"></a>docker pull egamas/docker-tutorial</h6><pre><code>拉取egamas/docker-tutorial镜像
-</code></pre><h6 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h6><pre><code>查看所有的镜像
-docker image - since=mongo:3.2
-docker images -before=mongo:3.2
-</code></pre><h6 id="docker-attach-container-id-names"><a href="#docker-attach-container-id-names" class="headerlink" title="docker attach container_id/names"></a>docker attach container_id/names</h6><pre><code>登录web容器
-</code></pre><h6 id="docker-exec-it-container-names-bin-bash"><a href="#docker-exec-it-container-names-bin-bash" class="headerlink" title="docker exec -it  container_names /bin/bash"></a>docker exec -it  container_names /bin/bash</h6><pre><code>登录容器中(容器已经启动的)
-</code></pre><h6 id="docker-rm-container-id-names"><a href="#docker-rm-container-id-names" class="headerlink" title="docker rm container_id/names"></a>docker rm container_id/names</h6><pre><code>删除停止状态的容器
-</code></pre><h6 id="docker-rm-f-container-id-names"><a href="#docker-rm-f-container-id-names" class="headerlink" title="docker rm -f container_id/names"></a>docker rm -f container_id/names</h6><pre><code>删除开启状态的容器
-</code></pre><h6 id="docker-push-source"><a href="#docker-push-source" class="headerlink" title="docker push source"></a>docker push source</h6><h6 id="docker-port-id"><a href="#docker-port-id" class="headerlink" title="docker port id"></a>docker port id</h6><h6 id="docker-top-id"><a href="#docker-top-id" class="headerlink" title="docker top id"></a>docker top id</h6><h6 id="docker-rmi-image-id"><a href="#docker-rmi-image-id" class="headerlink" title="docker rmi image_id"></a>docker rmi image_id</h6><pre><code>删除镜像
-</code></pre><h6 id="docker-image-rm-id"><a href="#docker-image-rm-id" class="headerlink" title="docker image rm id"></a>docker image rm id</h6><h6 id="docker-diff-image-name"><a href="#docker-diff-image-name" class="headerlink" title="docker diff image_name"></a>docker diff image_name</h6><pre><code>查看容器的具体变更内容（和基础的镜像相比，所作的变更，比如说在容器中安装了vim，这个时候就会显示出具体安装vim新增的文件）
-</code></pre><h6 id="docker-commit-container-id-image-id"><a href="#docker-commit-container-id-image-id" class="headerlink" title="docker commit container_id image_id"></a>docker commit container_id image_id</h6><pre><code>将修改的容器内容提交到镜像中，形成新的基础镜像(一般来说不这么干，都用Dockerfile)
-</code></pre><h6 id="docker-build-t-image-name-PATH"><a href="#docker-build-t-image-name-PATH" class="headerlink" title="docker build -t image_name PATH"></a>docker build -t image_name PATH</h6><pre><code>在PATH目录下，按照Dockerfile建立一个新的image_name镜像
-path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
-</code></pre><h6 id="docker-import-SOURCE-PATH-TARGET-PATH"><a href="#docker-import-SOURCE-PATH-TARGET-PATH" class="headerlink" title="docker import SOURCE_PATH TARGET_PATH"></a>docker import SOURCE_PATH TARGET_PATH</h6><pre><code>   docker import \
-       http://download.openvz.org/template/precreated/ubuntu-14.04-x86_64-minimal.tar.gz \
-       web1/ubuntu:14.04
-
-http://www.kancloud.cn/lyric/docker-intro/79899
-</code></pre><h6 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h6><pre><code>保存镜像为归档文件
-docker save web | gzip &gt; web.tar.gz
-</code></pre><h6 id="dcoker-load"><a href="#dcoker-load" class="headerlink" title="dcoker load"></a>dcoker load</h6><pre><code>将归档文件复制到另一个机器上
-docker load -i web.tar.gz
-</code></pre><h6 id="docker-run-option-image-name-command"><a href="#docker-run-option-image-name-command" class="headerlink" title="docker run [option] image_name [command]"></a>docker run [option] image_name [command]</h6><pre><code>启动容器
-在终端输出:hello world(注意nginx是镜像名称，在运行之后会创建一个容器，可执行docker ps -a查看，然后使用docker rm 进行删除)
-    sudo docker run nginx /bin/echo &apos;Hello world&apos;
-
- 创建一个基于image_name的镜像（以nginx为镜像构建一个容器，命名为web）  
-       docker run -t -i --name web nginx /bin/bash 
-
- 运行bash终端，允许用户进行交互(-t分配给docker一个伪终端，-i让容器的标准输入保持打开)
-    sudo docker run -it nginx /bin/bash
-
- docker run创建容器时，Docker会在后台运行包含以下：
-    检查本地是否存在指定的镜像，不存在就从公有仓库下载
-    利用镜像创建并启动一个容器
-    分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
-    从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
-    从地址池配置一个 ip 地址给容器
-    执行用户指定的应用程序
-    执行完毕后容器被终止
-</code></pre><h6 id="docker-start-container-id-names"><a href="#docker-start-container-id-names" class="headerlink" title="docker start container_id/names"></a>docker start container_id/names</h6><pre><code>运行容器
-</code></pre><h6 id="docker-stop-container-id-names"><a href="#docker-stop-container-id-names" class="headerlink" title="docker stop container_id/names"></a>docker stop container_id/names</h6><pre><code>停止运行容器    
-</code></pre><h6 id="docker-后台运行"><a href="#docker-后台运行" class="headerlink" title="docker 后台运行"></a>docker 后台运行</h6><pre><code>-d 让Dockre在后台运行而不是直接把执行命令的结果输出在当前宿主机下
-sudo docker run nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
-sudo docker run -d nginx /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
-</code></pre><h6 id="docker-logs-container-id"><a href="#docker-logs-container-id" class="headerlink" title="docker logs [container_id]"></a>docker logs [container_id]</h6><pre><code>获取容器的输出信息
-</code></pre><h6 id="进入Docker容器"><a href="#进入Docker容器" class="headerlink" title="进入Docker容器"></a>进入Docker容器</h6><pre><code>attach
-    sudo docker run -idt nginx
-    sudo docker ps
-    sudo docker attach quizzical_kilby
-    多个窗口同时 attach 到同一个容器的时候，所有窗口都会同步显示。当某个窗口因命令阻塞时,其他窗口也无法执行操作了
-
-nsenter
-    这个太复杂了，反正我也不会用
-</code></pre><h6 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h6><pre><code>导出容器快照到本地文件
-docker export web &gt; web.tar
-</code></pre><h6 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h6><pre><code>导入本地容器快照为镜像
-docker import web.tar test
-</code></pre><h6 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h6><pre><code>数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性
-数据卷可以在容器之间共享和重用
-对数据卷的修改会立马生效
-对数据卷的更新，不会影响镜像
-数据卷默认会一直存在，即使容器被删除
-注意：数据卷的使用，类似于 Linux 下对目录或文件进行 mount，镜像中的被指定为挂载点的目录中的文件会隐藏掉，能显示看的是挂载的数据卷。
-</code></pre><h6 id="创建数据卷"><a href="#创建数据卷" class="headerlink" title="创建数据卷"></a>创建数据卷</h6><pre><code>docker run -d -P --name web -v /webapp nginx
-可以使用:docker exec -it web /bin/bash登录容器进行查看
-</code></pre><h6 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h6><pre><code>docker rm -fv web
--v移除数据卷
-</code></pre><h6 id="挂载一个主机目录作为数据卷（也可以挂载文件）"><a href="#挂载一个主机目录作为数据卷（也可以挂载文件）" class="headerlink" title="挂载一个主机目录作为数据卷（也可以挂载文件）"></a>挂载一个主机目录作为数据卷（也可以挂载文件）</h6><pre><code>第一反应的作用是，本地可以写代码不用上传了，实时的在docker中运行
-docker run -d -P --name web -v /src/webapp:/opt/webapp nginx
-主机目录：/src/webapp 容器目录：/opt/webapp
-</code></pre><h6 id="查看数据卷的信息"><a href="#查看数据卷的信息" class="headerlink" title="查看数据卷的信息"></a>查看数据卷的信息</h6><pre><code>docker inspect web
-可以看到volumes字样
-</code></pre><h6 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h6><pre><code>数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
-创建一个容器（作为数据卷）：
-    docker run -d -v /dbdata --name dbdata nginx
-把dbdata容器指定为数据卷容器：
-    docker run -d --volumes-from dbdata --name db1 nginx
-</code></pre><h6 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h6><pre><code>sudo docker run --volumes-from dbdata -v $(pwd):/backup nginx tar cvf /backup/backup.tar /dbdata
-首先使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从主机挂载当前目录到容器的 /backup 目录，容器启动后，使用了 tar 命令来将 dbdata 卷备份为容器中 /backup/backup.tar 文件，也就是主机当前目录下的名为 backup.tar 的文件
-</code></pre><h6 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h6><pre><code>如果要恢复数据到一个容器，首先创建一个带有空数据卷的容器 dbdata2
-docker run -v /dbdata --name dbdata2 nginx /bin/bash
-
-然后创建另一个容器，挂载 dbdata2 容器卷中的数据卷，并使用 untar 解压备份文件到挂载的容器卷中
-sudo docker run --volumes-from dbdata2 -v $(pwd):/backup nginx tar xvf /backup/backup.tar
-
-为了查看/验证恢复的数据，可以再启动一个容器挂载同样的容器卷来查看
-sudo docker run --volumes-from dbdata2 nginx /bin/ls /dbdata
-</code></pre><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h6 id="映射到指定端口"><a href="#映射到指定端口" class="headerlink" title="映射到指定端口"></a>映射到指定端口</h6><pre><code>docker run -d -p 5000:5000 --name web2 nginx
-docker run -d -p 5000:5000 -p 80:80 --name=web2 nginx
-</code></pre><h6 id="查看映射端口配置"><a href="#查看映射端口配置" class="headerlink" title="查看映射端口配置"></a>查看映射端口配置</h6><pre><code>docker port web2 5000
-</code></pre><h6 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h6><pre><code>docker run -d -P --name web2 --link web1:web1 nginx
-
---link参数的格式为 --link name:alias，其中name是要连接容器的名称，alias是这个连接的别名
-Docker 在两个互联的容器之间创建了一个安全隧道，而且不用映射它们的端口到宿主主机上
-在启动 db 容器的时候并没有使用 -p 和 -P 标记，从而避免了暴露数据库端口到外部网络上
-
-Docker 通过两种方式为容器公开连接信息：
-环境变量
-    docker exec -it web2 /bin/bash  (登录docker容器)
-    env （使用env查看web2容器环境变量）
-
-    查询结果如下
-    HOSTNAME=b64578555fd9
-    WEB1_PORT_80_TCP=tcp://172.17.0.2:80
-    NJS_VERSION=1.13.1.0.1.10-1~stretch
-    NGINX_VERSION=1.13.1-1~stretch
-    WEB1_PORT_80_TCP_PROTO=tcp
-    WEB1_PORT_80_TCP_ADDR=172.17.0.2
-    WEB1_PORT=tcp://172.17.0.2:80
-    PWD=/
-    HOME=/root
-    WEB1_ENV_NGINX_VERSION=1.13.1-1~stretch
-    WEB1_PORT_80_TCP_PORT=80
-    TERM=xterm
-    SHLVL=1
-    WEB1_NAME=/web2/web1
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    WEB1_ENV_NJS_VERSION=1.13.1.0.1.10-1~stretch
-    _=/usr/bin/env
-
-    以WEB1_开头的环境变量是供web2容器连接web1容器使用
-
-
-添加host信息到父容器的/etc/hosts的文件    
-    docker exec -it web2 /bin/bash  (登录docker容器)
-    cat /etc/hosts(查看hosts文件)
-
-    127.0.0.1    localhost
-    ::1    localhost ip6-localhost ip6-loopback
-    fe00::0    ip6-localnet
-    ff00::0    ip6-mcastprefix
-    ff02::1    ip6-allnodes
-    ff02::2    ip6-allrouters
-    172.17.0.2    web1 979e62ebf622
-    172.17.0.3    b64578555fd9
-
-    docker exec -it web1 /bin/bash  (登录docker容器)
-    cat /etc/hosts(查看hosts文件)
-    127.0.0.1    localhost
-    ::1    localhost ip6-localhost ip6-loopback
-    fe00::0    ip6-localnet
-    ff00::0    ip6-mcastprefix
-    ff02::1    ip6-allnodes
-    ff02::2    ip6-allrouters
-    172.17.0.2    979e62ebf622
-</code></pre><h3 id="高级网络配置"><a href="#高级网络配置" class="headerlink" title="高级网络配置"></a>高级网络配置</h3><pre><code>下面是一个跟 Docker 网络相关的命令列表，其中有些命令选项只有在 Docker 服务启动的时候才能配置，而且不能马上生效。
-      -b BRIDGE or --bridge=BRIDGE --指定容器挂载的网桥
-      --bip=CIDR --定制 docker0 的掩码
-      -H SOCKET... or --host=SOCKET... --Docker 服务端接收命令的通道
-      --icc=true|false --是否支持容器之间进行通信
-      --ip-forward=true|false --请看下文容器之间的通信
-      --iptables=true|false --是否允许 Docker 添加 iptables 规则
-      --mtu=BYTES --容器网络中的 MTU
-
-下面2个命令选项既可以在启动服务时指定，也可以 Docker 容器启动（docker run）时候指定
-    --dns=IP_ADDRESS... --使用指定的DNS服务器
-    --dns-search=DOMAIN... --指定DNS搜索域
-</code></pre><h3 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h3><pre><code>利用虚拟文件来挂载到来容器的 3 个相关配置文件
-
-在容器中使用mount可以看到挂载信息
-    /dev/vda1 on /etc/resolv.conf type ext4 (rw,relatime,data=ordered)
-    /dev/vda1 on /etc/hostname type ext4 (rw,relatime,data=ordered)
-    /dev/vda1 on /etc/hosts type ext4 (rw,relatime,data=ordered)
-
- 这种机制可以让宿主主机 DNS 信息发生更新后，所有 Docker 容器的 dns 配置通过 /etc/resolv.conf 文件立刻得到更新
-</code></pre><h6 id="配置hostname"><a href="#配置hostname" class="headerlink" title="配置hostname"></a>配置hostname</h6><pre><code>-h HOSTNAME or --hostname=HOSTNAM
-注意：HOSTNAME会被写到容器内的 /etc/hostname 和 /etc/hosts；但它在容器外部看不到，既不会在 docker ps 中显示，也不会在其他的容器的 /etc/hosts 看到
-</code></pre><h6 id="配置alias"><a href="#配置alias" class="headerlink" title="配置alias"></a>配置alias</h6><pre><code>--link=CONTAINER_NAME:ALIAS
-在创建容器的时候，添加一个其他容器的主机名到 /etc/hosts 文件中，让新容器的进程可以使用主机名 ALIAS 就可以连接它
-</code></pre><h6 id="添加dns"><a href="#添加dns" class="headerlink" title="添加dns"></a>添加dns</h6><pre><code>--dns=IP_ADDRESS
-添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在 /etc/hosts 中的主机名
-</code></pre><h6 id="设定搜索域"><a href="#设定搜索域" class="headerlink" title="设定搜索域"></a>设定搜索域</h6><pre><code>--dns-search=DOMAIN
-设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com
-</code></pre><h3 id="容器访问控制"><a href="#容器访问控制" class="headerlink" title="容器访问控制"></a>容器访问控制</h3><pre><code>主要是通过linux上的iptables防火墙进行管理和实现的
-</code></pre><h6 id="容器访问外部网络"><a href="#容器访问外部网络" class="headerlink" title="容器访问外部网络"></a>容器访问外部网络</h6><pre><code>sysctl net.ipv4.ip_forward  查看是否值为1，如果不是则：
-sysctl -w net.ipv4.ip_forward=1
-或者在启动的时候设定：--ip-forward=true
-</code></pre><h6 id="容器之间访问"><a href="#容器之间访问" class="headerlink" title="容器之间访问"></a>容器之间访问</h6><pre><code>容器的网络拓扑是否已经互联
-本地系统的防火墙软件
-</code></pre><h6 id="访问所有端口"><a href="#访问所有端口" class="headerlink" title="访问所有端口"></a>访问所有端口</h6><pre><code>当启动 Docker 服务时候，默认会添加一条转发策略到 iptables 的 FORWARD 链上。策略为通过（ACCEPT）还是禁止（DROP）取决于配置--icc=true（缺省值）还是 --icc=false。当然，如果手动指定 --iptables=false 则不会添加 iptables 规则。
-可见，默认情况下，不同容器之间是允许网络互通的。如果为了安全考虑，可以在 /etc/default/docker 文件中配置 DOCKER_OPTS=--icc=false 来禁止它
-</code></pre><h6 id="访问指定端口"><a href="#访问指定端口" class="headerlink" title="访问指定端口"></a>访问指定端口</h6><pre><code>在通过 -icc=false 关闭网络访问后，还可以通过 --link=CONTAINER_NAME:ALIAS 选项来访问容器的开放端口
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/05/12/编写makefile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/12/编写makefile/" itemprop="url">编写makefile</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T09:52:04+08:00">
-                2017-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="什么是makefile"><a href="#什么是makefile" class="headerlink" title="什么是makefile"></a>什么是makefile</h1><h6 id="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"><a href="#用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件" class="headerlink" title="用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件"></a>用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件</h6><h1 id="makefile规则"><a href="#makefile规则" class="headerlink" title="makefile规则"></a>makefile规则</h1><pre><code>target ... : prerequisites ...
-    command
-    ...
-    ...
-</code></pre><h6 id="target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签"><a href="#target是一个目标文件，可以使一个Object-file，也就是执行文件，也可以是一个标签" class="headerlink" title="target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签"></a>target是一个目标文件，可以使一个Object file，也就是执行文件，也可以是一个标签</h6><h6 id="prerequisites是要生成target所需要的文件"><a href="#prerequisites是要生成target所需要的文件" class="headerlink" title="prerequisites是要生成target所需要的文件"></a>prerequisites是要生成target所需要的文件</h6><h6 id="command是make需要执行的命令"><a href="#command是make需要执行的命令" class="headerlink" title="command是make需要执行的命令"></a>command是make需要执行的命令</h6><h6 id="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"><a href="#这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行" class="headerlink" title="这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行"></a>这是一个文件的依赖关系，也就是说，target这一个或多个的目标文件依赖于prerequisites中的文件，其生成规则定义在command中。说白一点就是说，prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行</h6><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h6 id="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"><a href="#一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的" class="headerlink" title="一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的"></a>一个工程有3个头文件，和8个C文件，我们为了完成前面所述的那三个规则，我们的Makefile应该是下面的这个样子的</h6><pre><code>edit : main.o kbd.o command.o display.o /
-       insert.o search.o files.o utils.o
-    cc -o edit main.o kbd.o command.o display.o /
-        insert.o search.o files.o utils.o
-
-main.o : main.c defs.h
-    cc -c main.c
-kbd.o : kbd.c defs.h command.h
-    cc -c kbd.c
-command.o : command.c defs.h command.h
-    cc -c command.c
-display.o : display.c defs.h buffer.h
-    cc -c display.c
-insert.o : insert.c defs.h buffer.h
-    cc -c insert.c
-search.o : search.c defs.h buffer.h
-    cc -c search.c
-files.o : files.c defs.h buffer.h command.h
-    cc -c files.c
-utils.o : utils.c defs.h
-    cc -c utils.c
-clean :
-    rm edit main.o kbd.o command.o display.o /
-           insert.o search.o files.o utils.o
-</code></pre><h6 id="反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行"><a href="#反斜杠（-）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make-clean就行" class="headerlink" title="反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行"></a>反斜杠（/）是换行符的意思，以上内容保存在makefile或Makefile文件中，在该目录下输入make就可以生成执行文件edit，如果要删除执行文件或中间文件，执行make clean就行</h6><h6 id="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"><a href="#在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（-o），依赖文件（prerequisites）就是冒号后面的那些-c-文件和-h文件。每一个-o-文件都有一组依赖文件，而这些-o-文件又是执行文件-edit-的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的" class="headerlink" title="在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的"></a>在这个makefile中，目标文件（target）包含：执行文件edit和中间目标文件（*.o），依赖文件（prerequisites）就是冒号后面的那些 .c 文件和 .h文件。每一个 .o 文件都有一组依赖文件，而这些 .o 文件又是执行文件 edit 的依赖文件。依赖关系的实质上就是说明了目标文件是由哪些文件生成的，换言之，目标文件是哪些文件更新的</h6><h6 id="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"><a href="#在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令" class="headerlink" title="在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令"></a>在定义好依赖关系后，后续的那一行定义了如何生成目标文件的操作系统命令，一定要以一个Tab键作为开头。记住，make并不管命令是怎么工作的，他只管执行所定义的命令。make会比较targets文件和prerequisites文件的修改日期，如果prerequisites文件的日期要比targets文件的日期要新，或者target不存在的话，那么，make就会执行后续定义的命令</h6><h6 id="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"><a href="#clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等" class="headerlink" title="clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等"></a>clean不是一个文件，它只不过是一个动作名字，有点像C语言中的lable一样，其冒号后什么也没有，那么，make就不会自动去找文件的依赖性，也就不会自动执行其后所定义的命令。要执行其后的命令，就要在make命令后明显得指出这个lable的名字。这样的方法非常有用，我们可以在一个makefile中定义不用的编译或是和编译无关的命令，比如程序的打包，程序的备份，等等</h6><h1 id="make工作流程"><a href="#make工作流程" class="headerlink" title="make工作流程"></a>make工作流程</h1><h6 id="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。"><a href="#1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make-f-filename则会直接找filename文件。" class="headerlink" title="1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。"></a>1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件，如果使用make -f filename则会直接找filename文件。</h6><h6 id="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"><a href="#2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。" class="headerlink" title="2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。"></a>2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“edit”这个文件，并把这个文件作为最终的目标文件。</h6><h6 id="3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"><a href="#3、如果edit文件不存在，或是edit所依赖的后面的-o-文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。" class="headerlink" title="3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。"></a>3、如果edit文件不存在，或是edit所依赖的后面的 .o 文件的文件修改时间要比edit这个文件新，那么，他就会执行后面所定义的命令来生成edit这个文件。</h6><h6 id="4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）"><a href="#4、如果edit所依赖的-o文件也存在，那么make会在当前文件中找目标为-o文件的依赖性，如果找到则再根据那一个规则生成-o文件。（这有点像一个堆栈的过程）" class="headerlink" title="4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）"></a>4、如果edit所依赖的.o文件也存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</h6><h6 id="5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。"><a href="#5、当然，你的C文件和H文件是存在的啦，于是make会生成-o-文件，然后再用-o-文件生命make的终极任务，也就是执行文件edit了。" class="headerlink" title="5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。"></a>5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生命make的终极任务，也就是执行文件edit了。</h6><h1 id="makefile中使用变量"><a href="#makefile中使用变量" class="headerlink" title="makefile中使用变量"></a>makefile中使用变量</h1><pre><code>edit : main.o kbd.o command.o display.o /
-                  insert.o search.o files.o utils.o
-    cc -o edit main.o kbd.o command.o display.o /
-                       insert.o search.o files.o utils.o
-</code></pre><h6 id="我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"><a href="#我们可以看到-o-文件的字符串被重复了两次，如果我们的工程需要加入一个新的-o-文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量" class="headerlink" title="我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量"></a>我们可以看到[.o]文件的字符串被重复了两次，如果我们的工程需要加入一个新的[.o]文件，那么我们需要在两个地方加（应该是三个地方，还有一个地方在clean中）。当然，我们的makefile并不复杂，所以在两个地方加也不累，但如果makefile变得复杂，那么我们就有可能会忘掉一个需要加入的地方，而导致编译失败。所以，为了makefile的易维护，在makefile中我们可以使用变量</h6><h4 id="例子，在makefile的文件开头定义一个变量obj"><a href="#例子，在makefile的文件开头定义一个变量obj" class="headerlink" title="例子，在makefile的文件开头定义一个变量obj"></a>例子，在makefile的文件开头定义一个变量obj</h4><pre><code>obj = main.o kbd.o command.o display.o /
-      insert.o search.o files.o utils.o
-objects = main.o kbd.o command.o display.o /
-          insert.o search.o files.o utils.o
-
-edit : $(objects)
-        cc -o edit $(objects)
-</code></pre><h1 id="让make自动推导"><a href="#让make自动推导" class="headerlink" title="让make自动推导"></a>让make自动推导</h1><h6 id="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂"><a href="#GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个-o-文件后都写上类似的命令m-只要make看到一个-o-文件，它就会自动的把-c-文件加在依赖关系中，如果make找到一个whatever-o，那么whatever-c，就会是whatever-o的依赖文件。并且-cc-c-whatever-c-也会被推导出来，于是，我们的makefile再也不用写得这么复杂" class="headerlink" title="GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂"></a>GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令m,只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂</h6><pre><code>objects = main.o kbd.o command.o display.o /
-    insert.o search.o files.o utils.o
-
-edit : $(objects)
-    cc -o edit $(objects)
-
-main.o : defs.h
-kbd.o : defs.h command.h
-command.o : defs.h command.h
-display.o : defs.h buffer.h
-insert.o : defs.h buffer.h
-search.o : defs.h buffer.h
-files.o : defs.h buffer.h command.h
-utils.o : defs.h
-
-.PHONY : clean
-clean :
-    rm edit $(objects)
-</code></pre><h6 id="“-PHONY”表示，clean是个伪目标文件"><a href="#“-PHONY”表示，clean是个伪目标文件" class="headerlink" title="“.PHONY”表示，clean是个伪目标文件"></a>“.PHONY”表示，clean是个伪目标文件</h6><h1 id="凌乱风格makefile"><a href="#凌乱风格makefile" class="headerlink" title="凌乱风格makefile"></a>凌乱风格makefile</h1><h6 id="看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？"><a href="#看到那堆-o-和-h-的依赖就有点不爽，那么多的重复的-h-能不能够也抽离出来？" class="headerlink" title="看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？"></a>看到那堆[.o]和[.h]的依赖就有点不爽，那么多的重复的[.h]能不能够也抽离出来？</h6><pre><code>objects = main.o kbd.o command.o display.o /
-          insert.o search.o files.o utils.o
-
-edit : $(objects)
-    cc -o edit $(objects)
-
-$(objects) : defs.h
-kbd.o command.o files.o : command.h
-display.o insert.o search.o files.o : buffer.h
-
-.PHONY : clean
-clean :
-    rm edit $(objects)
-</code></pre><h6 id="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h"><a href="#上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs-h" class="headerlink" title="上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h"></a>上例就是把依赖文件给抽离出来了，例如：objects中的所有的文件都依赖defs.h</h6><h1 id="清空目标文件的规则"><a href="#清空目标文件的规则" class="headerlink" title="清空目标文件的规则"></a>清空目标文件的规则</h1><h6 id="每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"><a href="#每个Makefile中都应该写一个清空目标文件（-o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁" class="headerlink" title="每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁"></a>每个Makefile中都应该写一个清空目标文件（.o和执行文件）的规则，这不仅便于重编译，也很利于保持文件的清洁</h6><h6 id="一般写法"><a href="#一般写法" class="headerlink" title="一般写法"></a>一般写法</h6><pre><code>clean:
-    rm edit $(objects)
-</code></pre><h6 id="稳妥写法"><a href="#稳妥写法" class="headerlink" title="稳妥写法"></a>稳妥写法</h6><pre><code>.PHONY : clean
-clean :
-    -rm edit $(objects)
-</code></pre><h6 id="PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"><a href="#PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾" class="headerlink" title=".PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾"></a>.PHONY意思表示clean是一个“伪目标”，。而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然，这就会变成make的默认目标，一般clean文件放在文件的末尾</h6><h1 id="引用其他文件"><a href="#引用其他文件" class="headerlink" title="引用其他文件"></a>引用其他文件</h1><h6 id="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"><a href="#使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）" class="headerlink" title="使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）"></a>使用include关键字把别的makefile文件包含进来（可以保含路径和通配符）</h6><pre><code>include &lt;filename&gt;
-</code></pre><h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><h6 id="你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk"><a href="#你有这样几个Makefile：a-mk、b-mk、c-mk，还有一个文件叫foo-make，以及一个变量-bar-，其包含了e-mk和f-mk" class="headerlink" title="你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk"></a>你有这样几个Makefile：a.mk、b.mk、c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了e.mk和f.mk</h6><pre><code>include foo.make *.mk $(bar)
-</code></pre><h6 id="等价于"><a href="#等价于" class="headerlink" title="等价于"></a>等价于</h6><pre><code>include foo.make a.mk b.mk c.mk e.mk f.mk
-</code></pre><h6 id="需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开"><a href="#需要注意的是在include前面可以有一些空字符，但是绝不能是-Tab-键开始。include和可以用一个或多个空格隔开" class="headerlink" title="需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和可以用一个或多个空格隔开"></a>需要注意的是在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和<filename>可以用一个或多个空格隔开</filename></h6><h6 id="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找"><a href="#include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录-include（一般是：-usr-local-bin或-usr-include）存在的话，make也会去找" class="headerlink" title="include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找"></a>include如果没有指定绝对路径或相对路径的话mmake会先在当前目录下首先查找，如果没有找到，make会在这几个目录下找：如果make执行时，有“-I”或“–include-dir”参数，那么make就会在这个参数所指定的目录下去寻找；如果目录<prefix>/include（一般是：/usr/local/bin或/usr/include）存在的话，make也会去找</prefix></h6><h6 id="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："><a href="#如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：" class="headerlink" title="如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如："></a>如果有文件没有找到的话，make会生成一条警告信息，但不会马上出现致命错误。它会继续载入其它的文件，一旦完成makefile的读取，make会再重试这些没有找到，或是不能读取的文件，如果还是不行，make才会出现一条致命信息。如果你想让make不理那些无法读取的文件，而继续执行，你可以在include前加一个减号“-”。如：</h6><pre><code>-include &lt;filename&gt;
-</code></pre><h1 id="环境变量makefiles"><a href="#环境变量makefiles" class="headerlink" title="环境变量makefiles"></a>环境变量makefiles</h1><h6 id="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"><a href="#如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的" class="headerlink" title="如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的"></a>如果你的当前环境中定义了环境变量MAKEFILES，那么，make会把这个变量中的值做一个类似于include的动作。这个变量中的值是其它的Makefile，用空格分隔。只是，它和include不同的是，从这个环境变中引入的Makefile的“目标”不会起作用，如果环境变量中定义的文件发现错误，make也会不理；但是在这里我还是建议不要使用这个环境变量，因为只要这个变量一被定义，那么当你使用make时，所有的Makefile都会受到它的影响，这绝不是你想看到的</h6><h1 id="make的工作方式"><a href="#make的工作方式" class="headerlink" title="make的工作方式"></a>make的工作方式</h1><h6 id="1、读入所有的Makefile。"><a href="#1、读入所有的Makefile。" class="headerlink" title="1、读入所有的Makefile。"></a>1、读入所有的Makefile。</h6><h6 id="2、读入被include的其它Makefile。"><a href="#2、读入被include的其它Makefile。" class="headerlink" title="2、读入被include的其它Makefile。"></a>2、读入被include的其它Makefile。</h6><h6 id="3、初始化文件中的变量。"><a href="#3、初始化文件中的变量。" class="headerlink" title="3、初始化文件中的变量。"></a>3、初始化文件中的变量。</h6><h6 id="4、推导隐晦规则，并分析所有规则。"><a href="#4、推导隐晦规则，并分析所有规则。" class="headerlink" title="4、推导隐晦规则，并分析所有规则。"></a>4、推导隐晦规则，并分析所有规则。</h6><h6 id="5、为所有的目标文件创建依赖关系链。"><a href="#5、为所有的目标文件创建依赖关系链。" class="headerlink" title="5、为所有的目标文件创建依赖关系链。"></a>5、为所有的目标文件创建依赖关系链。</h6><h6 id="6、根据依赖关系，决定哪些目标要重新生成。"><a href="#6、根据依赖关系，决定哪些目标要重新生成。" class="headerlink" title="6、根据依赖关系，决定哪些目标要重新生成。"></a>6、根据依赖关系，决定哪些目标要重新生成。</h6><h6 id="7、执行生成命令。"><a href="#7、执行生成命令。" class="headerlink" title="7、执行生成命令。"></a>7、执行生成命令。</h6><p><a href="http://blog.csdn.net/haoel/article/details/2886/" title="makefile原文链接" target="_blank" rel="external">makefile原文链接</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/05/08/编译reids的sds文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/08/编译reids的sds文件/" itemprop="url">编译reids的sds文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T20:30:02+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><a href="#在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来" class="headerlink" title="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"></a>在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来</h6><h1 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h1><h6 id="想当然的，sds-c的文件嘛，直接使用如下命令"><a href="#想当然的，sds-c的文件嘛，直接使用如下命令" class="headerlink" title="想当然的，sds.c的文件嘛，直接使用如下命令"></a>想当然的，sds.c的文件嘛，直接使用如下命令</h6><pre><code>gcc sds.c -o sds.o
-</code></pre><h6 id="结果也很想当然的报错"><a href="#结果也很想当然的报错" class="headerlink" title="结果也很想当然的报错"></a>结果也很想当然的报错</h6><p><img src="/img/redis/sds_gcc_error.png" alt="Alt text" title="写出代码"></p>
-<h5 id="本能的去指定头文件-依旧报错"><a href="#本能的去指定头文件-依旧报错" class="headerlink" title="本能的去指定头文件,依旧报错"></a>本能的去指定头文件,依旧报错</h5><pre><code>gcc -I sds.h zmalloc.h sds.c -o sds.o
-</code></pre><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h6 id="google后得知，是动态链接库没指定好"><a href="#google后得知，是动态链接库没指定好" class="headerlink" title="google后得知，是动态链接库没指定好"></a>google后得知，是动态链接库没指定好</h6><h6 id="首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"><a href="#首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果" class="headerlink" title="首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"></a>首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果</h6><h6 id="编译动态链接库"><a href="#编译动态链接库" class="headerlink" title="编译动态链接库"></a>编译动态链接库</h6><pre><code>gcc zmalloc.c -fPIC -shared -o libzmalloc.so
-命名的格式需要注意一下，lib+文件名+&apos;.so&apos;
-</code></pre><h6 id="指定动态链接库，编译sds-c"><a href="#指定动态链接库，编译sds-c" class="headerlink" title="指定动态链接库，编译sds.c"></a>指定动态链接库，编译sds.c</h6><pre><code>gcc sds.c -L. -l zmalloc -o sds.o
--L：添加库文件的搜索路径
--l：指定需要链接的库，该名字就是lib***.so中的名称
-</code></pre><h6 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h6><pre><code>./sds.o
-</code></pre><h6 id="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！"><a href="#非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！" class="headerlink" title="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！"></a>非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！</h6><p><img src="/img/redis/sds_gcc_succ.png" alt="Alt text" title="写出代码"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1394,7 +1172,7 @@ clean :
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

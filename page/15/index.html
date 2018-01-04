@@ -233,6 +233,589 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/10/C语言动态存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/10/C语言动态存储/" itemprop="url">C语言动态存储</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-10T08:12:39+08:00">
+                2016-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="动态数据存储的位置"><a href="#动态数据存储的位置" class="headerlink" title="动态数据存储的位置"></a>动态数据存储的位置</h1><pre><code>堆,它是程序中用来保存长期使用数据的地方
+</code></pre><h1 id="获取空间"><a href="#获取空间" class="headerlink" title="获取空间"></a>获取空间</h1><pre><code>使用malloc()函数进行申请
+</code></pre><h1 id="如何释放"><a href="#如何释放" class="headerlink" title="如何释放"></a>如何释放</h1><pre><code>使用free()函数进行释放
+</code></pre><h1 id="使用malloc"><a href="#使用malloc" class="headerlink" title="使用malloc"></a>使用malloc</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+void display(island *start);
+void release(island *start);
+island* create();
+
+int main()
+{
+    char name[80];
+    fgets(name, 80, stdin);
+    island *i = create(name);
+
+    fgets(name, 80, stdin);
+    island *i1 = create(name);
+    i-&gt;next = i1;
+    display(i);
+    release(i);
+}
+
+island* create (char *name)
+{
+    island *i = malloc(sizeof(island));
+    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
+    i-&gt;name = strdup(name);
+    i-&gt;open = &quot;09:00&quot;;
+    i-&gt;close = &quot;17:00&quot;;
+    i-&gt;next = NULL;
+
+    return i;
+}
+
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+
+void release(island *start) {
+    island *i = NULL;
+    island *next = NULL;
+
+    for(;i!=NULL;i=next) {
+        next = i-&gt;next;
+        free(i-&gt;name);
+        free(i);
+    }
+}
+</code></pre><h1 id="为什么island在堆上申请了内存-name还需要在堆上申请内存"><a href="#为什么island在堆上申请了内存-name还需要在堆上申请内存" class="headerlink" title="为什么island在堆上申请了内存,name还需要在堆上申请内存?"></a>为什么island在堆上申请了内存,name还需要在堆上申请内存?</h1><pre><code>因为结构只是把不同类型的数据写在一起,封装成一个大的数据类型,它不是创建了一个类型把所有数据都存储在它里面
+</code></pre><h1 id="使用release的时候需要释放那些堆上的内存"><a href="#使用release的时候需要释放那些堆上的内存" class="headerlink" title="使用release的时候需要释放那些堆上的内存?"></a>使用release的时候需要释放那些堆上的内存?</h1><pre><code>因为name,和island在堆上申请了内存,所以只要释放他们的内存就好了,但是需要注意的是先释放name的内存,不然先释放了island就找不到name了
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/09/C语言链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/09/C语言链表/" itemprop="url">C语言链表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-09T07:57:33+08:00">
+                2016-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><pre><code>是一种抽象的数据结构
+</code></pre><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><pre><code>为了保存可变数量的数据,需要一样比数组更灵活的东西
+</code></pre><h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><pre><code>保存了一条数据和链向另一条数据的链接
+</code></pre><h1 id="创建链表"><a href="#创建链表" class="headerlink" title="创建链表"></a>创建链表</h1><pre><code>#include &lt;stdio.h&gt;
+//注意要先定义函数在main函数的外部
+void display();
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+
+int main()
+{
+    island amity = {&quot;Amity&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+    island craggy = {&quot;craggy&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+    island shutter = {&quot;shutter&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+
+    amity.next = &amp;craggy;
+    craggy.next = &amp;shutter;
+
+    display(&amp;amity);
+    return 0;
+}
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+</code></pre><h1 id="递归结构"><a href="#递归结构" class="headerlink" title="递归结构"></a>递归结构</h1><pre><code>如果一个结构中包含一个链向同种结构的链接,那么这个结构就被称为递归结构
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/27/C语言联合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/27/C语言联合/" itemprop="url">C语言联合</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-27T07:42:29+08:00">
+                2016-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h1><pre><code>用union关键字定义的一个叫&quot;量&quot;的数据类型
+typedef union {
+    short count;
+    float volume;
+    float weight;
+} quantity;
+</code></pre><h1 id="联合的特点"><a href="#联合的特点" class="headerlink" title="联合的特点"></a>联合的特点</h1><pre><code>1.可以有效的使用存储器空间
+    当定义联合的时候,计算机只为其中一个最大的字段分配空间,然后由你决定里面保存什么值(上面例子的name,age,weight都会存储在一个位置)
+</code></pre><h1 id="如何使用联合"><a href="#如何使用联合" class="headerlink" title="如何使用联合"></a>如何使用联合</h1><pre><code>1.c89方式:只能设置联合的第一个字段也就是上述中的name字段
+    例子:quantity a = {1};
+
+2.指定初始化器:按名设置联合字段的值
+    quantity b = {.volume = 4.6};
+
+3.点表示法:先创建变量,在设置字段的值
+    quantity c;
+    c.weight = 3.7;
+
+注意:无论哪种方法设置联合的值,都只会保存一条数据。联合只是提供了一种让你创建支持不同数据类型的变量的方法
+实例:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        typedef union {
+            short count;
+            float volume;
+            float weight;
+        } quantity;
+
+        quantity a = {1};
+
+        quantity b = {.volume = 4.6};
+
+        quantity c;
+        c.weight = 3.7;
+        printf(&quot;%i,%f,%f&quot;, a.count, b.volume, c.weight);
+        return 0;
+    }
+</code></pre><h1 id="结构和联合一起使用"><a href="#结构和联合一起使用" class="headerlink" title="结构和联合一起使用"></a>结构和联合一起使用</h1><pre><code>#include &lt;stdio.h&gt;
+
+typedef union {
+    short count;
+    float volume;
+    float weight;
+} quantity;
+
+typedef struct {
+    const char *name;
+    const char *country;
+    quantity amount;
+} fruit_order;
+
+int main()
+{
+    /*
+        此处的.amount表示fruit_order中的amount字段,.count表示quantity中的字段
+    */
+    fruit_order apples = {&quot;apple&quot;, &quot;china&quot;, .amount.count = 20};
+    printf(&quot;%s,%s,%i&quot;, apples.name, apples.country, apples.amount.count);
+
+    return 0;
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/26/C语言结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -891,844 +1474,11 @@ db: db.o encrypt.o
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/22/C语言标准输入标准输出/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/22/C语言标准输入标准输出/" itemprop="url">C语言标准输入标准输出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-22T07:51:22+08:00">
-                2016-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h1><pre><code>将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
-eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
-</code></pre><h1 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h1><pre><code>将显示在屏幕的输出存储的位置(自己理解瞎定义的),一般使用&apos;&gt;&apos;操作符告诉操作系统,标准输出的位置,默认情况下会发送到显示器
-eg:./demo &gt; output.txt 表示运行demo程序产生的结果输出到output.txt文件
-</code></pre><h1 id="为什么要使用标准输入-标准输出"><a href="#为什么要使用标准输入-标准输出" class="headerlink" title="为什么要使用标准输入,标准输出?"></a>为什么要使用标准输入,标准输出?</h1><pre><code>因为一旦有了标准输入,标准输出,就可以重定向标准输入,标准输出,让程序从键盘以外的地方读取数据,往显示器以外的地方写数据
-</code></pre><h1 id="标准输入与标准输出的实例"><a href="#标准输入与标准输出的实例" class="headerlink" title="标准输入与标准输出的实例"></a>标准输入与标准输出的实例</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    float latitude;
-    float longitude;
-    char info[80];
-
-    int started=0;
-    puts(&quot;data=[&quot;);
-    while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-        if (started) {
-            printf(&quot;,\n&quot;);
-        } else {
-            started = 1;
-        }
-        printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
-    }
-    puts(&quot;\n]&quot;);
-
-    return 0;
-}
-
-input.txt内容为:
-    12.12,22.33,speed=21
-    33.33,45.21,speed=24
-    12.44,55.32,seppd=44
-    11.55,44.33,speed=22
-    423.63182,-71.095833,speed=22
-    28.345,-74.232,speed=44
-
-以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
-程序的标准输入是input.txt文件,标准输出到了output.txt文件
-</code></pre><h1 id="如果程序出错了如何看到结果"><a href="#如果程序出错了如何看到结果" class="headerlink" title="如果程序出错了如何看到结果?"></a>如果程序出错了如何看到结果?</h1><pre><code>程序执行完之后再终端输入:echo $?
-如果返回结果是0代表正常执行,如果返回结果是其他值,就是程序中报错的值(main函数正常返回0)
-</code></pre><h1 id="如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt"><a href="#如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt" class="headerlink" title="如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?"></a>如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?</h1><pre><code>我们需要将正常输出和异常输出分开来
-</code></pre><h1 id="标准错误"><a href="#标准错误" class="headerlink" title="标准错误"></a>标准错误</h1><pre><code>将错误的信息输出的位置,一般使用fprintf(stderr,msg)进行输出
-例子:
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        float latitude;
-        float longitude;
-        char info[80];
-        int started = 0;
-
-        puts(&quot;data=[&quot;);
-        while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-            if (started) {
-                printf(&quot;,\n&quot;);
-            } else {
-                started = 1;
-            }
-
-            if ((latitude &lt; -90.0) || (latitude &gt; 90.0)) {
-                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
-                return 2;
-            }
-
-            if ((longitude &lt; -180.0) || (longitude &gt; 180.0)) {
-                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
-                return 2;
-            }
-
-            printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
-        }
-        puts(&quot;\n]&quot;);
-        return 0;
-    }
-
-    以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
-    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
-</code></pre><h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><pre><code>将一个进程的标准输出与另一个进程的标准输入连接起来。用符号&apos;|&apos;表示
-
-一个例子:
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        float latitude;
-        float longitude;
-        char info[80];
-        while(scanf(&quot;%f, %f, %79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
-            if ((latitude &gt; 26) &amp;&amp; (latitude &lt; 34)) {
-                if ((longitude &gt; -76) &amp;&amp; (longitude &lt; -64)) {
-                    printf(&quot;%f, %f, %s\n&quot;, latitude, longitude, info);
-                }
-            }
-        }
-
-        return 0;
-    }
-
-    以上程序在filter.c的文件中,gcc filter.c -o filter &amp;&amp; (./filter | ./tool &lt; input.txt &gt; output.txt
-    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
-</code></pre><h1 id="如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办"><a href="#如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办" class="headerlink" title="如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?"></a>如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?</h1><pre><code>需要在程序运行时创建自己的数据流
-</code></pre><h1 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h1><pre><code>FILE *in_file = fopen(&quot;input.txt&quot;, &quot;r&quot;);
-fscanf(in_file, &quot;%79[^\n]\n&quot;, demo);
-</code></pre><h1 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h1><pre><code>FILE *out_file = fopen(&quot;output.txt&quot;, &quot;w&quot;);
-fprintf(out_file, &quot;this is %s&quot;, &quot;demo&quot;);
-</code></pre><h1 id="关闭数据流"><a href="#关闭数据流" class="headerlink" title="关闭数据流"></a>关闭数据流</h1><pre><code>fclose(in_file);
-fclose(out_file);
-</code></pre><h1 id="创建数据流例子"><a href="#创建数据流例子" class="headerlink" title="创建数据流例子"></a>创建数据流例子</h1><pre><code>以下是file.c
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-
-/*
-    argc代表传入函数main的参数的个数
-    argv表示实际的参数数组
-*/
-int main(int argc, char *argv[])
-{
-    char line[80];
-
-    /*
-        argc第0个参数是函数名,所以一共有6个参数
-    */
-    if (argc != 6) {
-        fprintf(stderr, &quot;you need to give 5 arguments\n&quot;);
-        return 1;
-    }
-
-    /*
-        注意:一定要是双引号,写别的语言惹的祸
-    */
-    FILE *in = fopen(&quot;spooky.csv&quot;, &quot;r&quot;);
-    FILE *file1 = fopen(argv[2], &quot;w&quot;);
-    FILE *file2 = fopen(argv[4], &quot;w&quot;);
-    FILE *file3 = fopen(argv[5], &quot;w&quot;);
-    /*
-        用fscanf读取自定义数据流
-    */
-    while(fscanf(in, &quot;%79[^\n]\n&quot;, line) == 1) {
-        if (strstr(line, argv[1])) {
-            /*
-                用fprintf输出自定义数据流
-            */
-            fprintf(file1, &quot;%s\n&quot;, line);
-        } else if (strstr(line, argv[3])) {
-            fprintf(file2, &quot;%s\n&quot;, line);
-        } else {
-            fprintf(file3, &quot;%s\n&quot;, line);
-        }
-    }
-
-    fclose(file1);
-    fclose(file2);
-    fclose(file3);
-    return 0;
-}
-
-以下是spooky.csv
-
-30.453,-68.1212,Type=Yeti
-28.2342,-74.1212,Type=UFO
-29.303.-71.1323,Type=Ship
-28.1212,-62.2342,Type=Elvis
-27.1313,-68.1212,Type=Goatsucker
-30.12123,-73.12132,Type=Disappearance
-26.121,-71.123213,Type=UFO
-29.12,-66.1212,Type=Ship
-37.234,-69.23424,Type=Elvis
-22.234,-68.23424,Type=Elvis
-27.234,-87.23424,Type=Elvis
-
-运行:gcc file.c -o file &amp;&amp; ./file UFO aliens.txt Elvis elviss.txt the_rest.txt
-会得到多个自定义的输出流:aliens.txt,elviss.txt
-
-
-# 函数参数的传入太过复杂,该如何处理呢?
-    使用unistd.h替代函数参数的处理
-
-# 函数参数处理的例子
-    #include &lt;stdio.h&gt;
-    #include &lt;unistd.h&gt;
-
-    /*
-        argc代表传入函数main的参数的个数
-        argv表示实际的参数数组
-    */
-    int main(int argc, char *argv[])
-    {
-        char *delivery = &quot;&quot;;
-        int thick = 0;
-        int count = 0;
-        char ch;
-
-        while((ch = getopt(argc, argv, &quot;d:t&quot;)) != EOF) {
-            switch(ch) {
-                case &apos;d&apos;:
-                    delivery = optarg;
-                    break;
-                case &apos;t&apos;:
-                    thick = 1;
-                    break;
-                default:
-                    fprintf(stderr, &quot;Unknow option: &apos;%s&apos;\n&quot;, optarg);
-                    return 1;
-            }
-        }
-
-        argc -= optind;
-        argv += optind;
-
-        if (thick) {
-            puts(&quot;thick crust&quot;);
-        }
-
-        if (delivery[0]) {
-            printf(&quot;to be delivered %s.\n&quot;, delivery);
-        }
-
-        puts(&quot;Ingredients:&quot;);
-        for(count = 0; count&lt;argc;count++) {
-            puts(argv[count]);
-        }
-        return 0;
-    }
-
-    gcc unistd.c -o unistd
-    ./unistd Anchovies Pineapple
-    ./unistd -d now Anchovies Pineapple
-    ./unistd -d now -t Anchovies Pineapple
-    ./unistd -f
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/20/C语言标准库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/20/C语言标准库/" itemprop="url">C语言标准库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-20T09:18:20+08:00">
-                2016-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="stdio-h"><a href="#stdio-h" class="headerlink" title="stdio.h"></a>stdio.h</h1><pre><code>提供标准输入输出,比如sprintf,scanf
-</code></pre><h1 id="string-h"><a href="#string-h" class="headerlink" title="string.h"></a>string.h</h1><pre><code>提供字符串的处理
-</code></pre><h1 id="unistd-h"><a href="#unistd-h" class="headerlink" title="unistd.h"></a>unistd.h</h1><pre><code>用来处理传入参数
-</code></pre><h1 id="stdlib-h"><a href="#stdlib-h" class="headerlink" title="stdlib.h"></a>stdlib.h</h1><pre><code>里面包含使用malloc和free函数
-</code></pre><h1 id="stdarg-h"><a href="#stdarg-h" class="headerlink" title="stdarg.h"></a>stdarg.h</h1><pre><code>可变参数列表
-</code></pre><h1 id="unistd-h-1"><a href="#unistd-h-1" class="headerlink" title="unistd.h"></a>unistd.h</h1><pre><code>系统函数库
-</code></pre><h1 id="errno-h"><a href="#errno-h" class="headerlink" title="errno.h"></a>errno.h</h1><pre><code>错误信息
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/18/C的存储器和指针/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/18/C的存储器和指针/" itemprop="url">C的存储器和指针</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T13:23:04+08:00">
-                2016-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><pre><code>存储器中某条数据的地址(用于保存存储器地址的变量)
-</code></pre><h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><pre><code>避免副本
-共享数据
-</code></pre><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><pre><code>计算机系统中的记忆设备，用来存放程序和数据
-它分为(低位到高位):
-    代码块
-        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
-
-    常量段
-        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
-
-    全局量
-        定义在函数之外,对所有函数可见。程序一开始运行就会创建全局量,可以修改他们
-
-    堆
-        用于动态存储:程序在运行时创建一些数据,然后使用很长一段时间
-
-    栈
-        存储器用来保存局部变量的部分。每当调用函数,函数的所有局部变量都在栈上创建。它之所有叫栈是 因为它看起来就像堆积而成的栈板:当进入函数时,变量会放到栈顶;当离开函数时,把变量从栈顶拿走。它从存储器的顶部开始,向下增长。
-</code></pre><h1 id="如何找出变量在存储器中的指针-使用-amp-运算符"><a href="#如何找出变量在存储器中的指针-使用-amp-运算符" class="headerlink" title="如何找出变量在存储器中的指针(使用&amp;运算符)"></a>如何找出变量在存储器中的指针(使用&amp;运算符)</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int point = 4;
-    /*
-        %p用于打印指针
-    */
-    printf(&quot;point的指针位置是:%p\n&quot;, &amp;point);
-    return 0;
-}
-</code></pre><h1 id="如何读取指针中的内容-使用-运算符"><a href="#如何读取指针中的内容-使用-运算符" class="headerlink" title="如何读取指针中的内容(使用*运算符)"></a>如何读取指针中的内容(使用*运算符)</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int  c = 10;
-    /*
-        获取变量c的指针地址 &amp;运算符
-        注意需要用int *申明指针变量
-    */
-    int *point = &amp;c;
-    /*
-        获取指针地址对应的值 *运算符
-    */
-    int val = *point;
-    printf(&quot;指针是%p\n&quot;, &amp;c);
-    printf(&quot;指针对应的值是%d\n&quot;, val);
-}
-</code></pre><h1 id="改变地址中的内容"><a href="#改变地址中的内容" class="headerlink" title="改变地址中的内容"></a>改变地址中的内容</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int c = 10;
-    int *point = &amp;c;
-    int val = *point;
-    *point = 99;
-    printf(&quot;改变后的c的值为%d&quot;, c);
-}
-</code></pre><h1 id="数组和函数中的指针变量"><a href="#数组和函数中的指针变量" class="headerlink" title="数组和函数中的指针变量"></a>数组和函数中的指针变量</h1><pre><code>#include &lt;stdio.h&gt;
-
-void size(char str[])
-{
-    printf(&quot;传入的字符串是%s\n&quot;, str);
-
-    /*
-        如果函数参数申明为数组类型,他会被当做指针处理,因此sizeof得到的值是8(64为系统,sizeof(* int))
-    */
-    printf(&quot;字符串的长度是:%i\n&quot;, sizeof(str));
-    char str_size[] = &quot;this is demo&quot;;
-    char * point = *str_size;
-
-    /*
-        sizeof直接传入数组依然计算的是数组的长度
-    */
-    printf(&quot;数组变量的长度是:%i\n&quot;, sizeof(str_size));
-
-    printf(&quot;数组变量指针的长度是:%i\n&quot;, sizeof(point));
-
-    /*
-        数组变量可以用作指针
-    */
-    printf(&quot;数组的变量的地址是:%s\n&quot;, &amp;str_size);
-
-    /*
-        数组变量指向数组的第一个值
-    */
-    printf(&quot;数组指针变量的地址是:%s\n&quot;, &amp;point);
-    *point = &quot;test&quot;;
-
-    /*
-        编译不能通过,数组变量不能指向其他地方
-    */
-    printf(&quot;指针变量被赋值了吗?%s\n&quot;, point);
-}
-
-
-int main()
-{
-    size(&quot;test&quot;);
-}
-</code></pre><h1 id="为什么数组变量不能指向其他地方"><a href="#为什么数组变量不能指向其他地方" class="headerlink" title="为什么数组变量不能指向其他地方?"></a>为什么数组变量不能指向其他地方?</h1><pre><code>当创建指针变量时,计算机会分配4或8个字节的存储空间。如果创建的是数组,计算机会为数组分配存储空间,但不会为数组变量分配任何空间,编译器仅在出现它的地方把它替换成数组的起始地址
-</code></pre><h1 id="对于数组取值的两种方式"><a href="#对于数组取值的两种方式" class="headerlink" title="对于数组取值的两种方式"></a>对于数组取值的两种方式</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    char str[] = &quot;this is arr&quot;;
-    printf(&quot;看看结果%c\n&quot;, str[3]);
-    printf(&quot;另外一种方式看看结果%c\n&quot;, *(str+3));
-
-    int nums[] = {1,2,3};
-    printf(&quot;看看结果%i\n&quot;, nums[2]);
-    printf(&quot;另外一种方式看看结果%i\n&quot;, *(nums+2));
-    return 0;
-}
-
-1.arr[i]
-2.*(arr+i)
-</code></pre><h1 id="指针为什么需要有类型"><a href="#指针为什么需要有类型" class="headerlink" title="指针为什么需要有类型?"></a>指针为什么需要有类型?</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int nums[] = {1,2,3};
-
-    /*
-        两个地址相隔四个字节(注意是16进制)
-    */
-    printf(&quot;看看第一个元素的位置%p\n&quot;, nums);
-    printf(&quot;看看第二个元素的位置%p\n&quot;, nums+1);
-    return 0;
-}
-因为对于char指针加1,指针会指向存储器的下一个地址,因为char就占1字节
-int通常占四个字节,如果int指针加1,编译后的代码就会对存储器加4
-</code></pre><h1 id="指针输入数据"><a href="#指针输入数据" class="headerlink" title="指针输入数据"></a>指针输入数据</h1><pre><code>scanf
-fgets
-</code></pre><h1 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h1><pre><code>#include &lt;stdio.h&gt;
-int main()
-{
-    /*
-        输入字符串
-    */
-    char test[20];
-    scanf(&quot;%19s&quot;, test);
-    printf(&quot;输入的字符串为:%s\n&quot;, test);
-
-    /*
-        输入数字
-    */
-    int t;
-    scanf(&quot;%i&quot;, &amp;t);
-    printf(&quot;输入的数字是%i\n&quot;, t);
-}
-
-为什么数组传入变量名就可以,数字需要传&apos;&amp;&apos;呢?
-scanf和函数一样,传入数组的变量名会当做指针使用,它会根据指针去修改对应的值
-
-为什么scanf的时候需要指定&apos;%19s&apos;?
-如果不指定scanf读取的长度,当用户输入的值超过test数组的长度的时候会导致内存溢出。因此一般指定scanf的长度为test长度减1(去掉一个结束字符&apos;\0&apos;)
-</code></pre><h1 id="fgets"><a href="#fgets" class="headerlink" title="fgets"></a>fgets</h1><pre><code>#include &lt;stdio.h&gt;
-int main()
-{
-    char str[4];
-    /*
-        此处需要注意的是str是数组变量,所以传入的是str不是* str
-    */
-    fgets(str, sizeof(str), stdin);
-    printf(&quot;输入的字符为%s\n&quot;, str);
-}
-</code></pre><h1 id="scanf和fgets"><a href="#scanf和fgets" class="headerlink" title="scanf和fgets"></a>scanf和fgets</h1><pre><code>1.scanf记得在格式串中加入限制长度,sacnf就能限制用户输入长度(没有强制要求),并且输入的字符长度需要减去结束符的长度,fgets强制限制用户输入字符数
-2.scanf允许输入多个字段,而且能指定结构化数据根据什么字符划分。fgets只允许缓冲区输入一个字符串,而且只能是字符串,不能是其他数据类型
-3.sanf不能输入空格,遇到空格就会停止读取。fget可以输入空格
-</code></pre><h1 id="字符串创建的过程"><a href="#字符串创建的过程" class="headerlink" title="字符串创建的过程"></a>字符串创建的过程</h1><pre><code>1.载入字符串字面值(也就是在常量(只读)中定义字面值)
-2.在栈上新建一个数组,主要会分配数组的存储块大小
-3.初始化数组,把字符串字面值复制到栈(可修改)上
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1774,7 +1524,7 @@ int main()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -233,6 +233,784 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/10/shell预定义变量及标准变量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/10/shell预定义变量及标准变量/" itemprop="url">shell预定义变量及标准变量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-10T16:14:12+08:00">
+                2016-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="export-readonly"><a href="#export-readonly" class="headerlink" title="export,readonly"></a>export,readonly</h1><ul>
+<li><p>export 用于修改或打印环境变量</p>
+<ul>
+<li>export name[=word] 修改环境变量 export PATH=$PATH:/home/bin</li>
+<li>export -p 打印出环境变量的名称与值</li>
+</ul>
+</li>
+<li><p>readonly 使变量不能修改</p>
+<ul>
+<li>readonly name[=word] readonly a=hello 是的a变量不能被修改</li>
+<li>readonly -p 打印出所有只读变量的名称与值</li>
+</ul>
+</li>
+</ul>
+<h1 id="env-unset"><a href="#env-unset" class="headerlink" title="env,unset"></a>env,unset</h1><ul>
+<li><p>env 临时改变环境变量的值</p>
+<ul>
+<li>env -i 初始化环境变量，丢弃任何继承值，仅传递命令上指定的环境变量给程序使用</li>
+</ul>
+</li>
+<li><p>unset 从执行的shell中删除变量与函数</p>
+<ul>
+<li>unset demo  删除变量demo</li>
+<li>unset -v hello 删除除了hello以外的变量</li>
+<li>unset -f test 删除函数test</li>
+</ul>
+</li>
+</ul>
+<h1 id="shell运算符"><a href="#shell运算符" class="headerlink" title="shell运算符"></a>shell运算符</h1><ul>
+<li><p>${varname:-word}</p>
+<ul>
+<li>如果varname存在且不为null，则返回vaname的值，否则返回word</li>
+</ul>
+</li>
+<li><p>${varname:=word}</p>
+<ul>
+<li>如果varname存在且不为null，则返回vaname的值，否则设置它为word并返回</li>
+</ul>
+</li>
+<li><p>${varname:?message}</p>
+<ul>
+<li>如果varname存在且不为null，则返回vaname的值，否则设置显示varname:message，并退出当前命令或脚本</li>
+</ul>
+</li>
+<li><p>${varname:+word}</p>
+<ul>
+<li>如果varname存在且不为null，则返回word，否则返回null</li>
+</ul>
+</li>
+<li><p>${varname#pattern}</p>
+<ul>
+<li>如果模式匹配于变量值的开头处，则删除匹配的最短部分，并返回剩下部分</li>
+</ul>
+</li>
+<li><p>${varname##pattern}</p>
+<ul>
+<li>如果模式匹配位于变量值的结尾处，则删除匹配的最短部分，并返回剩下的部分</li>
+</ul>
+</li>
+<li><p>${varname%pattern}</p>
+<ul>
+<li>如果模式匹配位于变量的结尾处，则删除匹配的最长部分，并返回剩下的部分</li>
+</ul>
+</li>
+<li><p>${varname%%pattern}</p>
+<ul>
+<li>如果模式匹配位于变量值的结尾处，则删除匹配的最长部分，并返回剩下的部分</li>
+</ul>
+</li>
+</ul>
+<h1 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h1><ul>
+<li><p>$#</p>
+<ul>
+<li>提供给shell脚本或函数的参数的总数</li>
+</ul>
+</li>
+<li><p>$*,$@</p>
+<ul>
+<li>一次表示所有的命令行参数</li>
+</ul>
+</li>
+<li><p>“$*”</p>
+<ul>
+<li>将所有的命令行参数视为单个字符串，等同于”$1 $2”</li>
+</ul>
+</li>
+<li><p>“$@”</p>
+<ul>
+<li>将所有的命令行参数视为单独的个体，也就是单独字符串,等同于”$1”,”$2”</li>
+</ul>
+</li>
+<li><p>$0</p>
+<ul>
+<li>获取当前执行shell的脚本文件名，如果执行脚本带路径那么就包括脚本路径</li>
+</ul>
+</li>
+<li><p>$n</p>
+<ul>
+<li>获取当前执行shell脚本的第n个参数，n=1..9，当n为0时表示脚本文件名，如果n大于9，需要使用大括号括起来${10}</li>
+</ul>
+</li>
+<li><p>$$</p>
+<ul>
+<li>获取当前shell的进程号</li>
+</ul>
+</li>
+<li><p>$!</p>
+<ul>
+<li>执行上一个指令的PID</li>
+</ul>
+</li>
+<li><p>$?</p>
+<ul>
+<li>获取执行上一个指令的返回值（0为成功，非0为失败）</li>
+</ul>
+</li>
+<li><p>$_</p>
+<ul>
+<li>在此之前执行的命令或脚本的最后一个参数</li>
+</ul>
+</li>
+</ul>
+<h1 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h1><ul>
+<li><p>#</p>
+<ul>
+<li>目前进程的参数个数</li>
+</ul>
+</li>
+<li><p>@</p>
+<ul>
+<li>传递给当前进程的命令行参数</li>
+</ul>
+</li>
+<li><p>*</p>
+<ul>
+<li>当前进程的命令行参数</li>
+</ul>
+</li>
+<li><p>-</p>
+<ul>
+<li>在引用时给予shell的选项</li>
+</ul>
+</li>
+<li><p>?</p>
+<ul>
+<li>前一命令的推出状态</li>
+</ul>
+</li>
+<li><p>$</p>
+<ul>
+<li>shell进程的进程编号</li>
+</ul>
+</li>
+<li><p>0</p>
+<ul>
+<li>shell程序的名称</li>
+</ul>
+</li>
+<li><p>!</p>
+<ul>
+<li>最近一个后台命令的进程编号</li>
+</ul>
+</li>
+<li><p>ENV</p>
+<ul>
+<li>$ENV的值是可展开参数。仅用于交互式shell中</li>
+</ul>
+</li>
+<li><p>HOME</p>
+<ul>
+<li>根目录</li>
+</ul>
+</li>
+<li><p>IFS</p>
+<ul>
+<li>内部的字段分割器</li>
+</ul>
+</li>
+<li><p>LANG</p>
+<ul>
+<li>当前locale的默认名称</li>
+</ul>
+</li>
+<li><p>LC_ALL</p>
+<ul>
+<li>当前locale的名称</li>
+</ul>
+</li>
+<li><p>LC_COLLATE</p>
+<ul>
+<li>用来排序字符的当前locale名称</li>
+</ul>
+</li>
+<li><p>LC_CTYPE</p>
+<ul>
+<li>在模式匹配期间，用来确定字符类别的当前locale的名称</li>
+</ul>
+</li>
+<li><p>LC_MESSAGES</p>
+<ul>
+<li>输出信息的当前语言的名称</li>
+</ul>
+</li>
+<li><p>LINENO</p>
+<ul>
+<li>刚执行过的行在脚本或函数内的行编号</li>
+</ul>
+</li>
+<li><p>NLSPATH</p>
+<ul>
+<li>在$LC_MESSAGES(XSI)所给定的信息语言里，信息目录位置</li>
+</ul>
+</li>
+<li><p>PATH</p>
+<ul>
+<li>命令的查找路径</li>
+</ul>
+</li>
+<li><p>PPID</p>
+<ul>
+<li>父进程的进程编号</li>
+</ul>
+</li>
+<li><p>PS1</p>
+<ul>
+<li>主要的命令提示字符串。默认为”$”</li>
+</ul>
+</li>
+<li><p>PS2</p>
+<ul>
+<li>行继续的提示字符串。默认为”&gt;”</li>
+</ul>
+</li>
+<li><p>PS4</p>
+<ul>
+<li>以set -x设置的执行跟踪的提示字符串。默认位”+”</li>
+</ul>
+</li>
+<li><p>PWD</p>
+<ul>
+<li>当前工作目录</li>
+</ul>
+</li>
+</ul>
+<h1 id="shell内置变量"><a href="#shell内置变量" class="headerlink" title="shell内置变量"></a>shell内置变量</h1><pre><code>* 可以使用man cd查看
+</code></pre><ul>
+<li><p>alias,unalias</p>
+<ul>
+<li>定义别名，删除别名</li>
+</ul>
+</li>
+<li><p>bg,fg,jobs,kill</p>
+<ul>
+<li>用于工作控制，它是一个操作系统工具，可将工作移动到后台执行，或由后台执行中移出</li>
+</ul>
+</li>
+<li><p>fc</p>
+<ul>
+<li>管理shell之前已存储的执行过的命令历史，允许交互式用户再次调用之前用过的命令，编辑它以及再重新执行它</li>
+</ul>
+</li>
+<li><p>times</p>
+<ul>
+<li>打印由shell及所有子进程所累积执行迄今的cpu时间</li>
+</ul>
+</li>
+<li><p>umask</p>
+<ul>
+<li>用来设置文件监理师的权限掩码</li>
+</ul>
+</li>
+<li><p>PIPESTATUS</p>
+<ul>
+<li>存储上次运行的管道或命令的退出状态的数组</li>
+</ul>
+</li>
+<li><p>REPLY</p>
+<ul>
+<li>read命令没有提供变量情况下的默认变量</li>
+</ul>
+</li>
+<li><p>SECOND</p>
+<ul>
+<li>返回shell运行的秒数</li>
+</ul>
+</li>
+<li><p>TMOUT</p>
+<ul>
+<li>用于内置命令:read,select,或者交互式bash shell.如果TMOUT数值为证,则使用它的前面3个命令在$TMOUT秒之后超时.如果等于0或者为负数,则将其忽略</li>
+</ul>
+</li>
+</ul>
+<p>*</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/05/2015年个人总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/05/2015年个人总结/" itemprop="url">2015年个人总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-05T20:37:22+08:00">
+                2016-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h1><ul>
+<li><p>选书：</p>
+<ul>
+<li>先选择大概一个学习的方向，比如说mysql，redis，linux等</li>
+<li>再选择典型性的书籍（每个方面都会有几本特别经典的书籍）</li>
+</ul>
+</li>
+<li><p>阅读：</p>
+<ul>
+<li>先查阅目录，思考为什么会是这些章节，这个技术大概涵盖哪些内容</li>
+<li>再选择阅读的章节，思考作者写作思路，为什么先写这块知识，再写这块，有什么必然联系</li>
+<li>最后读的时候碰到不懂的尽量的去拓展阅读</li>
+</ul>
+</li>
+<li><p>知识点的归纳总结：</p>
+<ul>
+<li>实战－再项目中用到学的技术点</li>
+<li>经验－看看别人的应用场景及案例，以及踩过的坑</li>
+<li>分享－把学习到的东西告诉人家，验证学习成果</li>
+<li>交流－加几个相关方面微信或qq群，看看志同道合的人都在聊哪些知识点</li>
+</ul>
+</li>
+<li><p>建议：</p>
+<ul>
+<li>不要断续的阅读，成章成本的阅读，尽量一个知识块在一个连续的时间阅读完</li>
+<li>看到一本书，如果不能引发你的思考，那就停止阅读</li>
+<li>对于好的书籍反复阅读</li>
+</ul>
+</li>
+</ul>
+<h1 id="技术及书籍"><a href="#技术及书籍" class="headerlink" title="技术及书籍"></a>技术及书籍</h1><p>整体来说在技术成长比较缓慢，上半年有迷茫期，下半年技术有明确的方向。书籍阅读面及阅读量都太少。对行业的关注技实时新闻的关注有待加强。</p>
+<ul>
+<li><p>1月-4月（看完几乎没有获得什么，没有任何的思考及总结）<br>看了比较多的零散的文章，博客（没有固定方向，一般有人推荐和分享都会去看），而且没有总结（需要提高的地方）<br><a href="http://book.douban.com/subject/25942507/" title="参与感" target="_blank" rel="external">参与感</a><br><a href="http://book.douban.com/subject/6021440/" title="黑客与画家" target="_blank" rel="external">黑客与画家</a><br><a href="http://book.douban.com/subject/4262627/" title="重构" target="_blank" rel="external">重构</a><br><a href="http://book.douban.com/subject/5442024/" title="代码整洁之道" target="_blank" rel="external">代码整洁之道</a></p>
+</li>
+<li><p>5月-9月（反复的在阅读，最后在笔记本上记录相关重点知识整理了部分知识点的ppt－最好记录到博客，整理ppt便于分享及知识点提炼）<br><a href="http://book.douban.com/subject/24708143/" title="Mysql技术内幕－InnoDB存储引擎" target="_blank" rel="external">Mysql技术内幕－InnoDB存储引擎</a><br><a href="http://book.douban.com/subject/23008813/" title="高性能Mysql" target="_blank" rel="external">高性能Mysql</a></p>
+</li>
+<li><p>10月-11月（整理了ppt做了分享，分享效果不怎么样，需要改进）<br><a href="http://book.douban.com/subject/24522045/" title="Redis入门指南" target="_blank" rel="external">Redis入门指南</a><br><a href="http://book.douban.com/subject/25900156/" title="Redis设计与实现" target="_blank" rel="external">Redis设计与实现</a><br><a href="http://book.douban.com/subject/26612779/" title="Redis实战" target="_blank" rel="external">Redis实战</a></p>
+</li>
+<li><p>12月（尝试着整理知识点到博客）<br><a href="http://book.douban.com/subject/3519360/" title="Shell脚本学习指南" target="_blank" rel="external">Shell脚本学习指南</a></p>
+</li>
+</ul>
+<h1 id="思维"><a href="#思维" class="headerlink" title="思维"></a>思维</h1><p>缺乏安全意识，全局思考，横向，纵向拓展思考，几乎处于不会思考的状态，更多的思考停留在表面的为什么，简单的追求原因。没有深入的思考问题产生的本质，以及跳出问题本身的思考。思维局限在一个小的圈子里面。</p>
+<h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><ul>
+<li><p>3月-8月 蜜银项目，熟悉理财产品的录入，上架，用户充值，提现，购买，计息，兑付，对账，异常数据处理等业务。思考的方向是技术点实现的难易程度，以及后期的重构，代码的规范及抽象，模块的整理。</p>
+</li>
+<li><p>9月-12月 钱隆项目，业务点与蜜银相似，属于快速封闭开发项目。思考的方向更多的偏向流程，用户体验，及业务场景</p>
+</li>
+</ul>
+<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li><p>阅读：增加阅读的时间，不局限于技术类书籍，增大阅读的广度，阅读完之后都做总结博客</p>
+</li>
+<li><p>技术：主要偏向运维方向（搭建高可用高性能系统），及技术思路拓展</p>
+<ul>
+<li>shell脚本学习</li>
+<li>python语言学习</li>
+<li>初中级运维知识学习，偏系统搭建，及性能问题</li>
+</ul>
+</li>
+<li><p>业务：多关注行业内的动态及政策，多思考业务的存在原因</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/wc的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/29/wc的使用/" itemprop="url">wc的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T10:05:34+08:00">
+                2015-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/fmt的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -528,650 +1306,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/sort的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/29/sort的使用/" itemprop="url">sort的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T09:32:36+08:00">
-                2015-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="sort使用场景"><a href="#sort使用场景" class="headerlink" title="sort使用场景"></a>sort使用场景</h1><pre><code>用法：sort [选项]... [文件]...
-　或：sort [选项]... --files0-from=F
-串联排序所有指定文件并将结果写到标准输出。
-
-长选项必须使用的参数对于短选项时也是必需使用的。
-排序选项：
-
-  -b, --ignore-leading-blanks    忽略前导的空白区域
-  -d, --dictionary-order    只考虑空白区域和字母字符
-  -f, --ignore-case        忽略字母大小写
-  -g, --general-numeric-sort    按照常规数值排序
-  -i, --ignore-nonprinting    只排序可打印字符
-  -M, --month-sort        比较 (未知) &lt; &quot;一月&quot; &lt; ... &lt; &quot;十二月&quot;
-                在LC_ALL=C 时为(unknown) &lt; `JAN&apos; &lt; ... &lt; `DEC&apos;
-  -h, --human-numeric-sort    使用易读性数字(例如： 2K 1G)
-  -n, --numeric-sort        根据字符串数值比较
-  -R, --random-sort        根据随机hash 排序
-      --random-source=文件    从指定文件中获得随机字节
-  -r, --reverse            逆序输出排序结果
-      --sort=WORD        按照WORD 指定的格式排序：
-                    一般数字-g，高可读性-h，月份-M，数字-n，
-                    随机-R，版本-V
-  -V, --version-sort        在文本内进行自然版本排序
-
-其他选项：
-
-      --batch-size=NMERGE    一次最多合并NMERGE 个输入；如果输入更多
-                    则使用临时文件
-  -c, --check, --check=diagnose-first    检查输入是否已排序，若已有序则不进行操作
-  -C, --check=quiet, --check=silent    类似-c，但不报告第一个无序行
-      --compress-program=程序    使用指定程序压缩临时文件；使用该程序
-                    的-d 参数解压缩文件
-      --files0-from=文件    从指定文件读取以NUL 终止的名称，如果该文件被
-                    指定为&quot;-&quot;则从标准输入读文件名
-  -k, --key=位置1[,位置2]    在位置1 开始一个key，在位置2 终止(默认为行尾)
-  -m, --merge            合并已排序的文件，不再进行排序
-  -o, --output=文件        将结果写入到文件而非标准输出
-  -s, --stable            禁用last-resort 比较以稳定比较算法
-  -S, --buffer-size=大小    指定主内存缓存大小
-  -t, --field-separator=分隔符    使用指定的分隔符代替非空格到空格的转换
-  -T, --temporary-directory=目录    使用指定目录而非$TMPDIR 或/tmp 作为
-                    临时目录，可用多个选项指定多个目录
-  -u, --unique        配合-c，严格校验排序；不配合-c，则只输出一次排序结果
-  -z, --zero-terminated    以0 字节而非新行作为行尾标志
-      --help        显示此帮助信息并退出
-      --version        显示版本信息并退出
-
-POS 是F[.C][OPTS]，F 代表域编号，C 是域中字母的位置，F 和C 均从1开始计数
-如果没有有效的-t 或-b 选项存在，则从前导空格后开始计数字符。OPTS 是一个或多个
-由单个字母表示的顺序选项，以此覆盖此key 的全局顺序设置。如果没有指定key 则
-将其整个行。
-
-指定的大小可以使用以下单位之一：
-内存使用率% 1%，b 1、K 1024 (默认)，M、G、T、P、E、Z、Y 等依此类推。
-
-如果不指定文件，或者文件为&quot;-&quot;，则从标准输入读取数据。
-</code></pre><h1 id="sort参数说明"><a href="#sort参数说明" class="headerlink" title="sort参数说明"></a>sort参数说明</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/26/join的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">join的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-26T10:17:46+08:00">
-                2015-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="join的使用案例"><a href="#join的使用案例" class="headerlink" title="join的使用案例"></a>join的使用案例</h1><p>1.文件内容<br>cat month_cn.txt</p>
-<pre><code>1       一月
-2       二月
-3       三月
-4       四月
-5       五月
-6       六月
-7       七月
-8       八月
-9       九月
-10      十月
-11      十一月
-12      十二月
-13      十三月，故意的
-</code></pre><p>2.文件内容<br>cat month_en.txt</p>
-<pre><code>1       January
-2       February
-3       March
-4       April
-5       May
-6       June
-7       July
-8       August
-9       September
-10      October
-11      November
-12      December
-14      MonthUnknown
-</code></pre><p>3.内连接（指定关联行数）<br>join month_cn.txt month_en.txt<br>join -j 1 month_cn.txt month_en.txt(<code>以第一行作为匹配字段</code>)<br>join -1 1 -2 1 month_cn.txt month_en.txt(<code>第一个文件的第一行和第二个文件的第一行进行匹配</code>)</p>
-<pre><code>1 一月 January
-2 二月 February
-3 三月 March
-4 四月 April
-5 五月 May
-6 六月 June
-7 七月 July
-8 八月 August
-9 九月 September
-10 十月 October
-11 十一月 November
-12 十二月 December
-</code></pre><p>4.左连接（以全面文件为主去匹配后面文件的内容）<br>join -a1 month_cn.txt month_en.txt</p>
-<pre><code>1 一月 January
-2 二月 February
-3 三月 March
-4 四月 April
-5 五月 May
-6 六月 June
-7 七月 July
-8 八月 August
-9 九月 September
-10 十月 October
-11 十一月 November
-12 十二月 December
-13 十三月，故意的
-</code></pre><p>5.右连接<br>join -a2 month_cn.txt month_en.txt</p>
-<pre><code>1 一月 January
-2 二月 February
-3 三月 March
-4 四月 April
-5 五月 May
-6 六月 June
-7 七月 July
-8 八月 August
-9 九月 September
-10 十月 October
-11 十一月 November
-12 十二月 December
-14 MonthUnknown
-</code></pre><p>6.全连接<br>join -a1 -a2 month_cn.txt month_en.txt</p>
-<pre><code>1 一月 January
-2 二月 February
-3 三月 March
-4 四月 April
-5 五月 May
-6 六月 June
-7 七月 July
-8 八月 August
-9 九月 September
-10 十月 October
-11 十一月 November
-12 十二月 December
-13 十三月，故意的
-14 MonthUnknown
-</code></pre><p>7.指定输出内容<br>join -o 1.1 1.2 2.2 month_cn.txt month_en.txt</p>
-<pre><code>1 一月 January
-2 二月 February
-3 三月 March
-4 四月 April
-5 五月 May
-6 六月 June
-7 七月 July
-8 八月 August
-9 九月 September
-10 十月 October
-11 十一月 November
-12 十二月 December
-</code></pre><p>8.前面文件存在，后面文件不存在的内容<br>join -v 1  month_cn.txt month_en.txt</p>
-<pre><code>13 十三月，故意的
-</code></pre><h1 id="join参数说明"><a href="#join参数说明" class="headerlink" title="join参数说明"></a>join参数说明</h1><pre><code>用法：join [选项]... 文件1 文件2(找出两个文件中，指定栏位内容相同的行，并加以合并，再输出到标准输出设备。)
-针对每一对具有相同内容的输入行，整合为一行写到标准输出，
-默认的内容连接区块是由第一个空白符代表的分界符号。当文件1
-或文件2 都被指定为&quot;-&quot;时，程序将从标准输入读取数据。
-
-  -a  文件编号        文件编号的值可以是1 或2，分别对应文件1 和 文件2。
-                          此选项用于根据指定文件编号输出不成对的行目。
-  -e 字符            将缺失的输入区块替换为指定字符
-  -i, --ignore-case     比较时忽略大小写
-  -j 域         等于&quot;-1 域 -2 域&quot;
-  -o 格式         按照指定格式构造输出行
-  -t 字符         使用指定字符作为输入和输出的分隔符
-  -v 文件编号            类似 -a 文件编号，但禁止组合输出行
-  -1 域              在文件1 的此域组合
-  -2 域              在文件2 的此域组合
-  --check-order         检查输入行是否正确排序，即使所有输入行均是成对的
-  --nocheck-order       不检查输入是否正确排序
-      --help        显示此帮助信息并退出
-      --version        显示版本信息并退出
-
-除非使用了&quot;-t 字符串&quot; 选项，否则前导空格分隔的域将被忽略，如果指定了字符串，
-则使用指定字符串分隔任意的域并从1 开始计数的域编号。可以指定的格式是由一个
-或多个逗号活空格所分隔的描述，其形式为&quot;文件编号.域&quot;或者&quot;0&quot;。默认的
-格式输出合并后的域、文件1 和文件2 剩下的域，均由该指定字符串分隔。
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/cut的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">cut的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T10:48:06+08:00">
-                2015-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cut使用案例"><a href="#cut使用案例" class="headerlink" title="cut使用案例"></a>cut使用案例</h1><pre><code>1.按字节切割
-tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
-
-2.指定分隔符切割
-tail -n 1 /etc/passwd | cut -d : -f 1,5（以:分割，获取第一个和第五个域）
-ls -l | cut -d &quot; &quot; -f 1（以空格分割，取第一个域得字符）
-
-3.按字符切割
-ls -l | cut -c 1-10（获取文件的第一个字符到第十个字符）`中文字符和空格都算一个字符`
-</code></pre><h1 id="cut参数说明"><a href="#cut参数说明" class="headerlink" title="cut参数说明"></a>cut参数说明</h1><pre><code>用法：cut [选项]... [文件]...
-从每个文件中输出指定部分到标准输出。
-
-长选项必须使用的参数对于短选项时也是必需使用的。
-  -b, --bytes=列表        只选中指定的这些字节
-  -c, --characters=列表        只选中指定的这些字符
-  -d, --delimiter=分界符    使用指定分界符代替制表符作为区域分界
-  -f, --fields=LIST     选择部分字段，如果不制定－s分隔符的参数，直接打印出没有不包含分隔符的字符
-
-  -n                     -b: 不分裂的多字节字符和-b一起使用(`汉字是三个字节，如果直选中一个字节，也不进行分割，直接显示汉字`)
-      --complement        补全选中的字节、字符或域
-  -s, --only-delimited        不打印没有包含分界符的行
-      --output-delimiter=字符串    使用指定的字符串作为输出分界符，默认采用输入
-                的分界符
-      --help        显示此帮助信息并退出
-      --version        显示版本信息并退出
-
-仅使用f -b, -c 或-f 中的一个。每一个列表都是专门为一个类别作出的，或者您可以用逗号隔
-开要同时显示的不同类别。您的输入顺序将作为读取顺序，每个仅能输入一次。
-每种参数格式表示范围如下：
-    N    从第1 个开始数的第N 个字节、字符或域
-    N-    从第N 个开始到所在行结束的所有字符、字节或域
-    N-M    从第N 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
-    -M    从第1 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
-
-当没有文件参数，或者文件不存在时，从标准输入读取
-</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><pre><code>取出eth0对应的ip地址?
-ifconfig eth0 | grep &quot;inet addr&quot; | cut -d &quot;:&quot; -f2 | cut -d &quot; &quot; -f1
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1217,7 +1356,7 @@ ifconfig eth0 | grep &quot;inet addr&quot; | cut -d &quot;:&quot; -f2 | cut -d &
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -233,6 +233,525 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/17/ab压测工具的安装与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">ab压测工具的安装与使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-17T10:03:33+08:00">
+                2015-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install httpd-tools
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
+</code></pre><h2 id="命令执行结果分析"><a href="#命令执行结果分析" class="headerlink" title="命令执行结果分析"></a>命令执行结果分析</h2><pre><code>Server Software:
+Server Hostname:        hostname(*服务器域名*)
+Server Port:            443(*服务器端口*)
+SSL/TLS Protocol:       TLSv1/SSLv3,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+
+Document Path:          /path(*测试接口地址*)
+Document Length:        14904 bytes(*测试数据大小*)
+
+Concurrency Level:      10(*并发数*)
+Time taken for tests:   0.403 seconds(*整个测试持续时间*)
+Complete requests:      10(*完成的请求数量*)
+Failed requests:        0(*失败的请求,返回的内容如果和第一次不一样就认为是失败*)
+Write errors:           0(*请求写入失败的次数*)
+Keep-Alive requests:    0(*保持联机连接的请求数量。只有在命令行中使用-k，才能看到该属性值*)
+Total transferred:      151120 bytes(*整个场景中的网络传输量*)
+HTML transferred:       149040 bytes(*整个场景中的HTML内容传输量*)
+`Requests per second:    24.84 [#/sec] (mean)(*表示当前测试的服务器每秒可以处理24.84个静态html的请求事务，后面的mean表示平均。这个数值表示当前机器的整体性能，值越大越好*)`
+`Time per request:       402.511 [ms] (mean)(*单个并发的延迟时间，后面的mean表示平均。隔离开当前并发，单独完成一个请求需要的平均时间*)`
+`Time per request:       40.251 [ms] (mean, across all concurrent requests)(*即上面的时间（Time per request）除以并发数 ,平均每个并发请求处理的时间*)`
+`Transfer rate:          366.64 [Kbytes/sec] received(*平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题，也就是这些请求在单位时间从服务器获取的数据长度*)`
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       33   46  14.6     41      72
+Processing:    16  113 119.2     27     268
+Waiting:       10   37  79.1     12     262
+Total:         49  159 121.5     99     340
+
+Percentage of the requests served within a certain time (ms)
+  50%     99
+  66%    268
+  75%    282
+  80%    299
+  90%    340
+  95%    340
+  98%    340
+  99%    340
+ 100%    340 (longest request)
+</code></pre><h2 id="ab命令参数"><a href="#ab命令参数" class="headerlink" title="ab命令参数"></a>ab命令参数</h2><pre><code>Usage:
+  ab [options] [http[s]://]hostname[:port]/path
+Options are:
+  -n requests     (*总的请求数目*)
+  -c concurrency  (*一次请求并发数*)
+  -t timelimit    (*测试进行的最大秒数*)
+  -b windowsize   (*tcp连接的最大内存使用*)
+  -p postfile     (*post的数据*)
+  -u putfile      (*put的数据*)
+  -T content-type (*header的类型，比如&apos;application/x-www-form-urlencoded&apos;默认为Default is &apos;text/plain&apos;*)
+  -v verbosity    (*设置显示信息的详细程度 – 4或更大值会显示头信息， 3或更大值可以显示响应代码(404, 200等), 2或更大值可以显示警告和其他信息*)
+  -w              (*将结果用html的table打印出来，默认它是白色背景的两列宽度的一张表*)
+  -i              (*执行HEAD请求，而不是GET*)
+  -C attribute    (*添加一个cookie信息*)Add cookie, eg. &apos;Apache=1234. (repeatable)
+  -H attribute    (*添加head属性例如eg. &apos;Accept-Encoding: gzip&apos;*)
+  -A attribute    (*Add Basic WWW Authentication, the attributes are a colon separated username and password*)
+  -P attribute    (*Add Basic Proxy Authentication, the attributes are a colon separated username and password*)
+  -X proxy:port   (*使用代理的端口*)
+  -V              (*显示版本信息并退出*)
+  -k              (*使用http的KeepAlive属性*)
+  -d              (*Do not show percentiles served table*)
+  -S              (*Do not show confidence estimators and warnings*)
+  -g filename     (*Output collected data to gnuplot format file*)
+  -e filename     (*Output CSV file with percentages served*)
+  -r              (*忽略socket错误*)
+  -h              (*Display usage information (this message)*)
+  -Z ciphersuite  (*Specify SSL/TLS cipher suite (See openssl ciphers)*)
+  -f protocol     (*特殊的协议例如SSL2, SSL3, TLS1, or ALL*)
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/03/Redis集群的安装与配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">Redis集群的安装与配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-03T18:23:49+08:00">
+                2015-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Redis集群安装"><a href="#Redis集群安装" class="headerlink" title="Redis集群安装"></a>Redis集群安装</h2><ul>
+<li><code>wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;</code>(<em>下载redis-3.0.tar.gz</em>)</li>
+<li><code>tar zxvf redis-3.0.tar.gz</code>(<em>解压安装包</em>)</li>
+<li><code>cd redis-3.0.0-beta3</code>（<em>进入解压后的文件夹</em>）</li>
+<li><code>yum install tcl</code></li>
+<li><code>make</code></li>
+<li><code>cp redis.conf redis.6380.conf</code></li>
+<li><code>vim redis.6380.conf</code></li>
+<li><code>src/redis-server redis.6380.conf &amp;</code></li>
+<li><code>ps aux | grep redis</code></li>
+<li><code>src/redis-cli -h 172.16.9.111 -p 6379</code></li>
+<li><code>yum install ruby</code></li>
+<li><code>yum install rubygems</code></li>
+<li><code>gem install redis</code></li>
+<li><code>src/redis-trib.rb create --replicas 1 172.16.9.111:6380 172.16.9.111:6381 172.16.9.111:6382 172.16.9.104:6380 172.16.9.104:6381 172.16.9.104:6382</code></li>
+<li><code>src/redis-cli -p 6380</code></li>
+<li><code>src/redis-cli -c -p 6380</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/分页的思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">分页的思考</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T16:53:46+08:00">
+                2015-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>交易记录条数过多，需要分页处理</li>
+</ul>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
+<li>当进行翻页的时候会有重复的数据数据出现。</li>
+<li>原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page<em>$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易记录产生的时候，实际上对应的第二页得数据应该是第22到第41条(</em>因为产生记录之前的第20条数据，已经顺移了一个位置*)，实际上显示的是第21到第40条，所以第21条数据应该是重复的</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>在进行分页的时候，传入当前页的最有一个记录的id然后在分页的sql变成where id&gt;? limit $lenght</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/decrby的一个坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -550,593 +1069,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/Strace命令使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/04/Strace命令使用/" itemprop="url">Strace命令使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T00:00:59+08:00">
-                2015-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ul>
-<li>会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值，每一行都是一条系统调用，等号左边是系统调用的函数名及其参数，右边是该调用的返回值</li>
-</ul>
-<h2 id="我的应用场景"><a href="#我的应用场景" class="headerlink" title="我的应用场景"></a>我的应用场景</h2><ul>
-<li><code>strace mysql</code>（<em>找不到配置文件的时候，可以使用它查看它打开文件的记录，了解到配置文件的路径.</em>）</li>
-<li><code>ps aux | grep php-fpm</code>（<em>找出php-fpm的启动进程</em>） <code>strace -p 26999</code>（<em>26999为非root进程id</em>）（<em>在进行程序调试的时候不知道发生了什么错误，错误日志写在什么位置，或者程序在哪个未知位置执行终止了，都可以进行查看。</em>）</li>
-<li><code>strace -o strace.txt -T -tt -e trace=all -p 3306</code>（<em>跟踪3306进程的所有系统调用（-e trace=all），并统计系统调用的花费时间，以及开始时间（并以可视化的时分秒格式显示），最后将记录结果存在strace.txt文件里面，当中断显示不全strace信息的时候</em>）</li>
-</ul>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><pre><code> -c            #统计每一系统调用的所执行的时间,次数和出错的次数等.
- -C            #Like -c but also print regular output while processes are running
- -d            #输出strace自身的关于标准错误的调试信息.
- -f            #跟踪由fork调用所产生的子进程.
- -ff            #如果提供-o filename,则所有进程的跟踪结果输出到相应的filename.pid中,pid是各进程的进程号. 此与-c不兼容
- -h            #输出简要的帮助信息.
- -i            #打印系统调用时候的入口指针.
- -q            #禁止输出关于脱离的消息.
- -r            #进入每一个系统调用时打印一个相对时间戳，一个系统调用的开始和下一个系统调用接替时，两者之间的时间.
- -t            #在输出中的每一行前加上时间信息.
- -tt            #时间信息精确到微妙
- -ttt            #时间信息精确到微妙，而且时间表示为unix时间戳
- -T            #显示每一调用所耗的时间.
- -v            #Print unabbreviated versions of environment, stat, termios, etc.  calls
- -V            #输出strace的版本信息.
- -x            #打印所有非ascii字符串以十六进制字符串格式显示。
- -xx            #所有字符串以十六进制形式输出.
- -a column        #设置返回值的输出位置.默认 为40.
- -e expr        #指定一个表达式,用来控制如何跟踪.格式如下:
-[qualifier=][!]value1[,value2]...
-qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value是用来限定的符号或数字.默认的 qualifier是 trace.感叹号是否定符号.例如: -eopen等价于 -e trace=open,表示只跟踪open调用.而-etrace!=open表示跟踪除了open以外的其他调用.有两个特殊的符号 all 和 none. 注意有些shell使用!来执行历史记录里的命令,所以要使用反斜杠
- -e trace=set        #只跟踪指定的系统调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all.
- -e trace=file        #只跟踪有关文件操作的系统调用.
- -e trace=process    #只跟踪有关进程控制的系统调用.
- -e trace=network    #跟踪与网络有关的所有系统调用.
- -e strace=signal    #跟踪所有与系统信号有关的 系统调用
- -e trace=ipc        #跟踪所有与进程通讯有关的系统调用
- -e abbrev=set        #设定 strace输出的系统调用的结果集.-v等与abbrev=none.默认为abbrev=all.
- -e raw=set        #将指 定的系统调用的参数以十六进制显示.
- -e signal=set        #指定跟踪的系统信号.默认为all.如 signal=!SIGIO(或者signal=!io),表示不跟踪SIGIO信号.
- -e read=set        #输出从指定文件中读出的数据.例如: -e read=3,5
- -e write=set        #输出写入到指定文件中的数据.
- -o filename        #将strace的输出写入文件filename
- -O overhead        #设置追踪系统的总开销（microseconds）
- -p pid            #跟踪指定的进程pid.
- -s strsize        #指定输出的字符串的最大长度.默认为32.文件名一直全部输出.
- -S sortby        #-c选项的输出以规定的标准显示为直方图
- -u username        #以username 的UID和GID执行被跟踪的命令
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/29/Mysql-InnnoDB需要学习那些内容/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/29/Mysql-InnnoDB需要学习那些内容/" itemprop="url">Mysql InnnoDB需要学习那些内容</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-29T23:01:40+08:00">
-                2015-05-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Myslq-体系结构"><a href="#Myslq-体系结构" class="headerlink" title="Myslq 体系结构"></a>Myslq 体系结构</h2><h2 id="Myslq-存储引擎了解及对比"><a href="#Myslq-存储引擎了解及对比" class="headerlink" title="Myslq 存储引擎了解及对比"></a>Myslq 存储引擎了解及对比</h2><h2 id="InnoDB-体系结构"><a href="#InnoDB-体系结构" class="headerlink" title="InnoDB 体系结构"></a>InnoDB 体系结构</h2><h2 id="InnoDB-工作方式"><a href="#InnoDB-工作方式" class="headerlink" title="InnoDB 工作方式"></a>InnoDB 工作方式</h2><h2 id="InnoDB-特性"><a href="#InnoDB-特性" class="headerlink" title="InnoDB 特性"></a>InnoDB 特性</h2><h2 id="InnoDB-涉及的文件"><a href="#InnoDB-涉及的文件" class="headerlink" title="InnoDB 涉及的文件"></a>InnoDB 涉及的文件</h2><h2 id="InnoDB-表的存储方式"><a href="#InnoDB-表的存储方式" class="headerlink" title="InnoDB 表的存储方式"></a>InnoDB 表的存储方式</h2><h2 id="InnoDB-索引及算法"><a href="#InnoDB-索引及算法" class="headerlink" title="InnoDB 索引及算法"></a>InnoDB 索引及算法</h2><h2 id="InnoDB-锁"><a href="#InnoDB-锁" class="headerlink" title="InnoDB 锁"></a>InnoDB 锁</h2><h2 id="InnoDB-事务"><a href="#InnoDB-事务" class="headerlink" title="InnoDB 事务"></a>InnoDB 事务</h2><h2 id="InnoDB-备份和恢复"><a href="#InnoDB-备份和恢复" class="headerlink" title="InnoDB 备份和恢复"></a>InnoDB 备份和恢复</h2><h2 id="InnoDB-性能调优"><a href="#InnoDB-性能调优" class="headerlink" title="InnoDB 性能调优"></a>InnoDB 性能调优</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/28/Xhprof安装与使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/28/Xhprof安装与使用/" itemprop="url">Xhprof安装与使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-28T01:01:40+08:00">
-                2015-05-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p> <em>Xhprof能用来做什么？</em><br>    XHProf是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情 况。一个函数的开销，可细分成调用者和被调用者的开销。</p>
-<h3 id="Xhprof-安装"><a href="#Xhprof-安装" class="headerlink" title="Xhprof 安装"></a>Xhprof 安装</h3><ul>
-<li><p>Xhprof安装</p>
-<pre><code>wget http://pecl.php.net/get/xhprof-0.9.2.tgz 
-tar xzvf xhprof-0.9.2.tgz 
-cp -r xhprof_html xhprof_lib /usr/local/www/
-cd xhprof-0.9.2/extension/
-/usr/local/php/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config 
-make  
-make install
-</code></pre><p>  修改php.ini，添加xhprof.so （<em>注意xhprof.so需要在extension_dir目录下</em>）</p>
-<pre><code>extension=xhprof.so   
-xhprof.output_dir=/var/logs/xhprof
-</code></pre></li>
-<li><p>如果出现xhprof.lo错误,可能是版本兼容的问题,请更换xhprof的版本执行,下载地址<a href="http://pan.baidu.com/s/1i3OOuDB" title="xhprof" target="_blank" rel="external">xhprof-0.9.4</a>,重新再执行上面操作</p>
-</li>
-<li><p>graphviz安装（<em>性能数据也可以通过callgraph视图来查看 。callgraph 会高亮显示程序的关键路径。</em>）</p>
-<pre><code>wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.24.0.tar.gz
-tar zxf graphviz-2.24.0.tar.gz
-cd graphviz-2.24.0
-编译安装
-./configure
-make
-make install
-</code></pre></li>
-</ul>
-<h3 id="Xhprof-使用"><a href="#Xhprof-使用" class="headerlink" title="Xhprof 使用"></a>Xhprof 使用</h3><ul>
-<li><p>XHProf.class.php（<em>本事例是将xhprof_html xhprof_lib XHProf.class.php demo.php放在同一级目录下面，需要web程序能够访问到</em>）</p>
-<pre><code>&lt;?php
-require_once &apos;xhprof_lib/display/xhprof.php&apos;;
-require_once &apos;xhprof_lib/utils/xhprof_runs.php&apos;;
-class Xhprof {
-
-    public function start(array $ignored_funcs=array()) {
-        xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY, array(&apos;ignored_funcs&apos; =&gt; $ignored_funcs));
-    }
-
-    public function end() {
-        $data = xhprof_disable();
-        return $data;
-    }
-
-    public function createImg($data){
-        $source = &quot;xhprof&quot;;
-        $threshold = 0.01;
-        $type = &quot;png&quot;;
-        $func = &apos;&apos;;
-        $page = &quot;&quot;;
-        $critical_path = true;
-
-        $script = xhprof_generate_dot_script($data, $threshold, $source, $page,
-            $func, $critical_path);
-        $content = xhprof_generate_image_by_dot($script, $type);
-
-        $img_name = uniqid().&quot;.png&quot;;
-        $img_path = &quot;/data1/htdocs/xhprof.com/xhprof_img/&quot;.$img_name;
-        file_put_contents($img_path, $content);
-
-        return &quot;&lt;img src=&apos;http://xhprof.com/xhprof_img/&quot;.$img_name.&quot;&apos;&gt;&lt;img&gt;&quot;;
-    }
-
-    public function getHtml($data) {
-        $xhprof_runs = new \XHProfRuns_Default();
-        $run_id = $xhprof_runs-&gt;save_run($data, &quot;xhprof_foo&quot;);
-
-        return &quot;&lt;a href=\&quot;http://xhprof.com/xhprof_html/index.php?run=$run_id&amp;source=xhprof_foo\&quot; target=\&quot;iframe_a\&quot;&gt;性能分析结果&lt;/a&gt;&quot;;
-    }
-}
-</code></pre></li>
-<li><p>demo.php</p>
-<pre><code>&lt;?php
-ini_set(&apos;display_errors&apos;, 1);
-include &apos;./XHProf.class.php&apos;;
-$objProf = new XHProf();
-
-function foo() {
-    echo &apos;hello world&apos;;
-}
-
-//开启xhprof并开始记录
-$objProf-&gt;start();
-
-//运行一些函数
-foo();
-
-//停止记录并取到结果
-$data = $objProf-&gt;end();
-$img = $objProf-&gt;createImg($data);
-$href = $objProf-&gt;getHtml($data);
-var_dump($img, $href);
-</code></pre></li>
-</ul>
-<h3 id="结果查询"><a href="#结果查询" class="headerlink" title="结果查询"></a>结果查询</h3><pre><code>Function Name 函数名
-Calls 调用次数
-Calls% 调用百分比
-Incl. Wall Time (microsec) 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
-IWall% 调用的包括子函数所有花费时间的百分比
-Excl. Wall Time (microsec) 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒)
-EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间
-Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间
-减Excl. Wall Time即为等待cpu的时间
-ICpu% Incl. CPU(microsecs)的百分比
-Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。
-ECPU% Excl. CPU(microsec)的百分比
-Incl.MemUse(bytes) 包括子函数执行使用的内存。
-IMemUse% Incl.MemUse(bytes)的百分比
-Excl.MemUse(bytes) 函数执行本身内存,以字节算
-EMemUse% Excl.MemUse(bytes)的百分比
-Incl.PeakMemUse(bytes) Incl.MemUse的峰值
-IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比
-Excl.PeakMemUse(bytes) Excl.MemUse的峰值
-EPeakMemUse% EMemUse% 峰值百分比
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1182,7 +1119,7 @@ EPeakMemUse% EMemUse% 峰值百分比
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

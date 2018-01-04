@@ -233,6 +233,676 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记struct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">go学习笔记struct</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T17:07:11+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员" class="headerlink" title="值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员"></a>值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Node struct {
+    _       int
+    id      int
+    data    *byte
+    next    *Node
+}
+
+func main() {
+    n1 := Node{
+        id  : 1,
+        data: nil,
+    }
+
+    n2 := Node{
+        id  : 2,
+        data: nil,
+        next: &amp;n1,
+    }
+
+    fmt.Println(n1, n2)
+}
+</code></pre><h6 id="顺序初始化必须包含全部字段，否则会出错"><a href="#顺序初始化必须包含全部字段，否则会出错" class="headerlink" title="顺序初始化必须包含全部字段，否则会出错"></a>顺序初始化必须包含全部字段，否则会出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    name    string
+    age     int
+}
+
+func main() {
+    u1 := User{&quot;Tom&quot;, 20}
+    //u2 := User{&quot;Tom&quot;}     //会报错，缺少字段
+    fmt.Println(u1)
+}
+</code></pre><h6 id="支持匿名结构，可用作结构成员或定义变量"><a href="#支持匿名结构，可用作结构成员或定义变量" class="headerlink" title="支持匿名结构，可用作结构成员或定义变量"></a>支持匿名结构，可用作结构成员或定义变量</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type File struct {
+    name    string
+    size     int
+    attr struct {
+        perm    int
+        owner   int
+    }
+}
+
+func main() {
+    f := File{
+        name : &quot;test.txt&quot;,
+        size : 1024,
+        //attr : {0755,1} //这样赋值会报错
+    }
+
+    f.attr.owner = 1
+    f.attr.perm = 0755
+
+    fmt.Println(f)
+
+    d := File{
+        name : &quot;a.txt&quot;,
+        size : 512,
+    }
+
+    var attr = struct {
+        perm int
+        owner int
+    }{2, 0755}
+
+    d.attr = attr
+
+    fmt.Println(d)
+}
+</code></pre><h6 id="注意m的赋值方式"><a href="#注意m的赋值方式" class="headerlink" title="注意m的赋值方式"></a>注意m的赋值方式</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id     int
+    name    string
+}
+
+func main() {
+    m := map[User]int{
+        User{1, &quot;Tom&quot;} : 100,
+    }
+
+    fmt.Println(m)      //100
+}
+</code></pre><h6 id="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"><a href="#匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错" class="headerlink" title="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"></a>匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+}
+
+
+type Manager struct {
+    User
+    title string
+}
+
+type User struct {
+    Resource    //匿名字段，相当于引用上面的Resource结构
+    name string
+}
+
+func main() {
+    var m Manager
+    m.id = 1
+    m.name = &quot;Jack&quot;
+    m.title = &quot;Admin&quot;
+
+    fmt.Println(m)      //{{{1} Jack} Admin}
+}
+</code></pre><h6 id="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"><a href="#外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名" class="headerlink" title="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"></a>外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+    name string
+}
+
+
+type Classify struct {
+    id int
+}
+
+type User struct {
+    Resource
+    Classify
+    name string
+}
+
+func main() {
+    u := User{
+        Resource{1, &quot;pepple&quot;},
+        Classify{100},
+        &quot;Jack&quot;,
+    }
+
+    fmt.Println(u)
+    fmt.Println(u.name)
+    fmt.Println(u.Resource.id)
+    fmt.Println(u.Classify.id)
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">go学习笔记map</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T16:20:07+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制" class="headerlink" title="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"></a>引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[int]struct{
+        name string
+        age int
+    }{
+        1 : {&quot;user1&quot;, 10},
+        2 : {&quot;user2&quot;, 20},
+    }
+
+    fmt.Println(m[1].name)
+}
+</code></pre><h6 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[string]int{    //判断key是否存在
+        &quot;a&quot; : 1,
+    }
+
+    if v,ok := m[&quot;a&quot;];ok {
+        println(v, ok)      //1 true
+    }
+
+    fmt.Println(m[&quot;c&quot;])     //0   对于不存在的key，直接返回\0,不报错
+    m[&quot;b&quot;] = 2              //新增或修改
+    delete(m, &quot;c&quot;)          //删除，如果key不存在，不会出错
+    println(len(m))         //2    获取键值对数量。cap无效
+
+    for k, v := range m {   //迭代，可仅返回key。随机顺序返回，每次都不相同
+        println(k, v)       //b 2       a 1
+    }
+}
+</code></pre><h6 id="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"><a href="#从map中取回的是一个value临时复制品，对其成员的修改是没有意义的" class="headerlink" title="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"></a>从map中取回的是一个value临时复制品，对其成员的修改是没有意义的</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   type user struct{ name string }
+   m := map[int]user{
+        1 : {&quot;user1&quot;},
+   }
+
+   fmt.Println(m[1].name)
+   //m[1].name = &quot;Tom&quot;     //这样赋值会报错
+   u := m[1]
+   u.name = &quot;Tom&quot;
+   m[1] = u
+   fmt.Println(m[1].name)
+
+   m2 := map[int]*user{
+        1 : &amp;user{&quot;user1&quot;},
+   }
+   m2[1].name = &quot;jack&quot;
+   fmt.Println(m2[1].name)      //返回的是指针复制品，透过指针修改原对象是允许的
+}
+</code></pre><h6 id="可以在迭代时安全删除键值-最好不要做新增操作"><a href="#可以在迭代时安全删除键值-最好不要做新增操作" class="headerlink" title="可以在迭代时安全删除键值,最好不要做新增操作"></a>可以在迭代时安全删除键值,最好不要做新增操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    for i := 0; i &lt; 5;i++ {
+        m := map[int]string{
+            0:&quot;a&quot;, 1:&quot;a&quot;, 2:&quot;a&quot;, 3:&quot;a&quot;, 4:&quot;a&quot;,
+            5:&quot;a&quot;, 6:&quot;a&quot;, 7:&quot;a&quot;, 8:&quot;a&quot;, 9:&quot;a&quot;,
+        }
+
+        for k := range m {
+            m[k+k] = &quot;k&quot;
+            delete(m, k)
+        }
+
+        fmt.Println(m)
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记copy/" itemprop="url">go学习笔记copy</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T16:09:06+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"><a href="#函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠" class="headerlink" title="函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠"></a>函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    s := data[8:]
+    s2 := data[:5]
+    fmt.Println(s2)         //[0 1 2 3 4]
+    copy(s2, s)
+
+    fmt.Println(s)          //[8 9]
+    fmt.Println(s2)         //[8 9 2 3 4]
+    fmt.Println(data)       //[8 9 2 3 4 5 6 7 8 9]
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记append/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,665 +1236,11 @@ func main() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记slice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/28/go学习笔记slice/" itemprop="url">go学习笔记slice</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:52:55+08:00">
-                2017-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="#slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案" class="headerlink" title="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"></a>slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案</h6><h6 id="slice引用类型，但自身是结构体，值拷贝传递"><a href="#slice引用类型，但自身是结构体，值拷贝传递" class="headerlink" title="slice引用类型，但自身是结构体，值拷贝传递"></a>slice引用类型，但自身是结构体，值拷贝传递</h6><pre><code>//在runtime.h中的源码
-struct slice
-{
-    byte* array;
-    uintgo len;     //表示可用元素数量，读写操作不能超过该限制
-    uintgo cap;     //表示最大扩张容量，不能超出数组限制
-}
-</code></pre><h6 id="slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a"><a href="#slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a" class="headerlink" title="slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a"></a>slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6}
-    slice := data[1:4:5]
-    fmt.Println(slice)      //[1 2 3]
-}
-</code></pre><h6 id="slice使用举例"><a href="#slice使用举例" class="headerlink" title="slice使用举例"></a>slice使用举例</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[:6:8]
-    slice1 := data[5:]
-    slice2 := data[:3]
-    slice3 := data[:]
-    fmt.Println(slice, slice1, slice2, slice3)  //[0 1 2 3 4 5] [5 6 7 8 9] [0 1 2] [0 1 2 3 4 5 6 7 8 9]
-}
-</code></pre><h6 id="slice读写操作实际目标是底层数组，只需要注意索引号的差别"><a href="#slice读写操作实际目标是底层数组，只需要注意索引号的差别" class="headerlink" title="slice读写操作实际目标是底层数组，只需要注意索引号的差别"></a>slice读写操作实际目标是底层数组，只需要注意索引号的差别</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[6:8]
-    slice[0] += 100
-    slice[1] += 200
-    fmt.Println(slice)  //[106 207]
-    fmt.Println(data)   //[0 1 2 3 4 5 106 207 8 9]
-}
-</code></pre><h6 id="直接创建slice对象，自动分配底层数组"><a href="#直接创建slice对象，自动分配底层数组" class="headerlink" title="直接创建slice对象，自动分配底层数组"></a>直接创建slice对象，自动分配底层数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 8:100}
-    fmt.Println(data, len(data), cap(data)) //[0 1 2 3 0 0 0 0 100] 9 9
-
-    s2 := make([]int, 6, 8)
-    fmt.Println(s2, len(s2), cap(s2))   //[0 0 0 0 0 0] 6 8 没有初始化值，直接用0填充
-
-    s3 := make([]int, 6)
-    fmt.Println(s3, len(s3), cap(s3))   //[0 0 0 0 0 0] 6 6 省略cap那么久默认cap=len
-}
-</code></pre><h6 id="可以用指针直接访问底层数组，退化成普通数组操作"><a href="#可以用指针直接访问底层数组，退化成普通数组操作" class="headerlink" title="可以用指针直接访问底层数组，退化成普通数组操作"></a>可以用指针直接访问底层数组，退化成普通数组操作</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := []int{0, 1, 2, 3, 4}
-    p := &amp;s[2]      //直接使用指针修改数组底层的值
-    *p += 100
-    fmt.Println(s)
-}
-</code></pre><h6 id="依然是二维数组"><a href="#依然是二维数组" class="headerlink" title="依然是二维数组"></a>依然是二维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [][]int{
-        []int{1, 2, 3},
-        []int{100, 200},
-        []int{11, 22, 33, 44},
-    }
-
-    fmt.Println(data)       //[[1 2 3] [100 200] [11 22 33 44]]
-}
-</code></pre><h6 id="可直接修改struct-array成员"><a href="#可直接修改struct-array成员" class="headerlink" title="可直接修改struct array成员"></a>可直接修改struct array成员</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    d := [5]struct {
-        x int
-    }{}
-
-    s := d[:]   //这里是引用
-
-    d[1].x = 10
-    s[2].x = 20
-    fmt.Println(d)      //[{0} {10} {20} {0} {0}]
-    fmt.Printf(&quot;%p, %p\n&quot;, &amp;d, &amp;d[0])       //0xc4200720c0, 0xc4200720c0
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/28/go学习笔记array/" itemprop="url">go学习笔记array</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:21:50+08:00">
-                2017-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#数组是值类型，赋值和传参会复制整个数组，而不是指针" class="headerlink" title="数组是值类型，赋值和传参会复制整个数组，而不是指针"></a>数组是值类型，赋值和传参会复制整个数组，而不是指针</h6><h6 id="数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型"><a href="#数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型" class="headerlink" title="数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型"></a>数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型</h6><h6 id="支持”-”，”！-”操作符，因为内存总是被初始化过"><a href="#支持”-”，”！-”操作符，因为内存总是被初始化过" class="headerlink" title="支持”==”，”！=”操作符，因为内存总是被初始化过"></a>支持”==”，”！=”操作符，因为内存总是被初始化过</h6><h6 id="指针数组-n-T-数组指针-n-T"><a href="#指针数组-n-T-数组指针-n-T" class="headerlink" title="指针数组[n]T,数组指针[n]T"></a>指针数组[n]<em>T,数组指针</em>[n]T</h6><h1 id="定义数组的方式"><a href="#定义数组的方式" class="headerlink" title="定义数组的方式"></a>定义数组的方式</h1><h6 id="直接初始化"><a href="#直接初始化" class="headerlink" title="直接初始化"></a>直接初始化</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [3]int{1,2}    //定义了数组有三个元素，未初始化元素值为0
-    fmt.Println(a)      //[1 2 0]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]int{1, 2, 3, 4, 5}    //通过初始化值确定数组长度
-    fmt.Println(a)      //[1 2 3 4 5]
-}
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [5]int{2:100, 4:200}   //指定了数组对应的键，索引从0开始以0的值进行补齐到指定的数组长度
-    fmt.Println(a)      //[0 0 100 0 200]
-}
-</code></pre><h6 id="先struct方式定义数组格式，再初始化值"><a href="#先struct方式定义数组格式，再初始化值" class="headerlink" title="先struct方式定义数组格式，再初始化值"></a>先struct方式定义数组格式，再初始化值</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]struct{
-        name string
-        age uint8
-    }{
-        {&quot;user1&quot;, 10},
-        {&quot;user2&quot;, 20},  //都好不能省略
-    }
-
-    fmt.Println(a)      //[{user1 10} {user2 20}]
-}
-</code></pre><h6 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2][3]int{{1,2,3}, {4,5,6}}    //指定每一层的元素个数
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...][3]int{{1,2,3}, {4,5,6}}  //省略第一维的元素个数，第二维不能省略
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-</code></pre><h6 id="数组会有值拷贝行为，建议使用后slice，或数组指针"><a href="#数组会有值拷贝行为，建议使用后slice，或数组指针" class="headerlink" title="数组会有值拷贝行为，建议使用后slice，或数组指针"></a>数组会有值拷贝行为，建议使用后slice，或数组指针</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(x [2]int) {
-    fmt.Printf(&quot;x:%p&quot;, &amp;x)  //x:0xc42000a2d0    指针位置发生了改变，说明是重新复制了值
-    x[1] = 1000
-}
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Printf(&quot;a:%p&quot;, &amp;a)  //a:0xc42000a2a0
-    test(a)
-    fmt.Println(a)  //[1 2] 由于是值复制，因此当前的数组还是原来的值
-}
-</code></pre><h6 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Println(len(a), cap(a))  //2,2
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记延迟调用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/28/go学习笔记延迟调用/" itemprop="url">go学习笔记延迟调用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:18:53+08:00">
-                2017-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"><a href="#使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理" class="headerlink" title="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"></a>使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理</h6><pre><code>package main
-
-import &quot;os&quot;
-
-func test() error {
-    f, err := os.Create(&quot;test.txt&quot;) //创建一个文件
-
-    if err != nil { return err }    //创建失败返回错误信息
-
-    defer f.Close()     //不管是否出现错误都会关闭文件，defer会在ret之前执行
-    f.WriteString(&quot;Hello,world!&quot;)   //往文件中写入内容
-    return nil
-}
-
-func main() {
-    test()
-}
-</code></pre><h6 id="多个defer注册，按FILO次序执行"><a href="#多个defer注册，按FILO次序执行" class="headerlink" title="多个defer注册，按FILO次序执行"></a>多个defer注册，按FILO次序执行</h6><pre><code>package main
-
-func test(x int) int {
-    defer println(&quot;a&quot;)
-    defer println(&quot;b&quot;)
-
-    defer func() {
-        println(100 / x)
-    }()
-
-    defer println(&quot;c&quot;)
-
-    return 1
-}
-
-func main() {
-    test(20)        //输出结果为c 5 b a
-}
-</code></pre><h6 id="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"><a href="#延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取" class="headerlink" title="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"></a>延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取</h6><pre><code>package main
-
-func test() {
-    x, y := 10, 20
-
-    defer func(i int) {
-        println(&quot;defer:&quot;, i, y) //y闭包引用
-    }(x)    //x被复制
-
-    x += 10
-    y += 100
-    println(&quot;x=&quot;, x, &quot;y=&quot;, y)
-}
-
-func main() {
-    test()
-    //结果为:x= 20 y= 120   defer: 10 120
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1270,7 +1286,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

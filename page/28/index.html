@@ -233,6 +233,622 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/shell常识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">shell常识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T09:53:00+08:00">
+                2015-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="path环境变量"><a href="#path环境变量" class="headerlink" title="path环境变量"></a>path环境变量</h1><pre><code>环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
+echo $PATH（查看目前执行shell寻找的目录）
+:（表示查找的优先级）
+PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
+echo $PATH（查看环境变量）
+
+环境变量永久生效的方式：
+1.vim /etc/profile
+2.echo &apos;export PATH=/usr/local/mysql/bin:$PATH&apos; &gt;&gt; /etc/profile ;source /etc/profile
+</code></pre><h1 id="ls-l"><a href="#ls-l" class="headerlink" title="ls -l"></a>ls -l</h1><pre><code>‘-’表示参数是可有可无的
+</code></pre><h1 id="bin-sh-的含义"><a href="#bin-sh-的含义" class="headerlink" title="#! /bin/sh 的含义"></a>#! /bin/sh 的含义</h1><pre><code>告知系统需要使用/bin/sh的shell来执行脚本，类似的还有很多shell比如#! /bin/awk ;#! /bin/csh
+</code></pre><h1 id="‘-’和’-amp-’的作用"><a href="#‘-’和’-amp-’的作用" class="headerlink" title="‘;’和’&amp;’的作用"></a>‘;’和’&amp;’的作用</h1><pre><code>‘;’用来分隔同一行里的多个命令
+‘&amp;’如果是在命令的末尾shell会在后台执行该命令
+</code></pre><h1 id="‘set-x’与’set-x’"><a href="#‘set-x’与’set-x’" class="headerlink" title="‘set -x’与’set +x’"></a>‘set -x’与’set +x’</h1><pre><code>关闭和打开追踪功能
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/获取终端输出/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">获取终端输出</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T00:04:53+08:00">
+                2015-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="获取终端输出两种方式"><a href="#获取终端输出两种方式" class="headerlink" title="获取终端输出两种方式"></a>获取终端输出两种方式</h1><ul>
+<li><p>方法一：<br>  <code>who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
+  tail -n 100 output.txt（查看文件的末尾100行）</code></p>
+</li>
+<li><p>方法二：<br>  <code>cat &gt; output.txt（建立文件使用cat复制终端输出）
+  who（终端输入who命令）
+  ctrl+c（强制中断）
+  chmod +x output.txt（添加执行权限）
+  ./output.txt（执行测试）</code></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/20/性能分析命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/20/性能分析命令/" itemprop="url">性能分析命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-20T10:35:45+08:00">
+                2015-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
+<li>首先你得拥有一个linux环境</li>
+<li>安装sysstat包 <code>yum install sysstat</code></li>
+<li>安装procps包 <code>yum install procps</code></li>
+</ul>
+<h1 id="需要执行的命令"><a href="#需要执行的命令" class="headerlink" title="需要执行的命令"></a>需要执行的命令</h1><p><code>updime</code><br>    $ uptime<br>    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00</p>
+<pre><code>显示的是过去1分钟，五分钟，十五分钟系统的平均负载情况，通过数据可以了解服务器负载是趋于紧张还是趋于缓解
+</code></pre><p><code>dmesg | tail</code></p>
+<pre><code>该命令会输出系统日志的最后n行。这些日志可以帮助排查性能问题。千万不要忘了这一步。
+</code></pre><p><code>vmstat 1</code></p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0 558844  24696 150984  65156    0    0     2   150    1    2  0  1 99  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   51   72  0  0 100  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   50   75  0  0 100  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   55   80  0  1 99  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   44   67  0  0 100  0  0
+
+
+每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数1，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：
+
+1.r：等待在CPU资源的进程数。这个数据比平均负载更加能够体现CPU负载情况，数据中不包含等待IO的进程。如果这个数值大于机器CPU核数，那么机器的CPU资源已经饱和。
+2.free：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。
+3.si, so：交换区写入和读取的数量。如果这个数据不为0，说明系统已经在使用交换区（swap），机器物理内存已经不足。
+4.us, sy, id, wa, st：这些都代表了CPU时间的消耗，它们分别表示用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen，一般被其他虚拟机消耗）。
+
+一般情况下，如果用户时间和系统时间相加非常大，CPU出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。
+</code></pre><p><code>mpstat -P ALL 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时45分48秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+18时45分49秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+18时45分49秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+18时45分49秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+18时45分50秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+18时45分50秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的
+</code></pre><p><code>pidstat 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时47分22秒       PID    %usr %system  %guest    %CPU   CPU  Command
+18时47分23秒     24331    0.98    0.00    0.00    0.98     0  redis-server
+
+18时47分23秒       PID    %usr %system  %guest    %CPU   CPU  Command
+
+18时47分24秒       PID    %usr %system  %guest    %CPU   CPU  Command
+18时47分25秒         7    0.00    1.01    0.00    1.01     0  events/0
+18时47分25秒     27624    0.00    2.02    0.00    2.02     0  pidstat
+
+pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态
+</code></pre><p><code>iostat -xz 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.41    0.00    0.52    0.23    0.00   98.85
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+sda               0.04    29.67    0.08    8.22     4.77   299.70    36.67     0.11   12.74   0.66   0.55
+dm-0              0.00     0.00    0.11   37.40     4.63   299.11     8.10     0.50   13.35   0.15   0.55
+dm-1              0.00     0.00    0.02    0.07     0.14     0.59     8.00     0.00   27.85   0.76   0.01
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    2.00    0.00   98.00
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+sda               0.00     0.00    1.00    0.00    16.00     0.00    16.00     0.01   15.00  15.00   1.50
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    0.00    0.00  100.00
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    0.00    0.00  100.00
+
+iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：
+
+r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
+await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
+avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
+%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。
+如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能
+</code></pre><p><code>free -m</code><br>                 total       used       free     shared    buffers     cached<br>    Mem:           458        435         23          0        147         63<br>    -/+ buffers/cache:        223        234<br>    Swap:          927        545        382</p>
+<pre><code>free命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需 要注意的是，第二行-/+ buffers/cache，一般缓存会占用大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会 立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。
+
+如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。
+</code></pre><p><code>sar -n DEV 1</code></p>
+<pre><code>18时52分14秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
+18时52分15秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分15秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分15秒      eth1      1.01      0.00      0.07      0.00      0.00      0.00      0.00
+
+18时52分15秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
+18时52分16秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分16秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分16秒      eth1      1.01      1.01      0.07      0.49      0.00      0.00      0.00
+
+sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。
+</code></pre><p><code>sar -n TCP,ETCP 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时52分36秒  active/s passive/s    iseg/s    oseg/s
+18时52分37秒      0.00      0.00      0.00      0.00
+
+18时52分36秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+18时52分37秒      0.00      0.00      0.00      0.00      0.00
+
+18时52分37秒  active/s passive/s    iseg/s    oseg/s
+18时52分38秒      0.00      0.00      2.00      2.00
+
+18时52分37秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+18时52分38秒      0.00      0.00      0.00      0.00      0.00
+
+sar命令在这里用于查看TCP连接状态，其中包括：
+
+active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；
+passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；
+retrans/s：每秒TCP重传数量；
+TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。
+</code></pre><p><code>top</code></p>
+<pre><code>top - 18:53:43 up 53 days,  3:55,  1 user,  load average: 0.00, 0.00, 0.02
+Tasks:  86 total,   1 running,  85 sleeping,   0 stopped,   0 zombie
+Cpu(s):  0.4%us,  0.4%sy,  0.0%ni, 98.8%id,  0.2%wa,  0.0%hi,  0.1%si,  0.0%st
+Mem:    469452k total,   446128k used,    23324k free,   151644k buffers
+Swap:   950264k total,   558844k used,   391420k free,    65716k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+    1 root      20   0 19232  520  348 S  0.0  0.1   0:44.68 init
+    2 root      20   0     0    0    0 S  0.0  0.0   0:00.03 kthreadd
+    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+    4 root      20   0     0    0    0 S  0.0  0.0  38:03.76 ksoftirqd/0
+    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+    6 root      RT   0     0    0    0 S  0.0  0.0   0:15.98 watchdog/0
+    7 root      20   0     0    0    0 S  0.0  0.0  57:02.33 events/0
+    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 cgroup
+    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khelper
+   10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 netns
+   11 root      20   0     0    0    0 S  0.0  0.0   0:00.00 async/mgr
+   12 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pm
+   13 root      20   0     0    0    0 S  0.0  0.0   0:31.42 sync_supers
+   14 root      20   0     0    0    0 S  0.0  0.0   0:33.01 bdi-default
+   15 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kintegrityd/0
+   16 root      20   0     0    0    0 S  0.0  0.0  32:20.76 kblockd/0
+   17 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpid
+   18 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_notify
+   19 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_hotplug
+   20 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ata_aux
+   21 root      20   0     0    0    0 S  0.0  0.0   0:00.21 ata_sff/0
+   22 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ksuspend_usbd
+   23 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khubd
+   24 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kseriod
+   25 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md/0
+   26 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md_misc/0
+   27 root      20   0     0    0    0 S  0.0  0.0   0:00.00 linkwatch
+   28 root      20   0     0    0    0 S  0.0  0.0   0:02.11 khungtaskd
+   29 root      20   0     0    0    0 S  0.0  0.0   0:27.30 kswapd0
+   30 root      25   5     0    0    0 S  0.0  0.0   0:00.00 ksmd
+   31 root      20   0     0    0    0 S  0.0  0.0   0:00.00 aio/0
+   32 root      20   0     0    0    0 S  0.0  0.0   0:00.00 crypto/0
+   37 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthrotld/0
+   39 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kpsmoused
+   40 root      20   0     0    0    0 S  0.0  0.0   0:00.00 usbhid_resumer
+   70 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kstriped
+  128 root      20   0     0    0    0 S  0.0  0.0   0:02.82 scsi_eh_0
+  129 root      20   0     0    0    0 S  0.0  0.0   0:00.00 scsi_eh_1
+  215 root      20   0     0    0    0 S  0.0  0.0  13:53.06 kdmflush
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/18/服务器如何设置的cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -577,530 +1193,11 @@ Options:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/17/ab压测工具的安装与使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">ab压测工具的安装与使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-17T10:03:33+08:00">
-                2015-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install httpd-tools
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
-</code></pre><h2 id="命令执行结果分析"><a href="#命令执行结果分析" class="headerlink" title="命令执行结果分析"></a>命令执行结果分析</h2><pre><code>Server Software:
-Server Hostname:        hostname(*服务器域名*)
-Server Port:            443(*服务器端口*)
-SSL/TLS Protocol:       TLSv1/SSLv3,ECDHE-RSA-AES128-GCM-SHA256,2048,128
-
-Document Path:          /path(*测试接口地址*)
-Document Length:        14904 bytes(*测试数据大小*)
-
-Concurrency Level:      10(*并发数*)
-Time taken for tests:   0.403 seconds(*整个测试持续时间*)
-Complete requests:      10(*完成的请求数量*)
-Failed requests:        0(*失败的请求,返回的内容如果和第一次不一样就认为是失败*)
-Write errors:           0(*请求写入失败的次数*)
-Keep-Alive requests:    0(*保持联机连接的请求数量。只有在命令行中使用-k，才能看到该属性值*)
-Total transferred:      151120 bytes(*整个场景中的网络传输量*)
-HTML transferred:       149040 bytes(*整个场景中的HTML内容传输量*)
-`Requests per second:    24.84 [#/sec] (mean)(*表示当前测试的服务器每秒可以处理24.84个静态html的请求事务，后面的mean表示平均。这个数值表示当前机器的整体性能，值越大越好*)`
-`Time per request:       402.511 [ms] (mean)(*单个并发的延迟时间，后面的mean表示平均。隔离开当前并发，单独完成一个请求需要的平均时间*)`
-`Time per request:       40.251 [ms] (mean, across all concurrent requests)(*即上面的时间（Time per request）除以并发数 ,平均每个并发请求处理的时间*)`
-`Transfer rate:          366.64 [Kbytes/sec] received(*平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题，也就是这些请求在单位时间从服务器获取的数据长度*)`
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:       33   46  14.6     41      72
-Processing:    16  113 119.2     27     268
-Waiting:       10   37  79.1     12     262
-Total:         49  159 121.5     99     340
-
-Percentage of the requests served within a certain time (ms)
-  50%     99
-  66%    268
-  75%    282
-  80%    299
-  90%    340
-  95%    340
-  98%    340
-  99%    340
- 100%    340 (longest request)
-</code></pre><h2 id="ab命令参数"><a href="#ab命令参数" class="headerlink" title="ab命令参数"></a>ab命令参数</h2><pre><code>Usage:
-  ab [options] [http[s]://]hostname[:port]/path
-Options are:
-  -n requests     (*总的请求数目*)
-  -c concurrency  (*一次请求并发数*)
-  -t timelimit    (*测试进行的最大秒数*)
-  -b windowsize   (*tcp连接的最大内存使用*)
-  -p postfile     (*post的数据*)
-  -u putfile      (*put的数据*)
-  -T content-type (*header的类型，比如&apos;application/x-www-form-urlencoded&apos;默认为Default is &apos;text/plain&apos;*)
-  -v verbosity    (*设置显示信息的详细程度 – 4或更大值会显示头信息， 3或更大值可以显示响应代码(404, 200等), 2或更大值可以显示警告和其他信息*)
-  -w              (*将结果用html的table打印出来，默认它是白色背景的两列宽度的一张表*)
-  -i              (*执行HEAD请求，而不是GET*)
-  -C attribute    (*添加一个cookie信息*)Add cookie, eg. &apos;Apache=1234. (repeatable)
-  -H attribute    (*添加head属性例如eg. &apos;Accept-Encoding: gzip&apos;*)
-  -A attribute    (*Add Basic WWW Authentication, the attributes are a colon separated username and password*)
-  -P attribute    (*Add Basic Proxy Authentication, the attributes are a colon separated username and password*)
-  -X proxy:port   (*使用代理的端口*)
-  -V              (*显示版本信息并退出*)
-  -k              (*使用http的KeepAlive属性*)
-  -d              (*Do not show percentiles served table*)
-  -S              (*Do not show confidence estimators and warnings*)
-  -g filename     (*Output collected data to gnuplot format file*)
-  -e filename     (*Output CSV file with percentages served*)
-  -r              (*忽略socket错误*)
-  -h              (*Display usage information (this message)*)
-  -Z ciphersuite  (*Specify SSL/TLS cipher suite (See openssl ciphers)*)
-  -f protocol     (*特殊的协议例如SSL2, SSL3, TLS1, or ALL*)
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/03/Redis集群的安装与配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">Redis集群的安装与配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-03T18:23:49+08:00">
-                2015-12-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Redis集群安装"><a href="#Redis集群安装" class="headerlink" title="Redis集群安装"></a>Redis集群安装</h2><ul>
-<li><code>wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;</code>(<em>下载redis-3.0.tar.gz</em>)</li>
-<li><code>tar zxvf redis-3.0.tar.gz</code>(<em>解压安装包</em>)</li>
-<li><code>cd redis-3.0.0-beta3</code>（<em>进入解压后的文件夹</em>）</li>
-<li><code>yum install tcl</code></li>
-<li><code>make</code></li>
-<li><code>cp redis.conf redis.6380.conf</code></li>
-<li><code>vim redis.6380.conf</code></li>
-<li><code>src/redis-server redis.6380.conf &amp;</code></li>
-<li><code>ps aux | grep redis</code></li>
-<li><code>src/redis-cli -h 172.16.9.111 -p 6379</code></li>
-<li><code>yum install ruby</code></li>
-<li><code>yum install rubygems</code></li>
-<li><code>gem install redis</code></li>
-<li><code>src/redis-trib.rb create --replicas 1 172.16.9.111:6380 172.16.9.111:6381 172.16.9.111:6382 172.16.9.104:6380 172.16.9.104:6381 172.16.9.104:6382</code></li>
-<li><code>src/redis-cli -p 6380</code></li>
-<li><code>src/redis-cli -c -p 6380</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/分页的思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">分页的思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T16:53:46+08:00">
-                2015-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
-<li>交易记录条数过多，需要分页处理</li>
-</ul>
-<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
-<li>当进行翻页的时候会有重复的数据数据出现。</li>
-<li>原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page<em>$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易记录产生的时候，实际上对应的第二页得数据应该是第22到第41条(</em>因为产生记录之前的第20条数据，已经顺移了一个位置*)，实际上显示的是第21到第40条，所以第21条数据应该是重复的</li>
-</ul>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
-<li>在进行分页的时候，传入当前页的最有一个记录的id然后在分页的sql变成where id&gt;? limit $lenght</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1146,7 +1243,7 @@ Options are:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

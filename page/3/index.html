@@ -233,6 +233,518 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/15/添加git语法检查钩子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/15/添加git语法检查钩子/" itemprop="url">添加git语法检查钩子</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T11:13:49+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="添加pre-commit钩子"><a href="#添加pre-commit钩子" class="headerlink" title="添加pre-commit钩子"></a>添加pre-commit钩子</h1><pre><code>vim app_code/.git/hooks/pre-commit
+备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
+</code></pre><h1 id="添加语法检查内容"><a href="#添加语法检查内容" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>my $commit_id = `git rev-parse --verify HEAD`;
+my $against = &quot;4b825dc642cb6eb9a060e54bf8d69288fbee4904&quot;;
+
+if ($commit_id) {
+    $against=&quot;HEAD&quot;;
+}
+
+my @list = `git diff-index --cached --name-only $against --`;
+my $ret = 0;
+
+for my $x (@list) {
+    chomp $x;
+    if ($x =~ /\.php$/) {
+        if (-f &quot;$x&quot;) {
+            `php -l $x`;
+            if ($? != 0) {
+                $ret = 1;
+                goto end;
+            }
+        }
+    }
+}
+
+end:
+exit($ret);
+</code></pre><h1 id="添加执行权限"><a href="#添加执行权限" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-commit
+</code></pre><h1 id="添加测试"><a href="#添加测试" class="headerlink" title="添加测试"></a>添加测试</h1><p><img src="/img/git/php_check_grammar.png" alt="Alt text" title="php语法检查"></p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>然而使用pre-commit脚本存在一个很大的缺陷，钩子脚本需要放置在每个开发者的每个项目中，很容易遗漏，同时代码库重新clone后也需要记得重新放置钩子脚本，没有办法从根源上禁止有语法错误的代码的提交
+</code></pre><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code>统一的在git服务端添加pre-receive钩子，当代码push到中心代码库的时候进行语法检测，如果存在语法错误则拒绝当前的push，这样可以只在服务端配置，不需要在每个人的每个项目中进行配置，Git在接受到push时会调用pre-receive钩子，如果pre-receive返回非0的返回值，则当前的push会被拒绝。在调用pre-receive脚本时，会从标准输入传递三个参数，分别为之前的版本，push的版本和push的分支
+</code></pre><h1 id="添加pre-receive钩子"><a href="#添加pre-receive钩子" class="headerlink" title="添加pre-receive钩子"></a>添加pre-receive钩子</h1><pre><code>vim app_code/.git/hooks/pre-receive
+</code></pre><h1 id="添加语法检查内容-1"><a href="#添加语法检查内容-1" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>#!/usr/bin/perl
+use File::Temp;
+use strict;
+
+#从标准输入中读取参数信息
+my $line = &lt;&gt;;
+#处理后得到旧版本，但前版本和分支
+my @argv = split(/\s/, $line);
+my $old = $argv[0];
+my $new = $argv[1];
+my $branch = $argv[2];
+#比较两个版本的差异
+my @out = `git diff --name-status $old $new`;
+
+for my $x (@out) {
+    my @param = split(/\s/, $x);
+    #如果文件不是被删除且是php文件，则进行语法检测
+    if ($param[0] ne &apos;D&apos; and $param[1] =~ /\.php$/) {
+        #取出文件的内容，将其写入到一个临时文件中
+        my $content = `git show $new:$param[1]`;
+        my $fh = File::Temp-&gt;new(SUFFIX =&gt; &apos;.php&apos;, UNLINK =&gt; 1);
+        print $fh $content;
+        #进行语法检测
+        my $result = `php -l $fh 2&gt;&amp;1`;
+        #如果出错则输出错误，输出时需要将临时文件名替换称为原来的文件名，并拒绝push
+        if ($? != 0) {
+            if ($result =~ s#$fh#$param[1]#g) {
+                print $result;
+            }
+            exit(1);
+        }
+    }
+}
+exit(0);
+</code></pre><h1 id="添加执行权限-1"><a href="#添加执行权限-1" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-receive  
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/03/安装docker-swarm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/03/安装docker-swarm/" itemprop="url">安装docker-swarm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T10:08:49+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在virtualbox安装centos7"><a href="#在virtualbox安装centos7" class="headerlink" title="在virtualbox安装centos7"></a>在virtualbox安装centos7</h1><pre><code>注意一定要是在centos7及以上的版本
+</code></pre><h1 id="centeos安装docker"><a href="#centeos安装docker" class="headerlink" title="centeos安装docker"></a>centeos安装docker</h1><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+</code></pre><h1 id="启动docker容器"><a href="#启动docker容器" class="headerlink" title="启动docker容器"></a>启动docker容器</h1><pre><code>service docker start
+</code></pre><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><pre><code>docker pull swarm
+</code></pre><h1 id="获取docker容器ip"><a href="#获取docker容器ip" class="headerlink" title="获取docker容器ip"></a>获取docker容器ip</h1><pre><code>本次我的两个主机的ip是：
+    manage：192.168.1.164
+    node1：192.168.1.183
+    node2：192.168.1.194
+</code></pre><h1 id="生产集群token"><a href="#生产集群token" class="headerlink" title="生产集群token"></a>生产集群token</h1><pre><code>docker run --rm swarm create
+执行命令后会生产一串集群的token，记录下来（我的token是：6335a310b4fe5b21492bc119a03980d6）
+</code></pre><h1 id="添加节点到集群"><a href="#添加节点到集群" class="headerlink" title="添加节点到集群"></a>添加节点到集群</h1><pre><code>docker run -d swarm join --addr=192.168.1.183:2375 token://6335a310b4fe5b21492bc119a03980d6
+docker run -d swarm join --addr=192.168.1.194:2375 token://6335a310b4fe5b21492bc119a03980d6
+</code></pre><h1 id="在manage上开启管理程序"><a href="#在manage上开启管理程序" class="headerlink" title="在manage上开启管理程序"></a>在manage上开启管理程序</h1><pre><code>docker run -d -p 8888:2375 swarm manage token://6335a310b4fe5b21492bc119a03980d6
+</code></pre><h1 id="列出集群中的节点"><a href="#列出集群中的节点" class="headerlink" title="列出集群中的节点"></a>列出集群中的节点</h1><pre><code>docker run --rm swarm list token://6335a310b4fe5b21492bc119a03980d6    
+</code></pre><h1 id="在manage上管理node1，node2"><a href="#在manage上管理node1，node2" class="headerlink" title="在manage上管理node1，node2"></a>在manage上管理node1，node2</h1><pre><code>docker -H 192.168.1.164:8888 info
+docker -H 192.168.1.164:8888 ps
+docker -H 192.168.1.164:8888 logs
+</code></pre><h1 id="在集群上运行容器"><a href="#在集群上运行容器" class="headerlink" title="在集群上运行容器"></a>在集群上运行容器</h1><pre><code>docker -H 192.168.1.164:8888 run -d --name web1 nginx
+docker -H 192.168.1.164:8888 run -d --name web2 nginx
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/03/docker实践命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/03/docker实践命令/" itemprop="url">docker实践命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T09:56:30+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="查看docker容器的ip"><a href="#查看docker容器的ip" class="headerlink" title="查看docker容器的ip"></a>查看docker容器的ip</h1><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
+</code></pre><h1 id="查看docker完整的额容器id"><a href="#查看docker完整的额容器id" class="headerlink" title="查看docker完整的额容器id"></a>查看docker完整的额容器id</h1><pre><code>docker ps --no-trunc
+</code></pre><h1 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h1><pre><code>docker logs -f docker_name
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/02/登录docker容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -528,490 +1040,11 @@ $pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/07/14/如何编写一个dockerfile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/14/如何编写一个dockerfile/" itemprop="url">如何编写一个dockerfile</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T09:22:39+08:00">
-                2017-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>更快的构建速度</li>
-<li>更小的Docker镜像大小</li>
-<li>更少的Docker镜像层</li>
-<li>充分利用镜像缓存</li>
-<li>增加Dockerfile可读性</li>
-<li>让Docker容器使用起来更简单</li>
-</ul>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
-<li>容器只运行单个应用</li>
-<li>将多个RUN指令合并为一个</li>
-<li>基础镜像的标签不要用latest</li>
-<li>每个RUN指令后删除多余文件</li>
-<li>选择合适的基础镜像(alpine版本最好，不过个人还是喜欢centos)</li>
-<li>设置WORKDIR和CMD</li>
-<li>COPY与ADD优先使用前者</li>
-<li>合理调整COPY与RUN的顺序</li>
-<li>设置默认的环境变量，映射端口和数据卷</li>
-<li>使用LABEL设置镜像元数据</li>
-<li>添加HEALTHCHECK</li>
-<li>使用ENTRYPOINT (可选，可以用于做不同环境的判断，不如dev，product)</li>
-<li>在entrypoint脚本中使用exec</li>
-</ul>
-<h1 id="编写步骤"><a href="#编写步骤" class="headerlink" title="编写步骤"></a>编写步骤</h1><blockquote>
-<p><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/" title="编写dockerfile" target="_blank" rel="external">编写dockerfile</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/10/go的应用场景/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/10/go的应用场景/" itemprop="url">go的应用场景</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T17:26:53+08:00">
-                2017-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
-</code></pre><h3 id="并发性好"><a href="#并发性好" class="headerlink" title="并发性好"></a>并发性好</h3><pre><code>goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
-单个go应用能有效利用多个CPU内核，并行执行性能好
-</code></pre><h3 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h3><h3 id="丰富的标准库"><a href="#丰富的标准库" class="headerlink" title="丰富的标准库"></a>丰富的标准库</h3><h3 id="活跃的社区支持"><a href="#活跃的社区支持" class="headerlink" title="活跃的社区支持"></a>活跃的社区支持</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/06/关于产品设计的几个小思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/06/关于产品设计的几个小思考/" itemprop="url">关于产品设计的几个小思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T10:42:49+08:00">
-                2017-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/产品-运营/" itemprop="url" rel="index">
-                    <span itemprop="name">产品&运营</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
-</code></pre><h6 id="明确的目标用户"><a href="#明确的目标用户" class="headerlink" title="明确的目标用户"></a>明确的目标用户</h6><pre><code>这个至关重要，是产品定位的大基调
-能够更精准的确定获取目标用户的渠道
-能够精准的给用户设计产品功能
-比如说：
-    我的目标用户是青年人，那么理想的状态是我会推广一个文章能够触达到我的青年用户，在获取
-    青年用户的同时希望能够剔除掉非青年用户（毕竟用户的运营也是有成本的，这里指的是个性化
-    运营，并不是群发文章之类的）
-</code></pre><h6 id="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？"><a href="#为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？" class="headerlink" title="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？"></a>为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？</h6><pre><code>提醒用户，首屏下面还有内容，网站是可以滚动的    
-</code></pre><p><img src="/img/product/think/home_part_negative.png" alt="Alt text" title="首屏是完整的页面"><br><img src="/img/product/think/home_part_positive.png" alt="Alt text" title="首屏只显示部分页面"></p>
-<h6 id="关注首屏"><a href="#关注首屏" class="headerlink" title="关注首屏"></a>关注首屏</h6><pre><code>首屏是决定用户是否继续浏览的关键因素
-解决用户的信任问题
-放足够吸引用户的东西
-依旧举个例子（如下图）：
-    1、首先打开官网最打眼的2的位置，一个大红包这是足够吸引我去看红包是怎么回事
-    2、3的位置很巧妙，2的位置引导眼球的时候，在视线的下方位置，
-       观看到3的红色的免费字样，接着我的视线一定会移动到3所在的功能块，这个时候又是
-       10位置的红色字样直接吸引过来，接着应该是顺理成章的做评估了，设计者最后在
-       8的位置还把评估的人数显示上来，低调的解除了用户的不信任危机
-    3、再者是7的位置和传统的轮播图比他的优势在于右边的文字，一次性列举出了所有
-       的轮播图的作用（不是像传统的那样就是两个箭头或者几个数字点击能够进行切换，作为
-       用户我哪来的耐心去猜测你的箭头会切换到哪个轮播图？）
-    4、再看1的位置，在导航栏中做了重点的突出，应该是吸引用户的一个重要功能，很
-       希望用户去点
-    5、看4，5的位置我认为都在解决一个信任的问题，首先是4的位置介绍我的资质，这
-       个是比较有说服力的客观事实你如果还不信的话可以到5的位置去看关于我们
-</code></pre><p><img src="/img/product/think/hainabian_home.png" alt="Alt text" title="优质首页分析"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1057,7 +1090,7 @@ $pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

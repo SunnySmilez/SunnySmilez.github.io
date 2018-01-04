@@ -233,6 +233,645 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/sort的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/29/sort的使用/" itemprop="url">sort的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T09:32:36+08:00">
+                2015-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="sort使用场景"><a href="#sort使用场景" class="headerlink" title="sort使用场景"></a>sort使用场景</h1><pre><code>用法：sort [选项]... [文件]...
+　或：sort [选项]... --files0-from=F
+串联排序所有指定文件并将结果写到标准输出。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+排序选项：
+
+  -b, --ignore-leading-blanks    忽略前导的空白区域
+  -d, --dictionary-order    只考虑空白区域和字母字符
+  -f, --ignore-case        忽略字母大小写
+  -g, --general-numeric-sort    按照常规数值排序
+  -i, --ignore-nonprinting    只排序可打印字符
+  -M, --month-sort        比较 (未知) &lt; &quot;一月&quot; &lt; ... &lt; &quot;十二月&quot;
+                在LC_ALL=C 时为(unknown) &lt; `JAN&apos; &lt; ... &lt; `DEC&apos;
+  -h, --human-numeric-sort    使用易读性数字(例如： 2K 1G)
+  -n, --numeric-sort        根据字符串数值比较
+  -R, --random-sort        根据随机hash 排序
+      --random-source=文件    从指定文件中获得随机字节
+  -r, --reverse            逆序输出排序结果
+      --sort=WORD        按照WORD 指定的格式排序：
+                    一般数字-g，高可读性-h，月份-M，数字-n，
+                    随机-R，版本-V
+  -V, --version-sort        在文本内进行自然版本排序
+
+其他选项：
+
+      --batch-size=NMERGE    一次最多合并NMERGE 个输入；如果输入更多
+                    则使用临时文件
+  -c, --check, --check=diagnose-first    检查输入是否已排序，若已有序则不进行操作
+  -C, --check=quiet, --check=silent    类似-c，但不报告第一个无序行
+      --compress-program=程序    使用指定程序压缩临时文件；使用该程序
+                    的-d 参数解压缩文件
+      --files0-from=文件    从指定文件读取以NUL 终止的名称，如果该文件被
+                    指定为&quot;-&quot;则从标准输入读文件名
+  -k, --key=位置1[,位置2]    在位置1 开始一个key，在位置2 终止(默认为行尾)
+  -m, --merge            合并已排序的文件，不再进行排序
+  -o, --output=文件        将结果写入到文件而非标准输出
+  -s, --stable            禁用last-resort 比较以稳定比较算法
+  -S, --buffer-size=大小    指定主内存缓存大小
+  -t, --field-separator=分隔符    使用指定的分隔符代替非空格到空格的转换
+  -T, --temporary-directory=目录    使用指定目录而非$TMPDIR 或/tmp 作为
+                    临时目录，可用多个选项指定多个目录
+  -u, --unique        配合-c，严格校验排序；不配合-c，则只输出一次排序结果
+  -z, --zero-terminated    以0 字节而非新行作为行尾标志
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+POS 是F[.C][OPTS]，F 代表域编号，C 是域中字母的位置，F 和C 均从1开始计数
+如果没有有效的-t 或-b 选项存在，则从前导空格后开始计数字符。OPTS 是一个或多个
+由单个字母表示的顺序选项，以此覆盖此key 的全局顺序设置。如果没有指定key 则
+将其整个行。
+
+指定的大小可以使用以下单位之一：
+内存使用率% 1%，b 1、K 1024 (默认)，M、G、T、P、E、Z、Y 等依此类推。
+
+如果不指定文件，或者文件为&quot;-&quot;，则从标准输入读取数据。
+</code></pre><h1 id="sort参数说明"><a href="#sort参数说明" class="headerlink" title="sort参数说明"></a>sort参数说明</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/26/join的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">join的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-26T10:17:46+08:00">
+                2015-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="join的使用案例"><a href="#join的使用案例" class="headerlink" title="join的使用案例"></a>join的使用案例</h1><p>1.文件内容<br>cat month_cn.txt</p>
+<pre><code>1       一月
+2       二月
+3       三月
+4       四月
+5       五月
+6       六月
+7       七月
+8       八月
+9       九月
+10      十月
+11      十一月
+12      十二月
+13      十三月，故意的
+</code></pre><p>2.文件内容<br>cat month_en.txt</p>
+<pre><code>1       January
+2       February
+3       March
+4       April
+5       May
+6       June
+7       July
+8       August
+9       September
+10      October
+11      November
+12      December
+14      MonthUnknown
+</code></pre><p>3.内连接（指定关联行数）<br>join month_cn.txt month_en.txt<br>join -j 1 month_cn.txt month_en.txt(<code>以第一行作为匹配字段</code>)<br>join -1 1 -2 1 month_cn.txt month_en.txt(<code>第一个文件的第一行和第二个文件的第一行进行匹配</code>)</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>4.左连接（以全面文件为主去匹配后面文件的内容）<br>join -a1 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+</code></pre><p>5.右连接<br>join -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+14 MonthUnknown
+</code></pre><p>6.全连接<br>join -a1 -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+14 MonthUnknown
+</code></pre><p>7.指定输出内容<br>join -o 1.1 1.2 2.2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>8.前面文件存在，后面文件不存在的内容<br>join -v 1  month_cn.txt month_en.txt</p>
+<pre><code>13 十三月，故意的
+</code></pre><h1 id="join参数说明"><a href="#join参数说明" class="headerlink" title="join参数说明"></a>join参数说明</h1><pre><code>用法：join [选项]... 文件1 文件2(找出两个文件中，指定栏位内容相同的行，并加以合并，再输出到标准输出设备。)
+针对每一对具有相同内容的输入行，整合为一行写到标准输出，
+默认的内容连接区块是由第一个空白符代表的分界符号。当文件1
+或文件2 都被指定为&quot;-&quot;时，程序将从标准输入读取数据。
+
+  -a  文件编号        文件编号的值可以是1 或2，分别对应文件1 和 文件2。
+                          此选项用于根据指定文件编号输出不成对的行目。
+  -e 字符            将缺失的输入区块替换为指定字符
+  -i, --ignore-case     比较时忽略大小写
+  -j 域         等于&quot;-1 域 -2 域&quot;
+  -o 格式         按照指定格式构造输出行
+  -t 字符         使用指定字符作为输入和输出的分隔符
+  -v 文件编号            类似 -a 文件编号，但禁止组合输出行
+  -1 域              在文件1 的此域组合
+  -2 域              在文件2 的此域组合
+  --check-order         检查输入行是否正确排序，即使所有输入行均是成对的
+  --nocheck-order       不检查输入是否正确排序
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+除非使用了&quot;-t 字符串&quot; 选项，否则前导空格分隔的域将被忽略，如果指定了字符串，
+则使用指定字符串分隔任意的域并从1 开始计数的域编号。可以指定的格式是由一个
+或多个逗号活空格所分隔的描述，其形式为&quot;文件编号.域&quot;或者&quot;0&quot;。默认的
+格式输出合并后的域、文件1 和文件2 剩下的域，均由该指定字符串分隔。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/cut的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">cut的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T10:48:06+08:00">
+                2015-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cut使用案例"><a href="#cut使用案例" class="headerlink" title="cut使用案例"></a>cut使用案例</h1><pre><code>1.按字节切割
+tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
+
+2.指定分隔符切割
+tail -n 1 /etc/passwd | cut -d : -f 1,5（以:分割，获取第一个和第五个域）
+ls -l | cut -d &quot; &quot; -f 1（以空格分割，取第一个域得字符）
+
+3.按字符切割
+ls -l | cut -c 1-10（获取文件的第一个字符到第十个字符）`中文字符和空格都算一个字符`
+</code></pre><h1 id="cut参数说明"><a href="#cut参数说明" class="headerlink" title="cut参数说明"></a>cut参数说明</h1><pre><code>用法：cut [选项]... [文件]...
+从每个文件中输出指定部分到标准输出。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+  -b, --bytes=列表        只选中指定的这些字节
+  -c, --characters=列表        只选中指定的这些字符
+  -d, --delimiter=分界符    使用指定分界符代替制表符作为区域分界
+  -f, --fields=LIST     选择部分字段，如果不制定－s分隔符的参数，直接打印出没有不包含分隔符的字符
+
+  -n                     -b: 不分裂的多字节字符和-b一起使用(`汉字是三个字节，如果直选中一个字节，也不进行分割，直接显示汉字`)
+      --complement        补全选中的字节、字符或域
+  -s, --only-delimited        不打印没有包含分界符的行
+      --output-delimiter=字符串    使用指定的字符串作为输出分界符，默认采用输入
+                的分界符
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+仅使用f -b, -c 或-f 中的一个。每一个列表都是专门为一个类别作出的，或者您可以用逗号隔
+开要同时显示的不同类别。您的输入顺序将作为读取顺序，每个仅能输入一次。
+每种参数格式表示范围如下：
+    N    从第1 个开始数的第N 个字节、字符或域
+    N-    从第N 个开始到所在行结束的所有字符、字节或域
+    N-M    从第N 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
+    -M    从第1 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
+
+当没有文件参数，或者文件不存在时，从标准输入读取
+</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><pre><code>取出eth0对应的ip地址?
+ifconfig eth0 | grep &quot;inet addr&quot; | cut -d &quot;:&quot; -f2 | cut -d &quot; &quot; -f1
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/awk的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -649,627 +1288,11 @@ stat &quot;/root&quot; | sed -n &apos;4p&apos; | sed -n &apos;s#^.*s: (\([0-9].*
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/shell常识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">shell常识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T09:53:00+08:00">
-                2015-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="path环境变量"><a href="#path环境变量" class="headerlink" title="path环境变量"></a>path环境变量</h1><pre><code>环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
-
-环境变量永久生效的方式：
-1.vim /etc/profile
-2.echo &apos;export PATH=/usr/local/mysql/bin:$PATH&apos; &gt;&gt; /etc/profile ;source /etc/profile
-</code></pre><h1 id="ls-l"><a href="#ls-l" class="headerlink" title="ls -l"></a>ls -l</h1><pre><code>‘-’表示参数是可有可无的
-</code></pre><h1 id="bin-sh-的含义"><a href="#bin-sh-的含义" class="headerlink" title="#! /bin/sh 的含义"></a>#! /bin/sh 的含义</h1><pre><code>告知系统需要使用/bin/sh的shell来执行脚本，类似的还有很多shell比如#! /bin/awk ;#! /bin/csh
-</code></pre><h1 id="‘-’和’-amp-’的作用"><a href="#‘-’和’-amp-’的作用" class="headerlink" title="‘;’和’&amp;’的作用"></a>‘;’和’&amp;’的作用</h1><pre><code>‘;’用来分隔同一行里的多个命令
-‘&amp;’如果是在命令的末尾shell会在后台执行该命令
-</code></pre><h1 id="‘set-x’与’set-x’"><a href="#‘set-x’与’set-x’" class="headerlink" title="‘set -x’与’set +x’"></a>‘set -x’与’set +x’</h1><pre><code>关闭和打开追踪功能
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/获取终端输出/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">获取终端输出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T00:04:53+08:00">
-                2015-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="获取终端输出两种方式"><a href="#获取终端输出两种方式" class="headerlink" title="获取终端输出两种方式"></a>获取终端输出两种方式</h1><ul>
-<li><p>方法一：<br>  <code>who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）</code></p>
-</li>
-<li><p>方法二：<br>  <code>cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输入who命令）
-  ctrl+c（强制中断）
-  chmod +x output.txt（添加执行权限）
-  ./output.txt（执行测试）</code></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/20/性能分析命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/20/性能分析命令/" itemprop="url">性能分析命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-20T10:35:45+08:00">
-                2015-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
-<li>首先你得拥有一个linux环境</li>
-<li>安装sysstat包 <code>yum install sysstat</code></li>
-<li>安装procps包 <code>yum install procps</code></li>
-</ul>
-<h1 id="需要执行的命令"><a href="#需要执行的命令" class="headerlink" title="需要执行的命令"></a>需要执行的命令</h1><p><code>updime</code><br>    $ uptime<br>    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00</p>
-<pre><code>显示的是过去1分钟，五分钟，十五分钟系统的平均负载情况，通过数据可以了解服务器负载是趋于紧张还是趋于缓解
-</code></pre><p><code>dmesg | tail</code></p>
-<pre><code>该命令会输出系统日志的最后n行。这些日志可以帮助排查性能问题。千万不要忘了这一步。
-</code></pre><p><code>vmstat 1</code></p>
-<pre><code>procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
- 0  0 558844  24696 150984  65156    0    0     2   150    1    2  0  1 99  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   51   72  0  0 100  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   50   75  0  0 100  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   55   80  0  1 99  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   44   67  0  0 100  0  0
-
-
-每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数1，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：
-
-1.r：等待在CPU资源的进程数。这个数据比平均负载更加能够体现CPU负载情况，数据中不包含等待IO的进程。如果这个数值大于机器CPU核数，那么机器的CPU资源已经饱和。
-2.free：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。
-3.si, so：交换区写入和读取的数量。如果这个数据不为0，说明系统已经在使用交换区（swap），机器物理内存已经不足。
-4.us, sy, id, wa, st：这些都代表了CPU时间的消耗，它们分别表示用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen，一般被其他虚拟机消耗）。
-
-一般情况下，如果用户时间和系统时间相加非常大，CPU出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。
-</code></pre><p><code>mpstat -P ALL 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时45分48秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
-18时45分49秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-18时45分49秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-
-18时45分49秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
-18时45分50秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-18时45分50秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-
-显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的
-</code></pre><p><code>pidstat 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时47分22秒       PID    %usr %system  %guest    %CPU   CPU  Command
-18时47分23秒     24331    0.98    0.00    0.00    0.98     0  redis-server
-
-18时47分23秒       PID    %usr %system  %guest    %CPU   CPU  Command
-
-18时47分24秒       PID    %usr %system  %guest    %CPU   CPU  Command
-18时47分25秒         7    0.00    1.01    0.00    1.01     0  events/0
-18时47分25秒     27624    0.00    2.02    0.00    2.02     0  pidstat
-
-pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态
-</code></pre><p><code>iostat -xz 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.41    0.00    0.52    0.23    0.00   98.85
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-sda               0.04    29.67    0.08    8.22     4.77   299.70    36.67     0.11   12.74   0.66   0.55
-dm-0              0.00     0.00    0.11   37.40     4.63   299.11     8.10     0.50   13.35   0.15   0.55
-dm-1              0.00     0.00    0.02    0.07     0.14     0.59     8.00     0.00   27.85   0.76   0.01
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    2.00    0.00   98.00
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-sda               0.00     0.00    1.00    0.00    16.00     0.00    16.00     0.01   15.00  15.00   1.50
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    0.00    0.00  100.00
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    0.00    0.00  100.00
-
-iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：
-
-r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
-await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
-avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
-%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。
-如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能
-</code></pre><p><code>free -m</code><br>                 total       used       free     shared    buffers     cached<br>    Mem:           458        435         23          0        147         63<br>    -/+ buffers/cache:        223        234<br>    Swap:          927        545        382</p>
-<pre><code>free命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需 要注意的是，第二行-/+ buffers/cache，一般缓存会占用大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会 立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。
-
-如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。
-</code></pre><p><code>sar -n DEV 1</code></p>
-<pre><code>18时52分14秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
-18时52分15秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分15秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分15秒      eth1      1.01      0.00      0.07      0.00      0.00      0.00      0.00
-
-18时52分15秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
-18时52分16秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分16秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分16秒      eth1      1.01      1.01      0.07      0.49      0.00      0.00      0.00
-
-sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。
-</code></pre><p><code>sar -n TCP,ETCP 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时52分36秒  active/s passive/s    iseg/s    oseg/s
-18时52分37秒      0.00      0.00      0.00      0.00
-
-18时52分36秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
-18时52分37秒      0.00      0.00      0.00      0.00      0.00
-
-18时52分37秒  active/s passive/s    iseg/s    oseg/s
-18时52分38秒      0.00      0.00      2.00      2.00
-
-18时52分37秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
-18时52分38秒      0.00      0.00      0.00      0.00      0.00
-
-sar命令在这里用于查看TCP连接状态，其中包括：
-
-active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；
-passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；
-retrans/s：每秒TCP重传数量；
-TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。
-</code></pre><p><code>top</code></p>
-<pre><code>top - 18:53:43 up 53 days,  3:55,  1 user,  load average: 0.00, 0.00, 0.02
-Tasks:  86 total,   1 running,  85 sleeping,   0 stopped,   0 zombie
-Cpu(s):  0.4%us,  0.4%sy,  0.0%ni, 98.8%id,  0.2%wa,  0.0%hi,  0.1%si,  0.0%st
-Mem:    469452k total,   446128k used,    23324k free,   151644k buffers
-Swap:   950264k total,   558844k used,   391420k free,    65716k cached
-
-  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
-    1 root      20   0 19232  520  348 S  0.0  0.1   0:44.68 init
-    2 root      20   0     0    0    0 S  0.0  0.0   0:00.03 kthreadd
-    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
-    4 root      20   0     0    0    0 S  0.0  0.0  38:03.76 ksoftirqd/0
-    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
-    6 root      RT   0     0    0    0 S  0.0  0.0   0:15.98 watchdog/0
-    7 root      20   0     0    0    0 S  0.0  0.0  57:02.33 events/0
-    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 cgroup
-    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khelper
-   10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 netns
-   11 root      20   0     0    0    0 S  0.0  0.0   0:00.00 async/mgr
-   12 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pm
-   13 root      20   0     0    0    0 S  0.0  0.0   0:31.42 sync_supers
-   14 root      20   0     0    0    0 S  0.0  0.0   0:33.01 bdi-default
-   15 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kintegrityd/0
-   16 root      20   0     0    0    0 S  0.0  0.0  32:20.76 kblockd/0
-   17 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpid
-   18 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_notify
-   19 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_hotplug
-   20 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ata_aux
-   21 root      20   0     0    0    0 S  0.0  0.0   0:00.21 ata_sff/0
-   22 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ksuspend_usbd
-   23 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khubd
-   24 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kseriod
-   25 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md/0
-   26 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md_misc/0
-   27 root      20   0     0    0    0 S  0.0  0.0   0:00.00 linkwatch
-   28 root      20   0     0    0    0 S  0.0  0.0   0:02.11 khungtaskd
-   29 root      20   0     0    0    0 S  0.0  0.0   0:27.30 kswapd0
-   30 root      25   5     0    0    0 S  0.0  0.0   0:00.00 ksmd
-   31 root      20   0     0    0    0 S  0.0  0.0   0:00.00 aio/0
-   32 root      20   0     0    0    0 S  0.0  0.0   0:00.00 crypto/0
-   37 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthrotld/0
-   39 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kpsmoused
-   40 root      20   0     0    0    0 S  0.0  0.0   0:00.00 usbhid_resumer
-   70 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kstriped
-  128 root      20   0     0    0    0 S  0.0  0.0   0:02.82 scsi_eh_0
-  129 root      20   0     0    0    0 S  0.0  0.0   0:00.00 scsi_eh_1
-  215 root      20   0     0    0    0 S  0.0  0.0  13:53.06 kdmflush
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1315,7 +1338,7 @@ Swap:   950264k total,   558844k used,   391420k free,    65716k cached
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

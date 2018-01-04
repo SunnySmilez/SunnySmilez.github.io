@@ -233,6 +233,489 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/分发无权限文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/15/分发无权限文件/" itemprop="url">分发无权限文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T15:00:34+08:00">
+                2016-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="利用root用户远程登录-一般ssh出于安全考虑-它的配置文件都会配置不允许root远程登录"><a href="#利用root用户远程登录-一般ssh出于安全考虑-它的配置文件都会配置不允许root远程登录" class="headerlink" title="利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)"></a>利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)</h1><h1 id="分发到家目录"><a href="#分发到家目录" class="headerlink" title="分发到家目录"></a>分发到家目录</h1><pre><code>scp demo.txt /home/vagrant
+</code></pre><h1 id="赋予用户cp权限"><a href="#赋予用户cp权限" class="headerlink" title="赋予用户cp权限"></a>赋予用户cp权限</h1><pre><code>visudo修改
+在最后添加:(赋予vagrant用户cp的权限)
+vagrant    ALL=(ALL)       NOPASSWD: /bin/cp
+</code></pre><h1 id="查看sudo列表中是否有cp命令"><a href="#查看sudo列表中是否有cp命令" class="headerlink" title="查看sudo列表中是否有cp命令"></a>查看sudo列表中是否有cp命令</h1><pre><code>visudo -c(检查语法)
+sudo -l
+</code></pre><h1 id="远程sudo的方法"><a href="#远程sudo的方法" class="headerlink" title="远程sudo的方法"></a>远程sudo的方法</h1><pre><code>1.注释Defaults requiretty,允许远程执行sudo(会存在安全隐患)
+    # Disable &quot;ssh hostname sudo &lt;cmd&gt;&quot;, because it will show the password in clear.
+    #         You have to run &quot;ssh -t hostname sudo &lt;cmd&gt;&quot;.
+    #
+    Defaults requiretty
+
+2.利用ssh的-t选项
+    ssh -t vagrant@172.16.17.11 sudo /bin/cp /home/vagrant/test.txt /root/test.txt
+</code></pre><h1 id="设置suid对固定命令提权-利用rsync-安全相对较差-任何拥有suid权限命令的人都能执行rsync"><a href="#设置suid对固定命令提权-利用rsync-安全相对较差-任何拥有suid权限命令的人都能执行rsync" class="headerlink" title="设置suid对固定命令提权,利用rsync(安全相对较差,任何拥有suid权限命令的人都能执行rsync)"></a>设置suid对固定命令提权,利用rsync(安全相对较差,任何拥有suid权限命令的人都能执行rsync)</h1><pre><code>chmod 4755 `which rsync`
+rsync /home/vagrant/test.txt /root/test.txt
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/ssh实现免密批量登陆/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/15/ssh实现免密批量登陆/" itemprop="url">ssh实现免密批量登陆</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T13:26:32+08:00">
+                2016-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><h1 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h1><pre><code>1.以dsa的数字算法进行密钥生成
+    ssh-keygen -t dsa
+2.默认路径以及不给密码(接下来的是选项直接回车)
+</code></pre><h1 id="分发公钥"><a href="#分发公钥" class="headerlink" title="分发公钥"></a>分发公钥</h1><pre><code>1.默认端口
+ssh-copy-id -i id_dsa.pub vagrant@172.16.17.11
+
+2.非默认端口
+ssh-copy-id -i id_dsa.pub &quot;-p 22 vagrant@172.16.17.11&quot;
+
+3.确认结果:终端最终会出现如下提示文字
+
+ Now try logging into the machine, with &quot;ssh &apos;vagrant@172.16.17.11&apos;&quot;, and check in:
+
+   .ssh/authorized_keys
+</code></pre><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><pre><code>vagrant@172.16.17.11(直接登录到11的服务器)
+</code></pre><h1 id="ssh-copy-id原理"><a href="#ssh-copy-id原理" class="headerlink" title="ssh-copy-id原理"></a>ssh-copy-id原理</h1><pre><code>1.复制分发机器上的.ssh/id_dsa.pub到目标机器.ssh目录
+2.修改文件名为authorized_keys,修改文件权限为600
+</code></pre><h1 id="如果ssh-copy-id不存在"><a href="#如果ssh-copy-id不存在" class="headerlink" title="如果ssh-copy-id不存在"></a>如果ssh-copy-id不存在</h1><h3 id="分发公钥文件到登陆机器上"><a href="#分发公钥文件到登陆机器上" class="headerlink" title="分发公钥文件到登陆机器上"></a>分发公钥文件到登陆机器上</h3><pre><code>scp /Users/zhouzhi/.ssh/id_dsa.pub zhi.zhou@172.16.22.63:/home/zhi.zhou/id_dsa.pub
+</code></pre><h3 id="登陆到目标服务器并创建-ssh文件夹及authorized-keys文件-此处为63服务器"><a href="#登陆到目标服务器并创建-ssh文件夹及authorized-keys文件-此处为63服务器" class="headerlink" title="登陆到目标服务器并创建.ssh文件夹及authorized_keys文件(此处为63服务器)"></a>登陆到目标服务器并创建.ssh文件夹及authorized_keys文件(此处为63服务器)</h3><pre><code>mkdir .ssh &amp;&amp; touch .ssh/authorized_keys
+</code></pre><h3 id="将公钥拷贝到目标登陆服务器"><a href="#将公钥拷贝到目标登陆服务器" class="headerlink" title="将公钥拷贝到目标登陆服务器"></a>将公钥拷贝到目标登陆服务器</h3><pre><code>cat id_dsa.pub &gt;&gt; .ssh/authorized_keys
+</code></pre><h3 id="修改公钥文件权限为600"><a href="#修改公钥文件权限为600" class="headerlink" title="修改公钥文件权限为600"></a>修改公钥文件权限为600</h3><pre><code>chmod 600 .ssh/authorized_keys
+</code></pre><h3 id="加一个超级简单的登陆脚本"><a href="#加一个超级简单的登陆脚本" class="headerlink" title="加一个超级简单的登陆脚本"></a>加一个超级简单的登陆脚本</h3><pre><code>#!/bin/bash
+env=$1
+if [ $env == &apos;dev&apos; ];then
+ip=172.16.22.63
+fi
+
+if [ ${env} == &apos;test&apos; ];then
+ip=172.16.22.117
+fi
+
+ssh zhi.zhou@$ip
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/11/ssh介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/11/ssh介绍/" itemprop="url">ssh介绍</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-11T20:55:25+08:00">
+                2016-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SSH提供的功能-支持-RSA-DSA加密方式"><a href="#SSH提供的功能-支持-RSA-DSA加密方式" class="headerlink" title="SSH提供的功能(支持:RSA,DSA加密方式)"></a>SSH提供的功能(支持:RSA,DSA加密方式)</h1><pre><code>安全加密协议,远程联机访问,类似telnet
+类似FTP服务的sftp-server,借助SSH协议传输数据,提供更安全的SFTP服务(加密)
+</code></pre><h2 id="RSA-DSA的区别"><a href="#RSA-DSA的区别" class="headerlink" title="RSA,DSA的区别"></a>RSA,DSA的区别</h2><pre><code>RSA:既可以进行加密,也可以进行数字签名实现认证
+DSA:只能进行数字签名实现认证
+</code></pre><h1 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h1><pre><code>1.x版本
+    1.启动服务的时候生成一个公钥
+    2.客户端发送请求
+    3.服务器端发送公钥给客户端
+    4.客户端检查是否存在一致的公钥(~/.ssh/known_hosts),没有则保存改公钥
+    5.根据公钥以及本地生成一个私钥生成一个密钥对
+    6.每次和服务器端通讯都带着密钥对
+
+2.x版本
+    添加一个确认联机正确性的Diffie-Hellman机制
+</code></pre><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><pre><code>/etc/ssh/sshd_config                (服务器端配置文件位置)
+/etc/ssh/ssh_config                 (客户端配置文件位置)
+</code></pre><h1 id="认证类型"><a href="#认证类型" class="headerlink" title="认证类型"></a>认证类型</h1><pre><code>基于口令的安全验证
+基于密钥对的安全验证
+</code></pre><h1 id="修改ssh默认登录配置"><a href="#修改ssh默认登录配置" class="headerlink" title="修改ssh默认登录配置"></a>修改ssh默认登录配置</h1><pre><code>Port 22121                      默认端口为22,修改它为其他端口
+PermitRootLogin no              超级用户不允许远程登录,可以给其他别的用户sudo权限
+PermitEmptyPasswords no         禁止空密码登录
+UseDNS no                       不使用DNS解析
+GSSAPIAuthentication no         让ssh连接更快
+</code></pre><h1 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h1><pre><code>yum install nmap
+nmap 172.16.17.12 -p 1-65535                扫描1-65535端口开启的服务
+</code></pre><h1 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h1><pre><code>ssh -p port usernaem@ip
+ssh -p 22121 test@172.16.17.12
+</code></pre><h1 id="远程连接-执行命令"><a href="#远程连接-执行命令" class="headerlink" title="远程连接,执行命令"></a>远程连接,执行命令</h1><pre><code>ssh -p port usernaem@ip 命令
+ssh -p 22121 test@172.16.17.12 /usr/bin/free -m
+</code></pre><h1 id="scp-上传-r可以上传目录"><a href="#scp-上传-r可以上传目录" class="headerlink" title="scp 上传(-r可以上传目录)"></a>scp 上传(-r可以上传目录)</h1><pre><code>scp -p port path username@ip:path
+</code></pre><h1 id="scp-下载-r可以下载目录"><a href="#scp-下载-r可以下载目录" class="headerlink" title="scp 下载(-r可以下载目录)"></a>scp 下载(-r可以下载目录)</h1><pre><code>scp -p port username@ip:path path
+</code></pre><h1 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h1><pre><code>sftp -oPort=22121 test@172.16.17.12             连接sftp
+put /tmp/test.txt /tmp                          上传test.txt到/tmp目录
+get /home/test/test.txt                         默认下载到当前目录
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/04/文件系统NFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -756,544 +1239,11 @@ cache为读出缓存区,将磁盘的数据读入到cache
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/28/网络/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">网络</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-28T21:48:39+08:00">
-                2016-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="私有IP地址"><a href="#私有IP地址" class="headerlink" title="私有IP地址"></a>私有IP地址</h1><pre><code>A类: 10.0.0.0 - 10.255.255.255
-B类: 172.16.0.0 - 172.31.255.255
-C类: 192.168.0.0 - 192.168.255.255
-</code></pre><h1 id="访问网站基本流程-主要解释DNS"><a href="#访问网站基本流程-主要解释DNS" class="headerlink" title="访问网站基本流程(主要解释DNS)"></a>访问网站基本流程(主要解释DNS)</h1><pre><code>1.输入网址(www.demo.com.)
-2.访问本地hosts
-3.访问本地hosts DNS缓存
-4.访问LDNS(local dns),配置网关对应的地址
-5.先访问根域DNS(全球13台)
-6.访问com对应的服务器
-7.访问demo对应的服务器
-8.访问网站授权DNS服务器
-9.返回给LDNS网站(www.demo.com.)对应ip,LDNS缓存
-10.返回给请求者机器,请求者机器缓存DNS,并访问对应服务器
-11.对应服务器返回内容
-</code></pre><h1 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h1><pre><code>1.临时生效
-    hostname HELLO
-2.永久生效
-    vim /etc/sysconfig/network
-    HOSTNAME=HELLO    #主机名
-</code></pre><h1 id="网卡文件-etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#网卡文件-etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="网卡文件/etc/sysconfig/network-scripts/ifcfg-eth0"></a>网卡文件/etc/sysconfig/network-scripts/ifcfg-eth0</h1><pre><code>DEVICE=eth0                 #指第一块网卡名称为eth0第二块为eth1
-TYPE=Ethernet               #类型
-ONBOOT=yes                  #开机网卡自启动
-NM_CONTROLLED=yes
-BOOTPROTO=none              #静态分配地址
-DNS1=8.8.8.8                #客户端dns设置
-USERCTL=no
-IPV6INIT=no
-HWADDR=00:0C:20:3F:00:20    #mac地址,不同机器不能重复,尤其是克隆虚拟机或者复制网卡配置的时候
-IPADDR=10.10.1.1            #这里是ip地址设置
-NETMASK=255.255.255.0       #子网掩码/24
-GETWAY=10.0.0.254           #网关配置,也可以命令行通过route添加删除
-</code></pre><h1 id="设置多个ip地址"><a href="#设置多个ip地址" class="headerlink" title="设置多个ip地址"></a>设置多个ip地址</h1><pre><code>ifconfig eth0:0 10.10.10.251 netmask 255.255.255.0
-</code></pre><h1 id="设置网关的位置-可以统一"><a href="#设置网关的位置-可以统一" class="headerlink" title="设置网关的位置(可以统一)"></a>设置网关的位置(可以统一)</h1><pre><code>/etc/sysconfig/network
-/etc/sysconfig/network-scripts/ifcfg-eth0 ----优先生效
-</code></pre><h1 id="查看网关"><a href="#查看网关" class="headerlink" title="查看网关"></a>查看网关</h1><pre><code>route -n
-
-Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
-192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth1
-10.0.2.0        0.0.0.0         255.255.255.0   U     0      0        0 eth0
-169.254.0.0     0.0.0.0         255.255.0.0     U     1002   0        0 eth0
-169.254.0.0     0.0.0.0         255.255.0.0     U     1003   0        0 eth1
-0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 eth1  ----默认网关,所有规则都不符合的时候就走默认网关
-</code></pre><h1 id="删除网关-注意使用root权限操作"><a href="#删除网关-注意使用root权限操作" class="headerlink" title="删除网关(注意使用root权限操作)"></a>删除网关(注意使用root权限操作)</h1><pre><code>route del default gw 192.168.1.1
-</code></pre><h1 id="添加网关"><a href="#添加网关" class="headerlink" title="添加网关"></a>添加网关</h1><pre><code>route add default gw 192.168.1.1 ----临时生效
-</code></pre><h1 id="查看DNS解析"><a href="#查看DNS解析" class="headerlink" title="查看DNS解析"></a>查看DNS解析</h1><pre><code>dig www.baidu.com
-nslookup 然后再输入www.baidu.com
-</code></pre><h1 id="跟踪路由"><a href="#跟踪路由" class="headerlink" title="跟踪路由"></a>跟踪路由</h1><pre><code>traceroute www.baidu.com
-</code></pre><h1 id="检查网络"><a href="#检查网络" class="headerlink" title="检查网络"></a>检查网络</h1><pre><code>ping www.baidu.com
-traceroute www.baidu.com
-telnet
-nmap
-</code></pre><h1 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h1><pre><code>tcpdump
-tcpdump -n icmp -i eth0  相当于ping
-</code></pre><h1 id="网络不通检查思路"><a href="#网络不通检查思路" class="headerlink" title="网络不通检查思路"></a>网络不通检查思路</h1><pre><code>1.物理链路是否通
-2.本机ip,路由,DNS的设置情况是否达标
-3.测试到网关或路由器的通畅情况,先测网关然后测路由器
-4.测试ping公网ip的通畅情况
-5.测试DNS的通畅
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/27/su命令执行流程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">su命令执行流程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T22:34:53+08:00">
-                2016-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><pre><code>1.普通用户运行sudo
-2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
-3.如果过期,需要用户输入自己的口令
-4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
-5.无权限则退出sudo
-6.有权限则执行命令并返回结果,退出sudo
-</code></pre><h1 id="管理文件-etc-sudoers"><a href="#管理文件-etc-sudoers" class="headerlink" title="管理文件(/etc/sudoers)"></a>管理文件(/etc/sudoers)</h1><pre><code>1.主机别名
-2.用户别名
-3.角色别名
-4.定义命令别名
-</code></pre><h1 id="设置sudo权限"><a href="#设置sudo权限" class="headerlink" title="设置sudo权限"></a>设置sudo权限</h1><pre><code>demo      ALL=(ALL)       ALL
-用户,组    主机名,用户       命令
-</code></pre><h1 id="设置sudo的日志"><a href="#设置sudo的日志" class="headerlink" title="设置sudo的日志"></a>设置sudo的日志</h1><pre><code>在/etc/sudoers下添加&quot;Defaults logfile=/var/log/sudo.log&quot;
-</code></pre><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a>注意事项:</h1><pre><code>* 不需要密码直接运行命令的,应该加NOPASSWD:参数
-* 禁止某类程序或命令执行,在命令动作前面加上&quot;!&quot;,并放在允许执行的命令后面
-* 用户组前面必须加%号
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/26/定时任务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">定时任务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-26T00:14:41+08:00">
-                2016-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="系统定时任务"><a href="#系统定时任务" class="headerlink" title="系统定时任务"></a>系统定时任务</h1><pre><code>ls /etc | grep cron
-</code></pre><h1 id="用户定时任务"><a href="#用户定时任务" class="headerlink" title="用户定时任务"></a>用户定时任务</h1><pre><code>* * * * * (分时日月周)
-</code></pre><h1 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h1><pre><code>*
-    表示任意时间
-    eg: * * * * * 表示每分钟都执行
-
--
-    a-b,表示在a到b的范围内,包括a,b
-    eg:30 1-3 * * * 表示在1点30,2点30,3点30执行
-
-,
-    表示分隔时段的意思
-    eg:30 17,18,19 * * * 表示17点半,18点半,19点半执行
-
-/n
-    表示每隔的意思
-    eg: */10 * * * * 表示每隔10分钟执行
-</code></pre><h1 id="crontab-l"><a href="#crontab-l" class="headerlink" title="crontab -l"></a>crontab -l</h1><pre><code>查看crontab文件内容
-</code></pre><h1 id="crontab-r"><a href="#crontab-r" class="headerlink" title="crontab -r"></a>crontab -r</h1><pre><code>删除crontab文件内容
-</code></pre><h1 id="crontab-e"><a href="#crontab-e" class="headerlink" title="crontab -e"></a>crontab -e</h1><pre><code>编辑crontab文件内容
-</code></pre><h1 id="crontab-i"><a href="#crontab-i" class="headerlink" title="crontab -i"></a>crontab -i</h1><pre><code>确认crontab文件内容
-</code></pre><h1 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h1><pre><code>服务状态查看:/etc/init.d/crond status
-服务启动:/etc/init.d/crond start
-服务重启:/etc/init.d/crond restart
-</code></pre><h1 id="书写规范"><a href="#书写规范" class="headerlink" title="书写规范"></a>书写规范</h1><pre><code>1.定时任务添加注释
-2.执行shell前加/bin/sh
-3.定时任务命令或脚本的结尾加&gt;&gt;/dev/null 2&amp;1
-4.定时任务命令的执行,最好用脚本文件
-5.在指定用户下执行相关定时任务
-6.生产任务程序不要随意打印输出信息
-7.定时任务执行脚本要规范路径
-</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><pre><code>1.系统环境变量问题
-2.定时任务要用绝对路径
-3.时间变量&apos;%&apos;用反斜线转移
-4.脚本权限问题加/bin/sh
-5.定时任务中的脚本命令使用全路径
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1339,7 +1289,7 @@ tcpdump -n icmp -i eth0  相当于ping
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
