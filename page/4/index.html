@@ -326,34 +326,28 @@
       
         
           
-            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>更快的构建速度</li>
-<li>更小的Docker镜像大小</li>
-<li>更少的Docker镜像层</li>
-<li>充分利用镜像缓存</li>
-<li>增加Dockerfile可读性</li>
-<li>让Docker容器使用起来更简单</li>
-</ul>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
-<li>容器只运行单个应用</li>
-<li>将多个RUN指令合并为一个</li>
-<li>基础镜像的标签不要用latest</li>
-<li>每个RUN指令后删除多余文件</li>
-<li>选择合适的基础镜像(alpine版本最好，不过个人还是喜欢centos)</li>
-<li>设置WORKDIR和CMD</li>
-<li>COPY与ADD优先使用前者</li>
-<li>合理调整COPY与RUN的顺序</li>
-<li>设置默认的环境变量，映射端口和数据卷</li>
-<li>使用LABEL设置镜像元数据</li>
-<li>添加HEALTHCHECK</li>
-<li>使用ENTRYPOINT (可选，可以用于做不同环境的判断，不如dev，product)</li>
-<li>在entrypoint脚本中使用exec</li>
-</ul>
-<h1 id="编写步骤"><a href="#编写步骤" class="headerlink" title="编写步骤"></a>编写步骤</h1><blockquote>
-<p><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/" title="编写dockerfile" target="_blank" rel="external">编写dockerfile</a></p>
-</blockquote>
+          目标
+更快的构建速度
+更小的Docker镜像大小
+更少的Docker镜像层
+充分利用镜像缓存
+增加Dockerfile可读性
+让Docker容器使用起来更简单
 
-          
+注意事项
+容器只运行单个应用
+将多个RUN指令合并为一个
+基础镜像的标签不要用latest
+每个RUN指令后删除多余文件
+选择合适的基础镜
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/14/如何编写一个dockerfile/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -493,11 +487,18 @@
       
         
           
-            <h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
-</code></pre><h3 id="并发性好"><a href="#并发性好" class="headerlink" title="并发性好"></a>并发性好</h3><pre><code>goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
+          部署简单go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
+并发性好goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
 单个go应用能有效利用多个CPU内核，并行执行性能好
-</code></pre><h3 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h3><h3 id="丰富的标准库"><a href="#丰富的标准库" class="headerlink" title="丰富的标准库"></a>丰富的标准库</h3><h3 id="活跃的社区支持"><a href="#活跃的社区支持" class="headerlink" title="活跃的社区支持"></a>活跃的社区支持</h3>
+跨平台编译丰富的标准库活跃的社区支持
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/10/go的应用场景/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -637,35 +638,21 @@
       
         
           
-            <h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
-</code></pre><h6 id="明确的目标用户"><a href="#明确的目标用户" class="headerlink" title="明确的目标用户"></a>明确的目标用户</h6><pre><code>这个至关重要，是产品定位的大基调
+          说明以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
+明确的目标用户这个至关重要，是产品定位的大基调
 能够更精准的确定获取目标用户的渠道
 能够精准的给用户设计产品功能
 比如说：
     我的目标用户是青年人，那么理想的状态是我会推广一个文章能够触达到我的青年用户，在获取
-    青年用户的同时希望能够剔除掉非青年用户（毕竟用户的运营也是有成本的，这里指的是个性化
-    运营，并不是群发文章之类的）
-</code></pre><h6 id="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？"><a href="#为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？" class="headerlink" title="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？"></a>为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？</h6><pre><code>提醒用户，首屏下面还有内容，网站是可以滚动的    
-</code></pre><p><img src="/img/product/think/home_part_negative.png" alt="Alt text" title="首屏是完整的页面"><br><img src="/img/product/think/home_part_positive.png" alt="Alt text" title="首屏只显示部分页面"></p>
-<h6 id="关注首屏"><a href="#关注首屏" class="headerlink" title="关注首屏"></a>关注首屏</h6><pre><code>首屏是决定用户是否继续浏览的关键因素
-解决用户的信任问题
-放足够吸引用户的东西
-依旧举个例子（如下图）：
-    1、首先打开官网最打眼的2的位置，一个大红包这是足够吸引我去看红包是怎么回事
-    2、3的位置很巧妙，2的位置引导眼球的时候，在视线的下方位置，
-       观看到3的红色的免费字样，接着我的视线一定会移动到3所在的功能块，这个时候又是
-       10位置的红色字样直接吸引过来，接着应该是顺理成章的做评估了，设计者最后在
-       8的位置还把评估的人数显示上来，低调的解除了用户的不信任危机
-    3、再者是7的位置和传统的轮播图比他的优势在于右边的文字，一次性列举出了所有
-       的轮播图的作用（不是像传统的那样就是两个箭头或者几个数字点击能够进行切换，作为
-       用户我哪来的耐心去猜测你的箭头会切换到哪个轮播图？）
-    4、再看1的位置，在导航栏中做了重点的突出，应该是吸引用户的一个重要功能，很
-       希望用户去点
-    5、看4，5的位置我认为都在解决一个信任的问题，首先是4的位置介绍我的资质，这
-       个是比较有说服力的客观事实你如果还不信的话可以到5的位置去看关于我们
-</code></pre><p><img src="/img/product/think/hainabian_home.png" alt="Alt text" title="优质首页分析"></p>
-
-          
+ 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/06/关于产品设计的几个小思考/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -805,128 +792,16 @@
       
         
           
-            <h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
-docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
-</code></pre><h1 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h1><h3 id="docker-build-其他用法"><a href="#docker-build-其他用法" class="headerlink" title="docker build 其他用法"></a>docker build 其他用法</h3><h6 id="标准用法"><a href="#标准用法" class="headerlink" title="标准用法"></a>标准用法</h6><pre><code>docker build -t image_name PATH
-在PATH目录下，按照Dockerfile建立一个新的image_name镜像
-path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
-</code></pre><h6 id="直接用-Git-repo-进行构建"><a href="#直接用-Git-repo-进行构建" class="headerlink" title="直接用 Git repo 进行构建"></a>直接用 Git repo 进行构建</h6><pre><code>docker build https://github.com/twang2218/gitlab-ce-zh.git#:8.14
-指定了构建所需的 Git repo，并且指定默认的 master 分支，构建目录为 /8.14/，然后 Docker 就会自己去 git clone 这个项目、切换到指定分支、并进入到指定目录后开始构建
-</code></pre><h6 id="用给定的-tar-压缩包构建"><a href="#用给定的-tar-压缩包构建" class="headerlink" title="用给定的 tar 压缩包构建"></a>用给定的 tar 压缩包构建</h6><pre><code>docker build http://server/context.tar.gz
-Docker 引擎会下载这个包，并自动解压缩，以其作为上下文，开始构建
-</code></pre><h6 id="从标准输入中读取-Dockerfile-进行构建"><a href="#从标准输入中读取-Dockerfile-进行构建" class="headerlink" title="从标准输入中读取 Dockerfile 进行构建"></a>从标准输入中读取 Dockerfile 进行构建</h6><pre><code>docker build - &lt; Dockerfile或者cat Dockerfile | docker build -
-如果标准输入传入的是文本文件，则将其视为 Dockerfile，并开始构建。这种形式由于直接从标准输入中读取 Dockerfile 的内容，它没有上下文，因此不可以像其他方法那样可以将本地文件 COPY 进镜像之类的事情
-</code></pre><h6 id="从标准输入中读取上下文压缩包进行构建"><a href="#从标准输入中读取上下文压缩包进行构建" class="headerlink" title="从标准输入中读取上下文压缩包进行构建"></a>从标准输入中读取上下文压缩包进行构建</h6><pre><code>docker build - &lt; context.tar.gz
-如果发现标准输入的文件格式是 gzip、bzip2 以及 xz 的话，将会使其为上下文压缩包，直接将其展开，将里面视为上下文，并开始构建
-</code></pre><h6 id="From"><a href="#From" class="headerlink" title="From"></a>From</h6><pre><code>指定基础镜像，在其上进行定制
-</code></pre><h6 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h6><pre><code>执行命令行的命令，比如：RUN apt-get update是执行apt-get update命令
-执行此命令的时候需要注意，在Dockerfile中没执行一个指令都会新建一层(目前有个最大层的限制是127层)，所以每执行一个RUN就会和我们在执行安装软件然后执行commit一样，苟静一层镜像。因此在执行多个命令的时候使用&quot;&amp;&quot;符连接，用一个RUN执行，这样就只会新建一个层
-不可这样：
-RUN apt-get update
-RUN apt-get -y install vim
-应当改为：
-RUN apt-get update \
-    &amp;&amp; apt-get -y install vim
-</code></pre><h6 id="COPY-source-path-target-path"><a href="#COPY-source-path-target-path" class="headerlink" title="COPY source_path target_path"></a>COPY source_path target_path</h6><pre><code>将本地的source_path复制到新的一层镜像内的target_path位置（如果source_path是相对路径，那么需要注意的是他是相对于docker build -t image_name PATH时指定的PATH也就是上下文环境）
-source_path支持通配符
-target_path可以是容器的绝对路径，也可以是相对于工作目录的相对路径（工作目录用WORKDIR指令来指定）
-需要注意的是所有的source_path的文件属性都会保留（包含读写执行权限等）
-</code></pre><h6 id="ADD-source-path-target-path"><a href="#ADD-source-path-target-path" class="headerlink" title="ADD source_path target_path"></a>ADD source_path target_path</h6><pre><code>使用方式和COPY一样，但是添加了一些新的功能
-source_path可以是一个 URL，这种情况下，Docker 引擎会试图去下载这个链接的文件放到 target_path去。下载后的文件权限自动设置为 600，另外，如果下载的是个压缩包，需要解压缩，如果对权限不满足或者需要进行解压缩，那就需要再使用RUN命令调整
-如果source_path是一个tar压缩文件的话，ADD会将文件解压缩后到target_path中
-</code></pre><h6 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h6><pre><code>CMD与RUN类似
-shell格式：CMD 命令
-exec格式：CMD [&quot;可执行文件&quot;, &quot;参数1&quot;, &quot;参数2&quot;...]
-参数列表格式：CMD [&quot;参数1&quot;, &quot;参数2&quot;...]。在指定了 ENTRYPOINT 指令后，用 CMD 指定具体的参数
-需要注意的是：Docker 不是虚拟机，容器就是进程，容器就是为了主进程而存在的，主进程退出，容器就失去了存在的意义，从而退出，其它辅助进程不是它需要关心的东西(这块实验并没有成功，暂时忽略，有坑能想到这块就行)
-什么意思呢？重启nginx的时候可能会写成这样：CMD service nginx start
-在执行的时候会被理解为：CMD [ &quot;sh&quot;, &quot;-c&quot;, &quot;service nginx start&quot;]，因此主进程实际是sh，当service nginx start结束之后，sh也就结束了，sh作为主进程退出，自然容器也就退出了
-正确的做法是直接执行nginx可执行文件
-CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
-</code></pre><h6 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h6><pre><code>和cmd的命令差不多，两个应用场景
-1、启动一个服务前的准备工作
-    FROM alpine:3.4
-    ...
-    RUN addgroup -S redis &amp;&amp; adduser -S -G redis redis
-    ...
-    ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]
-
-    EXPOSE 6379
-    CMD [ &quot;redis-server&quot; ]
-
-
-    docker-entrypoint.sh的脚本
-    #!/bin/sh
-    ...
-    # allow the container to be started with `--user`
-    if [ &quot;$1&quot; = &apos;redis-server&apos; -a &quot;$(id -u)&quot; = &apos;0&apos; ]; then
-        chown -R redis .
-        exec su-exec redis &quot;$0&quot; &quot;$@&quot;
-    fi
-
-    exec &quot;$@&quot;
-    这时候的ENTRYPOINT会判断CMD的内容，如果是redis-server就切换redis用户身份启动服务器，否则用root身份执行
-
-2、让镜像像命令一样
-    FROM ubuntu:16.04
-    RUN apt-get update \
-        &amp;&amp; apt-get install -y curl \
-        &amp;&amp; rm -rf /var/lib/apt/lists/*
-    CMD [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
-
-    如上我们在构建好镜像之后，执行docker run container_name就会执行curl http://ip.cn
-    如果这个时候我想显示当前的http头信息，就需要加上-i的参数了，假如我们执行docker run container_name -I 命令会变成curl -I http://ip.cn？
-    记住在镜像的后面只能跟command，运行时会替换CMD的默认值，所以在这里的-i是把整个的CMD给替换了，而-I这个命令是不存在的，显然我们需要docker run container_name curl -I http://ip.cn这么写
-    如果我们换成这种写法
-    FROM ubuntu:16.04
-    RUN apt-get update \
-        &amp;&amp; apt-get install -y curl \
-        &amp;&amp; rm -rf /var/lib/apt/lists/*
-    ENTRYPOINT [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
-
-    这样写就能构建完镜像之后，执行docker run container_name就能获取header信息
-    因为CMD的内容将会作为参数传给ENTRYPOINT，因此原本命令是curl http://ip.cn，CMD命令是-I所以最终执行的命令是curl -I http://ip.cn
-</code></pre><h6 id="ENV设置环境变量"><a href="#ENV设置环境变量" class="headerlink" title="ENV设置环境变量"></a>ENV设置环境变量</h6><pre><code>ENV key val
-ENV key1=val1 key2=val2
-ENV VERSION=1.01 NAME=&quot;TEST&quot;
-</code></pre><h6 id="ARG构建参数"><a href="#ARG构建参数" class="headerlink" title="ARG构建参数"></a>ARG构建参数</h6><pre><code>ARG key=val
-和ENV一样是设置环境变量，ARG构建的环境变量，在容器运行时不会存在这些环境变量（貌似就是一个临时的环境变量的概念，但是他能用docker history查看，所以不要以为真的是临时变量，直接传入账号密码）
-</code></pre><h6 id="VOLUME定义匿名卷"><a href="#VOLUME定义匿名卷" class="headerlink" title="VOLUME定义匿名卷"></a>VOLUME定义匿名卷</h6><pre><code>容器运行的时候，我们应该尽量保持容器存储层不发生写操作，对于数据库类需要动态保存数据的应用/或者上传文件的目录，我们应该把这些文件保存在卷中，比如在Dockerfile中，我们事先指定 /data/mysqldata为匿名卷，这样做会保证容器存储层无变化，说白了就是你把当前的容器做build的时候不会把mysqldata文件给打包进去
-VOLUME /data/mysqldata
-在执行：docker run -d -v mydata:/data/mysqldata container_name的时候是可以覆盖掉匿名卷的
-</code></pre><h6 id="EXPOSE暴露端口"><a href="#EXPOSE暴露端口" class="headerlink" title="EXPOSE暴露端口"></a>EXPOSE暴露端口</h6><pre><code>EXPOSE 端口1 端口2
-这样写在容器运行的时候也不会开启这个端口的服务
-他有两个作用：提醒，告诉镜像使用者理解这个服务的使用的端口；占用随机应用端口，
-</code></pre><h6 id="WORKDIR指定工作目录"><a href="#WORKDIR指定工作目录" class="headerlink" title="WORKDIR指定工作目录"></a>WORKDIR指定工作目录</h6><pre><code>指定工作目录，以后各层的当前目录就改为指定的目录
-</code></pre><h6 id="USER指定当前用户"><a href="#USER指定当前用户" class="headerlink" title="USER指定当前用户"></a>USER指定当前用户</h6><pre><code>切换到指定用户，该用户必须事先存在
-</code></pre><h6 id="HEALTHCHECK健康检查"><a href="#HEALTHCHECK健康检查" class="headerlink" title="HEALTHCHECK健康检查"></a>HEALTHCHECK健康检查</h6><pre><code>--interval  两次健康检查的间隔时间
---timeout   监看检查命令运行超时时间，如果超过这个时间，本次健康检查视为失败，默认30s
---retries   当连续失败命令运行
-
-FROM nginx
-RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*
-HEALTHCHECK --interval=5s --timeout=3s \
-  CMD curl -fs http://localhost/ || exit 1
-
-这里设置每隔5s检查一次，如果健康检查命令超过3s没响应就视为失败，并使用curl -fs http://localhost/ || exit 1作为健康检查命令
-</code></pre><h6 id="onbulid"><a href="#onbulid" class="headerlink" title="onbulid"></a>onbulid</h6><pre><code>他后面跟其他的指令，例如RUN,COPY等，而这些指令，在当前镜像构建时并不会被执行，只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行
-1、先编写一个Dockerfile文件，内容如下：
-    FROM web1
-    ONBUILD RUN mkdir /test
-
-2、利用上面的Dockerfile构建镜像：docker build -t web1
-    这个时候你在web1镜像中不会看到有/test文件夹
-
-3、在编写一个Dockerfile，内容如下
-    FROM web1
-
-4、构建镜像：docker build -t web2
-    这个时候你会看到镜像web2中有/test文件夹
-</code></pre><h6 id="dockerignore"><a href="#dockerignore" class="headerlink" title=".dockerignore"></a>.dockerignore</h6><pre><code>如果在docker build指定的上下文环境中有不需要COPY的文件，可以像.gitignore这样的语法写在.dockerignore
-.path/*
-.file_name
-</code></pre>
-          
+          Dockerfile 作用定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
+docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/04/Dockerfile的编写/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1066,29 +941,18 @@ HEALTHCHECK --interval=5s --timeout=3s \
       
         
           
-            <h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
+          优势    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
 统技术管理镜像，能极大简化环境运维过程，相对于VM，docker在其轻量、配置复杂度以及资源利用率方
 面有着明显的优势
-</code></pre><h1 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h1><pre><code>    虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的平台（软件、系统），Docker在
-降低额外开销的情况下提供了同样的功能。它能让你将运行环境和配置放在代码中然后部署，同一个
-Docker的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度
-</code></pre><h1 id="代码流水线管理"><a href="#代码流水线管理" class="headerlink" title="代码流水线管理"></a>代码流水线管理</h1><pre><code>    代码从开发机到最终的生产环境的部署，需要经过很多的中间环境，Docker给应用提供了一个一致
-的环境，让代码的流水线变得简单
-</code></pre><h1 id="提高开发效率"><a href="#提高开发效率" class="headerlink" title="提高开发效率"></a>提高开发效率</h1><pre><code>    在开发的过程中，对于环境，我们永远避不开两件事：1.快速的搭建开发环境 2.让开发环境和生产
-环境无限保持一致
-</code></pre><h1 id="隔离应用"><a href="#隔离应用" class="headerlink" title="隔离应用"></a>隔离应用</h1><pre><code>    在开发或者生产环境中，出于节约服务器资源的考虑，通常会出现这样的情况，一台服务器上部署多
-个应用，这样部署应用一般会导致修改某些文件会导致应用之间互相干扰，比如修改nginx配置
-</code></pre><h1 id="整合服务器"><a href="#整合服务器" class="headerlink" title="整合服务器"></a>整合服务器</h1><pre><code>在一台服务器上部署多个应用
-</code></pre><h1 id="调试能力"><a href="#调试能力" class="headerlink" title="调试能力"></a>调试能力</h1><pre><code>Docker提供了很多的工具
-</code></pre><h1 id="多租户环境"><a href="#多租户环境" class="headerlink" title="多租户环境"></a>多租户环境</h1><h1 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h1><pre><code>    在虚拟机之前，引入新的硬件资源需要消耗几天的时间。虚拟化技术（Virtualization）将这个时间
-缩短到了分钟级别，而Docker通过为进程仅仅创建一个容器而无需启动一个操作系统，再次将这个过程缩短
-到了秒级
-
-
-http://get.ftqq.com/7115.get
-http://dockone.io/article/126
-</code></pre>
-          
+简化配置    虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/02/docker的应用场景/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

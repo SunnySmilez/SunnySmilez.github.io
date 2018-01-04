@@ -326,22 +326,21 @@
       
         
           
-            <h1 id="path环境变量"><a href="#path环境变量" class="headerlink" title="path环境变量"></a>path环境变量</h1><pre><code>环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
+          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
 echo $PATH（查看目前执行shell寻找的目录）
 :（表示查找的优先级）
 PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
 echo $PATH（查看环境变量）
 
-环境变量永久生效的方式：
-1.vim /etc/profile
-2.echo &apos;export PATH=/usr/local/mysql/bin:$PATH&apos; &gt;&gt; /etc/profile ;source /etc/profile
-</code></pre><h1 id="ls-l"><a href="#ls-l" class="headerlink" title="ls -l"></a>ls -l</h1><pre><code>‘-’表示参数是可有可无的
-</code></pre><h1 id="bin-sh-的含义"><a href="#bin-sh-的含义" class="headerlink" title="#! /bin/sh 的含义"></a>#! /bin/sh 的含义</h1><pre><code>告知系统需要使用/bin/sh的shell来执行脚本，类似的还有很多shell比如#! /bin/awk ;#! /bin/csh
-</code></pre><h1 id="‘-’和’-amp-’的作用"><a href="#‘-’和’-amp-’的作用" class="headerlink" title="‘;’和’&amp;’的作用"></a>‘;’和’&amp;’的作用</h1><pre><code>‘;’用来分隔同一行里的多个命令
-‘&amp;’如果是在命令的末尾shell会在后台执行该命令
-</code></pre><h1 id="‘set-x’与’set-x’"><a href="#‘set-x’与’set-x’" class="headerlink" title="‘set -x’与’set +x’"></a>‘set -x’与’set +x’</h1><pre><code>关闭和打开追踪功能
-</code></pre>
-          
+环境
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -481,19 +480,20 @@ echo $PATH（查看环境变量）
       
         
           
-            <h1 id="获取终端输出两种方式"><a href="#获取终端输出两种方式" class="headerlink" title="获取终端输出两种方式"></a>获取终端输出两种方式</h1><ul>
-<li><p>方法一：<br>  <code>who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）</code></p>
-</li>
-<li><p>方法二：<br>  <code>cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输入who命令）
-  ctrl+c（强制中断）
-  chmod +x output.txt（添加执行权限）
-  ./output.txt（执行测试）</code></p>
-</li>
-</ul>
+          获取终端输出两种方式
+方法一：  who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
+  tail -n 100 output.txt（查看文件的末尾100行）
 
-          
+方法二：  cat &gt; output.txt（建立文件使用cat复制终端输出）
+  who（终端输
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/12/22/获取终端输出/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -633,176 +633,20 @@ echo $PATH（查看环境变量）
       
         
           
-            <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
-<li>首先你得拥有一个linux环境</li>
-<li>安装sysstat包 <code>yum install sysstat</code></li>
-<li>安装procps包 <code>yum install procps</code></li>
-</ul>
-<h1 id="需要执行的命令"><a href="#需要执行的命令" class="headerlink" title="需要执行的命令"></a>需要执行的命令</h1><p><code>updime</code><br>    $ uptime<br>    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00</p>
-<pre><code>显示的是过去1分钟，五分钟，十五分钟系统的平均负载情况，通过数据可以了解服务器负载是趋于紧张还是趋于缓解
-</code></pre><p><code>dmesg | tail</code></p>
-<pre><code>该命令会输出系统日志的最后n行。这些日志可以帮助排查性能问题。千万不要忘了这一步。
-</code></pre><p><code>vmstat 1</code></p>
-<pre><code>procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
- 0  0 558844  24696 150984  65156    0    0     2   150    1    2  0  1 99  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   51   72  0  0 100  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   50   75  0  0 100  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   55   80  0  1 99  0  0
- 0  0 558844  24688 150984  65160    0    0     0     0   44   67  0  0 100  0  0
+          环境准备
+首先你得拥有一个linux环境
+安装sysstat包 yum install sysstat
+安装procps包 yum install procps
 
-
-每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数1，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：
-
-1.r：等待在CPU资源的进程数。这个数据比平均负载更加能够体现CPU负载情况，数据中不包含等待IO的进程。如果这个数值大于机器CPU核数，那么机器的CPU资源已经饱和。
-2.free：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。
-3.si, so：交换区写入和读取的数量。如果这个数据不为0，说明系统已经在使用交换区（swap），机器物理内存已经不足。
-4.us, sy, id, wa, st：这些都代表了CPU时间的消耗，它们分别表示用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen，一般被其他虚拟机消耗）。
-
-一般情况下，如果用户时间和系统时间相加非常大，CPU出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。
-</code></pre><p><code>mpstat -P ALL 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时45分48秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
-18时45分49秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-18时45分49秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-
-18时45分49秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
-18时45分50秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-18时45分50秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-
-显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的
-</code></pre><p><code>pidstat 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时47分22秒       PID    %usr %system  %guest    %CPU   CPU  Command
-18时47分23秒     24331    0.98    0.00    0.00    0.98     0  redis-server
-
-18时47分23秒       PID    %usr %system  %guest    %CPU   CPU  Command
-
-18时47分24秒       PID    %usr %system  %guest    %CPU   CPU  Command
-18时47分25秒         7    0.00    1.01    0.00    1.01     0  events/0
-18时47分25秒     27624    0.00    2.02    0.00    2.02     0  pidstat
-
-pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态
-</code></pre><p><code>iostat -xz 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.41    0.00    0.52    0.23    0.00   98.85
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-sda               0.04    29.67    0.08    8.22     4.77   299.70    36.67     0.11   12.74   0.66   0.55
-dm-0              0.00     0.00    0.11   37.40     4.63   299.11     8.10     0.50   13.35   0.15   0.55
-dm-1              0.00     0.00    0.02    0.07     0.14     0.59     8.00     0.00   27.85   0.76   0.01
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    2.00    0.00   98.00
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-sda               0.00     0.00    1.00    0.00    16.00     0.00    16.00     0.01   15.00  15.00   1.50
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    0.00    0.00  100.00
-
-Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
-
-avg-cpu:  %user   %nice %system %iowait  %steal   %idle
-           0.00    0.00    0.00    0.00    0.00  100.00
-
-iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：
-
-r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
-await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
-avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
-%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。
-如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能
-</code></pre><p><code>free -m</code><br>                 total       used       free     shared    buffers     cached<br>    Mem:           458        435         23          0        147         63<br>    -/+ buffers/cache:        223        234<br>    Swap:          927        545        382</p>
-<pre><code>free命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需 要注意的是，第二行-/+ buffers/cache，一般缓存会占用大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会 立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。
-
-如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。
-</code></pre><p><code>sar -n DEV 1</code></p>
-<pre><code>18时52分14秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
-18时52分15秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分15秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分15秒      eth1      1.01      0.00      0.07      0.00      0.00      0.00      0.00
-
-18时52分15秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
-18时52分16秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分16秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
-18时52分16秒      eth1      1.01      1.01      0.07      0.49      0.00      0.00      0.00
-
-sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。
-</code></pre><p><code>sar -n TCP,ETCP 1</code></p>
-<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
-
-18时52分36秒  active/s passive/s    iseg/s    oseg/s
-18时52分37秒      0.00      0.00      0.00      0.00
-
-18时52分36秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
-18时52分37秒      0.00      0.00      0.00      0.00      0.00
-
-18时52分37秒  active/s passive/s    iseg/s    oseg/s
-18时52分38秒      0.00      0.00      2.00      2.00
-
-18时52分37秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
-18时52分38秒      0.00      0.00      0.00      0.00      0.00
-
-sar命令在这里用于查看TCP连接状态，其中包括：
-
-active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；
-passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；
-retrans/s：每秒TCP重传数量；
-TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。
-</code></pre><p><code>top</code></p>
-<pre><code>top - 18:53:43 up 53 days,  3:55,  1 user,  load average: 0.00, 0.00, 0.02
-Tasks:  86 total,   1 running,  85 sleeping,   0 stopped,   0 zombie
-Cpu(s):  0.4%us,  0.4%sy,  0.0%ni, 98.8%id,  0.2%wa,  0.0%hi,  0.1%si,  0.0%st
-Mem:    469452k total,   446128k used,    23324k free,   151644k buffers
-Swap:   950264k total,   558844k used,   391420k free,    65716k cached
-
-  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
-    1 root      20   0 19232  520  348 S  0.0  0.1   0:44.68 init
-    2 root      20   0     0    0    0 S  0.0  0.0   0:00.03 kthreadd
-    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
-    4 root      20   0     0    0    0 S  0.0  0.0  38:03.76 ksoftirqd/0
-    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
-    6 root      RT   0     0    0    0 S  0.0  0.0   0:15.98 watchdog/0
-    7 root      20   0     0    0    0 S  0.0  0.0  57:02.33 events/0
-    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 cgroup
-    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khelper
-   10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 netns
-   11 root      20   0     0    0    0 S  0.0  0.0   0:00.00 async/mgr
-   12 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pm
-   13 root      20   0     0    0    0 S  0.0  0.0   0:31.42 sync_supers
-   14 root      20   0     0    0    0 S  0.0  0.0   0:33.01 bdi-default
-   15 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kintegrityd/0
-   16 root      20   0     0    0    0 S  0.0  0.0  32:20.76 kblockd/0
-   17 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpid
-   18 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_notify
-   19 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_hotplug
-   20 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ata_aux
-   21 root      20   0     0    0    0 S  0.0  0.0   0:00.21 ata_sff/0
-   22 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ksuspend_usbd
-   23 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khubd
-   24 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kseriod
-   25 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md/0
-   26 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md_misc/0
-   27 root      20   0     0    0    0 S  0.0  0.0   0:00.00 linkwatch
-   28 root      20   0     0    0    0 S  0.0  0.0   0:02.11 khungtaskd
-   29 root      20   0     0    0    0 S  0.0  0.0   0:27.30 kswapd0
-   30 root      25   5     0    0    0 S  0.0  0.0   0:00.00 ksmd
-   31 root      20   0     0    0    0 S  0.0  0.0   0:00.00 aio/0
-   32 root      20   0     0    0    0 S  0.0  0.0   0:00.00 crypto/0
-   37 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthrotld/0
-   39 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kpsmoused
-   40 root      20   0     0    0    0 S  0.0  0.0   0:00.00 usbhid_resumer
-   70 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kstriped
-  128 root      20   0     0    0    0 S  0.0  0.0   0:02.82 scsi_eh_0
-  129 root      20   0     0    0    0 S  0.0  0.0   0:00.00 scsi_eh_1
-  215 root      20   0     0    0    0 S  0.0  0.0  13:53.06 kdmflush
-</code></pre>
-          
+需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  l
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/12/20/性能分析命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -942,22 +786,19 @@ Swap:   950264k total,   558844k used,   391420k free,    65716k cached
       
         
           
-            <h2 id="一个joke"><a href="#一个joke" class="headerlink" title="一个joke"></a>一个joke</h2><pre><code>&lt;?php
+          一个joke&lt;?php
     setcookie(&apos;key&apos;, &apos;value&apos;, time()+1000, &apos;/&apos;, &apos;hostname&apos;);
     var_dump($_COOKIE);
 
-为什么不能打印出cookie？难道代码写错了么？你知道么？
-</code></pre><h2 id="cookie设置流程"><a href="#cookie设置流程" class="headerlink" title="cookie设置流程"></a>cookie设置流程</h2><pre><code>1.首先调用setcookie函数的时候服务器端会在header头里面发送：set-cookie key=value，以此来告诉客户端我需要设置cookie
-2.客户端会通过一定的方法将cookie存储起来
-3.每次访问的时候都会在header里面的cookie带上信息：key=value
-</code></pre><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
-<li><p>当立马设置完cookie然后去拿cookie的时候当然拿不到cookie值key，因为它的当前请求中的cookie是不存在的，只有这次请求完之后，才会去设置号cookie然后请求的header信息中带上cookie</p>
-</li>
-<li><p>当然对于删除cookie和重置cookie都是同样的道理</p>
-</li>
-</ul>
-
-          
+为什么不能打印出c
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/12/18/服务器如何设置的cookie/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1097,69 +938,18 @@ Swap:   950264k total,   558844k used,   391420k free,    65716k cached
       
         
           
-            <h1 id="siege的安装"><a href="#siege的安装" class="headerlink" title="siege的安装"></a>siege的安装</h1><pre><code>wget http://soft.vpser.net/test/siege/siege-2.67.tar.gz（国内的一个镜像站地址）
+          siege的安装wget http://soft.vpser.net/test/siege/siege-2.67.tar.gz（国内的一个镜像站地址）
 tar -zxvf siege-2.67.tar.gz
 cd siege-2.67
-./configure &amp;&amp; make &amp;&amp; make install
-/usr/local/bin/siege --help
-</code></pre><p><a href="http://download.joedog.org/siege/siege-latest.tar.gz" target="_blank" rel="external">官网的下载地址</a>（我下载的时候连接超时）<br>    <a href="https://github.com/JoeDog/siege" target="_blank" rel="external">siege，github地址</a></p>
-<h1 id="siege的使用"><a href="#siege的使用" class="headerlink" title="siege的使用"></a>siege的使用</h1><pre><code>50个用户（每次并发量，注意不是每秒并发量） 重复100次 共产生 50 * 100 = 5000个请求
-/usr/local/bin/siege -c 50 -r 100  hostname/path
-
-50个用户 重复100次 发送GET参数
-/usr/local/bin/siege -c 50 -r 100  hostname/path?name=zhangsan
-
-50个用户 重复100次 发送POST参数 (注意引号)
-/usr/local/bin/siege -c 50 -r 100  &quot;hostname/path POST name=zhangsan&quot;
-
-50个用户 重复100次 发送POST参数(从文件中读取)
-/usr/local/bin/siege -c 50 -r 100  &quot;hostname/path POST &lt; /tmp/post.xml&quot;
-
-100个用户 重复100次 发送cookie参数
-/usr/local/bin/siege -c 100 -r 100 -H &quot;Cookie:key=value&quot; &quot;hostname/path&quot;
-
-压测多个地址
-siege -c 200 -r 10 -f url.txt
-url.txt的内容是:
-    hostname/path
-    hostname/path
-    hostname/path
-</code></pre><h1 id="siege命令结果分析"><a href="#siege命令结果分析" class="headerlink" title="siege命令结果分析"></a>siege命令结果分析</h1><pre><code>Transactions:                    100 hits （完成100个请求)
-Availability:                    100.00 %（100%的成功率_）
-Elapsed time:                    10.97 secs（总共使用时间_）
-Data transferred:                0.54 MB（总共传输数据_）
-Response time:                    0.17 secs（响应时间）
-Transaction rate:                9.12 trans/sec（平均每秒完成的处理）
-Throughput:                        0.05 MB/sec（平均每秒传送的数据）
-Concurrency:                    1.58（实际最高并发数）
-Successful transactions:        100（成功处理次数）
-Failed transactions:            0（失败处理次数）
-Longest transaction:            3.09（每次传输花费的最长时间）
-Shortest transaction:            0.03（每次传输花费的最短时间）
-</code></pre><h1 id="siege参数说明"><a href="#siege参数说明" class="headerlink" title="siege参数说明"></a>siege参数说明</h1><pre><code>Usage: siege [options]
-       siege [options] URL
-       siege -g URL
-Options:
-  -V, --version           （版本信息）
-  -h, --help              （帮助信息）
-  -C, --config            （显示配置）
-  -v, --verbose           （运行时能看到详细的运行信息）
-  -g, --get               （显示http头信息，用户debug）
-  -c, --concurrent=NUM    （一次请求的并发数目）
-  -i, --internet          （随机模拟用户点击）
-  -b, --benchmark         （基准测试，设置这个参数默认延迟时间为0）
-  -t, --time=NUMm         （设置测试的时间比如--time=1H, 测试时间一个小时）
-  -r, --reps=NUM          （压测次数）
-  -f, --file=FILE         （指定任务文件）
-  -R, --rc=FILE           （修改siegerc的文件位置，覆盖SIEGERC的环境变量）
-  -l, --log               （运行完之后的结果log位置）
-  -m, --mark=&quot;text&quot;       （利用分隔符标记文件）
-  -d, --delay=NUM         （每次压测延迟的时间）
-  -H, --header=&quot;text&quot;     （添加一个header头请求消息）
-  -A, --user-agent=&quot;text&quot; （设置User-Agent）
-  -T --content-type       （指定http请求中的content-type字段内容）
-</code></pre>
-          
+./configure &amp;&amp; make &amp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/12/17/siege压测工具的安装与使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

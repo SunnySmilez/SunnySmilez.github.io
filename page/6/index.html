@@ -326,8 +326,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/18/go项目的运行/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -467,15 +474,16 @@
       
         
           
-            <h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h6 id="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"><a href="#场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的" class="headerlink" title="场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的"></a>场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的</h6><h6 id="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"><a href="#场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决" class="headerlink" title="场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决"></a>场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决</h6><pre><code>1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
-2，应用部署在多台机器上，使用负载均衡进行访问，redis部署在独立的机器上
-</code></pre><h6 id="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"><a href="#这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题" class="headerlink" title="这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题"></a>这两种访问都不能再进行局域网访问，那么redis的安全就是一个问题</h6><h6 id="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"><a href="#举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接" class="headerlink" title="举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接"></a>举个栗子，目前就有很多脚本在对公网的6379端口，进行扫描，然后获取到ip，进行连接</h6><h3 id="解决办法（设置redis密码）"><a href="#解决办法（设置redis密码）" class="headerlink" title="解决办法（设置redis密码）"></a>解决办法（设置redis密码）</h3><h6 id="打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行"><a href="#打开redis公网访问，编辑redis配置文件，注释bind-127-0-0-1这行" class="headerlink" title="打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行"></a>打开redis公网访问，编辑redis配置文件，注释bind 127.0.0.1这行</h6><p><img src="/img/redis-pwd/redis-net-work.png" alt="Alt text" title="打开redis公网访问"></p>
-<h6 id="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"><a href="#设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码" class="headerlink" title="设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码"></a>设置redis访问密码，编辑redis配置文件，设置requirepass，后面就是密码</h6><p><img src="/img/redis-pwd/redis-pwd.png" alt="Alt text" title="设置redis访问密码"></p>
-<h6 id="使用auth进行连接，使用auth进行连接，redis提供了auth接口"><a href="#使用auth进行连接，使用auth进行连接，redis提供了auth接口" class="headerlink" title="使用auth进行连接，使用auth进行连接，redis提供了auth接口"></a>使用auth进行连接，使用auth进行连接，redis提供了auth接口</h6><p><img src="/img/redis-pwd/auth.png" alt="Alt text" title="auth连接"></p>
-<h3 id="延伸两点"><a href="#延伸两点" class="headerlink" title="延伸两点"></a>延伸两点</h3><h6 id="危险命令重命名"><a href="#危险命令重命名" class="headerlink" title="危险命令重命名"></a>危险命令重命名</h6><pre><code>编辑配置文件，添加如下行：
-    rename-command FLUSHALL &quot;&quot;
-</code></pre><h6 id="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"><a href="#使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）" class="headerlink" title="使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）"></a>使用linux的nobody用户启动redis服务（因为nobody用户是无法登录的）</h6>
-          
+          应用场景场景一：在应用访问数不多，单机能撑起的情况下，应用和redis服务可以搭建在一台机器上，设置redis只允许本机访问，这种方式是最安全的场景二：当应用访问数增多的时候，单机难以支撑的情况时，会有两种办法解决1，应用部署在多台机器上，使用负载均衡进行访问，redis部署在一台应用机器上
+2，应
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/16/redis安全/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -615,17 +623,19 @@
       
         
           
-            <h1 id="公众号设置"><a href="#公众号设置" class="headerlink" title="公众号设置"></a>公众号设置</h1><h3 id="配置业务域名（公众号设置-gt-功能设置）"><a href="#配置业务域名（公众号设置-gt-功能设置）" class="headerlink" title="配置业务域名（公众号设置-&gt;功能设置）"></a>配置业务域名（公众号设置-&gt;功能设置）</h3><h6 id=""><a href="#" class="headerlink" title=""></a><img src="/img/wechat/domain.png" alt="Alt text" title="配置业务域名"></h6><h6 id="注意不需要输入http或者https"><a href="#注意不需要输入http或者https" class="headerlink" title="注意不需要输入http或者https"></a>注意不需要输入http或者https</h6><h6 id="如果是二级域名，需要一起填入"><a href="#如果是二级域名，需要一起填入" class="headerlink" title="如果是二级域名，需要一起填入"></a>如果是二级域名，需要一起填入</h6><h3 id="js接口安全域名，网页授权域名同理"><a href="#js接口安全域名，网页授权域名同理" class="headerlink" title="js接口安全域名，网页授权域名同理"></a>js接口安全域名，网页授权域名同理</h3><h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><h3 id="同意成为开发者"><a href="#同意成为开发者" class="headerlink" title="同意成为开发者"></a>同意成为开发者</h3><p><img src="/img/wechat/dev.png" alt="Alt text" title="成为开发者"></p>
-<h3 id="生成appsecret"><a href="#生成appsecret" class="headerlink" title="生成appsecret"></a>生成appsecret</h3><p><img src="/img/wechat/appsecret.png" alt="Alt text" title="生成appsecret"></p>
-<h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><p><img src="/img/wechat/config.png" alt="Alt text" title="服务器配置"></p>
-<h6 id="需要注意的是url需要输入http-https-在域名的最后需要添加’-‘"><a href="#需要注意的是url需要输入http-https-在域名的最后需要添加’-‘" class="headerlink" title="需要注意的是url需要输入http/https 在域名的最后需要添加’/‘"></a>需要注意的是url需要输入http/https 在域名的最后需要添加’/‘</h6><p><img src="/img/wechat/dev_conf.png" alt="Alt text" title="服务器配置样例"></p>
-<h3 id="token验证失败"><a href="#token验证失败" class="headerlink" title="token验证失败"></a>token验证失败</h3><h5 id="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"><a href="#验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）" class="headerlink" title="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"></a>验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）</h5><h6 id="首先去nginx中抓取请求"><a href="#首先去nginx中抓取请求" class="headerlink" title="首先去nginx中抓取请求"></a>首先去nginx中抓取请求</h6><h6 id="自己再本地测试看解密代码是否正常执行"><a href="#自己再本地测试看解密代码是否正常执行" class="headerlink" title="自己再本地测试看解密代码是否正常执行"></a>自己再本地测试看解密代码是否正常执行</h6><p><img src="/img/wechat/request.png" alt="Alt text" title="微信请求信息"></p>
-<h5 id="确认公众号信息全部完善"><a href="#确认公众号信息全部完善" class="headerlink" title="确认公众号信息全部完善"></a>确认公众号信息全部完善</h5><p><img src="/img/wechat/info.png" alt="Alt text" title="完善信息"></p>
-<h6 id="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"><a href="#最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业" class="headerlink" title="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"></a>最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业</h6><h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h3 id="获取access-token，jsapi-ticket"><a href="#获取access-token，jsapi-ticket" class="headerlink" title="获取access_token，jsapi_ticket"></a>获取access_token，jsapi_ticket</h3><h6 id="建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取"><a href="#建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取" class="headerlink" title="建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取"></a>建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取</h6><h1 id="redirect-uri参数错误"><a href="#redirect-uri参数错误" class="headerlink" title="redirect_uri参数错误"></a>redirect_uri参数错误</h1><h6 id="首先可能是你的appid等参数不正确，这个先排除"><a href="#首先可能是你的appid等参数不正确，这个先排除" class="headerlink" title="首先可能是你的appid等参数不正确，这个先排除"></a>首先可能是你的appid等参数不正确，这个先排除</h6><h6 id="其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"><a href="#其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的" class="headerlink" title="其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"></a>其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的</h6><h1 id="access-denied的坑"><a href="#access-denied的坑" class="headerlink" title="access denied的坑"></a>access denied的坑</h1><h6 id="在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"><a href="#在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限" class="headerlink" title="在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"></a>在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限</h6><pre><code>location = /MP_verify_Rj9V6BBuQjlS0myN.txt {
-        allow all;
-}
-</code></pre><h1 id="其余开发详情，后续再写"><a href="#其余开发详情，后续再写" class="headerlink" title="其余开发详情，后续再写"></a>其余开发详情，后续再写</h1>
-          
+          公众号设置配置业务域名（公众号设置-&gt;功能设置）注意不需要输入http或者https如果是二级域名，需要一起填入js接口安全域名，网页授权域名同理基本配置同意成为开发者
+生成appsecret
+服务器配置
+需要注意的是url需要输入http/https 在域名的最后需要添加’/‘
+token验
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/06/微信开发配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -765,75 +775,21 @@
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"><a href="#引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒" class="headerlink" title="引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒"></a>引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒</h6><pre><code>package main
+          定义引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒package main
 
 import (
     &quot;fmt&quot;
 )
 
-func main() {
-    data := make(chan int)      //数据交换队列
-    exit := make(chan bool)     //退出通知
-
-    go func() {
-        for d := range data {   //从队列迭代接收数据，直到close
-            fmt.Println(d)
-        }
-
-        fmt.Println(&quot;recv over.&quot;)
-        exit &lt;- true            //发送退出通知
-    }()
-
-    data &lt;- 1                   //发送数据
-    data &lt;- 2
-    data &lt;- 3
-    close(data)                 //关闭队列
-
-    fmt.Println(&quot;send over.&quot;)
-    &lt;-exit                      //等待退出通知
-}
-</code></pre><h6 id="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"><a href="#异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞" class="headerlink" title="异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞"></a>异步方式通过判断缓冲区来觉得是否阻塞，如果缓冲区已满，发送被阻塞；缓冲区为空，接收被阻塞</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    data := make(chan int, 3)
-    exit := make(chan bool)
-    data &lt;- 1
-    data &lt;- 2
-    data &lt;- 3
-    go func() {
-        for d := range data {
-            fmt.Println(d)
-        }
-
-        exit &lt;- true
-    }()
-
-    data &lt;- 4
-    data &lt;- 5
-    close(data)
-
-    &lt;- exit
-}
-</code></pre><h6 id="可以将channel隐士转换为单向队列，只收或只发"><a href="#可以将channel隐士转换为单向队列，只收或只发" class="headerlink" title="可以将channel隐士转换为单向队列，只收或只发"></a>可以将channel隐士转换为单向队列，只收或只发</h6><pre><code>package main
-
-import (
-)
-
-func main() {
-    c := make(chan int, 3)
-    var send chan &lt;- int = c
-    var recv &lt;- chan int = c
-    send &lt;- 1
-    //&lt;- send           //receive from send-only type chan&lt;- int
-    //recv &lt;- 2         //send to receive-only type &lt;-chan int
-    &lt;- recv
-}
-</code></pre><h6 id="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case"><a href="#如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default-case" class="headerlink" title="如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case"></a>如果同时处理多个channel，可使用select语句，它随机选择一个可用channel做收发操作，或执行default case</h6>
-          
+func main()
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/08/go学习笔记并发-channel/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -973,7 +929,7 @@ func main() {
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="只需在函数调用语句前添加go关键字，就可创建并发执行单元"><a href="#只需在函数调用语句前添加go关键字，就可创建并发执行单元" class="headerlink" title="只需在函数调用语句前添加go关键字，就可创建并发执行单元"></a>只需在函数调用语句前添加go关键字，就可创建并发执行单元</h6><pre><code>package main
+          定义只需在函数调用语句前添加go关键字，就可创建并发执行单元package main
 
 import (
     &quot;fmt&quot;
@@ -981,73 +937,15 @@ import (
 )
 
 func say(s string) {
-    for i := 0; i &lt; 3; i++ {
-        runtime.Gosched()
-        fmt.Println(s) }
-    }
-
-func main() {
-    go say(&quot;world&quot;)     //开一个新的Goroutines执行
-    say(&quot;hello&quot;)        //当前Goroutines执行
-}
-</code></pre><h6 id="Goexit-退出当前执行的goroutine，但是defer函数还会继续调用"><a href="#Goexit-退出当前执行的goroutine，但是defer函数还会继续调用" class="headerlink" title="Goexit 退出当前执行的goroutine，但是defer函数还会继续调用"></a>Goexit 退出当前执行的goroutine，但是defer函数还会继续调用</h6><h6 id="NumCPU-返回CPU核数量"><a href="#NumCPU-返回CPU核数量" class="headerlink" title="NumCPU 返回CPU核数量"></a>NumCPU 返回CPU核数量</h6><h6 id="NumGoroutine-返回正在执行和排队的任务总数"><a href="#NumGoroutine-返回正在执行和排队的任务总数" class="headerlink" title="NumGoroutine 返回正在执行和排队的任务总数"></a>NumGoroutine 返回正在执行和排队的任务总数</h6><h6 id="GOMAXPROCS-用来设置可以运行的CPU核数"><a href="#GOMAXPROCS-用来设置可以运行的CPU核数" class="headerlink" title="GOMAXPROCS 用来设置可以运行的CPU核数"></a>GOMAXPROCS 用来设置可以运行的CPU核数</h6><h6 id="sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"><a href="#sync-WaitGroup-它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成" class="headerlink" title="sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成"></a>sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成</h6><h6 id="Add-添加或者减少等待goroutine的数量"><a href="#Add-添加或者减少等待goroutine的数量" class="headerlink" title="Add 添加或者减少等待goroutine的数量"></a>Add 添加或者减少等待goroutine的数量</h6><h6 id="Done-相当于Add-1"><a href="#Done-相当于Add-1" class="headerlink" title="Done 相当于Add(-1)"></a>Done 相当于Add(-1)</h6><h6 id="Wait-执行阻塞，直到所有的WaitGroup数量变成0"><a href="#Wait-执行阻塞，直到所有的WaitGroup数量变成0" class="headerlink" title="Wait 执行阻塞，直到所有的WaitGroup数量变成0"></a>Wait 执行阻塞，直到所有的WaitGroup数量变成0</h6><pre><code>package main
-
-import (
-    &quot;runtime&quot;
-    &quot;sync&quot;
-)
-
-func main() {
-    wg := new(sync.WaitGroup)
-    wg.Add(1)
-
-    go func() {
-        defer wg.Done()
-        defer println(&quot;A.defer&quot;)
-
-        func() {
-            defer println(&quot;B.defer&quot;)
-            runtime.Goexit()
-            println(&quot;B&quot;)
-        }()
-
-        println(&quot;A&quot;)
-    }()
-    wg.Wait()
-}
-</code></pre><h6 id="Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"><a href="#Gosched-让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行" class="headerlink" title="Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行"></a>Gosched 让出当前goroutine的执行权限，调度器安排其他等待的任务运行，并在下次某个时候从该位置恢复执行</h6><pre><code>package main
-
-import (
-    &quot;runtime&quot;
-    &quot;sync&quot;
-)
-
-func main() {
-    //它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成
-    wg := new(sync.WaitGroup)
-    //添加或者减少等待goroutine的数量
-    wg.Add(2)
-
-    go func() {
-        //相当于Add(-1)
-        defer wg.Done()
-
-        for i := 0; i &lt; 6; i++ {
-            println(i)
-            if i == 3 { runtime.Gosched() }
-        }
-    }()
-
-    go func() {
-        defer wg.Done()
-        println(&quot;hello,world!&quot;)
-    }()
-
-    //执行阻塞，直到所有的WaitGroup数量变成0
-    wg.Wait()
-}
-</code></pre>
-          
+    for i := 0; i &lt; 3; i++
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/03/go学习笔记并发/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

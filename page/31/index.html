@@ -326,25 +326,20 @@
       
         
           
-            <h2 id="PHPUnit-安装"><a href="#PHPUnit-安装" class="headerlink" title="PHPUnit 安装"></a>PHPUnit 安装</h2><ul>
-<li><p><a href="https://phpunit.de/" title="PHPUnit官网" target="_blank" rel="external">PHPUnit官网</a>，直接点击下载PHPUnit4.6 <em>需要注意的是PHPUnit和PHP版本的匹配</em>，也可以通过（<code>wget https://phar.phpunit.de/phpunit.phar</code>）直接下载</p>
-</li>
-<li><p>通过scp直接上传文件到服务器</p>
-<ul>
-<li>将文件传到远程服务器(<code>scp local_file remote_username@remote_ip:remote_folder</code>)</li>
-<li>将目录传到远程服务器加r就好（<code>scp -r local_folder remote_username@remote_ip:remote_folder</code>*）</li>
-<li>将远程服务器文件下载到本地（<code>scp remote_username@remote_ip:remote_file local_file</code>*）</li>
-<li>同理下载远程目录加r即可（<code>scp -r remote_username@remote_ip:remote_file local_file</code>）</li>
-</ul>
-</li>
-<li>不管是你用wget直接在服务器下的还是先下载好传到服务器的，你都会发现一个叫<b>phpunit.phar的文件</b>，将他移动到/usr/local/bin目录下<code>mv phpunit.phar /usr/local/bin/phpunit</code></li>
-<li>赋予phpunit执行权限<code>chmod +x phpunit</code></li>
-<li>使用<code>/usr/local/bin/phpunit --version</code>查看是否安装好，执行结果如果是phpunit的版本号，则证明安装成功</li>
-</ul>
-<p>关于PHPUnit详细内容请参考<a href="https://phpunit.de/manual/current/zh_cn/installation.html" title="PHPUnit中文官网" target="_blank" rel="external">PHPUnit文档</a></p>
-<h2 id="PHPUnit-使用"><a href="#PHPUnit-使用" class="headerlink" title="PHPUnit 使用"></a>PHPUnit 使用</h2><p>请保持姿态持续关注，正在更新中</p>
+          PHPUnit 安装
+PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版本的匹配，也可以通过（wget https://phar.phpunit.de/phpunit.phar）直接下载
 
-          
+通过scp直接上传文件到服务器
+
+将文件传到远程服务器(scp loc
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/21/PHPUnit安装和使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -484,25 +479,18 @@
       
         
           
-            <h2 id="Mysql数据库，Mysql数据库实例"><a href="#Mysql数据库，Mysql数据库实例" class="headerlink" title="Mysql数据库，Mysql数据库实例"></a>Mysql数据库，Mysql数据库实例</h2><ul>
-<li>简单来说数据库是由一个个二进制文件组成的，而对这些文件进行操作就需要通过数据实例来完成</li>
-<li>因此说数据库是文件的集合，是依照某种数据模型组织起来的并存放于二级存储器中(<em>指的是备份或归档来自主存储的存储服务器相连的辅助存储设备</em>)的数据集合</li>
-<li>数据库实例是程序，是位于用户与操作系统之间的一层数据管理软件，对数据库也就是文件的任何操作都是在数据库实例下进行的，应用程序只有通过数据库实例才能和数据库打交道</li>
-</ul>
-<h2 id="Mysql体系结构"><a href="#Mysql体系结构" class="headerlink" title="Mysql体系结构"></a>Mysql体系结构</h2><p><img src="/img/mysqlSystem.png" alt="周小志的博客"></p>
-<h2 id="由上图可以看出，Mysql的组成包括"><a href="#由上图可以看出，Mysql的组成包括" class="headerlink" title="由上图可以看出，Mysql的组成包括"></a>由上图可以看出，Mysql的组成包括</h2><ul>
-<li>连接池组件</li>
-<li>服务管理和工具插件</li>
-<li>SQL接口组建</li>
-<li>查询分析器组件</li>
-<li>优化器组建</li>
-<li>缓冲组件</li>
-<li>插件是存储引擎（<em>最大的优势</em>）</li>
-<li>物理文件</li>
-</ul>
-<p>存储引擎是基于表的，而不是基于数据库的，它是底层的物理结构实现的</p>
-
-          
+          Mysql数据库，Mysql数据库实例
+简单来说数据库是由一个个二进制文件组成的，而对这些文件进行操作就需要通过数据实例来完成
+因此说数据库是文件的集合，是依照某种数据模型组织起来的并存放于二级存储器中(指的是备份或归档来自主存储的存储服务器相连的辅助存储设备)的数据集合
+数据库实例是程序，是位于用
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/20/Innodb存储引擎-1-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -642,56 +630,17 @@
       
         
           
-            <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>物理操作系统文件或其他形式文件类型的集合(<em>可能是存放在内存中的文件</em>)。</p>
-<h2 id="数据库文件"><a href="#数据库文件" class="headerlink" title="数据库文件"></a>数据库文件</h2><ul>
-<li>.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文件夾下面。 </li>
-<li>MYD：是MyISAM 存储引擎专用，存放MyISAM 表的数据。每一個MyISAM 表都会有一個“.MYD”文件与之对应，存放在所属数据库的文件夾下，和“.frm”文件在一起。 </li>
-<li>MYI:是MyISAM存储引擎的，主要存放MyISAM表的索引相关信息。对于MyISAM存储來說，可以被cache 的內容主要就是來源于“.MYI”文件中。每一个MyISAM表对应一个“.MYI”文件，存放于位置和“.frm”以及“.MYD”一样。 </li>
-<li>ibd，ibdata：是存放Innodb 数据的文件，之所以有两种文件來存放Innodb 的数据（包括索引），是因为Innodb 的数据存储方式能够通过配置來决定是使用共享表空間存放存储数据，还是独享表空间存放存储数据。独享表空间存储方式使用“.ibd”文件來存放數据，且每个表一个“.ibd”文件，文件存放在和MyISAM数据相同的位置。 如果选用共享存储表空間來存放数据，则会使用ibdata 文件來存放，所有表共同使用一个（或者多个，可自行配置）ibdata 文件。</li>
-</ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
-<li><strong>Mysql被设计成的是一个单进程多线程的数据库，因此Mysql数据库实例在系统上的表现就是一个进程</strong></li>
-<li>Mysql数据库由后台线程以及一个共享内存区组成，共享内存可以被运行的后台线程所共享。<em>数据库实例才是真正用于操作数据库文件的</em></li>
-</ul>
-<h2 id="Mysql在linux系统中的使用命令"><a href="#Mysql在linux系统中的使用命令" class="headerlink" title="Mysql在linux系统中的使用命令"></a>Mysql在linux系统中的使用命令</h2><p>Mysql启动命令，&amp;代表在后台启动<br>    <code>./mysqld_safe&amp;</code></p>
-<p>ps 查看系统进行命令，这里可以看到Mysql在系统上的表现是一个进程（<em>此时的进程号是1197</em>）</p>
-<p><code>ps aux | grep mysql</code></p>
-<p>执行结果为</p>
-<pre><code>root      1063  0.0  0.0 108300   372 ?        S    Apr24   0:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --pid-file=/var/lib/mysql/localhost.localdomain.pid
-
-mysql     1197  0.0 13.9 1341208 65276 ?       Sl   Apr24   9:27 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/lib/mysql/localhost.localdomain.err --pid-file=/var/lib/mysql/localhost.localdomain.pid
-</code></pre><p><code>ps -ef | grep mysqld</code></p>
-<p>执行结果为</p>
-<pre><code>root      1063     1  0 Apr24 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --pid-file=/var/lib/mysql/localhost.localdomain.pid
-
-mysql     1197  1063  0 Apr24 ?        00:09:27 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/lib/mysql/localhost.localdomain.err --pid-file=/var/lib/mysql/localhost.localdomain.pid
-</code></pre><p><code>mysql --help | grep my.cnf</code></p>
-<p>执行结果为（<em>表示如果没有指定Mysql</em>配置文件，Mysql会从这些位置去读取配置文件，如果多个地方有统一参数的配置，则Mysql以最后一个文件的配置参数为准，一般配置文件在/etc/my.cnf*）</p>
-<pre><code>order of preference, my.cnf, $MYSQL_TCP_PORT,/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf
-</code></pre><p>ps命令执行后的结果中可以看到datadir的参数，该参数表示数据库所在位置。也可以在Mysql终端使用</p>
-<p><code>SHOW VARIABLES LIKE &#39;datadir&#39;\G</code></p>
-<pre><code>*************************** 1. row ***************************
-Variable_name: datadir
-       Value: /var/lib/mysql/   
-1 row in set (0.00 sec)
-</code></pre><p>接着在Mysql终端运行下面下面命令，可以看出data其实就是一个数据目录（<em>该目录的用户和权限必须得到保障只有Mysql用户和组可以访问，通常权限是mysql:mysql</em>）<br><code>system ls -lh /var/lib/mysql/</code> </p>
-<pre><code>总用量 173M
--rw-rw----. 1 mysql mysql   56 3月  24 16:08 auto.cnf
-drwx------. 2 mysql mysql 4.0K 5月  18 14:43 beebank
--rw-rw----. 1 mysql mysql  76M 5月  18 20:01 ibdata1
--rw-rw----. 1 mysql mysql  48M 5月  18 20:01 ib_logfile0
--rw-rw----. 1 mysql mysql  48M 3月  24 16:04 ib_logfile1
--rw-r-----. 1 mysql root  520K 4月  25 02:22 localhost.localdomain.err
--rw-rw----. 1 mysql mysql    5 4月  25 02:22 localhost.localdomain.pid
-drwx--x--x. 2 mysql mysql 4.0K 3月  24 16:04 mysql
-srwxrwxrwx. 1 mysql mysql    0 4月  25 02:22 mysql.sock
-drwx------. 2 mysql mysql 4.0K 3月  24 16:04 performance_schema
--rw-r--r--. 1 root  root   125 3月  24 16:04 RPM_UPGRADE_HISTORY
--rw-r--r--. 1 mysql mysql  125 3月  24 16:04 RPM_UPGRADE_MARKER-LAST
-drwxr-xr-x. 2 mysql mysql 4.0K 3月  24 16:04 test
-drwx------. 2 mysql mysql 4.0K 5月  11 17:24 test_checklist_table
-</code></pre>
-          
+          数据库物理操作系统文件或其他形式文件类型的集合(可能是存放在内存中的文件)。
+数据库文件
+.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/19/Innodb存储引擎-1-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

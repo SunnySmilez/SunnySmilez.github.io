@@ -326,9 +326,16 @@
       
         
           
-            <p>###</p>
+          ###
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/26/du命令使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -468,9 +475,16 @@
       
         
           
-            <p>###</p>
+          ###
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/26/set的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -610,7 +624,7 @@
       
         
           
-            <h1 id="expr"><a href="#expr" class="headerlink" title="expr"></a>expr</h1><pre><code>用法：expr 表达式
+          expr用法：expr 表达式
 　或：expr 选项
 
       --help        显示此帮助信息并退出
@@ -619,44 +633,15 @@
 将表达式的值列印到标准输出，分隔符下面的空行可提升算式优先级。
 可用的表达式有：
 
-  ARG1 | ARG2       若ARG1 的值不为0 或者为空，则返回ARG1，否则返回ARG2
-
-  ARG1 &amp; ARG2       若两边的值都不为0 或为空，则返回ARG1，否则返回 0
-
-  ARG1 &lt; ARG2       ARG1 小于ARG2
-  ARG1 &lt;= ARG2      ARG1 小于或等于ARG2
-  ARG1 = ARG2       ARG1 等于ARG2
-  ARG1 != ARG2      ARG1 不等于ARG2
-  ARG1 &gt;= ARG2      ARG1 大于或等于ARG2
-  ARG1 &gt; ARG2       ARG1 大于ARG2
-
-  ARG1 + ARG2       计算 ARG1 与ARG2 相加之和
-  ARG1 - ARG2       计算 ARG1 与ARG2 相减之差
-
-  ARG1 * ARG2       计算 ARG1 与ARG2 相乘之积
-  ARG1 / ARG2       计算 ARG1 与ARG2 相除之商
-  ARG1 % ARG2       计算 ARG1 与ARG2 相除之余数
-
-  字符串 : 表达式        定位字符串中匹配表达式的模式
-
-  match 字符串 表达式        等于&quot;字符串 :表达式&quot;
-  substr 字符串 偏移量 长度    替换字符串的子串，偏移的数值从 1 起计
-  index 字符串 字符        在字符串中发现字符的地方建立下标，或者标0
-  length 字符串            字符串的长度
-  + 记号            将记号解析为字符串，即使它是一个类似&quot;match&quot;或
-                运算符&quot;/&quot;那样的关键字
-
-  ( 表达式 )            表达式的值
-
-请注意有许多运算操作符都可能需要由 shell 先实施转义。
-如果参与运算的 ARG 自变量都是数字，比较符就会被视作数学符号，否则就是多义的。
-模式匹配会返回&quot;\&quot;和&quot;\&quot;之间被匹配的子字符串或空(null)；如果未使用&quot;\&quot;和&quot;\&quot;，
-则会返回匹配字符数量或是 0。
-
-若表达式的值既不是空也不是 0，退出状态值为 0；若表达式的值为空或为 0，
-退出状态值为 1。如果表达式的句法无效，则会在出错时返回退出状态值 3。
-</code></pre>
-          
+  ARG1 | ARG2  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/22/expr的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -796,76 +781,17 @@
       
         
           
-            <h1 id="read"><a href="#read" class="headerlink" title="read"></a>read</h1><pre><code>将信息传递给shell程序的重要方式之一
+          read将信息传递给shell程序的重要方式之一
 自标准输入读取行后，通过shell字段切割功能（IFS）进行切分。第一个单词复制给第一个变量，第二个单词复制给第二个变量，如果单词多余变量，则剩下的单词，全赋值给最后一个变量
-</code></pre><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><h4 id="读取终端输入"><a href="#读取终端输入" class="headerlink" title="读取终端输入"></a>读取终端输入</h4><pre><code>name=&apos;zhangsan&apos;;printf &quot;name is now &apos;%s&apos;. Enter new value:&quot; $name;read name
-</code></pre><h4 id="读取所有值到多个变量中"><a href="#读取所有值到多个变量中" class="headerlink" title="读取所有值到多个变量中"></a>读取所有值到多个变量中</h4><pre><code>#!/bin/bash
-cat /etc/passwd |
-while IFS=: read user pass other
-do
-        echo $other
-done
-</code></pre><h1 id="标注输出，标准错误输出（1表示标准输出，2表示错误输出）"><a href="#标注输出，标准错误输出（1表示标准输出，2表示错误输出）" class="headerlink" title="标注输出，标准错误输出（1表示标准输出，2表示错误输出）"></a>标注输出，标准错误输出（1表示标准输出，2表示错误输出）</h1><h4 id="标准输出到results-错误输出到error"><a href="#标准输出到results-错误输出到error" class="headerlink" title="标准输出到results,错误输出到error"></a>标准输出到results,错误输出到error</h4><pre><code>make 1&gt; results 2&gt;error
-make &gt; results 2&gt;error
-</code></pre><h4 id="标准输出到results-舍弃错误输出"><a href="#标准输出到results-舍弃错误输出" class="headerlink" title="标准输出到results,舍弃错误输出"></a>标准输出到results,舍弃错误输出</h4><pre><code>make 1&gt;results 2&gt;/dev/null
-make &gt;results 2&gt;/dev/null
-</code></pre><h4 id="标准输出和错误输出到results"><a href="#标准输出和错误输出到results" class="headerlink" title="标准输出和错误输出到results"></a>标准输出和错误输出到results</h4><pre><code>make 2&gt;&amp;1 &gt; results
-</code></pre><h1 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h1><h4 id="printf的转义序列"><a href="#printf的转义序列" class="headerlink" title="printf的转义序列"></a>printf的转义序列</h4><p>1.注意转义序列只在格式字符串中会被特别对待，在参数字符串的转义序列不会被解释，<br>2.当使用%b格式指示符，会解释参数字符串的转义序列，<br>3.无论是在格式字符串内还是在使用%b所打印的参数字符串里，大部分的转义序列都是被相同对待。<br>4.无论如何，\c与\0ddd只有搭配%b使用才有效，而\ddd只有在格式字符串里才会被解释)</p>
-<pre><code>序列                     说明
-\a                      警告字符，通常为ASCII的BEL字符
-\b                      后退
-\c                      抑制（不显示）输出结果中任何结尾的换行字符（只在%b格式指示符控制下的
-                        参数字符串中有效），而且，任何留在参数里的字符、任何接下来的参数以及
-                        任何留在格式字符串中的字符，都被忽略
-\f                      换页（formfeed）
-\n                      换行
-\r                      回车（Carriage return）
-\t                      水平制表符
-\v                      垂直制表符
-\\                      一个字面上的反斜杠字符
-\ddd                    表示1到3位数八进制值的字符。仅在格式字符串中有效
-\0ddd                   表示1到3位的八进制值字符
-</code></pre><h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><pre><code>printf &quot;a string,no processing:&lt;%s&gt;\n&quot; &quot;A\nB&quot;
-printf &quot;a string,no processing:&lt;%b&gt;\n&quot; &quot;A\nB&quot;
-</code></pre><h4 id="printf格式指示符"><a href="#printf格式指示符" class="headerlink" title="printf格式指示符"></a>printf格式指示符</h4><pre><code>项目              说明
-%b               相对应的参数被视为含有要被处理的转义序列之字符串。
-%c               ASCII字符。显示相对应参数的第一个字符
-%d, %i           十进制整数
-%e               浮点格式
-%E               浮点格式
-%f               浮点格式
-%g               %e或%f转换，看哪一个较短，则删除结尾的零
-%G               %E或%f转换，看哪一个较短，则删除结尾的零
-%o               不带正负号的八进制值
-%s               字符串
-%u               不带正负号的十进制值
-%x               不带正负号的十六进制值，使用a至f表示10至15
-%X               不带正负号的十六进制值，使用A至F表示10至15
-%%               字面意义的%
-</code></pre><h4 id="printf可指定输出字段的宽度及对齐操作（-flags-width-precision-format-specifier）"><a href="#printf可指定输出字段的宽度及对齐操作（-flags-width-precision-format-specifier）" class="headerlink" title="printf可指定输出字段的宽度及对齐操作（*flags width.precision format-specifier）"></a>printf可指定输出字段的宽度及对齐操作（*flags width.precision format-specifier）</h4><pre><code>printf &quot;|%-10s|\n&quot; hello
-printf &quot;|%10s|\n&quot; hello
-</code></pre><h4 id="精度的意义"><a href="#精度的意义" class="headerlink" title="精度的意义"></a>精度的意义</h4><pre><code>转换                                        精度含义
-%d,%i,%o,%u,%x,%X                          要打印的最小位数。当值的位数小于此数字时，会在前面补零。默认精度（precision）为1
-%e，%E                                      要打印的最小位数。当值的位数小于此数字时，会在小数点后面补零，默认精度为6.精度为0时则表示不显示小数点
-%f                                         小数点右边的位数
-%g，%G                                     有效位数（significant digit）的最大数目
-%s                                         要打印字符的最大数目
-</code></pre><h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><pre><code>printf &quot;%.5d\n&quot; 15
-printf &quot;%.10s\n&quot; “this is only test”
-printf &quot;%.2f\n&quot; 12.12645
-</code></pre><h4 id="printf的标志"><a href="#printf的标志" class="headerlink" title="printf的标志"></a>printf的标志</h4><pre><code>字符                      意义
--                        将字段里已格式化的值向左对齐
-空白(space)               在正值前置一个空格，在复制前置一个负号
-+                        总是在数值之前防止一个正号或负号
-#                        %o有一个前置O，%x与%X有前置的Ox和OX，%e，%E与%f总在结果中又一个小数点，%g与%G位没有结尾的零
-0                        以零填补输出，而非空白
-</code></pre><h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><pre><code>printf &quot;|%-10s| |%10s|\n&quot; hello world
-printf &quot;|% d| |% d|\n&quot; 15 -15
-printf &quot;%+d %+d\n&quot; 15 -15
-printf &quot;%x %#x\n&quot; 15 -15
-printf &quot;%05d\n&quot; 15
-</code></pre>
-          
+例子读取终端输入name=&apos;zhangsan&apos;;pri
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/17/shell的输入输出/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1005,7 +931,7 @@ printf &quot;%05d\n&quot; 15
       
         
           
-            <h1 id="if-elif-else-fi"><a href="#if-elif-else-fi" class="headerlink" title="if-elif-else-fi"></a>if-elif-else-fi</h1><h4 id="用法（方括号为可选部分）"><a href="#用法（方括号为可选部分）" class="headerlink" title="用法（方括号为可选部分）"></a>用法（方括号为可选部分）</h4><pre><code>if
+          if-elif-else-fi用法（方括号为可选部分）if
     条件
 then
     结果
@@ -1020,217 +946,17 @@ else
     结果
 ]
 fi
-</code></pre><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
+例子#!/bin/bash
 if
-        ls | grep &apos;demo.log&apos;
-then
-        echo &apos;found demo.log&apos;
-elif
-        ls | grep &apos;test&apos;
-then
-        echo &apos;found test&apos;
-else
-        echo &apos;not found&apos;
-fi
-</code></pre><h1 id="case语句"><a href="#case语句" class="headerlink" title="case语句"></a>case语句</h1><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><pre><code>case $1 in
-条件一)
-    结果
-    ;;
-条件二)
-    结果
-    ;;
-*)
-    结果
-    ;;
-esac
-</code></pre><h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-case $1 in
-&quot;hello&quot;)
-    echo &quot;this is hello&quot;
-    ;;
-&quot;world&quot;)
-    echo &quot;this is world&quot;
-    ;;
-*)
-    echo &quot;please input hello or world&quot;
-    ;;
-esac
-</code></pre><h1 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h1><h4 id="带列表"><a href="#带列表" class="headerlink" title="带列表"></a>带列表</h4><pre><code>for
-    variable in {list}
-do
-    做处理
-done
-</code></pre><h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-for i in $1
-do
-        echo $i
-done
-</code></pre><h4 id="不带列表"><a href="#不带列表" class="headerlink" title="不带列表"></a>不带列表</h4><pre><code>for variable
-do
-    做处理
-done
-</code></pre><h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-for argument
-do
-        echo &quot;$argument&quot;
-done
-</code></pre><h4 id="类c风格"><a href="#类c风格" class="headerlink" title="类c风格"></a>类c风格</h4><pre><code>for((i=variable;i&lt;=variable;i++))
-do
-    做处理
-done
-</code></pre><h4 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-for ((i=1;i&lt;=10;i++))
-do
-        echo $i
-done
-</code></pre><h1 id="while与until循环"><a href="#while与until循环" class="headerlink" title="while与until循环"></a>while与until循环</h1><h4 id="while用法"><a href="#while用法" class="headerlink" title="while用法"></a>while用法</h4><pre><code>while
-    条件
-do
-    做处理
-done
-</code></pre><h4 id="while例子"><a href="#while例子" class="headerlink" title="while例子"></a>while例子</h4><pre><code>#!/bin/bash
-i=1;
-while((i&lt;=$1))
-do
-        echo $i;
-        let &quot;i+=1&quot;;
-done
-</code></pre><h4 id="until用法-注意是条件为假的时候才会执行"><a href="#until用法-注意是条件为假的时候才会执行" class="headerlink" title="until用法(注意是条件为假的时候才会执行)"></a>until用法(注意是条件为假的时候才会执行)</h4><pre><code>until
-    条件
-do
-    做处理
-done
-</code></pre><h4 id="until例子"><a href="#until例子" class="headerlink" title="until例子"></a>until例子</h4><pre><code>#!/bin/bash
-
-i=0
-
-until [[ &quot;$i&quot; -gt 5 ]]
-do
-    let &quot;square=i*i&quot;
-    echo &quot;$i * $i = $square&quot;
-    let &quot;i++&quot;
-done
-</code></pre><h1 id="break与continue（分别是退出循环和结束本次循环）"><a href="#break与continue（分别是退出循环和结束本次循环）" class="headerlink" title="break与continue（分别是退出循环和结束本次循环）"></a>break与continue（分别是退出循环和结束本次循环）</h1><pre><code>#!/bin/bash
-for ((i=1;i&lt;10;i++))
-do
-        if
-                test $i = 1
-        then
-                continue
-        elif
-                test $i = 6
-        then
-                break
-        else
-                echo $i
-        fi
-done
-</code></pre><h1 id="select结构"><a href="#select结构" class="headerlink" title="select结构"></a>select结构</h1><pre><code>它是bash的扩展结构用于交互式菜单显示，功能类似于case结构比case的交互性要好
-</code></pre><h4 id="select用法"><a href="#select用法" class="headerlink" title="select用法"></a>select用法</h4><pre><code>select variable in list
-do
-    做处理
-    break
-done
-</code></pre><h4 id="例子-5"><a href="#例子-5" class="headerlink" title="例子"></a>例子</h4><pre><code>select number in &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;
-do
-        break
-done
-echo &quot;you have select $number&quot;
-</code></pre><h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h4 id="例子-6"><a href="#例子-6" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-function a {
-        echo &apos;test&apos;
-}
-a #函数引用
-
-#!/bin/bash
-b() {
-        echo &apos;test12&apos;
-}
-b #函数引用
-</code></pre><h1 id="test-主要用来测试文件属性，比较字符串及比较数字"><a href="#test-主要用来测试文件属性，比较字符串及比较数字" class="headerlink" title="test[主要用来测试文件属性，比较字符串及比较数字]"></a>test[主要用来测试文件属性，比较字符串及比较数字]</h1><pre><code>运算符                    如果...则为真
-string                   string不是null
--b file                  file为块设备
--c file                  file为字符设备
--d file                  file为目录
--e file                  file存在
--f file                  file为一般文件
--g file                  file有设置它的setgid位
--h file                  file为符号链接（与-L 同）
--k file                  file设置了粘滞位（sticky bit）
--L file                  file为符号链接（与-h同）
--O file                  file用户拥有该文件
--p file                  file为命名管道
--r file                  file（对用户）可读
--s file                  file不是空的（长度大于0字节）
--S file                  file存在且为套接字（socket）
--t fd                    file描述符与终端相关联
--u file                  file属性位set-user-id置1
--w file                  file（对用户）可写
--x file                  file（对用户）可执行
--n string                字符串是非null (长度大于0字节)
--z string                字符串为空（长度为0字节)
-expr1 -a expr2           两个表达式皆为真(逻辑与)
-expr1 -o expr2           两个表达式至少有一个为真(逻辑或)
-file1 -nt file           第一个文件比第二个文件新（利用修改时间戳比较）
-file1 -ot file           第一个文件比第二个文件旧（利用修改时间 戳比较）
-file1 -ef file           两个文件由链接关联在一起（硬链接或符号链接）
-var1 = var2              第一个字符串与第二个字符串相同
-var1 != var2             第一个字符串与第二个字符串不相同
-var1 -eq var2            第一个整数与第二个整数相等
-var1 -ne var2            第一个整数不等于第二个整数
-var1 -lt var2            第一个整数小于第二个整数
-var1 -le var2            第一个整数小于或等于第二个整数量
-var1 -gt var2            第一个整数大于第二个整数
-var1 -ge var2            第一个整数大于或等于第二个整数
-</code></pre><h4 id="例子-7"><a href="#例子-7" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-num1=100
-num2=100
-
-if
-        test $[num1] == $[num2]
-then
-        echo &apos;equal&apos;
-else
-        echo &apos;not equal&apos;
-fi
-</code></pre><h1 id="expr"><a href="#expr" class="headerlink" title="expr"></a>expr</h1><pre><code>计算整数变量值,需要注意的是expr与操作数据，以及操作数据与运算符之间都需要用空格隔开
-</code></pre><h4 id="例子-直接在终端运行"><a href="#例子-直接在终端运行" class="headerlink" title="例子(直接在终端运行)"></a>例子(直接在终端运行)</h4><pre><code>s=`expr 2 + 3`
-expr $s \* 3
-
-或者（一步计算）
-
-expr `expr 2 + 3` \* 4
-</code></pre><h1 id="let"><a href="#let" class="headerlink" title="let"></a>let</h1><pre><code>计算整数变量值,需要注意的是运算符与操作数据之间不必用空格分开，但表达式与表达式之间必须要用空格分开
-</code></pre><h4 id="例子-8"><a href="#例子-8" class="headerlink" title="例子"></a>例子</h4><pre><code>let s=(2+3)*4
-echo $s
-</code></pre><h1 id="shift"><a href="#shift" class="headerlink" title="shift"></a>shift</h1><pre><code>使位置变量下移一位（$2代替$1、$3代替$2，并使$#变量递减），当最后一个参数显示给用户，$#会等于0，$*也等于空
-</code></pre><h4 id="例子-9"><a href="#例子-9" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-while [[ &quot;$*&quot; != &quot;&quot; ]]
-do
-        echo &quot;$1&quot;
-        shift
-done
-</code></pre><h1 id="getopts"><a href="#getopts" class="headerlink" title="getopts"></a>getopts</h1><pre><code>可以获取用户在命令下的参数，然后根据参数进行不同的提示或者不同的执行
-./test.sh -a hello
-getopts一共有两个参数，第一个是-a这样的选项，第二个参数是 hello这样的参数
-选项之间可以通过冒号:进行分隔，也可以直接相连接，：表示选项后面必须带有参数，如果没有可以不加实际值进行传递比如输入./test.sh -c 不会报错，但是输入./test.sh -a会报错
-</code></pre><h4 id="例子-10"><a href="#例子-10" class="headerlink" title="例子"></a>例子</h4><pre><code>#!/bin/bash
-while getopts &quot;ca:b:&quot; opt;
-do
-case $opt in
-        a)
-                echo &quot;this is -a the arg is $OPTARG&quot;
-                ;;
-        b)
-                echo &quot;this is -b the arg is $OPTARG&quot;
-                ;;
-        c)
-                echo &quot;this is -c&quot;
-                ;;
-esac
-done
-</code></pre>
-          
+        ls | grep &apos;demo.log&apos
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/17/shell语句块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

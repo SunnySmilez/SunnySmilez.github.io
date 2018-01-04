@@ -326,89 +326,19 @@
       
         
           
-            <h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
-</code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
-</code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
-</code></pre><h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><pre><code>使用brew安装php，mysql，redis
-</code></pre><h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><pre><code>curl -sS https://getcomposer.org/installer | php 
-失败尝试：php -r &quot;readfile(&apos;https://getcomposer.org/installer&apos;);&quot; | php
-全局有效：mv composer.phar /usr/local/bin/composer
-验证：composer --version
-</code></pre><h1 id="通过composer安装valet"><a href="#通过composer安装valet" class="headerlink" title="通过composer安装valet"></a>通过composer安装valet</h1><pre><code>添加环境变量：
-    PATH=$PATH:~/.composer/vendor/bin
-
-修改composer源（默认的是国外的，需要翻墙）
-    1、查询composer配置文件所在位置
-        composer config -l -g
-
-    2、查看显示的home选项（就是composer所在配置的目录）
-        [home] /Users/sunnysmilez/.composer
-
-    3、在配置文件添加下载路径
-        vim /Users/sunnysmilez/.composer/config.json         
-        内容如下：
-            {
-                &quot;config&quot;: {
-                },
-                &quot;repositories&quot;: {
-                    &quot;packagist&quot;: {
-                        &quot;type&quot;: &quot;composer&quot;,
-                        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;
-                    }
-                }
-            }
-
-下载安装：valet
-    composer global require laravel/valet
-</code></pre><h1 id="安装valet"><a href="#安装valet" class="headerlink" title="安装valet"></a>安装valet</h1><pre><code>安装：
-    valet install
-
-测试：（127.0.0.1会响应所有*.dev的域名）
-    ping foobar.dev
-</code></pre><h1 id="设置code目录"><a href="#设置code目录" class="headerlink" title="设置code目录"></a>设置code目录</h1><pre><code>cd code
-valet park
-</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>composer create-project laravel/laravel=5.2.* hello --prefer-dist
-
-不知道为什么反正我的laravel new hello 不能使用
-项目使用的5.2的版本，如果你需要更高版本请自行更改
-</code></pre><h1 id="启动valet"><a href="#启动valet" class="headerlink" title="启动valet"></a>启动valet</h1><pre><code>valet start
-</code></pre><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><pre><code>http://hello.dev/
-</code></pre><h1 id="valet补充"><a href="#valet补充" class="headerlink" title="valet补充"></a>valet补充</h1><pre><code>valet start         启动valet
-valet stop          停止valet
-valet restart       重启valet
-valet share         共享项目（比较有意思）
-valet uninstall     卸载valet
-valet park          设置代码目录
-valet paths         查看代码目录
-等
-</code></pre><h1 id="各种错误"><a href="#各种错误" class="headerlink" title="各种错误"></a>各种错误</h1><h3 id="composer错误"><a href="#composer错误" class="headerlink" title="composer错误"></a>composer错误</h3><pre><code>类似此种下载不成功的，直接替换composer源
-[Composer\Downloader\TransportException]
-      The &quot;http://packagist.org/p/laravel/valet%2439296a873ae09b56ed010fd93604f08291f6223ad85ddf3bc5cb02af8a4035f3.json&quot; file could not be downloaded (HTTP/1.1 302 Found)
-
-[Composer\Downloader\TransportException]
-       Your configuration does not allow connections to http://pkg.phpcomposer.com/repo/packagist/packages.json. See https://getcomposer.org/doc/06-config.md#secure-http for details. 
-[Composer\Downloader\TransportException]
-      The &quot;http://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 301 Moved Permanently)
-
-[Composer\Downloader\TransportException]
- The &quot;https://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 404 Not Found)
-</code></pre><h3 id="valet-install错误"><a href="#valet-install错误" class="headerlink" title="valet install错误"></a>valet install错误</h3><pre><code>Brew was unable to install [dnsmasq].
-    手动安装dnsmasq：brew install dnsmasq（报下面的错误）
-
-Error: Xcode alone is not sufficient on Sierra.
-    执行：xcode-select --install
-
-执行：valet install       
-</code></pre><h3 id="valet权限错误（在安装的过程中使用了sudo）"><a href="#valet权限错误（在安装的过程中使用了sudo）" class="headerlink" title="valet权限错误（在安装的过程中使用了sudo）"></a>valet权限错误（在安装的过程中使用了sudo）</h3><pre><code>Warning: file_get_contents(/var/root/.valet/config.json): failed to open stream: Permission denied in /Users/Username/.composer/vendor/laravel/valet/server.php on line 23
-
-Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/vendor/laravel/valet/server.php on line 47
-404 - Not Found
-
-修改权限为当前用户：
-    cd ~/.composer/
-    sudo chown -R $(whoami) vendor
-</code></pre>
-          
+          前提说明在mac本地利用homebrew，使用Valet方式安装laravel
+更新brewbrew update
+查看brew servicebrew services list
+安装软件使用brew安装php，mysql，redis
+安装composercurl -sS https://getc
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/04/安装laravel环境/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -548,25 +478,19 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
       
         
           
-            <h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
-</code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
-<h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
+          安装插件preferences-&gt;plugins 搜索laravel plugin
+   
+添加”barryvdh/laravel-ide-helper”在compose.json中添加如下(在require的数组中添加)：
 &quot;require&quot;: {
-        &quot;laravel/framework&quot;: &quot;5.5.*&quot;,
-        &quot;barryvdh/laravel-ide-helper&quot;: &quot;dev-master&quot;
-},
-</code></pre><h1 id="composer加载插件"><a href="#composer加载插件" class="headerlink" title="composer加载插件"></a>composer加载插件</h1><pre><code>在项目根目录运行：composer update
-</code></pre><h1 id="添加service-provider"><a href="#添加service-provider" class="headerlink" title="添加service provider"></a>添加service provider</h1><pre><code>在项目下的config/app.php在providers中添加一行&quot;&apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;&quot;
-
-&apos;providers&apos; =&gt; [
-    &apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;
-    //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//具体什么方式添加看版本
-]
-</code></pre><h1 id="执行artisan命令"><a href="#执行artisan命令" class="headerlink" title="执行artisan命令"></a>执行artisan命令</h1><pre><code>php artisan ide-helper:generate
-最终生成_ide_helper.php的文件
-</code></pre><h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><pre><code>如果没效果，重启下编辑器试试
-</code></pre>
-          
+        &qu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/phpsttorm添加laravel代码提示/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -706,58 +630,16 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
       
         
           
-            <h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜像" class="headerlink" title="拉取laravel镜像"></a>拉取laravel镜像</h1><pre><code>docker pull laraedit/laraedit
-</code></pre><h1 id="创建laravel容器"><a href="#创建laravel容器" class="headerlink" title="创建laravel容器"></a>创建laravel容器</h1><pre><code>docker run --name laravel -itd -p 8080:80 -v ~/Desktop/laravel:/var/www/html/app laraedit/laraedit
---name 指定新建容器名称
--p 端口映射，指定本地端口8080映射到容器的80端口
--v 目录挂载，本机目录:容器目录
--d 在后台运行
-</code></pre><h1 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h1><pre><code>docker exec -it laravel /bim/bash
-</code></pre><h1 id="创建项目-容器内"><a href="#创建项目-容器内" class="headerlink" title="创建项目(容器内)"></a>创建项目(容器内)</h1><pre><code>cd /var/www/html/
-laravel new app
-</code></pre><h1 id="查看应用日志（容器内）"><a href="#查看应用日志（容器内）" class="headerlink" title="查看应用日志（容器内）"></a>查看应用日志（容器内）</h1><pre><code>tail -f /var/www/html/app/storage/logs/laravel.log
-</code></pre><h1 id="查看容器日志-容器外"><a href="#查看容器日志-容器外" class="headerlink" title="查看容器日志(容器外)"></a>查看容器日志(容器外)</h1><pre><code>docker logs -f laravel
-</code></pre><h1 id="创建文件（容器内）"><a href="#创建文件（容器内）" class="headerlink" title="创建文件（容器内）"></a>创建文件（容器内）</h1><pre><code>touch /var/www/html/app/.env
-添加内容如下：
-
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_LOG_LEVEL=debug
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
-DB_PASSWORD=secret
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-QUEUE_DRIVER=sync
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-</code></pre><h1 id="生成key"><a href="#生成key" class="headerlink" title="生成key"></a>生成key</h1><pre><code>php /var/www/html/app/artisan key:generate
-</code></pre><h1 id="测试安装成功"><a href="#测试安装成功" class="headerlink" title="测试安装成功"></a>测试安装成功</h1><pre><code>访问127.0.0.1:8080会看到laravel首页，否则的话就查日志看看原因吧
-</code></pre>
-          
+          安装docker环境拉取laravel镜像docker pull laraedit/laraedit
+创建laravel容器docker run --name laravel -itd -p 8080:80 -v ~/Desktop/laravel:/var/www/html/app laraedi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/26/docker创建laravel环境/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -897,8 +779,15 @@ PUSHER_APP_SECRET=
       
         
           
-            <h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><h1 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h1><h1 id="认知"><a href="#认知" class="headerlink" title="认知"></a>认知</h1>
+          工作经历技术业务管理认知
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/01/在小公司的成长/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1038,9 +927,15 @@ PUSHER_APP_SECRET=
       
         
           
-            <h1 id="常用本地钩子"><a href="#常用本地钩子" class="headerlink" title="常用本地钩子"></a>常用本地钩子</h1><h6 id="pre-commit"><a href="#pre-commit" class="headerlink" title="pre-commit"></a>pre-commit</h6><h6 id="prepare-commit-msg"><a href="#prepare-commit-msg" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h6><h6 id="commit-msg"><a href="#commit-msg" class="headerlink" title="commit-msg"></a>commit-msg</h6><h6 id="post-commit"><a href="#post-commit" class="headerlink" title="post-commit"></a>post-commit</h6><h6 id="post-checkout"><a href="#post-checkout" class="headerlink" title="post-checkout"></a>post-checkout</h6><h6 id="pre-rebase"><a href="#pre-rebase" class="headerlink" title="pre-rebase"></a>pre-rebase</h6><h6 id="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"><a href="#前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知" class="headerlink" title="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"></a>前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知</h6><h1 id="pre-commit-1"><a href="#pre-commit-1" class="headerlink" title="pre-commit"></a>pre-commit</h1><h6 id="在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"><a href="#在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。" class="headerlink" title="在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"></a>在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。</h6><h1 id="prepare-commit-msg-1"><a href="#prepare-commit-msg-1" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h1><h6 id="在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交"><a href="#在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交" class="headerlink" title="在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交"></a>在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交</h6><h1 id="commit-msg-1"><a href="#commit-msg-1" class="headerlink" title="commit-msg"></a>commit-msg</h1><h6 id="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交"><a href="#commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交" class="headerlink" title="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交"></a>commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交</h6><h1 id="post-commit-1"><a href="#post-commit-1" class="headerlink" title="post-commit"></a>post-commit</h1><h6 id="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"><a href="#post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交" class="headerlink" title="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"></a>post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交</h6><h1 id="post-checkout-1"><a href="#post-checkout-1" class="headerlink" title="post-checkout"></a>post-checkout</h1><h6 id="post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout"><a href="#post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout" class="headerlink" title="post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout"></a>post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout</h6><h1 id="pre-rebase-1"><a href="#pre-rebase-1" class="headerlink" title="pre-rebase"></a>pre-rebase</h1><h6 id="pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"><a href="#pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。" class="headerlink" title="pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"></a>pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。</h6><h1 id="服务端钩子"><a href="#服务端钩子" class="headerlink" title="服务端钩子"></a>服务端钩子</h1><h6 id="pre-receive"><a href="#pre-receive" class="headerlink" title="pre-receive"></a>pre-receive</h6><h6 id="update"><a href="#update" class="headerlink" title="update"></a>update</h6><h6 id="post-receive"><a href="#post-receive" class="headerlink" title="post-receive"></a>post-receive</h6><h6 id="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"><a href="#服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的" class="headerlink" title="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"></a>服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的</h6><h1 id="pre-receive-1"><a href="#pre-receive-1" class="headerlink" title="pre-receive"></a>pre-receive</h1><h6 id="当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："><a href="#当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：" class="headerlink" title="当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："></a>当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：</h6><pre><code>&lt;old-value&gt; &lt;new-value&gt; &lt;ref-name&gt;
-</code></pre><h6 id="常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"><a href="#常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交" class="headerlink" title="常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"></a>常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交</h6><h1 id="update-1"><a href="#update-1" class="headerlink" title="update"></a>update</h1><h6 id="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称"><a href="#update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称" class="headerlink" title="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称"></a>update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称</h6><h1 id="post-receive-1"><a href="#post-receive-1" class="headerlink" title="post-receive"></a>post-receive</h1><h6 id="成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取"><a href="#成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取" class="headerlink" title="成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取"></a>成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取</h6>
-          
+          常用本地钩子pre-commitprepare-commit-msgcommit-msgpost-commitpost-checkoutpre-rebase前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/15/git钩子介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -326,101 +326,19 @@
       
         
           
-            <h1 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h1><h6 id="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"><a href="#slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案" class="headerlink" title="slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案"></a>slice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案</h6><h6 id="slice引用类型，但自身是结构体，值拷贝传递"><a href="#slice引用类型，但自身是结构体，值拷贝传递" class="headerlink" title="slice引用类型，但自身是结构体，值拷贝传递"></a>slice引用类型，但自身是结构体，值拷贝传递</h6><pre><code>//在runtime.h中的源码
+          sliceslice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案slice引用类型，但自身是结构体，值拷贝传递//在runtime.h中的源码
 struct slice
 {
     byte* array;
-    uintgo len;     //表示可用元素数量，读写操作不能超过该限制
-    uintgo cap;     //表示最大扩张容量，不能超出数组限制
-}
-</code></pre><h6 id="slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a"><a href="#slice使用方式-a-b-c-，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len-b-a-cap-c-a" class="headerlink" title="slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a"></a>slice使用方式[a:b:c]，a表示从a位置开始，b表示到b位置结束，c表示最大位置是c，len=b-a,cap=c-a</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6}
-    slice := data[1:4:5]
-    fmt.Println(slice)      //[1 2 3]
-}
-</code></pre><h6 id="slice使用举例"><a href="#slice使用举例" class="headerlink" title="slice使用举例"></a>slice使用举例</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[:6:8]
-    slice1 := data[5:]
-    slice2 := data[:3]
-    slice3 := data[:]
-    fmt.Println(slice, slice1, slice2, slice3)  //[0 1 2 3 4 5] [5 6 7 8 9] [0 1 2] [0 1 2 3 4 5 6 7 8 9]
-}
-</code></pre><h6 id="slice读写操作实际目标是底层数组，只需要注意索引号的差别"><a href="#slice读写操作实际目标是底层数组，只需要注意索引号的差别" class="headerlink" title="slice读写操作实际目标是底层数组，只需要注意索引号的差别"></a>slice读写操作实际目标是底层数组，只需要注意索引号的差别</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-    slice := data[6:8]
-    slice[0] += 100
-    slice[1] += 200
-    fmt.Println(slice)  //[106 207]
-    fmt.Println(data)   //[0 1 2 3 4 5 106 207 8 9]
-}
-</code></pre><h6 id="直接创建slice对象，自动分配底层数组"><a href="#直接创建slice对象，自动分配底层数组" class="headerlink" title="直接创建slice对象，自动分配底层数组"></a>直接创建slice对象，自动分配底层数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [...]int{0, 1, 2, 3, 8:100}
-    fmt.Println(data, len(data), cap(data)) //[0 1 2 3 0 0 0 0 100] 9 9
-
-    s2 := make([]int, 6, 8)
-    fmt.Println(s2, len(s2), cap(s2))   //[0 0 0 0 0 0] 6 8 没有初始化值，直接用0填充
-
-    s3 := make([]int, 6)
-    fmt.Println(s3, len(s3), cap(s3))   //[0 0 0 0 0 0] 6 6 省略cap那么久默认cap=len
-}
-</code></pre><h6 id="可以用指针直接访问底层数组，退化成普通数组操作"><a href="#可以用指针直接访问底层数组，退化成普通数组操作" class="headerlink" title="可以用指针直接访问底层数组，退化成普通数组操作"></a>可以用指针直接访问底层数组，退化成普通数组操作</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    s := []int{0, 1, 2, 3, 4}
-    p := &amp;s[2]      //直接使用指针修改数组底层的值
-    *p += 100
-    fmt.Println(s)
-}
-</code></pre><h6 id="依然是二维数组"><a href="#依然是二维数组" class="headerlink" title="依然是二维数组"></a>依然是二维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    data := [][]int{
-        []int{1, 2, 3},
-        []int{100, 200},
-        []int{11, 22, 33, 44},
-    }
-
-    fmt.Println(data)       //[[1 2 3] [100 200] [11 22 33 44]]
-}
-</code></pre><h6 id="可直接修改struct-array成员"><a href="#可直接修改struct-array成员" class="headerlink" title="可直接修改struct array成员"></a>可直接修改struct array成员</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    d := [5]struct {
-        x int
-    }{}
-
-    s := d[:]   //这里是引用
-
-    d[1].x = 10
-    s[2].x = 20
-    fmt.Println(d)      //[{0} {10} {20} {0} {0}]
-    fmt.Printf(&quot;%p, %p\n&quot;, &amp;d, &amp;d[0])       //0xc4200720c0, 0xc4200720c0
-}
-</code></pre>
-          
+    uintgo len;     //表示可用元素数量，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记slice/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -560,93 +478,17 @@ func main() {
       
         
           
-            <h1 id="Array类型数据"><a href="#Array类型数据" class="headerlink" title="Array类型数据"></a>Array类型数据</h1><h6 id="数组是值类型，赋值和传参会复制整个数组，而不是指针"><a href="#数组是值类型，赋值和传参会复制整个数组，而不是指针" class="headerlink" title="数组是值类型，赋值和传参会复制整个数组，而不是指针"></a>数组是值类型，赋值和传参会复制整个数组，而不是指针</h6><h6 id="数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型"><a href="#数组长度必须是常量，且是类型的组成部分。-2-int和-3-int是不同类型" class="headerlink" title="数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型"></a>数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型</h6><h6 id="支持”-”，”！-”操作符，因为内存总是被初始化过"><a href="#支持”-”，”！-”操作符，因为内存总是被初始化过" class="headerlink" title="支持”==”，”！=”操作符，因为内存总是被初始化过"></a>支持”==”，”！=”操作符，因为内存总是被初始化过</h6><h6 id="指针数组-n-T-数组指针-n-T"><a href="#指针数组-n-T-数组指针-n-T" class="headerlink" title="指针数组[n]T,数组指针[n]T"></a>指针数组[n]<em>T,数组指针</em>[n]T</h6><h1 id="定义数组的方式"><a href="#定义数组的方式" class="headerlink" title="定义数组的方式"></a>定义数组的方式</h1><h6 id="直接初始化"><a href="#直接初始化" class="headerlink" title="直接初始化"></a>直接初始化</h6><pre><code>package main
+          Array类型数据数组是值类型，赋值和传参会复制整个数组，而不是指针数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型支持”==”，”！=”操作符，因为内存总是被初始化过指针数组[n]T,数组指针[n]T定义数组的方式直接初始化package main
 
-import &quot;fmt&quot;
-
-func main() {
-    a := [3]int{1,2}    //定义了数组有三个元素，未初始化元素值为0
-    fmt.Println(a)      //[1 2 0]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]int{1, 2, 3, 4, 5}    //通过初始化值确定数组长度
-    fmt.Println(a)      //[1 2 3 4 5]
-}
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [5]int{2:100, 4:200}   //指定了数组对应的键，索引从0开始以0的值进行补齐到指定的数组长度
-    fmt.Println(a)      //[0 0 100 0 200]
-}
-</code></pre><h6 id="先struct方式定义数组格式，再初始化值"><a href="#先struct方式定义数组格式，再初始化值" class="headerlink" title="先struct方式定义数组格式，再初始化值"></a>先struct方式定义数组格式，再初始化值</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...]struct{
-        name string
-        age uint8
-    }{
-        {&quot;user1&quot;, 10},
-        {&quot;user2&quot;, 20},  //都好不能省略
-    }
-
-    fmt.Println(a)      //[{user1 10} {user2 20}]
-}
-</code></pre><h6 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2][3]int{{1,2,3}, {4,5,6}}    //指定每一层的元素个数
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-
-
-package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [...][3]int{{1,2,3}, {4,5,6}}  //省略第一维的元素个数，第二维不能省略
-
-    fmt.Println(a)      //[[1 2 3] [4 5 6]]
-}
-</code></pre><h6 id="数组会有值拷贝行为，建议使用后slice，或数组指针"><a href="#数组会有值拷贝行为，建议使用后slice，或数组指针" class="headerlink" title="数组会有值拷贝行为，建议使用后slice，或数组指针"></a>数组会有值拷贝行为，建议使用后slice，或数组指针</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(x [2]int) {
-    fmt.Printf(&quot;x:%p&quot;, &amp;x)  //x:0xc42000a2d0    指针位置发生了改变，说明是重新复制了值
-    x[1] = 1000
-}
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Printf(&quot;a:%p&quot;, &amp;a)  //a:0xc42000a2a0
-    test(a)
-    fmt.Println(a)  //[1 2] 由于是值复制，因此当前的数组还是原来的值
-}
-</code></pre><h6 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func main() {
-    a := [2]int{1,2}
-    fmt.Println(len(a), cap(a))  //2,2
-}
-</code></pre>
-          
+import &q
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记array/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -786,61 +628,20 @@ func main() {
       
         
           
-            <h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"><a href="#使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理" class="headerlink" title="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"></a>使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理</h6><pre><code>package main
+          延迟调用使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理package main
 
 import &quot;os&quot;
 
 func test() error {
-    f, err := os.Create(&quot;test.txt&quot;) //创建一个文件
-
-    if err != nil { return err }    //创建失败返回错误信息
-
-    defer f.Close()     //不管是否出现错误都会关闭文件，defer会在ret之前执行
-    f.WriteString(&quot;Hello,world!&quot;)   //往文件中写入内容
-    return nil
-}
-
-func main() {
-    test()
-}
-</code></pre><h6 id="多个defer注册，按FILO次序执行"><a href="#多个defer注册，按FILO次序执行" class="headerlink" title="多个defer注册，按FILO次序执行"></a>多个defer注册，按FILO次序执行</h6><pre><code>package main
-
-func test(x int) int {
-    defer println(&quot;a&quot;)
-    defer println(&quot;b&quot;)
-
-    defer func() {
-        println(100 / x)
-    }()
-
-    defer println(&quot;c&quot;)
-
-    return 1
-}
-
-func main() {
-    test(20)        //输出结果为c 5 b a
-}
-</code></pre><h6 id="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"><a href="#延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取" class="headerlink" title="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"></a>延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取</h6><pre><code>package main
-
-func test() {
-    x, y := 10, 20
-
-    defer func(i int) {
-        println(&quot;defer:&quot;, i, y) //y闭包引用
-    }(x)    //x被复制
-
-    x += 10
-    y += 100
-    println(&quot;x=&quot;, x, &quot;y=&quot;, y)
-}
-
-func main() {
-    test()
-    //结果为:x= 20 y= 120   defer: 10 120
-}
-</code></pre>
-          
+    f, err := os.Create(&quo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记延迟调用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -980,88 +781,20 @@ func main() {
       
         
           
-            <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h6 id="没有结构化异常，使用panic抛出错误，recover捕获错误"><a href="#没有结构化异常，使用panic抛出错误，recover捕获错误" class="headerlink" title="没有结构化异常，使用panic抛出错误，recover捕获错误"></a>没有结构化异常，使用panic抛出错误，recover捕获错误</h6><pre><code>package main
+          异常处理没有结构化异常，使用panic抛出错误，recover捕获错误package main
 
 func test() {
     defer func() {
         if err := recover();err != nil {    //相当于php的错误异常处理的try
-            println(err.(string))       //将interface转换成string类型
-        }
-    }()
-
-    panic(&quot;panic error!&quot;)   //相当于php的throw
-}
-
-func main() {
-    test()  //输出panic error!
-}
-</code></pre><h6 id="由于panic，recover参数类型为interface-，因此可抛出任何类型对象"><a href="#由于panic，recover参数类型为interface-，因此可抛出任何类型对象" class="headerlink" title="由于panic，recover参数类型为interface{}，因此可抛出任何类型对象"></a>由于panic，recover参数类型为interface{}，因此可抛出任何类型对象</h6><pre><code>func panic(v interface{})   //不太理解
-func recover() interface{}
-</code></pre><h6 id="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"><a href="#延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获" class="headerlink" title="延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获"></a>延迟调用中引发的错误，可被后续延迟调用捕获，但仅最后一个错误可被捕获</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test() {
-    defer func() {
-        fmt.Println(recover())
-    }()
-
-    defer func() {
-        panic(&quot;defer panic&quot;)
-    }()
-
-    panic(&quot;test panic&quot;)
-}
-
-func main() {
-    test()  //输出结果为: defer panic
-}
-</code></pre><h6 id="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"><a href="#捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递" class="headerlink" title="捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递"></a>捕获函数recover只有在延迟调用内直接调用才会终止错误，否则总会返回nil，任何未捕获的错误都会沿调用栈向外传递</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test() {
-    defer recover() //无效
-    defer fmt.Println(recover())    //无效
-    defer func() {
-        //recover() //只有在此处才能捕获异常
-        func() {
-            println(&quot;defer inner&quot;)
-            recover()   //无效
-        }()
-    }()
-
-    panic(&quot;test panic&quot;)
-}
-
-func main() {
-    test()
-}
-</code></pre><h6 id="使用error-New和fmt-Errorf函数创建error接口的错误对象"><a href="#使用error-New和fmt-Errorf函数创建error接口的错误对象" class="headerlink" title="使用error.New和fmt.Errorf函数创建error接口的错误对象"></a>使用error.New和fmt.Errorf函数创建error接口的错误对象</h6><pre><code>package main
-
-import &quot;errors&quot;
-
-type error interface {
-    Error() string
-}
-
-var ErrDivByZero = errors.New(&quot;division by zero&quot;)   //使用error.New创建error错误对象
-
-func div(x, y int) (int, error) {
-    if y == 0 { return 0, ErrDivByZero }
-    return x / y, nil       //返回结果和异常
-}
-
-func main() {
-    switch z, err := div(10, 0); err {  //初始化变量，然后再匹配异常err的信息
-    case nil:
-        println(z)
-    case ErrDivByZero:
-        panic(err)
-    }
-}
-</code></pre><h6 id="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"><a href="#区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值" class="headerlink" title="区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值"></a>区分panic和error的两种方式，在包内部一般使用panic，对外api使用error返回值</h6>
-          
+    
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/28/go学习笔记异常处理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1201,176 +934,17 @@ func main() {
       
         
           
-            <h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h6 id="不支持嵌套，重载和默认参数"><a href="#不支持嵌套，重载和默认参数" class="headerlink" title="不支持嵌套，重载和默认参数"></a>不支持嵌套，重载和默认参数</h6><h6 id="无需声明原型"><a href="#无需声明原型" class="headerlink" title="无需声明原型"></a>无需声明原型</h6><h6 id="支持不定长变参"><a href="#支持不定长变参" class="headerlink" title="支持不定长变参"></a>支持不定长变参</h6><h6 id="支持多返回值"><a href="#支持多返回值" class="headerlink" title="支持多返回值"></a>支持多返回值</h6><h6 id="支持命名返回参数"><a href="#支持命名返回参数" class="headerlink" title="支持命名返回参数"></a>支持命名返回参数</h6><h6 id="支持匿名函数和闭包"><a href="#支持匿名函数和闭包" class="headerlink" title="支持匿名函数和闭包"></a>支持匿名函数和闭包</h6><h6 id="使用func定义函数，左大括号依旧不能另起一行"><a href="#使用func定义函数，左大括号依旧不能另起一行" class="headerlink" title="使用func定义函数，左大括号依旧不能另起一行"></a>使用func定义函数，左大括号依旧不能另起一行</h6><pre><code>package main
+          函数定义不支持嵌套，重载和默认参数无需声明原型支持不定长变参支持多返回值支持命名返回参数支持匿名函数和闭包使用func定义函数，左大括号依旧不能另起一行package main
 
-func test (x, y int, s string) (int, string) {  //需要定义返回参数的类型，可以返回多个数值
-    n := x + y
-    return n, s
-}
-
-func main() {
-    x,y := test(1, 2, &quot;a&quot;)  //接收返回的值
-    println(x,y)
-}
-</code></pre><h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><h6 id="函数是第一类对象，可作为参数传递"><a href="#函数是第一类对象，可作为参数传递" class="headerlink" title="函数是第一类对象，可作为参数传递"></a>函数是第一类对象，可作为参数传递</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(fn func() int) int {  //参数可以传入函数
-    return fn()
-}
-
-type FormatFunc func(s string, x, y int) string //定义函数类型
-
-func format(fn FormatFunc, s string, x, y int) string {
-    return fn(s, x, y)
-}
-
-func main() {
-    s1 := test(func() int { return 100 })
-    s2 := format(func(s string, x, y int) string {
-        return fmt.Sprintf(s, x, y)
-    }, &quot;%d, %d&quot;, 10, 20)
-
-    println(s1, s2)
-}
-</code></pre><h6 id="只能有一个，且必须是最后一个"><a href="#只能有一个，且必须是最后一个" class="headerlink" title="只能有一个，且必须是最后一个"></a>只能有一个，且必须是最后一个</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func test(s string, n ...int) string {  //变参
-    var x int
-    for _, i := range n {
-        x += i
-    }
-
-    return fmt.Sprintf(s, x)
-}
-
-func main() {
-    println(test(&quot;sum:%d&quot;, 1, 2, 3))
-}
-</code></pre><h1 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h1><h6 id="只能用变量接收返回值或者-忽略返回值"><a href="#只能用变量接收返回值或者-忽略返回值" class="headerlink" title="只能用变量接收返回值或者_忽略返回值"></a>只能用变量接收返回值或者_忽略返回值</h6><pre><code>package main
-
-func test() (int, int) {
-    return 1,2
-}
-
-func main() {
-    a,_ := test()
-    println(a)
-}
-</code></pre><h6 id="多返回值可直接作为其他函数调用实参"><a href="#多返回值可直接作为其他函数调用实参" class="headerlink" title="多返回值可直接作为其他函数调用实参"></a>多返回值可直接作为其他函数调用实参</h6><pre><code>package main
-
-func test() (int, int) {
-    return 1,2
-}
-
-func add(x, y int) int {
-    return x+y
-}
-
-func sum(n ...int) int {    //变参
-    var x int
-    for _,i := range n {    //循环，舍弃键
-        x += i
-    }
-
-    return x
-}
-
-func main() {
-    println(add(test()))
-    println(sum(test()))
-}
-</code></pre><h6 id="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"><a href="#命名返回参数可看做与形参类似的局部变量，最后由return隐式返回" class="headerlink" title="命名返回参数可看做与形参类似的局部变量，最后由return隐式返回"></a>命名返回参数可看做与形参类似的局部变量，最后由return隐式返回</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    z = x + y
-    return  //虽然没返回z，但是函数定义了返回的值是z而且是int类型
-}
-
-func main() {
-    println(add(1, 2))
-}
-</code></pre><h6 id="命名返回的参数可被同名局部变量遮蔽，需要显示返回"><a href="#命名返回的参数可被同名局部变量遮蔽，需要显示返回" class="headerlink" title="命名返回的参数可被同名局部变量遮蔽，需要显示返回"></a>命名返回的参数可被同名局部变量遮蔽，需要显示返回</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    {   //不能在一个级别定义z，否则会报错
-        var z = x + y
-        return z    //必须要显示返回
-    }
-}
-
-func main() {
-    println(add(1, 2))
-}
-
-//命名返回参数允许defer延迟调用通过闭包读取和修改
-package main
-
-func add(x, y int) (z int) {
-    defer func() {
-        println(z)  //输出3
-        z += 100
-    }()
-    z = x + y
-    return
-}
-
-func main() {
-    println(add(1, 2))  //输出103
-}
-</code></pre><h6 id="显式return返回前，会先修改命名返回参数"><a href="#显式return返回前，会先修改命名返回参数" class="headerlink" title="显式return返回前，会先修改命名返回参数"></a>显式return返回前，会先修改命名返回参数</h6><pre><code>package main
-
-func add(x, y int) (z int) {
-    defer func() {
-        println(z)//输出结果为203
-    }()
-    z = x + y
-    println(z)//输出结果为3
-    return z + 200  //执行顺序:z = x + y =&gt; z + 200 =&gt; call defer =&gt; return
-}
-
-func main() {
-    println(add(1, 2))
-}
-</code></pre><h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><h6 id="匿名函数-做为变量"><a href="#匿名函数-做为变量" class="headerlink" title="匿名函数,做为变量"></a>匿名函数,做为变量</h6><pre><code>package main
-
-func main() {
-    fn := func() { println(&quot;hello world&quot;)}
-    fn()
-}
-</code></pre><h6 id="匿名函数，做为collection"><a href="#匿名函数，做为collection" class="headerlink" title="匿名函数，做为collection"></a>匿名函数，做为collection</h6><pre><code>package main
-
-func main() {
-    fns := [](func(x int) int) {
-        func(x int) int { return x + 1 },
-        func(x int) int { return x + 2 },
-    }
-
-    println(fns[0](100))
-}
-</code></pre><h6 id="匿名函数，做为字段"><a href="#匿名函数，做为字段" class="headerlink" title="匿名函数，做为字段"></a>匿名函数，做为字段</h6><pre><code>package main
-
-func main() {
-    d := struct {
-        fn func() string
-    }{
-        fn: func() string { return &quot;hello,world!&quot; },
-    }
-
-    println(d.fn())
-}
-</code></pre><h6 id="匿名函数，做为channel"><a href="#匿名函数，做为channel" class="headerlink" title="匿名函数，做为channel"></a>匿名函数，做为channel</h6><pre><code>package main
-
-func main() {
-    fc := make(chan func() string, 2)//声明一个chan，定义一个函数
-    fc &lt;- func() string { return &quot;Hello,World!&quot; }   //把函数的值发送给fc
-    println((&lt;-fc)())
-}
-</code></pre>
-          
+func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/24/go学习笔记函数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

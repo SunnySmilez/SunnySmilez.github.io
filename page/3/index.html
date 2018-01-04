@@ -326,75 +326,17 @@
       
         
           
-            <h1 id="添加pre-commit钩子"><a href="#添加pre-commit钩子" class="headerlink" title="添加pre-commit钩子"></a>添加pre-commit钩子</h1><pre><code>vim app_code/.git/hooks/pre-commit
+          添加pre-commit钩子vim app_code/.git/hooks/pre-commit
 备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
-</code></pre><h1 id="添加语法检查内容"><a href="#添加语法检查内容" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>my $commit_id = `git rev-parse --verify HEAD`;
-my $against = &quot;4b825dc642cb6eb9a060e54bf8d69288fbee4904&quot;;
-
-if ($commit_id) {
-    $against=&quot;HEAD&quot;;
-}
-
-my @list = `git diff-index --cached --name-only $against --`;
-my $ret = 0;
-
-for my $x (@list) {
-    chomp $x;
-    if ($x =~ /\.php$/) {
-        if (-f &quot;$x&quot;) {
-            `php -l $x`;
-            if ($? != 0) {
-                $ret = 1;
-                goto end;
-            }
-        }
-    }
-}
-
-end:
-exit($ret);
-</code></pre><h1 id="添加执行权限"><a href="#添加执行权限" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-commit
-</code></pre><h1 id="添加测试"><a href="#添加测试" class="headerlink" title="添加测试"></a>添加测试</h1><p><img src="/img/git/php_check_grammar.png" alt="Alt text" title="php语法检查"></p>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>然而使用pre-commit脚本存在一个很大的缺陷，钩子脚本需要放置在每个开发者的每个项目中，很容易遗漏，同时代码库重新clone后也需要记得重新放置钩子脚本，没有办法从根源上禁止有语法错误的代码的提交
-</code></pre><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code>统一的在git服务端添加pre-receive钩子，当代码push到中心代码库的时候进行语法检测，如果存在语法错误则拒绝当前的push，这样可以只在服务端配置，不需要在每个人的每个项目中进行配置，Git在接受到push时会调用pre-receive钩子，如果pre-receive返回非0的返回值，则当前的push会被拒绝。在调用pre-receive脚本时，会从标准输入传递三个参数，分别为之前的版本，push的版本和push的分支
-</code></pre><h1 id="添加pre-receive钩子"><a href="#添加pre-receive钩子" class="headerlink" title="添加pre-receive钩子"></a>添加pre-receive钩子</h1><pre><code>vim app_code/.git/hooks/pre-receive
-</code></pre><h1 id="添加语法检查内容-1"><a href="#添加语法检查内容-1" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>#!/usr/bin/perl
-use File::Temp;
-use strict;
-
-#从标准输入中读取参数信息
-my $line = &lt;&gt;;
-#处理后得到旧版本，但前版本和分支
-my @argv = split(/\s/, $line);
-my $old = $argv[0];
-my $new = $argv[1];
-my $branch = $argv[2];
-#比较两个版本的差异
-my @out = `git diff --name-status $old $new`;
-
-for my $x (@out) {
-    my @param = split(/\s/, $x);
-    #如果文件不是被删除且是php文件，则进行语法检测
-    if ($param[0] ne &apos;D&apos; and $param[1] =~ /\.php$/) {
-        #取出文件的内容，将其写入到一个临时文件中
-        my $content = `git show $new:$param[1]`;
-        my $fh = File::Temp-&gt;new(SUFFIX =&gt; &apos;.php&apos;, UNLINK =&gt; 1);
-        print $fh $content;
-        #进行语法检测
-        my $result = `php -l $fh 2&gt;&amp;1`;
-        #如果出错则输出错误，输出时需要将临时文件名替换称为原来的文件名，并拒绝push
-        if ($? != 0) {
-            if ($result =~ s#$fh#$param[1]#g) {
-                print $result;
-            }
-            exit(1);
-        }
-    }
-}
-exit(0);
-</code></pre><h1 id="添加执行权限-1"><a href="#添加执行权限-1" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-receive  
-</code></pre>
-          
+添加语法检查内容my $commit_id = `git rev-parse --ver
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/15/添加git语法检查钩子/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -534,27 +476,17 @@ exit(0);
       
         
           
-            <h1 id="在virtualbox安装centos7"><a href="#在virtualbox安装centos7" class="headerlink" title="在virtualbox安装centos7"></a>在virtualbox安装centos7</h1><pre><code>注意一定要是在centos7及以上的版本
-</code></pre><h1 id="centeos安装docker"><a href="#centeos安装docker" class="headerlink" title="centeos安装docker"></a>centeos安装docker</h1><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-</code></pre><h1 id="启动docker容器"><a href="#启动docker容器" class="headerlink" title="启动docker容器"></a>启动docker容器</h1><pre><code>service docker start
-</code></pre><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><pre><code>docker pull swarm
-</code></pre><h1 id="获取docker容器ip"><a href="#获取docker容器ip" class="headerlink" title="获取docker容器ip"></a>获取docker容器ip</h1><pre><code>本次我的两个主机的ip是：
-    manage：192.168.1.164
-    node1：192.168.1.183
-    node2：192.168.1.194
-</code></pre><h1 id="生产集群token"><a href="#生产集群token" class="headerlink" title="生产集群token"></a>生产集群token</h1><pre><code>docker run --rm swarm create
-执行命令后会生产一串集群的token，记录下来（我的token是：6335a310b4fe5b21492bc119a03980d6）
-</code></pre><h1 id="添加节点到集群"><a href="#添加节点到集群" class="headerlink" title="添加节点到集群"></a>添加节点到集群</h1><pre><code>docker run -d swarm join --addr=192.168.1.183:2375 token://6335a310b4fe5b21492bc119a03980d6
-docker run -d swarm join --addr=192.168.1.194:2375 token://6335a310b4fe5b21492bc119a03980d6
-</code></pre><h1 id="在manage上开启管理程序"><a href="#在manage上开启管理程序" class="headerlink" title="在manage上开启管理程序"></a>在manage上开启管理程序</h1><pre><code>docker run -d -p 8888:2375 swarm manage token://6335a310b4fe5b21492bc119a03980d6
-</code></pre><h1 id="列出集群中的节点"><a href="#列出集群中的节点" class="headerlink" title="列出集群中的节点"></a>列出集群中的节点</h1><pre><code>docker run --rm swarm list token://6335a310b4fe5b21492bc119a03980d6    
-</code></pre><h1 id="在manage上管理node1，node2"><a href="#在manage上管理node1，node2" class="headerlink" title="在manage上管理node1，node2"></a>在manage上管理node1，node2</h1><pre><code>docker -H 192.168.1.164:8888 info
-docker -H 192.168.1.164:8888 ps
-docker -H 192.168.1.164:8888 logs
-</code></pre><h1 id="在集群上运行容器"><a href="#在集群上运行容器" class="headerlink" title="在集群上运行容器"></a>在集群上运行容器</h1><pre><code>docker -H 192.168.1.164:8888 run -d --name web1 nginx
-docker -H 192.168.1.164:8888 run -d --name web2 nginx
-</code></pre>
-          
+          在virtualbox安装centos7注意一定要是在centos7及以上的版本
+centeos安装dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/安装docker-swarm/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -694,11 +626,17 @@ docker -H 192.168.1.164:8888 run -d --name web2 nginx
       
         
           
-            <h1 id="查看docker容器的ip"><a href="#查看docker容器的ip" class="headerlink" title="查看docker容器的ip"></a>查看docker容器的ip</h1><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
-</code></pre><h1 id="查看docker完整的额容器id"><a href="#查看docker完整的额容器id" class="headerlink" title="查看docker完整的额容器id"></a>查看docker完整的额容器id</h1><pre><code>docker ps --no-trunc
-</code></pre><h1 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h1><pre><code>docker logs -f docker_name
-</code></pre>
-          
+          查看docker容器的ipdocker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
+查看docker完整的额容器iddocker ps --no-trunc
+查看日志docker
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/docker实践命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -838,26 +776,19 @@ docker -H 192.168.1.164:8888 run -d --name web2 nginx
       
         
           
-            <h1 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h1><h6 id="查看启动的容器"><a href="#查看启动的容器" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
+          attach查看启动的容器docker ps
 注意：CONTAINER ID，NAMES这两个信息下面命令会用到
-</code></pre><h6 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker attach contain_id(CONTAINER ID)
+登录容器docker attach contain_id(CONTAINER ID)
 docker attach contain_name(NAMES)
-</code></pre><h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><h6 id="查看启动的容器-1"><a href="#查看启动的容器-1" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
-</code></pre><h6 id="登录容器-1"><a href="#登录容器-1" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker exec -it  contain_id(CONTAINER ID) /bin/bash
-docker exec contain_name(NAMES) /bin/bash
-</code></pre><h1 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h1><h6 id="这应该是很传统的连接方式，但是不建议用这种方式进入容器"><a href="#这应该是很传统的连接方式，但是不建议用这种方式进入容器" class="headerlink" title="这应该是很传统的连接方式，但是不建议用这种方式进入容器"></a>这应该是很传统的连接方式，但是不建议用这种方式进入容器</h6><blockquote>
-<p><a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp" title="为什么不需要在docker中运行sshd" target="_blank" rel="external">为什么不需要在docker中运行sshd</a></p>
-</blockquote>
-<h1 id="nesenter"><a href="#nesenter" class="headerlink" title="nesenter"></a>nesenter</h1><h6 id="查看启动的容器-2"><a href="#查看启动的容器-2" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
-</code></pre><h6 id="查看容器详细信息"><a href="#查看容器详细信息" class="headerlink" title="查看容器详细信息"></a>查看容器详细信息</h6><pre><code>docker inspect contain_id(CONTAINER ID)
-docker inspect contain_name(NAMES)
-</code></pre><h6 id="登录容器-2"><a href="#登录容器-2" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>nsenter --target $pid --mount --uts --ipc --net --pid
-$pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装的，自己去google吧
-</code></pre><blockquote>
-<p><a href="https://github.com/jpetazzo/nsenter" title="什么是nesenter" target="_blank" rel="external">什么是nesenter</a></p>
-</blockquote>
-
-          
+exec查看启动的容器docke
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/登录docker容器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -997,16 +928,20 @@ $pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装
       
         
           
-            <h1 id="不能ping通的原因"><a href="#不能ping通的原因" class="headerlink" title="不能ping通的原因"></a>不能ping通的原因</h1><pre><code>由于Docker for mac的网络实现方式，不能够创建docker0虚拟网卡，实际上它存在于HyperKit
+          不能ping通的原因由于Docker for mac的网络实现方式，不能够创建docker0虚拟网卡，实际上它存在于HyperKit
 由于macox的限制，不能将流量转发给容器
-</code></pre><blockquote>
-<p><a href="https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos" title="mac不能ping通docker的原因" target="_blank" rel="external">mac不能ping通docker的原因</a></p>
-</blockquote>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h5 id="映射端口"><a href="#映射端口" class="headerlink" title="映射端口"></a>映射端口</h5><pre><code>docker run -d -p 80:80 --name webserver nginx
-</code></pre><h5 id="注意：需要查看80端口是否被占用"><a href="#注意：需要查看80端口是否被占用" class="headerlink" title="注意：需要查看80端口是否被占用"></a>注意：需要查看80端口是否被占用</h5><pre><code>lsof -P | grep &apos;:80&apos;
-</code></pre><h5 id="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"><a href="#如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）" class="headerlink" title="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"></a>如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）</h5><pre><code>docker run -d -p 80:80 -v /data1/htdocs/code /data1/htdocs/code --name webserver nginx
-</code></pre>
-          
+
+mac不能ping通docker的原因
+
+解决办法映射端口docker run -d -p 80:80 --name w
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/01/mac无法ping通docker容器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

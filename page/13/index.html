@@ -304,42 +304,21 @@
       
         
           
-            <h1 id="Mac安装GDB"><a href="#Mac安装GDB" class="headerlink" title="Mac安装GDB"></a>Mac安装GDB</h1><h3 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h3><pre><code>brew install gdb
-</code></pre><h1 id="使用gdb进行调试"><a href="#使用gdb进行调试" class="headerlink" title="使用gdb进行调试"></a>使用gdb进行调试</h1><h3 id="gbd-c文件中的内容"><a href="#gbd-c文件中的内容" class="headerlink" title="gbd.c文件中的内容"></a>gbd.c文件中的内容</h3><pre><code>#include &lt;stdio.h&gt;
+          Mac安装GDB安装GDBbrew install gdb
+使用gdb进行调试gbd.c文件中的内容#include &lt;stdio.h&gt;
 
 int add_range(int low, int high)
 {
         int i, sum;
-        for (i = low; i &lt;= high; i++)
-                sum = sum + i;
-        return sum;
-}
-
-int main(void)
-{
-        int result[100];
-        result[0] = add_range(1, 10);
-        result[1] = add_range(1, 100);
-        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
-        return 0;
-}
-</code></pre><h3 id="编译并使用gdb"><a href="#编译并使用gdb" class="headerlink" title="编译并使用gdb"></a>编译并使用gdb</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; gdb gdbtest
-</code></pre><h3 id="gdb开始调试"><a href="#gdb开始调试" class="headerlink" title="gdb开始调试"></a>gdb开始调试</h3><pre><code>start
-</code></pre><h3 id="mac下出现如下错误"><a href="#mac下出现如下错误" class="headerlink" title="mac下出现如下错误"></a>mac下出现如下错误</h3><p><img src="/img/mac_gdb/gdb-error.png" alt="Alt text" title="gdb错误信息"></p>
-<h3 id="mac下对gdb进行签名"><a href="#mac下对gdb进行签名" class="headerlink" title="mac下对gdb进行签名"></a>mac下对gdb进行签名</h3><p><img src="/img/mac_gdb/key.png" alt="Alt text" title="启动key"></p>
-<p><img src="/img/mac_gdb/create-key.png" alt="Alt text" title="创建证书"></p>
-<p><img src="/img/mac_gdb/gdb-cert-first.png" alt="Alt text" title="选择代码签名"></p>
-<p><img src="/img/mac_gdb/gdb-cert-second.png" alt="Alt text" title="设置过期时间"></p>
-<h3 id="接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统"><a href="#接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统" class="headerlink" title="接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统"></a>接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统</h3><p><img src="/img/mac_gdb/gdb-cert-third.png" alt="Alt text" title="选择存储位置"></p>
-<h3 id="创建的证书"><a href="#创建的证书" class="headerlink" title="创建的证书"></a>创建的证书</h3><p><img src="/img/mac_gdb/gdb-cert-last.png" alt="Alt text" title="证书"></p>
-<h3 id="设置信任"><a href="#设置信任" class="headerlink" title="设置信任"></a>设置信任</h3><p><img src="/img/mac_gdb/gdb-auth-1.png" alt="Alt text" title="找到证书简介"><br><img src="/img/mac_gdb/gdb-auth-2.png" alt="Alt text" title="设置代码签名始终信任"></p>
-<h1 id="对gdb进行代码签名"><a href="#对gdb进行代码签名" class="headerlink" title="对gdb进行代码签名"></a>对gdb进行代码签名</h1><h3 id="关闭taskgated进程"><a href="#关闭taskgated进程" class="headerlink" title="关闭taskgated进程"></a>关闭taskgated进程</h3><p><img src="/img/mac_gdb/gdb-cert-sign-1.png" alt="Alt text" title="打开活动检测器"><br><img src="/img/mac_gdb/taskgated.png" alt="Alt text" title="检索taskgated进程并退出"></p>
-<h3 id="对gdb进行签名"><a href="#对gdb进行签名" class="headerlink" title="对gdb进行签名"></a>对gdb进行签名</h3><pre><code>codesign -s gdb-cert /usr/local/bin/gdb
-</code></pre><h3 id="检测是否安装成功"><a href="#检测是否安装成功" class="headerlink" title="检测是否安装成功"></a>检测是否安装成功</h3><pre><code>codesign -v gdb (`如果没有任何信息输出代表签名成功`)
-</code></pre><h3 id="再次使用gdb进行调试"><a href="#再次使用gdb进行调试" class="headerlink" title="再次使用gdb进行调试"></a>再次使用gdb进行调试</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; sudo gdb gdbtest (`注意sudo不能少,这个坑我趟了好几个小时,最终在google找到答案`)
-start
-</code></pre>
-          
+        for (i = lo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/21/mac安装gdb/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -479,8 +458,15 @@ start
       
         
           
-            <h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><h1 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h1>
+          编辑器调试器
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/21/redis源码阅读-准备工作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -620,10 +606,17 @@ start
       
         
           
-            <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>#<br>    tcpdump  -i  lo -Anns0 port 9000</p>
-<p>#<br>    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’<br>    strace</p>
+          现象#    tcpdump  -i  lo -Anns0 port 9000
+#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -763,13 +756,19 @@ start
       
         
           
-            <h1 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h1><pre><code>标准输入:stdin          对应描述符:0
+          数据流标准输入:stdin          对应描述符:0
 标准输出:stdout         对应描述符:1
 标准错误:stderr         对应描述符:2
-</code></pre><h1 id="重定向数据流"><a href="#重定向数据流" class="headerlink" title="重定向数据流"></a>重定向数据流</h1><pre><code>重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
-重定向输入数据流 &quot;&lt;&quot;,&quot;&lt;&lt;&quot;
-</code></pre><h1 id="fileni返回描述符号"><a href="#fileni返回描述符号" class="headerlink" title="fileni返回描述符号"></a>fileni返回描述符号</h1><h1 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h1>
-          
+重定向数据流重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
+重定向输入数据流 &
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/16/C语言进程间通信/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -909,105 +908,18 @@ start
       
         
           
-            <h1 id="execl-execlp-execle"><a href="#execl-execlp-execle" class="headerlink" title="execl,execlp,execle"></a>execl,execlp,execle</h1><pre><code>第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
+          execl,execlp,execle第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
 第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
 中间都被当做脚本所需要的参数
-最后一个参数是NULL,告诉函数没有其他参数了
-如果是以e结尾的exec系列函数(例如execle),还可以传递环境变量数组
-
-例子:
-execl(&apos;/tmp/test&apos;, &apos;/tmp/test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL);
-execlp(&apos;test&apos;, &apos;test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL);
-execle(&apos;/tmp/test&apos;, &apos;/tmp/test&apos;, &apos;param1&apos;, &apos;param2&apos;, &apos;param3&apos;, NULL, env_vars);
-</code></pre><h1 id="execv-execvp-execve"><a href="#execv-execvp-execve" class="headerlink" title="execv,execvp,execve"></a>execv,execvp,execve</h1><pre><code>参数类型,只是把后面的参数传递给了数组
-
-例子:
-execv(&apos;/tmp/test&apos;, my_args);
-execvp(&apos;test&apos;, my_args);
-</code></pre><h1 id="错误信息的一些规定"><a href="#错误信息的一些规定" class="headerlink" title="错误信息的一些规定"></a>错误信息的一些规定</h1><pre><code>不允许操作               1
-没有该文件或目录          2
-没有改进程               3
-错误                    -1
-正常返回                 0
-</code></pre><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><pre><code>#include &lt;stdio.h&gt;
-/*
-    为了使用exec函数
-*/
-#include &lt;unistd.h&gt;
-/*
-    为了使用errno变量
-*/
-#include &lt;errno.h&gt;
-#include &lt;string.h&gt;
-
-int main()
-{
-    if (execl(&quot;/sbin/ifconfig&quot;, &quot;/sbin/ifconfig&quot;, NULL) == -1)
-    {
-        if (execlp(&quot;ipconfig&quot;, &quot;ipconfig&quot;, NULL) == -1)
-        {
-            fprintf(stderr, &quot;Cannot run ipconfig: %s&quot;, strerror(errno));
-
-            return 1;
-        }
-    }
-
-    return 0;
-}
-</code></pre><h1 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h1><pre><code>fork会向子进程返回0,父进程返回非0值
-</code></pre><h1 id="copy-on-write"><a href="#copy-on-write" class="headerlink" title="copy-on-write"></a>copy-on-write</h1><pre><code>为了让fork进程变快,操作系统做了很多技巧,比如操作系统不会真的复制父进程的数据,而是让父子进程共享数据,当子进程需要修改存储器,就会为他复制一份数据
-</code></pre><h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><pre><code>exec系列函数执行的时候会启动一个进程,后面的代码不会运行
-伪代码:
-    code1
-    exec系列函数
-    code2
-    此例中的code2代码不会再运行
-
-如果需要运行获取多个exec系列函数的结果需要使用fork进行
-伪代码:
-    code1
-    pid_t pid_t = fork();
-    exec系列函数
-    pid_t pid_t = fork();
-    exec系列函数
-</code></pre><h1 id="事例-此事例中需要安装python环境-下载rss-gossip脚本https-github-com-dogriffiths-rssgossip-zipball-master"><a href="#事例-此事例中需要安装python环境-下载rss-gossip脚本https-github-com-dogriffiths-rssgossip-zipball-master" class="headerlink" title="事例(此事例中需要安装python环境,下载rss gossip脚本https://github.com/dogriffiths/rssgossip/zipball/master)"></a>事例(此事例中需要安装python环境,下载rss gossip脚本<a href="https://github.com/dogriffiths/rssgossip/zipball/master" target="_blank" rel="external">https://github.com/dogriffiths/rssgossip/zipball/master</a>)</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;errno.h&gt;
-
- int main(int argc, char *argv[])
- {
-    char *feeds[] = {&quot;http://wwww.cnn.com/rss/celebs.xml&quot;,
-                    &quot;http://www.rollingstone/rock.xml&quot;,
-                    &quot;http://eonline.com/gossip.xml&quot;
-                    };
-    int times = 3;
-    char *phrase = argv[1];
-    int i;
-    for(i = 0; i&lt; times; i++) {
-        char var[255];
-        sprintf(var, &quot;RSS_FEED=%s&quot;, feeds[i]);
-        char *vars[] = {var, NULL};
-        /*
-            pid_t是可以理解成一种int的类型
-        */
-        pid_t pid_t = fork();
-        if (pid_t == -1) {
-            fprintf(stderr, &quot;can&apos;t fork process:%s\n&quot;, strerror(errno));
-            return 1;
-        }
-
-        if (!pid_t &amp;&amp; execle(&quot;/usr/bin/python&quot;, &quot;/usr/bin/python&quot;, &quot;./rssgossip.py&quot;, phrase, NULL, vars) == -1) {
-            fprintf(stderr, &quot;can&apos;t run script:%s\n&quot;, strerror(errno));
-            return 1;
-        }
-    }
-
-    return 0;
- }
-</code></pre>
-          
+最后一个参数是NULL,告诉函
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/14/C语言进程与系统调用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -326,54 +326,20 @@
       
         
           
-            <h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ul>
-<li>会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值，每一行都是一条系统调用，等号左边是系统调用的函数名及其参数，右边是该调用的返回值</li>
-</ul>
-<h2 id="我的应用场景"><a href="#我的应用场景" class="headerlink" title="我的应用场景"></a>我的应用场景</h2><ul>
-<li><code>strace mysql</code>（<em>找不到配置文件的时候，可以使用它查看它打开文件的记录，了解到配置文件的路径.</em>）</li>
-<li><code>ps aux | grep php-fpm</code>（<em>找出php-fpm的启动进程</em>） <code>strace -p 26999</code>（<em>26999为非root进程id</em>）（<em>在进行程序调试的时候不知道发生了什么错误，错误日志写在什么位置，或者程序在哪个未知位置执行终止了，都可以进行查看。</em>）</li>
-<li><code>strace -o strace.txt -T -tt -e trace=all -p 3306</code>（<em>跟踪3306进程的所有系统调用（-e trace=all），并统计系统调用的花费时间，以及开始时间（并以可视化的时分秒格式显示），最后将记录结果存在strace.txt文件里面，当中断显示不全strace信息的时候</em>）</li>
-</ul>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><pre><code> -c            #统计每一系统调用的所执行的时间,次数和出错的次数等.
- -C            #Like -c but also print regular output while processes are running
- -d            #输出strace自身的关于标准错误的调试信息.
- -f            #跟踪由fork调用所产生的子进程.
- -ff            #如果提供-o filename,则所有进程的跟踪结果输出到相应的filename.pid中,pid是各进程的进程号. 此与-c不兼容
- -h            #输出简要的帮助信息.
- -i            #打印系统调用时候的入口指针.
- -q            #禁止输出关于脱离的消息.
- -r            #进入每一个系统调用时打印一个相对时间戳，一个系统调用的开始和下一个系统调用接替时，两者之间的时间.
- -t            #在输出中的每一行前加上时间信息.
- -tt            #时间信息精确到微妙
- -ttt            #时间信息精确到微妙，而且时间表示为unix时间戳
- -T            #显示每一调用所耗的时间.
- -v            #Print unabbreviated versions of environment, stat, termios, etc.  calls
- -V            #输出strace的版本信息.
- -x            #打印所有非ascii字符串以十六进制字符串格式显示。
- -xx            #所有字符串以十六进制形式输出.
- -a column        #设置返回值的输出位置.默认 为40.
- -e expr        #指定一个表达式,用来控制如何跟踪.格式如下:
-[qualifier=][!]value1[,value2]...
-qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value是用来限定的符号或数字.默认的 qualifier是 trace.感叹号是否定符号.例如: -eopen等价于 -e trace=open,表示只跟踪open调用.而-etrace!=open表示跟踪除了open以外的其他调用.有两个特殊的符号 all 和 none. 注意有些shell使用!来执行历史记录里的命令,所以要使用反斜杠
- -e trace=set        #只跟踪指定的系统调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all.
- -e trace=file        #只跟踪有关文件操作的系统调用.
- -e trace=process    #只跟踪有关进程控制的系统调用.
- -e trace=network    #跟踪与网络有关的所有系统调用.
- -e strace=signal    #跟踪所有与系统信号有关的 系统调用
- -e trace=ipc        #跟踪所有与进程通讯有关的系统调用
- -e abbrev=set        #设定 strace输出的系统调用的结果集.-v等与abbrev=none.默认为abbrev=all.
- -e raw=set        #将指 定的系统调用的参数以十六进制显示.
- -e signal=set        #指定跟踪的系统信号.默认为all.如 signal=!SIGIO(或者signal=!io),表示不跟踪SIGIO信号.
- -e read=set        #输出从指定文件中读出的数据.例如: -e read=3,5
- -e write=set        #输出写入到指定文件中的数据.
- -o filename        #将strace的输出写入文件filename
- -O overhead        #设置追踪系统的总开销（microseconds）
- -p pid            #跟踪指定的进程pid.
- -s strsize        #指定输出的字符串的最大长度.默认为32.文件名一直全部输出.
- -S sortby        #-c选项的输出以规定的标准显示为直方图
- -u username        #以username 的UID和GID执行被跟踪的命令
-</code></pre>
-          
+          主要功能
+会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值，每一行都是一条系统调用，等号左边是系统调用的函数名及其参数，右边是该调用的返回值
+
+我的应用场景
+strace mysql（找不到配置文件的时候，可以使用它查看它打开文件的记录，了解到配置文件的路径.）
+ps aux |
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/11/04/Strace命令使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -513,8 +479,15 @@ qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value�
       
         
           
-            <h2 id="Myslq-体系结构"><a href="#Myslq-体系结构" class="headerlink" title="Myslq 体系结构"></a>Myslq 体系结构</h2><h2 id="Myslq-存储引擎了解及对比"><a href="#Myslq-存储引擎了解及对比" class="headerlink" title="Myslq 存储引擎了解及对比"></a>Myslq 存储引擎了解及对比</h2><h2 id="InnoDB-体系结构"><a href="#InnoDB-体系结构" class="headerlink" title="InnoDB 体系结构"></a>InnoDB 体系结构</h2><h2 id="InnoDB-工作方式"><a href="#InnoDB-工作方式" class="headerlink" title="InnoDB 工作方式"></a>InnoDB 工作方式</h2><h2 id="InnoDB-特性"><a href="#InnoDB-特性" class="headerlink" title="InnoDB 特性"></a>InnoDB 特性</h2><h2 id="InnoDB-涉及的文件"><a href="#InnoDB-涉及的文件" class="headerlink" title="InnoDB 涉及的文件"></a>InnoDB 涉及的文件</h2><h2 id="InnoDB-表的存储方式"><a href="#InnoDB-表的存储方式" class="headerlink" title="InnoDB 表的存储方式"></a>InnoDB 表的存储方式</h2><h2 id="InnoDB-索引及算法"><a href="#InnoDB-索引及算法" class="headerlink" title="InnoDB 索引及算法"></a>InnoDB 索引及算法</h2><h2 id="InnoDB-锁"><a href="#InnoDB-锁" class="headerlink" title="InnoDB 锁"></a>InnoDB 锁</h2><h2 id="InnoDB-事务"><a href="#InnoDB-事务" class="headerlink" title="InnoDB 事务"></a>InnoDB 事务</h2><h2 id="InnoDB-备份和恢复"><a href="#InnoDB-备份和恢复" class="headerlink" title="InnoDB 备份和恢复"></a>InnoDB 备份和恢复</h2><h2 id="InnoDB-性能调优"><a href="#InnoDB-性能调优" class="headerlink" title="InnoDB 性能调优"></a>InnoDB 性能调优</h2>
+          Myslq 体系结构Myslq 存储引擎了解及对比InnoDB 体系结构InnoDB 工作方式InnoDB 特性InnoDB 涉及的文件InnoDB 表的存储方式InnoDB 索引及算法InnoDB 锁InnoDB 事务InnoDB 备份和恢复InnoDB 性能调优
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/29/Mysql-InnnoDB需要学习那些内容/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -654,121 +627,18 @@ qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value�
       
         
           
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p> <em>Xhprof能用来做什么？</em><br>    XHProf是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情 况。一个函数的开销，可细分成调用者和被调用者的开销。</p>
-<h3 id="Xhprof-安装"><a href="#Xhprof-安装" class="headerlink" title="Xhprof 安装"></a>Xhprof 安装</h3><ul>
-<li><p>Xhprof安装</p>
-<pre><code>wget http://pecl.php.net/get/xhprof-0.9.2.tgz 
-tar xzvf xhprof-0.9.2.tgz 
-cp -r xhprof_html xhprof_lib /usr/local/www/
-cd xhprof-0.9.2/extension/
-/usr/local/php/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config 
-make  
-make install
-</code></pre><p>  修改php.ini，添加xhprof.so （<em>注意xhprof.so需要在extension_dir目录下</em>）</p>
-<pre><code>extension=xhprof.so   
-xhprof.output_dir=/var/logs/xhprof
-</code></pre></li>
-<li><p>如果出现xhprof.lo错误,可能是版本兼容的问题,请更换xhprof的版本执行,下载地址<a href="http://pan.baidu.com/s/1i3OOuDB" title="xhprof" target="_blank" rel="external">xhprof-0.9.4</a>,重新再执行上面操作</p>
-</li>
-<li><p>graphviz安装（<em>性能数据也可以通过callgraph视图来查看 。callgraph 会高亮显示程序的关键路径。</em>）</p>
-<pre><code>wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.24.0.tar.gz
-tar zxf graphviz-2.24.0.tar.gz
-cd graphviz-2.24.0
-编译安装
-./configure
-make
-make install
-</code></pre></li>
-</ul>
-<h3 id="Xhprof-使用"><a href="#Xhprof-使用" class="headerlink" title="Xhprof 使用"></a>Xhprof 使用</h3><ul>
-<li><p>XHProf.class.php（<em>本事例是将xhprof_html xhprof_lib XHProf.class.php demo.php放在同一级目录下面，需要web程序能够访问到</em>）</p>
-<pre><code>&lt;?php
-require_once &apos;xhprof_lib/display/xhprof.php&apos;;
-require_once &apos;xhprof_lib/utils/xhprof_runs.php&apos;;
-class Xhprof {
-
-    public function start(array $ignored_funcs=array()) {
-        xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY, array(&apos;ignored_funcs&apos; =&gt; $ignored_funcs));
-    }
-
-    public function end() {
-        $data = xhprof_disable();
-        return $data;
-    }
-
-    public function createImg($data){
-        $source = &quot;xhprof&quot;;
-        $threshold = 0.01;
-        $type = &quot;png&quot;;
-        $func = &apos;&apos;;
-        $page = &quot;&quot;;
-        $critical_path = true;
-
-        $script = xhprof_generate_dot_script($data, $threshold, $source, $page,
-            $func, $critical_path);
-        $content = xhprof_generate_image_by_dot($script, $type);
-
-        $img_name = uniqid().&quot;.png&quot;;
-        $img_path = &quot;/data1/htdocs/xhprof.com/xhprof_img/&quot;.$img_name;
-        file_put_contents($img_path, $content);
-
-        return &quot;&lt;img src=&apos;http://xhprof.com/xhprof_img/&quot;.$img_name.&quot;&apos;&gt;&lt;img&gt;&quot;;
-    }
-
-    public function getHtml($data) {
-        $xhprof_runs = new \XHProfRuns_Default();
-        $run_id = $xhprof_runs-&gt;save_run($data, &quot;xhprof_foo&quot;);
-
-        return &quot;&lt;a href=\&quot;http://xhprof.com/xhprof_html/index.php?run=$run_id&amp;source=xhprof_foo\&quot; target=\&quot;iframe_a\&quot;&gt;性能分析结果&lt;/a&gt;&quot;;
-    }
-}
-</code></pre></li>
-<li><p>demo.php</p>
-<pre><code>&lt;?php
-ini_set(&apos;display_errors&apos;, 1);
-include &apos;./XHProf.class.php&apos;;
-$objProf = new XHProf();
-
-function foo() {
-    echo &apos;hello world&apos;;
-}
-
-//开启xhprof并开始记录
-$objProf-&gt;start();
-
-//运行一些函数
-foo();
-
-//停止记录并取到结果
-$data = $objProf-&gt;end();
-$img = $objProf-&gt;createImg($data);
-$href = $objProf-&gt;getHtml($data);
-var_dump($img, $href);
-</code></pre></li>
-</ul>
-<h3 id="结果查询"><a href="#结果查询" class="headerlink" title="结果查询"></a>结果查询</h3><pre><code>Function Name 函数名
-Calls 调用次数
-Calls% 调用百分比
-Incl. Wall Time (microsec) 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
-IWall% 调用的包括子函数所有花费时间的百分比
-Excl. Wall Time (microsec) 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒)
-EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间
-Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间
-减Excl. Wall Time即为等待cpu的时间
-ICpu% Incl. CPU(microsecs)的百分比
-Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。
-ECPU% Excl. CPU(microsec)的百分比
-Incl.MemUse(bytes) 包括子函数执行使用的内存。
-IMemUse% Incl.MemUse(bytes)的百分比
-Excl.MemUse(bytes) 函数执行本身内存,以字节算
-EMemUse% Excl.MemUse(bytes)的百分比
-Incl.PeakMemUse(bytes) Incl.MemUse的峰值
-IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比
-Excl.PeakMemUse(bytes) Excl.MemUse的峰值
-EPeakMemUse% EMemUse% 峰值百分比
-</code></pre>
-          
+          简介 Xhprof能用来做什么？    XHProf是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情 况。一个函数的开销，可细分成调用者和被调用者的开销。
+Xhprof 安装
+Xhprof安装
+wget http://pecl.php.net/g
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/28/Xhprof安装与使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -908,19 +778,18 @@ EPeakMemUse% EMemUse% 峰值百分比
       
         
           
-            <h1 id="linux时区及服务器时间调整"><a href="#linux时区及服务器时间调整" class="headerlink" title="linux时区及服务器时间调整"></a>linux时区及服务器时间调整</h1><ul>
-<li>首先使用<code>date</code>查看服务器时间和时区运行结果为<code>2015年 5月21日 星期四 01时43分23秒 CST</code></li>
-<li>如果发现时区不对请进行时区更改（例子为更改为上海时区）<pre><code>vim /etc/sysconfig/clock:
-ZONE=&quot;Asia/Shanghai&quot;
-</code></pre></li>
-<li>删除之前的时区，使用上海时区    <pre><code>rm /etc/localtime
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-</code></pre></li>
-<li>同步时间<pre><code>ntpdate -u asia.pool.ntp.org
-</code></pre></li>
-</ul>
-
-          
+          linux时区及服务器时间调整
+首先使用date查看服务器时间和时区运行结果为2015年 5月21日 星期四 01时43分23秒 CST
+如果发现时区不对请进行时区更改（例子为更改为上海时区）vim /etc/sysconfig/clock:
+ZONE=&quot;Asia/Shanghai&quo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/21/ntp同步linux服务器时间/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1060,29 +929,19 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
       
         
           
-            <h2 id="phptrace安装"><a href="#phptrace安装" class="headerlink" title="phptrace安装"></a>phptrace安装</h2><ul>
-<li>下载<a href="https://pecl.php.net/package/trace" title="phpstrace下载地址" target="_blank" rel="external">phpstrace</a>，上传到服务器</li>
-<li>使用命令<code>tar -zxf phptrace-{version}.tar.gz</code>进行解压（<em>phptrace-{version}.tar.gz就是你压缩包的位置</em>）</li>
-<li><code>cd phptrace-{version}</code>（<em>进入解压后的文件夹</em>）</li>
-<li><code>cd extension</code></li>
-<li><code>{php_bin_dir}/phpize</code>（<em>进入php的安装目录下的/bin/phpize的目录,一般的在/usr/local/php/bin/phpize</em>）</li>
-<li><code>./configure --with-php-config={php_bin_dir}/php-config &amp;&amp; make &amp;&amp; make install</code></li>
-<li>注意查看执行的命令会出现extension_dir这里指的是你的拓展包文件被编译的位置</li>
-<li><code>php -i | grep php.ini</code>查看你的php.ini的位置，进入编辑，添加extension <code>extension=trace.so</code>，需要保证你的so文件的位置和你系统extension默认加载位置一致</li>
-<li><code>cd ../cmdtool &amp;&amp; make</code>（<em>安装一个命令行操作工具，便于使用strace</em>）</li>
-<li>记得重启php-fpm（<em>杀死 <code>killall php-fpm</code> 或者 <code>ps aux | grep php-fpm</code> 找到他们的进程号一个个的<code>kill -9 pid</code> 启动<code>/usr/local/php/bin/php-fpm</code> /usr/local/php是你的php安装目录</em>）</li>
-<li>测试<code>php -r &#39;for ($i = 0; $i &lt; 100; $i++) usleep(10000);&#39; &amp; ./phptrace -p $!</code><br>输出结果为<pre><code>1431681727.341829      usleep  =&gt;  NULL   wt: 0.011979 ct: 0.011980
-1431681727.341847      usleep(10000) at [Command line code:1]
-1431681727.353831      usleep  =&gt;  NULL   wt: 0.011984 ct: 0.011983
-1431681727.353849      usleep(10000) at [Command line code:1]
-1431681727.365829      usleep  =&gt;  NULL   wt: 0.011980 ct: 0.011981
-1431681727.365848      usleep(10000) at [Command line code:1]
-</code></pre></li>
-</ul>
-<h2 id="phptrace使用"><a href="#phptrace使用" class="headerlink" title="phptrace使用"></a>phptrace使用</h2><p>请保持持续关注，正在不断更新中</p>
-<p><a href="https://github.com/Qihoo360/phptrace" title="phptrace github地址" target="_blank" rel="external">参考链接地址</a></p>
-
-          
+          phptrace安装
+下载phpstrace，上传到服务器
+使用命令tar -zxf phptrace-{version}.tar.gz进行解压（phptrace-{version}.tar.gz就是你压缩包的位置）
+cd phptrace-{version}（进入解压后的文件夹）
+cd exten
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/21/phptrace安装与使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
