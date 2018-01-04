@@ -1,0 +1,852 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Other," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="初始化一个git项目git init
+添加文件git add filename
+添加目录git add .
+只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
+查看当前工作区文件提交的状态git status
+git status -s 查看简便信息
+提交文件到本地git commit filename -m &amp;apos;注释&amp;apos;
+删除本地git提交git rm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的使用">
+<meta property="og:url" content="http://www.cxyteam.com/2016/09/02/git的使用/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="初始化一个git项目git init
+添加文件git add filename
+添加目录git add .
+只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
+查看当前工作区文件提交的状态git status
+git status -s 查看简便信息
+提交文件到本地git commit filename -m &amp;apos;注释&amp;apos;
+删除本地git提交git rm">
+<meta property="og:updated_time" content="2016-09-07T11:21:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git的使用">
+<meta name="twitter:description" content="初始化一个git项目git init
+添加文件git add filename
+添加目录git add .
+只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
+查看当前工作区文件提交的状态git status
+git status -s 查看简便信息
+提交文件到本地git commit filename -m &amp;apos;注释&amp;apos;
+删除本地git提交git rm">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> git的使用 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T12:17:48+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初始化一个git项目"><a href="#初始化一个git项目" class="headerlink" title="初始化一个git项目"></a>初始化一个git项目</h1><pre><code>git init
+</code></pre><h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><pre><code>git add filename
+</code></pre><h1 id="添加目录"><a href="#添加目录" class="headerlink" title="添加目录"></a>添加目录</h1><pre><code>git add .
+</code></pre><h1 id="只提交已提交过得文件-不添加新增文件-只添加修改的文件"><a href="#只提交已提交过得文件-不添加新增文件-只添加修改的文件" class="headerlink" title="只提交已提交过得文件(不添加新增文件,只添加修改的文件)"></a>只提交已提交过得文件(不添加新增文件,只添加修改的文件)</h1><pre><code>git add -u
+</code></pre><h1 id="查看当前工作区文件提交的状态"><a href="#查看当前工作区文件提交的状态" class="headerlink" title="查看当前工作区文件提交的状态"></a>查看当前工作区文件提交的状态</h1><pre><code>git status
+git status -s 查看简便信息
+</code></pre><h1 id="提交文件到本地"><a href="#提交文件到本地" class="headerlink" title="提交文件到本地"></a>提交文件到本地</h1><pre><code>git commit filename -m &apos;注释&apos;
+</code></pre><h1 id="删除本地git提交"><a href="#删除本地git提交" class="headerlink" title="删除本地git提交"></a>删除本地git提交</h1><pre><code>git rm --cached .
+</code></pre><h1 id="将文件推送到远程服务器"><a href="#将文件推送到远程服务器" class="headerlink" title="将文件推送到远程服务器"></a>将文件推送到远程服务器</h1><pre><code>git push
+</code></pre><h1 id="将文件从远程拉取回来"><a href="#将文件从远程拉取回来" class="headerlink" title="将文件从远程拉取回来"></a>将文件从远程拉取回来</h1><pre><code>git pull
+</code></pre><h1 id="添加忽略文件"><a href="#添加忽略文件" class="headerlink" title="添加忽略文件"></a>添加忽略文件</h1><pre><code>添加.gitignore到git项目目录
+编辑.gitignore,添加.idea/(此处idea为需要提交时候忽略的文件)
+</code></pre><h1 id="下载远程项目"><a href="#下载远程项目" class="headerlink" title="下载远程项目"></a>下载远程项目</h1><pre><code>git clone git_path
+</code></pre><h1 id="创建裸版本库"><a href="#创建裸版本库" class="headerlink" title="创建裸版本库"></a>创建裸版本库</h1><pre><code>git clone --bare project_name path
+</code></pre><h1 id="查看文件提交记录"><a href="#查看文件提交记录" class="headerlink" title="查看文件提交记录"></a>查看文件提交记录</h1><pre><code>git log filename
+</code></pre><h1 id="查看修改文件差异-只能比较工作区和暂存区信息"><a href="#查看修改文件差异-只能比较工作区和暂存区信息" class="headerlink" title="查看修改文件差异(只能比较工作区和暂存区信息)"></a>查看修改文件差异(只能比较工作区和暂存区信息)</h1><pre><code>git diff file_name
+git diff HEAD
+</code></pre><h1 id="查看提交详细记录"><a href="#查看提交详细记录" class="headerlink" title="查看提交详细记录"></a>查看提交详细记录</h1><pre><code>git show file_name
+</code></pre><h1 id="使用git移动修改文件-修改完之后-文件的日志记录都没了"><a href="#使用git移动修改文件-修改完之后-文件的日志记录都没了" class="headerlink" title="使用git移动修改文件(修改完之后,文件的日志记录都没了)"></a>使用git移动修改文件(修改完之后,文件的日志记录都没了)</h1><pre><code>git mv old_file_name new_file_name
+</code></pre><h1 id="从git中删除"><a href="#从git中删除" class="headerlink" title="从git中删除"></a>从git中删除</h1><pre><code>git rm file_name
+</code></pre><h1 id="删除非git管理文件-也就是没有add到git管理中的"><a href="#删除非git管理文件-也就是没有add到git管理中的" class="headerlink" title="删除非git管理文件(也就是没有add到git管理中的)"></a>删除非git管理文件(也就是没有add到git管理中的)</h1><pre><code>git clean
+</code></pre><h1 id="查看即将被删除的非git管理文件"><a href="#查看即将被删除的非git管理文件" class="headerlink" title="查看即将被删除的非git管理文件"></a>查看即将被删除的非git管理文件</h1><pre><code>git clean -n
+</code></pre><h1 id="删除非git管理文件-包含-gitignore中指定的文件"><a href="#删除非git管理文件-包含-gitignore中指定的文件" class="headerlink" title="删除非git管理文件,包含.gitignore中指定的文件"></a>删除非git管理文件,包含.gitignore中指定的文件</h1><pre><code>git clean -x
+</code></pre><h1 id="强制删除所有的git非管理文件-git-clean需要设置clean-requireForce"><a href="#强制删除所有的git非管理文件-git-clean需要设置clean-requireForce" class="headerlink" title="强制删除所有的git非管理文件(git clean需要设置clean.requireForce)"></a>强制删除所有的git非管理文件(git clean需要设置clean.requireForce)</h1><pre><code>git clean -f
+</code></pre><h1 id="还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源"><a href="#还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源" class="headerlink" title="还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)"></a>还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)</h1><pre><code>git checkout file_name
+</code></pre><h1 id="删除已提交过的文件-把状态从add修改回来-可以使用checkout操作"><a href="#删除已提交过的文件-把状态从add修改回来-可以使用checkout操作" class="headerlink" title="删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)"></a>删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)</h1><pre><code>git reset HEAD file_name
+</code></pre><h1 id="创建一个分支"><a href="#创建一个分支" class="headerlink" title="创建一个分支"></a>创建一个分支</h1><pre><code>git branch dirname
+</code></pre><h1 id="查看存在的分支"><a href="#查看存在的分支" class="headerlink" title="查看存在的分支"></a>查看存在的分支</h1><pre><code>git branch
+git branch -a 查看所有的分支
+</code></pre><h1 id="切换到分支"><a href="#切换到分支" class="headerlink" title="切换到分支"></a>切换到分支</h1><pre><code>git checkout branch_name
+</code></pre><h1 id="在某个版本上创建分支并求换"><a href="#在某个版本上创建分支并求换" class="headerlink" title="在某个版本上创建分支并求换"></a>在某个版本上创建分支并求换</h1><pre><code>git checkout commit_name -b branch_name
+</code></pre><h1 id="切换到主干"><a href="#切换到主干" class="headerlink" title="切换到主干"></a>切换到主干</h1><pre><code>git checkout master
+</code></pre><h1 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h1><pre><code>git merge branch_name
+</code></pre><h1 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h1><pre><code>git branch -d branch_name
+</code></pre><h1 id="强制删除分支"><a href="#强制删除分支" class="headerlink" title="强制删除分支"></a>强制删除分支</h1><pre><code>git branch -D branch_name
+</code></pre><h1 id="查看所有的远程的分支"><a href="#查看所有的远程的分支" class="headerlink" title="查看所有的远程的分支"></a>查看所有的远程的分支</h1><pre><code>git branch -r
+</code></pre><h1 id="重置提交-重置最近三次的提交"><a href="#重置提交-重置最近三次的提交" class="headerlink" title="重置提交(重置最近三次的提交)"></a>重置提交(重置最近三次的提交)</h1><pre><code>git reset --hard HEAD~3
+</code></pre><h1 id="在分支上执行rebase"><a href="#在分支上执行rebase" class="headerlink" title="在分支上执行rebase"></a>在分支上执行rebase</h1><pre><code>git checkout branch_name
+git rebase master
+</code></pre><h1 id="rebase之后修改冲突-再提交"><a href="#rebase之后修改冲突-再提交" class="headerlink" title="rebase之后修改冲突,再提交"></a>rebase之后修改冲突,再提交</h1><pre><code>git add conflict_file
+git rebase --continue
+</code></pre><h1 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h1><pre><code>git tag tag_name
+</code></pre><h1 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h1><pre><code>git tag
+</code></pre><h1 id="显示包含标签资料的历史记录"><a href="#显示包含标签资料的历史记录" class="headerlink" title="显示包含标签资料的历史记录"></a>显示包含标签资料的历史记录</h1><pre><code>git log --decorate
+</code></pre><h1 id="查看git提交的注释"><a href="#查看git提交的注释" class="headerlink" title="查看git提交的注释"></a>查看git提交的注释</h1><pre><code>git log
+</code></pre><h1 id="编辑tag注释"><a href="#编辑tag注释" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -a tag_name
+然后再文件中输入注释
+</code></pre><h1 id="编辑tag注释-1"><a href="#编辑tag注释-1" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -am &quot;注释&quot; tag_name
+</code></pre><h1 id="查看标签的提交记录"><a href="#查看标签的提交记录" class="headerlink" title="查看标签的提交记录"></a>查看标签的提交记录</h1><pre><code>git show tag
+</code></pre><h1 id="查看tag注释"><a href="#查看tag注释" class="headerlink" title="查看tag注释"></a>查看tag注释</h1><pre><code>git tag -n
+</code></pre><h1 id="删除tag"><a href="#删除tag" class="headerlink" title="删除tag"></a>删除tag</h1><pre><code>git tag -d tag_name
+</code></pre><h1 id="合并提交注释"><a href="#合并提交注释" class="headerlink" title="合并提交注释"></a>合并提交注释</h1><pre><code>git commit --amend
+进入编辑器,然后进行注释修改(使用git log进行提交注释查看)
+</code></pre><h1 id="取消上一次提交"><a href="#取消上一次提交" class="headerlink" title="取消上一次提交"></a>取消上一次提交</h1><pre><code>git revert HEAD
+</code></pre><h1 id="删除最近提交"><a href="#删除最近提交" class="headerlink" title="删除最近提交"></a>删除最近提交</h1><pre><code>git reset --hart HEAD~~
+</code></pre><h1 id="查看远程git地址"><a href="#查看远程git地址" class="headerlink" title="查看远程git地址"></a>查看远程git地址</h1><pre><code>git remote -v
+</code></pre><h1 id="查看git配置项"><a href="#查看git配置项" class="headerlink" title="查看git配置项"></a>查看git配置项</h1><pre><code>git config --list
+</code></pre><h1 id="编辑git配置"><a href="#编辑git配置" class="headerlink" title="编辑git配置"></a>编辑git配置</h1><pre><code>git config -e
+</code></pre><h1 id="保存本地工作进度"><a href="#保存本地工作进度" class="headerlink" title="保存本地工作进度"></a>保存本地工作进度</h1><pre><code>git stash
+</code></pre><h1 id="查看保存的快照"><a href="#查看保存的快照" class="headerlink" title="查看保存的快照"></a>查看保存的快照</h1><pre><code>git stash list
+</code></pre><h1 id="恢复stash中的内容到工作区"><a href="#恢复stash中的内容到工作区" class="headerlink" title="恢复stash中的内容到工作区"></a>恢复stash中的内容到工作区</h1><pre><code>git stash pop
+</code></pre><h1 id="恢复缓冲区内容"><a href="#恢复缓冲区内容" class="headerlink" title="恢复缓冲区内容"></a>恢复缓冲区内容</h1><pre><code>git stash apply stash_name
+</code></pre><h1 id="删除缓冲区中的内容"><a href="#删除缓冲区中的内容" class="headerlink" title="删除缓冲区中的内容"></a>删除缓冲区中的内容</h1><pre><code>git clear
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag">#Other</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/15/C语言高级函数使用/" rel="next" title="C语言高级函数使用">
+                <i class="fa fa-chevron-left"></i> C语言高级函数使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/09/代码设计/" rel="prev" title="代码设计">
+                代码设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化一个git项目"><span class="nav-number">1.</span> <span class="nav-text">初始化一个git项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加文件"><span class="nav-number">2.</span> <span class="nav-text">添加文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加目录"><span class="nav-number">3.</span> <span class="nav-text">添加目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#只提交已提交过得文件-不添加新增文件-只添加修改的文件"><span class="nav-number">4.</span> <span class="nav-text">只提交已提交过得文件(不添加新增文件,只添加修改的文件)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看当前工作区文件提交的状态"><span class="nav-number">5.</span> <span class="nav-text">查看当前工作区文件提交的状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交文件到本地"><span class="nav-number">6.</span> <span class="nav-text">提交文件到本地</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除本地git提交"><span class="nav-number">7.</span> <span class="nav-text">删除本地git提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将文件推送到远程服务器"><span class="nav-number">8.</span> <span class="nav-text">将文件推送到远程服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将文件从远程拉取回来"><span class="nav-number">9.</span> <span class="nav-text">将文件从远程拉取回来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加忽略文件"><span class="nav-number">10.</span> <span class="nav-text">添加忽略文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载远程项目"><span class="nav-number">11.</span> <span class="nav-text">下载远程项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建裸版本库"><span class="nav-number">12.</span> <span class="nav-text">创建裸版本库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看文件提交记录"><span class="nav-number">13.</span> <span class="nav-text">查看文件提交记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看修改文件差异-只能比较工作区和暂存区信息"><span class="nav-number">14.</span> <span class="nav-text">查看修改文件差异(只能比较工作区和暂存区信息)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看提交详细记录"><span class="nav-number">15.</span> <span class="nav-text">查看提交详细记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用git移动修改文件-修改完之后-文件的日志记录都没了"><span class="nav-number">16.</span> <span class="nav-text">使用git移动修改文件(修改完之后,文件的日志记录都没了)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从git中删除"><span class="nav-number">17.</span> <span class="nav-text">从git中删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除非git管理文件-也就是没有add到git管理中的"><span class="nav-number">18.</span> <span class="nav-text">删除非git管理文件(也就是没有add到git管理中的)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看即将被删除的非git管理文件"><span class="nav-number">19.</span> <span class="nav-text">查看即将被删除的非git管理文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除非git管理文件-包含-gitignore中指定的文件"><span class="nav-number">20.</span> <span class="nav-text">删除非git管理文件,包含.gitignore中指定的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强制删除所有的git非管理文件-git-clean需要设置clean-requireForce"><span class="nav-number">21.</span> <span class="nav-text">强制删除所有的git非管理文件(git clean需要设置clean.requireForce)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源"><span class="nav-number">22.</span> <span class="nav-text">还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除已提交过的文件-把状态从add修改回来-可以使用checkout操作"><span class="nav-number">23.</span> <span class="nav-text">删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个分支"><span class="nav-number">24.</span> <span class="nav-text">创建一个分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看存在的分支"><span class="nav-number">25.</span> <span class="nav-text">查看存在的分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换到分支"><span class="nav-number">26.</span> <span class="nav-text">切换到分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在某个版本上创建分支并求换"><span class="nav-number">27.</span> <span class="nav-text">在某个版本上创建分支并求换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换到主干"><span class="nav-number">28.</span> <span class="nav-text">切换到主干</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并分支"><span class="nav-number">29.</span> <span class="nav-text">合并分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除分支"><span class="nav-number">30.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强制删除分支"><span class="nav-number">31.</span> <span class="nav-text">强制删除分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看所有的远程的分支"><span class="nav-number">32.</span> <span class="nav-text">查看所有的远程的分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重置提交-重置最近三次的提交"><span class="nav-number">33.</span> <span class="nav-text">重置提交(重置最近三次的提交)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在分支上执行rebase"><span class="nav-number">34.</span> <span class="nav-text">在分支上执行rebase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rebase之后修改冲突-再提交"><span class="nav-number">35.</span> <span class="nav-text">rebase之后修改冲突,再提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加标签"><span class="nav-number">36.</span> <span class="nav-text">添加标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看标签"><span class="nav-number">37.</span> <span class="nav-text">查看标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示包含标签资料的历史记录"><span class="nav-number">38.</span> <span class="nav-text">显示包含标签资料的历史记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看git提交的注释"><span class="nav-number">39.</span> <span class="nav-text">查看git提交的注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编辑tag注释"><span class="nav-number">40.</span> <span class="nav-text">编辑tag注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编辑tag注释-1"><span class="nav-number">41.</span> <span class="nav-text">编辑tag注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看标签的提交记录"><span class="nav-number">42.</span> <span class="nav-text">查看标签的提交记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看tag注释"><span class="nav-number">43.</span> <span class="nav-text">查看tag注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除tag"><span class="nav-number">44.</span> <span class="nav-text">删除tag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并提交注释"><span class="nav-number">45.</span> <span class="nav-text">合并提交注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取消上一次提交"><span class="nav-number">46.</span> <span class="nav-text">取消上一次提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除最近提交"><span class="nav-number">47.</span> <span class="nav-text">删除最近提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看远程git地址"><span class="nav-number">48.</span> <span class="nav-text">查看远程git地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看git配置项"><span class="nav-number">49.</span> <span class="nav-text">查看git配置项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编辑git配置"><span class="nav-number">50.</span> <span class="nav-text">编辑git配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存本地工作进度"><span class="nav-number">51.</span> <span class="nav-text">保存本地工作进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看保存的快照"><span class="nav-number">52.</span> <span class="nav-text">查看保存的快照</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#恢复stash中的内容到工作区"><span class="nav-number">53.</span> <span class="nav-text">恢复stash中的内容到工作区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#恢复缓冲区内容"><span class="nav-number">54.</span> <span class="nav-text">恢复缓冲区内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除缓冲区中的内容"><span class="nav-number">55.</span> <span class="nav-text">删除缓冲区中的内容</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

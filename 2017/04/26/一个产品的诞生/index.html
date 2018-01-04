@@ -1,0 +1,936 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Other," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="背景介绍此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码
+项目起源在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知找出痛点这是我们进入的第一个阶段，我们需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个产品的诞生">
+<meta property="og:url" content="http://www.cxyteam.com/2017/04/26/一个产品的诞生/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="背景介绍此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码
+项目起源在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知找出痛点这是我们进入的第一个阶段，我们需要">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/jieduan.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/tongdian.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/process1.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/youli.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/shangwu.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/chudian.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/yunying.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/xuqiu.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/chuqi.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/process_all_1.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/process_all_2.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/bad_face.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/good_face.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/code.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/zfeasyloan/plan.png">
+<meta property="og:updated_time" content="2017-04-27T04:01:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个产品的诞生">
+<meta name="twitter:description" content="背景介绍此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码
+项目起源在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知找出痛点这是我们进入的第一个阶段，我们需要">
+<meta name="twitter:image" content="http://www.cxyteam.com/img/zfeasyloan/jieduan.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 一个产品的诞生 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个产品的诞生
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-26T17:11:55+08:00" content="2017-04-26">
+              2017-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><h5 id="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"><a href="#此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码" class="headerlink" title="此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"></a>此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码</h5><p><img src="/img/zfeasyloan/jieduan.png" alt="Alt text" title="历经阶段"></p>
+<h1 id="项目起源"><a href="#项目起源" class="headerlink" title="项目起源"></a>项目起源</h1><h5 id="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"><a href="#在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知" class="headerlink" title="在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"></a>在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知</h5><h1 id="找出痛点"><a href="#找出痛点" class="headerlink" title="找出痛点"></a>找出痛点</h1><h5 id="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："><a href="#这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：" class="headerlink" title="这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："></a>这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：</h5><p><img src="/img/zfeasyloan/tongdian.png" alt="Alt text" title="找出痛点的阶段"></p>
+<h3 id="贴近用户"><a href="#贴近用户" class="headerlink" title="贴近用户"></a>贴近用户</h3><ol>
+<li><p>向前线索要情报</p>
+<ul>
+<li>夜一提供助贷流程图</li>
+<li>索隆提供培训资料<br><img src="/img/zfeasyloan/process1.png" alt="Alt text" title="助贷流程">    </li>
+</ul>
+</li>
+<li><p>参与战斗</p>
+<ul>
+<li>跟商务线下跑触点，谈合作</li>
+<li>和运营去和用户面聊，参与整个跟单（由于调研期间没有订单，所以更多的是询问有跟单经验的小伙伴）</li>
+</ul>
+</li>
+</ol>
+<h3 id="访谈用户"><a href="#访谈用户" class="headerlink" title="访谈用户"></a>访谈用户</h3><ol>
+<li><p>制作MRD</p>
+<ul>
+<li>进行市场调研，参加商务的早晚效率（由于团队成员中阿葵亚对运营很了解，所以重心点放在商务）</li>
+<li>驻扎前线，反馈信息（阿葵亚驻扎深圳战场），最终出具MRD文档，用户画像，行业报告<br><img src="/img/zfeasyloan/youli.png" alt="Alt text" title="MRD文档要点-尤里，空波提供">   </li>
+</ul>
+</li>
+<li><p>准备调查问卷</p>
+<ul>
+<li>获取到的信息的疑惑点，想要了解的信息以问卷的方式进行调查（这一步最终没做）</li>
+<li>问题需要具备非开放式，尽量设置成是或者否的方式</li>
+<li>问问题方式不具备引导性</li>
+</ul>
+</li>
+<li><p>进行竞品分析</p>
+<ul>
+<li>快鸽</li>
+<li>按揭帮</li>
+<li>数据项，数据名称，数据排版的理由</li>
+<li>理解对方的业务流程</li>
+<li>思考为什么会有这个功能点</li>
+<li>服务的对象，产品的定位</li>
+</ul>
+</li>
+</ol>
+<h3 id="成为用户"><a href="#成为用户" class="headerlink" title="成为用户"></a>成为用户</h3><ol>
+<li>把自己当做自己的用户实际的去思考，我在工作的时候什么状态是不满的</li>
+<li>以下是我在当时状态下了解到各个角色的工作内容以后，把自己当做该角色提出的疑惑点<br><img src="/img/zfeasyloan/shangwu.png" alt="Alt text" title="我是商务"><br><img src="/img/zfeasyloan/chudian.png" alt="Alt text" title="我是触点"><br><img src="/img/zfeasyloan/yunying.png" alt="Alt text" title="我是运营"> </li>
+</ol>
+<h3 id="这一阶段的产出，了解到需要解决的痛点"><a href="#这一阶段的产出，了解到需要解决的痛点" class="headerlink" title="这一阶段的产出，了解到需要解决的痛点"></a>这一阶段的产出，了解到需要解决的痛点</h3><ol>
+<li>内部：商务和运营同步信息</li>
+<li>外部：用户和触点及时看到信息</li>
+</ol>
+<h1 id="缕清需求"><a href="#缕清需求" class="headerlink" title="缕清需求"></a>缕清需求</h1><h5 id="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："><a href="#在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：" class="headerlink" title="在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："></a>在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：</h5><p><img src="/img/zfeasyloan/xuqiu.png" alt="Alt text" title="缕清阶段"></p>
+<h3 id="制定use-case"><a href="#制定use-case" class="headerlink" title="制定use case"></a>制定use case</h3><ol>
+<li>找出报单到最后反润中的整个流程的场景，分离出来</li>
+</ol>
+<ul>
+<li>反思：在这个过程，没有进行场景划分，导致我把很多调研的小块小块的需求堆积在一起，没有主次之分，也没办法串联各个小块的需求<br>初期我的原型图是这样的(看目录就能看出来很乱)：<br><img src="/img/zfeasyloan/chuqi.png" alt="Alt text" title="混乱的原型"></li>
+</ul>
+<ol>
+<li>按实际的use case为路径，串联参与的角色需要做的事，梳理出整个系统应具备的功能</li>
+</ol>
+<ul>
+<li>反思：在这个过程中，我是按照各个角色去梳理他们需要参与的事情，导致会缺少部分功能</li>
+</ul>
+<ol>
+<li>永远只给用户一种方案做一件事情，当你自己都拿不准方案的时候，用户一定比你更懵</li>
+</ol>
+<ul>
+<li>反思：在触点注册的时候，由于对需求的把握不准，提供了两种方案：一种是商务注册，一种是触点注册</li>
+</ul>
+<h3 id="美化PRD"><a href="#美化PRD" class="headerlink" title="美化PRD"></a>美化PRD</h3><ol>
+<li>如何使用Axure（找无所不能的产品经理教你吧，或许下次会有简单的教程）</li>
+<li>判断整个保留下来的use case是否保证闭环了，比如说你有商务在进行操作，但是商务的角色在哪产生都没去想，这就是明显的错误了</li>
+<li>按照use case画出各个参与方的整体流程图</li>
+</ol>
+<ul>
+<li>反思：在做这个的时候，我是直接在各个页面之间加了点击事件，企图模拟出整个流程，你可以想象一下，当我给大家在将我的流程的时候，我不断的在页面间切换来切换去，别人不断问你这个是谁的页面的时候的想死的心情，废话不多说，贴出整体的页面流程图：<br><img src="/img/zfeasyloan/process_all_1.png" alt="Alt text" title="整体的页面切换原型"><br><img src="/img/zfeasyloan/process_all_2.png" alt="Alt text" title="整体的流程"></li>
+</ul>
+<ol>
+<li>细化每个小页面的图</li>
+<li>参考竞品，按最优的方式展示，包括页面元素，最重要的是字段展示顺序</li>
+<li>注重小细节，用户操作习惯，比如说如果是订单显示，这个时候，用户有疑问，能否在页尾就找到负责人电话</li>
+</ol>
+<ul>
+<li>反思：对于这几个点个人建议还是交给专业的人，让我们万能的产品来做吧，毕竟这些东西不是一蹴而就的，当然如果你够强，那我也不拦你</li>
+<li>没有对比就没有伤害，看看下面两幅图<br><img src="/img/zfeasyloan/bad_face.png" alt="Alt text" title="我做的"><br><img src="/img/zfeasyloan/good_face.png" alt="Alt text" title="不知道谁做的"></li>
+</ul>
+<h3 id="出UI图"><a href="#出UI图" class="headerlink" title="出UI图"></a>出UI图</h3><ol>
+<li>可以提前做一些颜色基调的设计，基础元素的设计，比如按钮，导航等</li>
+<li>有类似logo之类的设计，可以并行做</li>
+<li>尽快把PRD敲定</li>
+</ol>
+<ul>
+<li>反思：由于对设计师工作的不太了解，没能提前的让设计参与进来，尤其是logo图，到了临了才发现原来还有logo没做</li>
+</ul>
+<h1 id="写出代码"><a href="#写出代码" class="headerlink" title="写出代码"></a>写出代码</h1><h5 id="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："><a href="#作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：" class="headerlink" title="作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："></a>作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：</h5><p><img src="/img/zfeasyloan/code.png" alt="Alt text" title="写出代码"></p>
+<h3 id="做出计划"><a href="#做出计划" class="headerlink" title="做出计划"></a>做出计划</h3><ol>
+<li>按照倒推的方式进行时间规划（deadline摆在那）</li>
+</ol>
+<ul>
+<li>从后往前推，上线需要多长时间部署，测试需要多长时间，联调需要多长时间，那么剩下的就是开发时间了，不够？那就从别的地方挤时间吧</li>
+</ul>
+<ol>
+<li>划分出所有能够并行的任务</li>
+</ol>
+<ul>
+<li>比如微信公众号认证，模板消息申请，域名，线上环境部署，前后端分离开发…</li>
+</ul>
+<ol>
+<li>制定好时间节点后，同步让大家知道，留下邮件</li>
+</ol>
+<ul>
+<li>定好没个时间节点应出的东西，然后小组达成一致，最后再邮件通知大家</li>
+<li>反思：在这个过程中，定好了时间节点，在实施的时候，有的东西未能到位，比如说：10号截止需求的变更，理论上是需要在10号的时候，所有的东西都定下来，然后再12号才拿到设计好的ui图；最终没能邮件通知到大家，只是过了一个会，这个相当于是一个承诺式的工作方式，过会后，需要把结论发送邮件给大家，避免大家忘记各个时间节点或者有部分突然的变更</li>
+</ul>
+<ol>
+<li>反馈进度</li>
+</ol>
+<ul>
+<li>这个当然不用说，实时的反馈进度，让整个小组，关心这个项目的人员清楚，现在我们在哪一个阶段，需要什么帮助，有什么风险点</li>
+<li>反思：在这个阶段是做的最不好的，项目进入开发的时候，就相当于进入黑盒了，知道最后上完线，大家才恍然大悟，原来上线了；给自己找几个小借口，项目时间太紧了，可能反馈进度，需要花费时间，所以偷懒了；其次，项目功能不太多，没法进行阶段性反馈（其实都是借口，哪怕花一分钟的时间，大概说下做完哪些了，大家心里也有数）</li>
+</ul>
+<h3 id="并行开发"><a href="#并行开发" class="headerlink" title="并行开发"></a>并行开发</h3><ol>
+<li>并行并不是说各自开发各自的，到联调的时候再进行沟通，需要时刻保持沟通</li>
+</ol>
+<ul>
+<li>比如说在开发的时候，遇到多种角色如何传递角色id的情况，页面判断如何做，及时的沟通，达到一致后，再开始干活</li>
+<li>这块做的其实还不错，鼓励下自己，可能是前端是合作的老伙伴了，得心应手</li>
+</ul>
+<ol>
+<li>规范好接口，写好接口文档，能够减少很多沟通成本</li>
+</ol>
+<ul>
+<li>接口做好规范，命名，数据返回格式（看着设计图来，尽量把格式都转换好），避免前端关键字，比如分页时候的length，返回的时候读返回json数组，一会对象一会数组，还是很容易抓狂的，该get就get该post就post（get，post区别不知道？google去吧）</li>
+<li>必要的接口文档，至少得说明：接口地址是什么，上送值是什么，返回数据的含义</li>
+<li>这块也做的不错，接口文档，返回数据格式各方面能想到的还是去做好了，虽然最后接口字段可能不断地在变，这也不可避免</li>
+</ul>
+<h3 id="测试上线"><a href="#测试上线" class="headerlink" title="测试上线"></a>测试上线</h3><ol>
+<li>执行use case</li>
+</ol>
+<ul>
+<li>这个比较简单，直接按照PRD走正常流程就行，一般都没问题，开发就是按照这个流程做的</li>
+</ul>
+<ol>
+<li>执行异常逻辑</li>
+</ol>
+<ul>
+<li>特殊的场景，比如注册了，没完善信息报单会如何，注册了，商务未登录过消息怎么发送</li>
+<li>这块没有去专门的列所有的场景然后进行测试，而是发动了群众的力量进行测试（测试完之后内心还是忐忑的）</li>
+</ul>
+<h1 id="最初的计划"><a href="#最初的计划" class="headerlink" title="最初的计划"></a>最初的计划</h1><h3 id="最后晒一个设想的开发计划，自己感受下"><a href="#最后晒一个设想的开发计划，自己感受下" class="headerlink" title="最后晒一个设想的开发计划，自己感受下"></a>最后晒一个设想的开发计划，自己感受下</h3><h6 id="友情提示，记得和第一张图对比着看，理想和现实的差距"><a href="#友情提示，记得和第一张图对比着看，理想和现实的差距" class="headerlink" title="友情提示，记得和第一张图对比着看，理想和现实的差距"></a>友情提示，记得和第一张图对比着看，理想和现实的差距</h6><p><img src="/img/zfeasyloan/plan.png" alt="Alt text" title="初期计划"></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag">#Other</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/18/go命令/" rel="next" title="go命令">
+                <i class="fa fa-chevron-left"></i> go命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/08/编译reids的sds文件/" rel="prev" title="编译reids的sds文件">
+                编译reids的sds文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景介绍"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目起源"><span class="nav-number">2.</span> <span class="nav-text">项目起源</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至于需要什么信息，有什么功能，做成什么样子，这些内容一概不知</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#找出痛点"><span class="nav-number">3.</span> <span class="nav-text">找出痛点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">这是我们进入的第一个阶段，我们需要知道：我们的服务用户是谁，我们的用户需要什么样的东西，我们的产品需要解决什么问题，为了解答这几个问题，我们做了如下事情：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贴近用户"><span class="nav-number">3.0.1.</span> <span class="nav-text">贴近用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访谈用户"><span class="nav-number">3.0.2.</span> <span class="nav-text">访谈用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成为用户"><span class="nav-number">3.0.3.</span> <span class="nav-text">成为用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这一阶段的产出，了解到需要解决的痛点"><span class="nav-number">3.0.4.</span> <span class="nav-text">这一阶段的产出，了解到需要解决的痛点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缕清需求"><span class="nav-number">4.</span> <span class="nav-text">缕清需求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下："><span class="nav-number">4.0.0.0.1.</span> <span class="nav-text">在找出痛点阶段，对于我们的触点，商务，运营的工作内容及触点的工作内容及痛点都具备了一定的理解，每个人都自己的一些想法，我们小组成员需要把自己的想法画出来，进行交叉认证，然后达到一致，再往后续的落地走，保证大家方向无偏差，大概过程如下：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制定use-case"><span class="nav-number">4.0.1.</span> <span class="nav-text">制定use case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#美化PRD"><span class="nav-number">4.0.2.</span> <span class="nav-text">美化PRD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出UI图"><span class="nav-number">4.0.3.</span> <span class="nav-text">出UI图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写出代码"><span class="nav-number">5.</span> <span class="nav-text">写出代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下："><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">作为技术，这是我们最熟悉的一个战场，任务虽然圆满完成了，然而还是有很多不足，大概过程如下：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做出计划"><span class="nav-number">5.0.1.</span> <span class="nav-text">做出计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行开发"><span class="nav-number">5.0.2.</span> <span class="nav-text">并行开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试上线"><span class="nav-number">5.0.3.</span> <span class="nav-text">测试上线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最初的计划"><span class="nav-number">6.</span> <span class="nav-text">最初的计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最后晒一个设想的开发计划，自己感受下"><span class="nav-number">6.0.1.</span> <span class="nav-text">最后晒一个设想的开发计划，自己感受下</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#友情提示，记得和第一张图对比着看，理想和现实的差距"><span class="nav-number">6.0.1.0.0.1.</span> <span class="nav-text">友情提示，记得和第一张图对比着看，理想和现实的差距</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

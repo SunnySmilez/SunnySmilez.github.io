@@ -1,0 +1,976 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="指针存储器中某条数据的地址(用于保存存储器地址的变量)
+目的避免副本
+共享数据
+存储器计算机系统中的记忆设备，用来存放程序和数据
+它分为(低位到高位):
+    代码块
+        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
+
+    常量段
+        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
+
+    全局量
+        定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C的存储器和指针">
+<meta property="og:url" content="http://www.cxyteam.com/2016/07/18/C的存储器和指针/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="指针存储器中某条数据的地址(用于保存存储器地址的变量)
+目的避免副本
+共享数据
+存储器计算机系统中的记忆设备，用来存放程序和数据
+它分为(低位到高位):
+    代码块
+        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
+
+    常量段
+        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
+
+    全局量
+        定义">
+<meta property="og:updated_time" content="2016-11-05T08:59:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C的存储器和指针">
+<meta name="twitter:description" content="指针存储器中某条数据的地址(用于保存存储器地址的变量)
+目的避免副本
+共享数据
+存储器计算机系统中的记忆设备，用来存放程序和数据
+它分为(低位到高位):
+    代码块
+        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
+
+    常量段
+        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
+
+    全局量
+        定义">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> C的存储器和指针 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C的存储器和指针
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T13:23:04+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><pre><code>存储器中某条数据的地址(用于保存存储器地址的变量)
+</code></pre><h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><pre><code>避免副本
+共享数据
+</code></pre><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><pre><code>计算机系统中的记忆设备，用来存放程序和数据
+它分为(低位到高位):
+    代码块
+        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
+
+    常量段
+        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
+
+    全局量
+        定义在函数之外,对所有函数可见。程序一开始运行就会创建全局量,可以修改他们
+
+    堆
+        用于动态存储:程序在运行时创建一些数据,然后使用很长一段时间
+
+    栈
+        存储器用来保存局部变量的部分。每当调用函数,函数的所有局部变量都在栈上创建。它之所有叫栈是 因为它看起来就像堆积而成的栈板:当进入函数时,变量会放到栈顶;当离开函数时,把变量从栈顶拿走。它从存储器的顶部开始,向下增长。
+</code></pre><h1 id="如何找出变量在存储器中的指针-使用-amp-运算符"><a href="#如何找出变量在存储器中的指针-使用-amp-运算符" class="headerlink" title="如何找出变量在存储器中的指针(使用&amp;运算符)"></a>如何找出变量在存储器中的指针(使用&amp;运算符)</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int point = 4;
+    /*
+        %p用于打印指针
+    */
+    printf(&quot;point的指针位置是:%p\n&quot;, &amp;point);
+    return 0;
+}
+</code></pre><h1 id="如何读取指针中的内容-使用-运算符"><a href="#如何读取指针中的内容-使用-运算符" class="headerlink" title="如何读取指针中的内容(使用*运算符)"></a>如何读取指针中的内容(使用*运算符)</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int  c = 10;
+    /*
+        获取变量c的指针地址 &amp;运算符
+        注意需要用int *申明指针变量
+    */
+    int *point = &amp;c;
+    /*
+        获取指针地址对应的值 *运算符
+    */
+    int val = *point;
+    printf(&quot;指针是%p\n&quot;, &amp;c);
+    printf(&quot;指针对应的值是%d\n&quot;, val);
+}
+</code></pre><h1 id="改变地址中的内容"><a href="#改变地址中的内容" class="headerlink" title="改变地址中的内容"></a>改变地址中的内容</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int c = 10;
+    int *point = &amp;c;
+    int val = *point;
+    *point = 99;
+    printf(&quot;改变后的c的值为%d&quot;, c);
+}
+</code></pre><h1 id="数组和函数中的指针变量"><a href="#数组和函数中的指针变量" class="headerlink" title="数组和函数中的指针变量"></a>数组和函数中的指针变量</h1><pre><code>#include &lt;stdio.h&gt;
+
+void size(char str[])
+{
+    printf(&quot;传入的字符串是%s\n&quot;, str);
+
+    /*
+        如果函数参数申明为数组类型,他会被当做指针处理,因此sizeof得到的值是8(64为系统,sizeof(* int))
+    */
+    printf(&quot;字符串的长度是:%i\n&quot;, sizeof(str));
+    char str_size[] = &quot;this is demo&quot;;
+    char * point = *str_size;
+
+    /*
+        sizeof直接传入数组依然计算的是数组的长度
+    */
+    printf(&quot;数组变量的长度是:%i\n&quot;, sizeof(str_size));
+
+    printf(&quot;数组变量指针的长度是:%i\n&quot;, sizeof(point));
+
+    /*
+        数组变量可以用作指针
+    */
+    printf(&quot;数组的变量的地址是:%s\n&quot;, &amp;str_size);
+
+    /*
+        数组变量指向数组的第一个值
+    */
+    printf(&quot;数组指针变量的地址是:%s\n&quot;, &amp;point);
+    *point = &quot;test&quot;;
+
+    /*
+        编译不能通过,数组变量不能指向其他地方
+    */
+    printf(&quot;指针变量被赋值了吗?%s\n&quot;, point);
+}
+
+
+int main()
+{
+    size(&quot;test&quot;);
+}
+</code></pre><h1 id="为什么数组变量不能指向其他地方"><a href="#为什么数组变量不能指向其他地方" class="headerlink" title="为什么数组变量不能指向其他地方?"></a>为什么数组变量不能指向其他地方?</h1><pre><code>当创建指针变量时,计算机会分配4或8个字节的存储空间。如果创建的是数组,计算机会为数组分配存储空间,但不会为数组变量分配任何空间,编译器仅在出现它的地方把它替换成数组的起始地址
+</code></pre><h1 id="对于数组取值的两种方式"><a href="#对于数组取值的两种方式" class="headerlink" title="对于数组取值的两种方式"></a>对于数组取值的两种方式</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[] = &quot;this is arr&quot;;
+    printf(&quot;看看结果%c\n&quot;, str[3]);
+    printf(&quot;另外一种方式看看结果%c\n&quot;, *(str+3));
+
+    int nums[] = {1,2,3};
+    printf(&quot;看看结果%i\n&quot;, nums[2]);
+    printf(&quot;另外一种方式看看结果%i\n&quot;, *(nums+2));
+    return 0;
+}
+
+1.arr[i]
+2.*(arr+i)
+</code></pre><h1 id="指针为什么需要有类型"><a href="#指针为什么需要有类型" class="headerlink" title="指针为什么需要有类型?"></a>指针为什么需要有类型?</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int nums[] = {1,2,3};
+
+    /*
+        两个地址相隔四个字节(注意是16进制)
+    */
+    printf(&quot;看看第一个元素的位置%p\n&quot;, nums);
+    printf(&quot;看看第二个元素的位置%p\n&quot;, nums+1);
+    return 0;
+}
+因为对于char指针加1,指针会指向存储器的下一个地址,因为char就占1字节
+int通常占四个字节,如果int指针加1,编译后的代码就会对存储器加4
+</code></pre><h1 id="指针输入数据"><a href="#指针输入数据" class="headerlink" title="指针输入数据"></a>指针输入数据</h1><pre><code>scanf
+fgets
+</code></pre><h1 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h1><pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    /*
+        输入字符串
+    */
+    char test[20];
+    scanf(&quot;%19s&quot;, test);
+    printf(&quot;输入的字符串为:%s\n&quot;, test);
+
+    /*
+        输入数字
+    */
+    int t;
+    scanf(&quot;%i&quot;, &amp;t);
+    printf(&quot;输入的数字是%i\n&quot;, t);
+}
+
+为什么数组传入变量名就可以,数字需要传&apos;&amp;&apos;呢?
+scanf和函数一样,传入数组的变量名会当做指针使用,它会根据指针去修改对应的值
+
+为什么scanf的时候需要指定&apos;%19s&apos;?
+如果不指定scanf读取的长度,当用户输入的值超过test数组的长度的时候会导致内存溢出。因此一般指定scanf的长度为test长度减1(去掉一个结束字符&apos;\0&apos;)
+</code></pre><h1 id="fgets"><a href="#fgets" class="headerlink" title="fgets"></a>fgets</h1><pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    char str[4];
+    /*
+        此处需要注意的是str是数组变量,所以传入的是str不是* str
+    */
+    fgets(str, sizeof(str), stdin);
+    printf(&quot;输入的字符为%s\n&quot;, str);
+}
+</code></pre><h1 id="scanf和fgets"><a href="#scanf和fgets" class="headerlink" title="scanf和fgets"></a>scanf和fgets</h1><pre><code>1.scanf记得在格式串中加入限制长度,sacnf就能限制用户输入长度(没有强制要求),并且输入的字符长度需要减去结束符的长度,fgets强制限制用户输入字符数
+2.scanf允许输入多个字段,而且能指定结构化数据根据什么字符划分。fgets只允许缓冲区输入一个字符串,而且只能是字符串,不能是其他数据类型
+3.sanf不能输入空格,遇到空格就会停止读取。fget可以输入空格
+</code></pre><h1 id="字符串创建的过程"><a href="#字符串创建的过程" class="headerlink" title="字符串创建的过程"></a>字符串创建的过程</h1><pre><code>1.载入字符串字面值(也就是在常量(只读)中定义字面值)
+2.在栈上新建一个数组,主要会分配数组的存储块大小
+3.初始化数组,把字符串字面值复制到栈(可修改)上
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/14/C语言语句/" rel="next" title="C语言语句">
+                <i class="fa fa-chevron-left"></i> C语言语句
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/20/C语言标准库/" rel="prev" title="C语言标准库">
+                C语言标准库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">2.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器"><span class="nav-number">3.</span> <span class="nav-text">存储器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何找出变量在存储器中的指针-使用-amp-运算符"><span class="nav-number">4.</span> <span class="nav-text">如何找出变量在存储器中的指针(使用&运算符)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何读取指针中的内容-使用-运算符"><span class="nav-number">5.</span> <span class="nav-text">如何读取指针中的内容(使用*运算符)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改变地址中的内容"><span class="nav-number">6.</span> <span class="nav-text">改变地址中的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组和函数中的指针变量"><span class="nav-number">7.</span> <span class="nav-text">数组和函数中的指针变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么数组变量不能指向其他地方"><span class="nav-number">8.</span> <span class="nav-text">为什么数组变量不能指向其他地方?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对于数组取值的两种方式"><span class="nav-number">9.</span> <span class="nav-text">对于数组取值的两种方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针为什么需要有类型"><span class="nav-number">10.</span> <span class="nav-text">指针为什么需要有类型?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针输入数据"><span class="nav-number">11.</span> <span class="nav-text">指针输入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scanf"><span class="nav-number">12.</span> <span class="nav-text">scanf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fgets"><span class="nav-number">13.</span> <span class="nav-text">fgets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scanf和fgets"><span class="nav-number">14.</span> <span class="nav-text">scanf和fgets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串创建的过程"><span class="nav-number">15.</span> <span class="nav-text">字符串创建的过程</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

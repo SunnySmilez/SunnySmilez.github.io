@@ -1,0 +1,961 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="为什么要使用声明与定义分离,它解决了什么问题1.代码顺序的问题
+    #include &amp;lt;stdio.h&amp;gt;
+        /*
+            由于函数定义顺序产生的一个编译的错误
+        */
+        int main()
+        {
+            demo();
+
+            return 0;
+        }">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言声明与定义分离">
+<meta property="og:url" content="http://www.cxyteam.com/2016/07/24/C语言使用多个源文件/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="为什么要使用声明与定义分离,它解决了什么问题1.代码顺序的问题
+    #include &amp;lt;stdio.h&amp;gt;
+        /*
+            由于函数定义顺序产生的一个编译的错误
+        */
+        int main()
+        {
+            demo();
+
+            return 0;
+        }">
+<meta property="og:updated_time" content="2016-09-11T08:48:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言声明与定义分离">
+<meta name="twitter:description" content="为什么要使用声明与定义分离,它解决了什么问题1.代码顺序的问题
+    #include &amp;lt;stdio.h&amp;gt;
+        /*
+            由于函数定义顺序产生的一个编译的错误
+        */
+        int main()
+        {
+            demo();
+
+            return 0;
+        }">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> C语言声明与定义分离 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C语言声明与定义分离
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-24T17:56:26+08:00" content="2016-07-24">
+              2016-07-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="为什么要使用声明与定义分离-它解决了什么问题"><a href="#为什么要使用声明与定义分离-它解决了什么问题" class="headerlink" title="为什么要使用声明与定义分离,它解决了什么问题"></a>为什么要使用声明与定义分离,它解决了什么问题</h1><pre><code>1.代码顺序的问题
+    #include &lt;stdio.h&gt;
+        /*
+            由于函数定义顺序产生的一个编译的错误
+        */
+        int main()
+        {
+            demo();
+
+            return 0;
+        }
+
+        float demo()
+        {
+            return 1.00;
+        }
+
+2.解决了代码的互相依赖的问题,在a方法中调用了b方法,在b方法中又调用了b方法
+    #include &lt;stdio.h&gt;
+    int demo()
+    {
+        test();
+    }
+
+    int test()
+    {
+        demo();
+    }
+
+    int main()
+    {
+        demo();
+        return 0;
+    }
+</code></pre><h1 id="如下代码为什么会报错"><a href="#如下代码为什么会报错" class="headerlink" title="如下代码为什么会报错"></a>如下代码为什么会报错</h1><pre><code>#include &lt;stdio.h&gt;
+/*
+    由于函数定义顺序产生的一个编译的错误
+*/
+int main()
+{
+    demo();
+
+    return 0;
+}
+
+float demo()
+{
+    return 1.00;
+}
+
+1.编译器看到不认识的函数调用(函数未定义),认为它会在之后的源文件中找到这个函数的详细信息。它会先记录下来,随后在文件中查找
+2.编译器需要知道函数的返回类型,由于函数未定义,所以不知道它的返回类型,所以只好假设它返回int
+3.等编译器看到实际的函数,返回&quot;conflicting types for &apos;demo&apos;&quot;的错误,因为编译器认为有两个同名的函数,一个是文件中的函数,一个是编译器假设返回int的那个
+</code></pre><h1 id="什么是声明与定义分离"><a href="#什么是声明与定义分离" class="headerlink" title="什么是声明与定义分离"></a>什么是声明与定义分离</h1><pre><code>如果在第二步函数就知道返回类型了,就不需要再找了,所以为了防止编译器假设函数的返回类型,可以显示的告诉他,告诉编译器函数会返回什么类型的语句就叫函数声明;一旦声明了,编译器就不需要假设了,完全可以先调用函数,再定义函数
+声明只是一个函数签名:一条包含函数名,形参类型与返回类型的记录
+</code></pre><h1 id="如何让声明与定义分离"><a href="#如何让声明与定义分离" class="headerlink" title="如何让声明与定义分离"></a>如何让声明与定义分离</h1><pre><code>例如:
+    #include &lt;stdio.h&gt;
+
+    /*
+        此处声明了函数
+    */
+    int demo();
+
+    int main()
+    {
+        demo();
+        puts(&quot;this is main function&quot;);
+
+        return 0;
+    }
+
+    /*
+        此处定义了函数
+    */
+    int demo()
+    {
+        puts(&quot;this is demo function&quot;);
+        return 0;
+    }
+</code></pre><h1 id="创建完全和函数体分离的头文件"><a href="#创建完全和函数体分离的头文件" class="headerlink" title="创建完全和函数体分离的头文件"></a>创建完全和函数体分离的头文件</h1><pre><code>demo.h文件内容:
+    int demo();
+
+函数体中的内容:
+    #include &lt;stdio.h&gt;
+    /*
+        注意这里是双引号,且没有分号,文件在当前目录下,是相对路径,里面之定义了头信息(就是函数的返回值以及类型)
+    */
+    #include &quot;demo.h&quot;
+
+    int main()
+    {
+        /*
+            调用未定义的函数,不报错(因为上面加载了函数头信息)
+        */
+        demo();
+        puts(&quot;this is main function&quot;);
+
+        return 0;
+    }
+
+    int demo()
+    {
+        puts(&quot;this is demo function&quot;);
+        return 0;
+    }
+</code></pre><h1 id="什么是预处理"><a href="#什么是预处理" class="headerlink" title="什么是预处理"></a>什么是预处理</h1><pre><code>预处理是把c源码转化成可执行文件的第一个阶段,预处理会在编译开始之前修改代码,创建一个新的源文件(为了提高效率,编译器通常会用管道在两个阶段之间发送数据)
+</code></pre><h1 id="include-lt-gt-和include-“”有什么区别"><a href="#include-lt-gt-和include-“”有什么区别" class="headerlink" title="include &lt;&gt; 和include “”有什么区别"></a>include &lt;&gt; 和include “”有什么区别</h1><pre><code>引号表示使用以相对路径查找头文件,如果不加目录名,只包含一个文件名,编译器就会在当前目录下查找头文件;如果遇到尖括号,会到标准库代码所在目录查找头文件
+</code></pre><h1 id="gcc一般会去哪些位置寻找头文件"><a href="#gcc一般会去哪些位置寻找头文件" class="headerlink" title="gcc一般会去哪些位置寻找头文件"></a>gcc一般会去哪些位置寻找头文件</h1><pre><code>gcc知道标准库的头文件被保存的位置,头文件一般保存在/usr/local/include,/usr/include这些地方
+</code></pre><h1 id="编译器是如何工作的"><a href="#编译器是如何工作的" class="headerlink" title="编译器是如何工作的"></a>编译器是如何工作的</h1><pre><code>1.预处理:修改代码
+    用include指令添加相关头文件;跳过程序中的某些代码;补充一些代码
+
+2.编译:转换成汇编代码
+    计算机只理解底层的机器代码指令,在这一步,会把语句或函数调用转化成一串汇编语言指令
+
+3.汇编:生成目标代码
+    编译器将符号代码汇编成机器代码或目标代码,也就是CPU内部电路执行的二进制代码
+
+4.链接:放在一起
+    一旦有了目标代码,就需要将它们拼在一起,构成可执行程序,当某个代码调用另外一个目标代码的函数时,编译器会把它们连接在一起。同时,链接还会确保程序能够调用库代码。最后程序会写到一个可执行程序文件中,文件格式视操作系统而定,操作系统根据文件格式把程序加载到存储器中运行
+</code></pre><h1 id="如何进行代码共享"><a href="#如何进行代码共享" class="headerlink" title="如何进行代码共享"></a>如何进行代码共享</h1><pre><code>例如在将数据写入到数据库中需要进行加密,在将数据写入到缓存中中也要进行加密,他们的加密方法是一致的,不需要在两个文件中都写一份加密的代码
+1.创建自己的头文件
+    encrypt.h文件
+        void encrypt(char *message);
+
+2.引用头文件
+    encrypt.c文件
+    #include &quot;encrypt.h&quot;
+
+    void encrypt(char *message)
+    {
+        char c;
+        while(*message) {
+            *message = *message ^ 31;
+            message++;
+        }
+    }
+
+    db.c文件
+    #include &lt;stdio.h&gt;
+    #include &quot;encrypt.h&quot;
+
+    int main()
+    {
+        char msg[80];
+        while(fgets(msg, 80, stdin)) {
+            encrypt(msg);
+            printf(&quot;%s\n&quot;, msg);
+        }
+    }
+
+3.执行命令(将多个文件编译成一个可执行文件)
+    gcc db.c encrypt.c -o db &amp;&amp; ./db
+</code></pre><h1 id="如果源文件很多-每次编译都需要耗费很长的时间-如何做到只重新编译改了的文件"><a href="#如果源文件很多-每次编译都需要耗费很长的时间-如何做到只重新编译改了的文件" class="headerlink" title="如果源文件很多,每次编译都需要耗费很长的时间,如何做到只重新编译改了的文件"></a>如果源文件很多,每次编译都需要耗费很长的时间,如何做到只重新编译改了的文件</h1><pre><code>回顾下编译器的工作原理,如果源文件没有进行变化的话,那么只有最后一步需要重新做(也就是链接);如果文件修改了毫无疑问需要重新编译
+</code></pre><h1 id="如何做能让gcc把目标代码保存在文件中-然后让编译器把目标文件链接起来"><a href="#如何做能让gcc把目标代码保存在文件中-然后让编译器把目标文件链接起来" class="headerlink" title="如何做能让gcc把目标代码保存在文件中?然后让编译器把目标文件链接起来?"></a>如何做能让gcc把目标代码保存在文件中?然后让编译器把目标文件链接起来?</h1><pre><code>1.首先把源代码编译为目标文件
+    gcc -c *.c
+
+2.把目标文件链接起来
+    gcc *.o -o demo
+</code></pre><h1 id="修改代码的编译流程变成了这样"><a href="#修改代码的编译流程变成了这样" class="headerlink" title="修改代码的编译流程变成了这样"></a>修改代码的编译流程变成了这样</h1><pre><code>1.首次编译
+    gcc *.c -o demo
+
+2.修改了test.c文件
+
+3.再次编译
+    gcc -c test.c
+
+4.再次链接
+    gcc *.o -o demo
+</code></pre><h1 id="如果我修改了很多文件-记录下来修改哪些文件也很麻烦"><a href="#如果我修改了很多文件-记录下来修改哪些文件也很麻烦" class="headerlink" title="如果我修改了很多文件,记录下来修改哪些文件也很麻烦"></a>如果我修改了很多文件,记录下来修改哪些文件也很麻烦</h1><pre><code>使用make工具自动化构建
+</code></pre><h1 id="make"><a href="#make" class="headerlink" title="make"></a>make</h1><pre><code>make是一个可以运行编译命令的工具。make会检查源文件和目标文件的时间戳,如果目标文件过期,make就会重新编译它
+</code></pre><h1 id="需要提供给make的条件"><a href="#需要提供给make的条件" class="headerlink" title="需要提供给make的条件"></a>需要提供给make的条件</h1><pre><code>1.依赖项;生成目标需要用哪些文件
+2.生成方法;生成该文件时要用哪些指令
+例如
+    将demo.c编译成demo.o,依赖项和生成方法分别是什么?
+    demo.o就是目标,因为需要生成这个文件,demo.c就是依赖项,因为编译器创建demo.o的时候需要它
+    生成方法就是将demo.c转化成demo.o的命令也就是gcc -c demo.c
+</code></pre><h1 id="怎样把依赖项和生成方法告诉make"><a href="#怎样把依赖项和生成方法告诉make" class="headerlink" title="怎样把依赖项和生成方法告诉make"></a>怎样把依赖项和生成方法告诉make</h1><pre><code>所有目标,依赖项和生成方法的细节信息需要保存在一个叫makefile或Makefile的文件中
+拿加密的例子说:
+最终的加密程序db由encrypt.o和db.o文件链接组成,这两个文件是由C文件和头文件编译而成,db.o依赖encrypt.h文件,因为db.o需要调用encrypt.c中的函数
+db.o: db.c encrypt.c encrypt.h
+    gcc -c db.c
+
+encrypt.o: encrypt.c encrypt.h
+    gcc -c encrypt.c
+
+db: db.o encrypt.o
+    gcc db.o encrypt.o -o db
+</code></pre><h1 id="创建makefile很麻烦"><a href="#创建makefile很麻烦" class="headerlink" title="创建makefile很麻烦"></a>创建makefile很麻烦</h1><pre><code>使用autoconf来自动生成makefile
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/C语言标准输入标准输出/" rel="next" title="C语言标准输入标准输出">
+                <i class="fa fa-chevron-left"></i> C语言标准输入标准输出
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/26/C语言结构/" rel="prev" title="C语言结构">
+                C语言结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要使用声明与定义分离-它解决了什么问题"><span class="nav-number">1.</span> <span class="nav-text">为什么要使用声明与定义分离,它解决了什么问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如下代码为什么会报错"><span class="nav-number">2.</span> <span class="nav-text">如下代码为什么会报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是声明与定义分离"><span class="nav-number">3.</span> <span class="nav-text">什么是声明与定义分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何让声明与定义分离"><span class="nav-number">4.</span> <span class="nav-text">如何让声明与定义分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建完全和函数体分离的头文件"><span class="nav-number">5.</span> <span class="nav-text">创建完全和函数体分离的头文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是预处理"><span class="nav-number">6.</span> <span class="nav-text">什么是预处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-lt-gt-和include-“”有什么区别"><span class="nav-number">7.</span> <span class="nav-text">include <> 和include “”有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc一般会去哪些位置寻找头文件"><span class="nav-number">8.</span> <span class="nav-text">gcc一般会去哪些位置寻找头文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译器是如何工作的"><span class="nav-number">9.</span> <span class="nav-text">编译器是如何工作的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何进行代码共享"><span class="nav-number">10.</span> <span class="nav-text">如何进行代码共享</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果源文件很多-每次编译都需要耗费很长的时间-如何做到只重新编译改了的文件"><span class="nav-number">11.</span> <span class="nav-text">如果源文件很多,每次编译都需要耗费很长的时间,如何做到只重新编译改了的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何做能让gcc把目标代码保存在文件中-然后让编译器把目标文件链接起来"><span class="nav-number">12.</span> <span class="nav-text">如何做能让gcc把目标代码保存在文件中?然后让编译器把目标文件链接起来?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改代码的编译流程变成了这样"><span class="nav-number">13.</span> <span class="nav-text">修改代码的编译流程变成了这样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果我修改了很多文件-记录下来修改哪些文件也很麻烦"><span class="nav-number">14.</span> <span class="nav-text">如果我修改了很多文件,记录下来修改哪些文件也很麻烦</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#make"><span class="nav-number">15.</span> <span class="nav-text">make</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#需要提供给make的条件"><span class="nav-number">16.</span> <span class="nav-text">需要提供给make的条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎样把依赖项和生成方法告诉make"><span class="nav-number">17.</span> <span class="nav-text">怎样把依赖项和生成方法告诉make</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建makefile很麻烦"><span class="nav-number">18.</span> <span class="nav-text">创建makefile很麻烦</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

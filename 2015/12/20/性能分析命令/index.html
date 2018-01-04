@@ -1,0 +1,954 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="环境准备
+首先你得拥有一个linux环境
+安装sysstat包 yum install sysstat
+安装procps包 yum install procps
+
+需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00
+显示的是过去1分钟，五分钟，十五分钟系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="性能分析命令">
+<meta property="og:url" content="http://www.cxyteam.com/2015/12/20/性能分析命令/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="环境准备
+首先你得拥有一个linux环境
+安装sysstat包 yum install sysstat
+安装procps包 yum install procps
+
+需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00
+显示的是过去1分钟，五分钟，十五分钟系统">
+<meta property="og:updated_time" content="2016-02-17T02:36:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="性能分析命令">
+<meta name="twitter:description" content="环境准备
+首先你得拥有一个linux环境
+安装sysstat包 yum install sysstat
+安装procps包 yum install procps
+
+需要执行的命令updime    $ uptime    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00
+显示的是过去1分钟，五分钟，十五分钟系统">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 性能分析命令 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                性能分析命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-20T10:35:45+08:00" content="2015-12-20">
+              2015-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
+<li>首先你得拥有一个linux环境</li>
+<li>安装sysstat包 <code>yum install sysstat</code></li>
+<li>安装procps包 <code>yum install procps</code></li>
+</ul>
+<h1 id="需要执行的命令"><a href="#需要执行的命令" class="headerlink" title="需要执行的命令"></a>需要执行的命令</h1><p><code>updime</code><br>    $ uptime<br>    10:41:30 up 45 days, 19:43,  1 user,  load average: 0.00, 0.02, 0.00</p>
+<pre><code>显示的是过去1分钟，五分钟，十五分钟系统的平均负载情况，通过数据可以了解服务器负载是趋于紧张还是趋于缓解
+</code></pre><p><code>dmesg | tail</code></p>
+<pre><code>该命令会输出系统日志的最后n行。这些日志可以帮助排查性能问题。千万不要忘了这一步。
+</code></pre><p><code>vmstat 1</code></p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0 558844  24696 150984  65156    0    0     2   150    1    2  0  1 99  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   51   72  0  0 100  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   50   75  0  0 100  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   55   80  0  1 99  0  0
+ 0  0 558844  24688 150984  65160    0    0     0     0   44   67  0  0 100  0  0
+
+
+每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数1，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：
+
+1.r：等待在CPU资源的进程数。这个数据比平均负载更加能够体现CPU负载情况，数据中不包含等待IO的进程。如果这个数值大于机器CPU核数，那么机器的CPU资源已经饱和。
+2.free：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。
+3.si, so：交换区写入和读取的数量。如果这个数据不为0，说明系统已经在使用交换区（swap），机器物理内存已经不足。
+4.us, sy, id, wa, st：这些都代表了CPU时间的消耗，它们分别表示用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen，一般被其他虚拟机消耗）。
+
+一般情况下，如果用户时间和系统时间相加非常大，CPU出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。
+</code></pre><p><code>mpstat -P ALL 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时45分48秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+18时45分49秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+18时45分49秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+18时45分49秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+18时45分50秒  all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+18时45分50秒    0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的
+</code></pre><p><code>pidstat 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时47分22秒       PID    %usr %system  %guest    %CPU   CPU  Command
+18时47分23秒     24331    0.98    0.00    0.00    0.98     0  redis-server
+
+18时47分23秒       PID    %usr %system  %guest    %CPU   CPU  Command
+
+18时47分24秒       PID    %usr %system  %guest    %CPU   CPU  Command
+18时47分25秒         7    0.00    1.01    0.00    1.01     0  events/0
+18时47分25秒     27624    0.00    2.02    0.00    2.02     0  pidstat
+
+pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态
+</code></pre><p><code>iostat -xz 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.41    0.00    0.52    0.23    0.00   98.85
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+sda               0.04    29.67    0.08    8.22     4.77   299.70    36.67     0.11   12.74   0.66   0.55
+dm-0              0.00     0.00    0.11   37.40     4.63   299.11     8.10     0.50   13.35   0.15   0.55
+dm-1              0.00     0.00    0.02    0.07     0.14     0.59     8.00     0.00   27.85   0.76   0.01
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    2.00    0.00   98.00
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+sda               0.00     0.00    1.00    0.00    16.00     0.00    16.00     0.01   15.00  15.00   1.50
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    0.00    0.00  100.00
+
+Device:         rrqm/s   wrqm/s     r/s     w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.00    0.00    0.00  100.00
+
+iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：
+
+r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
+await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
+avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
+%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。
+如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能
+</code></pre><p><code>free -m</code><br>                 total       used       free     shared    buffers     cached<br>    Mem:           458        435         23          0        147         63<br>    -/+ buffers/cache:        223        234<br>    Swap:          927        545        382</p>
+<pre><code>free命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需 要注意的是，第二行-/+ buffers/cache，一般缓存会占用大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会 立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。
+
+如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。
+</code></pre><p><code>sar -n DEV 1</code></p>
+<pre><code>18时52分14秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
+18时52分15秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分15秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分15秒      eth1      1.01      0.00      0.07      0.00      0.00      0.00      0.00
+
+18时52分15秒     IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
+18时52分16秒        lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分16秒      eth0      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+18时52分16秒      eth1      1.01      1.01      0.07      0.49      0.00      0.00      0.00
+
+sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。
+</code></pre><p><code>sar -n TCP,ETCP 1</code></p>
+<pre><code>Linux 2.6.32-431.el6.x86_64 (localhost.localdomain)     2015年12月27日     _x86_64_    (1 CPU)
+
+18时52分36秒  active/s passive/s    iseg/s    oseg/s
+18时52分37秒      0.00      0.00      0.00      0.00
+
+18时52分36秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+18时52分37秒      0.00      0.00      0.00      0.00      0.00
+
+18时52分37秒  active/s passive/s    iseg/s    oseg/s
+18时52分38秒      0.00      0.00      2.00      2.00
+
+18时52分37秒  atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+18时52分38秒      0.00      0.00      0.00      0.00      0.00
+
+sar命令在这里用于查看TCP连接状态，其中包括：
+
+active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；
+passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；
+retrans/s：每秒TCP重传数量；
+TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。
+</code></pre><p><code>top</code></p>
+<pre><code>top - 18:53:43 up 53 days,  3:55,  1 user,  load average: 0.00, 0.00, 0.02
+Tasks:  86 total,   1 running,  85 sleeping,   0 stopped,   0 zombie
+Cpu(s):  0.4%us,  0.4%sy,  0.0%ni, 98.8%id,  0.2%wa,  0.0%hi,  0.1%si,  0.0%st
+Mem:    469452k total,   446128k used,    23324k free,   151644k buffers
+Swap:   950264k total,   558844k used,   391420k free,    65716k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+    1 root      20   0 19232  520  348 S  0.0  0.1   0:44.68 init
+    2 root      20   0     0    0    0 S  0.0  0.0   0:00.03 kthreadd
+    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+    4 root      20   0     0    0    0 S  0.0  0.0  38:03.76 ksoftirqd/0
+    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+    6 root      RT   0     0    0    0 S  0.0  0.0   0:15.98 watchdog/0
+    7 root      20   0     0    0    0 S  0.0  0.0  57:02.33 events/0
+    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 cgroup
+    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khelper
+   10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 netns
+   11 root      20   0     0    0    0 S  0.0  0.0   0:00.00 async/mgr
+   12 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pm
+   13 root      20   0     0    0    0 S  0.0  0.0   0:31.42 sync_supers
+   14 root      20   0     0    0    0 S  0.0  0.0   0:33.01 bdi-default
+   15 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kintegrityd/0
+   16 root      20   0     0    0    0 S  0.0  0.0  32:20.76 kblockd/0
+   17 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpid
+   18 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_notify
+   19 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kacpi_hotplug
+   20 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ata_aux
+   21 root      20   0     0    0    0 S  0.0  0.0   0:00.21 ata_sff/0
+   22 root      20   0     0    0    0 S  0.0  0.0   0:00.00 ksuspend_usbd
+   23 root      20   0     0    0    0 S  0.0  0.0   0:00.00 khubd
+   24 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kseriod
+   25 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md/0
+   26 root      20   0     0    0    0 S  0.0  0.0   0:00.00 md_misc/0
+   27 root      20   0     0    0    0 S  0.0  0.0   0:00.00 linkwatch
+   28 root      20   0     0    0    0 S  0.0  0.0   0:02.11 khungtaskd
+   29 root      20   0     0    0    0 S  0.0  0.0   0:27.30 kswapd0
+   30 root      25   5     0    0    0 S  0.0  0.0   0:00.00 ksmd
+   31 root      20   0     0    0    0 S  0.0  0.0   0:00.00 aio/0
+   32 root      20   0     0    0    0 S  0.0  0.0   0:00.00 crypto/0
+   37 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthrotld/0
+   39 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kpsmoused
+   40 root      20   0     0    0    0 S  0.0  0.0   0:00.00 usbhid_resumer
+   70 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kstriped
+  128 root      20   0     0    0    0 S  0.0  0.0   0:02.82 scsi_eh_0
+  129 root      20   0     0    0    0 S  0.0  0.0   0:00.00 scsi_eh_1
+  215 root      20   0     0    0    0 S  0.0  0.0  13:53.06 kdmflush
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/18/服务器如何设置的cookie/" rel="next" title="服务器如何设置的cookie">
+                <i class="fa fa-chevron-left"></i> 服务器如何设置的cookie
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/22/获取终端输出/" rel="prev" title="获取终端输出">
+                获取终端输出 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#需要执行的命令"><span class="nav-number">2.</span> <span class="nav-text">需要执行的命令</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

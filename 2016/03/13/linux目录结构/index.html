@@ -1,0 +1,869 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/usr(unix software resource)存放unix系统商开发的程序
+/usr/loc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux目录结构">
+<meta property="og:url" content="http://www.cxyteam.com/2016/03/13/linux目录结构/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/usr(unix software resource)存放unix系统商开发的程序
+/usr/loc">
+<meta property="og:updated_time" content="2016-04-27T14:16:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux目录结构">
+<meta name="twitter:description" content="目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
+应用程序/usr/bin
+数据文件/usr/share
+用户程序,及数据,帮助文件等目录/usr
+设备目录/dev/
+配置文件/etc/
+启动命令/etc/init.d
+/存放系统相关的程序
+/usr(unix software resource)存放unix系统商开发的程序
+/usr/loc">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> linux目录结构 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux目录结构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
+              2016-03-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="目录结构和分区是没有关系的-不同的目录可以跨越不同的磁盘设备和分区"><a href="#目录结构和分区是没有关系的-不同的目录可以跨越不同的磁盘设备和分区" class="headerlink" title="目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区"></a>目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区</h1><pre><code>mount /dev/sdb /mnt
+</code></pre><h1 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h1><pre><code>/usr/bin
+</code></pre><h1 id="数据文件"><a href="#数据文件" class="headerlink" title="数据文件"></a>数据文件</h1><pre><code>/usr/share
+</code></pre><h1 id="用户程序-及数据-帮助文件等目录"><a href="#用户程序-及数据-帮助文件等目录" class="headerlink" title="用户程序,及数据,帮助文件等目录"></a>用户程序,及数据,帮助文件等目录</h1><pre><code>/usr
+</code></pre><h1 id="设备目录"><a href="#设备目录" class="headerlink" title="设备目录"></a>设备目录</h1><pre><code>/dev/
+</code></pre><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><pre><code>/etc/
+</code></pre><h1 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h1><pre><code>/etc/init.d
+</code></pre><h1 id=""><a href="#" class="headerlink" title="/"></a>/</h1><pre><code>存放系统相关的程序
+</code></pre><h1 id="usr-unix-software-resource"><a href="#usr-unix-software-resource" class="headerlink" title="/usr(unix software resource)"></a>/usr(unix software resource)</h1><pre><code>存放unix系统商开发的程序
+</code></pre><h1 id="usr-local"><a href="#usr-local" class="headerlink" title="/usr/local"></a>/usr/local</h1><pre><code>存放用户自己安装的程序
+</code></pre><h1 id="opt"><a href="#opt" class="headerlink" title="/opt"></a>/opt</h1><pre><code>用于存放第三方厂商开发的程序
+</code></pre><h1 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h1><pre><code>普通用户的家目录
+</code></pre><h1 id="root"><a href="#root" class="headerlink" title="/root"></a>/root</h1><pre><code>管理员的家目录
+</code></pre><h1 id="lib"><a href="#lib" class="headerlink" title="/lib"></a>/lib</h1><pre><code>库文件存放目录
+</code></pre><h1 id="lib-modules"><a href="#lib-modules" class="headerlink" title="/lib/modules"></a>/lib/modules</h1><pre><code>kernel的相关模块
+</code></pre><h1 id="var-lib-rpm"><a href="#var-lib-rpm" class="headerlink" title="/var/lib/rpm"></a>/var/lib/rpm</h1><pre><code>rpm套件安装处
+</code></pre><h1 id="lib64"><a href="#lib64" class="headerlink" title="/lib64"></a>/lib64</h1><pre><code>库文件存放目录
+</code></pre><h1 id="lost-found"><a href="#lost-found" class="headerlink" title="/lost+found"></a>/lost+found</h1><pre><code>系统意外崩溃或关机的时候回产生一些碎片文件在这里,下次系统开机的时候使用fsck工具检查并修复
+</code></pre><h1 id="mnt"><a href="#mnt" class="headerlink" title="/mnt"></a>/mnt</h1><pre><code>系统临时的挂载点
+</code></pre><h1 id="proc"><a href="#proc" class="headerlink" title="/proc"></a>/proc</h1><pre><code>内核及进程信息的虚拟文件系统目录
+</code></pre><h1 id="proc-version"><a href="#proc-version" class="headerlink" title="/proc/version"></a>/proc/version</h1><pre><code>内核版本
+</code></pre><h1 id="proc-sys-kernel"><a href="#proc-sys-kernel" class="headerlink" title="/proc/sys/kernel"></a>/proc/sys/kernel</h1><pre><code>系统内核功能
+</code></pre><h1 id="proc-sys-net-ipv4"><a href="#proc-sys-net-ipv4" class="headerlink" title="/proc/sys/net/ipv4"></a>/proc/sys/net/ipv4</h1><pre><code>修改proc的配置时临时生效,/etc/sysctl.conf内核参数里配置才是永久生效
+</code></pre><h1 id="proc-cpuinfo"><a href="#proc-cpuinfo" class="headerlink" title="/proc/cpuinfo"></a>/proc/cpuinfo</h1><pre><code>关于处理器的信息
+</code></pre><h1 id="proc-meminfo"><a href="#proc-meminfo" class="headerlink" title="/proc/meminfo"></a>/proc/meminfo</h1><pre><code>系统内存信息
+</code></pre><h1 id="proc-devices"><a href="#proc-devices" class="headerlink" title="/proc/devices"></a>/proc/devices</h1><pre><code>当前运行内核所配置的所有设备清单
+</code></pre><h1 id="proc-dma"><a href="#proc-dma" class="headerlink" title="/proc/dma"></a>/proc/dma</h1><pre><code>当前正在使用的DMA通道
+</code></pre><h1 id="proc-filesystems"><a href="#proc-filesystems" class="headerlink" title="/proc/filesystems"></a>/proc/filesystems</h1><pre><code>当前运行内核所配置的文件系统
+</code></pre><h1 id="proc-interrupts"><a href="#proc-interrupts" class="headerlink" title="/proc/interrupts"></a>/proc/interrupts</h1><pre><code>正在使用的终端,和曾经有多少个终端
+</code></pre><h1 id="proc-ioports"><a href="#proc-ioports" class="headerlink" title="/proc/ioports"></a>/proc/ioports</h1><pre><code>当前正在使用的I/O端口
+</code></pre><h1 id="proc-loadavg"><a href="#proc-loadavg" class="headerlink" title="/proc/loadavg"></a>/proc/loadavg</h1><pre><code>系统负载平均值信息
+</code></pre><h1 id="bin"><a href="#bin" class="headerlink" title="/bin"></a>/bin</h1><pre><code>普通用户的命令
+</code></pre><h1 id="sbin"><a href="#sbin" class="headerlink" title="/sbin"></a>/sbin</h1><pre><code>系统管理的命令的存放,是超级管理员可执行命令的存放地
+</code></pre><h1 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h1><pre><code>临时文件目录
+</code></pre><h1 id="usr-bin-usr-sbin"><a href="#usr-bin-usr-sbin" class="headerlink" title="/usr/bin,/usr/sbin"></a>/usr/bin,/usr/sbin</h1><pre><code>系统命令
+</code></pre><h1 id="usr-local-bin"><a href="#usr-local-bin" class="headerlink" title="/usr/local/bin"></a>/usr/local/bin</h1><pre><code>用户自定义命令文件夹,一般第三方库也会存放在这
+</code></pre><h1 id="usr-share-fonts"><a href="#usr-share-fonts" class="headerlink" title="/usr/share/fonts"></a>/usr/share/fonts</h1><pre><code>字体目录
+</code></pre><h1 id="usr-share-man"><a href="#usr-share-man" class="headerlink" title="/usr/share/man"></a>/usr/share/man</h1><pre><code>帮助目录
+</code></pre><h1 id="usr-share-doc"><a href="#usr-share-doc" class="headerlink" title="/usr/share/doc"></a>/usr/share/doc</h1><pre><code>文档目录
+</code></pre><h1 id="usr-src"><a href="#usr-src" class="headerlink" title="/usr/src"></a>/usr/src</h1><pre><code>内核源码目录
+</code></pre><h1 id="var"><a href="#var" class="headerlink" title="/var"></a>/var</h1><pre><code>可变数据,系统日志,缓存,等记录系统服务状态,和访问请求的内容
+</code></pre><h1 id="var-log"><a href="#var-log" class="headerlink" title="/var/log"></a>/var/log</h1><pre><code>系统日志文件存放位置
+</code></pre><h1 id="var-log-messages"><a href="#var-log-messages" class="headerlink" title="/var/log/messages"></a>/var/log/messages</h1><pre><code>系统日志文件
+</code></pre><h1 id="var-log-secure"><a href="#var-log-secure" class="headerlink" title="/var/log/secure"></a>/var/log/secure</h1><pre><code>系统安全的日志
+</code></pre><h1 id="etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="/etc/sysconfig/network-scripts/ifcfg-eth0"></a>/etc/sysconfig/network-scripts/ifcfg-eth0</h1><pre><code>网卡配置文件
+</code></pre><h1 id="etc-init-d-network-restart"><a href="#etc-init-d-network-restart" class="headerlink" title="/etc/init.d/network restart"></a>/etc/init.d/network restart</h1><pre><code>重启网卡
+</code></pre><h1 id="ifdown-eth0-amp-amp-ifup-eth0"><a href="#ifdown-eth0-amp-amp-ifup-eth0" class="headerlink" title="ifdown eth0 &amp;&amp; ifup eth0"></a>ifdown eth0 &amp;&amp; ifup eth0</h1><pre><code>重启网卡
+</code></pre><h1 id="etc-resolv-conf"><a href="#etc-resolv-conf" class="headerlink" title="/etc/resolv.conf"></a>/etc/resolv.conf</h1><pre><code>设置linux本地客户端的dns文件
+</code></pre><h1 id="etc-hosts"><a href="#etc-hosts" class="headerlink" title="/etc/hosts"></a>/etc/hosts</h1><pre><code>设置ip与域名的对应解析表
+</code></pre><h1 id="etc-sysconfig-network"><a href="#etc-sysconfig-network" class="headerlink" title="/etc/sysconfig/network"></a>/etc/sysconfig/network</h1><pre><code>可修改机器名及网卡启动,网关等的配置
+</code></pre><h1 id="etc-fstab"><a href="#etc-fstab" class="headerlink" title="/etc/fstab"></a>/etc/fstab</h1><pre><code>记录开机要挂在的文件系统的文件
+</code></pre><h1 id="etc-rc-local"><a href="#etc-rc-local" class="headerlink" title="/etc/rc.local"></a>/etc/rc.local</h1><pre><code>存放开机自启动程序命令的文件(chkconfig只能管理yum和rpm安装的程序的启动服务)
+</code></pre><h1 id="etc-inittab"><a href="#etc-inittab" class="headerlink" title="/etc/inittab"></a>/etc/inittab</h1><pre><code>设定系统init进程把系统设置成什么样的runlevel及家长相关的启动配置
+</code></pre><h1 id="etc-exports"><a href="#etc-exports" class="headerlink" title="/etc/exports"></a>/etc/exports</h1><pre><code>设定NFS网络文件系统用的配置文件
+</code></pre><h1 id="ext-init-d"><a href="#ext-init-d" class="headerlink" title="/ext/init.d"></a>/ext/init.d</h1><pre><code>存放系统或服务器以Systerm V模式启动的脚本
+</code></pre><h1 id="etc-xinit-d"><a href="#etc-xinit-d" class="headerlink" title="/etc/xinit.d"></a>/etc/xinit.d</h1><h1 id="etc-profile"><a href="#etc-profile" class="headerlink" title="/etc/profile"></a>/etc/profile</h1><pre><code>全局环境变量的路径(配置别名,PATH变量)
+</code></pre><h1 id="etc-profile-d"><a href="#etc-profile-d" class="headerlink" title="/etc/profile.d"></a>/etc/profile.d</h1><pre><code>加载系统登录程序一个目录,命令或文件独立存在
+</code></pre><h1 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h1><pre><code>设定用户的组名与相关信息
+</code></pre><h1 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h1><pre><code>账号信息文件
+</code></pre><h1 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h1><pre><code>密码信息文件
+</code></pre><h1 id="etc-sudoers"><a href="#etc-sudoers" class="headerlink" title="/etc/sudoers"></a>/etc/sudoers</h1><pre><code>可以执行使用sudo命令的配置文件
+</code></pre><h1 id="etc-securetty"><a href="#etc-securetty" class="headerlink" title="/etc/securetty"></a>/etc/securetty</h1><pre><code>设定哪些终端可以让root登陆
+</code></pre><h1 id="etc-login-defs"><a href="#etc-login-defs" class="headerlink" title="/etc/login.defs"></a>/etc/login.defs</h1><pre><code>所有用户登陆时的缺省配置
+</code></pre><h1 id="etc-modprobe-conf"><a href="#etc-modprobe-conf" class="headerlink" title="/etc/modprobe.conf"></a>/etc/modprobe.conf</h1><pre><code>内核模块额外参数设定
+</code></pre><h1 id="etc-syslog-conf"><a href="#etc-syslog-conf" class="headerlink" title="/etc/syslog.conf"></a>/etc/syslog.conf</h1><pre><code>日志设置文件
+</code></pre><h1 id="etc-rsyslog-conf"><a href="#etc-rsyslog-conf" class="headerlink" title="/etc/rsyslog.conf"></a>/etc/rsyslog.conf</h1><pre><code>日志设置文件
+</code></pre><h1 id="etc-issue"><a href="#etc-issue" class="headerlink" title="/etc/issue"></a>/etc/issue</h1><pre><code>记录用户登录前的显示信息
+</code></pre><h1 id="etc-motd"><a href="#etc-motd" class="headerlink" title="/etc/motd"></a>/etc/motd</h1><pre><code>登陆提醒
+</code></pre><h1 id="var-log-wtmp"><a href="#var-log-wtmp" class="headerlink" title="/var/log/wtmp"></a>/var/log/wtmp</h1><pre><code>记录登陆者信息的文件
+</code></pre><h1 id="var-spool-var-spool-cron-root"><a href="#var-spool-var-spool-cron-root" class="headerlink" title="/var/spool  /var/spool/cron/root"></a>/var/spool  /var/spool/cron/root</h1><pre><code>定时任务crontab默认路径,按用户名命名的文件
+</code></pre><h1 id="var-spool-clientmqueue"><a href="#var-spool-clientmqueue" class="headerlink" title="/var/spool/clientmqueue"></a>/var/spool/clientmqueue</h1><pre><code>sendmail邮件服务邮件临时存放地点
+</code></pre><h1 id="etc-skel"><a href="#etc-skel" class="headerlink" title="/etc/skel"></a>/etc/skel</h1><pre><code>用来存放新用户配置文件的目录,当添加新用户时,该目录下的所有文件会自动复制到新添加的用户的家目录下(在/etc/default/useradd可以设置复制目录的位置)
+</code></pre><h1 id="etc-login-defs-1"><a href="#etc-login-defs-1" class="headerlink" title="/etc/login.defs"></a>/etc/login.defs</h1><pre><code>定义创建用户时需要的一些用户的配置信息,如:是否需要家目录,UID和GID范围,用户及密码的有效期等
+</code></pre><h1 id="etc-default-useradd"><a href="#etc-default-useradd" class="headerlink" title="/etc/default/useradd"></a>/etc/default/useradd</h1><pre><code>创建用户的时候的一些初始的内容,包括家目录,账户过期时间,账户shell类型,账户默认文件存放路径等
+</code></pre>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/13/linux系统优化/" rel="next" title="linux系统优化">
+                <i class="fa fa-chevron-left"></i> linux系统优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/14/linux文件类型及属性/" rel="prev" title="linux文件类型及属性">
+                linux文件类型及属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录结构和分区是没有关系的-不同的目录可以跨越不同的磁盘设备和分区"><span class="nav-number">1.</span> <span class="nav-text">目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用程序"><span class="nav-number">2.</span> <span class="nav-text">应用程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据文件"><span class="nav-number">3.</span> <span class="nav-text">数据文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户程序-及数据-帮助文件等目录"><span class="nav-number">4.</span> <span class="nav-text">用户程序,及数据,帮助文件等目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设备目录"><span class="nav-number">5.</span> <span class="nav-text">设备目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">6.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动命令"><span class="nav-number">7.</span> <span class="nav-text">启动命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">8.</span> <span class="nav-text">/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-unix-software-resource"><span class="nav-number">9.</span> <span class="nav-text">/usr(unix software resource)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-local"><span class="nav-number">10.</span> <span class="nav-text">/usr/local</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#opt"><span class="nav-number">11.</span> <span class="nav-text">/opt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#home"><span class="nav-number">12.</span> <span class="nav-text">/home</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#root"><span class="nav-number">13.</span> <span class="nav-text">/root</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lib"><span class="nav-number">14.</span> <span class="nav-text">/lib</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lib-modules"><span class="nav-number">15.</span> <span class="nav-text">/lib/modules</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-lib-rpm"><span class="nav-number">16.</span> <span class="nav-text">/var/lib/rpm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lib64"><span class="nav-number">17.</span> <span class="nav-text">/lib64</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lost-found"><span class="nav-number">18.</span> <span class="nav-text">/lost+found</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mnt"><span class="nav-number">19.</span> <span class="nav-text">/mnt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc"><span class="nav-number">20.</span> <span class="nav-text">/proc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-version"><span class="nav-number">21.</span> <span class="nav-text">/proc/version</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-sys-kernel"><span class="nav-number">22.</span> <span class="nav-text">/proc/sys/kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-sys-net-ipv4"><span class="nav-number">23.</span> <span class="nav-text">/proc/sys/net/ipv4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-cpuinfo"><span class="nav-number">24.</span> <span class="nav-text">/proc/cpuinfo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-meminfo"><span class="nav-number">25.</span> <span class="nav-text">/proc/meminfo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-devices"><span class="nav-number">26.</span> <span class="nav-text">/proc/devices</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-dma"><span class="nav-number">27.</span> <span class="nav-text">/proc/dma</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-filesystems"><span class="nav-number">28.</span> <span class="nav-text">/proc/filesystems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-interrupts"><span class="nav-number">29.</span> <span class="nav-text">/proc/interrupts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-ioports"><span class="nav-number">30.</span> <span class="nav-text">/proc/ioports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-loadavg"><span class="nav-number">31.</span> <span class="nav-text">/proc/loadavg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bin"><span class="nav-number">32.</span> <span class="nav-text">/bin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sbin"><span class="nav-number">33.</span> <span class="nav-text">/sbin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tmp"><span class="nav-number">34.</span> <span class="nav-text">/tmp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-bin-usr-sbin"><span class="nav-number">35.</span> <span class="nav-text">/usr/bin,/usr/sbin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-local-bin"><span class="nav-number">36.</span> <span class="nav-text">/usr/local/bin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-share-fonts"><span class="nav-number">37.</span> <span class="nav-text">/usr/share/fonts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-share-man"><span class="nav-number">38.</span> <span class="nav-text">/usr/share/man</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-share-doc"><span class="nav-number">39.</span> <span class="nav-text">/usr/share/doc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr-src"><span class="nav-number">40.</span> <span class="nav-text">/usr/src</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var"><span class="nav-number">41.</span> <span class="nav-text">/var</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-log"><span class="nav-number">42.</span> <span class="nav-text">/var/log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-log-messages"><span class="nav-number">43.</span> <span class="nav-text">/var/log/messages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-log-secure"><span class="nav-number">44.</span> <span class="nav-text">/var/log/secure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-sysconfig-network-scripts-ifcfg-eth0"><span class="nav-number">45.</span> <span class="nav-text">/etc/sysconfig/network-scripts/ifcfg-eth0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-init-d-network-restart"><span class="nav-number">46.</span> <span class="nav-text">/etc/init.d/network restart</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifdown-eth0-amp-amp-ifup-eth0"><span class="nav-number">47.</span> <span class="nav-text">ifdown eth0 && ifup eth0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-resolv-conf"><span class="nav-number">48.</span> <span class="nav-text">/etc/resolv.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-hosts"><span class="nav-number">49.</span> <span class="nav-text">/etc/hosts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-sysconfig-network"><span class="nav-number">50.</span> <span class="nav-text">/etc/sysconfig/network</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-fstab"><span class="nav-number">51.</span> <span class="nav-text">/etc/fstab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-rc-local"><span class="nav-number">52.</span> <span class="nav-text">/etc/rc.local</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-inittab"><span class="nav-number">53.</span> <span class="nav-text">/etc/inittab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-exports"><span class="nav-number">54.</span> <span class="nav-text">/etc/exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ext-init-d"><span class="nav-number">55.</span> <span class="nav-text">/ext/init.d</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-xinit-d"><span class="nav-number">56.</span> <span class="nav-text">/etc/xinit.d</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-profile"><span class="nav-number">57.</span> <span class="nav-text">/etc/profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-profile-d"><span class="nav-number">58.</span> <span class="nav-text">/etc/profile.d</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-group"><span class="nav-number">59.</span> <span class="nav-text">/etc/group</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-passwd"><span class="nav-number">60.</span> <span class="nav-text">/etc/passwd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-shadow"><span class="nav-number">61.</span> <span class="nav-text">/etc/shadow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-sudoers"><span class="nav-number">62.</span> <span class="nav-text">/etc/sudoers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-securetty"><span class="nav-number">63.</span> <span class="nav-text">/etc/securetty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-login-defs"><span class="nav-number">64.</span> <span class="nav-text">/etc/login.defs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-modprobe-conf"><span class="nav-number">65.</span> <span class="nav-text">/etc/modprobe.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-syslog-conf"><span class="nav-number">66.</span> <span class="nav-text">/etc/syslog.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-rsyslog-conf"><span class="nav-number">67.</span> <span class="nav-text">/etc/rsyslog.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-issue"><span class="nav-number">68.</span> <span class="nav-text">/etc/issue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-motd"><span class="nav-number">69.</span> <span class="nav-text">/etc/motd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-log-wtmp"><span class="nav-number">70.</span> <span class="nav-text">/var/log/wtmp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-spool-var-spool-cron-root"><span class="nav-number">71.</span> <span class="nav-text">/var/spool  /var/spool/cron/root</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-spool-clientmqueue"><span class="nav-number">72.</span> <span class="nav-text">/var/spool/clientmqueue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-skel"><span class="nav-number">73.</span> <span class="nav-text">/etc/skel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-login-defs-1"><span class="nav-number">74.</span> <span class="nav-text">/etc/login.defs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-default-useradd"><span class="nav-number">75.</span> <span class="nav-text">/etc/default/useradd</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

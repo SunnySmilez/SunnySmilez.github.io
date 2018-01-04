@@ -1,0 +1,956 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="lsof命令的作用
+用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。
+
+lsof详解COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1180">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lsof的使用">
+<meta property="og:url" content="http://www.cxyteam.com/2016/01/27/lsof的使用/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="lsof命令的作用
+用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。
+
+lsof详解COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1180">
+<meta property="og:updated_time" content="2016-02-17T02:36:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lsof的使用">
+<meta name="twitter:description" content="lsof命令的作用
+用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。
+
+lsof详解COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1180">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> lsof的使用 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                lsof的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-27T09:29:07+08:00" content="2016-01-27">
+              2016-01-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="lsof命令的作用"><a href="#lsof命令的作用" class="headerlink" title="lsof命令的作用"></a>lsof命令的作用</h3><ul>
+<li>用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。</li>
+</ul>
+<h3 id="lsof详解"><a href="#lsof详解" class="headerlink" title="lsof详解"></a>lsof详解</h3><pre><code>COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1180 mysql  cwd    DIR              253,0     4096  262249 /var/lib/mysql
+mysqld  1180 mysql  rtd    DIR              253,0     4096       2 /
+mysqld  1180 mysql  txt    REG              253,0 85349440  788926 /usr/sbin/mysqld
+mysqld  1180 mysql  mem    REG              253,0    65928  655389 /lib64/libnss_files-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   469528  655366 /lib64/libfreebl3.so
+mysqld  1180 mysql  mem    REG              253,0  1921176  655373 /lib64/libc-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    90880  655489 /lib64/libgcc_s-4.4.7-20120601.so.1
+mysqld  1180 mysql  mem    REG              253,0   596272  655381 /lib64/libm-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   987096  787788 /usr/lib64/libstdc++.so.6.0.13
+mysqld  1180 mysql  mem    REG              253,0    19536  655379 /lib64/libdl-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    40400  655377 /lib64/libcrypt-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    43880  655401 /lib64/librt-2.12.so
+mysqld  1180 mysql  mem    REG              253,0     3944  655374 /lib64/libaio.so.1.0.1
+mysqld  1180 mysql  mem    REG              253,0   142640  655397 /lib64/libpthread-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   154624  655363 /lib64/ld-2.12.so
+mysqld  1180 mysql    0r   CHR                1,3      0t0    3782 /dev/null
+mysqld  1180 mysql    1w   REG              253,0   684315  262288 /var/lib/mysql/localhost.localdomain.err
+mysqld  1180 mysql    2w   REG              253,0   684315  262288 /var/lib/mysql/localhost.localdomain.err
+mysqld  1180 mysql    3uW  REG              253,0 79691776  262381 /var/lib/mysql/ibdata1
+mysqld  1180 mysql    4u   REG              253,0        0 1966087 /tmp/ibBOOuA6 (deleted)
+mysqld  1180 mysql    5u   REG              253,0        0 1966092 /tmp/ibX6N8u1 (deleted)
+mysqld  1180 mysql    6u   REG              253,0        0 1966093 /tmp/ibqGaNpW (deleted)
+mysqld  1180 mysql    7u   REG              253,0        0 1966094 /tmp/ibuLnlDM (deleted)
+mysqld  1180 mysql    8uW  REG              253,0 50331648  262466 /var/lib/mysql/ib_logfile0
+mysqld  1180 mysql    9uW  REG              253,0 50331648  262467 /var/lib/mysql/ib_logfile1
+mysqld  1180 mysql   10uW  REG              253,0    98304  263215 /var/lib/mysql/mysql/innodb_index_stats.ibd
+mysqld  1180 mysql   11u   REG              253,0        0 1966107 /tmp/ibT8BG4I (deleted)
+mysqld  1180 mysql   12uW  REG              253,0    98304  263213 /var/lib/mysql/mysql/innodb_table_stats.ibd
+mysqld  1180 mysql   13uW  REG              253,0   114688  263548 /var/lib/mysql/qianlong/finance_order.ibd
+mysqld  1180 mysql   14uW  REG              253,0   180224  263552 /var/lib/mysql/qianlong/pay_record.ibd
+mysqld  1180 mysql   15uW  REG              253,0   114688  263544 /var/lib/mysql/qianlong/finance_interest.ibd
+mysqld  1180 mysql   16u  IPv6              11162      0t0     TCP *:mysql (LISTEN)
+mysqld  1180 mysql   17u  unix 0xffff880019b5e6c0      0t0   11163 /var/lib/mysql/mysql.sock
+mysqld  1180 mysql   18u   REG              253,0     2048  262472 /var/lib/mysql/mysql/user.MYI
+mysqld  1180 mysql   19u   REG              253,0      556  262473 /var/lib/mysql/mysql/user.MYD
+mysqld  1180 mysql   20u   REG              253,0     5120  262469 /var/lib/mysql/mysql/db.MYI
+mysqld  1180 mysql   21u   REG              253,0      880  262470 /var/lib/mysql/mysql/db.MYD
+mysqld  1180 mysql   22u   REG              253,0     5120  263277 /var/lib/mysql/mysql/proxies_priv.MYI
+mysqld  1180 mysql   23u   REG              253,0     1386  263278 /var/lib/mysql/mysql/proxies_priv.MYD
+mysqld  1180 mysql   24u   REG              253,0     4096  262660 /var/lib/mysql/mysql/tables_priv.MYI
+mysqld  1180 mysql   25u   REG              253,0        0  262661 /var/lib/mysql/mysql/tables_priv.MYD
+mysqld  1180 mysql   26u   REG              253,0     4096  262774 /var/lib/mysql/mysql/columns_priv.MYI
+mysqld  1180 mysql   27u   REG              253,0        0  263157 /var/lib/mysql/mysql/columns_priv.MYD
+mysqld  1180 mysql   28u   REG              253,0     4096  263198 /var/lib/mysql/mysql/procs_priv.MYI
+mysqld  1180 mysql   29u   REG              253,0        0  263199 /var/lib/mysql/mysql/procs_priv.MYD
+mysqld  1180 mysql   30u   REG              253,0     1024  262602 /var/lib/mysql/mysql/servers.MYI
+mysqld  1180 mysql   31u   REG              253,0        0  262642 /var/lib/mysql/mysql/servers.MYD
+</code></pre><ul>
+<li>COMMAND                        进程的名称</li>
+<li>PID                            进程id</li>
+<li>USER                           进程所有者</li>
+<li><p>FD                             文件描述符</p>
+<ul>
+<li>（1）cwd：表示current work dirctory，即：应用程序的当前工作目录，这是该应用程序启动的目录，除非它本身对这个目录进行更改</li>
+<li>（2）txt ：该类型的文件是程序代码，如应用程序二进制文件本身或共享库，如上列表中显示的 /sbin/init 程序</li>
+<li>（3）lnn：library references (AIX);</li>
+<li>（4）er：FD information error (see NAME column);</li>
+<li>（5）jld：jail directory (FreeBSD);</li>
+<li>（6）ltx：shared library text (code and data);</li>
+<li>（7）mxx ：hex memory-mapped type number xx.</li>
+<li>（8）m86：DOS Merge mapped file;</li>
+<li>（9）mem：memory-mapped file;</li>
+<li>（10）mmap：memory-mapped device;</li>
+<li>（11）pd：parent directory;</li>
+<li>（12）rtd：root directory;</li>
+<li>（13）tr：kernel trace file (OpenBSD);</li>
+<li>（14）v86  VP/ix mapped file;</li>
+<li>（15）0：表示标准输出</li>
+<li>（16）1：表示标准输入</li>
+<li><p>（17）2：表示标准错误</p>
+</li>
+<li><p>一般在标准输出、标准错误、标准输入后还跟着文件状态模式：r、w、u等</p>
+<ul>
+<li>（1）u：表示该文件被打开并处于读取/写入模式</li>
+<li>（2）r：表示该文件被打开并处于只读模式</li>
+<li>（3）w：表示该文件被打开并处于</li>
+<li>（4）空格：表示该文件的状态模式为unknow，且没有锁定</li>
+<li>（5）-：表示该文件的状态模式为unknow，且被锁定</li>
+</ul>
+</li>
+<li>同时在文件状态模式后面，还跟着相关的锁<ul>
+<li>（1）N：for a Solaris NFS lock of unknown type;</li>
+<li>（2）r：for read lock on part of the file;</li>
+<li>（3）R：for a read lock on the entire file;</li>
+<li>（4）w：for a write lock on part of the file;（文件的部分写锁）</li>
+<li>（5）W：for a write lock on the entire file;（整个文件的写锁）</li>
+<li>（6）u：for a read and write lock of any length;</li>
+<li>（7）U：for a lock of unknown type;</li>
+<li>（8）x：for an SCO OpenServer Xenix lock on part      of the file;</li>
+<li>（9）X：for an SCO OpenServer Xenix lock on the      entire file;</li>
+<li>（10）space：if there is no lock.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TYPE                           文件类型</p>
+<ul>
+<li>（1）DIR：表示目录</li>
+<li>（2）CHR：表示字符类型</li>
+<li>（3）BLK：块设备类型</li>
+<li>（4）UNIX： UNIX 域套接字</li>
+<li>（5）FIFO：先进先出 (FIFO) 队列</li>
+<li>（6）IPv4：网际协议 (IP) 套接字</li>
+</ul>
+</li>
+<li><p>DEVICE                         指定磁盘名称</p>
+</li>
+<li>SIZE/OFF                       文件的大小</li>
+<li>NODE                           索引节点</li>
+<li>NAME                           打开文件的确切的名称</li>
+</ul>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ul>
+<li>lsof my.cnf 显示开启文件my.cnf的进程</li>
+<li>lsof -c abc 显示abc进程现在打开的文件</li>
+<li>lsof -c -p 1234 列出进程号为1234的进程所打开的文件</li>
+<li>lsof -g gid 显示归属gid的进程情况</li>
+<li>lsof +d /usr/local/ 显示目录下被进程开启的文件</li>
+<li>lsof +D /usr/local/ 同上，但是会搜索目录下的目录，时间较长</li>
+<li>lsof -d 4 显示使用fd为4的进程</li>
+<li>lsof -i 用以显示符合条件的进程情况* lsof -i[46] [protocol][@hostname|hostaddr][:service|port]<br>  46 –&gt; IPv4 or IPv6<br>  protocol –&gt; TCP or UDP<br>  hostname –&gt; Internet host name<br>  hostaddr –&gt; IPv4地址<br>  service –&gt; /etc/service中的 service name (可以不止一个)<br>  port –&gt; 端口号 (可以不止一个)</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件</li>
+<li>lsof /etc/passwd //那个进程在占用/etc/passwd</li>
+<li>lsof /dev/hda6 //那个进程在占用hda6</li>
+<li>lsof /dev/cdrom //那个进程在占用光驱</li>
+<li>lsof -c sendmail //查看sendmail进程的文件使用情况</li>
+<li>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn</li>
+<li>lsof -p 30297 //显示那些文件被pid为30297的进程打开</li>
+<li><p>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列</p>
+</li>
+<li><p>lsof -u1000 //查看uid是100的用户的进程的文件使用情况</p>
+</li>
+<li>lsof -utony //查看用户tony的进程的文件使用情况</li>
+<li>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)</li>
+<li>lsof -i //显示所有打开的端口</li>
+<li>lsof -i:80 //显示所有打开80端口的进程</li>
+<li>lsof -i -U //显示所有打开的端口和UNIX domain文件</li>
+<li>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接</li>
+<li>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)</li>
+<li>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数</li>
+</ul>
+<h1 id="我的应用场景"><a href="#我的应用场景" class="headerlink" title="我的应用场景"></a>我的应用场景</h1><ul>
+<li><p>查找服务的配置文件位置</p>
+<ul>
+<li>ps aux | grep mysql(例如mysql的进程为1234)</li>
+<li>lsof -p 1234</li>
+</ul>
+</li>
+<li><p>查看端口是否被占用</p>
+<ul>
+<li>lsof -i:9000</li>
+</ul>
+</li>
+<li><p>恢复被删除文件(网上找的,没用过)</p>
+<pre><code>当Linux计算机受到入侵时，常见的情况是日志文件被删除，以掩盖攻击者的踪迹。管理错误也可能导致意外删除重要的文件，比如在清理旧日志时，意外地删除了数据库的活动事务日志。有时可以通过lsof来恢复这些文件。
+当进程打开了某个文件时，只要该进程保持打开该文件，即使将其删除，它依然存在于磁盘中。这意味着，进程并不知道文件已经被删除，它仍然可以向打开该文件时提供给它的文件描述符进行读取和写入。除了该进程之外，这个文件是不可见的，因为已经删除了其相应的目录索引节点。
+在/proc 目录下，其中包含了反映内核和进程树的各种文件。/proc目录挂载的是在内存中所映射的一块区域，所以这些文件和目录并不存在于磁盘中，因此当我们对这些文件进行读取和写入时，实际上是在从内存中获取相关信息。大多数与 lsof 相关的信息都存储于以进程的 PID 命名的目录中，即 /proc/1234 中包含的是 PID 为 1234 的进程的信息。每个进程目录中存在着各种文件，它们可以使得应用程序简单地了解进程的内存空间、文件描述符列表、指向磁盘上的文件的符号链接和其他系统信息。lsof 程序使用该信息和其他关于内核内部状态的信息来产生其输出。所以lsof 可以显示进程的文件描述符和相关的文件名等信息。也就是我们通过访问进程的文件描述符可以找到该文件的相关信息。
+当系统中的某个文件被意外地删除了，只要这个时候系统中还有进程正在访问该文件，那么我们就可以通过lsof从/proc目录下恢复该文件的内容。 假如由于误操作将/var/log/messages文件删除掉了，那么这时要将/var/log/messages文件恢复的方法如下：
+首先使用lsof来查看当前是否有进程打开/var/logmessages文件，如下：
+# lsof |grep /var/log/messages
+syslogd 1283 root 2w REG 3,3 5381017 1773647 /var/log/messages (deleted)
+从上面的信息可以看到 PID 1283（syslogd）打开文件的文件描述符为 2。同时还可以看到/var/log/messages已经标记被删除了。因此我们可以在 /proc/1283/fd/2 （fd下的每个以数字命名的文件表示进程对应的文件描述符）中查看相应的信息，如下：
+# head -n 10 /proc/1283/fd/2
+Aug 4 13:50:15 holmes86 syslogd 1.4.1: restart.
+Aug 4 13:50:15 holmes86 kernel: klogd 1.4.1, log source = /proc/kmsg started.
+Aug 4 13:50:15 holmes86 kernel: Linux version 2.6.22.1-8 (root@everestbuilder.linux-ren.org) (gcc version 4.2.0) #1 SMP Wed Jul 18 11:18:32 EDT 2007 Aug 4 13:50:15 holmes86 kernel: BIOS-provided physical RAM map: Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 0000000000000000 - 000000000009f000 (usable) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 000000000009f000 - 00000000000a0000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 0000000000100000 - 000000001f7d3800 (usable) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 000000001f7d3800 - 0000000020000000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 00000000e0000000 - 00000000f0007000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 00000000f0008000 - 00000000f000c000 (reserved)
+从上面的信息可以看出，查看 /proc/8663/fd/15 就可以得到所要恢复的数据。如果可以通过文件描述符查看相应的数据，那么就可以使用 I/O 重定向将其复制到文件中，如:
+cat /proc/1283/fd/2 &gt; /var/log/messages
+对于许多应用程序，尤其是日志文件和数据库，这种恢复删除文件的方法非常有用。
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/26/du命令使用/" rel="next" title="du命令使用">
+                <i class="fa fa-chevron-left"></i> du命令使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/27/top的使用/" rel="prev" title="top的使用">
+                top的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lsof命令的作用"><span class="nav-number">1.</span> <span class="nav-text">lsof命令的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsof详解"><span class="nav-number">2.</span> <span class="nav-text">lsof详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数详解"><span class="nav-number">3.</span> <span class="nav-text">参数详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">4.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的应用场景"><span class="nav-number"></span> <span class="nav-text">我的应用场景</span></a></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>

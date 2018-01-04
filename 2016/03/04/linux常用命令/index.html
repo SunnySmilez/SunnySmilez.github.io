@@ -1,0 +1,1080 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="mkdir  创建命令,mkdir -p(递归创建命令)
+
+ls  -l(long),-d(directory)显示目录或文件,ls -F添加不同的符号, 在目录后面添加斜线,-d显示目录,-p添加斜线,
+
+cd  切换目录层次(change  directiry),cd -(回到上一级目录), cd ~(回到家目录)
+
+echo  打印输出内容  -n 不换行  -e 制定特殊的字符
+
+vi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="http://www.cxyteam.com/2016/03/04/linux常用命令/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="mkdir  创建命令,mkdir -p(递归创建命令)
+
+ls  -l(long),-d(directory)显示目录或文件,ls -F添加不同的符号, 在目录后面添加斜线,-d显示目录,-p添加斜线,
+
+cd  切换目录层次(change  directiry),cd -(回到上一级目录), cd ~(回到家目录)
+
+echo  打印输出内容  -n 不换行  -e 制定特殊的字符
+
+vi/">
+<meta property="og:updated_time" content="2016-06-30T14:05:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用命令">
+<meta name="twitter:description" content="mkdir  创建命令,mkdir -p(递归创建命令)
+
+ls  -l(long),-d(directory)显示目录或文件,ls -F添加不同的符号, 在目录后面添加斜线,-d显示目录,-p添加斜线,
+
+cd  切换目录层次(change  directiry),cd -(回到上一级目录), cd ~(回到家目录)
+
+echo  打印输出内容  -n 不换行  -e 制定特殊的字符
+
+vi/">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> linux常用命令 | 狂奔的菜鸟 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">狂奔的菜鸟</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux常用命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-04T21:59:50+08:00" content="2016-03-04">
+              2016-03-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>mkdir<br>  创建命令,mkdir -p(递归创建命令)</p>
+</li>
+<li><p>ls<br>  -l(long),-d(directory)显示目录或文件,ls -F添加不同的符号, 在目录后面添加斜线,-d显示目录,-p添加斜线,</p>
+</li>
+<li><p>cd<br>  切换目录层次(change  directiry),cd -(回到上一级目录), cd ~(回到家目录)</p>
+</li>
+<li><p>echo<br>  打印输出内容<br>  -n 不换行<br>  -e 制定特殊的字符</p>
+</li>
+<li><p>vi/vim<br>  打开文本</p>
+</li>
+<li><p>cat<br>  查看文件内容</p>
+</li>
+<li><p>cp -apr<br>  拷贝文件或者目录</p>
+</li>
+<li><p>mv<br>  移动目录活改名</p>
+</li>
+<li><p>rm<br>  -f强制删除文件,-r递归删除</p>
+</li>
+<li><p>rmdir<br>  删除空目录</p>
+</li>
+<li><p>head<br>  head -n 显示文件头部-n行</p>
+</li>
+<li><p>tail<br>  tail -n 显示文件尾部-n行,tail -f</p>
+</li>
+<li><p>grep *<br>  过滤,-v排除,-i忽略大小写,-E同事过滤多个字符串</p>
+</li>
+<li><p>egrep<br>  相当于grep -E ;同时过滤多个(grep -E ‘A|b|c’)</p>
+</li>
+<li><p>alias<br>  设置别名</p>
+</li>
+<li><p>unalias<br>  删除别名</p>
+</li>
+<li><p>which,wheris,locate,find<br>  查看命令所在路径</p>
+</li>
+<li><p>find<br>  查找命令,-type (f按照文件类型查找,d按照目录类型查找), -name(按照文件名查找) ,-mtime(按照修改时间查找),find / -type f -name “test.txt” -exec rm -rf {} \;, find / -type f -name “test.txt” | xargs rm -rf;-maxdepth level指定查找的深度;-f查找文件;-o表示或者;and表示并</p>
+</li>
+<li><p>tree<br>  查看目录结构,-L指定深度,d只显示目录</p>
+</li>
+<li><p>xargs<br>  用于把find/ls的输出交给后面处理</p>
+</li>
+<li><p>seq<br>  打印数字序列,-s制定分隔符,[seq -s ‘ ‘ 5, seq -s ‘ ‘ 1 3,seq -s ‘ ‘ 1 2 9(输出1到9的数字序列,步进为2,用’ ‘进行连接)]</p>
+</li>
+<li><p>man<br>  查看命令及配置文件等的帮助</p>
+</li>
+<li><p>touch<br>  创建文件或者修改文件时间戳</p>
+</li>
+<li><p>pwd<br>  显示当前的路径</p>
+</li>
+<li><p>history<br>  -c清空所有,-d行号,查看历史记录</p>
+</li>
+<li><p>diff<br>  比较文件内容的差别</p>
+</li>
+<li><p>vimdiff<br>  编辑并比较两个文件差异,</p>
+</li>
+<li><p>useradd<br>  添加用户 -g -u -c -s -d -G- M -D -e</p>
+</li>
+<li><p>passwd<br>  –stdin(无交互修改密码) 修改用户密码,如果不指定用户,则修改当前用户密码,普通用户只能改自己密码</p>
+</li>
+<li><p>whoami<br>  查看当前命令行终端用户</p>
+</li>
+<li><p>w<br>  显示登陆机器的用户</p>
+</li>
+<li><p>su</p>
+<ul>
+<li>切换用户角色</li>
+</ul>
+</li>
+<li><p>sudo<br>  让普通用户拥有指定用户的root权限命令</p>
+</li>
+<li><p>yum<br>  包管理工具,解决rpm包管理依赖</p>
+</li>
+<li><p>rpm<br>  -ivh 软件安装命令</p>
+</li>
+<li><p>chkconfig<br>  查看设置开机自启动的命令</p>
+</li>
+<li><p>netstat<br>  查看网络状态的tlunp货an</p>
+</li>
+<li><p>lsof<br>  -i:port查看端口,打开的文件</p>
+</li>
+<li><p>chattr -i,+i</p>
+</li>
+<li><p>lsattr</p>
+</li>
+<li><p>‘;’ 多个命令的分隔符</p>
+</li>
+<li><p>‘/‘ 根或者路径的分隔符</p>
+</li>
+<li><p>‘&gt;’或’1&gt;’ 标准输出重定向,数据流朝着箭头的方向流动,覆盖原来的文件</p>
+</li>
+<li><p>‘&gt;&gt;’或’1&gt;&gt;’ 追加输出重定向,数据流朝着箭头的方向流动,再原来的文件的结尾,追加新的内容</p>
+</li>
+<li><p>‘&lt;’或’&lt;0’ 标准输入重定向,输入重定向用于改变命令的输入,制定输入的内容,后跟文件名</p>
+</li>
+<li><p>‘&lt;&lt;’或’&lt;&lt;0’ 输入重定向,后跟字符串,用来表示’输入结束’,也可用ctrl+d来结束输入</p>
+</li>
+<li><p>‘..’ 上一级目录</p>
+</li>
+<li><p>‘.’ 当前目录;任意一个字符,且只代表一个字符;隐藏文件的标识;可以使一个配置文件生效;</p>
+</li>
+<li><p>‘~’ 家目录</p>
+</li>
+<li><p>‘|’ 管道,通过管道,把前一个命令的输出交给后一个命令继续处理</p>
+</li>
+<li><p>‘{}’ 配合echo打印序列echo {1..6}</p>
+</li>
+<li><p>PATH 环境变量大写,所有包含在环境变量里面的路径,全局生效/etc/profile,~/.bash_profile或者~/.bashrc</p>
+</li>
+<li><p>awk<br>  [awk ‘{if(NR&gt;19&amp;&amp;NR&lt;31) print $0}’ test.txt; awk ‘/test/‘ /tmp/test.txt; awk -F ‘:’ ‘{print $1}’ /etc/passwd]</p>
+</li>
+<li><p>sed<br>  取内容,-n,取消默认输出,-p,打印,-d,删除[sed -i s#test#demo#g /tmp/test.txt(将test.txt文件中的test替换成demo并输入到原文件中); sed -n ‘/test/p’ /tmp/test.txt(在test.txt中查找包含test的行); sed ‘/test/d’ /tmp/test.txt(在test.txt中查找包含test的行,删除test关键字); sed -n 20,30p /tmp/test.txt(只打印第20-30行的内容)]</p>
+</li>
+<li><p>netstat<br>  查看网络状态(netstat -tlun,netstat -an )</p>
+</li>
+<li><p>lsof -i :port<br>  查看端口</p>
+</li>
+<li><p>reboot<br>  重启</p>
+</li>
+<li><p>shudown -r now<br>  重启</p>
+</li>
+<li><p>shutdown -h now<br>  关机</p>
+</li>
+<li><p>halt<br>  关机</p>
+</li>
+<li><p>init 0<br>  关机</p>
+</li>
+<li><p>init 6<br>  重启</p>
+</li>
+<li><p>last<br>  显示最后登陆过的用户的列表</p>
+</li>
+<li><p>file<br>  查看文件类型</p>
+</li>
+<li><p>^<br>  表示以什么开头</p>
+</li>
+<li><p>$<br>  以什么结尾</p>
+</li>
+<li><p>more<br>  查看文件分屏输出,不能向上翻</p>
+</li>
+<li><p>less<br>  查看文件分屏输出,能向上翻</p>
+</li>
+<li><p>chkconfig –list<br>  查看服务启动级别</p>
+</li>
+<li><p>chkconfig –list sshd<br>  查看sshd服务启动级别</p>
+</li>
+<li><p>chkconfig –level 5 sshd off<br>  关闭sshd服务在运行级别为5的时候关闭启动</p>
+</li>
+<li><p>手动修改运行级别:<br>  关闭:</p>
+<pre><code>rm -f /etc/rc.d/rc3.d/S55sshd
+ln /etc/init.d/sshd /etc/rc.d/rc3.d/K25sshd
+chkconfig --list sshd
+</code></pre><p>  开启:</p>
+<pre><code>rm -f /etc/rc.d/rc3.d/K25sshd
+ln /etc/init.d/sshd /etc/rc.d/rc3.d/S55sshd
+chkconfig --list sshd
+</code></pre></li>
+<li><p>tar<br>  gzip 打包组合zcvf,解包组合zxfv<br>  bzip 打包组合jcvf,解包组合jxvf<br>  -C 指定目录解压,-p保持属性,<br>  z(gzip),c(create),v(verbose),file</p>
+</li>
+<li><p>cut<br>  -d 指定分隔符<br>  -f 数据选列<br>  -c 按字符切割</p>
+</li>
+</ul>
+<ul>
+<li><p>wc<br>  wc -l 统计行数</p>
+</li>
+<li><p>ulimit</p>
+</li>
+</ul>
+<ul>
+<li>kill</li>
+</ul>
+<ul>
+<li>let</li>
+</ul>
+<ul>
+<li>stat</li>
+</ul>
+<p><strong><strong> 基础正则表达式 </strong></strong></p>
+<ul>
+<li><p>^<br>  ^test<br>  检索以test开头的</p>
+</li>
+<li><p>$<br>  test$<br>  检索以test结尾的</p>
+</li>
+<li><p>.<br>  代表且只能代表一个字符</p>
+</li>
+<li><p>\<br>  转移字符,转义特殊含义的字符,例如’.’</p>
+</li>
+<li><p>*<br> 重复0次或多次前面的一个字符</p>
+</li>
+<li><p>.*<br>  重复多次前面的多个字符</p>
+</li>
+<li><p>[]<br>  匹配括号中间的任意字符</p>
+</li>
+<li><p>[^]<br>  匹配除括号中间的任意字符</p>
+</li>
+<li><p>{n,m}<br>  前一个字符串重复n到m之间的次数</p>
+</li>
+<li><p>{,m}<br>  前一个字符重复至多m次</p>
+</li>
+<li><p>{n,}<br>  前一个字符至少重复n次</p>
+</li>
+<li><p>{n}<br>  前一个字符重复n次</p>
+</li>
+</ul>
+<p><strong><strong> 拓展正则表达式 </strong></strong></p>
+<ul>
+<li><p>+<br>  重复一个或多个前面的字符</p>
+</li>
+<li><p>?<br>  重复0个或一个前面的字符</p>
+</li>
+<li><p>|<br>  用或的方式查找多个符合的字符串</p>
+</li>
+<li><p>()<br>  括号里面的当做一个整体进行匹配</p>
+</li>
+<li><p>date<br>  查看系统时间<br>  -s 修改时间<br>  date ‘+%y-%m-%d’ 指定时间格式</p>
+</li>
+</ul>
+<pre><code>**** 查看登陆用户 ****
+</code></pre><ul>
+<li><p>w</p>
+</li>
+<li><p>who</p>
+</li>
+<li><p>users</p>
+</li>
+<li><p>last</p>
+</li>
+<li><p>lastlog</p>
+</li>
+</ul>
+<ul>
+<li><p>userdel<br>  删除用户 -r</p>
+</li>
+<li><p>groupadd<br>  添加组</p>
+</li>
+<li><p>groupdel<br>  删除组</p>
+</li>
+<li><p>change<br>  修改密码过期属性</p>
+</li>
+<li><p>su<br>  切换用户角色</p>
+</li>
+<li><p>sudo<br>  普通用户拥有root或者其他用户的权限</p>
+</li>
+<li><p>vimsudo<br>  编辑sudo配置文件</p>
+</li>
+<li><p>groups</p>
+</li>
+<li><p>newgrp</p>
+</li>
+<li><p>id</p>
+</li>
+<li><p>fdisk<br>  l 查看列表<br>  适合小于2T的分区工具</p>
+</li>
+<li><p>parted<br>  适合对于2T的分区工具</p>
+</li>
+<li><p>mount<br>  挂载(-t 文件系统类型 -o挂载选项  -a)</p>
+</li>
+<li><p>umonut<br>  卸载(-lf强制卸载)</p>
+</li>
+<li><p>dd(dd if=/dev/sda of=mbr.bin bs=512 count=1)<br>  创建一个文件的系统</p>
+</li>
+<li><p>mkfs<br>  格式化命令<br>  -t 文件系统类型(或者mkfs.ext3)</p>
+</li>
+<li><p>df -h<br>  查看磁盘挂载信息</p>
+</li>
+<li><p>du<br>  du -sh 查看文件及目录大小</p>
+</li>
+<li><p>tune2fs<br>  调整文件系统参数</p>
+</li>
+<li><p>dumpe2fs<br>  查看文件信息,block和innode信息</p>
+</li>
+<li><p>paste<br>  按列合并两个文件的结果(paste a.log b.log &gt; c.log)</p>
+</li>
+<li><p>curl<br>  远程获取内容</p>
+</li>
+<li><p>uniq<br>  去重<br>  -c 计算重复的行</p>
+</li>
+<li><p>sort<br>  排序<br>  -nr     按照数字倒序<br>  -t      分割符进行排序<br>  -k      指定分割符之后对那个列进行排序<br>  eg:sort -t “ “ -k 2 test.txt 按照空格进行切分,并以第二行进行排序</p>
+<pre><code>k 3,3       对第三个列进行排序
+k 4.1,4.3   对第四列的第一个字符到第四列的第三个字符进行排序
+</code></pre></li>
+<li><p>tr<br>  tr用来从标准输入中通过替换或删除操作进行字符转换<br>  tr -c -d -s [“string1_to_translate_from”] [“string2_to_translate_to”] &lt; input-file</p>
+<p>  cat file | tr [0-9] [a-j] &gt; new_file        #将file中的0-9替换成a-j</p>
+<p>  cat file | tr -s [a-zA-Z] &gt; new_file        #删除“连续着的”重复字母，只保留第一个<br>  -c 用字符串1中字符集的补集替换此字符集，要求字符集为ASCII。</p>
+<p>  cat file | tr -d “test”                     #删除file中出现的test字符<br>  -d 删除字符串1中所有输入字符。</p>
+<p>  cat file | tr -s “\n” &gt; new_file            #删除空行<br>  -s 删除所有重复出现字符序列，只保留第一个；即将重复出现字符串压缩为一个字符串</p>
+</li>
+<li><p>pstree<br>  将进程按照层级排列出来<br>  -a  显示所有的进程</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/29/技术词汇学习/" rel="next" title="技术词汇学习">
+                <i class="fa fa-chevron-left"></i> 技术词汇学习
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/08/linux系统设备只是介绍/" rel="prev" title="linux系统设备只是介绍">
+                linux系统设备只是介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <div onclick="showGitment()" id="gitment_title" class="gitment_title">显示 Gitment 评论</div>
+    <div id="container" style="display:none"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+      }
+    }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'SunnySmilez',
+        repo: 'sunnysmilez.github.io',
+        oauth: {
+          client_id: '0f0f9461c8cd507d8d51',
+          client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f'
+        }
+      });
+      gitment.render('container');
+    }
+    </script>
+
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="狂奔的菜鸟" />
+          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives/">
+              <span class="site-state-item-count">153</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnySmilez" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
