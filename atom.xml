@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-01-02T11:06:05.000Z</updated>
+  <updated>2017-12-28T02:44:39.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,41 +13,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[redis对象类型及数据结构]]></title>
-    <link href="http://www.cxyteam.com/2018/01/02/redis%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/</id>
-    <published>2018-01-02T09:42:59.000Z</published>
-    <updated>2018-01-02T11:06:05.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
-可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
-</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
-因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
-</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
-    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
-    2、列表对象保存的元素数量小于 512 个
-</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
-    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
-    2、哈希对象保存的键值对数量小于 512 个；
-</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
-    1、集合对象保存的所有元素都是整数值；
-    2、集合对象保存的元素数量不超过 512 个；
-</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
-    1、有序集合保存的元素数量小于 128 个；
-    2、有序集合保存的所有元素成员的长度都小于 64 字节；
-</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
   
   <entry>
     <title><![CDATA[常用命令]]></title>
@@ -1116,6 +1081,33 @@ clean :
       <category term="C" scheme="http://www.cxyteam.com/tags/C/"/>
     
       <category term="C" scheme="http://www.cxyteam.com/categories/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[编译reids的sds文件]]></title>
+    <link href="http://www.cxyteam.com/2017/05/08/%E7%BC%96%E8%AF%91reids%E7%9A%84sds%E6%96%87%E4%BB%B6/"/>
+    <id>http://www.cxyteam.com/2017/05/08/编译reids的sds文件/</id>
+    <published>2017-05-08T12:30:02.000Z</published>
+    <updated>2017-05-09T01:51:49.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><a href="#在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来" class="headerlink" title="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"></a>在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来</h6><h1 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h1><h6 id="想当然的，sds-c的文件嘛，直接使用如下命令"><a href="#想当然的，sds-c的文件嘛，直接使用如下命令" class="headerlink" title="想当然的，sds.c的文件嘛，直接使用如下命令"></a>想当然的，sds.c的文件嘛，直接使用如下命令</h6><pre><code>gcc sds.c -o sds.o
+</code></pre><h6 id="结果也很想当然的报错"><a href="#结果也很想当然的报错" class="headerlink" title="结果也很想当然的报错"></a>结果也很想当然的报错</h6><p><img src="/img/redis/sds_gcc_error.png" alt="Alt text" title="写出代码"></p>
+<h5 id="本能的去指定头文件-依旧报错"><a href="#本能的去指定头文件-依旧报错" class="headerlink" title="本能的去指定头文件,依旧报错"></a>本能的去指定头文件,依旧报错</h5><pre><code>gcc -I sds.h zmalloc.h sds.c -o sds.o
+</code></pre><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h6 id="google后得知，是动态链接库没指定好"><a href="#google后得知，是动态链接库没指定好" class="headerlink" title="google后得知，是动态链接库没指定好"></a>google后得知，是动态链接库没指定好</h6><h6 id="首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"><a href="#首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果" class="headerlink" title="首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"></a>首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果</h6><h6 id="编译动态链接库"><a href="#编译动态链接库" class="headerlink" title="编译动态链接库"></a>编译动态链接库</h6><pre><code>gcc zmalloc.c -fPIC -shared -o libzmalloc.so
+命名的格式需要注意一下，lib+文件名+&apos;.so&apos;
+</code></pre><h6 id="指定动态链接库，编译sds-c"><a href="#指定动态链接库，编译sds-c" class="headerlink" title="指定动态链接库，编译sds.c"></a>指定动态链接库，编译sds.c</h6><pre><code>gcc sds.c -L. -l zmalloc -o sds.o
+-L：添加库文件的搜索路径
+-l：指定需要链接的库，该名字就是lib***.so中的名称
+</code></pre><h6 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h6><pre><code>./sds.o
+</code></pre><h6 id="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！"><a href="#非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！" class="headerlink" title="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！"></a>非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！</h6><p><img src="/img/redis/sds_gcc_succ.png" alt="Alt text" title="写出代码"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
     
   </entry>
   

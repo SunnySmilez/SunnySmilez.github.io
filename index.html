@@ -233,165 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/redis对象类型及数据结构/" itemprop="url">redis对象类型及数据结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T17:42:59+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
-可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
-</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
-因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
-</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
-    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
-    2、列表对象保存的元素数量小于 512 个
-</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
-    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
-    2、哈希对象保存的键值对数量小于 512 个；
-</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
-    1、集合对象保存的所有元素都是整数值；
-    2、集合对象保存的元素数量不超过 512 个；
-</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
-    1、有序集合保存的元素数量小于 128 个；
-    2、有序集合保存的所有元素成员的长度都小于 64 字节；
-</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/28/常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1050,11 +891,202 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/11/26/docker创建laravel环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/26/docker创建laravel环境/" itemprop="url">docker创建laravel环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T18:39:18+08:00">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/laravel/" itemprop="url" rel="index">
+                    <span itemprop="name">laravel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜像" class="headerlink" title="拉取laravel镜像"></a>拉取laravel镜像</h1><pre><code>docker pull laraedit/laraedit
+</code></pre><h1 id="创建laravel容器"><a href="#创建laravel容器" class="headerlink" title="创建laravel容器"></a>创建laravel容器</h1><pre><code>docker run --name laravel -itd -p 8080:80 -v ~/Desktop/laravel:/var/www/html/app laraedit/laraedit
+--name 指定新建容器名称
+-p 端口映射，指定本地端口8080映射到容器的80端口
+-v 目录挂载，本机目录:容器目录
+-d 在后台运行
+</code></pre><h1 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h1><pre><code>docker exec -it laravel /bim/bash
+</code></pre><h1 id="创建项目-容器内"><a href="#创建项目-容器内" class="headerlink" title="创建项目(容器内)"></a>创建项目(容器内)</h1><pre><code>cd /var/www/html/
+laravel new app
+</code></pre><h1 id="查看应用日志（容器内）"><a href="#查看应用日志（容器内）" class="headerlink" title="查看应用日志（容器内）"></a>查看应用日志（容器内）</h1><pre><code>tail -f /var/www/html/app/storage/logs/laravel.log
+</code></pre><h1 id="查看容器日志-容器外"><a href="#查看容器日志-容器外" class="headerlink" title="查看容器日志(容器外)"></a>查看容器日志(容器外)</h1><pre><code>docker logs -f laravel
+</code></pre><h1 id="创建文件（容器内）"><a href="#创建文件（容器内）" class="headerlink" title="创建文件（容器内）"></a>创建文件（容器内）</h1><pre><code>touch /var/www/html/app/.env
+添加内容如下：
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_LOG_LEVEL=debug
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+</code></pre><h1 id="生成key"><a href="#生成key" class="headerlink" title="生成key"></a>生成key</h1><pre><code>php /var/www/html/app/artisan key:generate
+</code></pre><h1 id="测试安装成功"><a href="#测试安装成功" class="headerlink" title="测试安装成功"></a>测试安装成功</h1><pre><code>访问127.0.0.1:8080会看到laravel首页，否则的话就查日志看看原因吧
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1100,7 +1132,7 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

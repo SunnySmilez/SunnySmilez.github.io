@@ -233,319 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/18/C的存储器和指针/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/18/C的存储器和指针/" itemprop="url">C的存储器和指针</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T13:23:04+08:00">
-                2016-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><pre><code>存储器中某条数据的地址(用于保存存储器地址的变量)
-</code></pre><h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><pre><code>避免副本
-共享数据
-</code></pre><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><pre><code>计算机系统中的记忆设备，用来存放程序和数据
-它分为(低位到高位):
-    代码块
-        一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
-
-    常量段
-        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
-
-    全局量
-        定义在函数之外,对所有函数可见。程序一开始运行就会创建全局量,可以修改他们
-
-    堆
-        用于动态存储:程序在运行时创建一些数据,然后使用很长一段时间
-
-    栈
-        存储器用来保存局部变量的部分。每当调用函数,函数的所有局部变量都在栈上创建。它之所有叫栈是 因为它看起来就像堆积而成的栈板:当进入函数时,变量会放到栈顶;当离开函数时,把变量从栈顶拿走。它从存储器的顶部开始,向下增长。
-</code></pre><h1 id="如何找出变量在存储器中的指针-使用-amp-运算符"><a href="#如何找出变量在存储器中的指针-使用-amp-运算符" class="headerlink" title="如何找出变量在存储器中的指针(使用&amp;运算符)"></a>如何找出变量在存储器中的指针(使用&amp;运算符)</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int point = 4;
-    /*
-        %p用于打印指针
-    */
-    printf(&quot;point的指针位置是:%p\n&quot;, &amp;point);
-    return 0;
-}
-</code></pre><h1 id="如何读取指针中的内容-使用-运算符"><a href="#如何读取指针中的内容-使用-运算符" class="headerlink" title="如何读取指针中的内容(使用*运算符)"></a>如何读取指针中的内容(使用*运算符)</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int  c = 10;
-    /*
-        获取变量c的指针地址 &amp;运算符
-        注意需要用int *申明指针变量
-    */
-    int *point = &amp;c;
-    /*
-        获取指针地址对应的值 *运算符
-    */
-    int val = *point;
-    printf(&quot;指针是%p\n&quot;, &amp;c);
-    printf(&quot;指针对应的值是%d\n&quot;, val);
-}
-</code></pre><h1 id="改变地址中的内容"><a href="#改变地址中的内容" class="headerlink" title="改变地址中的内容"></a>改变地址中的内容</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int c = 10;
-    int *point = &amp;c;
-    int val = *point;
-    *point = 99;
-    printf(&quot;改变后的c的值为%d&quot;, c);
-}
-</code></pre><h1 id="数组和函数中的指针变量"><a href="#数组和函数中的指针变量" class="headerlink" title="数组和函数中的指针变量"></a>数组和函数中的指针变量</h1><pre><code>#include &lt;stdio.h&gt;
-
-void size(char str[])
-{
-    printf(&quot;传入的字符串是%s\n&quot;, str);
-
-    /*
-        如果函数参数申明为数组类型,他会被当做指针处理,因此sizeof得到的值是8(64为系统,sizeof(* int))
-    */
-    printf(&quot;字符串的长度是:%i\n&quot;, sizeof(str));
-    char str_size[] = &quot;this is demo&quot;;
-    char * point = *str_size;
-
-    /*
-        sizeof直接传入数组依然计算的是数组的长度
-    */
-    printf(&quot;数组变量的长度是:%i\n&quot;, sizeof(str_size));
-
-    printf(&quot;数组变量指针的长度是:%i\n&quot;, sizeof(point));
-
-    /*
-        数组变量可以用作指针
-    */
-    printf(&quot;数组的变量的地址是:%s\n&quot;, &amp;str_size);
-
-    /*
-        数组变量指向数组的第一个值
-    */
-    printf(&quot;数组指针变量的地址是:%s\n&quot;, &amp;point);
-    *point = &quot;test&quot;;
-
-    /*
-        编译不能通过,数组变量不能指向其他地方
-    */
-    printf(&quot;指针变量被赋值了吗?%s\n&quot;, point);
-}
-
-
-int main()
-{
-    size(&quot;test&quot;);
-}
-</code></pre><h1 id="为什么数组变量不能指向其他地方"><a href="#为什么数组变量不能指向其他地方" class="headerlink" title="为什么数组变量不能指向其他地方?"></a>为什么数组变量不能指向其他地方?</h1><pre><code>当创建指针变量时,计算机会分配4或8个字节的存储空间。如果创建的是数组,计算机会为数组分配存储空间,但不会为数组变量分配任何空间,编译器仅在出现它的地方把它替换成数组的起始地址
-</code></pre><h1 id="对于数组取值的两种方式"><a href="#对于数组取值的两种方式" class="headerlink" title="对于数组取值的两种方式"></a>对于数组取值的两种方式</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    char str[] = &quot;this is arr&quot;;
-    printf(&quot;看看结果%c\n&quot;, str[3]);
-    printf(&quot;另外一种方式看看结果%c\n&quot;, *(str+3));
-
-    int nums[] = {1,2,3};
-    printf(&quot;看看结果%i\n&quot;, nums[2]);
-    printf(&quot;另外一种方式看看结果%i\n&quot;, *(nums+2));
-    return 0;
-}
-
-1.arr[i]
-2.*(arr+i)
-</code></pre><h1 id="指针为什么需要有类型"><a href="#指针为什么需要有类型" class="headerlink" title="指针为什么需要有类型?"></a>指针为什么需要有类型?</h1><pre><code>#include &lt;stdio.h&gt;
-
-int main()
-{
-    int nums[] = {1,2,3};
-
-    /*
-        两个地址相隔四个字节(注意是16进制)
-    */
-    printf(&quot;看看第一个元素的位置%p\n&quot;, nums);
-    printf(&quot;看看第二个元素的位置%p\n&quot;, nums+1);
-    return 0;
-}
-因为对于char指针加1,指针会指向存储器的下一个地址,因为char就占1字节
-int通常占四个字节,如果int指针加1,编译后的代码就会对存储器加4
-</code></pre><h1 id="指针输入数据"><a href="#指针输入数据" class="headerlink" title="指针输入数据"></a>指针输入数据</h1><pre><code>scanf
-fgets
-</code></pre><h1 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h1><pre><code>#include &lt;stdio.h&gt;
-int main()
-{
-    /*
-        输入字符串
-    */
-    char test[20];
-    scanf(&quot;%19s&quot;, test);
-    printf(&quot;输入的字符串为:%s\n&quot;, test);
-
-    /*
-        输入数字
-    */
-    int t;
-    scanf(&quot;%i&quot;, &amp;t);
-    printf(&quot;输入的数字是%i\n&quot;, t);
-}
-
-为什么数组传入变量名就可以,数字需要传&apos;&amp;&apos;呢?
-scanf和函数一样,传入数组的变量名会当做指针使用,它会根据指针去修改对应的值
-
-为什么scanf的时候需要指定&apos;%19s&apos;?
-如果不指定scanf读取的长度,当用户输入的值超过test数组的长度的时候会导致内存溢出。因此一般指定scanf的长度为test长度减1(去掉一个结束字符&apos;\0&apos;)
-</code></pre><h1 id="fgets"><a href="#fgets" class="headerlink" title="fgets"></a>fgets</h1><pre><code>#include &lt;stdio.h&gt;
-int main()
-{
-    char str[4];
-    /*
-        此处需要注意的是str是数组变量,所以传入的是str不是* str
-    */
-    fgets(str, sizeof(str), stdin);
-    printf(&quot;输入的字符为%s\n&quot;, str);
-}
-</code></pre><h1 id="scanf和fgets"><a href="#scanf和fgets" class="headerlink" title="scanf和fgets"></a>scanf和fgets</h1><pre><code>1.scanf记得在格式串中加入限制长度,sacnf就能限制用户输入长度(没有强制要求),并且输入的字符长度需要减去结束符的长度,fgets强制限制用户输入字符数
-2.scanf允许输入多个字段,而且能指定结构化数据根据什么字符划分。fgets只允许缓冲区输入一个字符串,而且只能是字符串,不能是其他数据类型
-3.sanf不能输入空格,遇到空格就会停止读取。fget可以输入空格
-</code></pre><h1 id="字符串创建的过程"><a href="#字符串创建的过程" class="headerlink" title="字符串创建的过程"></a>字符串创建的过程</h1><pre><code>1.载入字符串字面值(也就是在常量(只读)中定义字面值)
-2.在栈上新建一个数组,主要会分配数组的存储块大小
-3.初始化数组,把字符串字面值复制到栈(可修改)上
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言语句/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1349,11 +1036,196 @@ option一些附加选项
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/12/lvs与keepalived/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/12/lvs与keepalived/" itemprop="url">lvs与keepalived</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T01:32:55+08:00">
+                2016-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><pre><code>一组相互独立的计算机,利用高速通信网络组成的一个计算机系统,每个集群节点都是运行其自己进程的一个独立服务器
+</code></pre><h1 id="集群特点"><a href="#集群特点" class="headerlink" title="集群特点"></a>集群特点</h1><pre><code>1.高性能
+2.价格有效性
+3.可伸缩性
+4.高可用性
+</code></pre><h1 id="集群优势"><a href="#集群优势" class="headerlink" title="集群优势"></a>集群优势</h1><pre><code>1.透明性
+2.高性能
+3.高可用性
+4.可伸缩性
+5.可管理性
+6.可编程性
+</code></pre><h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><pre><code>提供一种廉价,有效,透明的方法,来扩展网络设备和服务器的负载,贷款,增加吞吐量,加强网络数据处理能力,提高网络的灵活性和可用性
+</code></pre><h1 id="负载均衡搭建需求"><a href="#负载均衡搭建需求" class="headerlink" title="负载均衡搭建需求"></a>负载均衡搭建需求</h1><pre><code>1.单台机器无法承受大规模的并发访问或数据流量分担到多台节点设备上处理,减少用户等待响应时间,提升用户体验
+2.单个重负载的运算分担到多台节点设备上做并行处理,每个节点设备处理结束后,将结果汇总,返回给用户,系统处理能力得到大幅度提高
+3.7*24的服务保证,任意一个或多个有限节点设备宕机,要求不影响业务
+</code></pre><h1 id="LVS-Linux-Virtual-Servel-linux虚拟服务器"><a href="#LVS-Linux-Virtual-Servel-linux虚拟服务器" class="headerlink" title="LVS(Linux Virtual Servel linux虚拟服务器)"></a>LVS(Linux Virtual Servel linux虚拟服务器)</h1><pre><code>一个虚拟的服务器集群系统,可以在linux/unix平台下实现负载均衡集群功能。
+</code></pre><h1 id="VIP-Virtual-Ip-Address-虚拟IP地址"><a href="#VIP-Virtual-Ip-Address-虚拟IP地址" class="headerlink" title="VIP(Virtual Ip Address 虚拟IP地址)"></a>VIP(Virtual Ip Address 虚拟IP地址)</h1><pre><code>为Director用于向客户端计算机提供服务的IP地址
+</code></pre><h1 id="RIP-Real-Server-Ip-Address-真实IP地址"><a href="#RIP-Real-Server-Ip-Address-真实IP地址" class="headerlink" title="RIP(Real Server Ip Address 真实IP地址)"></a>RIP(Real Server Ip Address 真实IP地址)</h1><pre><code>在集群下面节点上使用的IP地址
+</code></pre><h1 id="DIP-Director-Ip-Address"><a href="#DIP-Director-Ip-Address" class="headerlink" title="DIP(Director Ip Address)"></a>DIP(Director Ip Address)</h1><pre><code>用于连接内外网络的IP地址,物理网卡上的IP地址。是负载均衡器上的IP
+</code></pre><h1 id="CIP-Client-Ip-Address-客户端主机IP地址"><a href="#CIP-Client-Ip-Address-客户端主机IP地址" class="headerlink" title="CIP(Client Ip Address 客户端主机IP地址)"></a>CIP(Client Ip Address 客户端主机IP地址)</h1><pre><code>客户端用户计算机请求集群服务器的IP地址,该地址用作发给集群的请求的源IP地址
+</code></pre><h1 id="NAT-Network-Address-Translation-模式-网络地址转换-收费站模式"><a href="#NAT-Network-Address-Translation-模式-网络地址转换-收费站模式" class="headerlink" title="NAT(Network Address Translation)模式-网络地址转换(收费站模式)"></a>NAT(Network Address Translation)模式-网络地址转换(收费站模式)</h1><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><pre><code>1.将请求报文(DNAT)和响应报文(SNAT),通过调度器地址重写然后再转发给内部服务器,报文返回时再改写成原来用户请求的地址
+2.只需要在调度器LB上配置WAN公网IP即可,调度器也有私有LAN IP和内部RS节点通信
+3.每台内部RS节点的网关地址,必须要配成调度器LB的私有LAN内物理网卡地址(LDIP),这样才能保证数据报文返回时仍然经过调度器LB
+4.由于请求与响应报文都经过调度器LB,因此,网站访问量大时调度器LB有较大瓶颈,一般要求最多10-10台节点
+5.NAT模式支持对IP及端口的转换,即用户请求10.0.0.1:80,可以通过调度器转换到RS节点的10.0.0.1:8080(DR和TUN模式不能)
+6.所有NAT内部RS节点只需配置私有LAN IP即可
+7.由于数据包来回都需要经过调度器,因此,需要开启内核转发net.ipv4.ip_forward=1,也包括iptables防火墙的forward功能
+</code></pre><h1 id="TUNNEL"><a href="#TUNNEL" class="headerlink" title="TUNNEL"></a>TUNNEL</h1><pre><code>1.负载均衡器通过把请求的报文通过IP隧道(ipip隧道)的方式(请求报文不经过原目的地址的改写(包括MAC),而是直接封装成另外的IP报文),转发至真实服务器,而真实服务器响应处理后直接返回给客户端用户
+2.由于真实服务器将将响应处理后的报文直接返回给客户端用户,因此,最好RS有一个外网IP地址,这样效率才会更高。理论上:只要能出外网即可,无需外网ip
+3.由于调度器LB只处理入站请求的报文。因此,次集群系统吞吐量可以提高10倍以上,但隧道模式也会带来一定的系统开销,TUN模式适合LAN/WAN
+4.TUN模式的LAN环境转发不如DR模式效率高,而且还考虑系统对IP隧道的支持问题
+5.所有的RS服务器都要绑定VIP,一直ARP,配置复杂
+6.LAN换几个一般采用DR模式,WAM环境可以采用TUN模式,但是当前WAN环境下,请求转发更多的呗haproxy/nginx/DNS调度代理取代。因此,TUN模式在国内公司实际用的很少。跨机房应用要么拉光钎成局域网,要么DNS调度,底层数据还得同步
+7.直接对外访问业务,不直接对外的业务
+</code></pre><h1 id="DR模式-直接路由模式"><a href="#DR模式-直接路由模式" class="headerlink" title="DR模式-直接路由模式"></a>DR模式-直接路由模式</h1><pre><code>通过改写请求报文的目标MAC地址,将请求发给真实服务器的,而真实服务器将响应后的结果直接返回给客户端用户。
+</code></pre><h1 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h1><pre><code>1.通过在调度器LB上修改数据包的目的MAC地址实现转发。注意源IP地址仍然是CIP,目的IP地址仍然是VIP
+2.请求报文经过调取器LB,而RS响应处理后的报文无需经过调度器LB,因此并发访问量大时使用效率很高(和NAT模式比)
+3.DR模式是通过MAC地址的改写机制实现的转发,因此,所有的RS节点和调节器LB只能在一个局域网LAN中
+4.需要注意RS节点的VIP绑定(lo:vip,lo1:vip)和ARP抑制问题
+5.RS节点的默认网关不需要是调度器LB的DIP,而直接是IDC机房分配的上级路由器的IP(这是RS带有外网IP地址的情况),理论讲:只要RS可以出网即可,不是必须配置外网IP
+6.调度器仅进行目的MAC地址的改写,因此,调度器LB无法改变请求的报文的目的和端口
+7.调度器LB知乎支持所有的UNIX,LINUX系统
+8.DR模式效率很高,但是配置比较麻烦(访问量不是很大的可以使用日pv2000w或并发请求1万以下:haproxy/nginx)
+9.直接对外访问业务
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1399,7 +1271,7 @@ option一些附加选项
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

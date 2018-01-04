@@ -233,200 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记延迟调用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/28/go学习笔记延迟调用/" itemprop="url">go学习笔记延迟调用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:18:53+08:00">
-                2017-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h1><h6 id="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"><a href="#使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理" class="headerlink" title="使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理"></a>使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理</h6><pre><code>package main
-
-import &quot;os&quot;
-
-func test() error {
-    f, err := os.Create(&quot;test.txt&quot;) //创建一个文件
-
-    if err != nil { return err }    //创建失败返回错误信息
-
-    defer f.Close()     //不管是否出现错误都会关闭文件，defer会在ret之前执行
-    f.WriteString(&quot;Hello,world!&quot;)   //往文件中写入内容
-    return nil
-}
-
-func main() {
-    test()
-}
-</code></pre><h6 id="多个defer注册，按FILO次序执行"><a href="#多个defer注册，按FILO次序执行" class="headerlink" title="多个defer注册，按FILO次序执行"></a>多个defer注册，按FILO次序执行</h6><pre><code>package main
-
-func test(x int) int {
-    defer println(&quot;a&quot;)
-    defer println(&quot;b&quot;)
-
-    defer func() {
-        println(100 / x)
-    }()
-
-    defer println(&quot;c&quot;)
-
-    return 1
-}
-
-func main() {
-    test(20)        //输出结果为c 5 b a
-}
-</code></pre><h6 id="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"><a href="#延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取" class="headerlink" title="延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取"></a>延迟调用参数在注册时求值或复制，可用指针或闭包延迟读取</h6><pre><code>package main
-
-func test() {
-    x, y := 10, 20
-
-    defer func(i int) {
-        println(&quot;defer:&quot;, i, y) //y闭包引用
-    }(x)    //x被复制
-
-    x += 10
-    y += 100
-    println(&quot;x=&quot;, x, &quot;y=&quot;, y)
-}
-
-func main() {
-    test()
-    //结果为:x= 20 y= 120   defer: 10 120
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记异常处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1629,11 +1435,206 @@ func main() {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记枚举/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">go学习笔记枚举</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:32:10+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h6 id="关键字iota定义常量数组中从0开始安航基数的自增枚举值"><a href="#关键字iota定义常量数组中从0开始安航基数的自增枚举值" class="headerlink" title="关键字iota定义常量数组中从0开始安航基数的自增枚举值"></a>关键字iota定义常量数组中从0开始安航基数的自增枚举值</h6><pre><code>package main
+
+func main() {
+    const (
+        a = iota
+        b
+        c
+        d
+    )
+
+    println(a,b,c,d)    //0 1 2 3
+}
+</code></pre><h6 id="同一个常量组中可以提供多个iota，它们各自增长"><a href="#同一个常量组中可以提供多个iota，它们各自增长" class="headerlink" title="同一个常量组中可以提供多个iota，它们各自增长"></a>同一个常量组中可以提供多个iota，它们各自增长</h6><pre><code>package main
+
+func main() {
+    const (
+        a,b = iota, iota
+        c,d
+        e,f
+    )
+
+    println(c,d)    //1 1
+}
+</code></pre><h6 id="如果iota自增被打断，须显示恢复"><a href="#如果iota自增被打断，须显示恢复" class="headerlink" title="如果iota自增被打断，须显示恢复"></a>如果iota自增被打断，须显示恢复</h6><pre><code>package main
+
+func main() {
+    const (
+        a = iota
+        b = &quot;a&quot;
+        c = 100
+        d = iota
+        e
+    )
+
+    println(d, e)   //3 4 常量值d进行了显示恢复iota的值，计算的时候算上了b,c两行
+}
+</code></pre><h6 id="可通过自定义类型来限制枚举类型限制"><a href="#可通过自定义类型来限制枚举类型限制" class="headerlink" title="可通过自定义类型来限制枚举类型限制"></a>可通过自定义类型来限制枚举类型限制</h6><pre><code>package main
+
+type test int   //声明一个自定义类型
+
+const (
+    black test = iota   //注意black需要制定一个test类型
+    red
+    blue
+)
+
+func demo(c test) {}    //函数指定传入test类型
+
+func main() {
+    x := red
+    demo(x)
+    x := 1
+    demo(x)         //报错，此处的x类型已经变成了int类型
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1679,7 +1680,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

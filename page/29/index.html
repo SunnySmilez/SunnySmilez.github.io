@@ -233,157 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/分页的思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">分页的思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T16:53:46+08:00">
-                2015-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
-<li>交易记录条数过多，需要分页处理</li>
-</ul>
-<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
-<li>当进行翻页的时候会有重复的数据数据出现。</li>
-<li>原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page<em>$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易记录产生的时候，实际上对应的第二页得数据应该是第22到第41条(</em>因为产生记录之前的第20条数据，已经顺移了一个位置*)，实际上显示的是第21到第40条，所以第21条数据应该是重复的</li>
-</ul>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
-<li>在进行分页的时候，传入当前页的最有一个记录的id然后在分页的sql变成where id&gt;? limit $lenght</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/decrby的一个坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1029,11 +878,265 @@ qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value�
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/28/Xhprof安装与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/28/Xhprof安装与使用/" itemprop="url">Xhprof安装与使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-28T01:01:40+08:00">
+                2015-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p> <em>Xhprof能用来做什么？</em><br>    XHProf是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情 况。一个函数的开销，可细分成调用者和被调用者的开销。</p>
+<h3 id="Xhprof-安装"><a href="#Xhprof-安装" class="headerlink" title="Xhprof 安装"></a>Xhprof 安装</h3><ul>
+<li><p>Xhprof安装</p>
+<pre><code>wget http://pecl.php.net/get/xhprof-0.9.2.tgz 
+tar xzvf xhprof-0.9.2.tgz 
+cp -r xhprof_html xhprof_lib /usr/local/www/
+cd xhprof-0.9.2/extension/
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make  
+make install
+</code></pre><p>  修改php.ini，添加xhprof.so （<em>注意xhprof.so需要在extension_dir目录下</em>）</p>
+<pre><code>extension=xhprof.so   
+xhprof.output_dir=/var/logs/xhprof
+</code></pre></li>
+<li><p>如果出现xhprof.lo错误,可能是版本兼容的问题,请更换xhprof的版本执行,下载地址<a href="http://pan.baidu.com/s/1i3OOuDB" title="xhprof" target="_blank" rel="external">xhprof-0.9.4</a>,重新再执行上面操作</p>
+</li>
+<li><p>graphviz安装（<em>性能数据也可以通过callgraph视图来查看 。callgraph 会高亮显示程序的关键路径。</em>）</p>
+<pre><code>wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.24.0.tar.gz
+tar zxf graphviz-2.24.0.tar.gz
+cd graphviz-2.24.0
+编译安装
+./configure
+make
+make install
+</code></pre></li>
+</ul>
+<h3 id="Xhprof-使用"><a href="#Xhprof-使用" class="headerlink" title="Xhprof 使用"></a>Xhprof 使用</h3><ul>
+<li><p>XHProf.class.php（<em>本事例是将xhprof_html xhprof_lib XHProf.class.php demo.php放在同一级目录下面，需要web程序能够访问到</em>）</p>
+<pre><code>&lt;?php
+require_once &apos;xhprof_lib/display/xhprof.php&apos;;
+require_once &apos;xhprof_lib/utils/xhprof_runs.php&apos;;
+class Xhprof {
+
+    public function start(array $ignored_funcs=array()) {
+        xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY, array(&apos;ignored_funcs&apos; =&gt; $ignored_funcs));
+    }
+
+    public function end() {
+        $data = xhprof_disable();
+        return $data;
+    }
+
+    public function createImg($data){
+        $source = &quot;xhprof&quot;;
+        $threshold = 0.01;
+        $type = &quot;png&quot;;
+        $func = &apos;&apos;;
+        $page = &quot;&quot;;
+        $critical_path = true;
+
+        $script = xhprof_generate_dot_script($data, $threshold, $source, $page,
+            $func, $critical_path);
+        $content = xhprof_generate_image_by_dot($script, $type);
+
+        $img_name = uniqid().&quot;.png&quot;;
+        $img_path = &quot;/data1/htdocs/xhprof.com/xhprof_img/&quot;.$img_name;
+        file_put_contents($img_path, $content);
+
+        return &quot;&lt;img src=&apos;http://xhprof.com/xhprof_img/&quot;.$img_name.&quot;&apos;&gt;&lt;img&gt;&quot;;
+    }
+
+    public function getHtml($data) {
+        $xhprof_runs = new \XHProfRuns_Default();
+        $run_id = $xhprof_runs-&gt;save_run($data, &quot;xhprof_foo&quot;);
+
+        return &quot;&lt;a href=\&quot;http://xhprof.com/xhprof_html/index.php?run=$run_id&amp;source=xhprof_foo\&quot; target=\&quot;iframe_a\&quot;&gt;性能分析结果&lt;/a&gt;&quot;;
+    }
+}
+</code></pre></li>
+<li><p>demo.php</p>
+<pre><code>&lt;?php
+ini_set(&apos;display_errors&apos;, 1);
+include &apos;./XHProf.class.php&apos;;
+$objProf = new XHProf();
+
+function foo() {
+    echo &apos;hello world&apos;;
+}
+
+//开启xhprof并开始记录
+$objProf-&gt;start();
+
+//运行一些函数
+foo();
+
+//停止记录并取到结果
+$data = $objProf-&gt;end();
+$img = $objProf-&gt;createImg($data);
+$href = $objProf-&gt;getHtml($data);
+var_dump($img, $href);
+</code></pre></li>
+</ul>
+<h3 id="结果查询"><a href="#结果查询" class="headerlink" title="结果查询"></a>结果查询</h3><pre><code>Function Name 函数名
+Calls 调用次数
+Calls% 调用百分比
+Incl. Wall Time (microsec) 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
+IWall% 调用的包括子函数所有花费时间的百分比
+Excl. Wall Time (microsec) 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒)
+EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间
+Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间
+减Excl. Wall Time即为等待cpu的时间
+ICpu% Incl. CPU(microsecs)的百分比
+Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。
+ECPU% Excl. CPU(microsec)的百分比
+Incl.MemUse(bytes) 包括子函数执行使用的内存。
+IMemUse% Incl.MemUse(bytes)的百分比
+Excl.MemUse(bytes) 函数执行本身内存,以字节算
+EMemUse% Excl.MemUse(bytes)的百分比
+Incl.PeakMemUse(bytes) Incl.MemUse的峰值
+IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比
+Excl.PeakMemUse(bytes) Excl.MemUse的峰值
+EPeakMemUse% EMemUse% 峰值百分比
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1079,7 +1182,7 @@ qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

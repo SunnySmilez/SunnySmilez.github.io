@@ -233,157 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/05/08/编译reids的sds文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/08/编译reids的sds文件/" itemprop="url">编译reids的sds文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T20:30:02+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h6 id="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"><a href="#在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来" class="headerlink" title="在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来"></a>在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来</h6><h1 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h1><h6 id="想当然的，sds-c的文件嘛，直接使用如下命令"><a href="#想当然的，sds-c的文件嘛，直接使用如下命令" class="headerlink" title="想当然的，sds.c的文件嘛，直接使用如下命令"></a>想当然的，sds.c的文件嘛，直接使用如下命令</h6><pre><code>gcc sds.c -o sds.o
-</code></pre><h6 id="结果也很想当然的报错"><a href="#结果也很想当然的报错" class="headerlink" title="结果也很想当然的报错"></a>结果也很想当然的报错</h6><p><img src="/img/redis/sds_gcc_error.png" alt="Alt text" title="写出代码"></p>
-<h5 id="本能的去指定头文件-依旧报错"><a href="#本能的去指定头文件-依旧报错" class="headerlink" title="本能的去指定头文件,依旧报错"></a>本能的去指定头文件,依旧报错</h5><pre><code>gcc -I sds.h zmalloc.h sds.c -o sds.o
-</code></pre><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h6 id="google后得知，是动态链接库没指定好"><a href="#google后得知，是动态链接库没指定好" class="headerlink" title="google后得知，是动态链接库没指定好"></a>google后得知，是动态链接库没指定好</h6><h6 id="首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"><a href="#首先删除’-ifdef-SDS-TEST-MAIN’以及’-endif’，虽然我不太能看懂，猜测就是只有在’SDS-TEST-MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS-TEST-MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果" class="headerlink" title="首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果"></a>首先删除’#ifdef SDS_TEST_MAIN’以及’#endif’，虽然我不太能看懂，猜测就是只有在’SDS_TEST_MAIN’这个存在的时候，才去定义main函数，由于我不知道SDS_TEST_MAIN他是在哪个文件中定义的，所以干脆直接删除，反正我也只是为了看运行结果</h6><h6 id="编译动态链接库"><a href="#编译动态链接库" class="headerlink" title="编译动态链接库"></a>编译动态链接库</h6><pre><code>gcc zmalloc.c -fPIC -shared -o libzmalloc.so
-命名的格式需要注意一下，lib+文件名+&apos;.so&apos;
-</code></pre><h6 id="指定动态链接库，编译sds-c"><a href="#指定动态链接库，编译sds-c" class="headerlink" title="指定动态链接库，编译sds.c"></a>指定动态链接库，编译sds.c</h6><pre><code>gcc sds.c -L. -l zmalloc -o sds.o
--L：添加库文件的搜索路径
--l：指定需要链接的库，该名字就是lib***.so中的名称
-</code></pre><h6 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h6><pre><code>./sds.o
-</code></pre><h6 id="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！"><a href="#非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds-c看懂了今天运行起来了，不错！" class="headerlink" title="非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！"></a>非常开心，感觉在看redis源码的路上又走了一大步，准备看源码好久了，为了看源码还学了c，之前断断续续看了一段时间，昨天把sds.c看懂了今天运行起来了，不错！</h6><p><img src="/img/redis/sds_gcc_succ.png" alt="Alt text" title="写出代码"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/04/26/一个产品的诞生/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1091,11 +940,161 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/04/06/微信开发配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/06/微信开发配置/" itemprop="url">微信开发配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T16:29:56+08:00">
+                2017-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="公众号设置"><a href="#公众号设置" class="headerlink" title="公众号设置"></a>公众号设置</h1><h3 id="配置业务域名（公众号设置-gt-功能设置）"><a href="#配置业务域名（公众号设置-gt-功能设置）" class="headerlink" title="配置业务域名（公众号设置-&gt;功能设置）"></a>配置业务域名（公众号设置-&gt;功能设置）</h3><h6 id=""><a href="#" class="headerlink" title=""></a><img src="/img/wechat/domain.png" alt="Alt text" title="配置业务域名"></h6><h6 id="注意不需要输入http或者https"><a href="#注意不需要输入http或者https" class="headerlink" title="注意不需要输入http或者https"></a>注意不需要输入http或者https</h6><h6 id="如果是二级域名，需要一起填入"><a href="#如果是二级域名，需要一起填入" class="headerlink" title="如果是二级域名，需要一起填入"></a>如果是二级域名，需要一起填入</h6><h3 id="js接口安全域名，网页授权域名同理"><a href="#js接口安全域名，网页授权域名同理" class="headerlink" title="js接口安全域名，网页授权域名同理"></a>js接口安全域名，网页授权域名同理</h3><h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><h3 id="同意成为开发者"><a href="#同意成为开发者" class="headerlink" title="同意成为开发者"></a>同意成为开发者</h3><p><img src="/img/wechat/dev.png" alt="Alt text" title="成为开发者"></p>
+<h3 id="生成appsecret"><a href="#生成appsecret" class="headerlink" title="生成appsecret"></a>生成appsecret</h3><p><img src="/img/wechat/appsecret.png" alt="Alt text" title="生成appsecret"></p>
+<h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><p><img src="/img/wechat/config.png" alt="Alt text" title="服务器配置"></p>
+<h6 id="需要注意的是url需要输入http-https-在域名的最后需要添加’-‘"><a href="#需要注意的是url需要输入http-https-在域名的最后需要添加’-‘" class="headerlink" title="需要注意的是url需要输入http/https 在域名的最后需要添加’/‘"></a>需要注意的是url需要输入http/https 在域名的最后需要添加’/‘</h6><p><img src="/img/wechat/dev_conf.png" alt="Alt text" title="服务器配置样例"></p>
+<h3 id="token验证失败"><a href="#token验证失败" class="headerlink" title="token验证失败"></a>token验证失败</h3><h5 id="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"><a href="#验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）" class="headerlink" title="验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）"></a>验证token的过程，是微信验证你填写的url地址是否能按照它的要求来，一般会向你填写的url发送一个get请求，对应的url需要进行一次解密，然后输出一个串（具体看文档）</h5><h6 id="首先去nginx中抓取请求"><a href="#首先去nginx中抓取请求" class="headerlink" title="首先去nginx中抓取请求"></a>首先去nginx中抓取请求</h6><h6 id="自己再本地测试看解密代码是否正常执行"><a href="#自己再本地测试看解密代码是否正常执行" class="headerlink" title="自己再本地测试看解密代码是否正常执行"></a>自己再本地测试看解密代码是否正常执行</h6><p><img src="/img/wechat/request.png" alt="Alt text" title="微信请求信息"></p>
+<h5 id="确认公众号信息全部完善"><a href="#确认公众号信息全部完善" class="headerlink" title="确认公众号信息全部完善"></a>确认公众号信息全部完善</h5><p><img src="/img/wechat/info.png" alt="Alt text" title="完善信息"></p>
+<h6 id="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"><a href="#最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业" class="headerlink" title="最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业"></a>最后一定要启用服务器配置，千万不能忘记开启模板消息，选择正确的行业</h6><h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h3 id="获取access-token，jsapi-ticket"><a href="#获取access-token，jsapi-ticket" class="headerlink" title="获取access_token，jsapi_ticket"></a>获取access_token，jsapi_ticket</h3><h6 id="建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取"><a href="#建议单独写一个脚本逻辑，每30分钟更新一次access-token，jsapi-ticket，所有接口统一去redis取" class="headerlink" title="建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取"></a>建议单独写一个脚本逻辑，每30分钟更新一次access_token，jsapi_ticket，所有接口统一去redis取</h6><h1 id="redirect-uri参数错误"><a href="#redirect-uri参数错误" class="headerlink" title="redirect_uri参数错误"></a>redirect_uri参数错误</h1><h6 id="首先可能是你的appid等参数不正确，这个先排除"><a href="#首先可能是你的appid等参数不正确，这个先排除" class="headerlink" title="首先可能是你的appid等参数不正确，这个先排除"></a>首先可能是你的appid等参数不正确，这个先排除</h6><h6 id="其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"><a href="#其次可能是你的开发-gt-接口权限-gt-网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的" class="headerlink" title="其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的"></a>其次可能是你的开发-&gt;接口权限-&gt;网页授权接口没填写；要确认填入的uri和你请求微信传入的uri是一致的</h6><h1 id="access-denied的坑"><a href="#access-denied的坑" class="headerlink" title="access denied的坑"></a>access denied的坑</h1><h6 id="在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"><a href="#在设置token的时候，微信服务器会去test-com-MP-verify-Rj9V6BBuQjlS0myN-txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限" class="headerlink" title="在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限"></a>在设置token的时候，微信服务器会去test.com/MP_verify_Rj9V6BBuQjlS0myN.txt拿串，进行通讯验证，在设置nginx配置的时候，需要注意txt文件的权限</h6><pre><code>location = /MP_verify_Rj9V6BBuQjlS0myN.txt {
+        allow all;
+}
+</code></pre><h1 id="其余开发详情，后续再写"><a href="#其余开发详情，后续再写" class="headerlink" title="其余开发详情，后续再写"></a>其余开发详情，后续再写</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1141,7 +1140,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

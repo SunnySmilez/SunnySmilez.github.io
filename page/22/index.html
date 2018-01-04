@@ -233,208 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux文件类型及属性/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">linux文件类型及属性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T22:44:23+08:00">
-                2016-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="文件含义"><a href="#文件含义" class="headerlink" title="文件含义"></a>文件含义</h1><pre><code>ls -lhi /data
-1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
-
-1966317         表示inode索引节点编号
-drwxrwxrwx      文件类型及权限
-2               硬链接数
-root  root      属主及所属的组
-4.0K            文件或目录的大小
-2月  22 16:16   最近修改时间
-data            文件或目录名
-
-# 什么是innode?
-    inode是索引节点
-    在每个linux存储设备或存储分区,被格式化的ext3文件系统后,一般有两部分:第一部分是inode,第二部分是block
-    block是实际存储数据用的,包括文件名
-    inode是存放这些数据的属性信息的(文件大小,属主,属组,权限,文件类型,修改时间,还包括指向文件实体的指针的功能inode和block的对应关系),但是唯独不包括文件名
-    磁盘读取数据是按照block读取的,文件名一般在上级目录的block里
-    一个block只能存放一个文件内容,所以block并非越大越好
-    ext3/ext4最大只能4k,而生产中几乎没有小于4k的文件,所以,ext3/ext4文件系统,block都分4k
-    访问顺序呢:文件(一般是上级目录)-&gt;innode-&gt;block
-    inode一般默认大小为256k,block大小为1 2 4k 默认是4k引导分区等特殊分区除外
-    查看:df -i查看inode数量及使用情况,dumpe2fs /dev/sda3 | grep -i &apos;inode size&apos;查看inode及block的大小及数量
-</code></pre><h1 id="普通文件"><a href="#普通文件" class="headerlink" title="普通文件"></a>普通文件</h1><pre><code>-rw-------. 1 root root 1999 3月   7 2014 anaconda-ks.cfg
--rw-r--r--. 1 root root 9998 3月   7 2014 install.log
--rw-r--r--. 1 root root 3970 3月   7 2014 install.log.syslog
-
-第一列是&apos;-&apos;;用touch进行创建,cp拷贝,tar打包,echo重定向,cat查看等都是普通文件
-可用file进行详细类型查看
-
-    # 纯文本文件(ASCII)
-        内容可直接读取,数字字母等
-
-    # 二进制文件(binary)
-        linux中的可执行文件,比如命令文件
-
-    # 数据格式的文件(data)
-        具有特定格式的文件
-</code></pre><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>drwxr-xr-x. 3 root root 4096 2月  26 02:18 shell
-drwxr-xr-x. 2 root root 4096 2月  21 03:28 shell1
-drwxr-xr-x  9 root root 4096 2月  25 14:08 work
-
-第一列是d;创建目录用mkdir(-p参数),或cp命令(-r,-a参数),rm -r删除目录
-</code></pre><h1 id="字符设备-mknod进行创建"><a href="#字符设备-mknod进行创建" class="headerlink" title="字符设备(mknod进行创建)"></a>字符设备(mknod进行创建)</h1><pre><code>crw-rw-rw- 1 root tty 5, 0 3月  14 13:44 /dev/tty
-
-第一列是c开头;一般穿行端口的接口设备,如猫等串口设备
-</code></pre><h1 id="块设备-mknod进行创建"><a href="#块设备-mknod进行创建" class="headerlink" title="块设备(mknod进行创建)"></a>块设备(mknod进行创建)</h1><pre><code>brw-rw---- 1 root disk 8, 0 3月  14 13:44 /dev/sda
-brw-rw---- 1 root disk 8, 1 3月  14 13:44 /dev/sda1
-brw-rw---- 1 root disk 8, 2 3月  14 13:44 /dev/sda2
-
-第一列是b开头;硬盘,光驱都属于块设备
-</code></pre><h1 id="套接口设备"><a href="#套接口设备" class="headerlink" title="套接口设备"></a>套接口设备</h1><pre><code>srw-rw-rw- 1 root root 0 3月  14 13:45 /dev/log
-
-第一列是s开头
-用在网络之间进行数据连接
-</code></pre><h1 id="符号链接文件"><a href="#符号链接文件" class="headerlink" title="符号链接文件"></a>符号链接文件</h1><pre><code>lrwxrwxrwx. 1 root root 11 3月   7 2014 /etc/init.d -&gt; rc.d/init.d
-
-第一列是l开头
-用ln进行穿件(ln -s 源文件 新文件)
-</code></pre><h1 id="管道文件"><a href="#管道文件" class="headerlink" title="管道文件"></a>管道文件</h1><pre><code>prw--w--w- 1 postfix postfix 0 3月  14 15:35 /var/spool/postfix/public/qmgr
-
-第一列是p开头(find / -type p进行查询)
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/13/linux目录结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,11 +904,175 @@ cp CentOS6-Base-163.repo CentOS-Base.repo
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/08/linux系统设备只是介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/08/linux系统设备只是介绍/" itemprop="url">linux系统设备只是介绍</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-08T21:15:36+08:00">
+                2016-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><pre><code># 磁盘在使用前先要进行分区
+# 磁盘主要分为:主分区,拓展分区,逻辑分区
+# 一块硬盘最多可有4个主分区,其中一个主分区的位置可以用一个拓展分区代替,且一块硬盘只能有一个扩展分区3p+e(primary+ext)
+# 扩展分区不能用,必须在扩展分区上划分多个逻辑分区,然后格式化(创建文件系统),然后才能存数据或装系统
+# 分区的编号1-4只能留给主分区或扩展分区使用,逻辑分区编号从5开始
+</code></pre><h1 id="linux系统对分区的要求"><a href="#linux系统对分区的要求" class="headerlink" title="linux系统对分区的要求"></a>linux系统对分区的要求</h1><pre><code># 常规分区方案
+    # 必须有&apos;/&apos;根分区
+    # swap(交换分区)的作用:虚拟内存,swap分区的大小=1.5*物理内存容量
+    # 建议设置独立的/boot分区(100m-200m)
+
+# db及存储:有大量重要数据
+    # /data/ 剩余硬盘大小(专门用于放数据)
+    # / 50-200G
+    # swap 1.5
+    # /boot 100M
+
+# 门户网站
+    # / 50-200G
+    # swap 1.5倍
+    # /boot 100M
+    # 剩下的不再进行分区,保留下来,需要的时候再进行分区
+
+#
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1156,7 +1118,7 @@ cp CentOS6-Base-163.repo CentOS-Base.repo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

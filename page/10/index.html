@@ -233,201 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记枚举/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">go学习笔记枚举</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:32:10+08:00">
-                2017-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h6 id="关键字iota定义常量数组中从0开始安航基数的自增枚举值"><a href="#关键字iota定义常量数组中从0开始安航基数的自增枚举值" class="headerlink" title="关键字iota定义常量数组中从0开始安航基数的自增枚举值"></a>关键字iota定义常量数组中从0开始安航基数的自增枚举值</h6><pre><code>package main
-
-func main() {
-    const (
-        a = iota
-        b
-        c
-        d
-    )
-
-    println(a,b,c,d)    //0 1 2 3
-}
-</code></pre><h6 id="同一个常量组中可以提供多个iota，它们各自增长"><a href="#同一个常量组中可以提供多个iota，它们各自增长" class="headerlink" title="同一个常量组中可以提供多个iota，它们各自增长"></a>同一个常量组中可以提供多个iota，它们各自增长</h6><pre><code>package main
-
-func main() {
-    const (
-        a,b = iota, iota
-        c,d
-        e,f
-    )
-
-    println(c,d)    //1 1
-}
-</code></pre><h6 id="如果iota自增被打断，须显示恢复"><a href="#如果iota自增被打断，须显示恢复" class="headerlink" title="如果iota自增被打断，须显示恢复"></a>如果iota自增被打断，须显示恢复</h6><pre><code>package main
-
-func main() {
-    const (
-        a = iota
-        b = &quot;a&quot;
-        c = 100
-        d = iota
-        e
-    )
-
-    println(d, e)   //3 4 常量值d进行了显示恢复iota的值，计算的时候算上了b,c两行
-}
-</code></pre><h6 id="可通过自定义类型来限制枚举类型限制"><a href="#可通过自定义类型来限制枚举类型限制" class="headerlink" title="可通过自定义类型来限制枚举类型限制"></a>可通过自定义类型来限制枚举类型限制</h6><pre><code>package main
-
-type test int   //声明一个自定义类型
-
-const (
-    black test = iota   //注意black需要制定一个test类型
-    red
-    blue
-)
-
-func demo(c test) {}    //函数指定传入test类型
-
-func main() {
-    x := red
-    demo(x)
-    x := 1
-    demo(x)         //报错，此处的x类型已经变成了int类型
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记常量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1178,11 +983,167 @@ func main() {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/21/环境变量的设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">环境变量的设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-21T11:06:19+08:00">
+                2016-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-profile" class="headerlink" title="修改/etc/profile"></a>修改/etc/profile</h6><h6 id="添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同"><a href="#添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同" class="headerlink" title="添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同"></a>添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同</h6><pre><code>pathmunge () {
+    case &quot;:${PATH}:&quot; in
+        *:&quot;$1&quot;:*)
+            ;;
+        *)
+            if [ &quot;$2&quot; = &quot;after&quot; ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+        PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/sbin:/usr/local/php/sbin:/usr/local/php/bin:/usr/local/nginx/sbin
+}
+</code></pre><h6 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source /etc/profile"></a>source /etc/profile</h6><h1 id="永久对当前用户生效（注意要重新登录才生效）"><a href="#永久对当前用户生效（注意要重新登录才生效）" class="headerlink" title="永久对当前用户生效（注意要重新登录才生效）"></a>永久对当前用户生效（注意要重新登录才生效）</h1><h6 id="修改-bash-profile"><a href="#修改-bash-profile" class="headerlink" title="修改~/.bash_profile"></a>修改~/.bash_profile</h6><pre><code>PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+</code></pre><h6 id="source-bash-profile"><a href="#source-bash-profile" class="headerlink" title="source ~/.bash_profile"></a>source ~/.bash_profile</h6><h1 id="临时对当前终端生效（终端断开，换将变量就需要重新设置）"><a href="#临时对当前终端生效（终端断开，换将变量就需要重新设置）" class="headerlink" title="临时对当前终端生效（终端断开，换将变量就需要重新设置）"></a>临时对当前终端生效（终端断开，换将变量就需要重新设置）</h1><h6 id="终端执行命令"><a href="#终端执行命令" class="headerlink" title="终端执行命令"></a>终端执行命令</h6><pre><code>export PATH=$PATH:/usr/local/mysql/sbin
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1228,7 +1189,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

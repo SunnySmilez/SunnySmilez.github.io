@@ -233,191 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/12/lvs与keepalived/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/12/lvs与keepalived/" itemprop="url">lvs与keepalived</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T01:32:55+08:00">
-                2016-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><pre><code>一组相互独立的计算机,利用高速通信网络组成的一个计算机系统,每个集群节点都是运行其自己进程的一个独立服务器
-</code></pre><h1 id="集群特点"><a href="#集群特点" class="headerlink" title="集群特点"></a>集群特点</h1><pre><code>1.高性能
-2.价格有效性
-3.可伸缩性
-4.高可用性
-</code></pre><h1 id="集群优势"><a href="#集群优势" class="headerlink" title="集群优势"></a>集群优势</h1><pre><code>1.透明性
-2.高性能
-3.高可用性
-4.可伸缩性
-5.可管理性
-6.可编程性
-</code></pre><h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><pre><code>提供一种廉价,有效,透明的方法,来扩展网络设备和服务器的负载,贷款,增加吞吐量,加强网络数据处理能力,提高网络的灵活性和可用性
-</code></pre><h1 id="负载均衡搭建需求"><a href="#负载均衡搭建需求" class="headerlink" title="负载均衡搭建需求"></a>负载均衡搭建需求</h1><pre><code>1.单台机器无法承受大规模的并发访问或数据流量分担到多台节点设备上处理,减少用户等待响应时间,提升用户体验
-2.单个重负载的运算分担到多台节点设备上做并行处理,每个节点设备处理结束后,将结果汇总,返回给用户,系统处理能力得到大幅度提高
-3.7*24的服务保证,任意一个或多个有限节点设备宕机,要求不影响业务
-</code></pre><h1 id="LVS-Linux-Virtual-Servel-linux虚拟服务器"><a href="#LVS-Linux-Virtual-Servel-linux虚拟服务器" class="headerlink" title="LVS(Linux Virtual Servel linux虚拟服务器)"></a>LVS(Linux Virtual Servel linux虚拟服务器)</h1><pre><code>一个虚拟的服务器集群系统,可以在linux/unix平台下实现负载均衡集群功能。
-</code></pre><h1 id="VIP-Virtual-Ip-Address-虚拟IP地址"><a href="#VIP-Virtual-Ip-Address-虚拟IP地址" class="headerlink" title="VIP(Virtual Ip Address 虚拟IP地址)"></a>VIP(Virtual Ip Address 虚拟IP地址)</h1><pre><code>为Director用于向客户端计算机提供服务的IP地址
-</code></pre><h1 id="RIP-Real-Server-Ip-Address-真实IP地址"><a href="#RIP-Real-Server-Ip-Address-真实IP地址" class="headerlink" title="RIP(Real Server Ip Address 真实IP地址)"></a>RIP(Real Server Ip Address 真实IP地址)</h1><pre><code>在集群下面节点上使用的IP地址
-</code></pre><h1 id="DIP-Director-Ip-Address"><a href="#DIP-Director-Ip-Address" class="headerlink" title="DIP(Director Ip Address)"></a>DIP(Director Ip Address)</h1><pre><code>用于连接内外网络的IP地址,物理网卡上的IP地址。是负载均衡器上的IP
-</code></pre><h1 id="CIP-Client-Ip-Address-客户端主机IP地址"><a href="#CIP-Client-Ip-Address-客户端主机IP地址" class="headerlink" title="CIP(Client Ip Address 客户端主机IP地址)"></a>CIP(Client Ip Address 客户端主机IP地址)</h1><pre><code>客户端用户计算机请求集群服务器的IP地址,该地址用作发给集群的请求的源IP地址
-</code></pre><h1 id="NAT-Network-Address-Translation-模式-网络地址转换-收费站模式"><a href="#NAT-Network-Address-Translation-模式-网络地址转换-收费站模式" class="headerlink" title="NAT(Network Address Translation)模式-网络地址转换(收费站模式)"></a>NAT(Network Address Translation)模式-网络地址转换(收费站模式)</h1><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><pre><code>1.将请求报文(DNAT)和响应报文(SNAT),通过调度器地址重写然后再转发给内部服务器,报文返回时再改写成原来用户请求的地址
-2.只需要在调度器LB上配置WAN公网IP即可,调度器也有私有LAN IP和内部RS节点通信
-3.每台内部RS节点的网关地址,必须要配成调度器LB的私有LAN内物理网卡地址(LDIP),这样才能保证数据报文返回时仍然经过调度器LB
-4.由于请求与响应报文都经过调度器LB,因此,网站访问量大时调度器LB有较大瓶颈,一般要求最多10-10台节点
-5.NAT模式支持对IP及端口的转换,即用户请求10.0.0.1:80,可以通过调度器转换到RS节点的10.0.0.1:8080(DR和TUN模式不能)
-6.所有NAT内部RS节点只需配置私有LAN IP即可
-7.由于数据包来回都需要经过调度器,因此,需要开启内核转发net.ipv4.ip_forward=1,也包括iptables防火墙的forward功能
-</code></pre><h1 id="TUNNEL"><a href="#TUNNEL" class="headerlink" title="TUNNEL"></a>TUNNEL</h1><pre><code>1.负载均衡器通过把请求的报文通过IP隧道(ipip隧道)的方式(请求报文不经过原目的地址的改写(包括MAC),而是直接封装成另外的IP报文),转发至真实服务器,而真实服务器响应处理后直接返回给客户端用户
-2.由于真实服务器将将响应处理后的报文直接返回给客户端用户,因此,最好RS有一个外网IP地址,这样效率才会更高。理论上:只要能出外网即可,无需外网ip
-3.由于调度器LB只处理入站请求的报文。因此,次集群系统吞吐量可以提高10倍以上,但隧道模式也会带来一定的系统开销,TUN模式适合LAN/WAN
-4.TUN模式的LAN环境转发不如DR模式效率高,而且还考虑系统对IP隧道的支持问题
-5.所有的RS服务器都要绑定VIP,一直ARP,配置复杂
-6.LAN换几个一般采用DR模式,WAM环境可以采用TUN模式,但是当前WAN环境下,请求转发更多的呗haproxy/nginx/DNS调度代理取代。因此,TUN模式在国内公司实际用的很少。跨机房应用要么拉光钎成局域网,要么DNS调度,底层数据还得同步
-7.直接对外访问业务,不直接对外的业务
-</code></pre><h1 id="DR模式-直接路由模式"><a href="#DR模式-直接路由模式" class="headerlink" title="DR模式-直接路由模式"></a>DR模式-直接路由模式</h1><pre><code>通过改写请求报文的目标MAC地址,将请求发给真实服务器的,而真实服务器将响应后的结果直接返回给客户端用户。
-</code></pre><h1 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h1><pre><code>1.通过在调度器LB上修改数据包的目的MAC地址实现转发。注意源IP地址仍然是CIP,目的IP地址仍然是VIP
-2.请求报文经过调取器LB,而RS响应处理后的报文无需经过调度器LB,因此并发访问量大时使用效率很高(和NAT模式比)
-3.DR模式是通过MAC地址的改写机制实现的转发,因此,所有的RS节点和调节器LB只能在一个局域网LAN中
-4.需要注意RS节点的VIP绑定(lo:vip,lo1:vip)和ARP抑制问题
-5.RS节点的默认网关不需要是调度器LB的DIP,而直接是IDC机房分配的上级路由器的IP(这是RS带有外网IP地址的情况),理论讲:只要RS可以出网即可,不是必须配置外网IP
-6.调度器仅进行目的MAC地址的改写,因此,调度器LB无法改变请求的报文的目的和端口
-7.调度器LB知乎支持所有的UNIX,LINUX系统
-8.DR模式效率很高,但是配置比较麻烦(访问量不是很大的可以使用日pv2000w或并发请求1万以下:haproxy/nginx)
-9.直接对外访问业务
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/12/arp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1023,11 +838,166 @@ error_log = /logs/php_error.log
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/01/apache常用的prefork和worker模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">apache常用的prefork和worker模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T00:33:59+08:00">
+                2016-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="prefork模式-实现fork好子进程-等待请求"><a href="#prefork模式-实现fork好子进程-等待请求" class="headerlink" title="prefork模式(实现fork好子进程,等待请求)"></a>prefork模式(实现fork好子进程,等待请求)</h1><pre><code>使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
+
+工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
+
+优点:效率高,稳定,安全。
+
+缺点:和worker模式比消耗资源更多
+</code></pre><h1 id="worker模式"><a href="#worker模式" class="headerlink" title="worker模式"></a>worker模式</h1><pre><code>是线程与进程的结合,在worker模式下会有多个子进程,每个子进程又会有多个线程。每个线程在某个确定的时间只能维护一个连接
+
+工作原理:由主进程生成若干个子进程,而每个子进程中又包含固定的线程数,各个线程独立处理请求,同样为了不在请求到来时再生成线程,在配置文件中设置了最大和最小空闲线程数及所有子进程中的线程总数,如果现有子进程中的线程总数不能满足并发及负载,控制进程将派生新的子进程
+
+优点:内存占用比prefork模式低,适合高并发,高流量http服务
+
+缺点:如果一个线程奔溃,整个进程就会连同其任何线程一起&quot;死掉&quot;由于线程共享内存空间,所以一个程式在运行时必须被系统识别为&quot;每个线程都是安全的&quot;,服务稳定性不如prefork模式
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1073,7 +1043,7 @@ error_log = /logs/php_error.log
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

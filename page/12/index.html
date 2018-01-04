@@ -233,229 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/11/04/redis源码-目录结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/04/redis源码-目录结构/" itemprop="url">redis源码-目录结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T09:15:12+08:00">
-                2016-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><pre><code>|
-|--deps
-|
-|-- src
-   -- adlist.c          双链表结构,用于定义list
-   -- ae.c              用于事件的处理
-   -- ae_epoll.c        处理epoll事件
-   -- ae_evport.c       通过event ports实现处理结构
-   -- ae_kqueue.c       实现消息队列的处理
-   -- ae_select.c       处理select事件
-   -- anet.c            网络处理
-   -- aof.c             实现aof模式
-   -- asciilogo.h       定义欢迎界面的logo
-   -- bio.c             在后台通过线程模式实现io处理
-   -- bitops.c          与setbit,getbit相关的位操作
-   -- blocked.c         支持类似blpop,wait的阻塞操作
-   -- cluster.c         与集群创建,通信相关操作
-   -- config.c          配置文件的解析
-   -- crc16.c           基于CCITT标准的过滤算法
-   -- crc64.c
-   -- db.c              c-level数据库api实现
-   -- debug.c           调试库和日志输出
-   -- dict.c            字典实现
-   -- endiancov.c       主机字节序编解码, redis致力于使用little endian来编码
-   -- fmacros.h         用于Mac下的兼容性处理
-   -- help.h            辅助于命令的提示信息
-   -- hyperloglog.c
-   -- intset.c          int集合类型实现
-   -- lzf_c.c           lzf压缩算法
-   -- lzf_d.c
-   -- memtest.c         内存测试
-   -- muti.c            批量命令操作的原子实现
-   -- networking.c      网络通信实现
-   -- notify.c
-   -- object.c          对象存储类型
-   -- pqsort.c          一种快速排序的实现
-   -- pubsub.c          用于订阅模式的实现，有点类似于Client广播发送的方式
-   -- rand.c            随机序列的生产
-   -- rdb.c             rdb数据的load和dump
-   -- redis.c           redis数据库的主程序入口
-   -- redis-benchmark.c redis基准测试入口
-   -- redis-check-aof.c aof文件检查入口
-   -- redis-check-dump.c dump文件检查入口
-   -- redis-cli.c       redis的shell的客户端
-   -- release.c         版本发布信息
-   -- replication.c     数据的主从备份
-   -- rio.c             流式I/O的读写接口
-   -- scripting.c       redis相关协议转换到lua环境下执行
-   -- sds.c             强大的字符串处理机制
-   -- sentinel.c        redis集群的监护程序
-   -- setproctitle.c    程序名信息相关
-   -- sha1.c            sha1加密算法
-   -- slowlog.c         记录最近一段时间的查询等操作
-   -- sort.c            排序算法及辅助函数
-   -- syncio.c          同步io的实现
-   -- t_hash.c          hash结构
-   -- t_list.c          list结构
-   -- t_set.c           set结构
-   -- t_string.c        string结构
-   -- t_zset.c          用两种数据结构存储同一个数据体
-   -- util.c            辅助函数
-   -- ziplist.c         ziplist结构
-   -- zipmap.c          zipmap结构
-   -- zmalloc.c         在malloc上进行封装,增加内存开销统计
-|
-|--tests
-|
-|--utils
-</code></pre><h1 id="源码阅读顺序"><a href="#源码阅读顺序" class="headerlink" title="源码阅读顺序"></a><a href="https://github.com/huangz1990/blog/blob/master/diary/2014/how-to-read-redis-source-code.rst" title="源码阅读顺序" target="_blank" rel="external">源码阅读顺序</a></h1><h3 id="数据结构实现"><a href="#数据结构实现" class="headerlink" title="数据结构实现"></a>数据结构实现</h3><p>sds.h,sds.c                 动态字符串实现<br>adlist.h,adlist.c           双端链表实现<br>dict.h,dict.c               字典的实现</p>
-<p>redis.h中的zskiplist结构和zskiplistNode结构,以及t_zset.c中所有以zsl开头的函数,比如zslCreate,zslInsert,zslDeleteNode                 跳跃表实现</p>
-<p>hyperloglog.c中的hllhdr结构,以及所有以hll开头的函数。                      HyperLogLog实现</p>
-<h3 id="阅读内存编码数据结构实现"><a href="#阅读内存编码数据结构实现" class="headerlink" title="阅读内存编码数据结构实现"></a>阅读内存编码数据结构实现</h3><p>intset.c            整数集合数据结构。<br>ziplist.c           压缩列表数据结构</p>
-<h3 id="阅读数据类型实现"><a href="#阅读数据类型实现" class="headerlink" title="阅读数据类型实现"></a>阅读数据类型实现</h3><p>object.c            对象系统实现<br>t_string.c          字符串键的实现<br>t_list.c            列表键的实现<br>t_hash.c            散列键的实现<br>t_set.c             集合键的实现<br>t_zset.c中除zsl开头的函数之外的所有函数           有序集合键的实现<br>hyperloglog.c中所有以pf开头的函数                HyperLogLog 键的实现</p>
-<h3 id="阅读数据库实现相关代码"><a href="#阅读数据库实现相关代码" class="headerlink" title="阅读数据库实现相关代码"></a>阅读数据库实现相关代码</h3><p>redis.h文件中的redisDb结构,以及 db.c文件              Redis的数据库实现<br>notify.c                Redis的数据库通知功能实现代码<br>rdb.h和rdb.c             Redis的RDB持久化实现代码<br>aof.c                   Redis 的 AOF 持久化实现代码</p>
-<h3 id="选读"><a href="#选读" class="headerlink" title="选读"></a>选读</h3><p>redis.h文件的pubsubPattern结构,以及pubsub.c文件              发布与订阅功能的实现<br>redis.h文件的multiState结构以及multiCmd结构,multi.c文件       事务功能的实现<br>sort.c                      SORT命令的实现<br>bitops.c                    GETBIT,SETBIT等二进制位操作命令的实现</p>
-<h3 id="阅读客户端和服务器的相关代码"><a href="#阅读客户端和服务器的相关代码" class="headerlink" title="阅读客户端和服务器的相关代码"></a>阅读客户端和服务器的相关代码</h3><p>ae.c,以及任意一个 ae_*.c文件（取决于你所使用的多路复用库）         Redis 的事件处理器实现<br>networking.c                Redis 的网络连接库，负责发送命令回复和接受命令请求， 同时也负责创建/销毁客户端， 以及通信协议分析等工作<br>redis.h和redis.c中和单机Redis服务器有关的部分            单机 Redis 服务器的实现</p>
-<h3 id="选读-1"><a href="#选读-1" class="headerlink" title="选读"></a>选读</h3><p>scripting.c                 Lua 脚本功能的实现<br>slowlog.c                   慢查询功能的实现<br>monitor.c                   监视器功能的实现</p>
-<h3 id="阅读多机功能的实现"><a href="#阅读多机功能的实现" class="headerlink" title="阅读多机功能的实现"></a>阅读多机功能的实现</h3><p>replication.c               复制功能的实现代码<br>sentinel.c                  Redis Sentinel 的实现代码<br>cluster.c                   Redis 集群的实现代码</p>
-<h3 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h3><pre><code>[如何阅读redis](https://github.com/huangz1990/blog/blob/master/diary/2014/how-to-read-redis-source-code.rst &apos;如何阅读redis&apos;)
-[redis源码阅读](http://wiki.jikexueyuan.com/project/redis/provide-service.html &apos;redis源码阅读&apos;)
-[redis自建命令](https://zhengqm.github.io/code/2015/06/20/Learn-by-hacking-redis-source-code/ &apos;redis自建命令&apos;)
-[redis client/server交互流程](http://www.infoq.com/cn/articles/communication-redis-clientserver &apos;redis client/server交互流程&apos;)
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/11/02/gdb调试redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1147,11 +924,154 @@ start
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/Primary-script-unknown排查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">Primary script unknown排查</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T12:21:14+08:00">
+                2016-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>#<br>    tcpdump  -i  lo -Anns0 port 9000</p>
+<p>#<br>    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’<br>    strace</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1197,7 +1117,7 @@ start
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
