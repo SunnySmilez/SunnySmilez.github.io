@@ -233,310 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/16/linux文件满了删除不了/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">linux文件满了删除不了</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-16T17:45:21+08:00">
-                2016-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%<br>  原因:</p>
-<pre><code>有硬链接
-lsof | grep del  该文件被某些服务占用,导致不能及时释放
-磁盘空间维护出现问题
-</code></pre><p>  解决方案:</p>
-<pre><code>1.删除文件,重启服务
-2.清空文件
-</code></pre><p>  文件删除原理:</p>
-<pre><code>linux是通过link的数量来控制文件删除的,只有当一个文件不存在任何link的时候,这个文件才会被删除,一般来说,每个文件都有2个link计数器:i_count,i_nlink,
-i_count的意义是当前文件使用者的数量;i_nlink的意义是介质连接的数量(硬链接的数量),可以理解为i_count是内存引用计数器,i_nlink是磁盘的引用计数器.
-当一个文件被某一个进程引用时,对应的i_count数就会增加,当创建文件的硬链接的时候对应i_nlink数就会增加.
-对应删除命令rm而言,实际就是减少磁盘引用的计数i_nlink.如果一个文件正在被某个进程调用,而用户却执行rm操作把文件删除了,那么会出现如上结果.
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux扩展名的作用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">linux扩展名的作用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T23:46:59+08:00">
-                2016-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h1><pre><code>.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
-</code></pre><h1 id="shell脚本文件"><a href="#shell脚本文件" class="headerlink" title="shell脚本文件"></a>shell脚本文件</h1><pre><code>.sh,一般通过shell语言开发的程序
-</code></pre><h1 id="perl语言文件"><a href="#perl语言文件" class="headerlink" title="perl语言文件"></a>perl语言文件</h1><pre><code>.pl,通过perl语言开发的程序
-</code></pre><h1 id="python语言文件"><a href="#python语言文件" class="headerlink" title="python语言文件"></a>python语言文件</h1><pre><code>.py,python语言开发的程序
-</code></pre><h1 id="网页语言的文件"><a href="#网页语言的文件" class="headerlink" title="网页语言的文件"></a>网页语言的文件</h1><pre><code>.html,.htm,.php,.jsp,.do
-</code></pre><h1 id="系统服务的配置文件"><a href="#系统服务的配置文件" class="headerlink" title="系统服务的配置文件"></a>系统服务的配置文件</h1><pre><code>.conf
-</code></pre><h1 id="rpm安装包的文件"><a href="#rpm安装包的文件" class="headerlink" title="rpm安装包的文件"></a>rpm安装包的文件</h1><pre><code>.rpm
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux文件类型及属性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1110,6 +806,306 @@ brw-rw---- 1 root disk 8, 2 3月  14 13:44 /dev/sda2
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/09/ssh配置修改/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">ssh配置修改</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-09T22:52:57+08:00">
+                2016-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><pre><code>ssh -v vagrant@172.16.17.11
+</code></pre><h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><pre><code>cp /etc/ssh/sshd_config /etc/ssh/sshd_config
+</code></pre><h1 id="sshd-config修改端口-端口范围-0-65535"><a href="#sshd-config修改端口-端口范围-0-65535" class="headerlink" title="sshd_config修改端口(端口范围:0-65535)"></a>sshd_config修改端口(端口范围:0-65535)</h1><pre><code>Port 2231
+</code></pre><h1 id="不允许root用户通过ssh登录"><a href="#不允许root用户通过ssh登录" class="headerlink" title="不允许root用户通过ssh登录"></a>不允许root用户通过ssh登录</h1><pre><code>PermitRootLogin no
+</code></pre><h1 id="不使用DNS"><a href="#不使用DNS" class="headerlink" title="不使用DNS"></a>不使用DNS</h1><pre><code>UseDns no
+</code></pre><h1 id="不允许空密码登录"><a href="#不允许空密码登录" class="headerlink" title="不允许空密码登录"></a>不允许空密码登录</h1><pre><code>PasswordAuthentication no
+</code></pre><h1 id="重启生效"><a href="#重启生效" class="headerlink" title="重启生效"></a>重启生效</h1><pre><code>/etc/init.d/sshd restart
+</code></pre><h1 id="解决ssh慢的问题"><a href="#解决ssh慢的问题" class="headerlink" title="解决ssh慢的问题"></a>解决ssh慢的问题</h1><pre><code>UseDNS no
+GSSAPIAuthentication no
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/09/替换yum源/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">替换yum源</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-09T22:07:54+08:00">
+                2016-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="设置yum源为163的镜像原"><a href="#设置yum源为163的镜像原" class="headerlink" title="设置yum源为163的镜像原"></a>设置yum源为163的镜像原</h3><pre><code># 进入yum源目录
+    cd /etc/yum.repos.d
+
+# 下载国内yum源
+    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
+
+# 备份之前的yum源
+ mv
+cp CentOS6-Base-163.repo CentOS-Base.repo
+</code></pre><h3 id="设置yum源为本地yum源"><a href="#设置yum源为本地yum源" class="headerlink" title="设置yum源为本地yum源"></a>设置yum源为本地yum源</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1160,7 +1156,7 @@ brw-rw---- 1 root disk 8, 2 3月  14 13:44 /dev/sda2
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

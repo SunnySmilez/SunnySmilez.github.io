@@ -233,386 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/04/安装laravel环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/04/安装laravel环境/" itemprop="url">安装laravel环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T16:46:07+08:00">
-                2017-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/laravel/" itemprop="url" rel="index">
-                    <span itemprop="name">laravel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
-</code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
-</code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
-</code></pre><h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><pre><code>使用brew安装php，mysql，redis
-</code></pre><h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><pre><code>curl -sS https://getcomposer.org/installer | php 
-失败尝试：php -r &quot;readfile(&apos;https://getcomposer.org/installer&apos;);&quot; | php
-全局有效：mv composer.phar /usr/local/bin/composer
-验证：composer --version
-</code></pre><h1 id="通过composer安装valet"><a href="#通过composer安装valet" class="headerlink" title="通过composer安装valet"></a>通过composer安装valet</h1><pre><code>添加环境变量：
-    PATH=$PATH:~/.composer/vendor/bin
-
-修改composer源（默认的是国外的，需要翻墙）
-    1、查询composer配置文件所在位置
-        composer config -l -g
-
-    2、查看显示的home选项（就是composer所在配置的目录）
-        [home] /Users/sunnysmilez/.composer
-
-    3、在配置文件添加下载路径
-        vim /Users/sunnysmilez/.composer/config.json         
-        内容如下：
-            {
-                &quot;config&quot;: {
-                },
-                &quot;repositories&quot;: {
-                    &quot;packagist&quot;: {
-                        &quot;type&quot;: &quot;composer&quot;,
-                        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;
-                    }
-                }
-            }
-
-下载安装：valet
-    composer global require laravel/valet
-</code></pre><h1 id="安装valet"><a href="#安装valet" class="headerlink" title="安装valet"></a>安装valet</h1><pre><code>安装：
-    valet install
-
-测试：（127.0.0.1会响应所有*.dev的域名）
-    ping foobar.dev
-</code></pre><h1 id="设置code目录"><a href="#设置code目录" class="headerlink" title="设置code目录"></a>设置code目录</h1><pre><code>cd code
-valet park
-</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>composer create-project laravel/laravel=5.2.* hello --prefer-dist
-
-不知道为什么反正我的laravel new hello 不能使用
-项目使用的5.2的版本，如果你需要更高版本请自行更改
-</code></pre><h1 id="启动valet"><a href="#启动valet" class="headerlink" title="启动valet"></a>启动valet</h1><pre><code>valet start
-</code></pre><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><pre><code>http://hello.dev/
-</code></pre><h1 id="valet补充"><a href="#valet补充" class="headerlink" title="valet补充"></a>valet补充</h1><pre><code>valet start         启动valet
-valet stop          停止valet
-valet restart       重启valet
-valet share         共享项目（比较有意思）
-valet uninstall     卸载valet
-valet park          设置代码目录
-valet paths         查看代码目录
-等
-</code></pre><h1 id="各种错误"><a href="#各种错误" class="headerlink" title="各种错误"></a>各种错误</h1><h3 id="composer错误"><a href="#composer错误" class="headerlink" title="composer错误"></a>composer错误</h3><pre><code>类似此种下载不成功的，直接替换composer源
-[Composer\Downloader\TransportException]
-      The &quot;http://packagist.org/p/laravel/valet%2439296a873ae09b56ed010fd93604f08291f6223ad85ddf3bc5cb02af8a4035f3.json&quot; file could not be downloaded (HTTP/1.1 302 Found)
-
-[Composer\Downloader\TransportException]
-       Your configuration does not allow connections to http://pkg.phpcomposer.com/repo/packagist/packages.json. See https://getcomposer.org/doc/06-config.md#secure-http for details. 
-[Composer\Downloader\TransportException]
-      The &quot;http://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 301 Moved Permanently)
-
-[Composer\Downloader\TransportException]
- The &quot;https://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 404 Not Found)
-</code></pre><h3 id="valet-install错误"><a href="#valet-install错误" class="headerlink" title="valet install错误"></a>valet install错误</h3><pre><code>Brew was unable to install [dnsmasq].
-    手动安装dnsmasq：brew install dnsmasq（报下面的错误）
-
-Error: Xcode alone is not sufficient on Sierra.
-    执行：xcode-select --install
-
-执行：valet install       
-</code></pre><h3 id="valet权限错误（在安装的过程中使用了sudo）"><a href="#valet权限错误（在安装的过程中使用了sudo）" class="headerlink" title="valet权限错误（在安装的过程中使用了sudo）"></a>valet权限错误（在安装的过程中使用了sudo）</h3><pre><code>Warning: file_get_contents(/var/root/.valet/config.json): failed to open stream: Permission denied in /Users/Username/.composer/vendor/laravel/valet/server.php on line 23
-
-Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/vendor/laravel/valet/server.php on line 47
-404 - Not Found
-
-修改权限为当前用户：
-    cd ~/.composer/
-    sudo chown -R $(whoami) vendor
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/11/27/phpsttorm添加laravel代码提示/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/phpsttorm添加laravel代码提示/" itemprop="url">phpsttorm添加laravel代码提示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T00:58:03+08:00">
-                2017-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/laravel/" itemprop="url" rel="index">
-                    <span itemprop="name">laravel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
-</code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
-<h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
-&quot;require&quot;: {
-        &quot;laravel/framework&quot;: &quot;5.5.*&quot;,
-        &quot;barryvdh/laravel-ide-helper&quot;: &quot;dev-master&quot;
-},
-</code></pre><h1 id="composer加载插件"><a href="#composer加载插件" class="headerlink" title="composer加载插件"></a>composer加载插件</h1><pre><code>在项目根目录运行：composer update
-</code></pre><h1 id="添加service-provider"><a href="#添加service-provider" class="headerlink" title="添加service provider"></a>添加service provider</h1><pre><code>在项目下的config/app.php在providers中添加一行&quot;&apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;&quot;
-
-&apos;providers&apos; =&gt; [
-    &apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;
-    //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//具体什么方式添加看版本
-]
-</code></pre><h1 id="执行artisan命令"><a href="#执行artisan命令" class="headerlink" title="执行artisan命令"></a>执行artisan命令</h1><pre><code>php artisan ide-helper:generate
-最终生成_ide_helper.php的文件
-</code></pre><h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><pre><code>如果没效果，重启下编辑器试试
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/11/26/docker创建laravel环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1074,6 +694,374 @@ PUSHER_APP_SECRET=
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/15/添加git语法检查钩子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/15/添加git语法检查钩子/" itemprop="url">添加git语法检查钩子</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T11:13:49+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="添加pre-commit钩子"><a href="#添加pre-commit钩子" class="headerlink" title="添加pre-commit钩子"></a>添加pre-commit钩子</h1><pre><code>vim app_code/.git/hooks/pre-commit
+备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
+</code></pre><h1 id="添加语法检查内容"><a href="#添加语法检查内容" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>my $commit_id = `git rev-parse --verify HEAD`;
+my $against = &quot;4b825dc642cb6eb9a060e54bf8d69288fbee4904&quot;;
+
+if ($commit_id) {
+    $against=&quot;HEAD&quot;;
+}
+
+my @list = `git diff-index --cached --name-only $against --`;
+my $ret = 0;
+
+for my $x (@list) {
+    chomp $x;
+    if ($x =~ /\.php$/) {
+        if (-f &quot;$x&quot;) {
+            `php -l $x`;
+            if ($? != 0) {
+                $ret = 1;
+                goto end;
+            }
+        }
+    }
+}
+
+end:
+exit($ret);
+</code></pre><h1 id="添加执行权限"><a href="#添加执行权限" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-commit
+</code></pre><h1 id="添加测试"><a href="#添加测试" class="headerlink" title="添加测试"></a>添加测试</h1><p><img src="/img/git/php_check_grammar.png" alt="Alt text" title="php语法检查"></p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>然而使用pre-commit脚本存在一个很大的缺陷，钩子脚本需要放置在每个开发者的每个项目中，很容易遗漏，同时代码库重新clone后也需要记得重新放置钩子脚本，没有办法从根源上禁止有语法错误的代码的提交
+</code></pre><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code>统一的在git服务端添加pre-receive钩子，当代码push到中心代码库的时候进行语法检测，如果存在语法错误则拒绝当前的push，这样可以只在服务端配置，不需要在每个人的每个项目中进行配置，Git在接受到push时会调用pre-receive钩子，如果pre-receive返回非0的返回值，则当前的push会被拒绝。在调用pre-receive脚本时，会从标准输入传递三个参数，分别为之前的版本，push的版本和push的分支
+</code></pre><h1 id="添加pre-receive钩子"><a href="#添加pre-receive钩子" class="headerlink" title="添加pre-receive钩子"></a>添加pre-receive钩子</h1><pre><code>vim app_code/.git/hooks/pre-receive
+</code></pre><h1 id="添加语法检查内容-1"><a href="#添加语法检查内容-1" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>#!/usr/bin/perl
+use File::Temp;
+use strict;
+
+#从标准输入中读取参数信息
+my $line = &lt;&gt;;
+#处理后得到旧版本，但前版本和分支
+my @argv = split(/\s/, $line);
+my $old = $argv[0];
+my $new = $argv[1];
+my $branch = $argv[2];
+#比较两个版本的差异
+my @out = `git diff --name-status $old $new`;
+
+for my $x (@out) {
+    my @param = split(/\s/, $x);
+    #如果文件不是被删除且是php文件，则进行语法检测
+    if ($param[0] ne &apos;D&apos; and $param[1] =~ /\.php$/) {
+        #取出文件的内容，将其写入到一个临时文件中
+        my $content = `git show $new:$param[1]`;
+        my $fh = File::Temp-&gt;new(SUFFIX =&gt; &apos;.php&apos;, UNLINK =&gt; 1);
+        print $fh $content;
+        #进行语法检测
+        my $result = `php -l $fh 2&gt;&amp;1`;
+        #如果出错则输出错误，输出时需要将临时文件名替换称为原来的文件名，并拒绝push
+        if ($? != 0) {
+            if ($result =~ s#$fh#$param[1]#g) {
+                print $result;
+            }
+            exit(1);
+        }
+    }
+}
+exit(0);
+</code></pre><h1 id="添加执行权限-1"><a href="#添加执行权限-1" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-receive  
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/08/03/安装docker-swarm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/03/安装docker-swarm/" itemprop="url">安装docker-swarm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T10:08:49+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在virtualbox安装centos7"><a href="#在virtualbox安装centos7" class="headerlink" title="在virtualbox安装centos7"></a>在virtualbox安装centos7</h1><pre><code>注意一定要是在centos7及以上的版本
+</code></pre><h1 id="centeos安装docker"><a href="#centeos安装docker" class="headerlink" title="centeos安装docker"></a>centeos安装docker</h1><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+</code></pre><h1 id="启动docker容器"><a href="#启动docker容器" class="headerlink" title="启动docker容器"></a>启动docker容器</h1><pre><code>service docker start
+</code></pre><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><pre><code>docker pull swarm
+</code></pre><h1 id="获取docker容器ip"><a href="#获取docker容器ip" class="headerlink" title="获取docker容器ip"></a>获取docker容器ip</h1><pre><code>本次我的两个主机的ip是：
+    manage：192.168.1.164
+    node1：192.168.1.183
+    node2：192.168.1.194
+</code></pre><h1 id="生产集群token"><a href="#生产集群token" class="headerlink" title="生产集群token"></a>生产集群token</h1><pre><code>docker run --rm swarm create
+执行命令后会生产一串集群的token，记录下来（我的token是：6335a310b4fe5b21492bc119a03980d6）
+</code></pre><h1 id="添加节点到集群"><a href="#添加节点到集群" class="headerlink" title="添加节点到集群"></a>添加节点到集群</h1><pre><code>docker run -d swarm join --addr=192.168.1.183:2375 token://6335a310b4fe5b21492bc119a03980d6
+docker run -d swarm join --addr=192.168.1.194:2375 token://6335a310b4fe5b21492bc119a03980d6
+</code></pre><h1 id="在manage上开启管理程序"><a href="#在manage上开启管理程序" class="headerlink" title="在manage上开启管理程序"></a>在manage上开启管理程序</h1><pre><code>docker run -d -p 8888:2375 swarm manage token://6335a310b4fe5b21492bc119a03980d6
+</code></pre><h1 id="列出集群中的节点"><a href="#列出集群中的节点" class="headerlink" title="列出集群中的节点"></a>列出集群中的节点</h1><pre><code>docker run --rm swarm list token://6335a310b4fe5b21492bc119a03980d6    
+</code></pre><h1 id="在manage上管理node1，node2"><a href="#在manage上管理node1，node2" class="headerlink" title="在manage上管理node1，node2"></a>在manage上管理node1，node2</h1><pre><code>docker -H 192.168.1.164:8888 info
+docker -H 192.168.1.164:8888 ps
+docker -H 192.168.1.164:8888 logs
+</code></pre><h1 id="在集群上运行容器"><a href="#在集群上运行容器" class="headerlink" title="在集群上运行容器"></a>在集群上运行容器</h1><pre><code>docker -H 192.168.1.164:8888 run -d --name web1 nginx
+docker -H 192.168.1.164:8888 run -d --name web2 nginx
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1124,7 +1112,7 @@ PUSHER_APP_SECRET=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

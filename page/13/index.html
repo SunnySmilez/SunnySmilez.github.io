@@ -233,300 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/mac安装gdb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">mac安装gdb</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:32:25+08:00">
-                2016-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mac安装GDB"><a href="#Mac安装GDB" class="headerlink" title="Mac安装GDB"></a>Mac安装GDB</h1><h3 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h3><pre><code>brew install gdb
-</code></pre><h1 id="使用gdb进行调试"><a href="#使用gdb进行调试" class="headerlink" title="使用gdb进行调试"></a>使用gdb进行调试</h1><h3 id="gbd-c文件中的内容"><a href="#gbd-c文件中的内容" class="headerlink" title="gbd.c文件中的内容"></a>gbd.c文件中的内容</h3><pre><code>#include &lt;stdio.h&gt;
-
-int add_range(int low, int high)
-{
-        int i, sum;
-        for (i = low; i &lt;= high; i++)
-                sum = sum + i;
-        return sum;
-}
-
-int main(void)
-{
-        int result[100];
-        result[0] = add_range(1, 10);
-        result[1] = add_range(1, 100);
-        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
-        return 0;
-}
-</code></pre><h3 id="编译并使用gdb"><a href="#编译并使用gdb" class="headerlink" title="编译并使用gdb"></a>编译并使用gdb</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; gdb gdbtest
-</code></pre><h3 id="gdb开始调试"><a href="#gdb开始调试" class="headerlink" title="gdb开始调试"></a>gdb开始调试</h3><pre><code>start
-</code></pre><h3 id="mac下出现如下错误"><a href="#mac下出现如下错误" class="headerlink" title="mac下出现如下错误"></a>mac下出现如下错误</h3><p><img src="/img/mac_gdb/gdb-error.png" alt="Alt text" title="gdb错误信息"></p>
-<h3 id="mac下对gdb进行签名"><a href="#mac下对gdb进行签名" class="headerlink" title="mac下对gdb进行签名"></a>mac下对gdb进行签名</h3><p><img src="/img/mac_gdb/key.png" alt="Alt text" title="启动key"></p>
-<p><img src="/img/mac_gdb/create-key.png" alt="Alt text" title="创建证书"></p>
-<p><img src="/img/mac_gdb/gdb-cert-first.png" alt="Alt text" title="选择代码签名"></p>
-<p><img src="/img/mac_gdb/gdb-cert-second.png" alt="Alt text" title="设置过期时间"></p>
-<h3 id="接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统"><a href="#接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统" class="headerlink" title="接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统"></a>接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统</h3><p><img src="/img/mac_gdb/gdb-cert-third.png" alt="Alt text" title="选择存储位置"></p>
-<h3 id="创建的证书"><a href="#创建的证书" class="headerlink" title="创建的证书"></a>创建的证书</h3><p><img src="/img/mac_gdb/gdb-cert-last.png" alt="Alt text" title="证书"></p>
-<h3 id="设置信任"><a href="#设置信任" class="headerlink" title="设置信任"></a>设置信任</h3><p><img src="/img/mac_gdb/gdb-auth-1.png" alt="Alt text" title="找到证书简介"><br><img src="/img/mac_gdb/gdb-auth-2.png" alt="Alt text" title="设置代码签名始终信任"></p>
-<h1 id="对gdb进行代码签名"><a href="#对gdb进行代码签名" class="headerlink" title="对gdb进行代码签名"></a>对gdb进行代码签名</h1><h3 id="关闭taskgated进程"><a href="#关闭taskgated进程" class="headerlink" title="关闭taskgated进程"></a>关闭taskgated进程</h3><p><img src="/img/mac_gdb/gdb-cert-sign-1.png" alt="Alt text" title="打开活动检测器"><br><img src="/img/mac_gdb/taskgated.png" alt="Alt text" title="检索taskgated进程并退出"></p>
-<h3 id="对gdb进行签名"><a href="#对gdb进行签名" class="headerlink" title="对gdb进行签名"></a>对gdb进行签名</h3><pre><code>codesign -s gdb-cert /usr/local/bin/gdb
-</code></pre><h3 id="检测是否安装成功"><a href="#检测是否安装成功" class="headerlink" title="检测是否安装成功"></a>检测是否安装成功</h3><pre><code>codesign -v gdb (`如果没有任何信息输出代表签名成功`)
-</code></pre><h3 id="再次使用gdb进行调试"><a href="#再次使用gdb进行调试" class="headerlink" title="再次使用gdb进行调试"></a>再次使用gdb进行调试</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; sudo gdb gdbtest (`注意sudo不能少,这个坑我趟了好几个小时,最终在google找到答案`)
-start
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/redis源码阅读-准备工作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">redis源码阅读-准备工作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:29:44+08:00">
-                2016-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><h1 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/Primary-script-unknown排查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1041,6 +747,447 @@ int main()
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">C语言静态库和动态库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T16:51:13+08:00">
+                2016-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="实现文件共享"><a href="#实现文件共享" class="headerlink" title="实现文件共享"></a>实现文件共享</h1><pre><code>例子:
+目录结构如下:
+|--myHeader
+  --checksum.h
+  --encrypt.h
+|--checksum.c
+|--encrypt.c
+|--test.c
+|--myObject
+
+在myHeader文件中建立头文件checksum.h
+int checksum(char *message);
+在myHeader文件中建立头文件encrypt.h
+void encrypt(char *message);
+
+checksum.c内容:
+#include &lt;checksum.h&gt;
+
+int checksum(char *message)
+{
+ int c = 0;
+ while (*message) {
+     c += c ^ (int)(*message);
+     message++;
+ }
+
+ return c;
+}
+
+encrypt.c内容:
+#include &quot;./myHeader/encrypt.h&quot;
+
+void encrypt(char *message)
+{
+ char c;
+ while(*message) {
+     *message = *message ^ 31;
+     message++;
+ }
+}
+
+test.c的内容:
+#include &lt;stdio.h&gt;
+#include &quot;./myHeader/encrypt.h&quot;
+#include &quot;./myHeader/checksum.h&quot;
+
+int main()
+{
+     char s[] = &quot;Speak friend and enter&quot;;
+     encrypt(s);
+     printf(&quot;Encrypt to &apos;%s&apos;\n&quot;, s);
+     printf(&quot;checksum is %i\n&quot;, checksum(s));
+     encrypt(s);
+     printf(&quot;Decrypt to &apos;%s&apos;\n&quot;, s);
+     printf(&quot;checksum is %i\n&quot;, checksum(s));
+     return 0;
+}
+
+/*
+    把头文件和编译后的文件都保存在固定的文件中方便共享(myHeader和myObject)
+    -I告诉编译器去哪里找头文件
+*/
+执行命令:(执行命令每次都要指定.o的文件路径,是不是太麻烦?)
+    gcc -I ./myHeader -c checksum.c -o ./myObject/checksum.o
+    gcc -I ./myHeader -c encrypt.c -o ./myObject/encrypt.o
+    gcc -I ./myHeader test.c ./myObject/checksum.o ./myObject/encrypt.o -o test &amp;&amp; ./test
+</code></pre><h1 id="创建静态库的方式"><a href="#创建静态库的方式" class="headerlink" title="创建静态库的方式"></a>创建静态库的方式</h1><pre><code>/*
+    r:如果.a文件存在就更新它
+    c:表示创建存档时不显示反馈信息
+    s:告诉ar要在.a文件开头建立索引
+    创建的文件名:libhfsecurity.a
+    ** 静态库名字的命名规范一般是:libxxx.a的形式,不然编译器无法找到它
+*/
+ar -rcs libhfsecurity.a encrypt.o checksum.o
+
+/*
+    可以查看.a文件是由那些文件组成
+*/
+ar -t libhfsecurity.a
+
+/*
+    lhfsecurity对应去寻找上面创建的静态库的名字:libhfsecurity.a
+    -I指定头文件位置
+    -L告诉编译器去哪寻找存档
+    当然如果你把.a的文件放在/usr/local/lib(用来存放本地自定义库或者系统类库/usr/lib)中,可以不指定-L参数
+    gcc test.c  -lhfsecurity -o test
+*/
+gcc -I ./myHeader test.c -L myObject -lhfsecurity -o test &amp;&amp; ./test
+</code></pre><h1 id="静态库例子"><a href="#静态库例子" class="headerlink" title="静态库例子"></a>静态库例子</h1><pre><code>目录结构:
+|--myHeader
+  --hfcal.h
+|--myObject
+|--treadmill
+  --elliptical.c
+  --hfcal.c
+
+hfcal.h中的内容:
+    void display_calories(float weight, float distance, float coeff);
+
+hfcal.c文件中的内容:
+    #include &lt;stdio.h&gt;
+    #include &lt;hfcal.h&gt;
+
+    void display_calories(float weight, float distance, float coeff)
+    {
+        printf(&quot;Weight:%3.2f lbs\n&quot;, weight);
+        printf(&quot;Distance:%3.2f miles\n&quot;, distance);
+        printf(&quot;Calories burned:%4.2f cal\n&quot;, coeff * weight * distance);
+    }
+
+elliptical.c文件中的内容:
+    #include &lt;stdio.h&gt;
+    #include &lt;hfcal.h&gt;
+
+    int main()
+    {
+        display_calories(115.2, 11.3, 0.79);
+        return 0;
+    }
+
+cd treadmill
+gcc -I ../myHeader -c hfcal.c -o ../myObject/hfcal.o
+gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
+ar -rcs ../myObject/libhfcal.a ../myObject/hfcal.o
+cd ../myObject
+gcc elliptical.o -L ./ -lhfcal -o elliptical
+</code></pre><h1 id="创建动态库"><a href="#创建动态库" class="headerlink" title="创建动态库"></a>创建动态库</h1><pre><code>/*
+    -I指定头文件目录,-c不要链接代码,-fPIC创建位置无关代码创建库
+*/
+gcc -I ../myHeader -fPIC -c hfcal.c -o ../myObject/hfcal.o
+
+/*
+    --shared告诉gcc把目标文件转化为动态库
+    动态库在每个系统的后缀名都不一样
+    windows中后缀名是.dll
+    在linux和unix尚后缀名是.so
+   在mac上后缀名是是.dylib
+*/
+cd ../myObject/
+
+
+/*
+    在一些稍微老一点的mac系统上,没有-shared选项,可以使用-dynamiclib代替
+*/
+                        libhfcal.dll.a      #windows上的cygwin
+                        libhfcal.dylib         #mac
+gcc -shared hfcal.o -o  hfcal.dll           #windows上的mingw
+                        libhfcal.so         #linux或unix
+
+cd ../treadmill/
+gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
+cd ../myObject/
+
+/*
+    在linux和大部分unix中,编译器只会记录libhfcal.so库的文件名,而不会包含路径名,也就是说如果不把hfcal库保存到标准目录(/usr/lib),程序就找不到它
+    一般解决方法是:把库目录添加到LD_LIBRARY_PATH中,并export它
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
+*/
+gcc elliptical.o -L ./ -lhfcal -o elliptical
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/09/代码设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">代码设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-09T17:29:39+08:00">
+                2016-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="暂未找到合适的表述方法"><a href="#暂未找到合适的表述方法" class="headerlink" title="暂未找到合适的表述方法"></a>暂未找到合适的表述方法</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1091,7 +1238,7 @@ int main()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

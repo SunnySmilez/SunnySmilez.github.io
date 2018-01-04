@@ -233,306 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/09/ssh配置修改/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/09/ssh配置修改/" itemprop="url">ssh配置修改</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-09T22:52:57+08:00">
-                2016-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><pre><code>ssh -v vagrant@172.16.17.11
-</code></pre><h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><pre><code>cp /etc/ssh/sshd_config /etc/ssh/sshd_config
-</code></pre><h1 id="sshd-config修改端口-端口范围-0-65535"><a href="#sshd-config修改端口-端口范围-0-65535" class="headerlink" title="sshd_config修改端口(端口范围:0-65535)"></a>sshd_config修改端口(端口范围:0-65535)</h1><pre><code>Port 2231
-</code></pre><h1 id="不允许root用户通过ssh登录"><a href="#不允许root用户通过ssh登录" class="headerlink" title="不允许root用户通过ssh登录"></a>不允许root用户通过ssh登录</h1><pre><code>PermitRootLogin no
-</code></pre><h1 id="不使用DNS"><a href="#不使用DNS" class="headerlink" title="不使用DNS"></a>不使用DNS</h1><pre><code>UseDns no
-</code></pre><h1 id="不允许空密码登录"><a href="#不允许空密码登录" class="headerlink" title="不允许空密码登录"></a>不允许空密码登录</h1><pre><code>PasswordAuthentication no
-</code></pre><h1 id="重启生效"><a href="#重启生效" class="headerlink" title="重启生效"></a>重启生效</h1><pre><code>/etc/init.d/sshd restart
-</code></pre><h1 id="解决ssh慢的问题"><a href="#解决ssh慢的问题" class="headerlink" title="解决ssh慢的问题"></a>解决ssh慢的问题</h1><pre><code>UseDNS no
-GSSAPIAuthentication no
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/09/替换yum源/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/09/替换yum源/" itemprop="url">替换yum源</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-09T22:07:54+08:00">
-                2016-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="设置yum源为163的镜像原"><a href="#设置yum源为163的镜像原" class="headerlink" title="设置yum源为163的镜像原"></a>设置yum源为163的镜像原</h3><pre><code># 进入yum源目录
-    cd /etc/yum.repos.d
-
-# 下载国内yum源
-    wget &apos;mirrors.163.com/.help/CentOS6-Base-163.repo&apos;
-
-# 备份之前的yum源
- mv
-cp CentOS6-Base-163.repo CentOS-Base.repo
-</code></pre><h3 id="设置yum源为本地yum源"><a href="#设置yum源为本地yum源" class="headerlink" title="设置yum源为本地yum源"></a>设置yum源为本地yum源</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/08/linux系统设备只是介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1363,6 +1063,325 @@ peak                    n. 山峰；最高点；顶点；帽舌 vt. 使达到最
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/02/21/nginx信号/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/21/nginx信号/" itemprop="url">nginx信号</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-21T17:30:24+08:00">
+                2016-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="nginx关闭信号"><a href="#nginx关闭信号" class="headerlink" title="nginx关闭信号"></a>nginx关闭信号</h1><pre><code>* kill signal pid
+
+
+* TERM,INT
+    * 快速杀掉进程(kill -INT pid, kill -TERM pid,kill -9 pid)
+
+* QUIT
+    * 优雅的关闭进程,等待请求结束后再关闭(kill -QUIT pid)
+
+* HUP
+    * 改变配置文件,平滑的重读配置文件(kill -HUP pid)
+
+* USR1
+    *  重新打开日志文件(kill -USR1 `cat logs/nginx.pid`)
+
+* WINCH
+    * 从容关闭工作进程(kill WINCH pid)
+</code></pre><h1 id="nginx重启"><a href="#nginx重启" class="headerlink" title="nginx重启"></a>nginx重启</h1><pre><code>* 先关闭进程，修改你的配置后，重启进程
+    * kill -QUIT `cat /usr/local/nginx/nginx.pid` # 此处可替换成上面的关闭信号
+    * sudo /usr/local/nginx/nginx
+
+* 重新加载配置文件，不重启进程，不会停止处理请求
+    * kill -HUP pid
+    * 当 nginx 接收到 HUP 信号，它会尝试先解析配置文件（如果指定配置文件，就使用指定的，否则使用默认的），成功的话，就应用新的配置文件（例如：重新打开日志文件或监听的套接 字）。之后，nginx 运行新的工作进程并从容关闭旧的工作进程。通知工作进程关闭监听套接字但是继续为当前连接的客户提供服务。所有客户端的服务完成后，旧的工作进程被关闭。 如果新的配置文件应用失败，nginx 将继续使用旧的配置进行工作。
+
+* 平滑更新nginx二进制，不会停止处理请求
+    * kill USR2 pid
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/02/02/xdebug的安装与调试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/02/xdebug的安装与调试/" itemprop="url">xdebug的安装与调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-02T17:57:35+08:00">
+                2016-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="xdebug的安装"><a href="#xdebug的安装" class="headerlink" title="xdebug的安装"></a>xdebug的安装</h3><ul>
+<li><p>下载<br>  wget <a href="https://xdebug.org/files/xdebug-2.4.0rc4.tgz" target="_blank" rel="external">https://xdebug.org/files/xdebug-2.4.0rc4.tgz</a></p>
+</li>
+<li><p>安装<br>  tar zxvf xdebug-2.4.0rc4.tgz<br>  /data1/php/bin/phpize<br>  ./configure –with-php=/data1/php/bin/php-config &amp;&amp; make &amp;&amp; make install</p>
+</li>
+<li><p>配置server</p>
+</li>
+<li><p>配置client(phpstorm)</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1413,7 +1432,7 @@ peak                    n. 山峰；最高点；顶点；帽舌 vt. 使达到最
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

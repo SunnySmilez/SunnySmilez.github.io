@@ -233,313 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/shell常识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">shell常识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T09:53:00+08:00">
-                2015-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="path环境变量"><a href="#path环境变量" class="headerlink" title="path环境变量"></a>path环境变量</h1><pre><code>环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
-
-环境变量永久生效的方式：
-1.vim /etc/profile
-2.echo &apos;export PATH=/usr/local/mysql/bin:$PATH&apos; &gt;&gt; /etc/profile ;source /etc/profile
-</code></pre><h1 id="ls-l"><a href="#ls-l" class="headerlink" title="ls -l"></a>ls -l</h1><pre><code>‘-’表示参数是可有可无的
-</code></pre><h1 id="bin-sh-的含义"><a href="#bin-sh-的含义" class="headerlink" title="#! /bin/sh 的含义"></a>#! /bin/sh 的含义</h1><pre><code>告知系统需要使用/bin/sh的shell来执行脚本，类似的还有很多shell比如#! /bin/awk ;#! /bin/csh
-</code></pre><h1 id="‘-’和’-amp-’的作用"><a href="#‘-’和’-amp-’的作用" class="headerlink" title="‘;’和’&amp;’的作用"></a>‘;’和’&amp;’的作用</h1><pre><code>‘;’用来分隔同一行里的多个命令
-‘&amp;’如果是在命令的末尾shell会在后台执行该命令
-</code></pre><h1 id="‘set-x’与’set-x’"><a href="#‘set-x’与’set-x’" class="headerlink" title="‘set -x’与’set +x’"></a>‘set -x’与’set +x’</h1><pre><code>关闭和打开追踪功能
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/获取终端输出/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/22/获取终端输出/" itemprop="url">获取终端输出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T00:04:53+08:00">
-                2015-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="获取终端输出两种方式"><a href="#获取终端输出两种方式" class="headerlink" title="获取终端输出两种方式"></a>获取终端输出两种方式</h1><ul>
-<li><p>方法一：<br>  <code>who &gt;&gt; output.txt（将命令的输出结果追加写入到文件中）
-  tail -n 100 output.txt（查看文件的末尾100行）</code></p>
-</li>
-<li><p>方法二：<br>  <code>cat &gt; output.txt（建立文件使用cat复制终端输出）
-  who（终端输入who命令）
-  ctrl+c（强制中断）
-  chmod +x output.txt（添加执行权限）
-  ./output.txt（执行测试）</code></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/20/性能分析命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1193,6 +886,374 @@ Options:
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/17/ab压测工具的安装与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">ab压测工具的安装与使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-17T10:03:33+08:00">
+                2015-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install httpd-tools
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
+</code></pre><h2 id="命令执行结果分析"><a href="#命令执行结果分析" class="headerlink" title="命令执行结果分析"></a>命令执行结果分析</h2><pre><code>Server Software:
+Server Hostname:        hostname(*服务器域名*)
+Server Port:            443(*服务器端口*)
+SSL/TLS Protocol:       TLSv1/SSLv3,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+
+Document Path:          /path(*测试接口地址*)
+Document Length:        14904 bytes(*测试数据大小*)
+
+Concurrency Level:      10(*并发数*)
+Time taken for tests:   0.403 seconds(*整个测试持续时间*)
+Complete requests:      10(*完成的请求数量*)
+Failed requests:        0(*失败的请求,返回的内容如果和第一次不一样就认为是失败*)
+Write errors:           0(*请求写入失败的次数*)
+Keep-Alive requests:    0(*保持联机连接的请求数量。只有在命令行中使用-k，才能看到该属性值*)
+Total transferred:      151120 bytes(*整个场景中的网络传输量*)
+HTML transferred:       149040 bytes(*整个场景中的HTML内容传输量*)
+`Requests per second:    24.84 [#/sec] (mean)(*表示当前测试的服务器每秒可以处理24.84个静态html的请求事务，后面的mean表示平均。这个数值表示当前机器的整体性能，值越大越好*)`
+`Time per request:       402.511 [ms] (mean)(*单个并发的延迟时间，后面的mean表示平均。隔离开当前并发，单独完成一个请求需要的平均时间*)`
+`Time per request:       40.251 [ms] (mean, across all concurrent requests)(*即上面的时间（Time per request）除以并发数 ,平均每个并发请求处理的时间*)`
+`Transfer rate:          366.64 [Kbytes/sec] received(*平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题，也就是这些请求在单位时间从服务器获取的数据长度*)`
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       33   46  14.6     41      72
+Processing:    16  113 119.2     27     268
+Waiting:       10   37  79.1     12     262
+Total:         49  159 121.5     99     340
+
+Percentage of the requests served within a certain time (ms)
+  50%     99
+  66%    268
+  75%    282
+  80%    299
+  90%    340
+  95%    340
+  98%    340
+  99%    340
+ 100%    340 (longest request)
+</code></pre><h2 id="ab命令参数"><a href="#ab命令参数" class="headerlink" title="ab命令参数"></a>ab命令参数</h2><pre><code>Usage:
+  ab [options] [http[s]://]hostname[:port]/path
+Options are:
+  -n requests     (*总的请求数目*)
+  -c concurrency  (*一次请求并发数*)
+  -t timelimit    (*测试进行的最大秒数*)
+  -b windowsize   (*tcp连接的最大内存使用*)
+  -p postfile     (*post的数据*)
+  -u putfile      (*put的数据*)
+  -T content-type (*header的类型，比如&apos;application/x-www-form-urlencoded&apos;默认为Default is &apos;text/plain&apos;*)
+  -v verbosity    (*设置显示信息的详细程度 – 4或更大值会显示头信息， 3或更大值可以显示响应代码(404, 200等), 2或更大值可以显示警告和其他信息*)
+  -w              (*将结果用html的table打印出来，默认它是白色背景的两列宽度的一张表*)
+  -i              (*执行HEAD请求，而不是GET*)
+  -C attribute    (*添加一个cookie信息*)Add cookie, eg. &apos;Apache=1234. (repeatable)
+  -H attribute    (*添加head属性例如eg. &apos;Accept-Encoding: gzip&apos;*)
+  -A attribute    (*Add Basic WWW Authentication, the attributes are a colon separated username and password*)
+  -P attribute    (*Add Basic Proxy Authentication, the attributes are a colon separated username and password*)
+  -X proxy:port   (*使用代理的端口*)
+  -V              (*显示版本信息并退出*)
+  -k              (*使用http的KeepAlive属性*)
+  -d              (*Do not show percentiles served table*)
+  -S              (*Do not show confidence estimators and warnings*)
+  -g filename     (*Output collected data to gnuplot format file*)
+  -e filename     (*Output CSV file with percentages served*)
+  -r              (*忽略socket错误*)
+  -h              (*Display usage information (this message)*)
+  -Z ciphersuite  (*Specify SSL/TLS cipher suite (See openssl ciphers)*)
+  -f protocol     (*特殊的协议例如SSL2, SSL3, TLS1, or ALL*)
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/03/Redis集群的安装与配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">Redis集群的安装与配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-03T18:23:49+08:00">
+                2015-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Redis集群安装"><a href="#Redis集群安装" class="headerlink" title="Redis集群安装"></a>Redis集群安装</h2><ul>
+<li><code>wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;</code>(<em>下载redis-3.0.tar.gz</em>)</li>
+<li><code>tar zxvf redis-3.0.tar.gz</code>(<em>解压安装包</em>)</li>
+<li><code>cd redis-3.0.0-beta3</code>（<em>进入解压后的文件夹</em>）</li>
+<li><code>yum install tcl</code></li>
+<li><code>make</code></li>
+<li><code>cp redis.conf redis.6380.conf</code></li>
+<li><code>vim redis.6380.conf</code></li>
+<li><code>src/redis-server redis.6380.conf &amp;</code></li>
+<li><code>ps aux | grep redis</code></li>
+<li><code>src/redis-cli -h 172.16.9.111 -p 6379</code></li>
+<li><code>yum install ruby</code></li>
+<li><code>yum install rubygems</code></li>
+<li><code>gem install redis</code></li>
+<li><code>src/redis-trib.rb create --replicas 1 172.16.9.111:6380 172.16.9.111:6381 172.16.9.111:6382 172.16.9.104:6380 172.16.9.104:6381 172.16.9.104:6382</code></li>
+<li><code>src/redis-cli -p 6380</code></li>
+<li><code>src/redis-cli -c -p 6380</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1243,7 +1304,7 @@ Options:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

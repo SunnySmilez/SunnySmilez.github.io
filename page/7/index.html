@@ -233,515 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记接口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/01/go学习笔记接口/" itemprop="url">go学习笔记接口</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T15:06:44+08:00">
-                2017-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明"><a href="#接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明" class="headerlink" title="接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明"></a>接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明</h6><h6 id="所谓接口对应方法，是指有相同名称，参数列表以及返回值。"><a href="#所谓接口对应方法，是指有相同名称，参数列表以及返回值。" class="headerlink" title="所谓接口对应方法，是指有相同名称，参数列表以及返回值。"></a>所谓接口对应方法，是指有相同名称，参数列表以及返回值。</h6><h6 id="接口命名习惯以er结尾，结构体"><a href="#接口命名习惯以er结尾，结构体" class="headerlink" title="接口命名习惯以er结尾，结构体"></a>接口命名习惯以er结尾，结构体</h6><h6 id="接口只有方法签名，没有实现"><a href="#接口只有方法签名，没有实现" class="headerlink" title="接口只有方法签名，没有实现"></a>接口只有方法签名，没有实现</h6><h6 id="接口没有数据字段"><a href="#接口没有数据字段" class="headerlink" title="接口没有数据字段"></a>接口没有数据字段</h6><h6 id="可在接口中嵌入其他接口"><a href="#可在接口中嵌入其他接口" class="headerlink" title="可在接口中嵌入其他接口"></a>可在接口中嵌入其他接口</h6><h6 id="类型可实现多个接口"><a href="#类型可实现多个接口" class="headerlink" title="类型可实现多个接口"></a>类型可实现多个接口</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Stringer interface {
-    String() string         //定义了一个接口
-}
-
-type Printer interface {
-    Stringer                //嵌套接口
-    Print()
-}
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self *User) String() string {
-    return fmt.Sprintf(&quot;user %d, %s&quot;, self.id, self.name)
-}
-
-func (self *User) Print() {
-    fmt.Println(self.String())
-}
-
-func main() {
-    var t Printer = &amp;User{1, &quot;Tom&quot;}
-    t.Print()       //user 1, Tom
-}
-</code></pre><h6 id="空接口interface-没有任何方法签名，也就意味着任何类型都实现了空接口。"><a href="#空接口interface-没有任何方法签名，也就意味着任何类型都实现了空接口。" class="headerlink" title="空接口interface{}没有任何方法签名，也就意味着任何类型都实现了空接口。"></a>空接口interface{}没有任何方法签名，也就意味着任何类型都实现了空接口。</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-func Print(v interface{}) {
-    fmt.Printf(&quot;%T,%v\n&quot;, v, v)
-}
-
-func main() {
-    Print(1)                    //int,1
-    Print(&quot;Hello, world!&quot;)      //string,Hello, world!
-}
-</code></pre><h6 id="匿名接口可用作变量类型或结构成员"><a href="#匿名接口可用作变量类型或结构成员" class="headerlink" title="匿名接口可用作变量类型或结构成员"></a>匿名接口可用作变量类型或结构成员</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type Tester struct {
-    s interface {
-        String() string
-    }
-}
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self *User) String() string {
-    return fmt.Sprintf(&quot;User %d, %s&quot;, self.id, self.name)
-}
-
-func main() {
-    t := Tester{&amp;User{1, &quot;Tom&quot;}}
-    fmt.Println(t.s.String())
-}
-</code></pre><h6 id="数据指针持有的是目标对象的只读复制品，赋值完整对象或指针"><a href="#数据指针持有的是目标对象的只读复制品，赋值完整对象或指针" class="headerlink" title="数据指针持有的是目标对象的只读复制品，赋值完整对象或指针"></a>数据指针持有的是目标对象的只读复制品，赋值完整对象或指针</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func main() {
-    u := User{1, &quot;Tom&quot;}
-    var i interface{} = u
-
-    u.id = 2
-    u.name = &quot;jack&quot;
-
-    fmt.Printf(&quot;%v\n&quot;, u)           //{2 jack}
-    fmt.Printf(&quot;%v\n&quot;, i.(User))    //{1 Tom}
-}
-</code></pre><h6 id="接口转型返回临时对象，只有使用指针才能修改其状态"><a href="#接口转型返回临时对象，只有使用指针才能修改其状态" class="headerlink" title="接口转型返回临时对象，只有使用指针才能修改其状态"></a>接口转型返回临时对象，只有使用指针才能修改其状态</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func main() {
-    u := User{1, &quot;Tom&quot;}
-    var vi,pi interface{} = u, &amp;u
-
-    //vi.(User).name = &quot;jim&quot;    //报错，不能这样修改值
-    pi.(*User).name = &quot;Jack&quot;
-
-
-    fmt.Printf(&quot;%v\n&quot;, vi.(User))     //{1 Tom}
-    fmt.Printf(&quot;%v\n&quot;, pi.(*User))    //&amp;{1 Jack}
-}
-</code></pre><h6 id="利用类型推断，可判断接口对象是否某个具体的接口或类型"><a href="#利用类型推断，可判断接口对象是否某个具体的接口或类型" class="headerlink" title="利用类型推断，可判断接口对象是否某个具体的接口或类型"></a>利用类型推断，可判断接口对象是否某个具体的接口或类型</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self *User) String() string {
-    return fmt.Sprintf(&quot;%d, %s&quot;, self.id, self.name)
-}
-
-func main() {
-    var o interface{} = &amp;User{1, &quot;Tom&quot;}
-
-    if i,ok := o.(fmt.Stringer); ok {
-        fmt.Println(i)      //1, Tom
-    }
-
-
-    u := o.(*User)
-    //u := o.(User)         //报错
-    fmt.Println(u)          //1, Tom
-}
-</code></pre><h6 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-
-func main() {
-    var o interface{} = &amp;User{1, &quot;Tom&quot;}
-
-    switch v := o.(type) {
-    case nil :                  //nil类型
-        fmt.Println(&quot;nil&quot;)
-    case fmt.Stringer:          //interface
-        fmt.Println(v)
-    case func() string:         //func
-        fmt.Println(v())
-    case *User:
-        fmt.Printf(&quot;%d, %s\n&quot;, v.id, v.name)
-    default:
-        fmt.Println(&quot;unknow&quot;)
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记方法表达式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/01/go学习笔记方法表达式/" itemprop="url">go学习笔记方法表达式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T11:23:27+08:00">
-                2017-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><h6 id="instance-method-args…-gt-method-value"><a href="#instance-method-args…-gt-method-value" class="headerlink" title="instance.method(args…) =&gt; method value"></a>instance.method(args…) =&gt; method value</h6><h6 id="func-instance-args-gt-method-expression"><a href="#func-instance-args-gt-method-expression" class="headerlink" title=".func(instance, args)  =&gt; method expression"></a><type>.func(instance, args)  =&gt; method expression</type></h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self *User) Test() {
-    fmt.Printf(&quot;%p, %v\n&quot;, self, self)
-}
-
-func main() {
-    u := User{1, &quot;Tom&quot;}
-    u.Test()        //0xc42000e1e0, &amp;{1 Tom}
-
-    mValue := u.Test
-    mValue()        //0xc42000e1e0, &amp;{1 Tom} 隐式传递receiver
-
-    mExpression := (*User).Test
-    mExpression(&amp;u) //0xc42000e1e0, &amp;{1 Tom} 显示传递receiver
-}
-</code></pre><h6 id="method-value会复制receiver"><a href="#method-value会复制receiver" class="headerlink" title="method value会复制receiver"></a>method value会复制receiver</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self User) Test() {
-    fmt.Println(self)
-}
-
-func main() {
-    u := User{1, &quot;Tom&quot;}
-    mValue := u.Test
-
-    u.id, u.name = 2, &quot;Jack&quot;
-    u.Test()        //{2 Jack}
-    mValue()        //{1 Tom}
-}
-</code></pre><h6 id="注意receiver类型差异"><a href="#注意receiver类型差异" class="headerlink" title="注意receiver类型差异"></a>注意receiver类型差异</h6><pre><code>package main
-
-import &quot;fmt&quot;
-
-type User struct {
-    id      int
-    name    string
-}
-
-func (self *User) TestPointer() {
-    fmt.Printf(&quot;TestPointer:%p, %v\n&quot;, self, self)
-}
-
-func (self User) TestValue() {
-    fmt.Printf(&quot;TestValue:%p, %v\n&quot;, &amp;self, self)
-}
-
-func main() {
-    u := User{1, &quot;Tom&quot;}
-    m := User.TestValue
-    m(u)        //TestValue:0xc42000e200, {1 Tom}
-
-    a := (*User).TestPointer
-    a(&amp;u)       //TestPointer:0xc42000e1e0, &amp;{1 Tom}
-
-    b := (*User).TestValue  //*User方法集包含TestValue，前面变为func TestValue(self *User) 事迹依然是receiver value copy
-    b(&amp;u)       //TestValue:0xc42000e280, {1 Tom}
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记方法集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1268,6 +759,520 @@ func main() {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记struct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">go学习笔记struct</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T17:07:11+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员"><a href="#值类型，赋值和传参会复制全部内容。可用”-”定义补位字段，支持指向自身类型的指针成员" class="headerlink" title="值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员"></a>值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Node struct {
+    _       int
+    id      int
+    data    *byte
+    next    *Node
+}
+
+func main() {
+    n1 := Node{
+        id  : 1,
+        data: nil,
+    }
+
+    n2 := Node{
+        id  : 2,
+        data: nil,
+        next: &amp;n1,
+    }
+
+    fmt.Println(n1, n2)
+}
+</code></pre><h6 id="顺序初始化必须包含全部字段，否则会出错"><a href="#顺序初始化必须包含全部字段，否则会出错" class="headerlink" title="顺序初始化必须包含全部字段，否则会出错"></a>顺序初始化必须包含全部字段，否则会出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    name    string
+    age     int
+}
+
+func main() {
+    u1 := User{&quot;Tom&quot;, 20}
+    //u2 := User{&quot;Tom&quot;}     //会报错，缺少字段
+    fmt.Println(u1)
+}
+</code></pre><h6 id="支持匿名结构，可用作结构成员或定义变量"><a href="#支持匿名结构，可用作结构成员或定义变量" class="headerlink" title="支持匿名结构，可用作结构成员或定义变量"></a>支持匿名结构，可用作结构成员或定义变量</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type File struct {
+    name    string
+    size     int
+    attr struct {
+        perm    int
+        owner   int
+    }
+}
+
+func main() {
+    f := File{
+        name : &quot;test.txt&quot;,
+        size : 1024,
+        //attr : {0755,1} //这样赋值会报错
+    }
+
+    f.attr.owner = 1
+    f.attr.perm = 0755
+
+    fmt.Println(f)
+
+    d := File{
+        name : &quot;a.txt&quot;,
+        size : 512,
+    }
+
+    var attr = struct {
+        perm int
+        owner int
+    }{2, 0755}
+
+    d.attr = attr
+
+    fmt.Println(d)
+}
+</code></pre><h6 id="注意m的赋值方式"><a href="#注意m的赋值方式" class="headerlink" title="注意m的赋值方式"></a>注意m的赋值方式</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type User struct {
+    id     int
+    name    string
+}
+
+func main() {
+    m := map[User]int{
+        User{1, &quot;Tom&quot;} : 100,
+    }
+
+    fmt.Println(m)      //100
+}
+</code></pre><h6 id="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"><a href="#匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错" class="headerlink" title="匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错"></a>匿名字段，其实是一种语法糖，就是一个与成员类型同名的字段，被匿名嵌入的可以使任何类型，当然也包括指针。可以像普通字段那样访问匿名字段成员，编译器从外向内逐级查找所有层次的匿名字段，知道发现目标或出错</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+}
+
+
+type Manager struct {
+    User
+    title string
+}
+
+type User struct {
+    Resource    //匿名字段，相当于引用上面的Resource结构
+    name string
+}
+
+func main() {
+    var m Manager
+    m.id = 1
+    m.name = &quot;Jack&quot;
+    m.title = &quot;Admin&quot;
+
+    fmt.Println(m)      //{{{1} Jack} Admin}
+}
+</code></pre><h6 id="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"><a href="#外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名" class="headerlink" title="外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名"></a>外层同名字段会遮蔽嵌入字段成员，相同层次的同名字段也会让编译器无所适从，解决方法是使用显示字段名</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+type Resource struct {
+    id int
+    name string
+}
+
+
+type Classify struct {
+    id int
+}
+
+type User struct {
+    Resource
+    Classify
+    name string
+}
+
+func main() {
+    u := User{
+        Resource{1, &quot;pepple&quot;},
+        Classify{100},
+        &quot;Jack&quot;,
+    }
+
+    fmt.Println(u)
+    fmt.Println(u.name)
+    fmt.Println(u.Resource.id)
+    fmt.Println(u.Classify.id)
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">go学习笔记map</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T16:20:07+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h6 id="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"><a href="#引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制" class="headerlink" title="引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制"></a>引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[int]struct{
+        name string
+        age int
+    }{
+        1 : {&quot;user1&quot;, 10},
+        2 : {&quot;user2&quot;, 20},
+    }
+
+    fmt.Println(m[1].name)
+}
+</code></pre><h6 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    m := map[string]int{    //判断key是否存在
+        &quot;a&quot; : 1,
+    }
+
+    if v,ok := m[&quot;a&quot;];ok {
+        println(v, ok)      //1 true
+    }
+
+    fmt.Println(m[&quot;c&quot;])     //0   对于不存在的key，直接返回\0,不报错
+    m[&quot;b&quot;] = 2              //新增或修改
+    delete(m, &quot;c&quot;)          //删除，如果key不存在，不会出错
+    println(len(m))         //2    获取键值对数量。cap无效
+
+    for k, v := range m {   //迭代，可仅返回key。随机顺序返回，每次都不相同
+        println(k, v)       //b 2       a 1
+    }
+}
+</code></pre><h6 id="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"><a href="#从map中取回的是一个value临时复制品，对其成员的修改是没有意义的" class="headerlink" title="从map中取回的是一个value临时复制品，对其成员的修改是没有意义的"></a>从map中取回的是一个value临时复制品，对其成员的修改是没有意义的</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   type user struct{ name string }
+   m := map[int]user{
+        1 : {&quot;user1&quot;},
+   }
+
+   fmt.Println(m[1].name)
+   //m[1].name = &quot;Tom&quot;     //这样赋值会报错
+   u := m[1]
+   u.name = &quot;Tom&quot;
+   m[1] = u
+   fmt.Println(m[1].name)
+
+   m2 := map[int]*user{
+        1 : &amp;user{&quot;user1&quot;},
+   }
+   m2[1].name = &quot;jack&quot;
+   fmt.Println(m2[1].name)      //返回的是指针复制品，透过指针修改原对象是允许的
+}
+</code></pre><h6 id="可以在迭代时安全删除键值-最好不要做新增操作"><a href="#可以在迭代时安全删除键值-最好不要做新增操作" class="headerlink" title="可以在迭代时安全删除键值,最好不要做新增操作"></a>可以在迭代时安全删除键值,最好不要做新增操作</h6><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    for i := 0; i &lt; 5;i++ {
+        m := map[int]string{
+            0:&quot;a&quot;, 1:&quot;a&quot;, 2:&quot;a&quot;, 3:&quot;a&quot;, 4:&quot;a&quot;,
+            5:&quot;a&quot;, 6:&quot;a&quot;, 7:&quot;a&quot;, 8:&quot;a&quot;, 9:&quot;a&quot;,
+        }
+
+        for k := range m {
+            m[k+k] = &quot;k&quot;
+            delete(m, k)
+        }
+
+        fmt.Println(m)
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1318,7 +1323,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

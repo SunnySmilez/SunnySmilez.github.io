@@ -233,447 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">C语言静态库和动态库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T16:51:13+08:00">
-                2016-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="实现文件共享"><a href="#实现文件共享" class="headerlink" title="实现文件共享"></a>实现文件共享</h1><pre><code>例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --encrypt.h
-|--checksum.c
-|--encrypt.c
-|--test.c
-|--myObject
-
-在myHeader文件中建立头文件checksum.h
-int checksum(char *message);
-在myHeader文件中建立头文件encrypt.h
-void encrypt(char *message);
-
-checksum.c内容:
-#include &lt;checksum.h&gt;
-
-int checksum(char *message)
-{
- int c = 0;
- while (*message) {
-     c += c ^ (int)(*message);
-     message++;
- }
-
- return c;
-}
-
-encrypt.c内容:
-#include &quot;./myHeader/encrypt.h&quot;
-
-void encrypt(char *message)
-{
- char c;
- while(*message) {
-     *message = *message ^ 31;
-     message++;
- }
-}
-
-test.c的内容:
-#include &lt;stdio.h&gt;
-#include &quot;./myHeader/encrypt.h&quot;
-#include &quot;./myHeader/checksum.h&quot;
-
-int main()
-{
-     char s[] = &quot;Speak friend and enter&quot;;
-     encrypt(s);
-     printf(&quot;Encrypt to &apos;%s&apos;\n&quot;, s);
-     printf(&quot;checksum is %i\n&quot;, checksum(s));
-     encrypt(s);
-     printf(&quot;Decrypt to &apos;%s&apos;\n&quot;, s);
-     printf(&quot;checksum is %i\n&quot;, checksum(s));
-     return 0;
-}
-
-/*
-    把头文件和编译后的文件都保存在固定的文件中方便共享(myHeader和myObject)
-    -I告诉编译器去哪里找头文件
-*/
-执行命令:(执行命令每次都要指定.o的文件路径,是不是太麻烦?)
-    gcc -I ./myHeader -c checksum.c -o ./myObject/checksum.o
-    gcc -I ./myHeader -c encrypt.c -o ./myObject/encrypt.o
-    gcc -I ./myHeader test.c ./myObject/checksum.o ./myObject/encrypt.o -o test &amp;&amp; ./test
-</code></pre><h1 id="创建静态库的方式"><a href="#创建静态库的方式" class="headerlink" title="创建静态库的方式"></a>创建静态库的方式</h1><pre><code>/*
-    r:如果.a文件存在就更新它
-    c:表示创建存档时不显示反馈信息
-    s:告诉ar要在.a文件开头建立索引
-    创建的文件名:libhfsecurity.a
-    ** 静态库名字的命名规范一般是:libxxx.a的形式,不然编译器无法找到它
-*/
-ar -rcs libhfsecurity.a encrypt.o checksum.o
-
-/*
-    可以查看.a文件是由那些文件组成
-*/
-ar -t libhfsecurity.a
-
-/*
-    lhfsecurity对应去寻找上面创建的静态库的名字:libhfsecurity.a
-    -I指定头文件位置
-    -L告诉编译器去哪寻找存档
-    当然如果你把.a的文件放在/usr/local/lib(用来存放本地自定义库或者系统类库/usr/lib)中,可以不指定-L参数
-    gcc test.c  -lhfsecurity -o test
-*/
-gcc -I ./myHeader test.c -L myObject -lhfsecurity -o test &amp;&amp; ./test
-</code></pre><h1 id="静态库例子"><a href="#静态库例子" class="headerlink" title="静态库例子"></a>静态库例子</h1><pre><code>目录结构:
-|--myHeader
-  --hfcal.h
-|--myObject
-|--treadmill
-  --elliptical.c
-  --hfcal.c
-
-hfcal.h中的内容:
-    void display_calories(float weight, float distance, float coeff);
-
-hfcal.c文件中的内容:
-    #include &lt;stdio.h&gt;
-    #include &lt;hfcal.h&gt;
-
-    void display_calories(float weight, float distance, float coeff)
-    {
-        printf(&quot;Weight:%3.2f lbs\n&quot;, weight);
-        printf(&quot;Distance:%3.2f miles\n&quot;, distance);
-        printf(&quot;Calories burned:%4.2f cal\n&quot;, coeff * weight * distance);
-    }
-
-elliptical.c文件中的内容:
-    #include &lt;stdio.h&gt;
-    #include &lt;hfcal.h&gt;
-
-    int main()
-    {
-        display_calories(115.2, 11.3, 0.79);
-        return 0;
-    }
-
-cd treadmill
-gcc -I ../myHeader -c hfcal.c -o ../myObject/hfcal.o
-gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
-ar -rcs ../myObject/libhfcal.a ../myObject/hfcal.o
-cd ../myObject
-gcc elliptical.o -L ./ -lhfcal -o elliptical
-</code></pre><h1 id="创建动态库"><a href="#创建动态库" class="headerlink" title="创建动态库"></a>创建动态库</h1><pre><code>/*
-    -I指定头文件目录,-c不要链接代码,-fPIC创建位置无关代码创建库
-*/
-gcc -I ../myHeader -fPIC -c hfcal.c -o ../myObject/hfcal.o
-
-/*
-    --shared告诉gcc把目标文件转化为动态库
-    动态库在每个系统的后缀名都不一样
-    windows中后缀名是.dll
-    在linux和unix尚后缀名是.so
-   在mac上后缀名是是.dylib
-*/
-cd ../myObject/
-
-
-/*
-    在一些稍微老一点的mac系统上,没有-shared选项,可以使用-dynamiclib代替
-*/
-                        libhfcal.dll.a      #windows上的cygwin
-                        libhfcal.dylib         #mac
-gcc -shared hfcal.o -o  hfcal.dll           #windows上的mingw
-                        libhfcal.so         #linux或unix
-
-cd ../treadmill/
-gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
-cd ../myObject/
-
-/*
-    在linux和大部分unix中,编译器只会记录libhfcal.so库的文件名,而不会包含路径名,也就是说如果不把hfcal库保存到标准目录(/usr/lib),程序就找不到它
-    一般解决方法是:把库目录添加到LD_LIBRARY_PATH中,并export它
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
-*/
-gcc elliptical.o -L ./ -lhfcal -o elliptical
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/09/代码设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">代码设计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-09T17:29:39+08:00">
-                2016-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="暂未找到合适的表述方法"><a href="#暂未找到合适的表述方法" class="headerlink" title="暂未找到合适的表述方法"></a>暂未找到合适的表述方法</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/02/git的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1548,6 +1107,385 @@ void release(island *start) {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/10/C语言动态存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/10/C语言动态存储/" itemprop="url">C语言动态存储</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-10T08:12:39+08:00">
+                2016-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="动态数据存储的位置"><a href="#动态数据存储的位置" class="headerlink" title="动态数据存储的位置"></a>动态数据存储的位置</h1><pre><code>堆,它是程序中用来保存长期使用数据的地方
+</code></pre><h1 id="获取空间"><a href="#获取空间" class="headerlink" title="获取空间"></a>获取空间</h1><pre><code>使用malloc()函数进行申请
+</code></pre><h1 id="如何释放"><a href="#如何释放" class="headerlink" title="如何释放"></a>如何释放</h1><pre><code>使用free()函数进行释放
+</code></pre><h1 id="使用malloc"><a href="#使用malloc" class="headerlink" title="使用malloc"></a>使用malloc</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+void display(island *start);
+void release(island *start);
+island* create();
+
+int main()
+{
+    char name[80];
+    fgets(name, 80, stdin);
+    island *i = create(name);
+
+    fgets(name, 80, stdin);
+    island *i1 = create(name);
+    i-&gt;next = i1;
+    display(i);
+    release(i);
+}
+
+island* create (char *name)
+{
+    island *i = malloc(sizeof(island));
+    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
+    i-&gt;name = strdup(name);
+    i-&gt;open = &quot;09:00&quot;;
+    i-&gt;close = &quot;17:00&quot;;
+    i-&gt;next = NULL;
+
+    return i;
+}
+
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+
+void release(island *start) {
+    island *i = NULL;
+    island *next = NULL;
+
+    for(;i!=NULL;i=next) {
+        next = i-&gt;next;
+        free(i-&gt;name);
+        free(i);
+    }
+}
+</code></pre><h1 id="为什么island在堆上申请了内存-name还需要在堆上申请内存"><a href="#为什么island在堆上申请了内存-name还需要在堆上申请内存" class="headerlink" title="为什么island在堆上申请了内存,name还需要在堆上申请内存?"></a>为什么island在堆上申请了内存,name还需要在堆上申请内存?</h1><pre><code>因为结构只是把不同类型的数据写在一起,封装成一个大的数据类型,它不是创建了一个类型把所有数据都存储在它里面
+</code></pre><h1 id="使用release的时候需要释放那些堆上的内存"><a href="#使用release的时候需要释放那些堆上的内存" class="headerlink" title="使用release的时候需要释放那些堆上的内存?"></a>使用release的时候需要释放那些堆上的内存?</h1><pre><code>因为name,和island在堆上申请了内存,所以只要释放他们的内存就好了,但是需要注意的是先释放name的内存,不然先释放了island就找不到name了
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/09/C语言链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/09/C语言链表/" itemprop="url">C语言链表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-09T07:57:33+08:00">
+                2016-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><pre><code>是一种抽象的数据结构
+</code></pre><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><pre><code>为了保存可变数量的数据,需要一样比数组更灵活的东西
+</code></pre><h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><pre><code>保存了一条数据和链向另一条数据的链接
+</code></pre><h1 id="创建链表"><a href="#创建链表" class="headerlink" title="创建链表"></a>创建链表</h1><pre><code>#include &lt;stdio.h&gt;
+//注意要先定义函数在main函数的外部
+void display();
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+
+int main()
+{
+    island amity = {&quot;Amity&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+    island craggy = {&quot;craggy&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+    island shutter = {&quot;shutter&quot;, &quot;9:00&quot;, &quot;17:00&quot;, NULL};
+
+    amity.next = &amp;craggy;
+    craggy.next = &amp;shutter;
+
+    display(&amp;amity);
+    return 0;
+}
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+</code></pre><h1 id="递归结构"><a href="#递归结构" class="headerlink" title="递归结构"></a>递归结构</h1><pre><code>如果一个结构中包含一个链向同种结构的链接,那么这个结构就被称为递归结构
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1598,7 +1536,7 @@ void release(island *start) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

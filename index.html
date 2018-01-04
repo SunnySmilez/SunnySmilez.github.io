@@ -233,317 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/03/redis-sds源码阅读/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/03/redis-sds源码阅读/" itemprop="url">redis-sds源码阅读</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T11:57:42+08:00">
-                2018-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
-
-    /** buf 中已占用空间的长度*/
-    int len;
-
-    /** buf 中剩余可用空间的长度*/
-    int free;
-
-    /** 数据空间*/ 
-    /** 柔性数组*/
-    char buf[];
-};
-</code></pre><p><img src="/img/redis/sds.jpg" alt="Alt text" title="sds结构"></p>
-<h1 id="获取字符串长度复杂度为O-1"><a href="#获取字符串长度复杂度为O-1" class="headerlink" title="获取字符串长度复杂度为O(1)"></a>获取字符串长度复杂度为O(1)</h1><pre><code>在sds的结构中，保存了sds的占用空间的长度，可以使用sdslen进行读取，代码实现如下：
-
-static inline size_t sdslen(const sds s) {
-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
-    return sh-&gt;len;
-}
-</code></pre><h1 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h1><pre><code>二进制安全：比如说在c语言中，strlen计算长度，是依赖于特殊的字符&apos;\0&apos;来判断是否到达字符串的最末尾，所以对于&quot;aaa\0bbb&quot;来说，它就不是二进制安全的
-sds的二进制安全，它不仅仅根据&quot;\0&quot;来判断是否到达字符串的末尾，还根据len的长度来进行计算
-</code></pre><h1 id="杜绝缓冲区溢出"><a href="#杜绝缓冲区溢出" class="headerlink" title="杜绝缓冲区溢出"></a>杜绝缓冲区溢出</h1><pre><code>缓冲区溢出，指的是在修改字符串的时候，没有对该字符串分配足够的空间
-sds在对字符串进行修改的时候，都会使用（sdsMakeRoomFor）判断是否有足够的空间
-sds sdscatlen(sds s, const void *t, size_t len) {
-    struct sdshdr *sh;
-    // 原有字符串长度
-    size_t curlen = sdslen(s);
-
-    // 扩展 sds 空间
-    // T = O(N)
-    s = sdsMakeRoomFor(s, len);
-
-    // 内存不足？直接返回
-    if (s == NULL) {
-        return NULL;
-    }
-
-    // 复制 t 中的内容到字符串后部
-    // T = O(N)
-    sh = (void*) (s - (sizeof(struct sdshdr)));
-    memcpy(s + curlen, t, len);
-
-    // 更新属性
-    sh-&gt;len = curlen + len;
-    sh-&gt;free = sh-&gt;free - len;
-
-    // 添加新结尾符号
-    s[curlen + len] = &apos;\0&apos;;
-
-    // 返回新 sds
-    return s;
-}
-</code></pre><h1 id="动态扩展，空间预分配"><a href="#动态扩展，空间预分配" class="headerlink" title="动态扩展，空间预分配"></a>动态扩展，空间预分配</h1><pre><code>对字符串进行修改的时候，会判断sds的剩余空间，如果大小不足够会重新进行分配，具体分配逻辑如下：
-    1、如果新长度小于SDS_MAX_PREALLOC定义的最大空间，就分配两倍所需空间；
-    2、否则在目前的长度上再增加SDS_MAX_PREALLOC定义的最大空间
-
-代码实现如下：
-/*
- * 对 sds 中 buf 的长度进行扩展，确保在函数执行之后，
- * buf 至少会有 addlen + 1 长度的空余空间
- * （额外的 1 字节是为 \0 准备的）
- *
- * 返回值
- *  sds ：扩展成功返回扩展后的 sds
- *        扩展失败返回 NULL
- *
- * 复杂度
- *  T = O(N)
- */
-sds sdsMakeRoomFor(sds s, size_t addlen) {
-    struct sdshdr *sh, *newsh;
-
-    // 获取 s 目前的空余空间长度
-    size_t free = sdsavail(s);
-
-    size_t len, newlen;
-
-    // s 目前的空余空间已经足够，无须再进行扩展，直接返回
-    if (free &gt;= addlen) {
-        return s;
-    }
-
-    // 获取 s 目前已占用空间的长度
-    len = sdslen(s);
-    sh = (void*)(s - (sizeof(struct sdshdr)));
-
-    // s 最少需要的长度
-    newlen = (len + addlen);
-
-    // 根据新长度，为 s 分配新空间所需的大小
-    // 如果当前占用内存小于1M那么就分配两倍于当前长度的内存
-    // 如果当前占用内存大于等于1M那么就分配当前长度+1M的内存
-    // 内存增长策略*****
-    if (newlen &lt; SDS_MAX_PREALLOC) {
-        // 如果新长度小于 SDS_MAX_PREALLOC 
-        // 那么为它分配两倍于所需长度的空间
-        newlen *= 2;
-    } else {
-        // 否则，分配长度为目前长度加上 SDS_MAX_PREALLOC
-        newlen += SDS_MAX_PREALLOC;
-    }
-
-    // T = O(N)
-    newsh = zrealloc(sh, sizeof(struct sdshdr) + newlen + 1);
-
-    // 内存不足，分配失败，返回
-    if (newsh == NULL) { 
-        return NULL;
-    }
-
-    // 更新 sds 的空余长度
-    newsh-&gt;free = newlen - len;
-
-    // 返回 sds
-    return newsh-&gt;buf;
-}
-</code></pre><h1 id="惰性释放，减少内存分配次数"><a href="#惰性释放，减少内存分配次数" class="headerlink" title="惰性释放，减少内存分配次数"></a>惰性释放，减少内存分配次数</h1><pre><code>对sds字符串进行缩减操作的时候，不会对空间进行释放，仅仅只是改变len属性和free属性的值
-
-void sdsclear(sds s) {
-
-    // 取出 sdshdr
-    struct sdshdr *sh = (void*) (s - (sizeof(struct sdshdr)));
-
-    // 重新计算属性
-    sh-&gt;free += sh-&gt;len;
-    sh-&gt;len = 0;
-
-    // 将结束符放到最前面（相当于惰性地删除 buf 中的内容）
-    sh-&gt;buf[0] = &apos;\0&apos;;
-}
-</code></pre><h1 id="long数值转字符串"><a href="#long数值转字符串" class="headerlink" title="long数值转字符串"></a>long数值转字符串</h1><pre><code>这个函数比较有意思，他将long long类型的数值转换成string类型
-    1、将数值按照10取模，取模后的值保存，在除10（相当于是对当前位的上一位进行获取 12345第一次取模的值是5，除10变成1234.5取模的值变成4）（注意101.1与10取模是1不是1.1）
-    2、将保存的字符串再进行翻转
-    比如：
-        12345 取模后得到的值依次是5，4，3，2，1 连接成最后的字符串是54321
-        再进行倒转以后变成12345
-
-int sdsll2str(char *s, long long value) {
-    char *p, aux;
-    unsigned long long v;
-    size_t l;
-
-    /* Generate the string representation, this method produces
-     * an reversed string. */
-    v = (value &lt; 0) ? -value : value;
-    p = s;
-    do {
-        *p++ = &apos;0&apos; + (v%10);
-        v /= 10;
-    } while(v);
-    if (value &lt; 0) *p++ = &apos;-&apos;;
-
-    /* Compute length and add null term. */
-    l = p - s;
-    *p = &apos;\0&apos;;
-
-    /* Reverse the string. */
-    p--;
-    while(s &lt; p) {
-        aux = *s;
-        *s = *p;
-        *p = aux;
-        s++;
-        p--;
-    }
-    return l;
-}
-
-为什么要&apos;0&apos;+单个数字？
-参考ascii表，字符串1对应的ascii码是49，&apos;0&apos;对应的ancii值是48，比如说数字3想存储到字符串中表示也为&apos;3&apos;，那么它对应的ascii就是3+48也就是3+&apos;0&apos;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -994,7 +683,7 @@ return ;</code></p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/12/redis用到的函数/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/04/安装laravel环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -1013,7 +702,7 @@ return ;</code></p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/12/redis用到的函数/" itemprop="url">redis用到的函数</a></h1>
+                <a class="post-title-link" href="/2017/12/04/安装laravel环境/" itemprop="url">安装laravel环境</a></h1>
         
 
         <div class="post-meta">
@@ -1025,8 +714,8 @@ return ;</code></p>
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T23:18:48+08:00">
-                2017-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T16:46:07+08:00">
+                2017-12-04
               </time>
             
 
@@ -1048,8 +737,8 @@ return ;</code></p>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
+                  <a href="/categories/laravel/" itemprop="url" rel="index">
+                    <span itemprop="name">laravel</span>
                   </a>
                 </span>
 
@@ -1087,12 +776,246 @@ return ;</code></p>
       
         
           
-            <h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
-触发记录hello world日志
-例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&quot;);return ;
-当你启动redis-server后，在客户端，执行get name命令，会在redis-server终端输出&quot;hello world！&quot;
-</code></pre><p># </p>
+            <h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
+</code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
+</code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
+</code></pre><h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><pre><code>使用brew安装php，mysql，redis
+</code></pre><h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><pre><code>curl -sS https://getcomposer.org/installer | php 
+失败尝试：php -r &quot;readfile(&apos;https://getcomposer.org/installer&apos;);&quot; | php
+全局有效：mv composer.phar /usr/local/bin/composer
+验证：composer --version
+</code></pre><h1 id="通过composer安装valet"><a href="#通过composer安装valet" class="headerlink" title="通过composer安装valet"></a>通过composer安装valet</h1><pre><code>添加环境变量：
+    PATH=$PATH:~/.composer/vendor/bin
 
+修改composer源（默认的是国外的，需要翻墙）
+    1、查询composer配置文件所在位置
+        composer config -l -g
+
+    2、查看显示的home选项（就是composer所在配置的目录）
+        [home] /Users/sunnysmilez/.composer
+
+    3、在配置文件添加下载路径
+        vim /Users/sunnysmilez/.composer/config.json         
+        内容如下：
+            {
+                &quot;config&quot;: {
+                },
+                &quot;repositories&quot;: {
+                    &quot;packagist&quot;: {
+                        &quot;type&quot;: &quot;composer&quot;,
+                        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;
+                    }
+                }
+            }
+
+下载安装：valet
+    composer global require laravel/valet
+</code></pre><h1 id="安装valet"><a href="#安装valet" class="headerlink" title="安装valet"></a>安装valet</h1><pre><code>安装：
+    valet install
+
+测试：（127.0.0.1会响应所有*.dev的域名）
+    ping foobar.dev
+</code></pre><h1 id="设置code目录"><a href="#设置code目录" class="headerlink" title="设置code目录"></a>设置code目录</h1><pre><code>cd code
+valet park
+</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>composer create-project laravel/laravel=5.2.* hello --prefer-dist
+
+不知道为什么反正我的laravel new hello 不能使用
+项目使用的5.2的版本，如果你需要更高版本请自行更改
+</code></pre><h1 id="启动valet"><a href="#启动valet" class="headerlink" title="启动valet"></a>启动valet</h1><pre><code>valet start
+</code></pre><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><pre><code>http://hello.dev/
+</code></pre><h1 id="valet补充"><a href="#valet补充" class="headerlink" title="valet补充"></a>valet补充</h1><pre><code>valet start         启动valet
+valet stop          停止valet
+valet restart       重启valet
+valet share         共享项目（比较有意思）
+valet uninstall     卸载valet
+valet park          设置代码目录
+valet paths         查看代码目录
+等
+</code></pre><h1 id="各种错误"><a href="#各种错误" class="headerlink" title="各种错误"></a>各种错误</h1><h3 id="composer错误"><a href="#composer错误" class="headerlink" title="composer错误"></a>composer错误</h3><pre><code>类似此种下载不成功的，直接替换composer源
+[Composer\Downloader\TransportException]
+      The &quot;http://packagist.org/p/laravel/valet%2439296a873ae09b56ed010fd93604f08291f6223ad85ddf3bc5cb02af8a4035f3.json&quot; file could not be downloaded (HTTP/1.1 302 Found)
+
+[Composer\Downloader\TransportException]
+       Your configuration does not allow connections to http://pkg.phpcomposer.com/repo/packagist/packages.json. See https://getcomposer.org/doc/06-config.md#secure-http for details. 
+[Composer\Downloader\TransportException]
+      The &quot;http://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 301 Moved Permanently)
+
+[Composer\Downloader\TransportException]
+ The &quot;https://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 404 Not Found)
+</code></pre><h3 id="valet-install错误"><a href="#valet-install错误" class="headerlink" title="valet install错误"></a>valet install错误</h3><pre><code>Brew was unable to install [dnsmasq].
+    手动安装dnsmasq：brew install dnsmasq（报下面的错误）
+
+Error: Xcode alone is not sufficient on Sierra.
+    执行：xcode-select --install
+
+执行：valet install       
+</code></pre><h3 id="valet权限错误（在安装的过程中使用了sudo）"><a href="#valet权限错误（在安装的过程中使用了sudo）" class="headerlink" title="valet权限错误（在安装的过程中使用了sudo）"></a>valet权限错误（在安装的过程中使用了sudo）</h3><pre><code>Warning: file_get_contents(/var/root/.valet/config.json): failed to open stream: Permission denied in /Users/Username/.composer/vendor/laravel/valet/server.php on line 23
+
+Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/vendor/laravel/valet/server.php on line 47
+404 - Not Found
+
+修改权限为当前用户：
+    cd ~/.composer/
+    sudo chown -R $(whoami) vendor
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/11/27/phpsttorm添加laravel代码提示/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/phpsttorm添加laravel代码提示/" itemprop="url">phpsttorm添加laravel代码提示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T00:58:03+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/laravel/" itemprop="url" rel="index">
+                    <span itemprop="name">laravel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
+</code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
+<h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
+&quot;require&quot;: {
+        &quot;laravel/framework&quot;: &quot;5.5.*&quot;,
+        &quot;barryvdh/laravel-ide-helper&quot;: &quot;dev-master&quot;
+},
+</code></pre><h1 id="composer加载插件"><a href="#composer加载插件" class="headerlink" title="composer加载插件"></a>composer加载插件</h1><pre><code>在项目根目录运行：composer update
+</code></pre><h1 id="添加service-provider"><a href="#添加service-provider" class="headerlink" title="添加service provider"></a>添加service provider</h1><pre><code>在项目下的config/app.php在providers中添加一行&quot;&apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;&quot;
+
+&apos;providers&apos; =&gt; [
+    &apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;
+    //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//具体什么方式添加看版本
+]
+</code></pre><h1 id="执行artisan命令"><a href="#执行artisan命令" class="headerlink" title="执行artisan命令"></a>执行artisan命令</h1><pre><code>php artisan ide-helper:generate
+最终生成_ide_helper.php的文件
+</code></pre><h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><pre><code>如果没效果，重启下编辑器试试
+</code></pre>
           
         
       
@@ -1177,7 +1100,7 @@ return ;</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

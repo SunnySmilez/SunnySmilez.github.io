@@ -233,304 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/06/rsyslog配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/06/rsyslog配置/" itemprop="url">rsyslog配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-06T21:23:37+08:00">
-                2016-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
-http://huoding.com/2014/05/09/347
-http://blog.clanzx.net/2013/12/31/rsyslog.html
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/01/linux配置网络/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/01/linux配置网络/" itemprop="url">linux配置网络</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T12:01:52+08:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><code>service NetworkManager stop
-chkconfig NetworkManager off
-</code></pre><h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
-nameserver 8.8.8.8
-</code></pre><h1 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h1><h4 id="vi-etc-sysconfig-network"><a href="#vi-etc-sysconfig-network" class="headerlink" title="vi /etc/sysconfig/network"></a>vi /etc/sysconfig/network</h4><pre><code>NETWORKING=yes
-HOSTNAME=dev
-</code></pre><h1 id="配置IP地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h1><h4 id="vi-etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#vi-etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="vi /etc/sysconfig/network-scripts/ifcfg-eth0"></a>vi /etc/sysconfig/network-scripts/ifcfg-eth0</h4><pre><code>DEVICE=eth0
-BOOTPROTO=static
-HWADDR=08:00:27:94:F4:CB
-IPADDR=192.168.1.11
-NETMASK=255.255.255.0
-ONBOOT=yes
-GATEWAY=192.168.1.1
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/11/04/redis源码-目录结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1151,6 +853,300 @@ print 函数                    调用函数
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/mac安装gdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">mac安装gdb</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:32:25+08:00">
+                2016-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mac安装GDB"><a href="#Mac安装GDB" class="headerlink" title="Mac安装GDB"></a>Mac安装GDB</h1><h3 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h3><pre><code>brew install gdb
+</code></pre><h1 id="使用gdb进行调试"><a href="#使用gdb进行调试" class="headerlink" title="使用gdb进行调试"></a>使用gdb进行调试</h1><h3 id="gbd-c文件中的内容"><a href="#gbd-c文件中的内容" class="headerlink" title="gbd.c文件中的内容"></a>gbd.c文件中的内容</h3><pre><code>#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = low; i &lt;= high; i++)
+                sum = sum + i;
+        return sum;
+}
+
+int main(void)
+{
+        int result[100];
+        result[0] = add_range(1, 10);
+        result[1] = add_range(1, 100);
+        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
+        return 0;
+}
+</code></pre><h3 id="编译并使用gdb"><a href="#编译并使用gdb" class="headerlink" title="编译并使用gdb"></a>编译并使用gdb</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; gdb gdbtest
+</code></pre><h3 id="gdb开始调试"><a href="#gdb开始调试" class="headerlink" title="gdb开始调试"></a>gdb开始调试</h3><pre><code>start
+</code></pre><h3 id="mac下出现如下错误"><a href="#mac下出现如下错误" class="headerlink" title="mac下出现如下错误"></a>mac下出现如下错误</h3><p><img src="/img/mac_gdb/gdb-error.png" alt="Alt text" title="gdb错误信息"></p>
+<h3 id="mac下对gdb进行签名"><a href="#mac下对gdb进行签名" class="headerlink" title="mac下对gdb进行签名"></a>mac下对gdb进行签名</h3><p><img src="/img/mac_gdb/key.png" alt="Alt text" title="启动key"></p>
+<p><img src="/img/mac_gdb/create-key.png" alt="Alt text" title="创建证书"></p>
+<p><img src="/img/mac_gdb/gdb-cert-first.png" alt="Alt text" title="选择代码签名"></p>
+<p><img src="/img/mac_gdb/gdb-cert-second.png" alt="Alt text" title="设置过期时间"></p>
+<h3 id="接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统"><a href="#接下来所有步骤都选择默认选项-直到选择证书存储的时候选择系统" class="headerlink" title="接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统"></a>接下来所有步骤都选择默认选项,直到选择证书存储的时候选择系统</h3><p><img src="/img/mac_gdb/gdb-cert-third.png" alt="Alt text" title="选择存储位置"></p>
+<h3 id="创建的证书"><a href="#创建的证书" class="headerlink" title="创建的证书"></a>创建的证书</h3><p><img src="/img/mac_gdb/gdb-cert-last.png" alt="Alt text" title="证书"></p>
+<h3 id="设置信任"><a href="#设置信任" class="headerlink" title="设置信任"></a>设置信任</h3><p><img src="/img/mac_gdb/gdb-auth-1.png" alt="Alt text" title="找到证书简介"><br><img src="/img/mac_gdb/gdb-auth-2.png" alt="Alt text" title="设置代码签名始终信任"></p>
+<h1 id="对gdb进行代码签名"><a href="#对gdb进行代码签名" class="headerlink" title="对gdb进行代码签名"></a>对gdb进行代码签名</h1><h3 id="关闭taskgated进程"><a href="#关闭taskgated进程" class="headerlink" title="关闭taskgated进程"></a>关闭taskgated进程</h3><p><img src="/img/mac_gdb/gdb-cert-sign-1.png" alt="Alt text" title="打开活动检测器"><br><img src="/img/mac_gdb/taskgated.png" alt="Alt text" title="检索taskgated进程并退出"></p>
+<h3 id="对gdb进行签名"><a href="#对gdb进行签名" class="headerlink" title="对gdb进行签名"></a>对gdb进行签名</h3><pre><code>codesign -s gdb-cert /usr/local/bin/gdb
+</code></pre><h3 id="检测是否安装成功"><a href="#检测是否安装成功" class="headerlink" title="检测是否安装成功"></a>检测是否安装成功</h3><pre><code>codesign -v gdb (`如果没有任何信息输出代表签名成功`)
+</code></pre><h3 id="再次使用gdb进行调试"><a href="#再次使用gdb进行调试" class="headerlink" title="再次使用gdb进行调试"></a>再次使用gdb进行调试</h3><pre><code>gcc -g gdb.c -o gdbtest &amp;&amp; sudo gdb gdbtest (`注意sudo不能少,这个坑我趟了好几个小时,最终在google找到答案`)
+start
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/redis源码阅读-准备工作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">redis源码阅读-准备工作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:29:44+08:00">
+                2016-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><h1 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1201,7 +1197,7 @@ print 函数                    调用函数
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

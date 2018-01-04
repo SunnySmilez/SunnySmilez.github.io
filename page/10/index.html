@@ -233,691 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/22/go学习笔记表达式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">go学习笔记表达式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T10:54:47+08:00">
-                2017-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" title="在程序中不可以使用的名字"></a>在程序中不可以使用的名字</h6><pre><code>break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
-package,switch,const,fallthrough,if,range,type,continue,for,import,return,var
-</code></pre><h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>+       &amp;        +=       &amp;=        &amp;&amp;       ==       !=       (       )
--       |        -=       |=        ||       &lt;        &lt;=       [       ]
-*       ^        *=       ^=        &lt;-       &gt;        &gt;=       {       }
-/       &lt;&lt;       /=       &lt;&lt;=       ++       =        :=       ,       ;
-%       &gt;&gt;       %=       &gt;&gt;=       --       !        ...      .       :
-&amp;^      &amp;^=
-</code></pre><h1 id="简单位运算符"><a href="#简单位运算符" class="headerlink" title="简单位运算符"></a>简单位运算符</h1><pre><code>0110 &amp;  1011 = 0010     //AND 都为1
-0110 |  1011 = 1111     //OR 至少一个为1
-0110 ^  1011 = 1101     //XOR 只能一个为1
-0110 &amp;^ 1011 = 0100     //AND NOT 清楚标志位 m &amp;^ n 下面的数字是n的二进制是1值为0，二进制是0值为m中对应的值
-</code></pre><h1 id="标志位操作"><a href="#标志位操作" class="headerlink" title="标志位操作"></a>标志位操作</h1><pre><code>a := 0
-a |= 1 &lt;&lt; 2             //&lt;&lt;左移运算符 比如：1&lt;&lt;2 则表示：1的二进制表示为：000...0001(这里1前面0的个数和int的位数有关,32位机器,gcc里有31个0)，那么像左移动两位则是000...000100
-a |= 1 &lt;&lt; 6             //a|=b表示的意思就是a=a|b（注意OR运算是需要先转换成二进制的）
-a = a &amp;^ (1 &lt;&lt; 6)
-</code></pre><h1 id="不支持运算符重载"><a href="#不支持运算符重载" class="headerlink" title="不支持运算符重载"></a>不支持运算符重载</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    n := 0
-    p := &amp;n
-    //b := n++          //报错
-    //if n++ == 1 {}    //报错
-    //++n               //报错
-    n++
-    *p++
-
-    fmt.Println(n, p)
-}
-</code></pre><h1 id="没有’-’，取反运算也用’-’"><a href="#没有’-’，取反运算也用’-’" class="headerlink" title="没有’~’，取反运算也用’^’"></a>没有’~’，取反运算也用’^’</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    x := 1
-    x = ^x
-
-    fmt.Println(x)
-}
-</code></pre><h1 id="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"><a href="#初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部" class="headerlink" title="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"></a>初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部</h1><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    //var a struct{ x int } = { 100 }     //报错
-    //var b []int = { 1, 2, 3 }           //报错
-    //c := struct { x int; y string }     //报错
-    //{
-    //}
-    var a = struct { x int } { 100 }
-    var b = []int{  //可以分行
-                    1,
-                    2,
-                    3,  //分开的话，最后一行要一个&apos;,&apos;
-    }
-
-    var c = []int{  //可以分行
-                        1,
-                        2,
-                        3}  //分开的话，最后一行要一个&apos;}&apos;
-
-    fmt.Println(a, b, c)
-}
-</code></pre><h1 id="IF语句"><a href="#IF语句" class="headerlink" title="IF语句"></a>IF语句</h1><h6 id="可省略条件表达式括号"><a href="#可省略条件表达式括号" class="headerlink" title="可省略条件表达式括号"></a>可省略条件表达式括号</h6><h6 id="支持初始化语句，可定义代码块局部变量"><a href="#支持初始化语句，可定义代码块局部变量" class="headerlink" title="支持初始化语句，可定义代码块局部变量"></a>支持初始化语句，可定义代码块局部变量</h6><h6 id="代码块左大括号必须在条件表达式尾部"><a href="#代码块左大括号必须在条件表达式尾部" class="headerlink" title="代码块左大括号必须在条件表达式尾部"></a>代码块左大括号必须在条件表达式尾部</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    x := 0
-
-    if n := &quot;abc&quot;; x&gt;10 {
-       fmt.Println(n[1])
-    } else if x &lt;0 {
-        fmt.Println(n[2])
-    } else {
-        println(n[0])
-    }
-}
-</code></pre><h1 id="不支持三元运算符"><a href="#不支持三元运算符" class="headerlink" title="不支持三元运算符"></a>不支持三元运算符</h1><pre><code>package main
-
-func main() {
-    a := 0
-    b := 1
-
-    c := a &gt; b ? a : b      //报错
-    println(c)
-}
-</code></pre><h1 id="For（循环语句）"><a href="#For（循环语句）" class="headerlink" title="For（循环语句）"></a>For（循环语句）</h1><pre><code>package main
-
-func main() {
-    s := &quot;abc&quot;
-    //常见的for循环方式
-    for i,n :=0, len(s); i &lt; n; i++ {
-        println(i)
-    }
-
-    //while的for循环方式
-    n := len(s)
-    for n &gt; 0 {
-        println(n)
-        n--
-    }
-
-    //while(true) {} 死循环
-    for {
-        println(s)
-    }
-}
-</code></pre><h1 id="Range-类似迭代器操作，返回键值"><a href="#Range-类似迭代器操作，返回键值" class="headerlink" title="Range(类似迭代器操作，返回键值)"></a>Range(类似迭代器操作，返回键值)</h1><pre><code>package main
-
-func main() {
-    s := &quot;abc&quot;
-
-    for i := range s {      //默认忽略值，只把键赋值给了i变量
-        println(i, s[i])
-    }
-
-    for _, c := range s {   //默认丢弃了键，把值赋给了c变量
-        println(c)
-    }
-
-    var d = 0
-    for range s {           //抛弃键值，只循环
-        d++
-    }
-
-    println(d)
-
-    m := map[string]int{&quot;a&quot;:1, &quot;b&quot;:2}
-    for k,v := range m {        //遍历出键值
-        println(k,v)
-    }
-}
-</code></pre><h1 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h1><pre><code>package main
-
-func main() {
-    x := []int{1, 2, 3}
-    i := 3
-    switch i {
-        case x[1]:
-            println(&quot;a&quot;)
-        case x[2], 1:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-
-
-package main
-
-func main() {
-    x := 10
-    switch x {
-        case 10:
-            println(&quot;a&quot;)
-            fallthrough //需要继续下一分支，使用fallthrough
-        case 0:
-            println(&quot;c&quot;)
-    }
-}
-
-package main
-
-func main() {
-    x := []int{1, 2, 3}
-    switch {
-        case x[1] &gt; 0:      //当做if else使用 
-            println(&quot;a&quot;)
-        case x[1] &lt; 0:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-
-package main
-
-func main() {
-    x := []int{1, 2, 3}
-    switch i := x[2]; { //带初始值
-        case i &gt; 0:
-            println(&quot;a&quot;)
-        case i &lt; 0:
-            println(&quot;b&quot;)
-        default:
-            println(&quot;c&quot;)
-    }
-}
-</code></pre><h1 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h1><pre><code>package main
-
-func main() {
-    var i int
-    for {
-        println(i)
-        i++
-        if i &gt; 2 {
-            goto TEST
-        }
-    }
-
-    TEST:
-        println(&quot;break&quot;)
-}
-</code></pre><h1 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h1><pre><code>package main
-
-func main() {
-    L1:
-        for x := 0;x &lt; 3; x++ {
-    L2:
-            for y := 0;y &lt; 5;y++ {
-                if y &gt; 2 {
-                    continue L2
-                }
-
-                if x &gt; 1 {
-                    break L1        //break可用于for,switch,select而continue只能用于for循环
-                }
-
-                print(x, &quot;:&quot;, y, &quot; &quot;)
-            }
-
-            println()
-        }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记类型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/20/go学习笔记类型/" itemprop="url">go学习笔记类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:33:27+08:00">
-                2017-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><pre><code>package main
-
-func main() {
-    var b byte = 100
-    var n int = b // //隐式转换不支持，会报错
-    //var n int = int(b)//显示转换
-    println(n)
-}
-</code></pre><h1 id="其他值不能当作bool值使用"><a href="#其他值不能当作bool值使用" class="headerlink" title="其他值不能当作bool值使用"></a>其他值不能当作bool值使用</h1><pre><code>package main
-
-func main() {
-    a := 100
-    if a {
-        printf(&quot;aaa&quot;)
-    }
-}
-</code></pre><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h6 id="字符串是不可变值类型，内部用指针指向UTF-8字节数组"><a href="#字符串是不可变值类型，内部用指针指向UTF-8字节数组" class="headerlink" title="字符串是不可变值类型，内部用指针指向UTF-8字节数组"></a>字符串是不可变值类型，内部用指针指向UTF-8字节数组</h6><h6 id="默认值是控制符串””"><a href="#默认值是控制符串””" class="headerlink" title="默认值是控制符串””"></a>默认值是控制符串””</h6><h6 id="用索引号访问某字节，如s-i"><a href="#用索引号访问某字节，如s-i" class="headerlink" title="用索引号访问某字节，如s[i]"></a>用索引号访问某字节，如s[i]</h6><h6 id="不能用序号获取字节元素指针。-amp-s-i-非法"><a href="#不能用序号获取字节元素指针。-amp-s-i-非法" class="headerlink" title="不能用序号获取字节元素指针。&amp;s[i]非法"></a>不能用序号获取字节元素指针。&amp;s[i]非法</h6><h6 id="不可变类型，无法修改字节数组"><a href="#不可变类型，无法修改字节数组" class="headerlink" title="不可变类型，无法修改字节数组"></a>不可变类型，无法修改字节数组</h6><h6 id="字节数组尾部不包含NULL"><a href="#字节数组尾部不包含NULL" class="headerlink" title="字节数组尾部不包含NULL"></a>字节数组尾部不包含NULL</h6><h6 id="使用反引号定义不做转义处理的原始字符串，支持跨行"><a href="#使用反引号定义不做转义处理的原始字符串，支持跨行" class="headerlink" title="使用反引号定义不做转义处理的原始字符串，支持跨行"></a>使用反引号定义不做转义处理的原始字符串，支持跨行</h6><pre><code>package main
-
-func main() {
-    s := `abc
-    asdfa
-    c
-    `
-    println(s)  //结果就是字符串
-}
-</code></pre><h6 id="连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误"><a href="#连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误" class="headerlink" title="连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误"></a>连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误</h6><pre><code>package main
-
-func main() {
-    s := &quot;hello！&quot; +
-        &quot;world!&quot;
-
-    println(s)  //输出结果为hello！world!
-}
-</code></pre><h6 id="支持用两个索引号返回子串"><a href="#支持用两个索引号返回子串" class="headerlink" title="支持用两个索引号返回子串"></a>支持用两个索引号返回子串</h6><pre><code>package main
-
-func main() {
-    s := &quot;hello,&quot; +
-        &quot;world!&quot;
-
-    s1 := s[:5]
-    s2 := s[7:]
-    s3 := s[1:7]
-    println(s1, s2, s3) //hello orld! ello,w
-}
-</code></pre><h6 id="单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式"><a href="#单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式" class="headerlink" title="单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式"></a>单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式</h6><pre><code>package main
-
-func main() {
-    println(&quot;%T\n&quot;, &apos;a&apos;)
-    var c1, c2 rune = &apos;\u6211&apos;, &apos; &apos;
-    println(c1 == &apos; &apos;, string(c2) == &quot;\xe4\xbb\xac&quot;)
-}
-</code></pre><h6 id="要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"><a href="#要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组" class="headerlink" title="要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"></a>要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组</h6><pre><code>package main
-
-func main() {
-    s := &quot;abcd&quot;
-    bs := []byte(s)
-    bs[1] = &apos;B&apos;
-    println(string(bs)) //aBcd
-
-    u := &quot;电脑&quot;
-    us := []rune(u)
-    us[1] = &apos;话&apos;
-    println(string(us)) //电话
-}
-</code></pre><h6 id="用for循环遍历字符串时，也有byte和rune两种方式"><a href="#用for循环遍历字符串时，也有byte和rune两种方式" class="headerlink" title="用for循环遍历字符串时，也有byte和rune两种方式"></a>用for循环遍历字符串时，也有byte和rune两种方式</h6><pre><code>package main
-import &quot;fmt&quot;
-
-func main() {
-    s := &quot;abcd语言&quot;
-    for i := 0; i&lt;len(s); i++ {
-        fmt.Printf(&quot;%c&quot;, s[i])  //abcdè¯­è¨    byte方式
-    }
-
-    for _, r := range s {
-        fmt.Printf(&quot;%c&quot;, r)     //abcd语言    rune方式
-    }
-}
-</code></pre><h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h6 id="默认值为nil，没有NULL常量"><a href="#默认值为nil，没有NULL常量" class="headerlink" title="默认值为nil，没有NULL常量"></a>默认值为nil，没有NULL常量</h6><h6 id="操作符”-amp-”取变量地址，”-”透过指针访问目标对象"><a href="#操作符”-amp-”取变量地址，”-”透过指针访问目标对象" class="headerlink" title="操作符”&amp;”取变量地址，”*”透过指针访问目标对象"></a>操作符”&amp;”取变量地址，”*”透过指针访问目标对象</h6><h6 id="不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员"><a href="#不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员" class="headerlink" title="不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员"></a>不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员</h6><pre><code>package main
-import &quot;fmt&quot;
-
-func main() {
-    type data struct{   //申明一个data的数据结构
-        a int
-    }
-
-    var d = data{1234}  //赋值d的初始值为data类型
-
-    var p *data //申明p的类型
-    p = &amp;d
-
-    fmt.Printf(&quot;%p, %v\n&quot;, p, p.a)  //0xc42000a2a0, 1234
-}
-</code></pre><h6 id="不能用指针做加减法运算"><a href="#不能用指针做加减法运算" class="headerlink" title="不能用指针做加减法运算"></a>不能用指针做加减法运算</h6><pre><code>package main
-
-func main() {
-    x := 1234
-    p := &amp;x
-    p++ //报错
-}
-</code></pre><h6 id="可以在unsafe-Pointer和任意类型指针间进行转换"><a href="#可以在unsafe-Pointer和任意类型指针间进行转换" class="headerlink" title="可以在unsafe.Pointer和任意类型指针间进行转换"></a>可以在unsafe.Pointer和任意类型指针间进行转换</h6><pre><code>package main
-import (
-    &quot;fmt&quot;
-    &quot;unsafe&quot;
-)
-
-func main() {
-    x := 0x12345678
-    p := unsafe.Pointer(&amp;x)
-    n := (*[4]byte)(p)
-    for i := 0; i &lt; len(n); i++ {
-        fmt.Printf(&quot;%X &quot;, n[i]) //78 56 34 12
-    }
-}
-</code></pre><h6 id="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上"><a href="#返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上" class="headerlink" title="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上"></a>返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上</h6><pre><code>package main
-
-func main() {
-    println(test())
-}
-
-func test() *int {
-    x := 100
-    return &amp;x
-}
-</code></pre><h6 id="将Pointer转换成uintptr，可变相进行指针运算"><a href="#将Pointer转换成uintptr，可变相进行指针运算" class="headerlink" title="将Pointer转换成uintptr，可变相进行指针运算"></a>将Pointer转换成uintptr，可变相进行指针运算</h6><pre><code>package main
-
-import (
-        &quot;fmt&quot;
-        &quot;unsafe&quot;
-)
-
-func main() {
-    d := struct {
-        s string
-        x int
-    }{&quot;abc&quot;, 100}
-
-    //uintptr是goland的内置类型，是存储指针的整型，用于指针运算的；unsafe.Pointer是单纯的通用指针类型，用于转换不同类型指针，它不可以参与指针运算
-    p := uintptr(unsafe.Pointer(&amp;d))
-    //获取x的偏移量
-    p += unsafe.Offsetof(d.x)
-    //unsafe.Pointer指向一个Int类型的地址
-    p2 := unsafe.Pointer(p)
-    px := (*int)(p2)
-    *px = 200
-
-    fmt.Printf(&quot;%#v\n&quot;, d)  //struct { s string; x int }{s:&quot;abc&quot;, x:200}
-}
-</code></pre><h1 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h1><h6 id="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"><a href="#可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型" class="headerlink" title="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"></a>可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型</h6><h6 id="具有相同基类型的指针"><a href="#具有相同基类型的指针" class="headerlink" title="具有相同基类型的指针"></a>具有相同基类型的指针</h6><h6 id="具有相同元素类型和长度的array"><a href="#具有相同元素类型和长度的array" class="headerlink" title="具有相同元素类型和长度的array"></a>具有相同元素类型和长度的array</h6><h6 id="具有相同元素类型的slice"><a href="#具有相同元素类型的slice" class="headerlink" title="具有相同元素类型的slice"></a>具有相同元素类型的slice</h6><h6 id="具有相同键值类型的map"><a href="#具有相同键值类型的map" class="headerlink" title="具有相同键值类型的map"></a>具有相同键值类型的map</h6><h6 id="具有相同元素类型和传送方向的channel"><a href="#具有相同元素类型和传送方向的channel" class="headerlink" title="具有相同元素类型和传送方向的channel"></a>具有相同元素类型和传送方向的channel</h6><h6 id="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"><a href="#具有相同字段序列（字段名，类型，标签，顺序）的匿名struct" class="headerlink" title="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"></a>具有相同字段序列（字段名，类型，标签，顺序）的匿名struct</h6><h6 id="签名相同（参数和返回值，不包括参数名称）的function"><a href="#签名相同（参数和返回值，不包括参数名称）的function" class="headerlink" title="签名相同（参数和返回值，不包括参数名称）的function"></a>签名相同（参数和返回值，不包括参数名称）的function</h6><h6 id="方法集相同（方法名，方法签名相同和次序无关）的interface"><a href="#方法集相同（方法名，方法签名相同和次序无关）的interface" class="headerlink" title="方法集相同（方法名，方法签名相同和次序无关）的interface"></a>方法集相同（方法名，方法签名相同和次序无关）的interface</h6><h6 id="可用type在全局或函数内定义新类型"><a href="#可用type在全局或函数内定义新类型" class="headerlink" title="可用type在全局或函数内定义新类型"></a>可用type在全局或函数内定义新类型</h6><pre><code>package main
-
-func main() {
-    type bigint int64
-    var x bigint = 100
-    println(x)
-}
-</code></pre><h6 id="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"><a href="#新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换" class="headerlink" title="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"></a>新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换</h6><pre><code>package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main() {
-    type bigint int64
-    x := 1234
-    var b bigint = bigint(x)
-    var b2 int64 = int64(b)
-
-    fmt.Println(b,b2)
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记枚举/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1476,6 +791,393 @@ func main() {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/20/go学习笔记环境搭建/" itemprop="url">go环境搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T10:43:31+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="下载go"><a href="#下载go" class="headerlink" title="下载go"></a>下载go</h1><h6 id="在列表中选择需要的版本：http-code-google-com-p-go-downloads-list-q-OpSys-Darwin-AND-Type-Installer"><a href="#在列表中选择需要的版本：http-code-google-com-p-go-downloads-list-q-OpSys-Darwin-AND-Type-Installer" class="headerlink" title="在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer"></a>在列表中选择需要的版本：<a href="http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer" target="_blank" rel="external">http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer</a></h6><h6 id="将安装包安装到-usr-local目录下：tar-C-usr-local-xzf-go-tar-gz"><a href="#将安装包安装到-usr-local目录下：tar-C-usr-local-xzf-go-tar-gz" class="headerlink" title="将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz"></a>将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz</h6><h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><h6 id="export-PATH-PATH-usr-local-go-bin-临时生效"><a href="#export-PATH-PATH-usr-local-go-bin-临时生效" class="headerlink" title="export PATH=$PATH:/usr/local/go/bin (临时生效)"></a>export PATH=$PATH:/usr/local/go/bin (临时生效)</h6><h6 id="在-etc-profile文件中添加一行：-usr-local-go-bin-（全局有效）"><a href="#在-etc-profile文件中添加一行：-usr-local-go-bin-（全局有效）" class="headerlink" title="在/etc/profile文件中添加一行：/usr/local/go/bin （全局有效）"></a>在/etc/profile文件中添加一行：/usr/local/go/bin （全局有效）</h6><h6 id="在-profile文件中添加一行：-usr-local-go-bin-（当前用户生效）"><a href="#在-profile文件中添加一行：-usr-local-go-bin-（当前用户生效）" class="headerlink" title="在~/.profile文件中添加一行：/usr/local/go/bin （当前用户生效）"></a>在~/.profile文件中添加一行：/usr/local/go/bin （当前用户生效）</h6><h1 id="如果需要安装到指定位置"><a href="#如果需要安装到指定位置" class="headerlink" title="如果需要安装到指定位置"></a>如果需要安装到指定位置</h1><h6 id="首先安装到指定位置比如是家目录"><a href="#首先安装到指定位置比如是家目录" class="headerlink" title="首先安装到指定位置比如是家目录"></a>首先安装到指定位置比如是家目录</h6><h6 id="设置环境变量：export-GOROOT-HOME-go"><a href="#设置环境变量：export-GOROOT-HOME-go" class="headerlink" title="设置环境变量：export GOROOT=$HOME/go"></a>设置环境变量：export GOROOT=$HOME/go</h6><h6 id="设置环境变量：export-PATH-PATH-GOROOT-bin"><a href="#设置环境变量：export-PATH-PATH-GOROOT-bin" class="headerlink" title="设置环境变量：export PATH=$PATH:$GOROOT/bin"></a>设置环境变量：export PATH=$PATH:$GOROOT/bin</h6><h1 id="建立一个文件hello-go，内容如下"><a href="#建立一个文件hello-go，内容如下" class="headerlink" title="建立一个文件hello.go，内容如下"></a>建立一个文件hello.go，内容如下</h1><pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Printf(&quot;hello, world\n&quot;)
+}
+</code></pre><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h6 id="go-run-hello-go"><a href="#go-run-hello-go" class="headerlink" title="go run hello.go"></a>go run hello.go</h6><h6 id="若看到hello，world信息，那么go已被安装"><a href="#若看到hello，world信息，那么go已被安装" class="headerlink" title="若看到hello，world信息，那么go已被安装"></a>若看到hello，world信息，那么go已被安装</h6><h6 id="编译文件：go-build-test-go"><a href="#编译文件：go-build-test-go" class="headerlink" title="编译文件：go build test.go"></a>编译文件：go build test.go</h6><h6 id="运行文件：-test则也会看到hello，world的信息"><a href="#运行文件：-test则也会看到hello，world的信息" class="headerlink" title="运行文件：./test则也会看到hello，world的信息"></a>运行文件：./test则也会看到hello，world的信息</h6>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/01/29/2016年个人总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/29/2016年个人总结/" itemprop="url">2016年总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-29T17:41:34+08:00">
+                2017-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><h5 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h5><ul>
+<li>去年总的技术学习分两个方面，一个是广度的学习也就是进行的linux中级运维知识学习；一个是深度的学习也就是redis源码阅读；广度方面的出发点是想拓宽眼界，对需要用到和可能接触到的东西进行扫盲；深度方面的出发点是觉得很多成熟的开源产品都包含网络，i/o，并发，性能等方面的处理，想要通过熟悉一个较小的框架来对一些基础或者常用的知识进行深入的理解，再者想深入的学习数据存储方面（mysql太大，相对来说redis比较熟悉，成熟还比较小），给自己打造一个特长点</li>
+<li>1.在广度学习方面包括linux，nginx一些基本功能，服务，模块配置等，虽然最终形成了一定的博客积累，但是质量偏差，没有太多的自我思考，而且学习之后的效果也十分不理想，最后只留下了大概的印象（没有在工作中用到），仅形成了一定的思路；</li>
+<li>总结：在广度学习这一块分为两种情况；1.工作上能用的上的，那就必须花时间认真细学，并且应用到工作中，遇到问题做详细的记录；2.工作上用不上的，给自己增长见识的，提供解决问题的思路，这种只要进行熟悉的，不需要花费太多的时间去了解他的细节，大概知道有它的应用场景和解决什么问题就行了，等到真的用上的时候再反过来进行详细的学习（因为当时学习了依然会忘记）</li>
+<li>2.在深度的学习方面相对来说路途比较漫长，首先看redis源码，感觉应该没问题，但是对于它里面的一些代码看上去还是很吃力（非科班出身，没有进行过c语言，数据结构等学习），因此绕了一个弯子，重新去先学习了c语言，相对来说学习方法和作比较的方式有所进步，虽然对c语言还是没想象中的那么熟练，学习语言关键还是得练，后续得加强对c语言的熟练，还有数据结构；最后对于redis源码来说还是看了比较少的几个文件，没能啃完，17年必须多看源码了</li>
+<li>总结：在一些基础的知识点方面还是很欠缺，找时间还是依然要补回来，比如说c语言，数据结构，算法，操作系统等</li>
+</ul>
+<h5 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h5><ul>
+<li>依旧分为两个方面：广度和深度</li>
+<li>广度方面对golang和docker技术进行了解（其实都出来很久了，一直没时间去学，必须学完），这两个和我都是息息相关，目前的监控系统和日志系统都是用golang，而docker至少可以用在自己的环境开发中，所以应该来说都能进行实操，相信效果比今年要好</li>
+<li>深度方面还是对redis的源码进行阅读，目前还没能掌握比较好的阅读方式，希望能摸索出来一个好的阅读方式，欠下的债迟早是要还的</li>
+</ul>
+<h1 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h1><h5 id="阅读总结"><a href="#阅读总结" class="headerlink" title="阅读总结"></a>阅读总结</h5><ul>
+<li>16年的阅读可以说是非常糟糕，阅读的书籍比较少，而且每本书都是过眼云烟的感觉，看完的时候能有所收获，过后之后并不能收获什么，17年对于阅读的改进方面：</li>
+<li>1.多关注阅读方法的改进</li>
+<li>2.每阅读一本新书的时候，得思考为什么要读这本书，我能从中获取到什么，以及它和我之前学过的什么知识类似，是否能快速掌握了解它的方法</li>
+<li>3.每阅读一本书，必须写一篇读后感（这个今年开始实行），可以类似与总结，技术类的可以分批次写技术博客（这个习惯还是坚持了）</li>
+</ul>
+<h5 id="2016年的阅读书单如下："><a href="#2016年的阅读书单如下：" class="headerlink" title="2016年的阅读书单如下："></a>2016年的阅读书单如下：</h5><ul>
+<li><a href="https://item.jd.com/11786541.html" title="Modern PHP" target="_blank" rel="external">Modern PHP</a></li>
+<li><a href="https://item.jd.com/11666345.html" title="像外行一样思考，像专家一样实践——科研成功之道" target="_blank" rel="external">像外行一样思考，像专家一样实践——科研成功之道</a></li>
+<li><a href="https://item.jd.com/11499476.html" title="周鸿祎自述：我的互联网方法论" target="_blank" rel="external">周鸿祎自述：我的互联网方法论</a></li>
+<li><a href="https://item.jd.com/11482827.html" title="郎咸平说：萧条下的希望" target="_blank" rel="external">郎咸平说：萧条下的希望</a></li>
+<li><a href="https://item.jd.com/11592129.html" title="工匠精神" target="_blank" rel="external">工匠精神</a></li>
+<li><a href="https://item.jd.com/10059845.html" title="麦肯锡方法" target="_blank" rel="external">麦肯锡方法</a></li>
+<li><p><a href="https://item.jd.com/11310979.html" title="嗨翻c语言" target="_blank" rel="external">嗨翻c语言</a></p>
+</li>
+<li><p>看部分：</p>
+</li>
+<li><a href="https://item.jd.com/11548036.html" title="时寒冰说 未来二十年，经济大趋势" target="_blank" rel="external">时寒冰说 未来二十年，经济大趋势（现实篇+未来篇)</a></li>
+<li><a href="https://item.jd.com/10287784369.html" title="货币战争" target="_blank" rel="external">货币战争</a></li>
+<li><a href="https://item.jd.com/11919625.html" title="给经理人的第一课" target="_blank" rel="external">给经理人的第一课</a></li>
+<li>部分经济学方面的书籍</li>
+</ul>
+<h5 id="2017年阅读计划："><a href="#2017年阅读计划：" class="headerlink" title="2017年阅读计划："></a>2017年阅读计划：</h5><h6 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h6><ul>
+<li><a href="https://item.jd.com/11435655.html" title="三周时间" target="_blank" rel="external">如何阅读一本书</a></li>
+<li><a href="https://book.douban.com/subject/25940548/" title="三周时间" target="_blank" rel="external">阅读整理学</a></li>
+</ul>
+<h6 id="技术方面"><a href="#技术方面" class="headerlink" title="技术方面"></a>技术方面</h6><ul>
+<li><a href="https://item.jd.com/11944267.html" title="一个月时间" target="_blank" rel="external">Go语言学习笔记</a></li>
+<li><a href="https://item.jd.com/11909234.html" title="一个月时间" target="_blank" rel="external">第一本Docker书</a></li>
+<li><a href="https://item.jd.com/11449491.html" title="三周时间" target="_blank" rel="external">图解HTTP</a></li>
+<li><a href="https://item.jd.com/11253710.html" title="三周时间" target="_blank" rel="external">图解TCP/IP</a></li>
+<li><a href="https://item.jd.com/11486101.html" title="一月时间" target="_blank" rel="external">Redis设计与实现</a></li>
+<li><a href="https://item.jd.com/11039445.html" title="一月时间" target="_blank" rel="external">构建高性能Web站点</a></li>
+<li><a href="https://item.jd.com/11462889.html" title="三周时间" target="_blank" rel="external">Scrum精髓</a></li>
+</ul>
+<h6 id="经济"><a href="#经济" class="headerlink" title="经济"></a>经济</h6><ul>
+<li><a href="https://item.jd.com/11943794.html" title="三周时间" target="_blank" rel="external">一课经济学</a></li>
+<li><a href="https://item.jd.com/10347073967.html" title="一月时间" target="_blank" rel="external">货币简史</a></li>
+<li><a href="https://item.jd.com/11548036.html" title="两月时间" target="_blank" rel="external">时寒冰说 未来二十年，经济大趋势（现实篇+未来篇)</a></li>
+</ul>
+<h6 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h6><ul>
+<li><a href="https://item.jd.com/11232323.html" title="三周时间" target="_blank" rel="external">给经理人的第一课</a></li>
+<li><a href="http://ppt.geekbang.org/slide/show/669/65275" title="从技术到管理的三大挑战" target="_blank" rel="external">从技术到管理的三大挑战</a></li>
+</ul>
+<h6 id="思维"><a href="#思维" class="headerlink" title="思维"></a>思维</h6><ul>
+<li>建议方法论方面的书籍,暂无合适的书，如有合适的可以添加我的微信：zhouzhi1229</li>
+</ul>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><h6 id="关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察-有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题："><a href="#关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察-有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题：" class="headerlink" title="关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察,有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题："></a>关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察,有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题：</h6><h6 id="1-设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做"><a href="#1-设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做" class="headerlink" title="1.设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做"></a>1.设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做</h6><h6 id="2-思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助"><a href="#2-思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助" class="headerlink" title="2.思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助"></a>2.思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助</h6><h6 id="3-对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划"><a href="#3-对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划" class="headerlink" title="3.对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划"></a>3.对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划</h6><h6 id="总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考"><a href="#总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考" class="headerlink" title="总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考"></a>总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考</h6><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h5 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h5><ul>
+<li>贷款流程：贷前，贷中，贷后</li>
+<li>贷前：指的是在给用户进行放款之前的时间</li>
+<li>贷中：指的是给用户放款之后和用户还款日期之前的时间</li>
+<li>贷后：指的是用户过了还款期限之后的时间</li>
+<li>催收系统：属于贷后的行为，主要是针对逾期不还款用户进行电话短信等催收服务，该系统用于协助贷后人员进行逾期订单的催回，以及贷后人员的人效管理</li>
+<li>回访系统：包含贷前和贷中部分风险控制策略，提前发现风险点</li>
+<li>呼叫中心：主要提供和呼叫相关的服务，具备多个呼叫通道，保障呼叫的可用性（提供服务包含：外呼，群呼，语音呼叫，转接等）</li>
+<li>CRM：客户关系管理系统，主要用户对客户的管理，以及对订单的实时跟踪</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
+<li>这一年工作中收获的更多的是对于业务的理解能力，做到了知其然知其所以然，也更多的站在了业务方的角度去思考问题，能够从一个更好的角度去思考一个产品，为什么要做（立项的必要性），要做成什么样子（定位），以及对项目周期的控制；<br>最深体验的是去催收部门（业务部门）干了一个月的催收，完完全全把自己当做一个催收入职员工，从培训到最后的催收案件（一个周期）完全融入催收的业务中。以便于：寻找技术能提升业务效率的环节；使用目前的催收系统的不便之处；观察别人的操作习惯；整理别人反馈的问题及思考必要性；<br>另外一个值得一提的是，在我的推动下立项的一个项目：呼叫系统；基于对整个公司对于呼叫业务的了解，录音文件的保存，接入三方呼叫平台的开发效率，呼叫业务的稳定性这几方面考虑，最终说服产品和上级投入人力开发呼叫中心<br>年底由于某些原因，跟着公司的创业团队重新从零开始，重新的进行了基础业务（代发发布，服务监控报警，日志收集报警）的开发，加强了之前部分理论学习的实践（比如shell，linux服务等）</li>
+</ul>
+<h5 id="业务时间轴"><a href="#业务时间轴" class="headerlink" title="业务时间轴"></a>业务时间轴</h5><ul>
+<li>3.10 - 4.1，催收（ 业务了解）</li>
+<li>4.9，出基本功能，两周一上线</li>
+<li>4-6月，需求迭代，语音模板，业务线收集需求，搜索模块开发</li>
+<li>6月底，基本用上新系统，语音模板，自动提醒</li>
+<li>7月，驻扎业务线，开发自动分配</li>
+<li>8月，整理呼叫中心的业务，整理回访需求，新业务数据对接进催收系统</li>
+<li>9-10月，呼叫中心开发，回访开发</li>
+<li>11月，钱隆对账出数据，统一呼叫平台，催收对接呼叫中心，统一管理录音文件，驻扎业务线 </li>
+<li>12月，发布脚本，日志收集，报警，服务监控</li>
+<li>12月中旬，crm业务了解</li>
+<li>1月-1.19，crm前端接口，后台管理系统，用户系统与钉钉打通</li>
+</ul>
+<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h5 id="健身"><a href="#健身" class="headerlink" title="健身"></a>健身</h5><ul>
+<li>体重从135斤飚升到了145斤，主要变化是两个时间点：</li>
+<li>1.在坚持了将近1个月去健身房的记录之后，体重飚升5斤，在健身房主要是跑步20-30分钟，做5-10分钟的器械，30个仰卧起坐，然后学习游泳，最大的收获就是学会了游泳（蛙泳）</li>
+<li>2.在坚持了两个周之后的keep以后，然后体重毅然又飚升了5斤</li>
+</ul>
+<h5 id="计划-1"><a href="#计划-1" class="headerlink" title="计划"></a>计划</h5><ul>
+<li>总的来说新的一年，先把体重降到135斤再说，主要从饮食和运动两个方面着手：</li>
+<li>1.睡前，早晨起来各30个俯卧撑，30个仰卧起坐</li>
+<li>2.坚持一周至少三天keep以及一次跑步</li>
+<li>3.喝绿茶（去年喝的是茶叶，水分摄入还是足够）</li>
+<li>4.多吃香蕉，苹果等水果（去年坚持的还算可以，主要是家里有人买水果）</li>
+<li>5.减少油腻食品的摄入，多吃蔬菜（很少吃蔬菜），晚饭尽量少吃</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1526,7 +1228,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -233,315 +233,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/05/php-ini基本参数设置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">php.ini基本参数设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-05T23:03:14+08:00">
-                2016-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="开启安全模式-阻止php调用部分函数-比如system"><a href="#开启安全模式-阻止php调用部分函数-比如system" class="headerlink" title="开启安全模式(阻止php调用部分函数,比如system())"></a>开启安全模式(阻止php调用部分函数,比如system())</h1><pre><code>safe_mode = On
-</code></pre><h1 id="禁用函数"><a href="#禁用函数" class="headerlink" title="禁用函数"></a>禁用函数</h1><pre><code>disable_functions=system,exec,shell_exec
-</code></pre><h1 id="关闭php版本信息在header信息中泄露"><a href="#关闭php版本信息在header信息中泄露" class="headerlink" title="关闭php版本信息在header信息中泄露"></a>关闭php版本信息在header信息中泄露</h1><pre><code>expose_php = Off
-</code></pre><h1 id="关闭注册全局变量"><a href="#关闭注册全局变量" class="headerlink" title="关闭注册全局变量"></a>关闭注册全局变量</h1><pre><code>register_globals = Off
-</code></pre><h1 id="打开magic-quotes-gpcf防止sql注入-自动将’转换成-’"><a href="#打开magic-quotes-gpcf防止sql注入-自动将’转换成-’" class="headerlink" title="打开magic_quotes_gpcf防止sql注入(自动将’转换成\’)"></a>打开magic_quotes_gpcf防止sql注入(自动将’转换成\’)</h1><pre><code>magic_quotes_gpc = On
-</code></pre><h1 id="错误消息控制-不在页面显示"><a href="#错误消息控制-不在页面显示" class="headerlink" title="错误消息控制(不在页面显示)"></a>错误消息控制(不在页面显示)</h1><pre><code>display_errors = Off
-error_reporting = E_WARNING &amp; E_ERROR
-</code></pre><h1 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h1><pre><code>log_errors = On
-error_log = /logs/php_error.log
-</code></pre><h1 id="设置脚本运行最长时间"><a href="#设置脚本运行最长时间" class="headerlink" title="设置脚本运行最长时间"></a>设置脚本运行最长时间</h1><pre><code>max_execution_time = 30
-</code></pre><h1 id="每个脚本使用的最大内存"><a href="#每个脚本使用的最大内存" class="headerlink" title="每个脚本使用的最大内存"></a>每个脚本使用的最大内存</h1><pre><code>memory_limit = 128M
-</code></pre><h1 id="每个脚本等待输入数据最长时间"><a href="#每个脚本等待输入数据最长时间" class="headerlink" title="每个脚本等待输入数据最长时间"></a>每个脚本等待输入数据最长时间</h1><pre><code>max_input_time = 60
-</code></pre><h1 id="上传文件的最大的大小"><a href="#上传文件的最大的大小" class="headerlink" title="上传文件的最大的大小"></a>上传文件的最大的大小</h1><pre><code>upload_max_filesize= 2M
-</code></pre><p>#</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/01/如何防盗链/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">如何防盗链</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T01:06:42+08:00">
-                2016-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="资源盗链"><a href="#资源盗链" class="headerlink" title="资源盗链"></a>资源盗链</h1><pre><code>某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
-
-解决办法:
-    1.图片,视频打水印,logo
-    2.防火墙控制,根据ip控制
-    3.防盗链(根据referer机制,如果referer不是来自本网站就返回固定页面或错误)[referer可以简单理解为上一次请求的地址]
-    4.根据cookie
-    5.通过加密变换访问路径实现防盗链
-
-发现:
-    1.对IDC及CDN带宽流量做监控报警
-    2.每天查看网站流量变化
-    3.对访问日志做分析,对于异常流量迅速定位
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/01/apache常用的prefork和worker模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1018,6 +709,319 @@ error_log = /logs/php_error.log
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/06/12/流量统计单位/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/12/流量统计单位/" itemprop="url">流量统计单位</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-12T20:56:28+08:00">
+                2016-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP(Internet Protocol)"></a>IP(Internet Protocol)</h2><pre><code>独立IP,不同IP地址的计算机访问网站的总次数
+独立IP书度量网站访问量,不是很精确,国内的上网多数都是NAT上网,一个独立IP背后可能有多个客户端访问
+
+统计方法:
+    1.分析web服务的访问日志
+    2.在所有的页面结尾,嵌入js进行统计
+</code></pre><h2 id="PV-Page-View"><a href="#PV-Page-View" class="headerlink" title="PV(Page View)"></a>PV(Page View)</h2><pre><code>页面浏览量或点击量,用户每刷新一次算一次
+PV度量方法就是从浏览器发出一个对web服务器的请求,web服务器接到这个请求后,将该请求对应的网页发送给浏览器,从而产生一个PV,那么就是说,只要请求发送给浏览器,服务器接收到请求,无论该页面是否下载完成,都产生一个PV,为了防止用户刷PV,很多网站把PV的统计程序放在页面的最下面
+PV反映的是浏览某网站的页面数
+
+统计方法:
+    1.分析web服务的访问日志
+    2.在所有的页面结尾,嵌入js进行统计
+</code></pre><h2 id="UV-Unique-Visitor"><a href="#UV-Unique-Visitor" class="headerlink" title="UV(Unique Visitor)"></a>UV(Unique Visitor)</h2><pre><code>访问网站的一台电脑的客户端为一个访客
+
+统计方法:
+    1.IP地址加根据发出时间,浏览器版本,操作系统版本等
+    2.用cookie分辨
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/06/10/服务对应常见端口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/10/服务对应常见端口/" itemprop="url">服务对应常见端口</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-10T23:46:26+08:00">
+                2016-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="服务对应常见端口"><a href="#服务对应常见端口" class="headerlink" title="服务对应常见端口"></a>服务对应常见端口</h2><pre><code>服务                      端口
+ftp                       21
+sftp/ssh                  22
+smtp                      25
+mysql                     3306
+redis                     6379
+rsync                     873
+snmp                      161
+rpc                       111
+http                      80
+https                     443
+pop3                      110
+dns                       53
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1068,7 +1072,7 @@ error_log = /logs/php_error.log
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
