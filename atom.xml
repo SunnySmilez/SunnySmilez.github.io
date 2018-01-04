@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-01-03T13:40:25.000Z</updated>
+  <updated>2018-01-04T14:48:56.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,178 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[redis-adlist源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/01/04/redis-adlist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/01/04/redis-adlist源码阅读/</id>
+    <published>2018-01-04T14:02:22.000Z</published>
+    <updated>2018-01-04T14:48:56.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="adlist结构"><a href="#adlist结构" class="headerlink" title="adlist结构"></a>adlist结构</h1><pre><code>typedef struct list {
+
+    /** 表头节点 */
+    listNode *head;
+
+    /** 表尾节点 */
+    listNode *tail;
+
+    /** 节点值复制函数 */
+    void *(*dup)(void *ptr);
+
+    /** 节点值释放函数 */
+    void (*free)(void *ptr);
+
+    /** 节点值对比函数 */
+    int (*match)(void *ptr, void *key);
+
+    /** 链表所包含的节点数量 */
+    unsigned long len;
+
+} list;
+
+typedef struct listNode {
+
+    /** 前置节点 */
+    struct listNode *prev;
+
+    /** 后置节点 */
+    struct listNode *next;
+
+    /** 节点的值 */
+    void *value;
+
+} listNode;
+</code></pre><p><img src="/img/redis/adlist.svg" alt="Alt text" title="adlist结构">    </p>
+<h1 id="双端链表修改注意事项"><a href="#双端链表修改注意事项" class="headerlink" title="双端链表修改注意事项"></a>双端链表修改注意事项</h1><h3 id="在进行修改（增，删）双端链表的时候需要考虑这四个方面："><a href="#在进行修改（增，删）双端链表的时候需要考虑这四个方面：" class="headerlink" title="在进行修改（增，删）双端链表的时候需要考虑这四个方面："></a>在进行修改（增，删）双端链表的时候需要考虑这四个方面：</h3><h6 id="1、修改当前节点的前后指针"><a href="#1、修改当前节点的前后指针" class="headerlink" title="1、修改当前节点的前后指针"></a>1、修改当前节点的前后指针</h6><h6 id="2、修改当前节点的相邻节点的前后指针"><a href="#2、修改当前节点的相邻节点的前后指针" class="headerlink" title="2、修改当前节点的相邻节点的前后指针"></a>2、修改当前节点的相邻节点的前后指针</h6><h6 id="3、判断当前节点是否是首尾节点，修改list的首尾节点指针"><a href="#3、判断当前节点是否是首尾节点，修改list的首尾节点指针" class="headerlink" title="3、判断当前节点是否是首尾节点，修改list的首尾节点指针"></a>3、判断当前节点是否是首尾节点，修改list的首尾节点指针</h6><h6 id="4、修改len值"><a href="#4、修改len值" class="headerlink" title="4、修改len值"></a>4、修改len值</h6><h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><h6 id="如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）"><a href="#如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）" class="headerlink" title="如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）"></a>如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）</h6><h6 id="操作步奏："><a href="#操作步奏：" class="headerlink" title="操作步奏："></a>操作步奏：</h6><h6 id="1、将node2的prev指向node1，将node2的next指向node3"><a href="#1、将node2的prev指向node1，将node2的next指向node3" class="headerlink" title="1、将node2的prev指向node1，将node2的next指向node3"></a>1、将node2的prev指向node1，将node2的next指向node3</h6><h6 id="2、将node1的next指向node2，将node3的orev指向node2"><a href="#2、将node1的next指向node2，将node3的orev指向node2" class="headerlink" title="2、将node1的next指向node2，将node3的orev指向node2"></a>2、将node1的next指向node2，将node3的orev指向node2</h6><h6 id="3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2"><a href="#3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2" class="headerlink" title="3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2"></a>3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2</h6><h6 id="4-len的值加1"><a href="#4-len的值加1" class="headerlink" title="4.len的值加1"></a>4.len的值加1</h6><pre><code>示例代码：
+list *listInsertNode(list *list, listNode *old_node, void *value, int after) {
+    listNode *node;
+
+    // 创建新节点
+    if ((node = zmalloc(sizeof(*node))) == NULL)
+        return NULL;
+
+    // 保存值
+    node-&gt;value = value;
+
+    // 将新节点添加到给定节点之后
+    if (after) {
+        node-&gt;prev = old_node;
+        node-&gt;next = old_node-&gt;next;
+        // 给定节点是原表尾节点
+        if (list-&gt;tail == old_node) {
+            list-&gt;tail = node;
+        }
+    // 将新节点添加到给定节点之前
+    } else {
+        node-&gt;next = old_node;
+        node-&gt;prev = old_node-&gt;prev;
+        // 给定节点是原表头节点
+        if (list-&gt;head == old_node) {
+            list-&gt;head = node;
+        }
+    }
+
+    //这里需要注意的是，两个节点的连接，既要改变当前插入节点的前后节点指针，也要改变相邻节点的指针
+    // 更新新节点的前置指针
+    if (node-&gt;prev != NULL) {
+        node-&gt;prev-&gt;next = node;
+    }
+    // 更新新节点的后置指针
+    if (node-&gt;next != NULL) {
+        node-&gt;next-&gt;prev = node;
+    }
+
+    // 更新链表节点数
+    list-&gt;len++;
+
+    return list;
+}
+</code></pre><p><img src="/img/redis/mod_adlist.png" alt="Alt text" title="修改adlist示意图">    </p>
+<h1 id="双端链表遍历"><a href="#双端链表遍历" class="headerlink" title="双端链表遍历"></a>双端链表遍历</h1><h6 id="迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向"><a href="#迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向" class="headerlink" title="迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向"></a>迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向</h6><h6 id="然后使用listNext进行节点的移动"><a href="#然后使用listNext进行节点的移动" class="headerlink" title="然后使用listNext进行节点的移动"></a>然后使用listNext进行节点的移动</h6><h6 id="最后使用len属性和while进行节点的循环遍历"><a href="#最后使用len属性和while进行节点的循环遍历" class="headerlink" title="最后使用len属性和while进行节点的循环遍历"></a>最后使用len属性和while进行节点的循环遍历</h6><pre><code>示例代码：
+typedef struct listIter {
+
+    /** 当前迭代到的节点 */
+    listNode *next;
+
+    /** 迭代的方向 */
+    int direction;
+
+} listIter;
+
+listNode *listNext(listIter *iter)
+{
+    listNode *current = iter-&gt;next;
+
+    if (current != NULL) {
+        // 根据方向选择下一个节点
+        if (iter-&gt;direction == AL_START_HEAD)
+            // 保存下一个节点，防止当前节点被删除而造成指针丢失
+            iter-&gt;next = current-&gt;next;
+        else
+            // 保存下一个节点，防止当前节点被删除而造成指针丢失
+            iter-&gt;next = current-&gt;prev;
+    }
+
+    return current;
+}
+
+list *listDup(list *orig)
+{
+    list *copy;
+    listIter *iter;
+    listNode *node;
+
+    // 创建新链表
+    if ((copy = listCreate()) == NULL)
+        return NULL;
+
+    // 设置节点值处理函数
+    copy-&gt;dup = orig-&gt;dup;
+    copy-&gt;free = orig-&gt;free;
+    copy-&gt;match = orig-&gt;match;
+
+    // 迭代整个输入链表
+    iter = listGetIterator(orig, AL_START_HEAD);
+    while((node = listNext(iter)) != NULL) {
+        void *value;
+
+        // 复制节点值到新节点
+        if (copy-&gt;dup) {
+            value = copy-&gt;dup(node-&gt;value);
+            if (value == NULL) {
+                listRelease(copy);
+                listReleaseIterator(iter);
+                return NULL;
+            }
+        } else
+            value = node-&gt;value;
+
+        // 将节点添加到链表
+        if (listAddNodeTail(copy, value) == NULL) {
+            listRelease(copy);
+            listReleaseIterator(iter);
+            return NULL;
+        }
+    }
+
+    // 释放迭代器
+    listReleaseIterator(iter);
+
+    // 返回副本
+    return copy;
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="adlist结构"><a href="#adlist结构" class="headerlink" title="adlist结构"></a>adlist结构</h1><pre><code>typedef struct list {
+
+    /** 表头节点 */]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[redis-sds源码阅读]]></title>
@@ -287,13 +459,12 @@ return ;</code></p>
     <link href="http://www.cxyteam.com/2017/12/12/redis%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%BD%E6%95%B0/"/>
     <id>http://www.cxyteam.com/2017/12/12/redis用到的函数/</id>
     <published>2017-12-12T15:18:48.000Z</published>
-    <updated>2017-12-12T15:23:19.000Z</updated>
+    <updated>2018-01-04T08:09:27.000Z</updated>
     <content type="html"><![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
 触发记录hello world日志
 例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&quot;);return ;
 当你启动redis-server后，在客户端，执行get name命令，会在redis-server终端输出&quot;hello world！&quot;
-</code></pre><p># </p>
-]]></content>
+</code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
 触发记录]]>
@@ -983,45 +1154,6 @@ HEALTHCHECK --interval=5s --timeout=3s \
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker的应用场景]]></title>
-    <link href="http://www.cxyteam.com/2017/06/02/docker%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
-    <id>http://www.cxyteam.com/2017/06/02/docker的应用场景/</id>
-    <published>2017-06-02T02:31:31.000Z</published>
-    <updated>2017-06-02T03:42:54.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
-统技术管理镜像，能极大简化环境运维过程，相对于VM，docker在其轻量、配置复杂度以及资源利用率方
-面有着明显的优势
-</code></pre><h1 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h1><pre><code>    虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的平台（软件、系统），Docker在
-降低额外开销的情况下提供了同样的功能。它能让你将运行环境和配置放在代码中然后部署，同一个
-Docker的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度
-</code></pre><h1 id="代码流水线管理"><a href="#代码流水线管理" class="headerlink" title="代码流水线管理"></a>代码流水线管理</h1><pre><code>    代码从开发机到最终的生产环境的部署，需要经过很多的中间环境，Docker给应用提供了一个一致
-的环境，让代码的流水线变得简单
-</code></pre><h1 id="提高开发效率"><a href="#提高开发效率" class="headerlink" title="提高开发效率"></a>提高开发效率</h1><pre><code>    在开发的过程中，对于环境，我们永远避不开两件事：1.快速的搭建开发环境 2.让开发环境和生产
-环境无限保持一致
-</code></pre><h1 id="隔离应用"><a href="#隔离应用" class="headerlink" title="隔离应用"></a>隔离应用</h1><pre><code>    在开发或者生产环境中，出于节约服务器资源的考虑，通常会出现这样的情况，一台服务器上部署多
-个应用，这样部署应用一般会导致修改某些文件会导致应用之间互相干扰，比如修改nginx配置
-</code></pre><h1 id="整合服务器"><a href="#整合服务器" class="headerlink" title="整合服务器"></a>整合服务器</h1><pre><code>在一台服务器上部署多个应用
-</code></pre><h1 id="调试能力"><a href="#调试能力" class="headerlink" title="调试能力"></a>调试能力</h1><pre><code>Docker提供了很多的工具
-</code></pre><h1 id="多租户环境"><a href="#多租户环境" class="headerlink" title="多租户环境"></a>多租户环境</h1><h1 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h1><pre><code>    在虚拟机之前，引入新的硬件资源需要消耗几天的时间。虚拟化技术（Virtualization）将这个时间
-缩短到了分钟级别，而Docker通过为进程仅仅创建一个容器而无需启动一个操作系统，再次将这个过程缩短
-到了秒级
-
-
-http://get.ftqq.com/7115.get
-http://dockone.io/article/126
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>    Docker是一种轻量虚拟化的容器技术，提供类似虚拟机的隔离功能，并使用了一种分层的联合文件系
-统技术管理镜像，能极]]>
     </summary>
     
       <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
