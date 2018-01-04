@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/16/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/22/C语言标准输入标准输出/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/22/C语言标准输入标准输出/" itemprop="url">
-                  C语言标准输入标准输出
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/22/C语言标准输入标准输出/" itemprop="url">C语言标准输入标准输出</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-22T07:51:22+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-22T07:51:22+08:00">
+                2016-07-22
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,21 +326,255 @@
       
         
           
-          标准输入将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
+            <h1 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h1><pre><code>将键盘或终端其他设备的输入存储的位置(自己理解瞎定义的),一般使用&apos;&lt;&apos;操作符告诉操作系统,标准输入的来源,默认情况下从键盘和终端读取数据
 eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
-标准输出将显示在屏幕
-          ...
+</code></pre><h1 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h1><pre><code>将显示在屏幕的输出存储的位置(自己理解瞎定义的),一般使用&apos;&gt;&apos;操作符告诉操作系统,标准输出的位置,默认情况下会发送到显示器
+eg:./demo &gt; output.txt 表示运行demo程序产生的结果输出到output.txt文件
+</code></pre><h1 id="为什么要使用标准输入-标准输出"><a href="#为什么要使用标准输入-标准输出" class="headerlink" title="为什么要使用标准输入,标准输出?"></a>为什么要使用标准输入,标准输出?</h1><pre><code>因为一旦有了标准输入,标准输出,就可以重定向标准输入,标准输出,让程序从键盘以外的地方读取数据,往显示器以外的地方写数据
+</code></pre><h1 id="标准输入与标准输出的实例"><a href="#标准输入与标准输出的实例" class="headerlink" title="标准输入与标准输出的实例"></a>标准输入与标准输出的实例</h1><pre><code>#include &lt;stdio.h&gt;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/22/C语言标准输入标准输出/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+int main()
+{
+    float latitude;
+    float longitude;
+    char info[80];
+
+    int started=0;
+    puts(&quot;data=[&quot;);
+    while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
+        if (started) {
+            printf(&quot;,\n&quot;);
+        } else {
+            started = 1;
+        }
+        printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
+    }
+    puts(&quot;\n]&quot;);
+
+    return 0;
+}
+
+input.txt内容为:
+    12.12,22.33,speed=21
+    33.33,45.21,speed=24
+    12.44,55.32,seppd=44
+    11.55,44.33,speed=22
+    423.63182,-71.095833,speed=22
+    28.345,-74.232,speed=44
+
+以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
+程序的标准输入是input.txt文件,标准输出到了output.txt文件
+</code></pre><h1 id="如果程序出错了如何看到结果"><a href="#如果程序出错了如何看到结果" class="headerlink" title="如果程序出错了如何看到结果?"></a>如果程序出错了如何看到结果?</h1><pre><code>程序执行完之后再终端输入:echo $?
+如果返回结果是0代表正常执行,如果返回结果是其他值,就是程序中报错的值(main函数正常返回0)
+</code></pre><h1 id="如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt"><a href="#如果其中一条数据出错了怎么办-终止程序的运行-错误的信息也写入到了output-txt" class="headerlink" title="如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?"></a>如果其中一条数据出错了怎么办?终止程序的运行,错误的信息也写入到了output.txt?</h1><pre><code>我们需要将正常输出和异常输出分开来
+</code></pre><h1 id="标准错误"><a href="#标准错误" class="headerlink" title="标准错误"></a>标准错误</h1><pre><code>将错误的信息输出的位置,一般使用fprintf(stderr,msg)进行输出
+例子:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        float latitude;
+        float longitude;
+        char info[80];
+        int started = 0;
+
+        puts(&quot;data=[&quot;);
+        while (scanf(&quot;%f,%f,%79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
+            if (started) {
+                printf(&quot;,\n&quot;);
+            } else {
+                started = 1;
+            }
+
+            if ((latitude &lt; -90.0) || (latitude &gt; 90.0)) {
+                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
+                return 2;
+            }
+
+            if ((longitude &lt; -180.0) || (longitude &gt; 180.0)) {
+                fprintf(stderr, &quot;Invoid latitude : %f\n&quot;, latitude);
+                return 2;
+            }
+
+            printf(&quot;{latitude:%f, longitude:%f, info:&apos;%s&apos;}&quot;, latitude, longitude, info);
+        }
+        puts(&quot;\n]&quot;);
+        return 0;
+    }
+
+    以上程序在tool.c的文件中,gcc tool.c -o tool &amp;&amp; ./tool &lt; input.txt &gt; output.txt
+    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
+</code></pre><h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><pre><code>将一个进程的标准输出与另一个进程的标准输入连接起来。用符号&apos;|&apos;表示
+
+一个例子:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        float latitude;
+        float longitude;
+        char info[80];
+        while(scanf(&quot;%f, %f, %79[^\n]&quot;, &amp;latitude, &amp;longitude, info) == 3) {
+            if ((latitude &gt; 26) &amp;&amp; (latitude &lt; 34)) {
+                if ((longitude &gt; -76) &amp;&amp; (longitude &lt; -64)) {
+                    printf(&quot;%f, %f, %s\n&quot;, latitude, longitude, info);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    以上程序在filter.c的文件中,gcc filter.c -o filter &amp;&amp; (./filter | ./tool &lt; input.txt &gt; output.txt
+    程序的标准输入是input.txt文件,标准输出到了output.txt文件,标准错误输出到了终端的显示界面上
+</code></pre><h1 id="如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办"><a href="#如果我需要把数据进行分类输出到多个文件中呢-标准输出和标准错误输出只有两种形式-满足不了需求怎么办" class="headerlink" title="如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?"></a>如果我需要把数据进行分类输出到多个文件中呢?标准输出和标准错误输出只有两种形式,满足不了需求怎么办?</h1><pre><code>需要在程序运行时创建自己的数据流
+</code></pre><h1 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h1><pre><code>FILE *in_file = fopen(&quot;input.txt&quot;, &quot;r&quot;);
+fscanf(in_file, &quot;%79[^\n]\n&quot;, demo);
+</code></pre><h1 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h1><pre><code>FILE *out_file = fopen(&quot;output.txt&quot;, &quot;w&quot;);
+fprintf(out_file, &quot;this is %s&quot;, &quot;demo&quot;);
+</code></pre><h1 id="关闭数据流"><a href="#关闭数据流" class="headerlink" title="关闭数据流"></a>关闭数据流</h1><pre><code>fclose(in_file);
+fclose(out_file);
+</code></pre><h1 id="创建数据流例子"><a href="#创建数据流例子" class="headerlink" title="创建数据流例子"></a>创建数据流例子</h1><pre><code>以下是file.c
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+/*
+    argc代表传入函数main的参数的个数
+    argv表示实际的参数数组
+*/
+int main(int argc, char *argv[])
+{
+    char line[80];
+
+    /*
+        argc第0个参数是函数名,所以一共有6个参数
+    */
+    if (argc != 6) {
+        fprintf(stderr, &quot;you need to give 5 arguments\n&quot;);
+        return 1;
+    }
+
+    /*
+        注意:一定要是双引号,写别的语言惹的祸
+    */
+    FILE *in = fopen(&quot;spooky.csv&quot;, &quot;r&quot;);
+    FILE *file1 = fopen(argv[2], &quot;w&quot;);
+    FILE *file2 = fopen(argv[4], &quot;w&quot;);
+    FILE *file3 = fopen(argv[5], &quot;w&quot;);
+    /*
+        用fscanf读取自定义数据流
+    */
+    while(fscanf(in, &quot;%79[^\n]\n&quot;, line) == 1) {
+        if (strstr(line, argv[1])) {
+            /*
+                用fprintf输出自定义数据流
+            */
+            fprintf(file1, &quot;%s\n&quot;, line);
+        } else if (strstr(line, argv[3])) {
+            fprintf(file2, &quot;%s\n&quot;, line);
+        } else {
+            fprintf(file3, &quot;%s\n&quot;, line);
+        }
+    }
+
+    fclose(file1);
+    fclose(file2);
+    fclose(file3);
+    return 0;
+}
+
+以下是spooky.csv
+
+30.453,-68.1212,Type=Yeti
+28.2342,-74.1212,Type=UFO
+29.303.-71.1323,Type=Ship
+28.1212,-62.2342,Type=Elvis
+27.1313,-68.1212,Type=Goatsucker
+30.12123,-73.12132,Type=Disappearance
+26.121,-71.123213,Type=UFO
+29.12,-66.1212,Type=Ship
+37.234,-69.23424,Type=Elvis
+22.234,-68.23424,Type=Elvis
+27.234,-87.23424,Type=Elvis
+
+运行:gcc file.c -o file &amp;&amp; ./file UFO aliens.txt Elvis elviss.txt the_rest.txt
+会得到多个自定义的输出流:aliens.txt,elviss.txt
+
+
+# 函数参数的传入太过复杂,该如何处理呢?
+    使用unistd.h替代函数参数的处理
+
+# 函数参数处理的例子
+    #include &lt;stdio.h&gt;
+    #include &lt;unistd.h&gt;
+
+    /*
+        argc代表传入函数main的参数的个数
+        argv表示实际的参数数组
+    */
+    int main(int argc, char *argv[])
+    {
+        char *delivery = &quot;&quot;;
+        int thick = 0;
+        int count = 0;
+        char ch;
+
+        while((ch = getopt(argc, argv, &quot;d:t&quot;)) != EOF) {
+            switch(ch) {
+                case &apos;d&apos;:
+                    delivery = optarg;
+                    break;
+                case &apos;t&apos;:
+                    thick = 1;
+                    break;
+                default:
+                    fprintf(stderr, &quot;Unknow option: &apos;%s&apos;\n&quot;, optarg);
+                    return 1;
+            }
+        }
+
+        argc -= optind;
+        argv += optind;
+
+        if (thick) {
+            puts(&quot;thick crust&quot;);
+        }
+
+        if (delivery[0]) {
+            printf(&quot;to be delivered %s.\n&quot;, delivery);
+        }
+
+        puts(&quot;Ingredients:&quot;);
+        for(count = 0; count&lt;argc;count++) {
+            puts(argv[count]);
+        }
+        return 0;
+    }
+
+    gcc unistd.c -o unistd
+    ./unistd Anchovies Pineapple
+    ./unistd -d now Anchovies Pineapple
+    ./unistd -d now -t Anchovies Pineapple
+    ./unistd -f
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -289,6 +584,10 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -296,13 +595,27 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/20/C语言标准库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -310,38 +623,42 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/20/C语言标准库/" itemprop="url">
-                  C语言标准库
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/20/C语言标准库/" itemprop="url">C语言标准库</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-20T09:18:20+08:00" content="2016-07-20">
-              2016-07-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-20T09:18:20+08:00">
+                2016-07-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -349,7 +666,6 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
 
                 
                 
-
               
             </span>
           
@@ -359,14 +675,21 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -375,26 +698,31 @@ eg:./demo &lt; input.txt 表示运行demo程序的数据来源是input.txt文件
       
         
           
-          stdio.h提供标准输入输出,比如sprintf,scanf
-string.h提供字符串的处理
-unistd.h用来处理传入参数
-stdlib.h里面包含使用malloc和free函数
-stdarg.h可变参数列表
-unistd.h系统函数库
-errno.h错误信息
-
+            <h1 id="stdio-h"><a href="#stdio-h" class="headerlink" title="stdio.h"></a>stdio.h</h1><pre><code>提供标准输入输出,比如sprintf,scanf
+</code></pre><h1 id="string-h"><a href="#string-h" class="headerlink" title="string.h"></a>string.h</h1><pre><code>提供字符串的处理
+</code></pre><h1 id="unistd-h"><a href="#unistd-h" class="headerlink" title="unistd.h"></a>unistd.h</h1><pre><code>用来处理传入参数
+</code></pre><h1 id="stdlib-h"><a href="#stdlib-h" class="headerlink" title="stdlib.h"></a>stdlib.h</h1><pre><code>里面包含使用malloc和free函数
+</code></pre><h1 id="stdarg-h"><a href="#stdarg-h" class="headerlink" title="stdarg.h"></a>stdarg.h</h1><pre><code>可变参数列表
+</code></pre><h1 id="unistd-h-1"><a href="#unistd-h-1" class="headerlink" title="unistd.h"></a>unistd.h</h1><pre><code>系统函数库
+</code></pre><h1 id="errno-h"><a href="#errno-h" class="headerlink" title="errno.h"></a>errno.h</h1><pre><code>错误信息
+</code></pre>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/20/C语言标准库/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -404,6 +732,10 @@ errno.h错误信息
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -411,13 +743,27 @@ errno.h错误信息
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/18/C的存储器和指针/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -425,38 +771,42 @@ errno.h错误信息
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/18/C的存储器和指针/" itemprop="url">
-                  C的存储器和指针
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/18/C的存储器和指针/" itemprop="url">C的存储器和指针</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-18T13:23:04+08:00" content="2016-07-18">
-              2016-07-18
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T13:23:04+08:00">
+                2016-07-18
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -464,7 +814,6 @@ errno.h错误信息
 
                 
                 
-
               
             </span>
           
@@ -474,14 +823,21 @@ errno.h错误信息
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -490,28 +846,196 @@ errno.h错误信息
       
         
           
-          指针存储器中某条数据的地址(用于保存存储器地址的变量)
-目的避免副本
+            <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><pre><code>存储器中某条数据的地址(用于保存存储器地址的变量)
+</code></pre><h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><pre><code>避免副本
 共享数据
-存储器计算机系统中的记忆设备，用来存放程序和数据
+</code></pre><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><pre><code>计算机系统中的记忆设备，用来存放程序和数据
 它分为(低位到高位):
     代码块
         一般会放置在存储器地址的低位。它是只读的,是存储器用来加载机器代码的部分
 
     常量段
-        程序一
-          ...
+        程序一开始运行时创建,但保存在只读存储器中。它是程序中用到的不变量
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/18/C的存储器和指针/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    全局量
+        定义在函数之外,对所有函数可见。程序一开始运行就会创建全局量,可以修改他们
+
+    堆
+        用于动态存储:程序在运行时创建一些数据,然后使用很长一段时间
+
+    栈
+        存储器用来保存局部变量的部分。每当调用函数,函数的所有局部变量都在栈上创建。它之所有叫栈是 因为它看起来就像堆积而成的栈板:当进入函数时,变量会放到栈顶;当离开函数时,把变量从栈顶拿走。它从存储器的顶部开始,向下增长。
+</code></pre><h1 id="如何找出变量在存储器中的指针-使用-amp-运算符"><a href="#如何找出变量在存储器中的指针-使用-amp-运算符" class="headerlink" title="如何找出变量在存储器中的指针(使用&amp;运算符)"></a>如何找出变量在存储器中的指针(使用&amp;运算符)</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int point = 4;
+    /*
+        %p用于打印指针
+    */
+    printf(&quot;point的指针位置是:%p\n&quot;, &amp;point);
+    return 0;
+}
+</code></pre><h1 id="如何读取指针中的内容-使用-运算符"><a href="#如何读取指针中的内容-使用-运算符" class="headerlink" title="如何读取指针中的内容(使用*运算符)"></a>如何读取指针中的内容(使用*运算符)</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int  c = 10;
+    /*
+        获取变量c的指针地址 &amp;运算符
+        注意需要用int *申明指针变量
+    */
+    int *point = &amp;c;
+    /*
+        获取指针地址对应的值 *运算符
+    */
+    int val = *point;
+    printf(&quot;指针是%p\n&quot;, &amp;c);
+    printf(&quot;指针对应的值是%d\n&quot;, val);
+}
+</code></pre><h1 id="改变地址中的内容"><a href="#改变地址中的内容" class="headerlink" title="改变地址中的内容"></a>改变地址中的内容</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int c = 10;
+    int *point = &amp;c;
+    int val = *point;
+    *point = 99;
+    printf(&quot;改变后的c的值为%d&quot;, c);
+}
+</code></pre><h1 id="数组和函数中的指针变量"><a href="#数组和函数中的指针变量" class="headerlink" title="数组和函数中的指针变量"></a>数组和函数中的指针变量</h1><pre><code>#include &lt;stdio.h&gt;
+
+void size(char str[])
+{
+    printf(&quot;传入的字符串是%s\n&quot;, str);
+
+    /*
+        如果函数参数申明为数组类型,他会被当做指针处理,因此sizeof得到的值是8(64为系统,sizeof(* int))
+    */
+    printf(&quot;字符串的长度是:%i\n&quot;, sizeof(str));
+    char str_size[] = &quot;this is demo&quot;;
+    char * point = *str_size;
+
+    /*
+        sizeof直接传入数组依然计算的是数组的长度
+    */
+    printf(&quot;数组变量的长度是:%i\n&quot;, sizeof(str_size));
+
+    printf(&quot;数组变量指针的长度是:%i\n&quot;, sizeof(point));
+
+    /*
+        数组变量可以用作指针
+    */
+    printf(&quot;数组的变量的地址是:%s\n&quot;, &amp;str_size);
+
+    /*
+        数组变量指向数组的第一个值
+    */
+    printf(&quot;数组指针变量的地址是:%s\n&quot;, &amp;point);
+    *point = &quot;test&quot;;
+
+    /*
+        编译不能通过,数组变量不能指向其他地方
+    */
+    printf(&quot;指针变量被赋值了吗?%s\n&quot;, point);
+}
+
+
+int main()
+{
+    size(&quot;test&quot;);
+}
+</code></pre><h1 id="为什么数组变量不能指向其他地方"><a href="#为什么数组变量不能指向其他地方" class="headerlink" title="为什么数组变量不能指向其他地方?"></a>为什么数组变量不能指向其他地方?</h1><pre><code>当创建指针变量时,计算机会分配4或8个字节的存储空间。如果创建的是数组,计算机会为数组分配存储空间,但不会为数组变量分配任何空间,编译器仅在出现它的地方把它替换成数组的起始地址
+</code></pre><h1 id="对于数组取值的两种方式"><a href="#对于数组取值的两种方式" class="headerlink" title="对于数组取值的两种方式"></a>对于数组取值的两种方式</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[] = &quot;this is arr&quot;;
+    printf(&quot;看看结果%c\n&quot;, str[3]);
+    printf(&quot;另外一种方式看看结果%c\n&quot;, *(str+3));
+
+    int nums[] = {1,2,3};
+    printf(&quot;看看结果%i\n&quot;, nums[2]);
+    printf(&quot;另外一种方式看看结果%i\n&quot;, *(nums+2));
+    return 0;
+}
+
+1.arr[i]
+2.*(arr+i)
+</code></pre><h1 id="指针为什么需要有类型"><a href="#指针为什么需要有类型" class="headerlink" title="指针为什么需要有类型?"></a>指针为什么需要有类型?</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int nums[] = {1,2,3};
+
+    /*
+        两个地址相隔四个字节(注意是16进制)
+    */
+    printf(&quot;看看第一个元素的位置%p\n&quot;, nums);
+    printf(&quot;看看第二个元素的位置%p\n&quot;, nums+1);
+    return 0;
+}
+因为对于char指针加1,指针会指向存储器的下一个地址,因为char就占1字节
+int通常占四个字节,如果int指针加1,编译后的代码就会对存储器加4
+</code></pre><h1 id="指针输入数据"><a href="#指针输入数据" class="headerlink" title="指针输入数据"></a>指针输入数据</h1><pre><code>scanf
+fgets
+</code></pre><h1 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h1><pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    /*
+        输入字符串
+    */
+    char test[20];
+    scanf(&quot;%19s&quot;, test);
+    printf(&quot;输入的字符串为:%s\n&quot;, test);
+
+    /*
+        输入数字
+    */
+    int t;
+    scanf(&quot;%i&quot;, &amp;t);
+    printf(&quot;输入的数字是%i\n&quot;, t);
+}
+
+为什么数组传入变量名就可以,数字需要传&apos;&amp;&apos;呢?
+scanf和函数一样,传入数组的变量名会当做指针使用,它会根据指针去修改对应的值
+
+为什么scanf的时候需要指定&apos;%19s&apos;?
+如果不指定scanf读取的长度,当用户输入的值超过test数组的长度的时候会导致内存溢出。因此一般指定scanf的长度为test长度减1(去掉一个结束字符&apos;\0&apos;)
+</code></pre><h1 id="fgets"><a href="#fgets" class="headerlink" title="fgets"></a>fgets</h1><pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    char str[4];
+    /*
+        此处需要注意的是str是数组变量,所以传入的是str不是* str
+    */
+    fgets(str, sizeof(str), stdin);
+    printf(&quot;输入的字符为%s\n&quot;, str);
+}
+</code></pre><h1 id="scanf和fgets"><a href="#scanf和fgets" class="headerlink" title="scanf和fgets"></a>scanf和fgets</h1><pre><code>1.scanf记得在格式串中加入限制长度,sacnf就能限制用户输入长度(没有强制要求),并且输入的字符长度需要减去结束符的长度,fgets强制限制用户输入字符数
+2.scanf允许输入多个字段,而且能指定结构化数据根据什么字符划分。fgets只允许缓冲区输入一个字符串,而且只能是字符串,不能是其他数据类型
+3.sanf不能输入空格,遇到空格就会停止读取。fget可以输入空格
+</code></pre><h1 id="字符串创建的过程"><a href="#字符串创建的过程" class="headerlink" title="字符串创建的过程"></a>字符串创建的过程</h1><pre><code>1.载入字符串字面值(也就是在常量(只读)中定义字面值)
+2.在栈上新建一个数组,主要会分配数组的存储块大小
+3.初始化数组,把字符串字面值复制到栈(可修改)上
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -521,6 +1045,10 @@ errno.h错误信息
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -528,13 +1056,27 @@ errno.h错误信息
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言语句/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -542,38 +1084,42 @@ errno.h错误信息
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/14/C语言语句/" itemprop="url">
-                  C语言语句
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/14/C语言语句/" itemprop="url">C语言语句</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-14T21:41:07+08:00" content="2016-07-14">
-              2016-07-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T21:41:07+08:00">
+                2016-07-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -581,7 +1127,6 @@ errno.h错误信息
 
                 
                 
-
               
             </span>
           
@@ -591,14 +1136,21 @@ errno.h错误信息
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -607,7 +1159,7 @@ errno.h错误信息
       
         
           
-          if语句if (condition) {
+            <h1 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h1><pre><code>if (condition) {
     doSomething
 } elseif(condition) {
     doSomething
@@ -618,18 +1170,102 @@ errno.h错误信息
 例子:
     #include &lt;stdio.h&gt;
     int main()
-          ...
+    {
+        char age[3];
+        puts(&quot;请输入字母:\n&quot;);
+        scanf(&quot;%2s&quot;, age);
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/14/C语言语句/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        if (age[0]==&apos;A&apos;) {
+            puts(age);
+        } else {
+            puts(&quot;loser&quot;);
+        }
+
+        return 0;
+    }
+</code></pre><h1 id="siwtch语句"><a href="#siwtch语句" class="headerlink" title="siwtch语句"></a>siwtch语句</h1><pre><code>switch(variable) {
+    case value:
+        break;
+    default:
+}
+
+例子:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        char test[3];
+        scanf(&quot;%2s&quot;, test);
+
+        switch(test[0]) {
+            case &apos;a&apos;:
+                puts(&quot;this is a&quot;);
+                break;
+            case &apos;b&apos;:
+                puts(&quot;this is b&quot;);
+                break;
+                default:
+                puts(&quot;are you ok?&quot;);
+        }
+
+        return 0;
+    }
+</code></pre><h1 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h1><pre><code>while(condition) {
+    dosometing
+}
+
+例子:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        int n = 10;
+        while (n&gt;=5) {
+            printf(&quot;输出数字%i\n&quot;, n);
+            n=n-1;
+        }
+
+        return 0;
+    }
+</code></pre><h1 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h1><pre><code>for(initial;condition;step) {
+    dosometing
+}
+
+例子:
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        int n;
+        for(n=0;n&lt;10;n++) {
+            printf(&quot;数字%d\n&quot;, n);
+        }
+
+        return 0;
+    }
+</code></pre><h1 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h1><pre><code>break
+    跳出循环
+
+continue
+    终端本次循环,进入下一次循环
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -639,6 +1275,10 @@ errno.h错误信息
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -646,13 +1286,27 @@ errno.h错误信息
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -660,38 +1314,42 @@ errno.h错误信息
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/14/C语言数据类型/" itemprop="url">
-                  C语言数据类型
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/14/C语言数据类型/" itemprop="url">C语言数据类型</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-14T21:17:42+08:00" content="2016-07-14">
-              2016-07-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T21:17:42+08:00">
+                2016-07-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -699,7 +1357,6 @@ errno.h错误信息
 
                 
                 
-
               
             </span>
           
@@ -709,14 +1366,21 @@ errno.h错误信息
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -725,22 +1389,104 @@ errno.h错误信息
       
         
           
-          数据类型浮点型:float,double
+            <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><pre><code>浮点型:float,double
 整型:short,long,int,char(char以字符编码保存,他们也是数字)
-char字符在计算机的存储器中以字符编码的形式保存,字符编码是一个数字,因此在计算机看来A(ASCII码)和数字65完全一样
-需要注意的点1.字符串会被当做数组来读取,这个
-          ...
+</code></pre><h1 id="char"><a href="#char" class="headerlink" title="char"></a>char</h1><pre><code>字符在计算机的存储器中以字符编码的形式保存,字符编码是一个数字,因此在计算机看来A(ASCII码)和数字65完全一样
+</code></pre><h1 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h1><pre><code>1.字符串会被当做数组来读取,这个数组是由一个个的字符组成
+2.字符串会存在结束字符&apos;\0&apos;,也就是null
+3.字符的索引值是从0开始的
+4.单引号一般表示单个字符,双引号一般表示字符串
+</code></pre><h1 id="数组中如何定义字符串"><a href="#数组中如何定义字符串" class="headerlink" title="数组中如何定义字符串?"></a>数组中如何定义字符串?</h1><pre><code>char test[][80] = array(&apos;test&apos;);
+第一个[]中不写入是因为编译器知道列表项的个数,而第二个[80]是因为每个字符串的长度都不一样,为了存储最大的长度的字符串,所以分配了80(这个是按照需要定的)个字符
+</code></pre><h1 id="int"><a href="#int" class="headerlink" title="int"></a>int</h1><pre><code>保存一个整数,通常使用int,不同计算机中int的大小不同,至少应该有16位
+</code></pre><h1 id="short"><a href="#short" class="headerlink" title="short"></a>short</h1><pre><code>保存一个一百几千的数字,可以节省空间,一般是int的一半大小
+</code></pre><h1 id="long"><a href="#long" class="headerlink" title="long"></a>long</h1><pre><code>大小是int的两倍,可以保存几十亿以内的数字,大部分计算机的long和int一样大,因为在这些计算机中int本身就很大
+</code></pre><h1 id="float"><a href="#float" class="headerlink" title="float"></a>float</h1><pre><code>保存浮点数的基本数据类型
+</code></pre><h1 id="double"><a href="#double" class="headerlink" title="double"></a>double</h1><pre><code>保存精确的浮点数。double比float多占一倍空间,可以保存更大,更精确的数字
+</code></pre><h1 id="超过数据类型范围的数据它会如何存储"><a href="#超过数据类型范围的数据它会如何存储" class="headerlink" title="超过数据类型范围的数据它会如何存储?"></a>超过数据类型范围的数据它会如何存储?</h1><pre><code>#include &lt;stdio.h&gt;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/14/C语言数据类型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+int main()
+{
+    int num = 100000;
+    short t = num;
+
+    printf(&quot;最终数据是:%d&quot;, t);
+    return 0;
+}
+
+最终输出结果为:-31072
+</code></pre><h1 id="为什么最后存储的是负数"><a href="#为什么最后存储的是负数" class="headerlink" title="为什么最后存储的是负数?"></a>为什么最后存储的是负数?</h1><pre><code>数字以二进制保存,二进制的100000看起来是这样的:0001 1000 0110 1010 0000;当计算机想保存这个值到shrot的时候,发现只能保存两个字节,所以只保存了数字右半边:1000  0110 1010 0000;最高位是1的二级制有符号数会被当成负数处理,他等价于下面的十进制数:-31072
+</code></pre><h1 id="如下代码运行结果是什么-为什么"><a href="#如下代码运行结果是什么-为什么" class="headerlink" title="如下代码运行结果是什么?为什么?"></a>如下代码运行结果是什么?为什么?</h1><pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 7;
+    int y = 2;
+    float z = x/y;
+    printf(&quot;最后的结果是:%f\n&quot;, z);
+
+    float a = (float) x/y;
+    printf(&quot;最后的结果是:%f\n&quot;, a);
+}
+
+运行结果为:最后的结果是:3.000000;最后的结果是:3.500000
+第一个输出位置z的值;由于x和y都是整型所以最后得到一个舍入的整数
+第二个输出位置a的值;由于对x进行了类型转换;编译器就会自动将结果替换成浮点数的表示方式
+</code></pre><h1 id="数据类型的临界值"><a href="#数据类型的临界值" class="headerlink" title="数据类型的临界值"></a>数据类型的临界值</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;float.h&gt;
+
+int main()
+{
+    printf(&quot;int最大值是:%i\n&quot;, INT_MAX);
+    printf(&quot;int最小值是:%i\n&quot;, INT_MIN);
+    printf(&quot;int占用的字节大小:%lu bytes\n&quot;, sizeof(int));
+
+    printf(&quot;float最大值是:%f\n&quot;, FLT_MAX);
+    printf(&quot;float最小值是:%.50f\n&quot;, FLT_MIN);
+    printf(&quot;float占用的字节大小:%lu bytes\n&quot;, sizeof(float));
+
+    printf(&quot;char最大值是:%d\n&quot;, CHAR_MAX);
+    printf(&quot;char最小值是:%d\n&quot;, CHAR_MIN);
+    printf(&quot;char占用的字节大小:%lu bytes\n&quot;, sizeof(char));
+
+    printf(&quot;signed char最大值:%d\n&quot;,SCHAR_MAX);
+    printf(&quot;signed char最小值:%d\n&quot;,SCHAR_MIN);
+    printf(&quot;unsigned char最大值:%u\n&quot;,UCHAR_MAX);
+
+    printf(&quot;double最大值是:%f\n&quot;, DBL_MAX);
+    printf(&quot;double最小值是:%.5f\n&quot;, DBL_MIN);
+    printf(&quot;double占用的字节大小:%lu bytes\n&quot;, sizeof(double));
+
+    printf(&quot;short最大值是:%d\n&quot;, SHRT_MAX);
+    printf(&quot;short最小值是:%d\n&quot;, SHRT_MIN);
+    printf(&quot;short占用的字节大小:%lu bytes\n&quot;, sizeof(short));
+
+    printf(&quot;long最大值是:%ld\n&quot;, LONG_MAX);
+    printf(&quot;long最小值是:%ld\n&quot;, LONG_MIN);
+    printf(&quot;long占用的字节大小:%lu bytes\n&quot;, sizeof(long));
+
+    return 0;
+}
+</code></pre><h1 id="32位-64位到底是什么含义"><a href="#32位-64位到底是什么含义" class="headerlink" title="32位,64位到底是什么含义?"></a>32位,64位到底是什么含义?</h1><pre><code>它既可以表示CPU指令的长度,也可以表示CPU一次从存储器读取数据的大小,实际上,位数是计算机能够处理的数值长度
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -750,11 +1496,14 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -783,98 +1532,123 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -888,80 +1662,65 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -969,40 +1728,140 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

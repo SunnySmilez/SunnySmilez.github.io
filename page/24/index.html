@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/24/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/02/21/nginx信号/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/02/21/nginx信号/" itemprop="url">
-                  nginx信号
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/21/nginx信号/" itemprop="url">nginx信号</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-21T17:30:24+08:00" content="2016-02-21">
-              2016-02-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-21T17:30:24+08:00">
+                2016-02-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,7 +326,7 @@
       
         
           
-          nginx关闭信号* kill signal pid
+            <h1 id="nginx关闭信号"><a href="#nginx关闭信号" class="headerlink" title="nginx关闭信号"></a>nginx关闭信号</h1><pre><code>* kill signal pid
 
 
 * TERM,INT
@@ -274,19 +335,42 @@
 * QUIT
     * 优雅的关闭进程,等待请求结束后再关闭(kill -QUIT pid)
 
-* HU
-          ...
+* HUP
+    * 改变配置文件,平滑的重读配置文件(kill -HUP pid)
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/21/nginx信号/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+* USR1
+    *  重新打开日志文件(kill -USR1 `cat logs/nginx.pid`)
+
+* WINCH
+    * 从容关闭工作进程(kill WINCH pid)
+</code></pre><h1 id="nginx重启"><a href="#nginx重启" class="headerlink" title="nginx重启"></a>nginx重启</h1><pre><code>* 先关闭进程，修改你的配置后，重启进程
+    * kill -QUIT `cat /usr/local/nginx/nginx.pid` # 此处可替换成上面的关闭信号
+    * sudo /usr/local/nginx/nginx
+
+* 重新加载配置文件，不重启进程，不会停止处理请求
+    * kill -HUP pid
+    * 当 nginx 接收到 HUP 信号，它会尝试先解析配置文件（如果指定配置文件，就使用指定的，否则使用默认的），成功的话，就应用新的配置文件（例如：重新打开日志文件或监听的套接 字）。之后，nginx 运行新的工作进程并从容关闭旧的工作进程。通知工作进程关闭监听套接字但是继续为当前连接的客户提供服务。所有客户端的服务完成后，旧的工作进程被关闭。 如果新的配置文件应用失败，nginx 将继续使用旧的配置进行工作。
+
+* 平滑更新nginx二进制，不会停止处理请求
+    * kill USR2 pid
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -296,6 +380,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -303,13 +391,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/02/02/xdebug的安装与调试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -317,38 +419,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/02/02/xdebug的安装与调试/" itemprop="url">
-                  xdebug的安装与调试
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/02/xdebug的安装与调试/" itemprop="url">xdebug的安装与调试</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T17:57:35+08:00" content="2016-02-02">
-              2016-02-02
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-02T17:57:35+08:00">
+                2016-02-02
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -356,7 +462,6 @@
 
                 
                 
-
               
             </span>
           
@@ -366,14 +471,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -382,22 +494,34 @@
       
         
           
-          xdebug的安装
-下载  wget https://xdebug.org/files/xdebug-2.4.0rc4.tgz
+            <h3 id="xdebug的安装"><a href="#xdebug的安装" class="headerlink" title="xdebug的安装"></a>xdebug的安装</h3><ul>
+<li><p>下载<br>  wget <a href="https://xdebug.org/files/xdebug-2.4.0rc4.tgz" target="_blank" rel="external">https://xdebug.org/files/xdebug-2.4.0rc4.tgz</a></p>
+</li>
+<li><p>安装<br>  tar zxvf xdebug-2.4.0rc4.tgz<br>  /data1/php/bin/phpize<br>  ./configure –with-php=/data1/php/bin/php-config &amp;&amp; make &amp;&amp; make install</p>
+</li>
+<li><p>配置server</p>
+</li>
+<li><p>配置client(phpstorm)</p>
+</li>
+</ul>
 
-安装  tar zxvf xdebug-2.4.0rc4.tgz  /data1/php/bin/phpize  ./configure –with-php=/data1
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/02/xdebug的安装与调试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -407,6 +531,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -414,13 +542,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/27/seq的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -428,38 +570,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/27/seq的使用/" itemprop="url">
-                  seq的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/27/seq的使用/" itemprop="url">seq的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T22:19:37+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-27T22:19:37+08:00">
+                2016-01-27
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -467,7 +613,6 @@
 
                 
                 
-
               
             </span>
           
@@ -477,14 +622,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -493,20 +645,25 @@
       
         
           
-          ###
+            <p>###</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/seq的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -516,6 +673,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -523,13 +684,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/27/top的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -537,38 +712,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/27/top的使用/" itemprop="url">
-                  top的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/27/top的使用/" itemprop="url">top的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T09:29:17+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-27T09:29:17+08:00">
+                2016-01-27
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -576,7 +755,6 @@
 
                 
                 
-
               
             </span>
           
@@ -586,14 +764,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -602,21 +787,148 @@
       
         
           
-          top命令的作用使用来监控linux系统状况.包括CPU、内存、运行时间、交换分区、执行的线程等信息
-top值详解top - 15:57:23 up 56 min,  2 users,  load average: 0.00, 0.00, 0.00
-Tasks: 114 total,   1 run
-          ...
+            <h3 id="top命令的作用"><a href="#top命令的作用" class="headerlink" title="top命令的作用"></a>top命令的作用</h3><pre><code>使用来监控linux系统状况.包括CPU、内存、运行时间、交换分区、执行的线程等信息
+</code></pre><h3 id="top值详解"><a href="#top值详解" class="headerlink" title="top值详解"></a>top值详解</h3><pre><code>top - 15:57:23 up 56 min,  2 users,  load average: 0.00, 0.00, 0.00
+Tasks: 114 total,   1 running, 112 sleeping,   1 stopped,   0 zombie
+Cpu(s):  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Mem:    469452k total,   459964k used,     9488k free,    10504k buffers
+Swap:   950264k total,   208944k used,   741320k free,    35328k cached
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/top的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   PPID RUSER     UID GROUP    TTY      P SWAP   TIME CODE DATA nFLT nDRT WCHAN     Flags    COMMAND
+      7 root      20   0     0    0    0 S  0.3  0.0   0:02.10     2 root        0 root     ?        0    0   0:02    0    0    0    0 worker_th 842.8.4. events/0
+      1 root      20   0 19232  896  644 S  0.0  0.2   0:00.70     0 root        0 root     ?        0   24   0:00  140  288   27    0 poll_sche ..4.21.. init
+      2 root      20   0     0    0    0 S  0.0  0.0   0:00.00     0 root        0 root     ?        0    0   0:00    0    0    0    0 kthreadd  8.2.8.4. kthreadd
+      3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 migration 842.8.4. migration/0
+      4 root      20   0     0    0    0 S  0.0  0.0   0:00.12     2 root        0 root     ?        0    0   0:00    0    0    0    0 ksoftirqd 842.8.4. ksoftirqd/0
+      5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 cpu_stopp 842.8.4. migration/0
+      6 root      RT   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 watchdog  842.814. watchdog/0
+      8 root      20   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 worker_th 8.2.8.4. cgroup
+      9 root      20   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 worker_th 8.2.8.4. khelper
+     10 root      20   0     0    0    0 S  0.0  0.0   0:00.00     2 root        0 root     ?        0    0   0:00    0    0    0    0 worker_th 8.2.8.4. netns
+</code></pre><ul>
+<li><p>第一列</p>
+<ul>
+<li>15:57:23                          当前系统时间</li>
+<li>56 min                            系统持续运行时间</li>
+<li>2 users                           当前登陆用户</li>
+<li>load average: 0.00, 0.00, 0.00    1,10,15分钟的负载情况</li>
+</ul>
+</li>
+<li><p>第二列(进程状况)</p>
+<ul>
+<li>表示当前总共有114个进程,1个在运行,112个在休眠,stop状态的一个,僵尸进程没有</li>
+</ul>
+</li>
+<li><p>第三列(cpu状况)</p>
+<ul>
+<li>0.0%us            用户空间占用cpu百分比</li>
+<li>0.0%sy            系统空间占用cpu百分比</li>
+<li>0.0%ni            改变过优先级的进程占用cpu百分比</li>
+<li>100.0%id          空闲cpu百分比</li>
+<li>0.0%wa            io等待占用cpu百分比</li>
+<li>0.0%hi            硬中断占用cpu百分比</li>
+<li>0.0%si            软中断占用cpu百分比</li>
+<li>0.0%st            Steal Time</li>
+</ul>
+</li>
+<li><p>第四列(内存状况)</p>
+<ul>
+<li>469452k total        物理内存总量</li>
+<li>459964k used         使用中的内存总量</li>
+<li>9488k free           free空闲交换区总量</li>
+<li>10504k buffers       cached缓冲的交换区总量</li>
+</ul>
+</li>
+<li><p>swap交换分区</p>
+<ul>
+<li>950264k total            交换分区总量</li>
+<li>208944k used             使用中的交换区总量</li>
+<li>741320k free             空闲交换区总量</li>
+<li>35328k cached            缓冲的交换区总量</li>
+</ul>
+</li>
+<li><p>其他</p>
+<ul>
+<li>PID                      进程id</li>
+<li>USER                     进程所有者</li>
+<li>PR                       进程优先级</li>
+<li>NI                       nice值,负值表示高优先级,正值表示低优先级</li>
+<li>VIRT                     进程使用的虚拟内存总量</li>
+<li>RES                      进程使用的,未被换出的物理内存的大小,单位kb</li>
+<li>SHR                      共享内存大小,单位kb</li>
+<li>S                        进程状态,D(不可中断的睡眠状态),R(运行),S(睡眠),T(跟踪/停止),Z(僵尸进程)</li>
+<li>%CPU                     上次更新到现在的cpu时间占用百分比</li>
+<li>%MEM                     进程使用的物理内存百分比</li>
+<li>TIME+                    进程使用的cpu时间总计,单位1/100秒</li>
+<li>PPID                     父进程id</li>
+<li>RUSER                    关联用户</li>
+<li>UID                      进程所有者的用户id</li>
+<li>GROUP                    进程所有者的组名</li>
+<li>TTY                      启动进程的终端名.不是从终端启动的进程则显示为?</li>
+<li>P                        最后的使用的cpu,仅在多cpu环境下有意义</li>
+<li>SWAP                     进程使用的虚拟内存总量</li>
+<li>TIME                     进程使用的时间总计,单位秒</li>
+<li>CODE                     可执行代码占用的物理内存的大小,单位kb</li>
+<li>DATA                     可执行代码以外的部分占用的物理内存的大小</li>
+<li>nFLT                     页面错误次数</li>
+<li>nDRT                     最后一次写入到现在,被修改的页面数</li>
+<li>WCHAN                    若该进程在睡眠,则显示睡眠中的系统函数名</li>
+<li>Flags                    任务标志</li>
+<li>COMMAND                  进程名称</li>
+</ul>
+</li>
+</ul>
+<h3 id="top使用"><a href="#top使用" class="headerlink" title="top使用"></a>top使用</h3><ul>
+<li><p>终端输入:top</p>
+<ul>
+<li>-d 指定每两次屏幕信息刷新之间的时间间隔</li>
+<li>-p 制定监控特定的某个进程id</li>
+<li>-q 将使top没有任何延迟的进行刷新</li>
+<li>-S 指定累计模式</li>
+<li>-s 使top在安全模式中运行</li>
+<li>-i 使top不显示任何闲置或僵尸进程</li>
+<li>-c 显示整个命令行而不只是显示命令名</li>
+</ul>
+</li>
+<li><p>在top命令窗口,输入如下字母,进行交互</p>
+<ul>
+<li>M 根据驻留内存大小进行排序</li>
+<li>P 根据cpu使用百分比进行大小排序</li>
+<li>k 终止一个进程.(系统将提示用户输入需要终止的进程PID,以及需要发送什么样的信号.一般使用15的信号,如果不能正常结束就使用信号9强制结束该进程)</li>
+<li>i 忽略闲置和僵尸进程</li>
+<li>q 退出程序</li>
+<li>r 重新安排一个进程的优先级别,系统提示用户输入需要改变的进程PID以及需要设置的进程优先级值.输入一个正值将使优先级降低，反之则可以使该进程拥有更高的优先权.</li>
+<li>S 切换到累计模式</li>
+<li>s 改变两次刷新之间的延迟时间</li>
+<li>f或者F 从当前显示中添加或者删除项目</li>
+<li>o或O 改变显示项目的顺序</li>
+<li>l 切换显示平均负载和启动的时间信息</li>
+<li>m 切换显示内存信息</li>
+<li>t 切换显示进程和cpu状态信息</li>
+<li>c 切换显示命令和完整命令行</li>
+<li>T 根据时间/累计时间进行排序</li>
+<li>W 将当前设置写入~/.toprc文件中</li>
+</ul>
+</li>
+</ul>
+
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -626,6 +938,10 @@ Tasks: 114 total,   1 run
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -633,13 +949,27 @@ Tasks: 114 total,   1 run
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/27/lsof的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -647,38 +977,42 @@ Tasks: 114 total,   1 run
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/27/lsof的使用/" itemprop="url">
-                  lsof的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/27/lsof的使用/" itemprop="url">lsof的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-27T09:29:07+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-27T09:29:07+08:00">
+                2016-01-27
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -686,7 +1020,6 @@ Tasks: 114 total,   1 run
 
                 
                 
-
               
             </span>
           
@@ -696,14 +1029,21 @@ Tasks: 114 total,   1 run
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -712,22 +1052,200 @@ Tasks: 114 total,   1 run
       
         
           
-          lsof命令的作用
-用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。
+            <h3 id="lsof命令的作用"><a href="#lsof命令的作用" class="headerlink" title="lsof命令的作用"></a>lsof命令的作用</h3><ul>
+<li>用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为 lsof 需要访问核心内存和各种文件，所以需要root用户执行。</li>
+</ul>
+<h3 id="lsof详解"><a href="#lsof详解" class="headerlink" title="lsof详解"></a>lsof详解</h3><pre><code>COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1180 mysql  cwd    DIR              253,0     4096  262249 /var/lib/mysql
+mysqld  1180 mysql  rtd    DIR              253,0     4096       2 /
+mysqld  1180 mysql  txt    REG              253,0 85349440  788926 /usr/sbin/mysqld
+mysqld  1180 mysql  mem    REG              253,0    65928  655389 /lib64/libnss_files-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   469528  655366 /lib64/libfreebl3.so
+mysqld  1180 mysql  mem    REG              253,0  1921176  655373 /lib64/libc-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    90880  655489 /lib64/libgcc_s-4.4.7-20120601.so.1
+mysqld  1180 mysql  mem    REG              253,0   596272  655381 /lib64/libm-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   987096  787788 /usr/lib64/libstdc++.so.6.0.13
+mysqld  1180 mysql  mem    REG              253,0    19536  655379 /lib64/libdl-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    40400  655377 /lib64/libcrypt-2.12.so
+mysqld  1180 mysql  mem    REG              253,0    43880  655401 /lib64/librt-2.12.so
+mysqld  1180 mysql  mem    REG              253,0     3944  655374 /lib64/libaio.so.1.0.1
+mysqld  1180 mysql  mem    REG              253,0   142640  655397 /lib64/libpthread-2.12.so
+mysqld  1180 mysql  mem    REG              253,0   154624  655363 /lib64/ld-2.12.so
+mysqld  1180 mysql    0r   CHR                1,3      0t0    3782 /dev/null
+mysqld  1180 mysql    1w   REG              253,0   684315  262288 /var/lib/mysql/localhost.localdomain.err
+mysqld  1180 mysql    2w   REG              253,0   684315  262288 /var/lib/mysql/localhost.localdomain.err
+mysqld  1180 mysql    3uW  REG              253,0 79691776  262381 /var/lib/mysql/ibdata1
+mysqld  1180 mysql    4u   REG              253,0        0 1966087 /tmp/ibBOOuA6 (deleted)
+mysqld  1180 mysql    5u   REG              253,0        0 1966092 /tmp/ibX6N8u1 (deleted)
+mysqld  1180 mysql    6u   REG              253,0        0 1966093 /tmp/ibqGaNpW (deleted)
+mysqld  1180 mysql    7u   REG              253,0        0 1966094 /tmp/ibuLnlDM (deleted)
+mysqld  1180 mysql    8uW  REG              253,0 50331648  262466 /var/lib/mysql/ib_logfile0
+mysqld  1180 mysql    9uW  REG              253,0 50331648  262467 /var/lib/mysql/ib_logfile1
+mysqld  1180 mysql   10uW  REG              253,0    98304  263215 /var/lib/mysql/mysql/innodb_index_stats.ibd
+mysqld  1180 mysql   11u   REG              253,0        0 1966107 /tmp/ibT8BG4I (deleted)
+mysqld  1180 mysql   12uW  REG              253,0    98304  263213 /var/lib/mysql/mysql/innodb_table_stats.ibd
+mysqld  1180 mysql   13uW  REG              253,0   114688  263548 /var/lib/mysql/qianlong/finance_order.ibd
+mysqld  1180 mysql   14uW  REG              253,0   180224  263552 /var/lib/mysql/qianlong/pay_record.ibd
+mysqld  1180 mysql   15uW  REG              253,0   114688  263544 /var/lib/mysql/qianlong/finance_interest.ibd
+mysqld  1180 mysql   16u  IPv6              11162      0t0     TCP *:mysql (LISTEN)
+mysqld  1180 mysql   17u  unix 0xffff880019b5e6c0      0t0   11163 /var/lib/mysql/mysql.sock
+mysqld  1180 mysql   18u   REG              253,0     2048  262472 /var/lib/mysql/mysql/user.MYI
+mysqld  1180 mysql   19u   REG              253,0      556  262473 /var/lib/mysql/mysql/user.MYD
+mysqld  1180 mysql   20u   REG              253,0     5120  262469 /var/lib/mysql/mysql/db.MYI
+mysqld  1180 mysql   21u   REG              253,0      880  262470 /var/lib/mysql/mysql/db.MYD
+mysqld  1180 mysql   22u   REG              253,0     5120  263277 /var/lib/mysql/mysql/proxies_priv.MYI
+mysqld  1180 mysql   23u   REG              253,0     1386  263278 /var/lib/mysql/mysql/proxies_priv.MYD
+mysqld  1180 mysql   24u   REG              253,0     4096  262660 /var/lib/mysql/mysql/tables_priv.MYI
+mysqld  1180 mysql   25u   REG              253,0        0  262661 /var/lib/mysql/mysql/tables_priv.MYD
+mysqld  1180 mysql   26u   REG              253,0     4096  262774 /var/lib/mysql/mysql/columns_priv.MYI
+mysqld  1180 mysql   27u   REG              253,0        0  263157 /var/lib/mysql/mysql/columns_priv.MYD
+mysqld  1180 mysql   28u   REG              253,0     4096  263198 /var/lib/mysql/mysql/procs_priv.MYI
+mysqld  1180 mysql   29u   REG              253,0        0  263199 /var/lib/mysql/mysql/procs_priv.MYD
+mysqld  1180 mysql   30u   REG              253,0     1024  262602 /var/lib/mysql/mysql/servers.MYI
+mysqld  1180 mysql   31u   REG              253,0        0  262642 /var/lib/mysql/mysql/servers.MYD
+</code></pre><ul>
+<li>COMMAND                        进程的名称</li>
+<li>PID                            进程id</li>
+<li>USER                           进程所有者</li>
+<li><p>FD                             文件描述符</p>
+<ul>
+<li>（1）cwd：表示current work dirctory，即：应用程序的当前工作目录，这是该应用程序启动的目录，除非它本身对这个目录进行更改</li>
+<li>（2）txt ：该类型的文件是程序代码，如应用程序二进制文件本身或共享库，如上列表中显示的 /sbin/init 程序</li>
+<li>（3）lnn：library references (AIX);</li>
+<li>（4）er：FD information error (see NAME column);</li>
+<li>（5）jld：jail directory (FreeBSD);</li>
+<li>（6）ltx：shared library text (code and data);</li>
+<li>（7）mxx ：hex memory-mapped type number xx.</li>
+<li>（8）m86：DOS Merge mapped file;</li>
+<li>（9）mem：memory-mapped file;</li>
+<li>（10）mmap：memory-mapped device;</li>
+<li>（11）pd：parent directory;</li>
+<li>（12）rtd：root directory;</li>
+<li>（13）tr：kernel trace file (OpenBSD);</li>
+<li>（14）v86  VP/ix mapped file;</li>
+<li>（15）0：表示标准输出</li>
+<li>（16）1：表示标准输入</li>
+<li><p>（17）2：表示标准错误</p>
+</li>
+<li><p>一般在标准输出、标准错误、标准输入后还跟着文件状态模式：r、w、u等</p>
+<ul>
+<li>（1）u：表示该文件被打开并处于读取/写入模式</li>
+<li>（2）r：表示该文件被打开并处于只读模式</li>
+<li>（3）w：表示该文件被打开并处于</li>
+<li>（4）空格：表示该文件的状态模式为unknow，且没有锁定</li>
+<li>（5）-：表示该文件的状态模式为unknow，且被锁定</li>
+</ul>
+</li>
+<li>同时在文件状态模式后面，还跟着相关的锁<ul>
+<li>（1）N：for a Solaris NFS lock of unknown type;</li>
+<li>（2）r：for read lock on part of the file;</li>
+<li>（3）R：for a read lock on the entire file;</li>
+<li>（4）w：for a write lock on part of the file;（文件的部分写锁）</li>
+<li>（5）W：for a write lock on the entire file;（整个文件的写锁）</li>
+<li>（6）u：for a read and write lock of any length;</li>
+<li>（7）U：for a lock of unknown type;</li>
+<li>（8）x：for an SCO OpenServer Xenix lock on part      of the file;</li>
+<li>（9）X：for an SCO OpenServer Xenix lock on the      entire file;</li>
+<li>（10）space：if there is no lock.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TYPE                           文件类型</p>
+<ul>
+<li>（1）DIR：表示目录</li>
+<li>（2）CHR：表示字符类型</li>
+<li>（3）BLK：块设备类型</li>
+<li>（4）UNIX： UNIX 域套接字</li>
+<li>（5）FIFO：先进先出 (FIFO) 队列</li>
+<li>（6）IPv4：网际协议 (IP) 套接字</li>
+</ul>
+</li>
+<li><p>DEVICE                         指定磁盘名称</p>
+</li>
+<li>SIZE/OFF                       文件的大小</li>
+<li>NODE                           索引节点</li>
+<li>NAME                           打开文件的确切的名称</li>
+</ul>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ul>
+<li>lsof my.cnf 显示开启文件my.cnf的进程</li>
+<li>lsof -c abc 显示abc进程现在打开的文件</li>
+<li>lsof -c -p 1234 列出进程号为1234的进程所打开的文件</li>
+<li>lsof -g gid 显示归属gid的进程情况</li>
+<li>lsof +d /usr/local/ 显示目录下被进程开启的文件</li>
+<li>lsof +D /usr/local/ 同上，但是会搜索目录下的目录，时间较长</li>
+<li>lsof -d 4 显示使用fd为4的进程</li>
+<li>lsof -i 用以显示符合条件的进程情况* lsof -i[46] [protocol][@hostname|hostaddr][:service|port]<br>  46 –&gt; IPv4 or IPv6<br>  protocol –&gt; TCP or UDP<br>  hostname –&gt; Internet host name<br>  hostaddr –&gt; IPv4地址<br>  service –&gt; /etc/service中的 service name (可以不止一个)<br>  port –&gt; 端口号 (可以不止一个)</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件</li>
+<li>lsof /etc/passwd //那个进程在占用/etc/passwd</li>
+<li>lsof /dev/hda6 //那个进程在占用hda6</li>
+<li>lsof /dev/cdrom //那个进程在占用光驱</li>
+<li>lsof -c sendmail //查看sendmail进程的文件使用情况</li>
+<li>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn</li>
+<li>lsof -p 30297 //显示那些文件被pid为30297的进程打开</li>
+<li><p>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列</p>
+</li>
+<li><p>lsof -u1000 //查看uid是100的用户的进程的文件使用情况</p>
+</li>
+<li>lsof -utony //查看用户tony的进程的文件使用情况</li>
+<li>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)</li>
+<li>lsof -i //显示所有打开的端口</li>
+<li>lsof -i:80 //显示所有打开80端口的进程</li>
+<li>lsof -i -U //显示所有打开的端口和UNIX domain文件</li>
+<li>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接</li>
+<li>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)</li>
+<li>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数</li>
+</ul>
+<h1 id="我的应用场景"><a href="#我的应用场景" class="headerlink" title="我的应用场景"></a>我的应用场景</h1><ul>
+<li><p>查找服务的配置文件位置</p>
+<ul>
+<li>ps aux | grep mysql(例如mysql的进程为1234)</li>
+<li>lsof -p 1234</li>
+</ul>
+</li>
+<li><p>查看端口是否被占用</p>
+<ul>
+<li>lsof -i:9000</li>
+</ul>
+</li>
+<li><p>恢复被删除文件(网上找的,没用过)</p>
+<pre><code>当Linux计算机受到入侵时，常见的情况是日志文件被删除，以掩盖攻击者的踪迹。管理错误也可能导致意外删除重要的文件，比如在清理旧日志时，意外地删除了数据库的活动事务日志。有时可以通过lsof来恢复这些文件。
+当进程打开了某个文件时，只要该进程保持打开该文件，即使将其删除，它依然存在于磁盘中。这意味着，进程并不知道文件已经被删除，它仍然可以向打开该文件时提供给它的文件描述符进行读取和写入。除了该进程之外，这个文件是不可见的，因为已经删除了其相应的目录索引节点。
+在/proc 目录下，其中包含了反映内核和进程树的各种文件。/proc目录挂载的是在内存中所映射的一块区域，所以这些文件和目录并不存在于磁盘中，因此当我们对这些文件进行读取和写入时，实际上是在从内存中获取相关信息。大多数与 lsof 相关的信息都存储于以进程的 PID 命名的目录中，即 /proc/1234 中包含的是 PID 为 1234 的进程的信息。每个进程目录中存在着各种文件，它们可以使得应用程序简单地了解进程的内存空间、文件描述符列表、指向磁盘上的文件的符号链接和其他系统信息。lsof 程序使用该信息和其他关于内核内部状态的信息来产生其输出。所以lsof 可以显示进程的文件描述符和相关的文件名等信息。也就是我们通过访问进程的文件描述符可以找到该文件的相关信息。
+当系统中的某个文件被意外地删除了，只要这个时候系统中还有进程正在访问该文件，那么我们就可以通过lsof从/proc目录下恢复该文件的内容。 假如由于误操作将/var/log/messages文件删除掉了，那么这时要将/var/log/messages文件恢复的方法如下：
+首先使用lsof来查看当前是否有进程打开/var/logmessages文件，如下：
+# lsof |grep /var/log/messages
+syslogd 1283 root 2w REG 3,3 5381017 1773647 /var/log/messages (deleted)
+从上面的信息可以看到 PID 1283（syslogd）打开文件的文件描述符为 2。同时还可以看到/var/log/messages已经标记被删除了。因此我们可以在 /proc/1283/fd/2 （fd下的每个以数字命名的文件表示进程对应的文件描述符）中查看相应的信息，如下：
+# head -n 10 /proc/1283/fd/2
+Aug 4 13:50:15 holmes86 syslogd 1.4.1: restart.
+Aug 4 13:50:15 holmes86 kernel: klogd 1.4.1, log source = /proc/kmsg started.
+Aug 4 13:50:15 holmes86 kernel: Linux version 2.6.22.1-8 (root@everestbuilder.linux-ren.org) (gcc version 4.2.0) #1 SMP Wed Jul 18 11:18:32 EDT 2007 Aug 4 13:50:15 holmes86 kernel: BIOS-provided physical RAM map: Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 0000000000000000 - 000000000009f000 (usable) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 000000000009f000 - 00000000000a0000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 0000000000100000 - 000000001f7d3800 (usable) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 000000001f7d3800 - 0000000020000000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 00000000e0000000 - 00000000f0007000 (reserved) Aug 4 13:50:15 holmes86 kernel: BIOS-e820: 00000000f0008000 - 00000000f000c000 (reserved)
+从上面的信息可以看出，查看 /proc/8663/fd/15 就可以得到所要恢复的数据。如果可以通过文件描述符查看相应的数据，那么就可以使用 I/O 重定向将其复制到文件中，如:
+cat /proc/1283/fd/2 &gt; /var/log/messages
+对于许多应用程序，尤其是日志文件和数据库，这种恢复删除文件的方法非常有用。
+</code></pre></li>
+</ul>
 
-lsof详解COMMAND  PID  USER   FD   TYPE     
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/lsof的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -737,11 +1255,14 @@ lsof详解COMMAND  PID  USER   FD   TYPE
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -770,98 +1291,123 @@ lsof详解COMMAND  PID  USER   FD   TYPE
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -875,80 +1421,65 @@ lsof详解COMMAND  PID  USER   FD   TYPE
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -956,40 +1487,140 @@ lsof详解COMMAND  PID  USER   FD   TYPE
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

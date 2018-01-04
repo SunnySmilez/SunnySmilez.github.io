@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/21/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/28/网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">
-                  网络
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">网络</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-28T21:48:39+08:00" content="2016-04-28">
-              2016-04-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-28T21:48:39+08:00">
+                2016-04-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,23 +326,82 @@
       
         
           
-          私有IP地址A类: 10.0.0.0 - 10.255.255.255
+            <h1 id="私有IP地址"><a href="#私有IP地址" class="headerlink" title="私有IP地址"></a>私有IP地址</h1><pre><code>A类: 10.0.0.0 - 10.255.255.255
 B类: 172.16.0.0 - 172.31.255.255
 C类: 192.168.0.0 - 192.168.255.255
-访问网站基本流程(主要解释DNS)1.输入网址(www.demo.com.)
-2.访问本地hos
-          ...
+</code></pre><h1 id="访问网站基本流程-主要解释DNS"><a href="#访问网站基本流程-主要解释DNS" class="headerlink" title="访问网站基本流程(主要解释DNS)"></a>访问网站基本流程(主要解释DNS)</h1><pre><code>1.输入网址(www.demo.com.)
+2.访问本地hosts
+3.访问本地hosts DNS缓存
+4.访问LDNS(local dns),配置网关对应的地址
+5.先访问根域DNS(全球13台)
+6.访问com对应的服务器
+7.访问demo对应的服务器
+8.访问网站授权DNS服务器
+9.返回给LDNS网站(www.demo.com.)对应ip,LDNS缓存
+10.返回给请求者机器,请求者机器缓存DNS,并访问对应服务器
+11.对应服务器返回内容
+</code></pre><h1 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h1><pre><code>1.临时生效
+    hostname HELLO
+2.永久生效
+    vim /etc/sysconfig/network
+    HOSTNAME=HELLO    #主机名
+</code></pre><h1 id="网卡文件-etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#网卡文件-etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="网卡文件/etc/sysconfig/network-scripts/ifcfg-eth0"></a>网卡文件/etc/sysconfig/network-scripts/ifcfg-eth0</h1><pre><code>DEVICE=eth0                 #指第一块网卡名称为eth0第二块为eth1
+TYPE=Ethernet               #类型
+ONBOOT=yes                  #开机网卡自启动
+NM_CONTROLLED=yes
+BOOTPROTO=none              #静态分配地址
+DNS1=8.8.8.8                #客户端dns设置
+USERCTL=no
+IPV6INIT=no
+HWADDR=00:0C:20:3F:00:20    #mac地址,不同机器不能重复,尤其是克隆虚拟机或者复制网卡配置的时候
+IPADDR=10.10.1.1            #这里是ip地址设置
+NETMASK=255.255.255.0       #子网掩码/24
+GETWAY=10.0.0.254           #网关配置,也可以命令行通过route添加删除
+</code></pre><h1 id="设置多个ip地址"><a href="#设置多个ip地址" class="headerlink" title="设置多个ip地址"></a>设置多个ip地址</h1><pre><code>ifconfig eth0:0 10.10.10.251 netmask 255.255.255.0
+</code></pre><h1 id="设置网关的位置-可以统一"><a href="#设置网关的位置-可以统一" class="headerlink" title="设置网关的位置(可以统一)"></a>设置网关的位置(可以统一)</h1><pre><code>/etc/sysconfig/network
+/etc/sysconfig/network-scripts/ifcfg-eth0 ----优先生效
+</code></pre><h1 id="查看网关"><a href="#查看网关" class="headerlink" title="查看网关"></a>查看网关</h1><pre><code>route -n
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/28/网络/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth1
+10.0.2.0        0.0.0.0         255.255.255.0   U     0      0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1002   0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1003   0        0 eth1
+0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 eth1  ----默认网关,所有规则都不符合的时候就走默认网关
+</code></pre><h1 id="删除网关-注意使用root权限操作"><a href="#删除网关-注意使用root权限操作" class="headerlink" title="删除网关(注意使用root权限操作)"></a>删除网关(注意使用root权限操作)</h1><pre><code>route del default gw 192.168.1.1
+</code></pre><h1 id="添加网关"><a href="#添加网关" class="headerlink" title="添加网关"></a>添加网关</h1><pre><code>route add default gw 192.168.1.1 ----临时生效
+</code></pre><h1 id="查看DNS解析"><a href="#查看DNS解析" class="headerlink" title="查看DNS解析"></a>查看DNS解析</h1><pre><code>dig www.baidu.com
+nslookup 然后再输入www.baidu.com
+</code></pre><h1 id="跟踪路由"><a href="#跟踪路由" class="headerlink" title="跟踪路由"></a>跟踪路由</h1><pre><code>traceroute www.baidu.com
+</code></pre><h1 id="检查网络"><a href="#检查网络" class="headerlink" title="检查网络"></a>检查网络</h1><pre><code>ping www.baidu.com
+traceroute www.baidu.com
+telnet
+nmap
+</code></pre><h1 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h1><pre><code>tcpdump
+tcpdump -n icmp -i eth0  相当于ping
+</code></pre><h1 id="网络不通检查思路"><a href="#网络不通检查思路" class="headerlink" title="网络不通检查思路"></a>网络不通检查思路</h1><pre><code>1.物理链路是否通
+2.本机ip,路由,DNS的设置情况是否达标
+3.测试到网关或路由器的通畅情况,先测网关然后测路由器
+4.测试ping公网ip的通畅情况
+5.测试DNS的通畅
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -291,6 +411,10 @@ C类: 192.168.0.0 - 192.168.255.255
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -298,13 +422,27 @@ C类: 192.168.0.0 - 192.168.255.255
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/27/su命令执行流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -312,38 +450,42 @@ C类: 192.168.0.0 - 192.168.255.255
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">
-                  su命令执行流程
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">su命令执行流程</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T22:34:53+08:00" content="2016-04-27">
-              2016-04-27
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T22:34:53+08:00">
+                2016-04-27
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -351,7 +493,6 @@ C类: 192.168.0.0 - 192.168.255.255
 
                 
                 
-
               
             </span>
           
@@ -361,14 +502,21 @@ C类: 192.168.0.0 - 192.168.255.255
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -377,25 +525,40 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          流程1.普通用户运行sudo
+            <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><pre><code>1.普通用户运行sudo
 2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
 3.如果过期,需要用户输入自己的口令
 4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
 5.无权限则退出sudo
 6.有权限则执行命令并返回结果,退出sudo
-
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/27/su命令执行流程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre><h1 id="管理文件-etc-sudoers"><a href="#管理文件-etc-sudoers" class="headerlink" title="管理文件(/etc/sudoers)"></a>管理文件(/etc/sudoers)</h1><pre><code>1.主机别名
+2.用户别名
+3.角色别名
+4.定义命令别名
+</code></pre><h1 id="设置sudo权限"><a href="#设置sudo权限" class="headerlink" title="设置sudo权限"></a>设置sudo权限</h1><pre><code>demo      ALL=(ALL)       ALL
+用户,组    主机名,用户       命令
+</code></pre><h1 id="设置sudo的日志"><a href="#设置sudo的日志" class="headerlink" title="设置sudo的日志"></a>设置sudo的日志</h1><pre><code>在/etc/sudoers下添加&quot;Defaults logfile=/var/log/sudo.log&quot;
+</code></pre><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a>注意事项:</h1><pre><code>* 不需要密码直接运行命令的,应该加NOPASSWD:参数
+* 禁止某类程序或命令执行,在命令动作前面加上&quot;!&quot;,并放在允许执行的命令后面
+* 用户组前面必须加%号
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -405,6 +568,10 @@ C类: 192.168.0.0 - 192.168.255.255
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -412,13 +579,27 @@ C类: 192.168.0.0 - 192.168.255.255
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/26/定时任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -426,38 +607,42 @@ C类: 192.168.0.0 - 192.168.255.255
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">
-                  定时任务
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">定时任务</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T00:14:41+08:00" content="2016-04-26">
-              2016-04-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-26T00:14:41+08:00">
+                2016-04-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -465,7 +650,6 @@ C类: 192.168.0.0 - 192.168.255.255
 
                 
                 
-
               
             </span>
           
@@ -475,14 +659,21 @@ C类: 192.168.0.0 - 192.168.255.255
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -491,27 +682,60 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          系统定时任务ls /etc | grep cron
-用户定时任务* * * * * (分时日月周)
-符号*
+            <h1 id="系统定时任务"><a href="#系统定时任务" class="headerlink" title="系统定时任务"></a>系统定时任务</h1><pre><code>ls /etc | grep cron
+</code></pre><h1 id="用户定时任务"><a href="#用户定时任务" class="headerlink" title="用户定时任务"></a>用户定时任务</h1><pre><code>* * * * * (分时日月周)
+</code></pre><h1 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h1><pre><code>*
     表示任意时间
     eg: * * * * * 表示每分钟都执行
 
 -
     a-b,表示在a到b的范围内,包括a,b
-    eg:30 1-3 * * * 表示在1点30,2点
-          ...
+    eg:30 1-3 * * * 表示在1点30,2点30,3点30执行
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/26/定时任务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+,
+    表示分隔时段的意思
+    eg:30 17,18,19 * * * 表示17点半,18点半,19点半执行
+
+/n
+    表示每隔的意思
+    eg: */10 * * * * 表示每隔10分钟执行
+</code></pre><h1 id="crontab-l"><a href="#crontab-l" class="headerlink" title="crontab -l"></a>crontab -l</h1><pre><code>查看crontab文件内容
+</code></pre><h1 id="crontab-r"><a href="#crontab-r" class="headerlink" title="crontab -r"></a>crontab -r</h1><pre><code>删除crontab文件内容
+</code></pre><h1 id="crontab-e"><a href="#crontab-e" class="headerlink" title="crontab -e"></a>crontab -e</h1><pre><code>编辑crontab文件内容
+</code></pre><h1 id="crontab-i"><a href="#crontab-i" class="headerlink" title="crontab -i"></a>crontab -i</h1><pre><code>确认crontab文件内容
+</code></pre><h1 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h1><pre><code>服务状态查看:/etc/init.d/crond status
+服务启动:/etc/init.d/crond start
+服务重启:/etc/init.d/crond restart
+</code></pre><h1 id="书写规范"><a href="#书写规范" class="headerlink" title="书写规范"></a>书写规范</h1><pre><code>1.定时任务添加注释
+2.执行shell前加/bin/sh
+3.定时任务命令或脚本的结尾加&gt;&gt;/dev/null 2&amp;1
+4.定时任务命令的执行,最好用脚本文件
+5.在指定用户下执行相关定时任务
+6.生产任务程序不要随意打印输出信息
+7.定时任务执行脚本要规范路径
+</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><pre><code>1.系统环境变量问题
+2.定时任务要用绝对路径
+3.时间变量&apos;%&apos;用反斜线转移
+4.脚本权限问题加/bin/sh
+5.定时任务中的脚本命令使用全路径
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -521,6 +745,10 @@ C类: 192.168.0.0 - 192.168.255.255
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -528,13 +756,27 @@ C类: 192.168.0.0 - 192.168.255.255
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/关机-重启-注销/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -542,38 +784,42 @@ C类: 192.168.0.0 - 192.168.255.255
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/24/关机-重启-注销/" itemprop="url">
-                  关机-重启-注销
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/24/关机-重启-注销/" itemprop="url">关机-重启-注销</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T15:02:19+08:00" content="2016-04-24">
-              2016-04-24
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T15:02:19+08:00">
+                2016-04-24
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -581,7 +827,6 @@ C类: 192.168.0.0 - 192.168.255.255
 
                 
                 
-
               
             </span>
           
@@ -591,14 +836,21 @@ C类: 192.168.0.0 - 192.168.255.255
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -607,29 +859,42 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
+            <ul>
+<li><p>关机<br>  shutdown -h now 立刻关机</p>
+<p>  shutdown -h +1 1分钟以后关机</p>
+<p>  init 0</p>
+<p>  halt 立即停止系统,需要人工关闭电源</p>
+<p>  halt -p</p>
+<p>  poweroff 立即停止系统,并且关闭电源</p>
+</li>
+<li><p>重启<br>  reboot</p>
+<p>  shutdown -r now</p>
+<p>  shutdown -r +1</p>
+<p>  init 6</p>
+</li>
+<li><p>注销<br>  logout</p>
+<p>  exit</p>
+<p>  ctrl+d</p>
+</li>
+</ul>
+
           
-关机  shutdown -h now 立刻关机
-  shutdown -h +1 1分钟以后关机
-  init 0
-  halt 立即停止系统,需要人工关闭电源
-  halt -p
-  poweroff 立即停止系统,并且关闭电源
-
-重启  reboot
-  shutdown -r now
-  
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/24/关机-重启-注销/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -639,6 +904,10 @@ C类: 192.168.0.0 - 192.168.255.255
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -646,13 +915,27 @@ C类: 192.168.0.0 - 192.168.255.255
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/linux运行级别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -660,38 +943,42 @@ C类: 192.168.0.0 - 192.168.255.255
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">
-                  linux运行级别
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">linux运行级别</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T12:45:52+08:00" content="2016-04-24">
-              2016-04-24
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T12:45:52+08:00">
+                2016-04-24
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -699,7 +986,6 @@ C类: 192.168.0.0 - 192.168.255.255
 
                 
                 
-
               
             </span>
           
@@ -709,14 +995,21 @@ C类: 192.168.0.0 - 192.168.255.255
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -725,31 +1018,36 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
+            <ul>
+<li>linux运行级别的含义<ul>
+<li>0: 关机模式</li>
+<li>1: 单用户模式(破解root密码)</li>
+<li>2: 无网络支持的多用户模式</li>
+<li>3: 有网络支持的多用户模式</li>
+<li>4: 保留,未使用</li>
+<li>5: 有网络支持的X-Window支持的多用户模式</li>
+<li>6: 重启</li>
+</ul>
+</li>
+</ul>
+
           
-linux运行级别的含义
-0: 关机模式
-1: 单用户模式(破解root密码)
-2: 无网络支持的多用户模式
-3: 有网络支持的多用户模式
-4: 保留,未使用
-5: 有网络支持的X-Window支持的多用户模式
-6: 重启
-
-
-
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/24/linux运行级别/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -759,11 +1057,14 @@ linux运行级别的含义
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -792,98 +1093,123 @@ linux运行级别的含义
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -897,80 +1223,65 @@ linux运行级别的含义
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -978,40 +1289,140 @@ linux运行级别的含义
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

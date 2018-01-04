@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/03/redis-sds源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2018/01/03/redis-sds源码阅读/" itemprop="url">
-                  redis-sds源码阅读
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/01/03/redis-sds源码阅读/" itemprop="url">redis-sds源码阅读</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-01-03T11:57:42+08:00" content="2018-01-03">
-              2018-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T11:57:42+08:00">
+                2018-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,7 +326,7 @@
       
         
           
-          sds结构struct sdshdr {
+            <h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
 
     /** buf 中已占用空间的长度*/
     int len;
@@ -277,19 +338,182 @@
     /** 柔性数组*/
     char buf[];
 };
+</code></pre><p><img src="/img/redis/sds.jpg" alt="Alt text" title="sds结构"></p>
+<h1 id="获取字符串长度复杂度为O-1"><a href="#获取字符串长度复杂度为O-1" class="headerlink" title="获取字符串长度复杂度为O(1)"></a>获取字符串长度复杂度为O(1)</h1><pre><code>在sds的结构中，保存了sds的占用空间的长度，可以使用sdslen进行读取，代码实现如下：
 
-          ...
+static inline size_t sdslen(const sds s) {
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    return sh-&gt;len;
+}
+</code></pre><h1 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h1><pre><code>二进制安全：比如说在c语言中，strlen计算长度，是依赖于特殊的字符&apos;\0&apos;来判断是否到达字符串的最末尾，所以对于&quot;aaa\0bbb&quot;来说，它就不是二进制安全的
+sds的二进制安全，它不仅仅根据&quot;\0&quot;来判断是否到达字符串的末尾，还根据len的长度来进行计算
+</code></pre><h1 id="杜绝缓冲区溢出"><a href="#杜绝缓冲区溢出" class="headerlink" title="杜绝缓冲区溢出"></a>杜绝缓冲区溢出</h1><pre><code>缓冲区溢出，指的是在修改字符串的时候，没有对该字符串分配足够的空间
+sds在对字符串进行修改的时候，都会使用（sdsMakeRoomFor）判断是否有足够的空间
+sds sdscatlen(sds s, const void *t, size_t len) {
+    struct sdshdr *sh;
+    // 原有字符串长度
+    size_t curlen = sdslen(s);
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/03/redis-sds源码阅读/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    // 扩展 sds 空间
+    // T = O(N)
+    s = sdsMakeRoomFor(s, len);
+
+    // 内存不足？直接返回
+    if (s == NULL) {
+        return NULL;
+    }
+
+    // 复制 t 中的内容到字符串后部
+    // T = O(N)
+    sh = (void*) (s - (sizeof(struct sdshdr)));
+    memcpy(s + curlen, t, len);
+
+    // 更新属性
+    sh-&gt;len = curlen + len;
+    sh-&gt;free = sh-&gt;free - len;
+
+    // 添加新结尾符号
+    s[curlen + len] = &apos;\0&apos;;
+
+    // 返回新 sds
+    return s;
+}
+</code></pre><h1 id="动态扩展，空间预分配"><a href="#动态扩展，空间预分配" class="headerlink" title="动态扩展，空间预分配"></a>动态扩展，空间预分配</h1><pre><code>对字符串进行修改的时候，会判断sds的剩余空间，如果大小不足够会重新进行分配，具体分配逻辑如下：
+    1、如果新长度小于SDS_MAX_PREALLOC定义的最大空间，就分配两倍所需空间；
+    2、否则在目前的长度上再增加SDS_MAX_PREALLOC定义的最大空间
+
+代码实现如下：
+/*
+ * 对 sds 中 buf 的长度进行扩展，确保在函数执行之后，
+ * buf 至少会有 addlen + 1 长度的空余空间
+ * （额外的 1 字节是为 \0 准备的）
+ *
+ * 返回值
+ *  sds ：扩展成功返回扩展后的 sds
+ *        扩展失败返回 NULL
+ *
+ * 复杂度
+ *  T = O(N)
+ */
+sds sdsMakeRoomFor(sds s, size_t addlen) {
+    struct sdshdr *sh, *newsh;
+
+    // 获取 s 目前的空余空间长度
+    size_t free = sdsavail(s);
+
+    size_t len, newlen;
+
+    // s 目前的空余空间已经足够，无须再进行扩展，直接返回
+    if (free &gt;= addlen) {
+        return s;
+    }
+
+    // 获取 s 目前已占用空间的长度
+    len = sdslen(s);
+    sh = (void*)(s - (sizeof(struct sdshdr)));
+
+    // s 最少需要的长度
+    newlen = (len + addlen);
+
+    // 根据新长度，为 s 分配新空间所需的大小
+    // 如果当前占用内存小于1M那么就分配两倍于当前长度的内存
+    // 如果当前占用内存大于等于1M那么就分配当前长度+1M的内存
+    // 内存增长策略*****
+    if (newlen &lt; SDS_MAX_PREALLOC) {
+        // 如果新长度小于 SDS_MAX_PREALLOC 
+        // 那么为它分配两倍于所需长度的空间
+        newlen *= 2;
+    } else {
+        // 否则，分配长度为目前长度加上 SDS_MAX_PREALLOC
+        newlen += SDS_MAX_PREALLOC;
+    }
+
+    // T = O(N)
+    newsh = zrealloc(sh, sizeof(struct sdshdr) + newlen + 1);
+
+    // 内存不足，分配失败，返回
+    if (newsh == NULL) { 
+        return NULL;
+    }
+
+    // 更新 sds 的空余长度
+    newsh-&gt;free = newlen - len;
+
+    // 返回 sds
+    return newsh-&gt;buf;
+}
+</code></pre><h1 id="惰性释放，减少内存分配次数"><a href="#惰性释放，减少内存分配次数" class="headerlink" title="惰性释放，减少内存分配次数"></a>惰性释放，减少内存分配次数</h1><pre><code>对sds字符串进行缩减操作的时候，不会对空间进行释放，仅仅只是改变len属性和free属性的值
+
+void sdsclear(sds s) {
+
+    // 取出 sdshdr
+    struct sdshdr *sh = (void*) (s - (sizeof(struct sdshdr)));
+
+    // 重新计算属性
+    sh-&gt;free += sh-&gt;len;
+    sh-&gt;len = 0;
+
+    // 将结束符放到最前面（相当于惰性地删除 buf 中的内容）
+    sh-&gt;buf[0] = &apos;\0&apos;;
+}
+</code></pre><h1 id="long数值转字符串"><a href="#long数值转字符串" class="headerlink" title="long数值转字符串"></a>long数值转字符串</h1><pre><code>这个函数比较有意思，他将long long类型的数值转换成string类型
+    1、将数值按照10取模，取模后的值保存，在除10（相当于是对当前位的上一位进行获取 12345第一次取模的值是5，除10变成1234.5取模的值变成4）（注意101.1与10取模是1不是1.1）
+    2、将保存的字符串再进行翻转
+    比如：
+        12345 取模后得到的值依次是5，4，3，2，1 连接成最后的字符串是54321
+        再进行倒转以后变成12345
+
+int sdsll2str(char *s, long long value) {
+    char *p, aux;
+    unsigned long long v;
+    size_t l;
+
+    /* Generate the string representation, this method produces
+     * an reversed string. */
+    v = (value &lt; 0) ? -value : value;
+    p = s;
+    do {
+        *p++ = &apos;0&apos; + (v%10);
+        v /= 10;
+    } while(v);
+    if (value &lt; 0) *p++ = &apos;-&apos;;
+
+    /* Compute length and add null term. */
+    l = p - s;
+    *p = &apos;\0&apos;;
+
+    /* Reverse the string. */
+    p--;
+    while(s &lt; p) {
+        aux = *s;
+        *s = *p;
+        *p = aux;
+        s++;
+        p--;
+    }
+    return l;
+}
+
+为什么要&apos;0&apos;+单个数字？
+参考ascii表，字符串1对应的ascii码是49，&apos;0&apos;对应的ancii值是48，比如说数字3想存储到字符串中表示也为&apos;3&apos;，那么它对应的ascii就是3+48也就是3+&apos;0&apos;
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -299,6 +523,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -306,13 +534,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -320,38 +562,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2018/01/02/redis对象类型及数据结构/" itemprop="url">
-                  redis对象类型及数据结构
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/01/02/redis对象类型及数据结构/" itemprop="url">redis对象类型及数据结构</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-01-02T17:42:59+08:00" content="2018-01-02">
-              2018-01-02
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T17:42:59+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -359,7 +605,6 @@
 
                 
                 
-
               
             </span>
           
@@ -369,14 +614,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -385,19 +637,42 @@
       
         
           
-          字符创对象（REDIS_STRING | string）整数值（int）embstr编码的简单动态字符串（SDS）（embstr）动态字符串（raw）编码存储选择如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/02/redis对象类型及数据结构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
+如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
+可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
+</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
+因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
+</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
+    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
+    2、列表对象保存的元素数量小于 512 个
+</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
+    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
+    2、哈希对象保存的键值对数量小于 512 个；
+</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
+    1、集合对象保存的所有元素都是整数值；
+    2、集合对象保存的元素数量不超过 512 个；
+</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
+    1、有序集合保存的元素数量小于 128 个；
+    2、有序集合保存的所有元素成员的长度都小于 64 字节；
+</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -407,6 +682,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -414,13 +693,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/28/常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -428,38 +721,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/12/28/常用命令/" itemprop="url">
-                  常用命令
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/12/28/常用命令/" itemprop="url">常用命令</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-28T10:29:39+08:00" content="2017-12-28">
-              2017-12-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T10:29:39+08:00">
+                2017-12-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -467,7 +764,6 @@
 
                 
                 
-
               
             </span>
           
@@ -477,14 +773,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -493,20 +796,25 @@
       
         
           
-          linux杀死某个程序的多个进程ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
-
+            <h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
+</code></pre>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/28/常用命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -516,6 +824,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -523,13 +835,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/13/redis源码断点调试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -537,38 +863,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/12/13/redis源码断点调试/" itemprop="url">
-                  redis源码断点调试
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/12/13/redis源码断点调试/" itemprop="url">redis源码断点调试</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-13T20:37:19+08:00" content="2017-12-13">
-              2017-12-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T20:37:19+08:00">
+                2017-12-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -576,7 +906,6 @@
 
                 
                 
-
               
             </span>
           
@@ -586,14 +915,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -602,20 +938,32 @@
       
         
           
-          redis断点调试的方式有两种记录日志printf记录日志redisLog(REDIS_WARNING, &quot;hello world!&quot;)
-操作流程在t_string.c的getCommand方法中添加如下内容redisLog(REDIS_WARNING, &quot;hello 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/13/redis源码断点调试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h1 id="redis断点调试的方式有两种"><a href="#redis断点调试的方式有两种" class="headerlink" title="redis断点调试的方式有两种"></a>redis断点调试的方式有两种</h1><h6 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h6><h6 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h6><h3 id="记录日志-1"><a href="#记录日志-1" class="headerlink" title="记录日志"></a>记录日志</h3><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)</code></p>
+<h5 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h5><h6 id="在t-string-c的getCommand方法中添加如下内容"><a href="#在t-string-c的getCommand方法中添加如下内容" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;);
+return ;</code></p>
+<h6 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h6><p><code>make &amp;&amp; src/redis-server</code></p>
+<h6 id="连接redis"><a href="#连接redis" class="headerlink" title="连接redis"></a>连接redis</h6><p><code>src/redis-cli</code></p>
+<h6 id="查看结果（注意是在redis-server查看结果）"><a href="#查看结果（注意是在redis-server查看结果）" class="headerlink" title="查看结果（注意是在redis-server查看结果）"></a>查看结果（注意是在redis-server查看结果）</h6><p><code>get name</code></p>
+<h6 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h6><pre><code>由于getCommand是定义的get命令的操作，因此get name命令能够触发redisLog记录日志
+</code></pre><h3 id="printf-1"><a href="#printf-1" class="headerlink" title="printf"></a>printf</h3><h6 id="在t-string-c的getCommand方法中添加如下内容-1"><a href="#在t-string-c的getCommand方法中添加如下内容-1" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>printf(&quot;hello world!&quot;)</code></p>
+<h6 id="启动redis，连接redis，查看结果和上述流程一直"><a href="#启动redis，连接redis，查看结果和上述流程一直" class="headerlink" title="启动redis，连接redis，查看结果和上述流程一直"></a>启动redis，连接redis，查看结果和上述流程一直</h6><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h6 id="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"><a href="#每次操作完成之后都要进行编译，并重新启动服务端和连接redis" class="headerlink" title="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"></a>每次操作完成之后都要进行编译，并重新启动服务端和连接redis</h6><h6 id="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"><a href="#执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢" class="headerlink" title="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"></a>执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢</h6><h6 id="redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）"><a href="#redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）" class="headerlink" title="redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）"></a>redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）</h6><h6 id="printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr"><a href="#printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr" class="headerlink" title="printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));"></a>printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));</h6>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -625,6 +973,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -632,13 +984,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/12/12/redis用到的函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -646,38 +1012,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/12/12/redis用到的函数/" itemprop="url">
-                  redis用到的函数
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/12/12/redis用到的函数/" itemprop="url">redis用到的函数</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-12T23:18:48+08:00" content="2017-12-12">
-              2017-12-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T23:18:48+08:00">
+                2017-12-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -685,7 +1055,6 @@
 
                 
                 
-
               
             </span>
           
@@ -695,14 +1064,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -711,21 +1087,29 @@
       
         
           
-          记录日志redisLog(REDIS_WARNING, &quot;hello world!&quot;)
+            <h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
 触发记录hello world日志
-例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&
-          ...
+例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&quot;);return ;
+当你启动redis-server后，在客户端，执行get name命令，会在redis-server终端输出&quot;hello world！&quot;
+</code></pre><p># </p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/12/redis用到的函数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -735,11 +1119,14 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -768,98 +1155,123 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -873,80 +1285,65 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -954,40 +1351,140 @@
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

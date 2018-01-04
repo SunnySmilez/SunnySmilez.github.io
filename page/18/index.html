@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/18/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/05/php-ini基本参数设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">
-                  php.ini基本参数设置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/05/php-ini基本参数设置/" itemprop="url">php.ini基本参数设置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:03:14+08:00" content="2016-07-05">
-              2016-07-05
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-05T23:03:14+08:00">
+                2016-07-05
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,22 +326,38 @@
       
         
           
-          开启安全模式(阻止php调用部分函数,比如system())safe_mode = On
-禁用函数disable_functions=system,exec,shell_exec
-关闭php版本信息在header信息中泄露expose_php = Off
-关闭注册全局变量register_globa
-          ...
+            <h1 id="开启安全模式-阻止php调用部分函数-比如system"><a href="#开启安全模式-阻止php调用部分函数-比如system" class="headerlink" title="开启安全模式(阻止php调用部分函数,比如system())"></a>开启安全模式(阻止php调用部分函数,比如system())</h1><pre><code>safe_mode = On
+</code></pre><h1 id="禁用函数"><a href="#禁用函数" class="headerlink" title="禁用函数"></a>禁用函数</h1><pre><code>disable_functions=system,exec,shell_exec
+</code></pre><h1 id="关闭php版本信息在header信息中泄露"><a href="#关闭php版本信息在header信息中泄露" class="headerlink" title="关闭php版本信息在header信息中泄露"></a>关闭php版本信息在header信息中泄露</h1><pre><code>expose_php = Off
+</code></pre><h1 id="关闭注册全局变量"><a href="#关闭注册全局变量" class="headerlink" title="关闭注册全局变量"></a>关闭注册全局变量</h1><pre><code>register_globals = Off
+</code></pre><h1 id="打开magic-quotes-gpcf防止sql注入-自动将’转换成-’"><a href="#打开magic-quotes-gpcf防止sql注入-自动将’转换成-’" class="headerlink" title="打开magic_quotes_gpcf防止sql注入(自动将’转换成\’)"></a>打开magic_quotes_gpcf防止sql注入(自动将’转换成\’)</h1><pre><code>magic_quotes_gpc = On
+</code></pre><h1 id="错误消息控制-不在页面显示"><a href="#错误消息控制-不在页面显示" class="headerlink" title="错误消息控制(不在页面显示)"></a>错误消息控制(不在页面显示)</h1><pre><code>display_errors = Off
+error_reporting = E_WARNING &amp; E_ERROR
+</code></pre><h1 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h1><pre><code>log_errors = On
+error_log = /logs/php_error.log
+</code></pre><h1 id="设置脚本运行最长时间"><a href="#设置脚本运行最长时间" class="headerlink" title="设置脚本运行最长时间"></a>设置脚本运行最长时间</h1><pre><code>max_execution_time = 30
+</code></pre><h1 id="每个脚本使用的最大内存"><a href="#每个脚本使用的最大内存" class="headerlink" title="每个脚本使用的最大内存"></a>每个脚本使用的最大内存</h1><pre><code>memory_limit = 128M
+</code></pre><h1 id="每个脚本等待输入数据最长时间"><a href="#每个脚本等待输入数据最长时间" class="headerlink" title="每个脚本等待输入数据最长时间"></a>每个脚本等待输入数据最长时间</h1><pre><code>max_input_time = 60
+</code></pre><h1 id="上传文件的最大的大小"><a href="#上传文件的最大的大小" class="headerlink" title="上传文件的最大的大小"></a>上传文件的最大的大小</h1><pre><code>upload_max_filesize= 2M
+</code></pre><p>#</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/05/php-ini基本参数设置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -290,6 +367,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -297,13 +378,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/01/如何防盗链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -311,38 +406,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">
-                  如何防盗链
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/01/如何防盗链/" itemprop="url">如何防盗链</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T01:06:42+08:00" content="2016-07-01">
-              2016-07-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T01:06:42+08:00">
+                2016-07-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -350,7 +449,6 @@
 
                 
                 
-
               
             </span>
           
@@ -360,14 +458,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -376,23 +481,37 @@
       
         
           
-          资源盗链某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
+            <h1 id="资源盗链"><a href="#资源盗链" class="headerlink" title="资源盗链"></a>资源盗链</h1><pre><code>某些网站,通过在自身网站程序里未经许可非法调用其他网站资源,然后在自己网站上显示这些调用的资源,达到了填充自身网站显示的效果,但是浪费了调用资源网站的网络流量,造成其他网站的带宽及服务压力吃紧,甚至宕机
 
 解决办法:
     1.图片,视频打水印,logo
-    2.防火墙控制,根据ip控
-          ...
+    2.防火墙控制,根据ip控制
+    3.防盗链(根据referer机制,如果referer不是来自本网站就返回固定页面或错误)[referer可以简单理解为上一次请求的地址]
+    4.根据cookie
+    5.通过加密变换访问路径实现防盗链
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/如何防盗链/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+发现:
+    1.对IDC及CDN带宽流量做监控报警
+    2.每天查看网站流量变化
+    3.对访问日志做分析,对于异常流量迅速定位
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -402,6 +521,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -409,13 +532,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/01/apache常用的prefork和worker模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -423,38 +560,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">
-                  apache常用的prefork和worker模式
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/01/apache常用的prefork和worker模式/" itemprop="url">apache常用的prefork和worker模式</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T00:33:59+08:00" content="2016-07-01">
-              2016-07-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T00:33:59+08:00">
+                2016-07-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -462,7 +603,6 @@
 
                 
                 
-
               
             </span>
           
@@ -472,14 +612,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -488,23 +635,38 @@
       
         
           
-          prefork模式(实现fork好子进程,等待请求)使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
+            <h1 id="prefork模式-实现fork好子进程-等待请求"><a href="#prefork模式-实现fork好子进程-等待请求" class="headerlink" title="prefork模式(实现fork好子进程,等待请求)"></a>prefork模式(实现fork好子进程,等待请求)</h1><pre><code>使用多个子进程,每个子进程只有一个线程,每个进程在某个确定的时间维持一个连接
 
 工作原理:控制进程最初建立若干个子进程,为了不在请求到来时再生成子进程,所以要根据需求不断的创建新的子进程,最大可以到达每秒32个知道满足需求位置
 
-优点:效率高,稳定
-          ...
+优点:效率高,稳定,安全。
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/01/apache常用的prefork和worker模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+缺点:和worker模式比消耗资源更多
+</code></pre><h1 id="worker模式"><a href="#worker模式" class="headerlink" title="worker模式"></a>worker模式</h1><pre><code>是线程与进程的结合,在worker模式下会有多个子进程,每个子进程又会有多个线程。每个线程在某个确定的时间只能维护一个连接
+
+工作原理:由主进程生成若干个子进程,而每个子进程中又包含固定的线程数,各个线程独立处理请求,同样为了不在请求到来时再生成线程,在配置文件中设置了最大和最小空闲线程数及所有子进程中的线程总数,如果现有子进程中的线程总数不能满足并发及负载,控制进程将派生新的子进程
+
+优点:内存占用比prefork模式低,适合高并发,高流量http服务
+
+缺点:如果一个线程奔溃,整个进程就会连同其任何线程一起&quot;死掉&quot;由于线程共享内存空间,所以一个程式在运行时必须被系统识别为&quot;每个线程都是安全的&quot;,服务稳定性不如prefork模式
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -514,6 +676,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -521,13 +687,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/06/29/批量创建文件及替换文件名/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -535,38 +715,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/06/29/批量创建文件及替换文件名/" itemprop="url">
-                  批量创建文件及替换文件名
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/06/29/批量创建文件及替换文件名/" itemprop="url">批量创建文件及替换文件名</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T01:03:07+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-29T01:03:07+08:00">
+                2016-06-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -574,7 +758,6 @@
 
                 
                 
-
               
             </span>
           
@@ -584,14 +767,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -600,25 +790,61 @@
       
         
           
-          批量创建文件写入需要创建的文件名
+            <h1 id="批量创建文件"><a href="#批量创建文件" class="headerlink" title="批量创建文件"></a>批量创建文件</h1><pre><code>写入需要创建的文件名
     file.txt 内容如下:test1.big.jpg
                      test2.big.jpg
                      test1.big.jpg
 
 创建文件
-    touch `cat file.txt |
-          ...
+    touch `cat file.txt | tr &quot;\n&quot; &quot; &quot;`
+</code></pre><h1 id="批量修改文件名-sed"><a href="#批量修改文件名-sed" class="headerlink" title="批量修改文件名(sed)"></a>批量修改文件名(sed)</h1><pre><code>单一文件做测试
+    f=test1.big.jpg
+    echo $f | sed &apos;s#.big##g&apos;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/29/批量创建文件及替换文件名/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+获取目标文件
+    ls | grep &apos;big.jpg&apos;
+
+遍历输出目标文件
+    for i in `ls | grep &apos;big.jpg&apos;`;do echo $i;done;
+
+替换全部文件
+    for i in `ls | grep &apos;big.jpg&apos;`;do mv $i `echo $i | sed &apos;s#.big##g&apos;`;done;
+</code></pre><h1 id="批量修改文件名-awk"><a href="#批量修改文件名-awk" class="headerlink" title="批量修改文件名(awk)"></a>批量修改文件名(awk)</h1><pre><code>单一文件做测试
+    f=test1.big.jpg
+    echo $f | awk -F .big &apos;{print $1$2}&apos;
+获取目标文件
+    ls | grep &apos;big.jpg&apos;
+
+遍历输出目标文件
+    for i in `ls | grep &apos;big.jpg&apos;`;do echo $i;done;
+
+替换全部文件
+    for i in `ls | grep big.jpg`; do mv $i `echo $i | awk -F .big &apos;{print $1$2}&apos;`;done;
+</code></pre><h1 id="批量修改文件名-awk-1"><a href="#批量修改文件名-awk-1" class="headerlink" title="批量修改文件名(awk)"></a>批量修改文件名(awk)</h1><pre><code>获取mv的源文件和目标文件
+    ls | grep .big | awk -F &quot;.big&quot; &apos;{print $0 &quot; &quot; $1$2}&apos;
+拼接mv src dst
+    ls | grep .big | awk -F &quot;.big&quot; &apos;{print &quot;mv &quot;  $0 &quot; &quot; $1$2}&apos;
+作为命令执行
+    ls | grep .big | awk -F &quot;.big&quot; &apos;{print &quot;mv &quot;  $0 &quot; &quot; $1$2}&apos; | bash
+</code></pre><h1 id="批量修改文件名-rename"><a href="#批量修改文件名-rename" class="headerlink" title="批量修改文件名(rename)"></a>批量修改文件名(rename)</h1><pre><code>rename .big &quot; &quot; *.big.jpg
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -628,6 +854,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -635,13 +865,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/06/12/nginx简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -649,38 +893,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/06/12/nginx简介/" itemprop="url">
-                  nginx简介
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/06/12/nginx简介/" itemprop="url">nginx简介</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T23:44:31+08:00" content="2016-06-12">
-              2016-06-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-12T23:44:31+08:00">
+                2016-06-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -688,7 +936,6 @@
 
                 
                 
-
               
             </span>
           
@@ -698,14 +945,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -714,28 +968,39 @@
       
         
           
-          nginx功能1.提供web服务
+            <h1 id="nginx功能"><a href="#nginx功能" class="headerlink" title="nginx功能"></a>nginx功能</h1><pre><code>1.提供web服务
 2.负载均衡
 3.静态资源缓存
-nginx优点1.高并发
+</code></pre><h1 id="nginx优点"><a href="#nginx优点" class="headerlink" title="nginx优点"></a>nginx优点</h1><pre><code>1.高并发
 2.占用资源少
 3.功能种类较多,但每个功能都不是很强
 4.支持epoll模型,使得nginx支持高并发
 5.利用nginx对ip限速,可以限制连接数
 6.简单配置,更灵活
-应用场景静态服务器(图片,视频服务
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/nginx简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><pre><code>静态服务器(图片,视频服务)
+动态服务,nginx+fastcgi运行php
+反向代理,负载均衡(日PV20000000w以下都可以)
+缓存服务
+</code></pre><h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><pre><code>客户端请求一台反向代理服务器,反向代理服务器根据一定的策略发起请求到后端的web服务器,web服务器再将数据返回给反向代理服务器,反向代理服务器再返回给客户端
+</code></pre><h1 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h1><pre><code>客户端通过路由器请求web服务器,web服务器返回数据给路由器,路由器返回给客户端数据,并缓存访问的资源,下次有客户端访问同样的资源(根据一定策略判断),直接返回缓存的资源给客户端
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -745,11 +1010,14 @@ nginx优点1.高并发
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -778,98 +1046,123 @@ nginx优点1.高并发
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -883,80 +1176,65 @@ nginx优点1.高并发
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -964,40 +1242,140 @@ nginx优点1.高并发
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

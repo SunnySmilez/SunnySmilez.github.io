@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/29/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/17/ab压测工具的安装与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">
-                  ab压测工具的安装与使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/17/ab压测工具的安装与使用/" itemprop="url">ab压测工具的安装与使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-17T10:03:33+08:00" content="2015-12-17">
-              2015-12-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-17T10:03:33+08:00">
+                2015-12-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,22 +326,92 @@
       
         
           
-          安装yum install httpd-tools
-使用ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
-命令执行结果分析Server Software:
-Server Hostname:        hostname(*服
-          ...
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install httpd-tools
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>ab -kc 10 -n 10 http://hostname/path (*命令表示连接100，并发请求数是100次*)
+</code></pre><h2 id="命令执行结果分析"><a href="#命令执行结果分析" class="headerlink" title="命令执行结果分析"></a>命令执行结果分析</h2><pre><code>Server Software:
+Server Hostname:        hostname(*服务器域名*)
+Server Port:            443(*服务器端口*)
+SSL/TLS Protocol:       TLSv1/SSLv3,ECDHE-RSA-AES128-GCM-SHA256,2048,128
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/17/ab压测工具的安装与使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+Document Path:          /path(*测试接口地址*)
+Document Length:        14904 bytes(*测试数据大小*)
+
+Concurrency Level:      10(*并发数*)
+Time taken for tests:   0.403 seconds(*整个测试持续时间*)
+Complete requests:      10(*完成的请求数量*)
+Failed requests:        0(*失败的请求,返回的内容如果和第一次不一样就认为是失败*)
+Write errors:           0(*请求写入失败的次数*)
+Keep-Alive requests:    0(*保持联机连接的请求数量。只有在命令行中使用-k，才能看到该属性值*)
+Total transferred:      151120 bytes(*整个场景中的网络传输量*)
+HTML transferred:       149040 bytes(*整个场景中的HTML内容传输量*)
+`Requests per second:    24.84 [#/sec] (mean)(*表示当前测试的服务器每秒可以处理24.84个静态html的请求事务，后面的mean表示平均。这个数值表示当前机器的整体性能，值越大越好*)`
+`Time per request:       402.511 [ms] (mean)(*单个并发的延迟时间，后面的mean表示平均。隔离开当前并发，单独完成一个请求需要的平均时间*)`
+`Time per request:       40.251 [ms] (mean, across all concurrent requests)(*即上面的时间（Time per request）除以并发数 ,平均每个并发请求处理的时间*)`
+`Transfer rate:          366.64 [Kbytes/sec] received(*平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题，也就是这些请求在单位时间从服务器获取的数据长度*)`
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       33   46  14.6     41      72
+Processing:    16  113 119.2     27     268
+Waiting:       10   37  79.1     12     262
+Total:         49  159 121.5     99     340
+
+Percentage of the requests served within a certain time (ms)
+  50%     99
+  66%    268
+  75%    282
+  80%    299
+  90%    340
+  95%    340
+  98%    340
+  99%    340
+ 100%    340 (longest request)
+</code></pre><h2 id="ab命令参数"><a href="#ab命令参数" class="headerlink" title="ab命令参数"></a>ab命令参数</h2><pre><code>Usage:
+  ab [options] [http[s]://]hostname[:port]/path
+Options are:
+  -n requests     (*总的请求数目*)
+  -c concurrency  (*一次请求并发数*)
+  -t timelimit    (*测试进行的最大秒数*)
+  -b windowsize   (*tcp连接的最大内存使用*)
+  -p postfile     (*post的数据*)
+  -u putfile      (*put的数据*)
+  -T content-type (*header的类型，比如&apos;application/x-www-form-urlencoded&apos;默认为Default is &apos;text/plain&apos;*)
+  -v verbosity    (*设置显示信息的详细程度 – 4或更大值会显示头信息， 3或更大值可以显示响应代码(404, 200等), 2或更大值可以显示警告和其他信息*)
+  -w              (*将结果用html的table打印出来，默认它是白色背景的两列宽度的一张表*)
+  -i              (*执行HEAD请求，而不是GET*)
+  -C attribute    (*添加一个cookie信息*)Add cookie, eg. &apos;Apache=1234. (repeatable)
+  -H attribute    (*添加head属性例如eg. &apos;Accept-Encoding: gzip&apos;*)
+  -A attribute    (*Add Basic WWW Authentication, the attributes are a colon separated username and password*)
+  -P attribute    (*Add Basic Proxy Authentication, the attributes are a colon separated username and password*)
+  -X proxy:port   (*使用代理的端口*)
+  -V              (*显示版本信息并退出*)
+  -k              (*使用http的KeepAlive属性*)
+  -d              (*Do not show percentiles served table*)
+  -S              (*Do not show confidence estimators and warnings*)
+  -g filename     (*Output collected data to gnuplot format file*)
+  -e filename     (*Output CSV file with percentages served*)
+  -r              (*忽略socket错误*)
+  -h              (*Display usage information (this message)*)
+  -Z ciphersuite  (*Specify SSL/TLS cipher suite (See openssl ciphers)*)
+  -f protocol     (*特殊的协议例如SSL2, SSL3, TLS1, or ALL*)
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -290,6 +421,10 @@ Server Hostname:        hostname(*服
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -297,13 +432,27 @@ Server Hostname:        hostname(*服
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/03/Redis集群的安装与配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -311,38 +460,42 @@ Server Hostname:        hostname(*服
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">
-                  Redis集群的安装与配置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/03/Redis集群的安装与配置/" itemprop="url">Redis集群的安装与配置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-03T18:23:49+08:00" content="2015-12-03">
-              2015-12-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-03T18:23:49+08:00">
+                2015-12-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -350,7 +503,6 @@ Server Hostname:        hostname(*服
 
                 
                 
-
               
             </span>
           
@@ -360,14 +512,21 @@ Server Hostname:        hostname(*服
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -376,22 +535,42 @@ Server Hostname:        hostname(*服
       
         
           
-          Redis集群安装
-wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;(下载redis-3.0.tar.gz)
-tar zxvf redis-3.0.tar.gz(解压安装包)
-cd redis-3.0.0-beta
-          ...
+            <h2 id="Redis集群安装"><a href="#Redis集群安装" class="headerlink" title="Redis集群安装"></a>Redis集群安装</h2><ul>
+<li><code>wget &#39;http://download.redis.io/releases/redis-3.0.3.tar.gz&#39;</code>(<em>下载redis-3.0.tar.gz</em>)</li>
+<li><code>tar zxvf redis-3.0.tar.gz</code>(<em>解压安装包</em>)</li>
+<li><code>cd redis-3.0.0-beta3</code>（<em>进入解压后的文件夹</em>）</li>
+<li><code>yum install tcl</code></li>
+<li><code>make</code></li>
+<li><code>cp redis.conf redis.6380.conf</code></li>
+<li><code>vim redis.6380.conf</code></li>
+<li><code>src/redis-server redis.6380.conf &amp;</code></li>
+<li><code>ps aux | grep redis</code></li>
+<li><code>src/redis-cli -h 172.16.9.111 -p 6379</code></li>
+<li><code>yum install ruby</code></li>
+<li><code>yum install rubygems</code></li>
+<li><code>gem install redis</code></li>
+<li><code>src/redis-trib.rb create --replicas 1 172.16.9.111:6380 172.16.9.111:6381 172.16.9.111:6382 172.16.9.104:6380 172.16.9.104:6381 172.16.9.104:6382</code></li>
+<li><code>src/redis-cli -p 6380</code></li>
+<li><code>src/redis-cli -c -p 6380</code></li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/03/Redis集群的安装与配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -401,6 +580,10 @@ cd redis-3.0.0-beta
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -408,13 +591,27 @@ cd redis-3.0.0-beta
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/分页的思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -422,38 +619,42 @@ cd redis-3.0.0-beta
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">
-                  分页的思考
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/11/04/分页的思考/" itemprop="url">分页的思考</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T16:53:46+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T16:53:46+08:00">
+                2015-11-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
@@ -461,7 +662,6 @@ cd redis-3.0.0-beta
 
                 
                 
-
               
             </span>
           
@@ -471,14 +671,21 @@ cd redis-3.0.0-beta
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -487,24 +694,34 @@ cd redis-3.0.0-beta
       
         
           
-          需求
-交易记录条数过多，需要分页处理
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>交易记录条数过多，需要分页处理</li>
+</ul>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
+<li>当进行翻页的时候会有重复的数据数据出现。</li>
+<li>原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page<em>$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易记录产生的时候，实际上对应的第二页得数据应该是第22到第41条(</em>因为产生记录之前的第20条数据，已经顺移了一个位置*)，实际上显示的是第21到第40条，所以第21条数据应该是重复的</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>在进行分页的时候，传入当前页的最有一个记录的id然后在分页的sql变成where id&gt;? limit $lenght</li>
+</ul>
 
-坑
-当进行翻页的时候会有重复的数据数据出现。
-原因：在查询的时候，有新的交易记录产生，会影响偏移条数的统计。mysql中使用的是limit $page$length,$length的语句进行查询的，当他查询第一页前面20的时候返回的前面20条,当有新的1条交易
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/分页的思考/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -514,6 +731,10 @@ cd redis-3.0.0-beta
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -521,13 +742,27 @@ cd redis-3.0.0-beta
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/decrby的一个坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -535,38 +770,42 @@ cd redis-3.0.0-beta
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/11/04/decrby的一个坑/" itemprop="url">
-                  decrby的一个坑
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/11/04/decrby的一个坑/" itemprop="url">decrby的一个坑</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T12:56:11+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T12:56:11+08:00">
+                2015-11-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -574,7 +813,6 @@ cd redis-3.0.0-beta
 
                 
                 
-
               
             </span>
           
@@ -584,14 +822,21 @@ cd redis-3.0.0-beta
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -600,27 +845,48 @@ cd redis-3.0.0-beta
       
         
           
-          需求
-随着销售的进行，理财产品的总剩余额度需要进行记录
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>随着销售的进行，理财产品的总剩余额度需要进行记录</li>
+</ul>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
+<li>使用了redis进行落地存储，并使用decrby进行递减操作，结果数字到达一定的值以后不进行递减少了</li>
+</ul>
+<h2 id="选择理由"><a href="#选择理由" class="headerlink" title="选择理由"></a>选择理由</h2><ul>
+<li>销售总金额的变化频繁，所以采用redis进行存储</li>
+<li>用decrby不用get，set依次操作的的理由是把数据的减少操作交给redis操作，内部有事务进行保障</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>还是使用decrby进行递减操作，只是金额以分为单位，保证decrby是整数类型</li>
+</ul>
+<h2 id="实验（redis终端）"><a href="#实验（redis终端）" class="headerlink" title="实验（redis终端）"></a>实验（<em>redis终端</em>）</h2><ul>
+<li><code>set money 100</code></li>
+<li><code>decrby money 20</code></li>
+<li><code>set money 100.01</code></li>
+<li><code>decrby money 100</code></li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>decrby有类型限制，只有整数类型的时候才能进行递减操作</li>
+<li>文档的描述：如果值包含错误的类型，或字符串类型的值不能表示为数字，那么返回一个错误</li>
+<li>导致记录错误的原因是：在销售的过程中，有的用户购买理财产品不是整元数，导致decrby需要进行小数操作</li>
+</ul>
 
-坑
-使用了redis进行落地存储，并使用decrby进行递减操作，结果数字到达一定的值以后不进行递减少了
-
-选择理由
-销售总金额的变化频繁，所以采用redis进行存储
-用decrby不用get，set依次操作的的理由是把数据的减少操作交给re
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/decrby的一个坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -630,6 +896,10 @@ cd redis-3.0.0-beta
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -637,13 +907,27 @@ cd redis-3.0.0-beta
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/11/04/float遇到的一个坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -651,38 +935,42 @@ cd redis-3.0.0-beta
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/11/04/float遇到的一个坑/" itemprop="url">
-                  float遇到的一个坑
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/11/04/float遇到的一个坑/" itemprop="url">float遇到的一个坑</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T12:50:05+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-04T12:50:05+08:00">
+                2015-11-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Mysql/" itemprop="url" rel="index">
                     <span itemprop="name">Mysql</span>
                   </a>
@@ -690,7 +978,6 @@ cd redis-3.0.0-beta
 
                 
                 
-
               
             </span>
           
@@ -700,14 +987,21 @@ cd redis-3.0.0-beta
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -716,28 +1010,48 @@ cd redis-3.0.0-beta
       
         
           
-          需求
-数据库需要存储金钱的数值单位为元，保留两位小数，需要选择mysql数据类型
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>数据库需要存储金钱的数值单位为元，保留两位小数，需要选择mysql数据类型</li>
+</ul>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
+<li>使用了float进行存储，结果导致了，内部的金额计算会有部分错误</li>
+</ul>
+<h2 id="选择理由"><a href="#选择理由" class="headerlink" title="选择理由"></a>选择理由</h2><ul>
+<li>decimal用于存储精确的小数，支持精确计算（5.0以后），会影响列到空间消耗</li>
+<li>float使用4个字节存储</li>
+<li>浮点类型存储同样返回的值，通常比decimal使用更少的空间</li>
+<li>float已经修复了内部浮点数bug计算（<em>设计当初模糊的印象，没有去查证，实际是错的</em>）</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>使用decimal(15,2)进行存储</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><ul>
+<li><code>CREATE TABLE</code>account_float<code>(mon｀ey float(15,2) not null default &#39;0.00&#39;) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</code></li>
+<li><code>insert into account_float(money) values(1234456.56);</code></li>
+<li><code>CREATE TABLE</code>account_decimal<code>(money decimal(15,2) not null default &#39;0.00&#39;) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</code></li>
+<li><code>insert into account_decimal(money) values(1234456.56);</code><br>`<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2></li>
+<li>金额等需要精确计算的数据一般都用decimal进行存储</li>
+<li>导致记录错误的原因是：float和double会存在隐性类型转换，设置的float长度过长的话，mysql会自动将数据类型转换成double</li>
+<li>float和double的精度是由尾数的位数来决定的。浮点数在内存中是按科学计数法来存储的，其整数部分始终是一个隐含着的“1”，由于它是不变的，故不能对精度造成影响。</li>
+</ul>
 
-坑
-使用了float进行存储，结果导致了，内部的金额计算会有部分错误
-
-选择理由
-decimal用于存储精确的小数，支持精确计算（5.0以后），会影响列到空间消耗
-float使用4个字节存储
-浮点类型存储同样返回的值
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/04/float遇到的一个坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -747,11 +1061,14 @@ float使用4个字节存储
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -780,98 +1097,123 @@ float使用4个字节存储
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -885,80 +1227,65 @@ float使用4个字节存储
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -966,40 +1293,140 @@ float使用4个字节存储
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

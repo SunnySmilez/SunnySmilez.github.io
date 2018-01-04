@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/14/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">
-                  C语言静态库和动态库
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">C语言静态库和动态库</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-11T16:51:13+08:00" content="2016-09-11">
-              2016-09-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T16:51:13+08:00">
+                2016-09-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,7 +326,7 @@
       
         
           
-          实现文件共享例子:
+            <h1 id="实现文件共享"><a href="#实现文件共享" class="headerlink" title="实现文件共享"></a>实现文件共享</h1><pre><code>例子:
 目录结构如下:
 |--myHeader
   --checksum.h
@@ -276,19 +337,172 @@
 |--myObject
 
 在myHeader文件中建立头文件checksum.h
-int checksum(
-          ...
+int checksum(char *message);
+在myHeader文件中建立头文件encrypt.h
+void encrypt(char *message);
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+checksum.c内容:
+#include &lt;checksum.h&gt;
+
+int checksum(char *message)
+{
+ int c = 0;
+ while (*message) {
+     c += c ^ (int)(*message);
+     message++;
+ }
+
+ return c;
+}
+
+encrypt.c内容:
+#include &quot;./myHeader/encrypt.h&quot;
+
+void encrypt(char *message)
+{
+ char c;
+ while(*message) {
+     *message = *message ^ 31;
+     message++;
+ }
+}
+
+test.c的内容:
+#include &lt;stdio.h&gt;
+#include &quot;./myHeader/encrypt.h&quot;
+#include &quot;./myHeader/checksum.h&quot;
+
+int main()
+{
+     char s[] = &quot;Speak friend and enter&quot;;
+     encrypt(s);
+     printf(&quot;Encrypt to &apos;%s&apos;\n&quot;, s);
+     printf(&quot;checksum is %i\n&quot;, checksum(s));
+     encrypt(s);
+     printf(&quot;Decrypt to &apos;%s&apos;\n&quot;, s);
+     printf(&quot;checksum is %i\n&quot;, checksum(s));
+     return 0;
+}
+
+/*
+    把头文件和编译后的文件都保存在固定的文件中方便共享(myHeader和myObject)
+    -I告诉编译器去哪里找头文件
+*/
+执行命令:(执行命令每次都要指定.o的文件路径,是不是太麻烦?)
+    gcc -I ./myHeader -c checksum.c -o ./myObject/checksum.o
+    gcc -I ./myHeader -c encrypt.c -o ./myObject/encrypt.o
+    gcc -I ./myHeader test.c ./myObject/checksum.o ./myObject/encrypt.o -o test &amp;&amp; ./test
+</code></pre><h1 id="创建静态库的方式"><a href="#创建静态库的方式" class="headerlink" title="创建静态库的方式"></a>创建静态库的方式</h1><pre><code>/*
+    r:如果.a文件存在就更新它
+    c:表示创建存档时不显示反馈信息
+    s:告诉ar要在.a文件开头建立索引
+    创建的文件名:libhfsecurity.a
+    ** 静态库名字的命名规范一般是:libxxx.a的形式,不然编译器无法找到它
+*/
+ar -rcs libhfsecurity.a encrypt.o checksum.o
+
+/*
+    可以查看.a文件是由那些文件组成
+*/
+ar -t libhfsecurity.a
+
+/*
+    lhfsecurity对应去寻找上面创建的静态库的名字:libhfsecurity.a
+    -I指定头文件位置
+    -L告诉编译器去哪寻找存档
+    当然如果你把.a的文件放在/usr/local/lib(用来存放本地自定义库或者系统类库/usr/lib)中,可以不指定-L参数
+    gcc test.c  -lhfsecurity -o test
+*/
+gcc -I ./myHeader test.c -L myObject -lhfsecurity -o test &amp;&amp; ./test
+</code></pre><h1 id="静态库例子"><a href="#静态库例子" class="headerlink" title="静态库例子"></a>静态库例子</h1><pre><code>目录结构:
+|--myHeader
+  --hfcal.h
+|--myObject
+|--treadmill
+  --elliptical.c
+  --hfcal.c
+
+hfcal.h中的内容:
+    void display_calories(float weight, float distance, float coeff);
+
+hfcal.c文件中的内容:
+    #include &lt;stdio.h&gt;
+    #include &lt;hfcal.h&gt;
+
+    void display_calories(float weight, float distance, float coeff)
+    {
+        printf(&quot;Weight:%3.2f lbs\n&quot;, weight);
+        printf(&quot;Distance:%3.2f miles\n&quot;, distance);
+        printf(&quot;Calories burned:%4.2f cal\n&quot;, coeff * weight * distance);
+    }
+
+elliptical.c文件中的内容:
+    #include &lt;stdio.h&gt;
+    #include &lt;hfcal.h&gt;
+
+    int main()
+    {
+        display_calories(115.2, 11.3, 0.79);
+        return 0;
+    }
+
+cd treadmill
+gcc -I ../myHeader -c hfcal.c -o ../myObject/hfcal.o
+gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
+ar -rcs ../myObject/libhfcal.a ../myObject/hfcal.o
+cd ../myObject
+gcc elliptical.o -L ./ -lhfcal -o elliptical
+</code></pre><h1 id="创建动态库"><a href="#创建动态库" class="headerlink" title="创建动态库"></a>创建动态库</h1><pre><code>/*
+    -I指定头文件目录,-c不要链接代码,-fPIC创建位置无关代码创建库
+*/
+gcc -I ../myHeader -fPIC -c hfcal.c -o ../myObject/hfcal.o
+
+/*
+    --shared告诉gcc把目标文件转化为动态库
+    动态库在每个系统的后缀名都不一样
+    windows中后缀名是.dll
+    在linux和unix尚后缀名是.so
+   在mac上后缀名是是.dylib
+*/
+cd ../myObject/
+
+
+/*
+    在一些稍微老一点的mac系统上,没有-shared选项,可以使用-dynamiclib代替
+*/
+                        libhfcal.dll.a      #windows上的cygwin
+                        libhfcal.dylib         #mac
+gcc -shared hfcal.o -o  hfcal.dll           #windows上的mingw
+                        libhfcal.so         #linux或unix
+
+cd ../treadmill/
+gcc -I ../myHeader -c elliptical.c -o ../myObject/elliptical.o
+cd ../myObject/
+
+/*
+    在linux和大部分unix中,编译器只会记录libhfcal.so库的文件名,而不会包含路径名,也就是说如果不把hfcal库保存到标准目录(/usr/lib),程序就找不到它
+    一般解决方法是:把库目录添加到LD_LIBRARY_PATH中,并export它
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
+*/
+gcc elliptical.o -L ./ -lhfcal -o elliptical
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -298,6 +512,10 @@ int checksum(
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -305,13 +523,27 @@ int checksum(
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/09/代码设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -319,38 +551,42 @@ int checksum(
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">
-                  代码设计
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">代码设计</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-09T17:29:39+08:00" content="2016-09-09">
-              2016-09-09
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-09T17:29:39+08:00">
+                2016-09-09
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -358,7 +594,6 @@ int checksum(
 
                 
                 
-
               
             </span>
           
@@ -368,14 +603,21 @@ int checksum(
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -384,19 +626,24 @@ int checksum(
       
         
           
-          暂未找到合适的表述方法
+            <h1 id="暂未找到合适的表述方法"><a href="#暂未找到合适的表述方法" class="headerlink" title="暂未找到合适的表述方法"></a>暂未找到合适的表述方法</h1>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -406,6 +653,10 @@ int checksum(
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -413,13 +664,27 @@ int checksum(
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/02/git的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -427,38 +692,42 @@ int checksum(
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">
-                  git的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">git的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-02T12:17:48+08:00" content="2016-09-02">
-              2016-09-02
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T12:17:48+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -466,7 +735,6 @@ int checksum(
 
                 
                 
-
               
             </span>
           
@@ -476,14 +744,21 @@ int checksum(
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -492,25 +767,87 @@ int checksum(
       
         
           
-          初始化一个git项目git init
-添加文件git add filename
-添加目录git add .
-只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
-查看当前工作区文件提交的状态git status
+            <h1 id="初始化一个git项目"><a href="#初始化一个git项目" class="headerlink" title="初始化一个git项目"></a>初始化一个git项目</h1><pre><code>git init
+</code></pre><h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><pre><code>git add filename
+</code></pre><h1 id="添加目录"><a href="#添加目录" class="headerlink" title="添加目录"></a>添加目录</h1><pre><code>git add .
+</code></pre><h1 id="只提交已提交过得文件-不添加新增文件-只添加修改的文件"><a href="#只提交已提交过得文件-不添加新增文件-只添加修改的文件" class="headerlink" title="只提交已提交过得文件(不添加新增文件,只添加修改的文件)"></a>只提交已提交过得文件(不添加新增文件,只添加修改的文件)</h1><pre><code>git add -u
+</code></pre><h1 id="查看当前工作区文件提交的状态"><a href="#查看当前工作区文件提交的状态" class="headerlink" title="查看当前工作区文件提交的状态"></a>查看当前工作区文件提交的状态</h1><pre><code>git status
 git status -s 查看简便信息
-提交文件到本地git 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/02/git的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre><h1 id="提交文件到本地"><a href="#提交文件到本地" class="headerlink" title="提交文件到本地"></a>提交文件到本地</h1><pre><code>git commit filename -m &apos;注释&apos;
+</code></pre><h1 id="删除本地git提交"><a href="#删除本地git提交" class="headerlink" title="删除本地git提交"></a>删除本地git提交</h1><pre><code>git rm --cached .
+</code></pre><h1 id="将文件推送到远程服务器"><a href="#将文件推送到远程服务器" class="headerlink" title="将文件推送到远程服务器"></a>将文件推送到远程服务器</h1><pre><code>git push
+</code></pre><h1 id="将文件从远程拉取回来"><a href="#将文件从远程拉取回来" class="headerlink" title="将文件从远程拉取回来"></a>将文件从远程拉取回来</h1><pre><code>git pull
+</code></pre><h1 id="添加忽略文件"><a href="#添加忽略文件" class="headerlink" title="添加忽略文件"></a>添加忽略文件</h1><pre><code>添加.gitignore到git项目目录
+编辑.gitignore,添加.idea/(此处idea为需要提交时候忽略的文件)
+</code></pre><h1 id="下载远程项目"><a href="#下载远程项目" class="headerlink" title="下载远程项目"></a>下载远程项目</h1><pre><code>git clone git_path
+</code></pre><h1 id="创建裸版本库"><a href="#创建裸版本库" class="headerlink" title="创建裸版本库"></a>创建裸版本库</h1><pre><code>git clone --bare project_name path
+</code></pre><h1 id="查看文件提交记录"><a href="#查看文件提交记录" class="headerlink" title="查看文件提交记录"></a>查看文件提交记录</h1><pre><code>git log filename
+</code></pre><h1 id="查看修改文件差异-只能比较工作区和暂存区信息"><a href="#查看修改文件差异-只能比较工作区和暂存区信息" class="headerlink" title="查看修改文件差异(只能比较工作区和暂存区信息)"></a>查看修改文件差异(只能比较工作区和暂存区信息)</h1><pre><code>git diff file_name
+git diff HEAD
+</code></pre><h1 id="查看提交详细记录"><a href="#查看提交详细记录" class="headerlink" title="查看提交详细记录"></a>查看提交详细记录</h1><pre><code>git show file_name
+</code></pre><h1 id="使用git移动修改文件-修改完之后-文件的日志记录都没了"><a href="#使用git移动修改文件-修改完之后-文件的日志记录都没了" class="headerlink" title="使用git移动修改文件(修改完之后,文件的日志记录都没了)"></a>使用git移动修改文件(修改完之后,文件的日志记录都没了)</h1><pre><code>git mv old_file_name new_file_name
+</code></pre><h1 id="从git中删除"><a href="#从git中删除" class="headerlink" title="从git中删除"></a>从git中删除</h1><pre><code>git rm file_name
+</code></pre><h1 id="删除非git管理文件-也就是没有add到git管理中的"><a href="#删除非git管理文件-也就是没有add到git管理中的" class="headerlink" title="删除非git管理文件(也就是没有add到git管理中的)"></a>删除非git管理文件(也就是没有add到git管理中的)</h1><pre><code>git clean
+</code></pre><h1 id="查看即将被删除的非git管理文件"><a href="#查看即将被删除的非git管理文件" class="headerlink" title="查看即将被删除的非git管理文件"></a>查看即将被删除的非git管理文件</h1><pre><code>git clean -n
+</code></pre><h1 id="删除非git管理文件-包含-gitignore中指定的文件"><a href="#删除非git管理文件-包含-gitignore中指定的文件" class="headerlink" title="删除非git管理文件,包含.gitignore中指定的文件"></a>删除非git管理文件,包含.gitignore中指定的文件</h1><pre><code>git clean -x
+</code></pre><h1 id="强制删除所有的git非管理文件-git-clean需要设置clean-requireForce"><a href="#强制删除所有的git非管理文件-git-clean需要设置clean-requireForce" class="headerlink" title="强制删除所有的git非管理文件(git clean需要设置clean.requireForce)"></a>强制删除所有的git非管理文件(git clean需要设置clean.requireForce)</h1><pre><code>git clean -f
+</code></pre><h1 id="还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源"><a href="#还原正在手头修改-但是没有add到git的文件-相当于svn-revert-只不过git是本地的源" class="headerlink" title="还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)"></a>还原正在手头修改,但是没有add到git的文件(相当于svn revert,只不过git是本地的源)</h1><pre><code>git checkout file_name
+</code></pre><h1 id="删除已提交过的文件-把状态从add修改回来-可以使用checkout操作"><a href="#删除已提交过的文件-把状态从add修改回来-可以使用checkout操作" class="headerlink" title="删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)"></a>删除已提交过的文件(把状态从add修改回来,可以使用checkout操作)</h1><pre><code>git reset HEAD file_name
+</code></pre><h1 id="创建一个分支"><a href="#创建一个分支" class="headerlink" title="创建一个分支"></a>创建一个分支</h1><pre><code>git branch dirname
+</code></pre><h1 id="查看存在的分支"><a href="#查看存在的分支" class="headerlink" title="查看存在的分支"></a>查看存在的分支</h1><pre><code>git branch
+git branch -a 查看所有的分支
+</code></pre><h1 id="切换到分支"><a href="#切换到分支" class="headerlink" title="切换到分支"></a>切换到分支</h1><pre><code>git checkout branch_name
+</code></pre><h1 id="在某个版本上创建分支并求换"><a href="#在某个版本上创建分支并求换" class="headerlink" title="在某个版本上创建分支并求换"></a>在某个版本上创建分支并求换</h1><pre><code>git checkout commit_name -b branch_name
+</code></pre><h1 id="切换到主干"><a href="#切换到主干" class="headerlink" title="切换到主干"></a>切换到主干</h1><pre><code>git checkout master
+</code></pre><h1 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h1><pre><code>git merge branch_name
+</code></pre><h1 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h1><pre><code>git branch -d branch_name
+</code></pre><h1 id="强制删除分支"><a href="#强制删除分支" class="headerlink" title="强制删除分支"></a>强制删除分支</h1><pre><code>git branch -D branch_name
+</code></pre><h1 id="查看所有的远程的分支"><a href="#查看所有的远程的分支" class="headerlink" title="查看所有的远程的分支"></a>查看所有的远程的分支</h1><pre><code>git branch -r
+</code></pre><h1 id="重置提交-重置最近三次的提交"><a href="#重置提交-重置最近三次的提交" class="headerlink" title="重置提交(重置最近三次的提交)"></a>重置提交(重置最近三次的提交)</h1><pre><code>git reset --hard HEAD~3
+</code></pre><h1 id="在分支上执行rebase"><a href="#在分支上执行rebase" class="headerlink" title="在分支上执行rebase"></a>在分支上执行rebase</h1><pre><code>git checkout branch_name
+git rebase master
+</code></pre><h1 id="rebase之后修改冲突-再提交"><a href="#rebase之后修改冲突-再提交" class="headerlink" title="rebase之后修改冲突,再提交"></a>rebase之后修改冲突,再提交</h1><pre><code>git add conflict_file
+git rebase --continue
+</code></pre><h1 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h1><pre><code>git tag tag_name
+</code></pre><h1 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h1><pre><code>git tag
+</code></pre><h1 id="显示包含标签资料的历史记录"><a href="#显示包含标签资料的历史记录" class="headerlink" title="显示包含标签资料的历史记录"></a>显示包含标签资料的历史记录</h1><pre><code>git log --decorate
+</code></pre><h1 id="查看git提交的注释"><a href="#查看git提交的注释" class="headerlink" title="查看git提交的注释"></a>查看git提交的注释</h1><pre><code>git log
+</code></pre><h1 id="编辑tag注释"><a href="#编辑tag注释" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -a tag_name
+然后再文件中输入注释
+</code></pre><h1 id="编辑tag注释-1"><a href="#编辑tag注释-1" class="headerlink" title="编辑tag注释"></a>编辑tag注释</h1><pre><code>git tag -am &quot;注释&quot; tag_name
+</code></pre><h1 id="查看标签的提交记录"><a href="#查看标签的提交记录" class="headerlink" title="查看标签的提交记录"></a>查看标签的提交记录</h1><pre><code>git show tag
+</code></pre><h1 id="查看tag注释"><a href="#查看tag注释" class="headerlink" title="查看tag注释"></a>查看tag注释</h1><pre><code>git tag -n
+</code></pre><h1 id="删除tag"><a href="#删除tag" class="headerlink" title="删除tag"></a>删除tag</h1><pre><code>git tag -d tag_name
+</code></pre><h1 id="合并提交注释"><a href="#合并提交注释" class="headerlink" title="合并提交注释"></a>合并提交注释</h1><pre><code>git commit --amend
+进入编辑器,然后进行注释修改(使用git log进行提交注释查看)
+</code></pre><h1 id="取消上一次提交"><a href="#取消上一次提交" class="headerlink" title="取消上一次提交"></a>取消上一次提交</h1><pre><code>git revert HEAD
+</code></pre><h1 id="删除最近提交"><a href="#删除最近提交" class="headerlink" title="删除最近提交"></a>删除最近提交</h1><pre><code>git reset --hart HEAD~~
+</code></pre><h1 id="查看远程git地址"><a href="#查看远程git地址" class="headerlink" title="查看远程git地址"></a>查看远程git地址</h1><pre><code>git remote -v
+</code></pre><h1 id="查看git配置项"><a href="#查看git配置项" class="headerlink" title="查看git配置项"></a>查看git配置项</h1><pre><code>git config --list
+</code></pre><h1 id="编辑git配置"><a href="#编辑git配置" class="headerlink" title="编辑git配置"></a>编辑git配置</h1><pre><code>git config -e
+</code></pre><h1 id="保存本地工作进度"><a href="#保存本地工作进度" class="headerlink" title="保存本地工作进度"></a>保存本地工作进度</h1><pre><code>git stash
+</code></pre><h1 id="查看保存的快照"><a href="#查看保存的快照" class="headerlink" title="查看保存的快照"></a>查看保存的快照</h1><pre><code>git stash list
+</code></pre><h1 id="恢复stash中的内容到工作区"><a href="#恢复stash中的内容到工作区" class="headerlink" title="恢复stash中的内容到工作区"></a>恢复stash中的内容到工作区</h1><pre><code>git stash pop
+</code></pre><h1 id="恢复缓冲区内容"><a href="#恢复缓冲区内容" class="headerlink" title="恢复缓冲区内容"></a>恢复缓冲区内容</h1><pre><code>git stash apply stash_name
+</code></pre><h1 id="删除缓冲区中的内容"><a href="#删除缓冲区中的内容" class="headerlink" title="删除缓冲区中的内容"></a>删除缓冲区中的内容</h1><pre><code>git clear
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -520,6 +857,10 @@ git status -s 查看简便信息
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -527,13 +868,27 @@ git status -s 查看简便信息
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/15/C语言高级函数使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -541,38 +896,42 @@ git status -s 查看简便信息
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/08/15/C语言高级函数使用/" itemprop="url">
-                  C语言高级函数使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/08/15/C语言高级函数使用/" itemprop="url">C语言高级函数使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T08:17:17+08:00" content="2016-08-15">
-              2016-08-15
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T08:17:17+08:00">
+                2016-08-15
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -580,7 +939,6 @@ git status -s 查看简便信息
 
                 
                 
-
               
             </span>
           
@@ -590,14 +948,21 @@ git status -s 查看简便信息
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -606,22 +971,287 @@ git status -s 查看简便信息
       
         
           
-          函数的指针当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
-创建函数指针int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
+            <h1 id="函数的指针"><a href="#函数的指针" class="headerlink" title="函数的指针"></a>函数的指针</h1><pre><code>当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
+</code></pre><h1 id="创建函数指针"><a href="#创建函数指针" class="headerlink" title="创建函数指针"></a>创建函数指针</h1><pre><code>int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
 warp_fn = test;
-warp_fn(4);             #
-          ...
+warp_fn(4);             #等同于调用test函数
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/15/C语言高级函数使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+char** (*names_fn)(char*, int);                     #创建一个names_fn的变量用来保存test函数
+names_fn = test;
+char** results = name_fn(1972);
+</code></pre><h1 id="函数指针应用"><a href="#函数指针应用" class="headerlink" title="函数指针应用"></a>函数指针应用</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int NUM_ADS = 7;
+char *ADS[] = {
+    &quot;William:SBM GSON likes sport,TV,dining&quot;,
+    &quot;Matt:SWM NS likes art,movies,theather&quot;,
+    &quot;Luis:SLM ND likes books,theater,art&quot;,
+    &quot;MIKE:DWM DS likes truncks,sports and bieber&quot;,
+    &quot;Peter:SAM likes chess,working out and art&quot;,
+    &quot;Josh:SJM likes sports,movies and theater&quot;,
+    &quot;Jed:DBM likes theater,books and dining&quot;
+};
+/**
+ * 都要定义哦
+ */
+void find();
+int sports_no_bieber(char *s);
+int sports_or_workout(char *s);
+int ns_theater(char *s);
+
+int main()
+{
+    find(sports_no_bieber);
+    find(sports_or_workout);
+    find(ns_theater);
+    return 0;
+}
+
+/**
+ * 注意find中传入的参数是函数的指针
+ * char** 表示返回类型
+ * *func 表示指针变量
+ * char* 表示参数类型
+ */
+void find(char** (*func)(char*))
+{
+    int i;
+    puts(&quot;Search results:&quot;);
+    puts(&quot;---------------------&quot;);
+
+    for(i=0;i&lt;NUM_ADS;i++) {
+        if (func(ADS[i])) {
+            printf(&quot;%s\n&quot;, ADS[i]);
+        }
+    }
+
+    puts(&quot;----------------&quot;);
+}
+
+int sports_no_bieber(char *s)
+{
+    return strstr(s, &quot;sports&quot;) &amp;&amp; !strstr(s, &quot;bieber&quot;);
+}
+
+int sports_or_workout(char *s)
+{
+    return strstr(&quot;s&quot;, &quot;sports&quot;) || strstr(s, &quot;working out&quot;);
+}
+
+int ns_theater(char *s)
+{
+    return strstr(s, &quot;NS&quot;) &amp;&amp; strstr(s, &quot;theater&quot;);
+}
+</code></pre><h1 id="qsort使用"><a href="#qsort使用" class="headerlink" title="qsort使用"></a>qsort使用</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int compare_scores(const void * scores_a, const void * scores_b);
+
+typedef struct {
+    int width;
+    int height;
+} rectangle;
+
+int compare_areas(const void* a, const void* b);
+
+int compare_name(const void* a, const void* b);
+
+int main()
+{
+    int scores[] = {2,3,123,345,456,7,11,3,5,6};
+    qsort(scores, 10, sizeof(int), compare_scores);
+    int i;
+
+    for(i=0;i&lt;10;i++) {
+        printf(&quot;%i\n&quot;, scores[i]);
+    }
+
+    int areas[] = {2,3,345,123,1};
+    qsort(areas, 5, sizeof(int), compare_areas);
+    int x;
+
+    for(x=0;x&lt;5;x++) {
+        printf(&quot;%i\n&quot;, areas[x]);
+    }
+
+    char *names[] = {&quot;c&quot;, &quot;a&quot;,&quot;b&quot;};
+    qsort(names, 3, sizeof(char*), compare_name);
+    int z;
+
+    for(z=0;z&lt;3;z++) {
+        printf(&quot;%s\n&quot;, names[z]);
+    }
+
+    return 0;
+}
+
+/**
+    void指针可以保存任何类型数据的地址,但使用前必须把它转换成具体类型
+*/
+int compare_scores(const void * scores_a, const void * scores_b)
+{
+    /**
+        int * 把void指针转换成整形指针
+        *(int *)获取获取scores_a中的整形值
+    */
+    int a = *(int *)scores_a;
+    int b = *(int *)scores_b;
+
+    return b-a;
+}
+
+int compare_areas(const void *a, const void *b)
+{
+    /**
+        把指针转换成相应的类型
+    */
+    rectangle *ia = (rectangle*)a;
+    rectangle *ib = (rectangle*)b;
+    /**
+        矩形面积计算
+    */
+    int area_a = (ia-&gt;width * ia-&gt;height);
+    int area_b = (ia-&gt;width * ia-&gt;height);
+
+    return area_a-area_b;
+}
+
+int compare_name(const void* a, const void* b)
+{
+    /**
+        char** 代表的是指向字符指针的指针
+    */
+    char** sa = (char**)a;
+    char** sb = (char**)b;
+
+    /**
+        strcmp接收的是char*的值,而char**是指针地址
+    */
+    return strcmp(*sa, *sb);
+}
+</code></pre><h1 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h1><pre><code>void(*function_name[])(response)={function_a,function_b};
+void            声明返回类型
+*               声明函数指针
+function_name   变量名
+[]              表明是函数数组
+response        参数类型
+例子:
+    #include &lt;stdio.h&gt;
+
+    enum response_type {DUMP, SECOND_CHANCE, MARRIAGE};
+
+    typedef struct {
+        char* name;
+        enum response_type type;
+    }response;
+
+    void dump(response r);
+    void second_chance(response r);
+    void marriage(response r);
+
+    int main()
+    {
+        response ra[] = {
+            {&quot;test&quot;, DUMP},
+            {&quot;test2&quot;, SECOND_CHANCE},
+        };
+
+        /**
+            定义函数数组
+        */
+        void(*func_arr[])(response) = {dump, second_chance, marriage};
+
+        int i;
+        for (i=0;i&lt;2;i++) {
+            /**
+                使用函数数组定义的方法
+            */
+            (func_arr[ra[i].type])(ra[i]);
+
+            /**
+                受用switch的方法
+            */
+            switch(ra[i].type) {
+                case DUMP:
+                    dump(ra[i]);
+                break;
+                case SECOND_CHANCE:
+                    second_chance(ra[i]);
+                break;
+                default:
+                    marriage(ra[i]);
+                break;
+            }
+        }
+
+        return 0;
+    }
+
+    void dump(response r)
+    {
+        printf(&quot;hello,i&apos;m dump, you are %s\n&quot;, r.name);
+    }
+
+    void second_chance(response r)
+    {
+        printf(&quot;hello,i&apos;m second_chance, you are %s\n&quot;, r.name);
+    }
+
+    void marriage(response r)
+    {
+        printf(&quot;hello,i&apos;m marriage, you are %s\n&quot;, r.name);
+    }
+</code></pre><h1 id="可变参数个数"><a href="#可变参数个数" class="headerlink" title="可变参数个数"></a>可变参数个数</h1><pre><code>在C标准库中有一组宏可以建立自己的可变参数函数,&lt;stdarg.h&gt;
+例子
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+void print_ints(int args, ...)
+{
+    /*
+        保存传给函数的其他参数
+    */
+    va_list ap;
+
+    /*
+        表示可变参数从哪开始
+    */
+    va_start(ap, args);
+    int i;
+    /*
+        循环遍历所有其他参数,args保存了参数的数目
+    */
+    for(i=0;i&lt;args;i++) {
+        printf(&quot;argument:%i\n&quot;, va_arg(ap, int));
+    }
+
+    va_end(ap);
+}
+
+int main()
+{
+    print_ints(3, 79, 101, 32);
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -631,6 +1261,10 @@ warp_fn(4);             #
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -638,13 +1272,27 @@ warp_fn(4);             #
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/11/C语言内存泄露检测Valgrind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -652,38 +1300,42 @@ warp_fn(4);             #
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/08/11/C语言内存泄露检测Valgrind/" itemprop="url">
-                  C语言内存泄露检测Valgrind
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/08/11/C语言内存泄露检测Valgrind/" itemprop="url">C语言内存泄露检测Valgrind</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T09:05:15+08:00" content="2016-08-11">
-              2016-08-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-11T09:05:15+08:00">
+                2016-08-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -691,7 +1343,6 @@ warp_fn(4);             #
 
                 
                 
-
               
             </span>
           
@@ -701,14 +1352,21 @@ warp_fn(4);             #
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -717,20 +1375,162 @@ warp_fn(4);             #
       
         
           
-          valgrind使用场景检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
-valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪
-          ...
+            <h1 id="valgrind使用场景"><a href="#valgrind使用场景" class="headerlink" title="valgrind使用场景"></a>valgrind使用场景</h1><pre><code>检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
+</code></pre><h1 id="valgrind工作原理"><a href="#valgrind工作原理" class="headerlink" title="valgrind工作原理"></a>valgrind工作原理</h1><pre><code>通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪段代码分配了哪段存储器,结束的时候,valgrind会汇报堆上有哪些数据,并告诉你这些数据由哪段代码创建
+</code></pre><h1 id="安装valgrind"><a href="#安装valgrind" class="headerlink" title="安装valgrind"></a>安装valgrind</h1><pre><code>curl -O http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2
+tar -xjvf valgrind-3.11.0.tar.bz2
+cd valgrind-3.11.0
+./configure &amp;&amp; make &amp;&amp; make install
+valgrind --version
+</code></pre><h1 id="使用valgrind"><a href="#使用valgrind" class="headerlink" title="使用valgrind"></a>使用valgrind</h1><pre><code>gcc -g test.c -o test (其中-g是告诉编译器要记录需编译代码的行号)
+valgrind --leak-check=full ./test
+</code></pre><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><pre><code>createByMalloc.c
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/11/C语言内存泄露检测Valgrind/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+
+
+void display(island *start);
+island* create(char *name);
+
+int main()
+{
+    char name[80];
+    fgets(name, 80, stdin);
+    island *i = create(name);
+
+    fgets(name, 80, stdin);
+    island *i1 = create(name);
+    i-&gt;next = i1;
+    display(i);
+    release(i);
+}
+
+island* create (char *name)
+{
+    island *i = malloc(sizeof(island));
+    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
+    i-&gt;name = strdup(name);
+    i-&gt;open = &quot;09:00&quot;;
+    i-&gt;close = &quot;17:00&quot;;
+    i-&gt;next = NULL;
+
+    return i;
+}
+
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+
+gcc -g createByMalloc.c -o createByMalloc
+valgrind --leak-check=full ./createByMalloc
+</code></pre><p><img src="/img/c_code/list/valgrind.png" alt="Alt text" title="错误信息图片"></p>
+<pre><code>1.total heap usage: 520 allocs, 100 frees, 49,567 bytes allocated
+    表示520次存储器,100次被释放
+
+2.at 0x100007EA1: malloc (vg_replace_malloc.c:303)
+  by 0x100000D7A: create (createByMalloc.c:33)
+  by 0x100000CED: main (createByMalloc.c:23)
+    明确指出了可能出问题的行,查看代码可以发现是create的33行分配的堆上的存储器没有被释放,所以加上释放代码就好了
+
+正确例子:
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+//结构定义函数体的外面多个函数才能共享
+typedef struct island {
+    char *name;
+    char *open;
+    char *close;
+    struct island *next;
+} island;
+
+
+void display(island *start);
+void release1(island *start);
+void release(island *start);
+island* create(char *name);
+
+int main()
+{
+    char name[80];
+    fgets(name, 80, stdin);
+    island *i = create(name);
+
+    fgets(name, 80, stdin);
+    island *i1 = create(name);
+    i-&gt;next = i1;
+    display(i);
+}
+
+island* create (char *name)
+{
+    island *i = malloc(sizeof(island));
+    //注意在此处一定用用strdup在堆上存储,如果都是在栈上存储,函数结束后会释放内存空间,每次都只能保存最后传入的name指针指向的值
+    i-&gt;name = strdup(name);
+    i-&gt;open = &quot;09:00&quot;;
+    i-&gt;close = &quot;17:00&quot;;
+    i-&gt;next = NULL;
+
+    return i;
+}
+
+
+void display(island *start) {
+    island *i = start;
+    for (;i!=NULL;i=i-&gt;next) {
+        printf(&quot;name:%s,open:%s-%s\n&quot;,i-&gt;name, i-&gt;open, i-&gt;close);
+    }
+}
+
+void release1(island *start) {
+    island *i = NULL;
+    for(i=start;i!=NULL;i=i-&gt;next) {
+        free(i-&gt;name);
+        free(i);
+    }
+}
+
+void release(island *start) {
+    island *i = start;
+    island *next = NULL;
+    for(;i!=NULL;i=next) {
+        next = i-&gt;next;
+        free(i-&gt;name);
+        free(i);
+    }
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -740,11 +1540,14 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -773,98 +1576,123 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -878,80 +1706,65 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -959,40 +1772,140 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

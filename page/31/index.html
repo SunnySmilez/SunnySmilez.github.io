@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/31/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/21/PHPUnit安装和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/05/21/PHPUnit安装和使用/" itemprop="url">
-                  PHPUnit安装和使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/05/21/PHPUnit安装和使用/" itemprop="url">PHPUnit安装和使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-21T00:35:37+08:00" content="2015-05-21">
-              2015-05-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-21T00:35:37+08:00">
+                2015-05-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,24 +326,41 @@
       
         
           
-          PHPUnit 安装
-PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版本的匹配，也可以通过（wget https://phar.phpunit.de/phpunit.phar）直接下载
+            <h2 id="PHPUnit-安装"><a href="#PHPUnit-安装" class="headerlink" title="PHPUnit 安装"></a>PHPUnit 安装</h2><ul>
+<li><p><a href="https://phpunit.de/" title="PHPUnit官网" target="_blank" rel="external">PHPUnit官网</a>，直接点击下载PHPUnit4.6 <em>需要注意的是PHPUnit和PHP版本的匹配</em>，也可以通过（<code>wget https://phar.phpunit.de/phpunit.phar</code>）直接下载</p>
+</li>
+<li><p>通过scp直接上传文件到服务器</p>
+<ul>
+<li>将文件传到远程服务器(<code>scp local_file remote_username@remote_ip:remote_folder</code>)</li>
+<li>将目录传到远程服务器加r就好（<code>scp -r local_folder remote_username@remote_ip:remote_folder</code>*）</li>
+<li>将远程服务器文件下载到本地（<code>scp remote_username@remote_ip:remote_file local_file</code>*）</li>
+<li>同理下载远程目录加r即可（<code>scp -r remote_username@remote_ip:remote_file local_file</code>）</li>
+</ul>
+</li>
+<li>不管是你用wget直接在服务器下的还是先下载好传到服务器的，你都会发现一个叫<b>phpunit.phar的文件</b>，将他移动到/usr/local/bin目录下<code>mv phpunit.phar /usr/local/bin/phpunit</code></li>
+<li>赋予phpunit执行权限<code>chmod +x phpunit</code></li>
+<li>使用<code>/usr/local/bin/phpunit --version</code>查看是否安装好，执行结果如果是phpunit的版本号，则证明安装成功</li>
+</ul>
+<p>关于PHPUnit详细内容请参考<a href="https://phpunit.de/manual/current/zh_cn/installation.html" title="PHPUnit中文官网" target="_blank" rel="external">PHPUnit文档</a></p>
+<h2 id="PHPUnit-使用"><a href="#PHPUnit-使用" class="headerlink" title="PHPUnit 使用"></a>PHPUnit 使用</h2><p>请保持姿态持续关注，正在更新中</p>
 
-通过scp直接上传文件到服务器
-
-将文件传到远程服务器(scp loc
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/21/PHPUnit安装和使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -292,6 +370,10 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -299,13 +381,27 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/20/Innodb存储引擎-1-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -313,38 +409,42 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/05/20/Innodb存储引擎-1-2/" itemprop="url">
-                  Innodb存储引擎-1.2
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/05/20/Innodb存储引擎-1-2/" itemprop="url">Innodb存储引擎-1.2</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-20T01:32:02+08:00" content="2015-05-20">
-              2015-05-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-20T01:32:02+08:00">
+                2015-05-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Mysql/" itemprop="url" rel="index">
                     <span itemprop="name">Mysql</span>
                   </a>
@@ -352,7 +452,6 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
 
                 
                 
-
               
             </span>
           
@@ -362,14 +461,21 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -378,22 +484,41 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
       
         
           
-          Mysql数据库，Mysql数据库实例
-简单来说数据库是由一个个二进制文件组成的，而对这些文件进行操作就需要通过数据实例来完成
-因此说数据库是文件的集合，是依照某种数据模型组织起来的并存放于二级存储器中(指的是备份或归档来自主存储的存储服务器相连的辅助存储设备)的数据集合
-数据库实例是程序，是位于用
-          ...
+            <h2 id="Mysql数据库，Mysql数据库实例"><a href="#Mysql数据库，Mysql数据库实例" class="headerlink" title="Mysql数据库，Mysql数据库实例"></a>Mysql数据库，Mysql数据库实例</h2><ul>
+<li>简单来说数据库是由一个个二进制文件组成的，而对这些文件进行操作就需要通过数据实例来完成</li>
+<li>因此说数据库是文件的集合，是依照某种数据模型组织起来的并存放于二级存储器中(<em>指的是备份或归档来自主存储的存储服务器相连的辅助存储设备</em>)的数据集合</li>
+<li>数据库实例是程序，是位于用户与操作系统之间的一层数据管理软件，对数据库也就是文件的任何操作都是在数据库实例下进行的，应用程序只有通过数据库实例才能和数据库打交道</li>
+</ul>
+<h2 id="Mysql体系结构"><a href="#Mysql体系结构" class="headerlink" title="Mysql体系结构"></a>Mysql体系结构</h2><p><img src="/img/mysqlSystem.png" alt="周小志的博客"></p>
+<h2 id="由上图可以看出，Mysql的组成包括"><a href="#由上图可以看出，Mysql的组成包括" class="headerlink" title="由上图可以看出，Mysql的组成包括"></a>由上图可以看出，Mysql的组成包括</h2><ul>
+<li>连接池组件</li>
+<li>服务管理和工具插件</li>
+<li>SQL接口组建</li>
+<li>查询分析器组件</li>
+<li>优化器组建</li>
+<li>缓冲组件</li>
+<li>插件是存储引擎（<em>最大的优势</em>）</li>
+<li>物理文件</li>
+</ul>
+<p>存储引擎是基于表的，而不是基于数据库的，它是底层的物理结构实现的</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/20/Innodb存储引擎-1-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -403,6 +528,10 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -410,13 +539,27 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/05/19/Innodb存储引擎-1-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -424,38 +567,42 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/05/19/Innodb存储引擎-1-1/" itemprop="url">
-                  Innodb存储引擎-1.1
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/05/19/Innodb存储引擎-1-1/" itemprop="url">Innodb存储引擎-1.1</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-19T00:58:56+08:00" content="2015-05-19">
-              2015-05-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-19T00:58:56+08:00">
+                2015-05-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Mysql/" itemprop="url" rel="index">
                     <span itemprop="name">Mysql</span>
                   </a>
@@ -463,7 +610,6 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
 
                 
                 
-
               
             </span>
           
@@ -473,14 +619,21 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -489,21 +642,72 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
       
         
           
-          数据库物理操作系统文件或其他形式文件类型的集合(可能是存放在内存中的文件)。
-数据库文件
-.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文
-          ...
+            <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>物理操作系统文件或其他形式文件类型的集合(<em>可能是存放在内存中的文件</em>)。</p>
+<h2 id="数据库文件"><a href="#数据库文件" class="headerlink" title="数据库文件"></a>数据库文件</h2><ul>
+<li>.frm文件：与表相关的元数据（meta）信息都存放在“.frm”文件中，包括表结构的定义信息等。不论是什么存储引擎，每一個表都会有一个以表名命名的“.frm”文件。所有的“.frm”文件都存放在所属数据库的文件夾下面。 </li>
+<li>MYD：是MyISAM 存储引擎专用，存放MyISAM 表的数据。每一個MyISAM 表都会有一個“.MYD”文件与之对应，存放在所属数据库的文件夾下，和“.frm”文件在一起。 </li>
+<li>MYI:是MyISAM存储引擎的，主要存放MyISAM表的索引相关信息。对于MyISAM存储來說，可以被cache 的內容主要就是來源于“.MYI”文件中。每一个MyISAM表对应一个“.MYI”文件，存放于位置和“.frm”以及“.MYD”一样。 </li>
+<li>ibd，ibdata：是存放Innodb 数据的文件，之所以有两种文件來存放Innodb 的数据（包括索引），是因为Innodb 的数据存储方式能够通过配置來决定是使用共享表空間存放存储数据，还是独享表空间存放存储数据。独享表空间存储方式使用“.ibd”文件來存放數据，且每个表一个“.ibd”文件，文件存放在和MyISAM数据相同的位置。 如果选用共享存储表空間來存放数据，则会使用ibdata 文件來存放，所有表共同使用一个（或者多个，可自行配置）ibdata 文件。</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li><strong>Mysql被设计成的是一个单进程多线程的数据库，因此Mysql数据库实例在系统上的表现就是一个进程</strong></li>
+<li>Mysql数据库由后台线程以及一个共享内存区组成，共享内存可以被运行的后台线程所共享。<em>数据库实例才是真正用于操作数据库文件的</em></li>
+</ul>
+<h2 id="Mysql在linux系统中的使用命令"><a href="#Mysql在linux系统中的使用命令" class="headerlink" title="Mysql在linux系统中的使用命令"></a>Mysql在linux系统中的使用命令</h2><p>Mysql启动命令，&amp;代表在后台启动<br>    <code>./mysqld_safe&amp;</code></p>
+<p>ps 查看系统进行命令，这里可以看到Mysql在系统上的表现是一个进程（<em>此时的进程号是1197</em>）</p>
+<p><code>ps aux | grep mysql</code></p>
+<p>执行结果为</p>
+<pre><code>root      1063  0.0  0.0 108300   372 ?        S    Apr24   0:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --pid-file=/var/lib/mysql/localhost.localdomain.pid
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/19/Innodb存储引擎-1-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+mysql     1197  0.0 13.9 1341208 65276 ?       Sl   Apr24   9:27 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/lib/mysql/localhost.localdomain.err --pid-file=/var/lib/mysql/localhost.localdomain.pid
+</code></pre><p><code>ps -ef | grep mysqld</code></p>
+<p>执行结果为</p>
+<pre><code>root      1063     1  0 Apr24 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --pid-file=/var/lib/mysql/localhost.localdomain.pid
+
+mysql     1197  1063  0 Apr24 ?        00:09:27 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/lib/mysql/localhost.localdomain.err --pid-file=/var/lib/mysql/localhost.localdomain.pid
+</code></pre><p><code>mysql --help | grep my.cnf</code></p>
+<p>执行结果为（<em>表示如果没有指定Mysql</em>配置文件，Mysql会从这些位置去读取配置文件，如果多个地方有统一参数的配置，则Mysql以最后一个文件的配置参数为准，一般配置文件在/etc/my.cnf*）</p>
+<pre><code>order of preference, my.cnf, $MYSQL_TCP_PORT,/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf
+</code></pre><p>ps命令执行后的结果中可以看到datadir的参数，该参数表示数据库所在位置。也可以在Mysql终端使用</p>
+<p><code>SHOW VARIABLES LIKE &#39;datadir&#39;\G</code></p>
+<pre><code>*************************** 1. row ***************************
+Variable_name: datadir
+       Value: /var/lib/mysql/   
+1 row in set (0.00 sec)
+</code></pre><p>接着在Mysql终端运行下面下面命令，可以看出data其实就是一个数据目录（<em>该目录的用户和权限必须得到保障只有Mysql用户和组可以访问，通常权限是mysql:mysql</em>）<br><code>system ls -lh /var/lib/mysql/</code> </p>
+<pre><code>总用量 173M
+-rw-rw----. 1 mysql mysql   56 3月  24 16:08 auto.cnf
+drwx------. 2 mysql mysql 4.0K 5月  18 14:43 beebank
+-rw-rw----. 1 mysql mysql  76M 5月  18 20:01 ibdata1
+-rw-rw----. 1 mysql mysql  48M 5月  18 20:01 ib_logfile0
+-rw-rw----. 1 mysql mysql  48M 3月  24 16:04 ib_logfile1
+-rw-r-----. 1 mysql root  520K 4月  25 02:22 localhost.localdomain.err
+-rw-rw----. 1 mysql mysql    5 4月  25 02:22 localhost.localdomain.pid
+drwx--x--x. 2 mysql mysql 4.0K 3月  24 16:04 mysql
+srwxrwxrwx. 1 mysql mysql    0 4月  25 02:22 mysql.sock
+drwx------. 2 mysql mysql 4.0K 3月  24 16:04 performance_schema
+-rw-r--r--. 1 root  root   125 3月  24 16:04 RPM_UPGRADE_HISTORY
+-rw-r--r--. 1 mysql mysql  125 3月  24 16:04 RPM_UPGRADE_MARKER-LAST
+drwxr-xr-x. 2 mysql mysql 4.0K 3月  24 16:04 test
+drwx------. 2 mysql mysql 4.0K 5月  11 17:24 test_checklist_table
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -513,11 +717,14 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -546,98 +753,123 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -651,80 +883,65 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -732,40 +949,140 @@ PHPUnit官网，直接点击下载PHPUnit4.6 需要注意的是PHPUnit和PHP版�
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

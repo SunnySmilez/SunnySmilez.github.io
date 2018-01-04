@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/27/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/sort的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/29/sort的使用/" itemprop="url">
-                  sort的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/29/sort的使用/" itemprop="url">sort的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T09:32:36+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T09:32:36+08:00">
+                2015-12-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,26 +326,80 @@
       
         
           
-          sort使用场景用法：sort [选项]... [文件]...
+            <h1 id="sort使用场景"><a href="#sort使用场景" class="headerlink" title="sort使用场景"></a>sort使用场景</h1><pre><code>用法：sort [选项]... [文件]...
 　或：sort [选项]... --files0-from=F
 串联排序所有指定文件并将结果写到标准输出。
 
 长选项必须使用的参数对于短选项时也是必需使用的。
 排序选项：
 
-  -b, --ignore-leading-blanks  
-          ...
+  -b, --ignore-leading-blanks    忽略前导的空白区域
+  -d, --dictionary-order    只考虑空白区域和字母字符
+  -f, --ignore-case        忽略字母大小写
+  -g, --general-numeric-sort    按照常规数值排序
+  -i, --ignore-nonprinting    只排序可打印字符
+  -M, --month-sort        比较 (未知) &lt; &quot;一月&quot; &lt; ... &lt; &quot;十二月&quot;
+                在LC_ALL=C 时为(unknown) &lt; `JAN&apos; &lt; ... &lt; `DEC&apos;
+  -h, --human-numeric-sort    使用易读性数字(例如： 2K 1G)
+  -n, --numeric-sort        根据字符串数值比较
+  -R, --random-sort        根据随机hash 排序
+      --random-source=文件    从指定文件中获得随机字节
+  -r, --reverse            逆序输出排序结果
+      --sort=WORD        按照WORD 指定的格式排序：
+                    一般数字-g，高可读性-h，月份-M，数字-n，
+                    随机-R，版本-V
+  -V, --version-sort        在文本内进行自然版本排序
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/sort的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+其他选项：
+
+      --batch-size=NMERGE    一次最多合并NMERGE 个输入；如果输入更多
+                    则使用临时文件
+  -c, --check, --check=diagnose-first    检查输入是否已排序，若已有序则不进行操作
+  -C, --check=quiet, --check=silent    类似-c，但不报告第一个无序行
+      --compress-program=程序    使用指定程序压缩临时文件；使用该程序
+                    的-d 参数解压缩文件
+      --files0-from=文件    从指定文件读取以NUL 终止的名称，如果该文件被
+                    指定为&quot;-&quot;则从标准输入读文件名
+  -k, --key=位置1[,位置2]    在位置1 开始一个key，在位置2 终止(默认为行尾)
+  -m, --merge            合并已排序的文件，不再进行排序
+  -o, --output=文件        将结果写入到文件而非标准输出
+  -s, --stable            禁用last-resort 比较以稳定比较算法
+  -S, --buffer-size=大小    指定主内存缓存大小
+  -t, --field-separator=分隔符    使用指定的分隔符代替非空格到空格的转换
+  -T, --temporary-directory=目录    使用指定目录而非$TMPDIR 或/tmp 作为
+                    临时目录，可用多个选项指定多个目录
+  -u, --unique        配合-c，严格校验排序；不配合-c，则只输出一次排序结果
+  -z, --zero-terminated    以0 字节而非新行作为行尾标志
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+POS 是F[.C][OPTS]，F 代表域编号，C 是域中字母的位置，F 和C 均从1开始计数
+如果没有有效的-t 或-b 选项存在，则从前导空格后开始计数字符。OPTS 是一个或多个
+由单个字母表示的顺序选项，以此覆盖此key 的全局顺序设置。如果没有指定key 则
+将其整个行。
+
+指定的大小可以使用以下单位之一：
+内存使用率% 1%，b 1、K 1024 (默认)，M、G、T、P、E、Z、Y 等依此类推。
+
+如果不指定文件，或者文件为&quot;-&quot;，则从标准输入读取数据。
+</code></pre><h1 id="sort参数说明"><a href="#sort参数说明" class="headerlink" title="sort参数说明"></a>sort参数说明</h1>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -294,6 +409,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -301,13 +420,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/26/join的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -315,38 +448,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">
-                  join的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">join的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-26T10:17:46+08:00" content="2015-12-26">
-              2015-12-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-26T10:17:46+08:00">
+                2015-12-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -354,7 +491,6 @@
 
                 
                 
-
               
             </span>
           
@@ -364,14 +500,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -380,8 +523,8 @@
       
         
           
-          join的使用案例1.文件内容cat month_cn.txt
-1       一月
+            <h1 id="join的使用案例"><a href="#join的使用案例" class="headerlink" title="join的使用案例"></a>join的使用案例</h1><p>1.文件内容<br>cat month_cn.txt</p>
+<pre><code>1       一月
 2       二月
 3       三月
 4       四月
@@ -391,19 +534,136 @@
 8       八月
 9       九月
 10      十月
-11      
-          ...
+11      十一月
+12      十二月
+13      十三月，故意的
+</code></pre><p>2.文件内容<br>cat month_en.txt</p>
+<pre><code>1       January
+2       February
+3       March
+4       April
+5       May
+6       June
+7       July
+8       August
+9       September
+10      October
+11      November
+12      December
+14      MonthUnknown
+</code></pre><p>3.内连接（指定关联行数）<br>join month_cn.txt month_en.txt<br>join -j 1 month_cn.txt month_en.txt(<code>以第一行作为匹配字段</code>)<br>join -1 1 -2 1 month_cn.txt month_en.txt(<code>第一个文件的第一行和第二个文件的第一行进行匹配</code>)</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>4.左连接（以全面文件为主去匹配后面文件的内容）<br>join -a1 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+</code></pre><p>5.右连接<br>join -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+14 MonthUnknown
+</code></pre><p>6.全连接<br>join -a1 -a2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+13 十三月，故意的
+14 MonthUnknown
+</code></pre><p>7.指定输出内容<br>join -o 1.1 1.2 2.2 month_cn.txt month_en.txt</p>
+<pre><code>1 一月 January
+2 二月 February
+3 三月 March
+4 四月 April
+5 五月 May
+6 六月 June
+7 七月 July
+8 八月 August
+9 九月 September
+10 十月 October
+11 十一月 November
+12 十二月 December
+</code></pre><p>8.前面文件存在，后面文件不存在的内容<br>join -v 1  month_cn.txt month_en.txt</p>
+<pre><code>13 十三月，故意的
+</code></pre><h1 id="join参数说明"><a href="#join参数说明" class="headerlink" title="join参数说明"></a>join参数说明</h1><pre><code>用法：join [选项]... 文件1 文件2(找出两个文件中，指定栏位内容相同的行，并加以合并，再输出到标准输出设备。)
+针对每一对具有相同内容的输入行，整合为一行写到标准输出，
+默认的内容连接区块是由第一个空白符代表的分界符号。当文件1
+或文件2 都被指定为&quot;-&quot;时，程序将从标准输入读取数据。
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/26/join的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+  -a  文件编号        文件编号的值可以是1 或2，分别对应文件1 和 文件2。
+                          此选项用于根据指定文件编号输出不成对的行目。
+  -e 字符            将缺失的输入区块替换为指定字符
+  -i, --ignore-case     比较时忽略大小写
+  -j 域         等于&quot;-1 域 -2 域&quot;
+  -o 格式         按照指定格式构造输出行
+  -t 字符         使用指定字符作为输入和输出的分隔符
+  -v 文件编号            类似 -a 文件编号，但禁止组合输出行
+  -1 域              在文件1 的此域组合
+  -2 域              在文件2 的此域组合
+  --check-order         检查输入行是否正确排序，即使所有输入行均是成对的
+  --nocheck-order       不检查输入是否正确排序
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+除非使用了&quot;-t 字符串&quot; 选项，否则前导空格分隔的域将被忽略，如果指定了字符串，
+则使用指定字符串分隔任意的域并从1 开始计数的域编号。可以指定的格式是由一个
+或多个逗号活空格所分隔的描述，其形式为&quot;文件编号.域&quot;或者&quot;0&quot;。默认的
+格式输出合并后的域、文件1 和文件2 剩下的域，均由该指定字符串分隔。
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -413,6 +673,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -420,13 +684,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/cut的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -434,38 +712,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">
-                  cut的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">cut的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T10:48:06+08:00" content="2015-12-24">
-              2015-12-24
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T10:48:06+08:00">
+                2015-12-24
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -473,7 +755,6 @@
 
                 
                 
-
               
             </span>
           
@@ -483,14 +764,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -499,23 +787,61 @@
       
         
           
-          cut使用案例1.按字节切割
+            <h1 id="cut使用案例"><a href="#cut使用案例" class="headerlink" title="cut使用案例"></a>cut使用案例</h1><pre><code>1.按字节切割
 tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
 
 2.指定分隔符切割
-tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
-          ...
+tail -n 1 /etc/passwd | cut -d : -f 1,5（以:分割，获取第一个和第五个域）
+ls -l | cut -d &quot; &quot; -f 1（以空格分割，取第一个域得字符）
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/cut的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+3.按字符切割
+ls -l | cut -c 1-10（获取文件的第一个字符到第十个字符）`中文字符和空格都算一个字符`
+</code></pre><h1 id="cut参数说明"><a href="#cut参数说明" class="headerlink" title="cut参数说明"></a>cut参数说明</h1><pre><code>用法：cut [选项]... [文件]...
+从每个文件中输出指定部分到标准输出。
+
+长选项必须使用的参数对于短选项时也是必需使用的。
+  -b, --bytes=列表        只选中指定的这些字节
+  -c, --characters=列表        只选中指定的这些字符
+  -d, --delimiter=分界符    使用指定分界符代替制表符作为区域分界
+  -f, --fields=LIST     选择部分字段，如果不制定－s分隔符的参数，直接打印出没有不包含分隔符的字符
+
+  -n                     -b: 不分裂的多字节字符和-b一起使用(`汉字是三个字节，如果直选中一个字节，也不进行分割，直接显示汉字`)
+      --complement        补全选中的字节、字符或域
+  -s, --only-delimited        不打印没有包含分界符的行
+      --output-delimiter=字符串    使用指定的字符串作为输出分界符，默认采用输入
+                的分界符
+      --help        显示此帮助信息并退出
+      --version        显示版本信息并退出
+
+仅使用f -b, -c 或-f 中的一个。每一个列表都是专门为一个类别作出的，或者您可以用逗号隔
+开要同时显示的不同类别。您的输入顺序将作为读取顺序，每个仅能输入一次。
+每种参数格式表示范围如下：
+    N    从第1 个开始数的第N 个字节、字符或域
+    N-    从第N 个开始到所在行结束的所有字符、字节或域
+    N-M    从第N 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
+    -M    从第1 个开始到第M 个之间(包括第M 个)的所有字符、字节或域
+
+当没有文件参数，或者文件不存在时，从标准输入读取
+</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><pre><code>取出eth0对应的ip地址?
+ifconfig eth0 | grep &quot;inet addr&quot; | cut -d &quot;:&quot; -f2 | cut -d &quot; &quot; -f1
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -525,6 +851,10 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -532,13 +862,27 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/awk的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -546,38 +890,42 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">
-                  awk的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">awk的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:42:03+08:00" content="2015-12-24">
-              2015-12-24
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T09:42:03+08:00">
+                2015-12-24
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -585,7 +933,6 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
 
                 
                 
-
               
             </span>
           
@@ -595,14 +942,21 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -611,22 +965,99 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          awk使用案例1.以每一行为输入，指定分隔符，输出指定域
+            <h1 id="awk使用案例"><a href="#awk使用案例" class="headerlink" title="awk使用案例"></a>awk使用案例</h1><pre><code>1.以每一行为输入，指定分隔符，输出指定域
     tail -n 10 test.txt | awk -F &apos; &apos;  &apos;{print $1&quot;,\t&quot;$2}&apos;（以空格为分隔符，输出第一个域与第二个域并以,和tab连接）
 
-2.
-          ...
+2.在输出的首尾添加内容
+cat /etc/passwd |awk  -F &apos;:&apos;  &apos;BEGIN {print &quot;name,shell&quot;}  {print $1&quot;,&quot;$7} END {print &quot;blue,/bin/nosh&quot;}&apos;（显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加&quot;blue,/bin/nosh&quot;）
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/awk的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+3.搜索
+awk -F &apos;:&apos; &apos;/hello/{print $1}&apos; test.txt（搜索test.txt中的包含hello的行,并以&apos;:&apos;为分隔符，输出第一个域）
+
+4.awk的环境变量
+awk  -F &apos;:&apos;  &apos;{print &quot;filename:&quot; FILENAME &quot;,linenumber:&quot; NR &quot;,columns:&quot; NF &quot;,linecontent:&quot;$0}&apos; /etc/passwd（统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:）
+awk  -F &apos;:&apos;  &apos;{printf(&quot;filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n&quot;,FILENAME,NR,NF,$0)}&apos; /etc/passwd
+
+5.awk编程
+awk &apos;{count++;print $0;} END{print &quot;user count is &quot;, count}&apos; /etc/passwd（统计用户总数）
+ls -l | awk &apos;BEGIN {size=0} {size=size+$5} END {print &quot;size is &quot;size}&apos;（统计文件夹大小）
+</code></pre><h1 id="awk参数说明"><a href="#awk参数说明" class="headerlink" title="awk参数说明"></a>awk参数说明</h1><pre><code>用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...
+用法: awk [POSIX 或 GNU 风格选项] [--] &apos;程序&apos; 文件 ...
+POSIX 选项:             GNU 长选项:
+    -f 脚本文件        --file=脚本文件
+    -F fs            --field-separator=fs
+    -v var=val        --assign=var=val
+    -m[fr] val
+    -O            --optimize
+    -W compat        --compat
+    -W copyleft        --copyleft
+    -W copyright        --copyright
+    -W dump-variables[=file]    --dump-variables[=file]
+    -W exec=file        --exec=file
+    -W gen-po        --gen-po
+    -W help            --help
+    -W lint[=fatal]        --lint[=fatal]
+    -W lint-old        --lint-old
+    -W non-decimal-data    --non-decimal-data
+    -W profile[=file]    --profile[=file]
+    -W posix        --posix
+    -W re-interval        --re-interval
+    -W source=program-text    --source=program-text
+    -W traditional        --traditional
+    -W usage        --usage
+    -W use-lc-numeric    --use-lc-numeric
+    -W version        --version
+
+awk的环境变量
+    ARGC               命令行参数个数
+    ARGV               命令行参数排列
+    ENVIRON            支持队列中系统环境变量的使用
+    FILENAME           awk浏览的文件名
+    FNR                浏览文件的记录数
+    FS                 设置输入域分隔符，等价于命令行 -F选项
+    NF                 浏览记录的域的个数
+    NR                 已读的记录数
+    OFS                输出域分隔符
+    ORS                输出记录分隔符
+    RS                 控制记录分隔符
+
+# 应用
+    取出eth0对应的ip地址?
+    ifconfig eth0 | grep &quot;inet addr&quot; | awk -F &apos;:&apos; &apos;{print $2}&apos; | awk &apos;{print $1}&apos;
+    ifconfig eth0 | grep &quot;inet addr&quot; | awk -F &apos;[: ]+&apos; &apos;{print $4}&apos;
+    ifconfig eth0 | awk -F &quot;[: ]+&quot; &apos;NR==2 {print $4}&apos;
+
+    取一个文件的权限?
+    Access: (0550/dr-xr-x---)  Uid: (    0/    root)   Gid: (    0/    root)
+    stat &quot;/root/&quot; | awk -F &apos;:&apos; &apos;NR==4 {print $2}&apos; | awk -F &apos;(&apos; &apos;{print $2}&apos; | awk -F &apos;/&apos; &apos;{print $1}&apos;
+    stat &quot;/root/&quot; | awk -F &apos;:&apos; &apos;NR==4 {print $2}&apos; | awk -F &apos;[(/]&apos; &apos;{print $2}&apos;
+    ll &apos;/root/work/conf/&apos; | cut -c 2-10 | tr rwx- 4210 | awk -F &apos;&apos; &apos;{print $1+$2+$3 $4+$5+$6 $7+$8+$9}&apos;
+
+    netstat -n | awk &apos;/^tcp/ {++S[$NF]} END {for(key in S) print key,S[key]}&apos;
+        /^tcp/                  过滤tcp开头的行
+        S[]                     定义一个名为S的数组,数组下标一般以1开始,而不是0
+        S[$NF]                  表示数组元素的值
+        ++S[$NF]                表示某个数加1
+        for(key in S)           遍历S数组
+        print key,&quot;\t&quot;,S[key]   打印数组的键和值
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -636,6 +1067,10 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -643,13 +1078,27 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/sed的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -657,38 +1106,42 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">
-                  sed的使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">sed的使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T09:41:56+08:00" content="2015-12-24">
-              2015-12-24
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T09:41:56+08:00">
+                2015-12-24
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -696,7 +1149,6 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
 
                 
                 
-
               
             </span>
           
@@ -706,14 +1158,21 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -722,22 +1181,96 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          sed使用场景1.获取指定行数
+            <h1 id="sed使用场景"><a href="#sed使用场景" class="headerlink" title="sed使用场景"></a>sed使用场景</h1><pre><code>1.获取指定行数
 sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
 sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
-sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
-          ...
+sed -n &apos;2,3!&apos;p test.txt（查看不在第2到3行的内容）
+sed -n &apos;4q;2,3p&apos; test.txt（读取第2到3行的内容，速度更快）
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+2.打印包含某字符的行
+sed -n &apos;/hello/p&apos; test.txt（查看包含hello的行）
+
+3.删除行
+sed &apos;/^#/d&apos; test.txt（删除空行）
+sed &apos;/hello/d&apos; test.txt（删除包含hello的行）
+sed &apos;5,10s/[a-z]//g&apos; test.txt（删除第5行到第10行中的小写字母）
+sed &apos;5,$&apos;d test.txt（删除第五行之后的内容）
+sed &apos;s/[^0-9a-zA-Z]//g&apos; test.txt（删除除数字和字母以外的字符）
+sed &apos;/^#/d;G;G&apos; test.txt（删除空行添加两个空行）
+sed &apos;n;n;n;d;&apos;  test.txt（删除第4行的倍数行）
+
+4.选择特定的行，进行替换
+sed &apos;/demo/! s/hello/haha/g&apos; test.txt &gt; test1.txt（找到不包含demo的行中的hello替换成haha）
+sed &apos;/demo/! s#hello#haha#g&apos; test.txt &gt; test1.txt（避免替换/bin这种字符串的问题，把正则定界符换成#）
+sed &apos;y/demo/Demo/&apos; test.txt
+
+5.把结果保存到文件
+sed &apos;1,2d;w demo.txt&apos; test.txt（将第1，2行删除后保存到demo.txt文件）
+
+6.添加字符
+sed &quot;1,3a hello\ndemo&quot; test.txt（在第一行到第三行后添加字符串“hello\ndemo”）
+
+7.替换
+sed &apos;1,3c hello&apos; test.txt（把第一行到第三行替换成hello）
+
+8.插入
+sed -i &apos;$a haha_i&apos; test.txt（在文件的末尾插入字符串“haha_i”）
+</code></pre><h1 id="sed参数说明"><a href="#sed参数说明" class="headerlink" title="sed参数说明"></a>sed参数说明</h1><pre><code>用法: sed [选项]... {脚本(如果没有其他脚本)} [输入文件]...
+
+  -n, --quiet, --silent
+                 加上-n参数后，则只有经过sed特殊处理的那一行(或者动作)才会被列出来
+  -e 脚本, --expression=脚本
+                 添加“脚本”到程序的运行列表
+  -f 脚本文件, --file=脚本文件
+                 添加“脚本文件”到程序的运行列表
+  --follow-symlinks
+                 follow symlinks when processing in place; hard links
+                 will still be broken.
+  -i[SUFFIX], --in-place[=SUFFIX]
+                 直接修改读取的文件内容，不是输出到屏幕
+  -c, --copy
+                 取代／替换字符串
+  -l N, --line-length=N
+                 指定“l”命令的换行期望长度
+  --posix
+                 关闭所有 GNU 扩展
+  -r, --regexp-extended 在脚本中使用扩展正则表达式
+  -s, --separate
+                 将输入文件视为各个独立的文件而不是一个长的连续输入
+  -u, --unbuffered
+                 从输入文件读取最少的数据，更频繁的刷新输出
+      --help     打印帮助并退出
+      --version  输出版本信息并退出
+
+如果没有 -e, --expression, -f 或 --file 选项，那么第一个非选项参数被视为
+sed脚本。其他非选项参数被视为输入文件，如果没有输入文件，那么程序将从标准
+输入读取数据。
+</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><pre><code>取出eth0对应的ip地址?
+ifconfig eth0 | sed -n &apos;2p&apos; | awk -F &quot;[: ]+&quot; &apos;{print $4}&apos;
+ifconfig eth0 | sed -n &apos;/inet addr/p&apos;| sed &apos;s#.*addr:##g&apos; | sed &apos;s#  Bcast.*##g&apos;
+ifconfig eth0 | sed -n &apos;s#^.*addr:\(.*\)  Bcast.*$#\1#gp&apos;
+
+取一个文件的权限?
+Access: (0550/dr-xr-x---)  Uid: (    0/    root)   Gid: (    0/    root)
+stat &quot;/root&quot; | sed -n &apos;4p&apos; | sed -n &apos;s#^.*s: (\([0-9].*\)/dr.*$#\1#gp&apos;
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -747,11 +1280,14 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -780,98 +1316,123 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -885,80 +1446,65 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -966,40 +1512,140 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

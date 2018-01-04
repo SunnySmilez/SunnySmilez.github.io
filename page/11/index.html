@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/11/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记环境搭建/" itemprop="url">
-                  go环境搭建
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/20/go学习笔记环境搭建/" itemprop="url">go环境搭建</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T10:43:31+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T10:43:31+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,19 +326,31 @@
       
         
           
-          下载go在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz设置环境变
-          ...
+            <h1 id="下载go"><a href="#下载go" class="headerlink" title="下载go"></a>下载go</h1><h6 id="在列表中选择需要的版本：http-code-google-com-p-go-downloads-list-q-OpSys-Darwin-AND-Type-Installer"><a href="#在列表中选择需要的版本：http-code-google-com-p-go-downloads-list-q-OpSys-Darwin-AND-Type-Installer" class="headerlink" title="在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer"></a>在列表中选择需要的版本：<a href="http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer" target="_blank" rel="external">http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer</a></h6><h6 id="将安装包安装到-usr-local目录下：tar-C-usr-local-xzf-go-tar-gz"><a href="#将安装包安装到-usr-local目录下：tar-C-usr-local-xzf-go-tar-gz" class="headerlink" title="将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz"></a>将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz</h6><h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><h6 id="export-PATH-PATH-usr-local-go-bin-临时生效"><a href="#export-PATH-PATH-usr-local-go-bin-临时生效" class="headerlink" title="export PATH=$PATH:/usr/local/go/bin (临时生效)"></a>export PATH=$PATH:/usr/local/go/bin (临时生效)</h6><h6 id="在-etc-profile文件中添加一行：-usr-local-go-bin-（全局有效）"><a href="#在-etc-profile文件中添加一行：-usr-local-go-bin-（全局有效）" class="headerlink" title="在/etc/profile文件中添加一行：/usr/local/go/bin （全局有效）"></a>在/etc/profile文件中添加一行：/usr/local/go/bin （全局有效）</h6><h6 id="在-profile文件中添加一行：-usr-local-go-bin-（当前用户生效）"><a href="#在-profile文件中添加一行：-usr-local-go-bin-（当前用户生效）" class="headerlink" title="在~/.profile文件中添加一行：/usr/local/go/bin （当前用户生效）"></a>在~/.profile文件中添加一行：/usr/local/go/bin （当前用户生效）</h6><h1 id="如果需要安装到指定位置"><a href="#如果需要安装到指定位置" class="headerlink" title="如果需要安装到指定位置"></a>如果需要安装到指定位置</h1><h6 id="首先安装到指定位置比如是家目录"><a href="#首先安装到指定位置比如是家目录" class="headerlink" title="首先安装到指定位置比如是家目录"></a>首先安装到指定位置比如是家目录</h6><h6 id="设置环境变量：export-GOROOT-HOME-go"><a href="#设置环境变量：export-GOROOT-HOME-go" class="headerlink" title="设置环境变量：export GOROOT=$HOME/go"></a>设置环境变量：export GOROOT=$HOME/go</h6><h6 id="设置环境变量：export-PATH-PATH-GOROOT-bin"><a href="#设置环境变量：export-PATH-PATH-GOROOT-bin" class="headerlink" title="设置环境变量：export PATH=$PATH:$GOROOT/bin"></a>设置环境变量：export PATH=$PATH:$GOROOT/bin</h6><h1 id="建立一个文件hello-go，内容如下"><a href="#建立一个文件hello-go，内容如下" class="headerlink" title="建立一个文件hello.go，内容如下"></a>建立一个文件hello.go，内容如下</h1><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记环境搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Printf(&quot;hello, world\n&quot;)
+}
+</code></pre><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h6 id="go-run-hello-go"><a href="#go-run-hello-go" class="headerlink" title="go run hello.go"></a>go run hello.go</h6><h6 id="若看到hello，world信息，那么go已被安装"><a href="#若看到hello，world信息，那么go已被安装" class="headerlink" title="若看到hello，world信息，那么go已被安装"></a>若看到hello，world信息，那么go已被安装</h6><h6 id="编译文件：go-build-test-go"><a href="#编译文件：go-build-test-go" class="headerlink" title="编译文件：go build test.go"></a>编译文件：go build test.go</h6><h6 id="运行文件：-test则也会看到hello，world的信息"><a href="#运行文件：-test则也会看到hello，world的信息" class="headerlink" title="运行文件：./test则也会看到hello，world的信息"></a>运行文件：./test则也会看到hello，world的信息</h6>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -287,6 +360,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -294,13 +371,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/01/29/2016年个人总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -308,38 +399,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/01/29/2016年个人总结/" itemprop="url">
-                  2016年总结
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/01/29/2016年个人总结/" itemprop="url">2016年总结</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-29T17:41:34+08:00" content="2017-01-29">
-              2017-01-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-29T17:41:34+08:00">
+                2017-01-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Other/" itemprop="url" rel="index">
                     <span itemprop="name">Other</span>
                   </a>
@@ -347,7 +442,6 @@
 
                 
                 
-
               
             </span>
           
@@ -357,14 +451,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -373,20 +474,122 @@
       
         
           
-          技术技术总结
-去年总的技术学习分两个方面，一个是广度的学习也就是进行的linux中级运维知识学习；一个是深度的学习也就是redis源码阅读；广度方面的出发点是想拓宽眼界，对需要用到和可能接触到的东西进行扫盲；深度方面的出发点是觉得很多成熟的开源产品都包含网络，i/o，并发，性能等方面的处理，想要通过
-          ...
+            <h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><h5 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h5><ul>
+<li>去年总的技术学习分两个方面，一个是广度的学习也就是进行的linux中级运维知识学习；一个是深度的学习也就是redis源码阅读；广度方面的出发点是想拓宽眼界，对需要用到和可能接触到的东西进行扫盲；深度方面的出发点是觉得很多成熟的开源产品都包含网络，i/o，并发，性能等方面的处理，想要通过熟悉一个较小的框架来对一些基础或者常用的知识进行深入的理解，再者想深入的学习数据存储方面（mysql太大，相对来说redis比较熟悉，成熟还比较小），给自己打造一个特长点</li>
+<li>1.在广度学习方面包括linux，nginx一些基本功能，服务，模块配置等，虽然最终形成了一定的博客积累，但是质量偏差，没有太多的自我思考，而且学习之后的效果也十分不理想，最后只留下了大概的印象（没有在工作中用到），仅形成了一定的思路；</li>
+<li>总结：在广度学习这一块分为两种情况；1.工作上能用的上的，那就必须花时间认真细学，并且应用到工作中，遇到问题做详细的记录；2.工作上用不上的，给自己增长见识的，提供解决问题的思路，这种只要进行熟悉的，不需要花费太多的时间去了解他的细节，大概知道有它的应用场景和解决什么问题就行了，等到真的用上的时候再反过来进行详细的学习（因为当时学习了依然会忘记）</li>
+<li>2.在深度的学习方面相对来说路途比较漫长，首先看redis源码，感觉应该没问题，但是对于它里面的一些代码看上去还是很吃力（非科班出身，没有进行过c语言，数据结构等学习），因此绕了一个弯子，重新去先学习了c语言，相对来说学习方法和作比较的方式有所进步，虽然对c语言还是没想象中的那么熟练，学习语言关键还是得练，后续得加强对c语言的熟练，还有数据结构；最后对于redis源码来说还是看了比较少的几个文件，没能啃完，17年必须多看源码了</li>
+<li>总结：在一些基础的知识点方面还是很欠缺，找时间还是依然要补回来，比如说c语言，数据结构，算法，操作系统等</li>
+</ul>
+<h5 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h5><ul>
+<li>依旧分为两个方面：广度和深度</li>
+<li>广度方面对golang和docker技术进行了解（其实都出来很久了，一直没时间去学，必须学完），这两个和我都是息息相关，目前的监控系统和日志系统都是用golang，而docker至少可以用在自己的环境开发中，所以应该来说都能进行实操，相信效果比今年要好</li>
+<li>深度方面还是对redis的源码进行阅读，目前还没能掌握比较好的阅读方式，希望能摸索出来一个好的阅读方式，欠下的债迟早是要还的</li>
+</ul>
+<h1 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h1><h5 id="阅读总结"><a href="#阅读总结" class="headerlink" title="阅读总结"></a>阅读总结</h5><ul>
+<li>16年的阅读可以说是非常糟糕，阅读的书籍比较少，而且每本书都是过眼云烟的感觉，看完的时候能有所收获，过后之后并不能收获什么，17年对于阅读的改进方面：</li>
+<li>1.多关注阅读方法的改进</li>
+<li>2.每阅读一本新书的时候，得思考为什么要读这本书，我能从中获取到什么，以及它和我之前学过的什么知识类似，是否能快速掌握了解它的方法</li>
+<li>3.每阅读一本书，必须写一篇读后感（这个今年开始实行），可以类似与总结，技术类的可以分批次写技术博客（这个习惯还是坚持了）</li>
+</ul>
+<h5 id="2016年的阅读书单如下："><a href="#2016年的阅读书单如下：" class="headerlink" title="2016年的阅读书单如下："></a>2016年的阅读书单如下：</h5><ul>
+<li><a href="https://item.jd.com/11786541.html" title="Modern PHP" target="_blank" rel="external">Modern PHP</a></li>
+<li><a href="https://item.jd.com/11666345.html" title="像外行一样思考，像专家一样实践——科研成功之道" target="_blank" rel="external">像外行一样思考，像专家一样实践——科研成功之道</a></li>
+<li><a href="https://item.jd.com/11499476.html" title="周鸿祎自述：我的互联网方法论" target="_blank" rel="external">周鸿祎自述：我的互联网方法论</a></li>
+<li><a href="https://item.jd.com/11482827.html" title="郎咸平说：萧条下的希望" target="_blank" rel="external">郎咸平说：萧条下的希望</a></li>
+<li><a href="https://item.jd.com/11592129.html" title="工匠精神" target="_blank" rel="external">工匠精神</a></li>
+<li><a href="https://item.jd.com/10059845.html" title="麦肯锡方法" target="_blank" rel="external">麦肯锡方法</a></li>
+<li><p><a href="https://item.jd.com/11310979.html" title="嗨翻c语言" target="_blank" rel="external">嗨翻c语言</a></p>
+</li>
+<li><p>看部分：</p>
+</li>
+<li><a href="https://item.jd.com/11548036.html" title="时寒冰说 未来二十年，经济大趋势" target="_blank" rel="external">时寒冰说 未来二十年，经济大趋势（现实篇+未来篇)</a></li>
+<li><a href="https://item.jd.com/10287784369.html" title="货币战争" target="_blank" rel="external">货币战争</a></li>
+<li><a href="https://item.jd.com/11919625.html" title="给经理人的第一课" target="_blank" rel="external">给经理人的第一课</a></li>
+<li>部分经济学方面的书籍</li>
+</ul>
+<h5 id="2017年阅读计划："><a href="#2017年阅读计划：" class="headerlink" title="2017年阅读计划："></a>2017年阅读计划：</h5><h6 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h6><ul>
+<li><a href="https://item.jd.com/11435655.html" title="三周时间" target="_blank" rel="external">如何阅读一本书</a></li>
+<li><a href="https://book.douban.com/subject/25940548/" title="三周时间" target="_blank" rel="external">阅读整理学</a></li>
+</ul>
+<h6 id="技术方面"><a href="#技术方面" class="headerlink" title="技术方面"></a>技术方面</h6><ul>
+<li><a href="https://item.jd.com/11944267.html" title="一个月时间" target="_blank" rel="external">Go语言学习笔记</a></li>
+<li><a href="https://item.jd.com/11909234.html" title="一个月时间" target="_blank" rel="external">第一本Docker书</a></li>
+<li><a href="https://item.jd.com/11449491.html" title="三周时间" target="_blank" rel="external">图解HTTP</a></li>
+<li><a href="https://item.jd.com/11253710.html" title="三周时间" target="_blank" rel="external">图解TCP/IP</a></li>
+<li><a href="https://item.jd.com/11486101.html" title="一月时间" target="_blank" rel="external">Redis设计与实现</a></li>
+<li><a href="https://item.jd.com/11039445.html" title="一月时间" target="_blank" rel="external">构建高性能Web站点</a></li>
+<li><a href="https://item.jd.com/11462889.html" title="三周时间" target="_blank" rel="external">Scrum精髓</a></li>
+</ul>
+<h6 id="经济"><a href="#经济" class="headerlink" title="经济"></a>经济</h6><ul>
+<li><a href="https://item.jd.com/11943794.html" title="三周时间" target="_blank" rel="external">一课经济学</a></li>
+<li><a href="https://item.jd.com/10347073967.html" title="一月时间" target="_blank" rel="external">货币简史</a></li>
+<li><a href="https://item.jd.com/11548036.html" title="两月时间" target="_blank" rel="external">时寒冰说 未来二十年，经济大趋势（现实篇+未来篇)</a></li>
+</ul>
+<h6 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h6><ul>
+<li><a href="https://item.jd.com/11232323.html" title="三周时间" target="_blank" rel="external">给经理人的第一课</a></li>
+<li><a href="http://ppt.geekbang.org/slide/show/669/65275" title="从技术到管理的三大挑战" target="_blank" rel="external">从技术到管理的三大挑战</a></li>
+</ul>
+<h6 id="思维"><a href="#思维" class="headerlink" title="思维"></a>思维</h6><ul>
+<li>建议方法论方面的书籍,暂无合适的书，如有合适的可以添加我的微信：zhouzhi1229</li>
+</ul>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><h6 id="关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察-有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题："><a href="#关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察-有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题：" class="headerlink" title="关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察,有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题："></a>关于思考能力15年处于不会思考，16年通过对一部分公众号的阅读（碎片阅读，没有进行整理，这块得改进），以及对身边的人的处事方面进行观察,有所改进，对一些事务能有自己的部分独立看法，但是没有形成自己的一套方法论，这块还需要进行思考总结，目前会按照下面三种方式去思考问题：</h6><h6 id="1-设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做"><a href="#1-设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做" class="headerlink" title="1.设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做"></a>1.设身处地思考；这个思考方式举个小例子，比如说当你看到阿里的月饼门事件的报道，你是先看到事件本身然后去抨击阿里的好坏，还是把自己想象成ali的hrbp？或者想象成抢月饼的技术，如果你是他你会如何做？这样的几个角度会很好的锻炼思维，也能多方面的去思考问题；推荐在一些运营的问题上用这样的方式去思考，如果是我，我会怎么做</h6><h6 id="2-思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助"><a href="#2-思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助" class="headerlink" title="2.思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助"></a>2.思考事情发生的本质或者说事物产生的原因；举个例子为什么滴滴和快滴进行价格战？为什么最终滴滴和uber要合并？当然有些问题可能按照自己目前的认知水平很难回答，比如说人为什么或者；但是还是要按照这样的思维方式去思考，还是能给独立思考带来很大的帮助</h6><h6 id="3-对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划"><a href="#3-对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划" class="headerlink" title="3.对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划"></a>3.对标；这个思路能很好地应用到工作和生活中去，比如说我要做一个催收系统，但是我之前压根不了解他有什么，那么我们就可以去用市面上的产品，总结并结合自己的业务区思考；还有就是对于自己人生目标的设定，我特别崇拜某某，想成为他一样的技术大牛，我就去研究他会什么，然后是如何学习的，通过对他的研究，然后建立自己的一些规划</h6><h6 id="总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考"><a href="#总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考" class="headerlink" title="总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考"></a>总结：觉得这些都是一些零碎的思考点，希望能通过一些人或者书籍能够整理出自己对问题的一些解决方法和自己的思考模式，最终能够形成对事物的独立思考</h6><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h5 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h5><ul>
+<li>贷款流程：贷前，贷中，贷后</li>
+<li>贷前：指的是在给用户进行放款之前的时间</li>
+<li>贷中：指的是给用户放款之后和用户还款日期之前的时间</li>
+<li>贷后：指的是用户过了还款期限之后的时间</li>
+<li>催收系统：属于贷后的行为，主要是针对逾期不还款用户进行电话短信等催收服务，该系统用于协助贷后人员进行逾期订单的催回，以及贷后人员的人效管理</li>
+<li>回访系统：包含贷前和贷中部分风险控制策略，提前发现风险点</li>
+<li>呼叫中心：主要提供和呼叫相关的服务，具备多个呼叫通道，保障呼叫的可用性（提供服务包含：外呼，群呼，语音呼叫，转接等）</li>
+<li>CRM：客户关系管理系统，主要用户对客户的管理，以及对订单的实时跟踪</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
+<li>这一年工作中收获的更多的是对于业务的理解能力，做到了知其然知其所以然，也更多的站在了业务方的角度去思考问题，能够从一个更好的角度去思考一个产品，为什么要做（立项的必要性），要做成什么样子（定位），以及对项目周期的控制；<br>最深体验的是去催收部门（业务部门）干了一个月的催收，完完全全把自己当做一个催收入职员工，从培训到最后的催收案件（一个周期）完全融入催收的业务中。以便于：寻找技术能提升业务效率的环节；使用目前的催收系统的不便之处；观察别人的操作习惯；整理别人反馈的问题及思考必要性；<br>另外一个值得一提的是，在我的推动下立项的一个项目：呼叫系统；基于对整个公司对于呼叫业务的了解，录音文件的保存，接入三方呼叫平台的开发效率，呼叫业务的稳定性这几方面考虑，最终说服产品和上级投入人力开发呼叫中心<br>年底由于某些原因，跟着公司的创业团队重新从零开始，重新的进行了基础业务（代发发布，服务监控报警，日志收集报警）的开发，加强了之前部分理论学习的实践（比如shell，linux服务等）</li>
+</ul>
+<h5 id="业务时间轴"><a href="#业务时间轴" class="headerlink" title="业务时间轴"></a>业务时间轴</h5><ul>
+<li>3.10 - 4.1，催收（ 业务了解）</li>
+<li>4.9，出基本功能，两周一上线</li>
+<li>4-6月，需求迭代，语音模板，业务线收集需求，搜索模块开发</li>
+<li>6月底，基本用上新系统，语音模板，自动提醒</li>
+<li>7月，驻扎业务线，开发自动分配</li>
+<li>8月，整理呼叫中心的业务，整理回访需求，新业务数据对接进催收系统</li>
+<li>9-10月，呼叫中心开发，回访开发</li>
+<li>11月，钱隆对账出数据，统一呼叫平台，催收对接呼叫中心，统一管理录音文件，驻扎业务线 </li>
+<li>12月，发布脚本，日志收集，报警，服务监控</li>
+<li>12月中旬，crm业务了解</li>
+<li>1月-1.19，crm前端接口，后台管理系统，用户系统与钉钉打通</li>
+</ul>
+<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h5 id="健身"><a href="#健身" class="headerlink" title="健身"></a>健身</h5><ul>
+<li>体重从135斤飚升到了145斤，主要变化是两个时间点：</li>
+<li>1.在坚持了将近1个月去健身房的记录之后，体重飚升5斤，在健身房主要是跑步20-30分钟，做5-10分钟的器械，30个仰卧起坐，然后学习游泳，最大的收获就是学会了游泳（蛙泳）</li>
+<li>2.在坚持了两个周之后的keep以后，然后体重毅然又飚升了5斤</li>
+</ul>
+<h5 id="计划-1"><a href="#计划-1" class="headerlink" title="计划"></a>计划</h5><ul>
+<li>总的来说新的一年，先把体重降到135斤再说，主要从饮食和运动两个方面着手：</li>
+<li>1.睡前，早晨起来各30个俯卧撑，30个仰卧起坐</li>
+<li>2.坚持一周至少三天keep以及一次跑步</li>
+<li>3.喝绿茶（去年喝的是茶叶，水分摄入还是足够）</li>
+<li>4.多吃香蕉，苹果等水果（去年坚持的还算可以，主要是家里有人买水果）</li>
+<li>5.减少油腻食品的摄入，多吃蔬菜（很少吃蔬菜），晚饭尽量少吃</li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/29/2016年个人总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -396,6 +599,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -403,13 +610,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/21/环境变量的设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -417,38 +638,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">
-                  环境变量的设置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">环境变量的设置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-21T11:06:19+08:00" content="2016-12-21">
-              2016-12-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-21T11:06:19+08:00">
+                2016-12-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -456,7 +681,6 @@
 
                 
                 
-
               
             </span>
           
@@ -466,14 +690,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -482,21 +713,39 @@
       
         
           
-          永久对所有用户生效修改/etc/profile添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同pathmunge () {
+            <h1 id="永久对所有用户生效"><a href="#永久对所有用户生效" class="headerlink" title="永久对所有用户生效"></a>永久对所有用户生效</h1><h6 id="修改-etc-profile"><a href="#修改-etc-profile" class="headerlink" title="修改/etc/profile"></a>修改/etc/profile</h6><h6 id="添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同"><a href="#添加如下行-下面的PATH-PATH…是添加的-，对-etc-profile的不同，添加的位置可能不同" class="headerlink" title="添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同"></a>添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同</h6><pre><code>pathmunge () {
     case &quot;:${PATH}:&quot; in
-        *:&quot;$1&quot;:*
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/21/环境变量的设置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        *:&quot;$1&quot;:*)
+            ;;
+        *)
+            if [ &quot;$2&quot; = &quot;after&quot; ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+        PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/sbin:/usr/local/php/sbin:/usr/local/php/bin:/usr/local/nginx/sbin
+}
+</code></pre><h6 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source /etc/profile"></a>source /etc/profile</h6><h1 id="永久对当前用户生效（注意要重新登录才生效）"><a href="#永久对当前用户生效（注意要重新登录才生效）" class="headerlink" title="永久对当前用户生效（注意要重新登录才生效）"></a>永久对当前用户生效（注意要重新登录才生效）</h1><h6 id="修改-bash-profile"><a href="#修改-bash-profile" class="headerlink" title="修改~/.bash_profile"></a>修改~/.bash_profile</h6><pre><code>PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+</code></pre><h6 id="source-bash-profile"><a href="#source-bash-profile" class="headerlink" title="source ~/.bash_profile"></a>source ~/.bash_profile</h6><h1 id="临时对当前终端生效（终端断开，换将变量就需要重新设置）"><a href="#临时对当前终端生效（终端断开，换将变量就需要重新设置）" class="headerlink" title="临时对当前终端生效（终端断开，换将变量就需要重新设置）"></a>临时对当前终端生效（终端断开，换将变量就需要重新设置）</h1><h6 id="终端执行命令"><a href="#终端执行命令" class="headerlink" title="终端执行命令"></a>终端执行命令</h6><pre><code>export PATH=$PATH:/usr/local/mysql/sbin
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -506,6 +755,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -513,13 +766,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/19/rsyslog搭建日志系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -527,27 +794,27 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/12/19/rsyslog搭建日志系统/" itemprop="url">
-                  rsyslog搭建日志系统
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/12/19/rsyslog搭建日志系统/" itemprop="url">rsyslog搭建日志系统</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-19T19:09:44+08:00" content="2016-12-19">
-              2016-12-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-19T19:09:44+08:00">
+                2016-12-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
@@ -557,14 +824,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -573,22 +847,159 @@
       
         
           
-          安装rsyslog, 请跳转：安装rsyslog整体部署如图所示：
-配置client日志收集到本地在/etc/rsyslog.conf中添加一行*.* /tmp/rsyslog.log
-注释一行#$IncludeConfig /etc/rsyslog.d/*.conf
-配置日志收集到本地样例检验配置
-          ...
+            <h2 id="安装rsyslog-请跳转：安装rsyslog"><a href="#安装rsyslog-请跳转：安装rsyslog" class="headerlink" title="安装rsyslog, 请跳转：安装rsyslog"></a>安装rsyslog, 请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/rsyslog" title="rsyslog搭建日志系统" target="_blank" rel="external">安装rsyslog</a></h2><h6 id="整体部署如图所示："><a href="#整体部署如图所示：" class="headerlink" title="整体部署如图所示："></a>整体部署如图所示：</h6><p><img src="/img/rsyslog/rsyslog_alarm.png" alt="Alt text" title="运行结果"></p>
+<h2 id="配置client日志收集到本地"><a href="#配置client日志收集到本地" class="headerlink" title="配置client日志收集到本地"></a>配置client日志收集到本地</h2><h6 id="在-etc-rsyslog-conf中添加一行"><a href="#在-etc-rsyslog-conf中添加一行" class="headerlink" title="在/etc/rsyslog.conf中添加一行"></a>在/etc/rsyslog.conf中添加一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="注释一行"><a href="#注释一行" class="headerlink" title="注释一行"></a>注释一行</h6><pre><code>#$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="配置日志收集到本地样例"><a href="#配置日志收集到本地样例" class="headerlink" title="配置日志收集到本地样例"></a><a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/rsyslog_local.conf" title="配置日志收集到本地" target="_blank" rel="external">配置日志收集到本地样例</a></h6><h6 id="检验配置文件正确性"><a href="#检验配置文件正确性" class="headerlink" title="检验配置文件正确性"></a>检验配置文件正确性</h6><pre><code>rsyslogd -f /etc/rsyslog.conf -N1
+</code></pre><h6 id="查看错误信息"><a href="#查看错误信息" class="headerlink" title="查看错误信息"></a>查看错误信息</h6><pre><code>tail -n 100 /var/log/messages
+</code></pre><h6 id="重启rsyslog"><a href="#重启rsyslog" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
+</code></pre><h6 id="测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php"><a href="#测试写入rsyslog日志脚本-位置在-data1-htdocs-rsyslog-input-php" class="headerlink" title="测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)"></a>测试写入rsyslog日志脚本(位置在/data1/htdocs/rsyslog_input.php)</h6><pre><code>&lt;?php
+    $message=&apos;this is test&apos;;
+    openlog(&apos;this is test, do you know&apos;, LOG_ODELAY, LOG_LOCAL7);
+    syslog(LOG_DEBUG, $message);
+    closelog();
+</code></pre><h6 id="或者在终端运行（local7指定运行级别）"><a href="#或者在终端运行（local7指定运行级别）" class="headerlink" title="或者在终端运行（local7指定运行级别）"></a>或者在终端运行（local7指定运行级别）</h6><pre><code>#-p 指定自定义的日志设备，和配置文件的local5.*对应
+logger -it error  -p local5.info &quot;hello world&quot;
+</code></pre><h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><h6 id="运行脚本-usr-local-php-bin-php为你php的命令路径"><a href="#运行脚本-usr-local-php-bin-php为你php的命令路径" class="headerlink" title="运行脚本(/usr/local/php/bin/php为你php的命令路径)"></a>运行脚本(/usr/local/php/bin/php为你php的命令路径)</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
+</code></pre><h6 id="安装php环境，请跳转：安装php运行环境"><a href="#安装php环境，请跳转：安装php运行环境" class="headerlink" title="安装php环境，请跳转：安装php运行环境"></a>安装php环境，请跳转：<a href="https://github.com/SunnySmilez/Source/tree/master/lnmp" title="安装php运行环境" target="_blank" rel="external">安装php运行环境</a></h6><h6 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h6><pre><code>在/tmp/rsyslog.log中查看，会有我们记录的内容
+</code></pre><h2 id="client传输日志到server"><a href="#client传输日志到server" class="headerlink" title="client传输日志到server"></a>client传输日志到server</h2><h6 id="在-etc-rsyslog-conf文件中删除一行"><a href="#在-etc-rsyslog-conf文件中删除一行" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行"><a href="#在-etc-rsyslog-conf文件中添加一行" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="在-etc-rsyslog-d-添加文件client-conf"><a href="#在-etc-rsyslog-d-添加文件client-conf" class="headerlink" title="在/etc/rsyslog.d/添加文件client.conf"></a>在/etc/rsyslog.d/添加文件client.conf</h6><h6 id="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"><a href="#需要注意的是target是你的server的地址，配置client传输日志到server文件样例" class="headerlink" title="需要注意的是target是你的server的地址，配置client传输日志到server文件样例"></a>需要注意的是target是你的server的地址，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/client.conf" title="配置client传输日志到server文件样例" target="_blank" rel="external">配置client传输日志到server文件样例</a></h6><pre><code>if ($syslogfacility-text == &apos;local6&apos;) or ($syslogfacility-text == &apos;local7&apos;) or ($syslogtag == &apos;php:&apos;) or ($msg startswith &apos;PHP&apos;) then {
+        action(type=&quot;omfwd&quot;
+                        target=&quot;192.168.1.12&quot; port=&quot;514&quot; protocol=&quot;tcp&quot;
+                        queue.type=&quot;linkedList&quot;
+                        queue.spoolDirectory=&quot;/var/spool/rsyslog&quot;
+                        queue.fileName=&quot;fwd_rsyslog.com&quot;
+                        queue.maxDiskSpace=&quot;5g&quot;
+                        queue.saveOnShutdown=&quot;on&quot;
+                        action.resumeRetryCount=&quot;-1&quot;
+              )
+                ~
+}
+</code></pre><h6 id="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"><a href="#按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因" class="headerlink" title="按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因"></a>按照上述’配置client日志收集到本地’的步骤，配置好server服务器，如果接收到日志说明没有问题，如果有问题，请用tcpdump查看错误原因</h6><h2 id="配置server日志交给脚本处理"><a href="#配置server日志交给脚本处理" class="headerlink" title="配置server日志交给脚本处理"></a>配置server日志交给脚本处理</h2><h6 id="编辑日志处理脚本-data1-htdocs-rsyslog-php"><a href="#编辑日志处理脚本-data1-htdocs-rsyslog-php" class="headerlink" title="编辑日志处理脚本,/data1/htdocs/rsyslog.php"></a>编辑日志处理脚本,/data1/htdocs/rsyslog.php</h6><pre><code>&lt;?php
+while(!feof(STDIN)){
+        $line = trim(fgets(STDIN));
+        if (empty($line)) {
+                continue;
+        }
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/19/rsyslog搭建日志系统/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        file_put_contents(&apos;/tmp/rsyslog2.log&apos;, $line, FILE_APPEND);
+}
+</code></pre><h6 id="在-etc-rsyslog-conf文件中删除一行-1"><a href="#在-etc-rsyslog-conf文件中删除一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中删除一行"></a>在/etc/rsyslog.conf文件中删除一行</h6><pre><code>*.* /tmp/rsyslog.log
+</code></pre><h6 id="在-etc-rsyslog-conf文件中添加一行-1"><a href="#在-etc-rsyslog-conf文件中添加一行-1" class="headerlink" title="在/etc/rsyslog.conf文件中添加一行"></a>在/etc/rsyslog.conf文件中添加一行</h6><pre><code>$IncludeConfig /etc/rsyslog.d/*.conf
+</code></pre><h6 id="在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例"><a href="#在-etc-rsyslog-d-添加文件server-conf，server收集日志交给脚本处理配置文件样例" class="headerlink" title="在/etc/rsyslog.d/添加文件server.conf，server收集日志交给脚本处理配置文件样例"></a>在/etc/rsyslog.d/添加文件server.conf，<a href="https://github.com/SunnySmilez/Source/blob/master/rsyslog/conf/server.conf" title="server收集日志交给脚本处理配置文件样例" target="_blank" rel="external">server收集日志交给脚本处理配置文件样例</a></h6><pre><code>module(load=&quot;omprog&quot;)
+
+template(name=&quot;log&quot; type=&quot;string&quot; string=&quot;%fromhost-ip% %syslogtag% %msg%\n&quot;)
+
+*.* action(type=&quot;omprog&quot; binary=&quot;/usr/local/php/bin/php /data1/htdocs/rsyslog.php&quot; template=&quot;log&quot;)
+*.* ~
+</code></pre><h6 id="重启rsyslog-1"><a href="#重启rsyslog-1" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><pre><code>/etc/init.d/rsyslog restart
+</code></pre><h6 id="在client端写入日志"><a href="#在client端写入日志" class="headerlink" title="在client端写入日志"></a>在client端写入日志</h6><pre><code>/usr/local/php/bin/php /data1/htdocs/rsyslog_input.php
+</code></pre><h6 id="在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"><a href="#在server端查看-tmp-rsyslog2-log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本" class="headerlink" title="在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本"></a>在server端查看/tmp/rsyslog2.log的内容，如果有内容写入则整体架构搭建完成，可根据自己的需求去编写日志分析脚本</h6><h2 id="将nginx日志接入rsyslog-nginx主动推送"><a href="#将nginx日志接入rsyslog-nginx主动推送" class="headerlink" title="将nginx日志接入rsyslog(nginx主动推送)"></a>将nginx日志接入rsyslog(nginx主动推送)</h2><h6 id="男性交友网站有一个nginx的补丁包-nginx-syslog-patch"><a href="#男性交友网站有一个nginx的补丁包-nginx-syslog-patch" class="headerlink" title="男性交友网站有一个nginx的补丁包,nginx_syslog_patch"></a>男性交友网站有一个nginx的补丁包,<a href="https://github.com/yaoweibin/nginx_syslog_patch" title="nginx_syslog_patch" target="_blank" rel="external">nginx_syslog_patch</a></h6><h6 id="下载包（注意是整个包，不是一个patch的文件）"><a href="#下载包（注意是整个包，不是一个patch的文件）" class="headerlink" title="下载包（注意是整个包，不是一个patch的文件）"></a>下载包（注意是整个包，不是一个patch的文件）</h6><pre><code>git clone https://github.com/splitice/nginx_syslog_patch
+</code></pre><h5 id="进入到nginx的安装目录，然后进行patch"><a href="#进入到nginx的安装目录，然后进行patch" class="headerlink" title="进入到nginx的安装目录，然后进行patch"></a>进入到nginx的安装目录，然后进行patch</h5><pre><code>cd /usr/local/nginx-1.4.7 &amp;&amp; patch -p1 &lt; /usr/local/nginx_syslog_patch/syslog_1.4.0.patch
+./configure --add-module=/usr/local/nginx_syslog_patch/ --prefix=/usr/local/nginx &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><pre><code>worker_processes  1;
+#syslog logcal6 nginx这个很重要哦，只写一次就可以，当然也要看你放在哪里了
+syslog local6 nginx;
+events {
+        worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  &apos;$remote_addr - $remote_user [$time_local] $request &apos;
+        &apos;&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; &apos;
+        &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+    server {
+        listen       80;
+        server_name  localhost;
+        #send the log to syslog and file.
+        access_log  syslog:notice|logs/kinggoo.access.log main;
+         error_log syslog:notice|logs/kinggoo.error.log;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+    server {
+        listen       80;
+        server_name  www.example.com;
+
+        access_log  syslog:warn|logs/host2.access.log main;
+        error_log syslog:warn|logs/host2.error.log;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+    server {
+        listen       80;
+        server_name  www.test.com;
+
+        #send the log just to syslog.
+        access_log  syslog:error main;
+        error_log syslog:error;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+}
+</code></pre><h6 id="重启nginx"><a href="#重启nginx" class="headerlink" title="重启nginx"></a>重启nginx</h6><pre><code>/usr/local/nginx/sbin/nginx -s reload
+</code></pre><h6 id="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"><a href="#最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）" class="headerlink" title="最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）"></a>最好是对client和server的rsyslog都进行重启（理论上是可以忽略的）</h6><h6 id="访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志"><a href="#访问client的web，查看rsyslog（这里也就是-tmp-rsyslog2-log）中是否记录了nginx的日志" class="headerlink" title="访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志"></a>访问client的web，查看rsyslog（这里也就是/tmp/rsyslog2.log）中是否记录了nginx的日志</h6><h2 id="将php日志写入rsyslog"><a href="#将php日志写入rsyslog" class="headerlink" title="将php日志写入rsyslog"></a>将php日志写入rsyslog</h2><h6 id="修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询"><a href="#修改配置文件-此处的位置是-usr-local-php-etc-php-ini或者通过php-i-grep-php-ini查询" class="headerlink" title="修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)"></a>修改配置文件(此处的位置是/usr/local/php/etc/php.ini或者通过php -i | grep php.ini查询)</h6><pre><code>打开error_log = syslog这一行的注释，没有就添加吧
+</code></pre><h6 id="重启php-fpm"><a href="#重启php-fpm" class="headerlink" title="重启php-fpm"></a>重启php-fpm</h6><pre><code>killall php-fpm &amp;&amp; /usr/local/php/sbin/php-fpm
+</code></pre><h6 id="测试（故意写了语法错误）"><a href="#测试（故意写了语法错误）" class="headerlink" title="测试（故意写了语法错误）"></a>测试（故意写了语法错误）</h6><pre><code>php -r &quot;echo 11&quot;
+</code></pre><h5 id="查看server的-tmp-rsyslog2-log中是否存在日志"><a href="#查看server的-tmp-rsyslog2-log中是否存在日志" class="headerlink" title="查看server的/tmp/rsyslog2.log中是否存在日志"></a>查看server的/tmp/rsyslog2.log中是否存在日志</h5><h2 id="拉取nginx日志"><a href="#拉取nginx日志" class="headerlink" title="拉取nginx日志"></a>拉取nginx日志</h2><h6 id="添加-etc-rsyslog-d-nginx-biglog-conf文件"><a href="#添加-etc-rsyslog-d-nginx-biglog-conf文件" class="headerlink" title="添加/etc/rsyslog.d/nginx-biglog.conf文件"></a>添加/etc/rsyslog.d/nginx-biglog.conf文件</h6><pre><code>$ModLoad imfile
+$InputFilePollInterval 10
+$WorkDirectory /var/spool/rsyslog
+$PrivDropToGroup adm
+
+## Nginx访问日志文件路径，根据实际情况修改:
+$InputFileName /usr/local/nginx/logs/access.log
+$InputFileTag nginx-access:
+$InputFileStateFile stat-nginx-access
+$InputFileSeverity info
+$InputFilePersistStateInterval 25000
+$InputRunFileMonitor
+
+## Nginx错误日志文件路径，根据实际情况修改:
+$InputFileName /usr/local/nginx/logs/error.log
+$InputFileTag nginx-error:
+$InputFileStateFile stat-nginx-error
+$InputFileSeverity error
+$InputFilePersistStateInterval 25000
+$InputRunFileMonitor
+
+## 指定日志格式模板：
+$template BiglogFormatNginx,&quot;%msg%\n&quot;
+
+## 注意syslog日志服务器接收地址，根据实际情况修改：
+if $programname == &apos;nginx-access&apos; then @10.x.x.x:514;BiglogFormatNginx
+if $programname == &apos;nginx-access&apos; then ~
+if $programname == &apos;nginx-error&apos; then @10.x.x.x:514;BiglogFormatNginx
+if $programname == &apos;nginx-error&apos; then ~
+</code></pre><h6 id="重启rsyslog-2"><a href="#重启rsyslog-2" class="headerlink" title="重启rsyslog"></a>重启rsyslog</h6><h6 id="查看server的-tmp-rsyslog2-log中是否存在日志-1"><a href="#查看server的-tmp-rsyslog2-log中是否存在日志-1" class="headerlink" title="查看server的/tmp/rsyslog2.log中是否存在日志"></a>查看server的/tmp/rsyslog2.log中是否存在日志</h6>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -598,6 +1009,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -605,13 +1020,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/14/安装lnmp环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -619,38 +1048,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/12/14/安装lnmp环境/" itemprop="url">
-                  安装lnmp环境
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/12/14/安装lnmp环境/" itemprop="url">安装lnmp环境</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-14T15:21:17+08:00" content="2016-12-14">
-              2016-12-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-14T15:21:17+08:00">
+                2016-12-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -658,7 +1091,6 @@
 
                 
                 
-
               
             </span>
           
@@ -668,14 +1100,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -684,20 +1123,127 @@
       
         
           
-          注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）安装nginx依赖yum install gcc zlib-devel pcre-devel openssl-devel gcc-c++ gcc-g77
-安装nginxwget 
-          ...
+            <h2 id="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）"><a href="#注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用-tar-zxvf解压）" class="headerlink" title="注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）"></a>注意需要wget的包都已经在source文件夹中存在，可直接下载安装（不过都是tar包，注意使用 tar -zxvf解压）</h2><h2 id="安装nginx依赖"><a href="#安装nginx依赖" class="headerlink" title="安装nginx依赖"></a>安装nginx依赖</h2><pre><code>yum install gcc zlib-devel pcre-devel openssl-devel gcc-c++ gcc-g77
+</code></pre><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>wget http://nginx.org/download/nginx-1.4.7.tar.gz
+tar -zxvf nginx-1.4.7.tar.gz
+cd nginx-1.4.7
+./configure --prefix=/usr/local/nginx --with-openssl=/usr/include/openssl --with-pcre --with-http_stub_status_module &amp;&amp; make &amp;&amp; make install
+useradd www
+groupadd www
+useradd -g www www
+</code></pre><h5 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h5><pre><code>/usr/local/nginx/sbin/nginx
+</code></pre><h5 id="查看端口是否启动"><a href="#查看端口是否启动" class="headerlink" title="查看端口是否启动"></a>查看端口是否启动</h5><pre><code>ss -tlun | grep 80  或者 netstat -antlp ¦ grep 80
+</code></pre><h2 id="安装mysql依赖"><a href="#安装mysql依赖" class="headerlink" title="安装mysql依赖"></a>安装mysql依赖</h2><pre><code>yum install ncurses-devel perl-Data-Dumper.x86_64 libaio*
+</code></pre><h2 id="安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了"><a href="#安装mysql-因为下载的包是已经编译好的，所以直接初始化就好了" class="headerlink" title="安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)"></a>安装mysql(因为下载的包是已经编译好的，所以直接初始化就好了)</h2><pre><code>wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
+useradd -M -s /sbin/nologin mysql # -M 不添加家目录，-s不能指定shell登录
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/14/安装lnmp环境/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+tar -zxvf mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
+cp -R mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz /usr/local/mysql
+</code></pre><h5 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h5><pre><code>cd /usr/local/mysql
+chown -R mysql:mysql ./
+scripts/mysql_install_db --user=mysql
+chown -R root:root ./
+
+cp support-files/mysql.server /etc/init.d/mysqld        #复制启动脚本
+chmod +x /etc/init.d/mysqld                             #添加执行权限
+</code></pre><h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><pre><code>mysqladmin -u root password &quot;123123&quot;                   #账号为root密码为123123
+</code></pre><h5 id="添加mysql软连接，php编译安装的时候依赖"><a href="#添加mysql软连接，php编译安装的时候依赖" class="headerlink" title="添加mysql软连接，php编译安装的时候依赖"></a>添加mysql软连接，php编译安装的时候依赖</h5><pre><code>ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib/         
+ln -s /usr/local/mysql/lib/mysql/lib* /usr/lib64/
+</code></pre><h5 id="启动mysql检查端口启动"><a href="#启动mysql检查端口启动" class="headerlink" title="启动mysql检查端口启动"></a>启动mysql检查端口启动</h5><pre><code>service mysqld start
+netstat -antlp ¦ grep 3306 或者 ss -tlun | grep 3306
+</code></pre><h2 id="安装php依赖"><a href="#安装php依赖" class="headerlink" title="安装php依赖"></a>安装php依赖</h2><h5 id="安装libmcrypt"><a href="#安装libmcrypt" class="headerlink" title="安装libmcrypt"></a>安装libmcrypt</h5><pre><code>wget -O libmcrypt-2.5.8.tar.bz2 http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.bz2/download
+tar -jxvf libmcrypt-2.5.8.tar.bz2
+cd libmcrypt-2.5.8
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="安装mhash"><a href="#安装mhash" class="headerlink" title="安装mhash"></a>安装mhash</h5><pre><code>wget -O mhash-0.9.9.9.tar.bz2 http://sourceforge.net/projects/mhash/files/mhash/0.9.9.9/mhash-0.9.9.9.tar.bz2/download
+tar -jxvf mhash-0.9.9.9.tar.bz2
+cd mhash-0.9.9.9
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="解决mcrypt依赖"><a href="#解决mcrypt依赖" class="headerlink" title="解决mcrypt依赖"></a>解决mcrypt依赖</h5><pre><code>ln -s /usr/local/lib/libmcrypt* /usr/lib
+ln -s /usr/local/lib/libmcrypt* /usr/lib64
+ln -s /usr/local/lib/libmhash.* /usr/lib/
+ln -s /usr/local/lib/libmhash.* /usr/lib64/
+ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
+ln -s /usr/lib64/liblber* /usr/lib/
+ln -s /usr/lib64/liblber* /usr/lib64/
+</code></pre><h4 id="安装mcrypt"><a href="#安装mcrypt" class="headerlink" title="安装mcrypt"></a>安装mcrypt</h4><pre><code>wget -O mcrypt-2.6.8.tar.gz http://sourceforge.net/projects/mcrypt/files/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz/download
+tar -zxvf mcrypt-2.6.8.tar.gz
+cd mcrypt-2.6.8
+./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="解决php其他依赖"><a href="#解决php其他依赖" class="headerlink" title="解决php其他依赖"></a>解决php其他依赖</h5><pre><code>yum install -y gcc gcc-c++  make zlib zlib-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers libxslt-devel autoconf
+ln -s /usr/lib64/libldap* /usr/lib/
+ln -s /usr/lib64/libldap* /usr/lib64/
+</code></pre><h4 id="安装freetype"><a href="#安装freetype" class="headerlink" title="安装freetype"></a>安装freetype</h4><h6 id="理论上是在解决依赖的时候yum安装了freetype-freetype-devel"><a href="#理论上是在解决依赖的时候yum安装了freetype-freetype-devel" class="headerlink" title="理论上是在解决依赖的时候yum安装了freetype freetype-devel"></a>理论上是在解决依赖的时候yum安装了freetype freetype-devel</h6><pre><code>wget https://jaist.dl.sourceforge.net/project/freetype/freetype2/2.6/freetype-2.6.tar.gz
+tar -zxvf freetype-2.6.tar.gz
+cd freetype-2.6
+./configure --prefix=/usr/local/lib/freetype &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可"><a href="#编辑-etc-ld-so-conf-加入-usr-local-lib-再执行-ldconfig即可" class="headerlink" title="编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可"></a>编辑 /etc/ld.so.conf 加入/usr/local/lib 再执行 ldconfig即可</h5><h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><pre><code>wget -O php-7.0.14.tar.gz http://cn2.php.net/get/php-7.0.14.tar.gz/from/this/mirror
+tar -jxvf php-7.0.14.tar.gz
+cd php-7.0.14
+./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysqli=/usr/local/mysql/ --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql  --with-iconv-dir=/usr/local/ --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-sysvshm --enable-inline-optimization --with-curl  --enable-mbregex  --enable-fpm --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap=/usr/ --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap --enable-opcache --enable-ftp --enable-calendar --with-xsl --with-gettext --enable-session --enable-ctype --with-kerberos --with-libdir=/lib/ --with-pcre-regex --enable-exif --with-bz2 &amp;&amp; make &amp;&amp; make install
+cp php.ini-production /usr/local/php/etc/php.ini
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+ln -s /usr/local/php/bin/php /usr/bin/
+cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/demo.conf
+/usr/local/php/sbin/php-fpm
+</code></pre><h2 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h2><h5 id="编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件"><a href="#编辑-usr-local-nginx-conf-nginx-conf，添加解析php文件" class="headerlink" title="编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件"></a>编辑/usr/local/nginx/conf/nginx.conf，添加解析php文件</h5><pre><code>location / {
+    root   /data/htdocs;                           # 设置代码根目录     
+    index  index.php index.html index.htm;         # 添加index.php的首页文件
+}
+</code></pre><h5 id="添加如下代码，解析php文件，注意SCRIPT-FILENAME"><a href="#添加如下代码，解析php文件，注意SCRIPT-FILENAME" class="headerlink" title="添加如下代码，解析php文件，注意SCRIPT_FILENAME"></a>添加如下代码，解析php文件，注意SCRIPT_FILENAME</h5><pre><code>location ~ \.php$ {
+    fastcgi_pass        127.0.0.1:9000;
+    fastcgi_index       index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name; #注意SCRIPT_FILENAME
+    include fastcgi_params;
+    include fastcgi.conf;
+}
+</code></pre><h5 id="重启nginx-usr-local-nginx-sbin-nginx"><a href="#重启nginx-usr-local-nginx-sbin-nginx" class="headerlink" title="重启nginx /usr/local/nginx/sbin/nginx"></a>重启nginx /usr/local/nginx/sbin/nginx</h5><h5 id="在-data-htdocs中添加php文件测试"><a href="#在-data-htdocs中添加php文件测试" class="headerlink" title="在/data/htdocs中添加php文件测试"></a>在/data/htdocs中添加php文件测试</h5><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><pre><code>yum install redis
+redis-server &amp;
+</code></pre><h2 id="添加reids拓展"><a href="#添加reids拓展" class="headerlink" title="添加reids拓展"></a>添加reids拓展</h2><h5 id="下载php7对应的redis拓展"><a href="#下载php7对应的redis拓展" class="headerlink" title="下载php7对应的redis拓展"></a>下载php7对应的redis拓展</h5><pre><code>wget https://github.com/phpredis/phpredis/archive/php7.zip
+unzip php7.zip
+cd phpredis-php7/
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
+</code></pre><h5 id="编辑配置文件，添加redis-so拓展"><a href="#编辑配置文件，添加redis-so拓展" class="headerlink" title="编辑配置文件，添加redis.so拓展"></a>编辑配置文件，添加redis.so拓展</h5><pre><code>vim /usr/local/php/etc/php.ini
+添加如下行：
+extension=redis.so
+</code></pre><h5 id="重启nginx-php-fpm"><a href="#重启nginx-php-fpm" class="headerlink" title="重启nginx,php-fpm"></a>重启nginx,php-fpm</h5><h5 id="查看安装结果"><a href="#查看安装结果" class="headerlink" title="查看安装结果"></a>查看安装结果</h5><pre><code>php -i | grep redis
+</code></pre><h2 id="安装yaf拓展-用不到yaf框架可以进行以下步骤"><a href="#安装yaf拓展-用不到yaf框架可以进行以下步骤" class="headerlink" title="安装yaf拓展(用不到yaf框架可以进行以下步骤)"></a>安装yaf拓展(用不到yaf框架可以进行以下步骤)</h2><pre><code>wget pecl.php.net//get/yaf-3.0.4.tgz
+tar -zxvf yaf-3.0.4.tgz
+cd yaf-3.0.4
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config &amp;&amp; make &amp;&amp; make install
+vim /usr/local/php/etc/php.ini
+</code></pre><h6 id="修改php-ini配置-添加如下配置"><a href="#修改php-ini配置-添加如下配置" class="headerlink" title="修改php.ini配置(添加如下配置)"></a>修改php.ini配置(添加如下配置)</h6><pre><code>[yaf]
+extension=yaf.so
+yaf.library=/data1/phplib
+yaf.name_suffix=0
+yaf.use_namespace=1
+yaf.name_separator=&quot;_&quot;
+yaf.action_prefer=0
+yaf.environ=dev
+</code></pre><h4 id="安装遇到的问题"><a href="#安装遇到的问题" class="headerlink" title="安装遇到的问题"></a>安装遇到的问题</h4><pre><code>/usr/bin/ld: ext/ldap/.libs/ldap.o: undefined reference to symbol &apos;ber_strdup&apos;
+/usr/lib64/liblber-2.4.so.2: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+make: *** [sapi/cli/php] 错误 1
+</code></pre><h5 id="安装ldap的错误，如果不需要可以删除编译的ldap的部分，按照如下步骤解决该错误"><a href="#安装ldap的错误，如果不需要可以删除编译的ldap的部分，按照如下步骤解决该错误" class="headerlink" title="安装ldap的错误，如果不需要可以删除编译的ldap的部分，按照如下步骤解决该错误"></a>安装ldap的错误，如果不需要可以删除编译的ldap的部分，按照如下步骤解决该错误</h5><h6 id="执行-configure-–prefix-usr-local-php-–with-config-file-path-usr-local-php-etc-–with-mysqli-usr-local-mysql-–with-mysqli-usr-local-mysql-bin-mysql-config-–with-pdo-mysql-–with-iconv-dir-usr-local-–with-freetype-dir-–with-jpeg-dir-–with-png-dir-–with-zlib-–with-zlib-dir-–with-libxml-dir-usr-–enable-xml-–disable-rpath-–enable-bcmath-–enable-shmop-–enable-sysvsem-–enable-sysvshm-–enable-inline-optimization-–with-curl-–enable-mbregex-–enable-fpm-–enable-mbstring-–with-mcrypt-–with-gd-–enable-gd-native-ttf-–with-openssl-–with-mhash-–enable-pcntl-–enable-sockets-–with-ldap-usr-–with-ldap-sasl-–with-xmlrpc-–enable-zip-–enable-soap-–enable-opcache-–enable-ftp-–enable-calendar-–with-xsl-–with-gettext-–enable-session-–enable-ctype-–with-kerberos-–with-libdir-lib-–with-pcre-regex-–enable-exif-–with-bz2"><a href="#执行-configure-–prefix-usr-local-php-–with-config-file-path-usr-local-php-etc-–with-mysqli-usr-local-mysql-–with-mysqli-usr-local-mysql-bin-mysql-config-–with-pdo-mysql-–with-iconv-dir-usr-local-–with-freetype-dir-–with-jpeg-dir-–with-png-dir-–with-zlib-–with-zlib-dir-–with-libxml-dir-usr-–enable-xml-–disable-rpath-–enable-bcmath-–enable-shmop-–enable-sysvsem-–enable-sysvshm-–enable-inline-optimization-–with-curl-–enable-mbregex-–enable-fpm-–enable-mbstring-–with-mcrypt-–with-gd-–enable-gd-native-ttf-–with-openssl-–with-mhash-–enable-pcntl-–enable-sockets-–with-ldap-usr-–with-ldap-sasl-–with-xmlrpc-–enable-zip-–enable-soap-–enable-opcache-–enable-ftp-–enable-calendar-–with-xsl-–with-gettext-–enable-session-–enable-ctype-–with-kerberos-–with-libdir-lib-–with-pcre-regex-–enable-exif-–with-bz2" class="headerlink" title="执行./configure –prefix=/usr/local/php –with-config-file-path=/usr/local/php/etc –with-mysqli=/usr/local/mysql/ –with-mysqli=/usr/local/mysql/bin/mysql_config –with-pdo-mysql  –with-iconv-dir=/usr/local/ –with-freetype-dir –with-jpeg-dir –with-png-dir –with-zlib –with-zlib-dir –with-libxml-dir=/usr –enable-xml –disable-rpath –enable-bcmath –enable-shmop –enable-sysvsem –enable-sysvshm –enable-inline-optimization –with-curl  –enable-mbregex  –enable-fpm –enable-mbstring –with-mcrypt –with-gd –enable-gd-native-ttf –with-openssl –with-mhash –enable-pcntl –enable-sockets –with-ldap=/usr/ –with-ldap-sasl –with-xmlrpc –enable-zip –enable-soap –enable-opcache –enable-ftp –enable-calendar –with-xsl –with-gettext –enable-session –enable-ctype –with-kerberos –with-libdir=/lib/ –with-pcre-regex –enable-exif –with-bz2"></a>执行./configure –prefix=/usr/local/php –with-config-file-path=/usr/local/php/etc –with-mysqli=/usr/local/mysql/ –with-mysqli=/usr/local/mysql/bin/mysql_config –with-pdo-mysql  –with-iconv-dir=/usr/local/ –with-freetype-dir –with-jpeg-dir –with-png-dir –with-zlib –with-zlib-dir –with-libxml-dir=/usr –enable-xml –disable-rpath –enable-bcmath –enable-shmop –enable-sysvsem –enable-sysvshm –enable-inline-optimization –with-curl  –enable-mbregex  –enable-fpm –enable-mbstring –with-mcrypt –with-gd –enable-gd-native-ttf –with-openssl –with-mhash –enable-pcntl –enable-sockets –with-ldap=/usr/ –with-ldap-sasl –with-xmlrpc –enable-zip –enable-soap –enable-opcache –enable-ftp –enable-calendar –with-xsl –with-gettext –enable-session –enable-ctype –with-kerberos –with-libdir=/lib/ –with-pcre-regex –enable-exif –with-bz2</h6><h6 id="编辑php目录下的Makefile文件，找到”EXTRA-LIBS-”开头的这一行，在行尾添加-llber"><a href="#编辑php目录下的Makefile文件，找到”EXTRA-LIBS-”开头的这一行，在行尾添加-llber" class="headerlink" title="编辑php目录下的Makefile文件，找到”EXTRA_LIBS =”开头的这一行，在行尾添加-llber"></a>编辑php目录下的Makefile文件，找到”EXTRA_LIBS =”开头的这一行，在行尾添加-llber</h6>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -707,11 +1253,14 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -740,98 +1289,123 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -845,80 +1419,65 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -926,40 +1485,140 @@
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

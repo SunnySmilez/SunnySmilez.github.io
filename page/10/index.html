@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/10/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/22/go学习笔记表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">
-                  go学习笔记表达式
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">go学习笔记表达式</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-22T10:54:47+08:00" content="2017-02-22">
-              2017-02-22
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T10:54:47+08:00">
+                2017-02-22
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,20 +326,259 @@
       
         
           
-          保留字在程序中不可以使用的名字break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
-package,switch,const,fallthrough,if,range,type,continue,f
-          ...
+            <h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><h6 id="在程序中不可以使用的名字"><a href="#在程序中不可以使用的名字" class="headerlink" title="在程序中不可以使用的名字"></a>在程序中不可以使用的名字</h6><pre><code>break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
+package,switch,const,fallthrough,if,range,type,continue,for,import,return,var
+</code></pre><h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>+       &amp;        +=       &amp;=        &amp;&amp;       ==       !=       (       )
+-       |        -=       |=        ||       &lt;        &lt;=       [       ]
+*       ^        *=       ^=        &lt;-       &gt;        &gt;=       {       }
+/       &lt;&lt;       /=       &lt;&lt;=       ++       =        :=       ,       ;
+%       &gt;&gt;       %=       &gt;&gt;=       --       !        ...      .       :
+&amp;^      &amp;^=
+</code></pre><h1 id="简单位运算符"><a href="#简单位运算符" class="headerlink" title="简单位运算符"></a>简单位运算符</h1><pre><code>0110 &amp;  1011 = 0010     //AND 都为1
+0110 |  1011 = 1111     //OR 至少一个为1
+0110 ^  1011 = 1101     //XOR 只能一个为1
+0110 &amp;^ 1011 = 0100     //AND NOT 清楚标志位 m &amp;^ n 下面的数字是n的二进制是1值为0，二进制是0值为m中对应的值
+</code></pre><h1 id="标志位操作"><a href="#标志位操作" class="headerlink" title="标志位操作"></a>标志位操作</h1><pre><code>a := 0
+a |= 1 &lt;&lt; 2             //&lt;&lt;左移运算符 比如：1&lt;&lt;2 则表示：1的二进制表示为：000...0001(这里1前面0的个数和int的位数有关,32位机器,gcc里有31个0)，那么像左移动两位则是000...000100
+a |= 1 &lt;&lt; 6             //a|=b表示的意思就是a=a|b（注意OR运算是需要先转换成二进制的）
+a = a &amp;^ (1 &lt;&lt; 6)
+</code></pre><h1 id="不支持运算符重载"><a href="#不支持运算符重载" class="headerlink" title="不支持运算符重载"></a>不支持运算符重载</h1><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/22/go学习笔记表达式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    n := 0
+    p := &amp;n
+    //b := n++          //报错
+    //if n++ == 1 {}    //报错
+    //++n               //报错
+    n++
+    *p++
+
+    fmt.Println(n, p)
+}
+</code></pre><h1 id="没有’-’，取反运算也用’-’"><a href="#没有’-’，取反运算也用’-’" class="headerlink" title="没有’~’，取反运算也用’^’"></a>没有’~’，取反运算也用’^’</h1><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    x := 1
+    x = ^x
+
+    fmt.Println(x)
+}
+</code></pre><h1 id="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"><a href="#初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部" class="headerlink" title="初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部"></a>初始化符合对象，必须使用类型标签，且左大括号必须在类型尾部</h1><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    //var a struct{ x int } = { 100 }     //报错
+    //var b []int = { 1, 2, 3 }           //报错
+    //c := struct { x int; y string }     //报错
+    //{
+    //}
+    var a = struct { x int } { 100 }
+    var b = []int{  //可以分行
+                    1,
+                    2,
+                    3,  //分开的话，最后一行要一个&apos;,&apos;
+    }
+
+    var c = []int{  //可以分行
+                        1,
+                        2,
+                        3}  //分开的话，最后一行要一个&apos;}&apos;
+
+    fmt.Println(a, b, c)
+}
+</code></pre><h1 id="IF语句"><a href="#IF语句" class="headerlink" title="IF语句"></a>IF语句</h1><h6 id="可省略条件表达式括号"><a href="#可省略条件表达式括号" class="headerlink" title="可省略条件表达式括号"></a>可省略条件表达式括号</h6><h6 id="支持初始化语句，可定义代码块局部变量"><a href="#支持初始化语句，可定义代码块局部变量" class="headerlink" title="支持初始化语句，可定义代码块局部变量"></a>支持初始化语句，可定义代码块局部变量</h6><h6 id="代码块左大括号必须在条件表达式尾部"><a href="#代码块左大括号必须在条件表达式尾部" class="headerlink" title="代码块左大括号必须在条件表达式尾部"></a>代码块左大括号必须在条件表达式尾部</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    x := 0
+
+    if n := &quot;abc&quot;; x&gt;10 {
+       fmt.Println(n[1])
+    } else if x &lt;0 {
+        fmt.Println(n[2])
+    } else {
+        println(n[0])
+    }
+}
+</code></pre><h1 id="不支持三元运算符"><a href="#不支持三元运算符" class="headerlink" title="不支持三元运算符"></a>不支持三元运算符</h1><pre><code>package main
+
+func main() {
+    a := 0
+    b := 1
+
+    c := a &gt; b ? a : b      //报错
+    println(c)
+}
+</code></pre><h1 id="For（循环语句）"><a href="#For（循环语句）" class="headerlink" title="For（循环语句）"></a>For（循环语句）</h1><pre><code>package main
+
+func main() {
+    s := &quot;abc&quot;
+    //常见的for循环方式
+    for i,n :=0, len(s); i &lt; n; i++ {
+        println(i)
+    }
+
+    //while的for循环方式
+    n := len(s)
+    for n &gt; 0 {
+        println(n)
+        n--
+    }
+
+    //while(true) {} 死循环
+    for {
+        println(s)
+    }
+}
+</code></pre><h1 id="Range-类似迭代器操作，返回键值"><a href="#Range-类似迭代器操作，返回键值" class="headerlink" title="Range(类似迭代器操作，返回键值)"></a>Range(类似迭代器操作，返回键值)</h1><pre><code>package main
+
+func main() {
+    s := &quot;abc&quot;
+
+    for i := range s {      //默认忽略值，只把键赋值给了i变量
+        println(i, s[i])
+    }
+
+    for _, c := range s {   //默认丢弃了键，把值赋给了c变量
+        println(c)
+    }
+
+    var d = 0
+    for range s {           //抛弃键值，只循环
+        d++
+    }
+
+    println(d)
+
+    m := map[string]int{&quot;a&quot;:1, &quot;b&quot;:2}
+    for k,v := range m {        //遍历出键值
+        println(k,v)
+    }
+}
+</code></pre><h1 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h1><pre><code>package main
+
+func main() {
+    x := []int{1, 2, 3}
+    i := 3
+    switch i {
+        case x[1]:
+            println(&quot;a&quot;)
+        case x[2], 1:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+
+
+package main
+
+func main() {
+    x := 10
+    switch x {
+        case 10:
+            println(&quot;a&quot;)
+            fallthrough //需要继续下一分支，使用fallthrough
+        case 0:
+            println(&quot;c&quot;)
+    }
+}
+
+package main
+
+func main() {
+    x := []int{1, 2, 3}
+    switch {
+        case x[1] &gt; 0:      //当做if else使用 
+            println(&quot;a&quot;)
+        case x[1] &lt; 0:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+
+package main
+
+func main() {
+    x := []int{1, 2, 3}
+    switch i := x[2]; { //带初始值
+        case i &gt; 0:
+            println(&quot;a&quot;)
+        case i &lt; 0:
+            println(&quot;b&quot;)
+        default:
+            println(&quot;c&quot;)
+    }
+}
+</code></pre><h1 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h1><pre><code>package main
+
+func main() {
+    var i int
+    for {
+        println(i)
+        i++
+        if i &gt; 2 {
+            goto TEST
+        }
+    }
+
+    TEST:
+        println(&quot;break&quot;)
+}
+</code></pre><h1 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h1><pre><code>package main
+
+func main() {
+    L1:
+        for x := 0;x &lt; 3; x++ {
+    L2:
+            for y := 0;y &lt; 5;y++ {
+                if y &gt; 2 {
+                    continue L2
+                }
+
+                if x &gt; 1 {
+                    break L1        //break可用于for,switch,select而continue只能用于for循环
+                }
+
+                print(x, &quot;:&quot;, y, &quot; &quot;)
+            }
+
+            println()
+        }
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -288,6 +588,10 @@ package,switch,const,fallthrough,if,range,type,continue,f
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -295,13 +599,27 @@ package,switch,const,fallthrough,if,range,type,continue,f
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -309,38 +627,42 @@ package,switch,const,fallthrough,if,range,type,continue,f
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记类型/" itemprop="url">
-                  go学习笔记类型
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/20/go学习笔记类型/" itemprop="url">go学习笔记类型</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:33:27+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:33:27+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -348,7 +670,6 @@ package,switch,const,fallthrough,if,range,type,continue,f
 
                 
                 
-
               
             </span>
           
@@ -358,14 +679,21 @@ package,switch,const,fallthrough,if,range,type,continue,f
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -374,7 +702,7 @@ package,switch,const,fallthrough,if,range,type,continue,f
       
         
           
-          类型转换package main
+            <h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><pre><code>package main
 
 func main() {
     var b byte = 100
@@ -382,19 +710,184 @@ func main() {
     //var n int = int(b)//显示转换
     println(n)
 }
-其他值不能当作bool值使用
-          ...
+</code></pre><h1 id="其他值不能当作bool值使用"><a href="#其他值不能当作bool值使用" class="headerlink" title="其他值不能当作bool值使用"></a>其他值不能当作bool值使用</h1><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记类型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+func main() {
+    a := 100
+    if a {
+        printf(&quot;aaa&quot;)
+    }
+}
+</code></pre><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h6 id="字符串是不可变值类型，内部用指针指向UTF-8字节数组"><a href="#字符串是不可变值类型，内部用指针指向UTF-8字节数组" class="headerlink" title="字符串是不可变值类型，内部用指针指向UTF-8字节数组"></a>字符串是不可变值类型，内部用指针指向UTF-8字节数组</h6><h6 id="默认值是控制符串””"><a href="#默认值是控制符串””" class="headerlink" title="默认值是控制符串””"></a>默认值是控制符串””</h6><h6 id="用索引号访问某字节，如s-i"><a href="#用索引号访问某字节，如s-i" class="headerlink" title="用索引号访问某字节，如s[i]"></a>用索引号访问某字节，如s[i]</h6><h6 id="不能用序号获取字节元素指针。-amp-s-i-非法"><a href="#不能用序号获取字节元素指针。-amp-s-i-非法" class="headerlink" title="不能用序号获取字节元素指针。&amp;s[i]非法"></a>不能用序号获取字节元素指针。&amp;s[i]非法</h6><h6 id="不可变类型，无法修改字节数组"><a href="#不可变类型，无法修改字节数组" class="headerlink" title="不可变类型，无法修改字节数组"></a>不可变类型，无法修改字节数组</h6><h6 id="字节数组尾部不包含NULL"><a href="#字节数组尾部不包含NULL" class="headerlink" title="字节数组尾部不包含NULL"></a>字节数组尾部不包含NULL</h6><h6 id="使用反引号定义不做转义处理的原始字符串，支持跨行"><a href="#使用反引号定义不做转义处理的原始字符串，支持跨行" class="headerlink" title="使用反引号定义不做转义处理的原始字符串，支持跨行"></a>使用反引号定义不做转义处理的原始字符串，支持跨行</h6><pre><code>package main
+
+func main() {
+    s := `abc
+    asdfa
+    c
+    `
+    println(s)  //结果就是字符串
+}
+</code></pre><h6 id="连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误"><a href="#连接跨行字符串时，”-”必须在上一行末尾，否则导致编译错误" class="headerlink" title="连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误"></a>连接跨行字符串时，”+”必须在上一行末尾，否则导致编译错误</h6><pre><code>package main
+
+func main() {
+    s := &quot;hello！&quot; +
+        &quot;world!&quot;
+
+    println(s)  //输出结果为hello！world!
+}
+</code></pre><h6 id="支持用两个索引号返回子串"><a href="#支持用两个索引号返回子串" class="headerlink" title="支持用两个索引号返回子串"></a>支持用两个索引号返回子串</h6><pre><code>package main
+
+func main() {
+    s := &quot;hello,&quot; +
+        &quot;world!&quot;
+
+    s1 := s[:5]
+    s2 := s[7:]
+    s3 := s[1:7]
+    println(s1, s2, s3) //hello orld! ello,w
+}
+</code></pre><h6 id="单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式"><a href="#单引号字符创常量表示Unicode-Code-Point-支持-uFFFF-U7FFFFFFF-xFF格式" class="headerlink" title="单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式"></a>单引号字符创常量表示Unicode Code Point,支持\uFFFF,\U7FFFFFFF,\xFF格式</h6><pre><code>package main
+
+func main() {
+    println(&quot;%T\n&quot;, &apos;a&apos;)
+    var c1, c2 rune = &apos;\u6211&apos;, &apos; &apos;
+    println(c1 == &apos; &apos;, string(c2) == &quot;\xe4\xbb\xac&quot;)
+}
+</code></pre><h6 id="要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"><a href="#要修改字符串，必须先将其转换成-rune或-byte-完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组" class="headerlink" title="要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组"></a>要修改字符串，必须先将其转换成[]rune或[]byte,完成后再转换为string，这两种方式都会重新分配内存，并复制字节数组</h6><pre><code>package main
+
+func main() {
+    s := &quot;abcd&quot;
+    bs := []byte(s)
+    bs[1] = &apos;B&apos;
+    println(string(bs)) //aBcd
+
+    u := &quot;电脑&quot;
+    us := []rune(u)
+    us[1] = &apos;话&apos;
+    println(string(us)) //电话
+}
+</code></pre><h6 id="用for循环遍历字符串时，也有byte和rune两种方式"><a href="#用for循环遍历字符串时，也有byte和rune两种方式" class="headerlink" title="用for循环遍历字符串时，也有byte和rune两种方式"></a>用for循环遍历字符串时，也有byte和rune两种方式</h6><pre><code>package main
+import &quot;fmt&quot;
+
+func main() {
+    s := &quot;abcd语言&quot;
+    for i := 0; i&lt;len(s); i++ {
+        fmt.Printf(&quot;%c&quot;, s[i])  //abcdè¯­è¨    byte方式
+    }
+
+    for _, r := range s {
+        fmt.Printf(&quot;%c&quot;, r)     //abcd语言    rune方式
+    }
+}
+</code></pre><h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h6 id="默认值为nil，没有NULL常量"><a href="#默认值为nil，没有NULL常量" class="headerlink" title="默认值为nil，没有NULL常量"></a>默认值为nil，没有NULL常量</h6><h6 id="操作符”-amp-”取变量地址，”-”透过指针访问目标对象"><a href="#操作符”-amp-”取变量地址，”-”透过指针访问目标对象" class="headerlink" title="操作符”&amp;”取变量地址，”*”透过指针访问目标对象"></a>操作符”&amp;”取变量地址，”*”透过指针访问目标对象</h6><h6 id="不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员"><a href="#不支持指针运算，不支持”-gt-”运算符，直接用”-”访问目标成员" class="headerlink" title="不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员"></a>不支持指针运算，不支持”-&gt;”运算符，直接用”.”访问目标成员</h6><pre><code>package main
+import &quot;fmt&quot;
+
+func main() {
+    type data struct{   //申明一个data的数据结构
+        a int
+    }
+
+    var d = data{1234}  //赋值d的初始值为data类型
+
+    var p *data //申明p的类型
+    p = &amp;d
+
+    fmt.Printf(&quot;%p, %v\n&quot;, p, p.a)  //0xc42000a2a0, 1234
+}
+</code></pre><h6 id="不能用指针做加减法运算"><a href="#不能用指针做加减法运算" class="headerlink" title="不能用指针做加减法运算"></a>不能用指针做加减法运算</h6><pre><code>package main
+
+func main() {
+    x := 1234
+    p := &amp;x
+    p++ //报错
+}
+</code></pre><h6 id="可以在unsafe-Pointer和任意类型指针间进行转换"><a href="#可以在unsafe-Pointer和任意类型指针间进行转换" class="headerlink" title="可以在unsafe.Pointer和任意类型指针间进行转换"></a>可以在unsafe.Pointer和任意类型指针间进行转换</h6><pre><code>package main
+import (
+    &quot;fmt&quot;
+    &quot;unsafe&quot;
+)
+
+func main() {
+    x := 0x12345678
+    p := unsafe.Pointer(&amp;x)
+    n := (*[4]byte)(p)
+    for i := 0; i &lt; len(n); i++ {
+        fmt.Printf(&quot;%X &quot;, n[i]) //78 56 34 12
+    }
+}
+</code></pre><h6 id="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上"><a href="#返回局部变量的指针是安全的，编译器会根据需要将其分配在GC-Heap上" class="headerlink" title="返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上"></a>返回局部变量的指针是安全的，编译器会根据需要将其分配在GC Heap上</h6><pre><code>package main
+
+func main() {
+    println(test())
+}
+
+func test() *int {
+    x := 100
+    return &amp;x
+}
+</code></pre><h6 id="将Pointer转换成uintptr，可变相进行指针运算"><a href="#将Pointer转换成uintptr，可变相进行指针运算" class="headerlink" title="将Pointer转换成uintptr，可变相进行指针运算"></a>将Pointer转换成uintptr，可变相进行指针运算</h6><pre><code>package main
+
+import (
+        &quot;fmt&quot;
+        &quot;unsafe&quot;
+)
+
+func main() {
+    d := struct {
+        s string
+        x int
+    }{&quot;abc&quot;, 100}
+
+    //uintptr是goland的内置类型，是存储指针的整型，用于指针运算的；unsafe.Pointer是单纯的通用指针类型，用于转换不同类型指针，它不可以参与指针运算
+    p := uintptr(unsafe.Pointer(&amp;d))
+    //获取x的偏移量
+    p += unsafe.Offsetof(d.x)
+    //unsafe.Pointer指向一个Int类型的地址
+    p2 := unsafe.Pointer(p)
+    px := (*int)(p2)
+    *px = 200
+
+    fmt.Printf(&quot;%#v\n&quot;, d)  //struct { s string; x int }{s:&quot;abc&quot;, x:200}
+}
+</code></pre><h1 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h1><h6 id="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"><a href="#可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型" class="headerlink" title="可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型"></a>可将类型分为命名和未命名两大类，命名类型包括bool，int，string等，而array，slice，map等和具体元素类型，长度等有关，属于未命名类型，具有相同声明的未命名类型被视为同一类型</h6><h6 id="具有相同基类型的指针"><a href="#具有相同基类型的指针" class="headerlink" title="具有相同基类型的指针"></a>具有相同基类型的指针</h6><h6 id="具有相同元素类型和长度的array"><a href="#具有相同元素类型和长度的array" class="headerlink" title="具有相同元素类型和长度的array"></a>具有相同元素类型和长度的array</h6><h6 id="具有相同元素类型的slice"><a href="#具有相同元素类型的slice" class="headerlink" title="具有相同元素类型的slice"></a>具有相同元素类型的slice</h6><h6 id="具有相同键值类型的map"><a href="#具有相同键值类型的map" class="headerlink" title="具有相同键值类型的map"></a>具有相同键值类型的map</h6><h6 id="具有相同元素类型和传送方向的channel"><a href="#具有相同元素类型和传送方向的channel" class="headerlink" title="具有相同元素类型和传送方向的channel"></a>具有相同元素类型和传送方向的channel</h6><h6 id="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"><a href="#具有相同字段序列（字段名，类型，标签，顺序）的匿名struct" class="headerlink" title="具有相同字段序列（字段名，类型，标签，顺序）的匿名struct"></a>具有相同字段序列（字段名，类型，标签，顺序）的匿名struct</h6><h6 id="签名相同（参数和返回值，不包括参数名称）的function"><a href="#签名相同（参数和返回值，不包括参数名称）的function" class="headerlink" title="签名相同（参数和返回值，不包括参数名称）的function"></a>签名相同（参数和返回值，不包括参数名称）的function</h6><h6 id="方法集相同（方法名，方法签名相同和次序无关）的interface"><a href="#方法集相同（方法名，方法签名相同和次序无关）的interface" class="headerlink" title="方法集相同（方法名，方法签名相同和次序无关）的interface"></a>方法集相同（方法名，方法签名相同和次序无关）的interface</h6><h6 id="可用type在全局或函数内定义新类型"><a href="#可用type在全局或函数内定义新类型" class="headerlink" title="可用type在全局或函数内定义新类型"></a>可用type在全局或函数内定义新类型</h6><pre><code>package main
+
+func main() {
+    type bigint int64
+    var x bigint = 100
+    println(x)
+}
+</code></pre><h6 id="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"><a href="#新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换" class="headerlink" title="新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换"></a>新类型不是原类型的别名，除拥有相同数据存储结构外，他们之间没有任何关系，不会持有原类型任何信息，除非目标类型是未命名类型，否则必须显示转换</h6><pre><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main() {
+    type bigint int64
+    x := 1234
+    var b bigint = bigint(x)
+    var b2 int64 = int64(b)
+
+    fmt.Println(b,b2)
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -404,6 +897,10 @@ func main() {
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -411,13 +908,27 @@ func main() {
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记枚举/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -425,38 +936,42 @@ func main() {
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">
-                  go学习笔记枚举
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/20/go学习笔记枚举/" itemprop="url">go学习笔记枚举</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:32:10+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:32:10+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -464,7 +979,6 @@ func main() {
 
                 
                 
-
               
             </span>
           
@@ -474,14 +988,21 @@ func main() {
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -490,7 +1011,7 @@ func main() {
       
         
           
-          枚举关键字iota定义常量数组中从0开始安航基数的自增枚举值package main
+            <h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h6 id="关键字iota定义常量数组中从0开始安航基数的自增枚举值"><a href="#关键字iota定义常量数组中从0开始安航基数的自增枚举值" class="headerlink" title="关键字iota定义常量数组中从0开始安航基数的自增枚举值"></a>关键字iota定义常量数组中从0开始安航基数的自增枚举值</h6><pre><code>package main
 
 func main() {
     const (
@@ -500,19 +1021,68 @@ func main() {
         d
     )
 
-    println(a,b,c,d)    //
-          ...
+    println(a,b,c,d)    //0 1 2 3
+}
+</code></pre><h6 id="同一个常量组中可以提供多个iota，它们各自增长"><a href="#同一个常量组中可以提供多个iota，它们各自增长" class="headerlink" title="同一个常量组中可以提供多个iota，它们各自增长"></a>同一个常量组中可以提供多个iota，它们各自增长</h6><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记枚举/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+func main() {
+    const (
+        a,b = iota, iota
+        c,d
+        e,f
+    )
+
+    println(c,d)    //1 1
+}
+</code></pre><h6 id="如果iota自增被打断，须显示恢复"><a href="#如果iota自增被打断，须显示恢复" class="headerlink" title="如果iota自增被打断，须显示恢复"></a>如果iota自增被打断，须显示恢复</h6><pre><code>package main
+
+func main() {
+    const (
+        a = iota
+        b = &quot;a&quot;
+        c = 100
+        d = iota
+        e
+    )
+
+    println(d, e)   //3 4 常量值d进行了显示恢复iota的值，计算的时候算上了b,c两行
+}
+</code></pre><h6 id="可通过自定义类型来限制枚举类型限制"><a href="#可通过自定义类型来限制枚举类型限制" class="headerlink" title="可通过自定义类型来限制枚举类型限制"></a>可通过自定义类型来限制枚举类型限制</h6><pre><code>package main
+
+type test int   //声明一个自定义类型
+
+const (
+    black test = iota   //注意black需要制定一个test类型
+    red
+    blue
+)
+
+func demo(c test) {}    //函数指定传入test类型
+
+func main() {
+    x := red
+    demo(x)
+    x := 1
+    demo(x)         //报错，此处的x类型已经变成了int类型
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -522,6 +1092,10 @@ func main() {
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -529,13 +1103,27 @@ func main() {
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记常量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -543,38 +1131,42 @@ func main() {
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记常量/" itemprop="url">
-                  go学习笔记常量
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/20/go学习笔记常量/" itemprop="url">go学习笔记常量</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T19:31:27+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:31:27+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -582,7 +1174,6 @@ func main() {
 
                 
                 
-
               
             </span>
           
@@ -592,14 +1183,21 @@ func main() {
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -608,7 +1206,7 @@ func main() {
       
         
           
-          常量常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误package main
+            <h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><h6 id="常量值必须是编译器可确定的数字，字符串和布尔值-局部常量不会引发编译错误"><a href="#常量值必须是编译器可确定的数字，字符串和布尔值-局部常量不会引发编译错误" class="headerlink" title="常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误"></a>常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误</h6><pre><code>package main
 
 const a int = 1
 const b = &quot;aaa&quot;
@@ -616,19 +1214,46 @@ const c = false
 
 func main() {
     const d = 2
-    print
-          ...
+    println(a, b, c)    //1 aaa false
+}
+</code></pre><h6 id="在常量数组中，如不提供类型和初始值，则视作与上一个常量相同"><a href="#在常量数组中，如不提供类型和初始值，则视作与上一个常量相同" class="headerlink" title="在常量数组中，如不提供类型和初始值，则视作与上一个常量相同"></a>在常量数组中，如不提供类型和初始值，则视作与上一个常量相同</h6><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记常量/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+func main() {
+    const (
+        d = 2
+        x
+    )
+
+    println(x)  //2
+}
+</code></pre><h6 id="常量值还可以使len-cap-unsafe-Sizeof等编译可确定结果的函数返回值"><a href="#常量值还可以使len-cap-unsafe-Sizeof等编译可确定结果的函数返回值" class="headerlink" title="常量值还可以使len,cap,unsafe.Sizeof等编译可确定结果的函数返回值"></a>常量值还可以使len,cap,unsafe.Sizeof等编译可确定结果的函数返回值</h6><pre><code>package main
+
+func main() {
+    const (
+        d = &quot;2:aasd&quot;
+        x = len(d)
+    )
+
+    println(x)  //6
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -638,6 +1263,10 @@ func main() {
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -645,13 +1274,27 @@ func main() {
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记变量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -659,38 +1302,42 @@ func main() {
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记变量/" itemprop="url">
-                  go学习笔记变量
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/02/20/go学习笔记变量/" itemprop="url">go学习笔记变量</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-20T11:57:06+08:00" content="2017-02-20">
-              2017-02-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T11:57:06+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/GO/" itemprop="url" rel="index">
                     <span itemprop="name">GO</span>
                   </a>
@@ -698,7 +1345,6 @@ func main() {
 
                 
                 
-
               
             </span>
           
@@ -708,14 +1354,21 @@ func main() {
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -724,29 +1377,88 @@ func main() {
       
         
           
-          声明变量定义没有初始值的变量，必须带类型package main
+            <h1 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h1><h6 id="定义没有初始值的变量，必须带类型"><a href="#定义没有初始值的变量，必须带类型" class="headerlink" title="定义没有初始值的变量，必须带类型"></a>定义没有初始值的变量，必须带类型</h6><pre><code>package main
 
 func main() {
     var n int
     n = 1
     println(n)
 }
-有初始值不必须定义类型package main
+</code></pre><h6 id="有初始值不必须定义类型"><a href="#有初始值不必须定义类型" class="headerlink" title="有初始值不必须定义类型"></a>有初始值不必须定义类型</h6><pre><code>package main
 
 func main() {
-    var a = &quot;aaa&
-          ...
+    var a = &quot;aaa&quot;
+    var b float32 = 1.6
+    println(a, b)
+}
+</code></pre><h6 id="函数内部可以使用-进行定义"><a href="#函数内部可以使用-进行定义" class="headerlink" title="函数内部可以使用:=进行定义"></a>函数内部可以使用:=进行定义</h6><pre><code>package main
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记变量/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+func main() {
+    x := 123
+    println(x)
+}
+</code></pre><h6 id="一次定义多个变量-多个变量是从左到右依次赋值"><a href="#一次定义多个变量-多个变量是从左到右依次赋值" class="headerlink" title="一次定义多个变量(多个变量是从左到右依次赋值)"></a>一次定义多个变量(多个变量是从左到右依次赋值)</h6><pre><code>package main
+
+var c,d int
+
+var (
+    g int
+    h float32
+)
+
+var i,z = &quot;test&quot;,&quot;hello&quot;
+
+func main() {
+    c = 2
+    d = 3
+    e,f := 4,5
+    g,h = 1,2.01
+    println(c, d, e, f, g, h, i, z)
+}
+</code></pre><h6 id="变量赋值过程中-变量赋值，先计算所有相关值，在从左到右依次赋值"><a href="#变量赋值过程中-变量赋值，先计算所有相关值，在从左到右依次赋值" class="headerlink" title="变量赋值过程中(变量赋值，先计算所有相关值，在从左到右依次赋值)"></a>变量赋值过程中(变量赋值，先计算所有相关值，在从左到右依次赋值)</h6><pre><code>package main
+
+func main() {
+    data,i := [3]int{0,1,2}, 0
+    i,data[i] = 2, 100 //此处是赋值，不是初始化，所以不需要使用&quot;:=&quot;
+    println(i, data[0], data[2])//此处的结果是:2,100,2
+}
+</code></pre><h6 id="特殊占位符’-‘，用于忽略值占位"><a href="#特殊占位符’-‘，用于忽略值占位" class="headerlink" title="特殊占位符’-‘，用于忽略值占位"></a>特殊占位符’-‘，用于忽略值占位</h6><pre><code>package main
+
+func test()(int, string) {
+    return 1,&quot;aa&quot;
+}
+
+func main() {
+    _,a := test()
+    println(a)  // aa
+}
+</code></pre><h6 id="局部变量如果没有被使用会当做错误"><a href="#局部变量如果没有被使用会当做错误" class="headerlink" title="局部变量如果没有被使用会当做错误"></a>局部变量如果没有被使用会当做错误</h6><pre><code>package main
+
+func test()(int, string) {
+    return 1,&quot;aa&quot;
+}
+
+func main() {
+    _,a := test()   //a没有被使用，最终会报错
+}
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -756,11 +1468,14 @@ func main() {
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -789,98 +1504,123 @@ func main() {
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -894,80 +1634,65 @@ func main() {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -975,40 +1700,140 @@ func main() {
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

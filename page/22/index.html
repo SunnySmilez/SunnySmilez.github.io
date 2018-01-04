@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/22/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/16/linux文件满了删除不了/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">
-                  linux文件满了删除不了
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">linux文件满了删除不了</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-16T17:45:21+08:00" content="2016-04-16">
-              2016-04-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-16T17:45:21+08:00">
+                2016-04-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,26 +326,39 @@
       
         
           
-          
-问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%  原因:
-有硬链接
+            <ul>
+<li><p>问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%<br>  原因:</p>
+<pre><code>有硬链接
 lsof | grep del  该文件被某些服务占用,导致不能及时释放
 磁盘空间维护出现问题
-  解决方案:
-1.删除文件,重启服务
-2.清空
-          ...
+</code></pre><p>  解决方案:</p>
+<pre><code>1.删除文件,重启服务
+2.清空文件
+</code></pre><p>  文件删除原理:</p>
+<pre><code>linux是通过link的数量来控制文件删除的,只有当一个文件不存在任何link的时候,这个文件才会被删除,一般来说,每个文件都有2个link计数器:i_count,i_nlink,
+i_count的意义是当前文件使用者的数量;i_nlink的意义是介质连接的数量(硬链接的数量),可以理解为i_count是内存引用计数器,i_nlink是磁盘的引用计数器.
+当一个文件被某一个进程引用时,对应的i_count数就会增加,当创建文件的硬链接的时候对应i_nlink数就会增加.
+对应删除命令rm而言,实际就是减少磁盘引用的计数i_nlink.如果一个文件正在被某个进程调用,而用户却执行rm操作把文件删除了,那么会出现如上结果.
+</code></pre></li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/16/linux文件满了删除不了/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -294,6 +368,10 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -301,13 +379,27 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux扩展名的作用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -315,38 +407,42 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">
-                  linux扩展名的作用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">linux扩展名的作用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T23:46:59+08:00" content="2016-03-14">
-              2016-03-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T23:46:59+08:00">
+                2016-03-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -354,7 +450,6 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
 
                 
                 
-
               
             </span>
           
@@ -364,14 +459,21 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -380,23 +482,31 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
       
         
           
-          压缩文件.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
-shell脚本文件.sh,一般通过shell语言开发的程序
-perl语言文件.pl,通过perl语言开发的程序
-python语言文件.py,python语言开发的程序
-网页语言的文件.html,.htm,.ph
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux扩展名的作用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h1 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h1><pre><code>.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
+</code></pre><h1 id="shell脚本文件"><a href="#shell脚本文件" class="headerlink" title="shell脚本文件"></a>shell脚本文件</h1><pre><code>.sh,一般通过shell语言开发的程序
+</code></pre><h1 id="perl语言文件"><a href="#perl语言文件" class="headerlink" title="perl语言文件"></a>perl语言文件</h1><pre><code>.pl,通过perl语言开发的程序
+</code></pre><h1 id="python语言文件"><a href="#python语言文件" class="headerlink" title="python语言文件"></a>python语言文件</h1><pre><code>.py,python语言开发的程序
+</code></pre><h1 id="网页语言的文件"><a href="#网页语言的文件" class="headerlink" title="网页语言的文件"></a>网页语言的文件</h1><pre><code>.html,.htm,.php,.jsp,.do
+</code></pre><h1 id="系统服务的配置文件"><a href="#系统服务的配置文件" class="headerlink" title="系统服务的配置文件"></a>系统服务的配置文件</h1><pre><code>.conf
+</code></pre><h1 id="rpm安装包的文件"><a href="#rpm安装包的文件" class="headerlink" title="rpm安装包的文件"></a>rpm安装包的文件</h1><pre><code>.rpm
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -406,6 +516,10 @@ python语言文件.py,python语言开发的程序
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -413,13 +527,27 @@ python语言文件.py,python语言开发的程序
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux文件类型及属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -427,38 +555,42 @@ python语言文件.py,python语言开发的程序
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">
-                  linux文件类型及属性
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">linux文件类型及属性</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T22:44:23+08:00" content="2016-03-14">
-              2016-03-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T22:44:23+08:00">
+                2016-03-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -466,7 +598,6 @@ python语言文件.py,python语言开发的程序
 
                 
                 
-
               
             </span>
           
@@ -476,14 +607,21 @@ python语言文件.py,python语言开发的程序
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -492,24 +630,85 @@ python语言文件.py,python语言开发的程序
       
         
           
-          文件含义ls -lhi /data
+            <h1 id="文件含义"><a href="#文件含义" class="headerlink" title="文件含义"></a>文件含义</h1><pre><code>ls -lhi /data
 1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
 
 1966317         表示inode索引节点编号
 drwxrwxrwx      文件类型及权限
-2               硬链接
-          ...
+2               硬链接数
+root  root      属主及所属的组
+4.0K            文件或目录的大小
+2月  22 16:16   最近修改时间
+data            文件或目录名
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+# 什么是innode?
+    inode是索引节点
+    在每个linux存储设备或存储分区,被格式化的ext3文件系统后,一般有两部分:第一部分是inode,第二部分是block
+    block是实际存储数据用的,包括文件名
+    inode是存放这些数据的属性信息的(文件大小,属主,属组,权限,文件类型,修改时间,还包括指向文件实体的指针的功能inode和block的对应关系),但是唯独不包括文件名
+    磁盘读取数据是按照block读取的,文件名一般在上级目录的block里
+    一个block只能存放一个文件内容,所以block并非越大越好
+    ext3/ext4最大只能4k,而生产中几乎没有小于4k的文件,所以,ext3/ext4文件系统,block都分4k
+    访问顺序呢:文件(一般是上级目录)-&gt;innode-&gt;block
+    inode一般默认大小为256k,block大小为1 2 4k 默认是4k引导分区等特殊分区除外
+    查看:df -i查看inode数量及使用情况,dumpe2fs /dev/sda3 | grep -i &apos;inode size&apos;查看inode及block的大小及数量
+</code></pre><h1 id="普通文件"><a href="#普通文件" class="headerlink" title="普通文件"></a>普通文件</h1><pre><code>-rw-------. 1 root root 1999 3月   7 2014 anaconda-ks.cfg
+-rw-r--r--. 1 root root 9998 3月   7 2014 install.log
+-rw-r--r--. 1 root root 3970 3月   7 2014 install.log.syslog
+
+第一列是&apos;-&apos;;用touch进行创建,cp拷贝,tar打包,echo重定向,cat查看等都是普通文件
+可用file进行详细类型查看
+
+    # 纯文本文件(ASCII)
+        内容可直接读取,数字字母等
+
+    # 二进制文件(binary)
+        linux中的可执行文件,比如命令文件
+
+    # 数据格式的文件(data)
+        具有特定格式的文件
+</code></pre><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>drwxr-xr-x. 3 root root 4096 2月  26 02:18 shell
+drwxr-xr-x. 2 root root 4096 2月  21 03:28 shell1
+drwxr-xr-x  9 root root 4096 2月  25 14:08 work
+
+第一列是d;创建目录用mkdir(-p参数),或cp命令(-r,-a参数),rm -r删除目录
+</code></pre><h1 id="字符设备-mknod进行创建"><a href="#字符设备-mknod进行创建" class="headerlink" title="字符设备(mknod进行创建)"></a>字符设备(mknod进行创建)</h1><pre><code>crw-rw-rw- 1 root tty 5, 0 3月  14 13:44 /dev/tty
+
+第一列是c开头;一般穿行端口的接口设备,如猫等串口设备
+</code></pre><h1 id="块设备-mknod进行创建"><a href="#块设备-mknod进行创建" class="headerlink" title="块设备(mknod进行创建)"></a>块设备(mknod进行创建)</h1><pre><code>brw-rw---- 1 root disk 8, 0 3月  14 13:44 /dev/sda
+brw-rw---- 1 root disk 8, 1 3月  14 13:44 /dev/sda1
+brw-rw---- 1 root disk 8, 2 3月  14 13:44 /dev/sda2
+
+第一列是b开头;硬盘,光驱都属于块设备
+</code></pre><h1 id="套接口设备"><a href="#套接口设备" class="headerlink" title="套接口设备"></a>套接口设备</h1><pre><code>srw-rw-rw- 1 root root 0 3月  14 13:45 /dev/log
+
+第一列是s开头
+用在网络之间进行数据连接
+</code></pre><h1 id="符号链接文件"><a href="#符号链接文件" class="headerlink" title="符号链接文件"></a>符号链接文件</h1><pre><code>lrwxrwxrwx. 1 root root 11 3月   7 2014 /etc/init.d -&gt; rc.d/init.d
+
+第一列是l开头
+用ln进行穿件(ln -s 源文件 新文件)
+</code></pre><h1 id="管道文件"><a href="#管道文件" class="headerlink" title="管道文件"></a>管道文件</h1><pre><code>prw--w--w- 1 postfix postfix 0 3月  14 15:35 /var/spool/postfix/public/qmgr
+
+第一列是p开头(find / -type p进行查询)
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -519,6 +718,10 @@ drwxrwxrwx      文件类型及权限
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -526,13 +729,27 @@ drwxrwxrwx      文件类型及权限
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/13/linux目录结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -540,38 +757,42 @@ drwxrwxrwx      文件类型及权限
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">
-                  linux目录结构
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/13/linux目录结构/" itemprop="url">linux目录结构</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T21:49:33+08:00" content="2016-03-13">
-              2016-03-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-13T21:49:33+08:00">
+                2016-03-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -579,7 +800,6 @@ drwxrwxrwx      文件类型及权限
 
                 
                 
-
               
             </span>
           
@@ -589,14 +809,21 @@ drwxrwxrwx      文件类型及权限
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -605,27 +832,98 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区mount /dev/sdb /mnt
-应用程序/usr/bin
-数据文件/usr/share
-用户程序,及数据,帮助文件等目录/usr
-设备目录/dev/
-配置文件/etc/
-启动命令/etc/init.d
-/存放系统相关的程序
-/
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux目录结构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h1 id="目录结构和分区是没有关系的-不同的目录可以跨越不同的磁盘设备和分区"><a href="#目录结构和分区是没有关系的-不同的目录可以跨越不同的磁盘设备和分区" class="headerlink" title="目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区"></a>目录结构和分区是没有关系的,不同的目录可以跨越不同的磁盘设备和分区</h1><pre><code>mount /dev/sdb /mnt
+</code></pre><h1 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h1><pre><code>/usr/bin
+</code></pre><h1 id="数据文件"><a href="#数据文件" class="headerlink" title="数据文件"></a>数据文件</h1><pre><code>/usr/share
+</code></pre><h1 id="用户程序-及数据-帮助文件等目录"><a href="#用户程序-及数据-帮助文件等目录" class="headerlink" title="用户程序,及数据,帮助文件等目录"></a>用户程序,及数据,帮助文件等目录</h1><pre><code>/usr
+</code></pre><h1 id="设备目录"><a href="#设备目录" class="headerlink" title="设备目录"></a>设备目录</h1><pre><code>/dev/
+</code></pre><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><pre><code>/etc/
+</code></pre><h1 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h1><pre><code>/etc/init.d
+</code></pre><h1 id=""><a href="#" class="headerlink" title="/"></a>/</h1><pre><code>存放系统相关的程序
+</code></pre><h1 id="usr-unix-software-resource"><a href="#usr-unix-software-resource" class="headerlink" title="/usr(unix software resource)"></a>/usr(unix software resource)</h1><pre><code>存放unix系统商开发的程序
+</code></pre><h1 id="usr-local"><a href="#usr-local" class="headerlink" title="/usr/local"></a>/usr/local</h1><pre><code>存放用户自己安装的程序
+</code></pre><h1 id="opt"><a href="#opt" class="headerlink" title="/opt"></a>/opt</h1><pre><code>用于存放第三方厂商开发的程序
+</code></pre><h1 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h1><pre><code>普通用户的家目录
+</code></pre><h1 id="root"><a href="#root" class="headerlink" title="/root"></a>/root</h1><pre><code>管理员的家目录
+</code></pre><h1 id="lib"><a href="#lib" class="headerlink" title="/lib"></a>/lib</h1><pre><code>库文件存放目录
+</code></pre><h1 id="lib-modules"><a href="#lib-modules" class="headerlink" title="/lib/modules"></a>/lib/modules</h1><pre><code>kernel的相关模块
+</code></pre><h1 id="var-lib-rpm"><a href="#var-lib-rpm" class="headerlink" title="/var/lib/rpm"></a>/var/lib/rpm</h1><pre><code>rpm套件安装处
+</code></pre><h1 id="lib64"><a href="#lib64" class="headerlink" title="/lib64"></a>/lib64</h1><pre><code>库文件存放目录
+</code></pre><h1 id="lost-found"><a href="#lost-found" class="headerlink" title="/lost+found"></a>/lost+found</h1><pre><code>系统意外崩溃或关机的时候回产生一些碎片文件在这里,下次系统开机的时候使用fsck工具检查并修复
+</code></pre><h1 id="mnt"><a href="#mnt" class="headerlink" title="/mnt"></a>/mnt</h1><pre><code>系统临时的挂载点
+</code></pre><h1 id="proc"><a href="#proc" class="headerlink" title="/proc"></a>/proc</h1><pre><code>内核及进程信息的虚拟文件系统目录
+</code></pre><h1 id="proc-version"><a href="#proc-version" class="headerlink" title="/proc/version"></a>/proc/version</h1><pre><code>内核版本
+</code></pre><h1 id="proc-sys-kernel"><a href="#proc-sys-kernel" class="headerlink" title="/proc/sys/kernel"></a>/proc/sys/kernel</h1><pre><code>系统内核功能
+</code></pre><h1 id="proc-sys-net-ipv4"><a href="#proc-sys-net-ipv4" class="headerlink" title="/proc/sys/net/ipv4"></a>/proc/sys/net/ipv4</h1><pre><code>修改proc的配置时临时生效,/etc/sysctl.conf内核参数里配置才是永久生效
+</code></pre><h1 id="proc-cpuinfo"><a href="#proc-cpuinfo" class="headerlink" title="/proc/cpuinfo"></a>/proc/cpuinfo</h1><pre><code>关于处理器的信息
+</code></pre><h1 id="proc-meminfo"><a href="#proc-meminfo" class="headerlink" title="/proc/meminfo"></a>/proc/meminfo</h1><pre><code>系统内存信息
+</code></pre><h1 id="proc-devices"><a href="#proc-devices" class="headerlink" title="/proc/devices"></a>/proc/devices</h1><pre><code>当前运行内核所配置的所有设备清单
+</code></pre><h1 id="proc-dma"><a href="#proc-dma" class="headerlink" title="/proc/dma"></a>/proc/dma</h1><pre><code>当前正在使用的DMA通道
+</code></pre><h1 id="proc-filesystems"><a href="#proc-filesystems" class="headerlink" title="/proc/filesystems"></a>/proc/filesystems</h1><pre><code>当前运行内核所配置的文件系统
+</code></pre><h1 id="proc-interrupts"><a href="#proc-interrupts" class="headerlink" title="/proc/interrupts"></a>/proc/interrupts</h1><pre><code>正在使用的终端,和曾经有多少个终端
+</code></pre><h1 id="proc-ioports"><a href="#proc-ioports" class="headerlink" title="/proc/ioports"></a>/proc/ioports</h1><pre><code>当前正在使用的I/O端口
+</code></pre><h1 id="proc-loadavg"><a href="#proc-loadavg" class="headerlink" title="/proc/loadavg"></a>/proc/loadavg</h1><pre><code>系统负载平均值信息
+</code></pre><h1 id="bin"><a href="#bin" class="headerlink" title="/bin"></a>/bin</h1><pre><code>普通用户的命令
+</code></pre><h1 id="sbin"><a href="#sbin" class="headerlink" title="/sbin"></a>/sbin</h1><pre><code>系统管理的命令的存放,是超级管理员可执行命令的存放地
+</code></pre><h1 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h1><pre><code>临时文件目录
+</code></pre><h1 id="usr-bin-usr-sbin"><a href="#usr-bin-usr-sbin" class="headerlink" title="/usr/bin,/usr/sbin"></a>/usr/bin,/usr/sbin</h1><pre><code>系统命令
+</code></pre><h1 id="usr-local-bin"><a href="#usr-local-bin" class="headerlink" title="/usr/local/bin"></a>/usr/local/bin</h1><pre><code>用户自定义命令文件夹,一般第三方库也会存放在这
+</code></pre><h1 id="usr-share-fonts"><a href="#usr-share-fonts" class="headerlink" title="/usr/share/fonts"></a>/usr/share/fonts</h1><pre><code>字体目录
+</code></pre><h1 id="usr-share-man"><a href="#usr-share-man" class="headerlink" title="/usr/share/man"></a>/usr/share/man</h1><pre><code>帮助目录
+</code></pre><h1 id="usr-share-doc"><a href="#usr-share-doc" class="headerlink" title="/usr/share/doc"></a>/usr/share/doc</h1><pre><code>文档目录
+</code></pre><h1 id="usr-src"><a href="#usr-src" class="headerlink" title="/usr/src"></a>/usr/src</h1><pre><code>内核源码目录
+</code></pre><h1 id="var"><a href="#var" class="headerlink" title="/var"></a>/var</h1><pre><code>可变数据,系统日志,缓存,等记录系统服务状态,和访问请求的内容
+</code></pre><h1 id="var-log"><a href="#var-log" class="headerlink" title="/var/log"></a>/var/log</h1><pre><code>系统日志文件存放位置
+</code></pre><h1 id="var-log-messages"><a href="#var-log-messages" class="headerlink" title="/var/log/messages"></a>/var/log/messages</h1><pre><code>系统日志文件
+</code></pre><h1 id="var-log-secure"><a href="#var-log-secure" class="headerlink" title="/var/log/secure"></a>/var/log/secure</h1><pre><code>系统安全的日志
+</code></pre><h1 id="etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="/etc/sysconfig/network-scripts/ifcfg-eth0"></a>/etc/sysconfig/network-scripts/ifcfg-eth0</h1><pre><code>网卡配置文件
+</code></pre><h1 id="etc-init-d-network-restart"><a href="#etc-init-d-network-restart" class="headerlink" title="/etc/init.d/network restart"></a>/etc/init.d/network restart</h1><pre><code>重启网卡
+</code></pre><h1 id="ifdown-eth0-amp-amp-ifup-eth0"><a href="#ifdown-eth0-amp-amp-ifup-eth0" class="headerlink" title="ifdown eth0 &amp;&amp; ifup eth0"></a>ifdown eth0 &amp;&amp; ifup eth0</h1><pre><code>重启网卡
+</code></pre><h1 id="etc-resolv-conf"><a href="#etc-resolv-conf" class="headerlink" title="/etc/resolv.conf"></a>/etc/resolv.conf</h1><pre><code>设置linux本地客户端的dns文件
+</code></pre><h1 id="etc-hosts"><a href="#etc-hosts" class="headerlink" title="/etc/hosts"></a>/etc/hosts</h1><pre><code>设置ip与域名的对应解析表
+</code></pre><h1 id="etc-sysconfig-network"><a href="#etc-sysconfig-network" class="headerlink" title="/etc/sysconfig/network"></a>/etc/sysconfig/network</h1><pre><code>可修改机器名及网卡启动,网关等的配置
+</code></pre><h1 id="etc-fstab"><a href="#etc-fstab" class="headerlink" title="/etc/fstab"></a>/etc/fstab</h1><pre><code>记录开机要挂在的文件系统的文件
+</code></pre><h1 id="etc-rc-local"><a href="#etc-rc-local" class="headerlink" title="/etc/rc.local"></a>/etc/rc.local</h1><pre><code>存放开机自启动程序命令的文件(chkconfig只能管理yum和rpm安装的程序的启动服务)
+</code></pre><h1 id="etc-inittab"><a href="#etc-inittab" class="headerlink" title="/etc/inittab"></a>/etc/inittab</h1><pre><code>设定系统init进程把系统设置成什么样的runlevel及家长相关的启动配置
+</code></pre><h1 id="etc-exports"><a href="#etc-exports" class="headerlink" title="/etc/exports"></a>/etc/exports</h1><pre><code>设定NFS网络文件系统用的配置文件
+</code></pre><h1 id="ext-init-d"><a href="#ext-init-d" class="headerlink" title="/ext/init.d"></a>/ext/init.d</h1><pre><code>存放系统或服务器以Systerm V模式启动的脚本
+</code></pre><h1 id="etc-xinit-d"><a href="#etc-xinit-d" class="headerlink" title="/etc/xinit.d"></a>/etc/xinit.d</h1><h1 id="etc-profile"><a href="#etc-profile" class="headerlink" title="/etc/profile"></a>/etc/profile</h1><pre><code>全局环境变量的路径(配置别名,PATH变量)
+</code></pre><h1 id="etc-profile-d"><a href="#etc-profile-d" class="headerlink" title="/etc/profile.d"></a>/etc/profile.d</h1><pre><code>加载系统登录程序一个目录,命令或文件独立存在
+</code></pre><h1 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h1><pre><code>设定用户的组名与相关信息
+</code></pre><h1 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h1><pre><code>账号信息文件
+</code></pre><h1 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h1><pre><code>密码信息文件
+</code></pre><h1 id="etc-sudoers"><a href="#etc-sudoers" class="headerlink" title="/etc/sudoers"></a>/etc/sudoers</h1><pre><code>可以执行使用sudo命令的配置文件
+</code></pre><h1 id="etc-securetty"><a href="#etc-securetty" class="headerlink" title="/etc/securetty"></a>/etc/securetty</h1><pre><code>设定哪些终端可以让root登陆
+</code></pre><h1 id="etc-login-defs"><a href="#etc-login-defs" class="headerlink" title="/etc/login.defs"></a>/etc/login.defs</h1><pre><code>所有用户登陆时的缺省配置
+</code></pre><h1 id="etc-modprobe-conf"><a href="#etc-modprobe-conf" class="headerlink" title="/etc/modprobe.conf"></a>/etc/modprobe.conf</h1><pre><code>内核模块额外参数设定
+</code></pre><h1 id="etc-syslog-conf"><a href="#etc-syslog-conf" class="headerlink" title="/etc/syslog.conf"></a>/etc/syslog.conf</h1><pre><code>日志设置文件
+</code></pre><h1 id="etc-rsyslog-conf"><a href="#etc-rsyslog-conf" class="headerlink" title="/etc/rsyslog.conf"></a>/etc/rsyslog.conf</h1><pre><code>日志设置文件
+</code></pre><h1 id="etc-issue"><a href="#etc-issue" class="headerlink" title="/etc/issue"></a>/etc/issue</h1><pre><code>记录用户登录前的显示信息
+</code></pre><h1 id="etc-motd"><a href="#etc-motd" class="headerlink" title="/etc/motd"></a>/etc/motd</h1><pre><code>登陆提醒
+</code></pre><h1 id="var-log-wtmp"><a href="#var-log-wtmp" class="headerlink" title="/var/log/wtmp"></a>/var/log/wtmp</h1><pre><code>记录登陆者信息的文件
+</code></pre><h1 id="var-spool-var-spool-cron-root"><a href="#var-spool-var-spool-cron-root" class="headerlink" title="/var/spool  /var/spool/cron/root"></a>/var/spool  /var/spool/cron/root</h1><pre><code>定时任务crontab默认路径,按用户名命名的文件
+</code></pre><h1 id="var-spool-clientmqueue"><a href="#var-spool-clientmqueue" class="headerlink" title="/var/spool/clientmqueue"></a>/var/spool/clientmqueue</h1><pre><code>sendmail邮件服务邮件临时存放地点
+</code></pre><h1 id="etc-skel"><a href="#etc-skel" class="headerlink" title="/etc/skel"></a>/etc/skel</h1><pre><code>用来存放新用户配置文件的目录,当添加新用户时,该目录下的所有文件会自动复制到新添加的用户的家目录下(在/etc/default/useradd可以设置复制目录的位置)
+</code></pre><h1 id="etc-login-defs-1"><a href="#etc-login-defs-1" class="headerlink" title="/etc/login.defs"></a>/etc/login.defs</h1><pre><code>定义创建用户时需要的一些用户的配置信息,如:是否需要家目录,UID和GID范围,用户及密码的有效期等
+</code></pre><h1 id="etc-default-useradd"><a href="#etc-default-useradd" class="headerlink" title="/etc/default/useradd"></a>/etc/default/useradd</h1><pre><code>创建用户的时候的一些初始的内容,包括家目录,账户过期时间,账户shell类型,账户默认文件存放路径等
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -635,6 +933,10 @@ drwxrwxrwx      文件类型及权限
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -642,13 +944,27 @@ drwxrwxrwx      文件类型及权限
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/13/linux系统优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -656,38 +972,42 @@ drwxrwxrwx      文件类型及权限
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">
-                  linux系统优化
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/13/linux系统优化/" itemprop="url">linux系统优化</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T18:51:25+08:00" content="2016-03-13">
-              2016-03-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-13T18:51:25+08:00">
+                2016-03-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -695,7 +1015,6 @@ drwxrwxrwx      文件类型及权限
 
                 
                 
-
               
             </span>
           
@@ -705,14 +1024,21 @@ drwxrwxrwx      文件类型及权限
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -721,21 +1047,52 @@ drwxrwxrwx      文件类型及权限
       
         
           
-          增大文件描述符echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
-调整内核参数* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
-    net.ipv4.tcp_fin_timeout=2    
-          ...
+            <h1 id="增大文件描述符"><a href="#增大文件描述符" class="headerlink" title="增大文件描述符"></a>增大文件描述符</h1><pre><code>echo &apos;* - nofile 65535&apos; &gt;&gt; /etc/security/limits.conf
+</code></pre><h1 id="调整内核参数"><a href="#调整内核参数" class="headerlink" title="调整内核参数"></a>调整内核参数</h1><pre><code>* 修改配置文件,/etc/sysctl.conf,拷贝如下内容:
+    net.ipv4.tcp_fin_timeout=2              # 如果套接字由本端要求关闭,这个参数决定它保持在FIN-WAIT-2状态的时间,默认值是60s
+    net.ipv4.tcp_tw_reuse=1                 # tcp连接重用
+    net.ipv4.tcp_tw_recycle=1               # 开启tcp连接中TIME-WAITsockets的快速回收
+    net.ipv4.tcp_syncookies=1               # 开启SYN Cookies功能,当出现SYN等待队列溢出的时候,启用cookies来处理,可防范少量SYN攻击
+    net.ipv4.tcp_keepalive_time=600         # 连接的保持时间,tco发送keepalive消息的频度
+    net.ipv4.ip_local_port_range=4000 65000 # 用来设定允许系统打开的端口的范围
+    net.ipv4.tcp_max_syn_backlog=16384      # 表示SYN队列的长度;可以容纳更多等待连接的网络连接数
+    net.ipv4.tcp_max_tw_buckets=36000       # 表示系统同时保持TIME_WAIT套接字的最大数量
+    net.ipv4.route.gc_timeout=100           #
+    net.ipv4.tcp_syn_retries=1
+    net.ipv4.tcp_synack_retries=1
+    net.core.somaxconn=16384
+    net.core.netdev_max_backlog=16384
+    net.ipv4.tcp_max_orphans=16384
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/linux系统优化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+* sysctl -p
+</code></pre><h1 id="清除邮件服务临时存放位置-没安装sendmail就不需要删除"><a href="#清除邮件服务临时存放位置-没安装sendmail就不需要删除" class="headerlink" title="清除邮件服务临时存放位置(没安装sendmail就不需要删除)"></a>清除邮件服务临时存放位置(没安装sendmail就不需要删除)</h1><pre><code>find /var/spool/clientmqueue/ -type -f | xargs rm -f
+</code></pre><h1 id="清空版本号登陆时候的提示"><a href="#清空版本号登陆时候的提示" class="headerlink" title="清空版本号登陆时候的提示"></a>清空版本号登陆时候的提示</h1><pre><code>/dev/null &gt; /etc/issue
+</code></pre><h1 id="锁定关键系统文件"><a href="#锁定关键系统文件" class="headerlink" title="锁定关键系统文件"></a>锁定关键系统文件</h1><pre><code>* 加锁
+    chattr +i /etc/passwd
+
+* 解锁
+    chattr -i /etc/passwd
+
+* 重命名命令
+    mv /usr/bin/chattr /usr/bin/test
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -745,11 +1102,14 @@ drwxrwxrwx      文件类型及权限
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -778,98 +1138,123 @@ drwxrwxrwx      文件类型及权限
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -883,80 +1268,65 @@ drwxrwxrwx      文件类型及权限
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -964,40 +1334,140 @@ drwxrwxrwx      文件类型及权限
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -27,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -48,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -71,25 +93,39 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> 狂奔的菜鸟 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="http://www.cxyteam.com/page/12/"/>
+
+
+
+
+
+  <title>狂奔的菜鸟</title>
   
 
 
@@ -98,50 +134,57 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">狂奔的菜鸟</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
   </div>
-  <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -151,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -159,13 +202,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -176,23 +219,31 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/06/rsyslog配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -200,38 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/12/06/rsyslog配置/" itemprop="url">
-                  rsyslog配置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/12/06/rsyslog配置/" itemprop="url">rsyslog配置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-06T21:23:37+08:00" content="2016-12-06">
-              2016-12-06
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-06T21:23:37+08:00">
+                2016-12-06
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -239,7 +294,6 @@
 
                 
                 
-
               
             </span>
           
@@ -249,14 +303,21 @@
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -265,21 +326,27 @@
       
         
           
-          推荐阅读http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
+            <h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><pre><code>http://www.cnblogs.com/tobeseeker/archive/2013/03/10/2953250.html
 http://huoding.com/2014/05/09/347
 http://blog.clanzx.net/2013/12/31/rsyslog.html
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/06/rsyslog配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -289,6 +356,10 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -296,13 +367,27 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/01/linux配置网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -310,38 +395,42 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/12/01/linux配置网络/" itemprop="url">
-                  linux配置网络
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/12/01/linux配置网络/" itemprop="url">linux配置网络</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T12:01:52+08:00" content="2016-12-01">
-              2016-12-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-01T12:01:52+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -349,7 +438,6 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
 
                 
                 
-
               
             </span>
           
@@ -359,14 +447,21 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -375,22 +470,37 @@ http://blog.clanzx.net/2013/12/31/rsyslog.html
       
         
           
-          关闭NetworkManager服务service NetworkManager stop
+            <h1 id="关闭NetworkManager服务"><a href="#关闭NetworkManager服务" class="headerlink" title="关闭NetworkManager服务"></a>关闭NetworkManager服务</h1><pre><code>service NetworkManager stop
 chkconfig NetworkManager off
-设置网络为桥接模式配置DNSvi /etc/resolv.confnameserver 202.106.0.20
+</code></pre><h1 id="设置网络为桥接模式"><a href="#设置网络为桥接模式" class="headerlink" title="设置网络为桥接模式"></a>设置网络为桥接模式</h1><h1 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h1><h4 id="vi-etc-resolv-conf"><a href="#vi-etc-resolv-conf" class="headerlink" title="vi /etc/resolv.conf"></a>vi /etc/resolv.conf</h4><pre><code>nameserver 202.106.0.20
 nameserver 8.8.8.8
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/linux配置网络/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre><h1 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h1><h4 id="vi-etc-sysconfig-network"><a href="#vi-etc-sysconfig-network" class="headerlink" title="vi /etc/sysconfig/network"></a>vi /etc/sysconfig/network</h4><pre><code>NETWORKING=yes
+HOSTNAME=dev
+</code></pre><h1 id="配置IP地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h1><h4 id="vi-etc-sysconfig-network-scripts-ifcfg-eth0"><a href="#vi-etc-sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="vi /etc/sysconfig/network-scripts/ifcfg-eth0"></a>vi /etc/sysconfig/network-scripts/ifcfg-eth0</h4><pre><code>DEVICE=eth0
+BOOTPROTO=static
+HWADDR=08:00:27:94:F4:CB
+IPADDR=192.168.1.11
+NETMASK=255.255.255.0
+ONBOOT=yes
+GATEWAY=192.168.1.1
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -400,6 +510,10 @@ nameserver 8.8.8.8
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -407,13 +521,27 @@ nameserver 8.8.8.8
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/11/04/redis源码-目录结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -421,38 +549,42 @@ nameserver 8.8.8.8
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/11/04/redis源码-目录结构/" itemprop="url">
-                  redis源码-目录结构
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/11/04/redis源码-目录结构/" itemprop="url">redis源码-目录结构</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-04T09:15:12+08:00" content="2016-11-04">
-              2016-11-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T09:15:12+08:00">
+                2016-11-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -460,7 +592,6 @@ nameserver 8.8.8.8
 
                 
                 
-
               
             </span>
           
@@ -470,14 +601,21 @@ nameserver 8.8.8.8
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -486,26 +624,106 @@ nameserver 8.8.8.8
       
         
           
-          目录结构|
+            <h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><pre><code>|
 |--deps
 |
 |-- src
    -- adlist.c          双链表结构,用于定义list
    -- ae.c              用于事件的处理
    -- ae_epoll.c        处理epoll事件
-   -- ae_evport.c    
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/04/redis源码-目录结构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+   -- ae_evport.c       通过event ports实现处理结构
+   -- ae_kqueue.c       实现消息队列的处理
+   -- ae_select.c       处理select事件
+   -- anet.c            网络处理
+   -- aof.c             实现aof模式
+   -- asciilogo.h       定义欢迎界面的logo
+   -- bio.c             在后台通过线程模式实现io处理
+   -- bitops.c          与setbit,getbit相关的位操作
+   -- blocked.c         支持类似blpop,wait的阻塞操作
+   -- cluster.c         与集群创建,通信相关操作
+   -- config.c          配置文件的解析
+   -- crc16.c           基于CCITT标准的过滤算法
+   -- crc64.c
+   -- db.c              c-level数据库api实现
+   -- debug.c           调试库和日志输出
+   -- dict.c            字典实现
+   -- endiancov.c       主机字节序编解码, redis致力于使用little endian来编码
+   -- fmacros.h         用于Mac下的兼容性处理
+   -- help.h            辅助于命令的提示信息
+   -- hyperloglog.c
+   -- intset.c          int集合类型实现
+   -- lzf_c.c           lzf压缩算法
+   -- lzf_d.c
+   -- memtest.c         内存测试
+   -- muti.c            批量命令操作的原子实现
+   -- networking.c      网络通信实现
+   -- notify.c
+   -- object.c          对象存储类型
+   -- pqsort.c          一种快速排序的实现
+   -- pubsub.c          用于订阅模式的实现，有点类似于Client广播发送的方式
+   -- rand.c            随机序列的生产
+   -- rdb.c             rdb数据的load和dump
+   -- redis.c           redis数据库的主程序入口
+   -- redis-benchmark.c redis基准测试入口
+   -- redis-check-aof.c aof文件检查入口
+   -- redis-check-dump.c dump文件检查入口
+   -- redis-cli.c       redis的shell的客户端
+   -- release.c         版本发布信息
+   -- replication.c     数据的主从备份
+   -- rio.c             流式I/O的读写接口
+   -- scripting.c       redis相关协议转换到lua环境下执行
+   -- sds.c             强大的字符串处理机制
+   -- sentinel.c        redis集群的监护程序
+   -- setproctitle.c    程序名信息相关
+   -- sha1.c            sha1加密算法
+   -- slowlog.c         记录最近一段时间的查询等操作
+   -- sort.c            排序算法及辅助函数
+   -- syncio.c          同步io的实现
+   -- t_hash.c          hash结构
+   -- t_list.c          list结构
+   -- t_set.c           set结构
+   -- t_string.c        string结构
+   -- t_zset.c          用两种数据结构存储同一个数据体
+   -- util.c            辅助函数
+   -- ziplist.c         ziplist结构
+   -- zipmap.c          zipmap结构
+   -- zmalloc.c         在malloc上进行封装,增加内存开销统计
+|
+|--tests
+|
+|--utils
+</code></pre><h1 id="源码阅读顺序"><a href="#源码阅读顺序" class="headerlink" title="源码阅读顺序"></a><a href="https://github.com/huangz1990/blog/blob/master/diary/2014/how-to-read-redis-source-code.rst" title="源码阅读顺序" target="_blank" rel="external">源码阅读顺序</a></h1><h3 id="数据结构实现"><a href="#数据结构实现" class="headerlink" title="数据结构实现"></a>数据结构实现</h3><p>sds.h,sds.c                 动态字符串实现<br>adlist.h,adlist.c           双端链表实现<br>dict.h,dict.c               字典的实现</p>
+<p>redis.h中的zskiplist结构和zskiplistNode结构,以及t_zset.c中所有以zsl开头的函数,比如zslCreate,zslInsert,zslDeleteNode                 跳跃表实现</p>
+<p>hyperloglog.c中的hllhdr结构,以及所有以hll开头的函数。                      HyperLogLog实现</p>
+<h3 id="阅读内存编码数据结构实现"><a href="#阅读内存编码数据结构实现" class="headerlink" title="阅读内存编码数据结构实现"></a>阅读内存编码数据结构实现</h3><p>intset.c            整数集合数据结构。<br>ziplist.c           压缩列表数据结构</p>
+<h3 id="阅读数据类型实现"><a href="#阅读数据类型实现" class="headerlink" title="阅读数据类型实现"></a>阅读数据类型实现</h3><p>object.c            对象系统实现<br>t_string.c          字符串键的实现<br>t_list.c            列表键的实现<br>t_hash.c            散列键的实现<br>t_set.c             集合键的实现<br>t_zset.c中除zsl开头的函数之外的所有函数           有序集合键的实现<br>hyperloglog.c中所有以pf开头的函数                HyperLogLog 键的实现</p>
+<h3 id="阅读数据库实现相关代码"><a href="#阅读数据库实现相关代码" class="headerlink" title="阅读数据库实现相关代码"></a>阅读数据库实现相关代码</h3><p>redis.h文件中的redisDb结构,以及 db.c文件              Redis的数据库实现<br>notify.c                Redis的数据库通知功能实现代码<br>rdb.h和rdb.c             Redis的RDB持久化实现代码<br>aof.c                   Redis 的 AOF 持久化实现代码</p>
+<h3 id="选读"><a href="#选读" class="headerlink" title="选读"></a>选读</h3><p>redis.h文件的pubsubPattern结构,以及pubsub.c文件              发布与订阅功能的实现<br>redis.h文件的multiState结构以及multiCmd结构,multi.c文件       事务功能的实现<br>sort.c                      SORT命令的实现<br>bitops.c                    GETBIT,SETBIT等二进制位操作命令的实现</p>
+<h3 id="阅读客户端和服务器的相关代码"><a href="#阅读客户端和服务器的相关代码" class="headerlink" title="阅读客户端和服务器的相关代码"></a>阅读客户端和服务器的相关代码</h3><p>ae.c,以及任意一个 ae_*.c文件（取决于你所使用的多路复用库）         Redis 的事件处理器实现<br>networking.c                Redis 的网络连接库，负责发送命令回复和接受命令请求， 同时也负责创建/销毁客户端， 以及通信协议分析等工作<br>redis.h和redis.c中和单机Redis服务器有关的部分            单机 Redis 服务器的实现</p>
+<h3 id="选读-1"><a href="#选读-1" class="headerlink" title="选读"></a>选读</h3><p>scripting.c                 Lua 脚本功能的实现<br>slowlog.c                   慢查询功能的实现<br>monitor.c                   监视器功能的实现</p>
+<h3 id="阅读多机功能的实现"><a href="#阅读多机功能的实现" class="headerlink" title="阅读多机功能的实现"></a>阅读多机功能的实现</h3><p>replication.c               复制功能的实现代码<br>sentinel.c                  Redis Sentinel 的实现代码<br>cluster.c                   Redis 集群的实现代码</p>
+<h3 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h3><pre><code>[如何阅读redis](https://github.com/huangz1990/blog/blob/master/diary/2014/how-to-read-redis-source-code.rst &apos;如何阅读redis&apos;)
+[redis源码阅读](http://wiki.jikexueyuan.com/project/redis/provide-service.html &apos;redis源码阅读&apos;)
+[redis自建命令](https://zhengqm.github.io/code/2015/06/20/Learn-by-hacking-redis-source-code/ &apos;redis自建命令&apos;)
+[redis client/server交互流程](http://www.infoq.com/cn/articles/communication-redis-clientserver &apos;redis client/server交互流程&apos;)
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -515,6 +733,10 @@ nameserver 8.8.8.8
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -522,13 +744,27 @@ nameserver 8.8.8.8
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/11/02/gdb调试redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -536,38 +772,42 @@ nameserver 8.8.8.8
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/11/02/gdb调试redis/" itemprop="url">
-                  gdb调试redis
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/11/02/gdb调试redis/" itemprop="url">gdb调试redis</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-02T10:46:04+08:00" content="2016-11-02">
-              2016-11-02
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-02T10:46:04+08:00">
+                2016-11-02
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -575,7 +815,6 @@ nameserver 8.8.8.8
 
                 
                 
-
               
             </span>
           
@@ -585,14 +824,21 @@ nameserver 8.8.8.8
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -601,20 +847,25 @@ nameserver 8.8.8.8
       
         
           
-          #启动redis redis-server连接redis redis-cli获取进程id redis-cli info | grep process_idgdb调试进程id sudo gdb -p pidgdb查询代码 listgdb 设置断点 break main
+            <p>#<br>启动redis redis-server<br>连接redis redis-cli<br>获取进程id redis-cli info | grep process_id<br>gdb调试进程id sudo gdb -p pid<br>gdb查询代码 list<br>gdb 设置断点 break main</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/02/gdb调试redis/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -624,6 +875,10 @@ nameserver 8.8.8.8
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -631,13 +886,27 @@ nameserver 8.8.8.8
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/26/gdb调试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
 
     
       <header class="post-header">
@@ -645,38 +914,42 @@ nameserver 8.8.8.8
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">
-                  gdb调试
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">gdb调试</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T07:44:26+08:00" content="2016-10-26">
-              2016-10-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-26T07:44:26+08:00">
+                2016-10-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C</span>
                   </a>
@@ -684,7 +957,6 @@ nameserver 8.8.8.8
 
                 
                 
-
               
             </span>
           
@@ -694,14 +966,21 @@ nameserver 8.8.8.8
           
 
           
+          
 
           
+
           
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -710,25 +989,151 @@ nameserver 8.8.8.8
       
         
           
-          调试文件内容gdb.c#include &lt;stdio.h&gt;
+            <h1 id="调试文件内容gdb-c"><a href="#调试文件内容gdb-c" class="headerlink" title="调试文件内容gdb.c"></a>调试文件内容gdb.c</h1><pre><code>#include &lt;stdio.h&gt;
 
 int add_range(int low, int high)
 {
         int i, sum;
         for (i = low; i &lt;= high; i++)
-                s
-          ...
+                sum = sum + i;
+        return sum;
+}
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/gdb调试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+int main(void)
+{
+        int result[100];
+        result[0] = add_range(1, 10);
+        result[1] = add_range(1, 100);
+        printf(&quot;result[0]=%d\nresult[1]=%d\n&quot;, result[0], result[1]);
+        return 0;
+}
+</code></pre><h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><pre><code>gcc -g gdb.c -o gdbtest
+</code></pre><h1 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h1><pre><code>./gdbtest
+</code></pre><p><img src="/img/gdb_test/result.png" alt="Alt text" title="运行结果"><br>很明显运行的结果是不对的:1加到10的结果是55,但是1加到100的,结果应该是5050才对,而不是5105,下面用两种gdb方式进行调试</p>
+<h1 id="启动gdb"><a href="#启动gdb" class="headerlink" title="启动gdb"></a>启动gdb</h1><pre><code>sudo gdb gdbtest
+</code></pre><p><img src="/img/gdb_test/gdb.png" alt="Alt text" title="启动gdb"></p>
+<h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><pre><code>l
+</code></pre><p>l以后直接进行回车能够查看到后续的内容<br><img src="/img/gdb_test/list.png" alt="Alt text" title="启动gdb"></p>
+<h1 id="断点调试法"><a href="#断点调试法" class="headerlink" title="断点调试法"></a>断点调试法</h1><h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><pre><code>break 16                #设置16行为断点
+break add_range         #设置add_range函数为断点
+info break              #查看断点信息
+break在你认为关键的,需要输出的位置进行设置
+</code></pre><p><img src="/img/gdb_test/break.png" alt="Alt text" title="启动gdb"></p>
+<h3 id="开启调试"><a href="#开启调试" class="headerlink" title="开启调试"></a>开启调试</h3><pre><code>start               #运行程序
+n                   #单条语句执行，进入下一条
+print i             #达因变量i的值
+print sum
+c                   #可以想象成continue的功能
+当执行完c之后不知道代码执行到那个位置了,可以使用bt进行查看
+</code></pre><p><img src="/img/gdb_test/start_break.png" alt="Alt text" title="断点输出"></p>
+<h3 id="bt查看函数的堆栈"><a href="#bt查看函数的堆栈" class="headerlink" title="bt查看函数的堆栈"></a>bt查看函数的堆栈</h3><pre><code>如下图,表示在gdb.c的文件的第15行的main函数中调用了gdb.c文件中第六航的add_range函数,参数为low=1,high=100
+    #0  add_range (low=1, high=100) at gdb.c:6
+    #1  0x0000000100000f07 in main () at gdb.c:15
+</code></pre><p><img src="/img/gdb_test/bt.png" alt="Alt text" title="查看函数堆栈"></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><pre><code>当我们在调试的时候,可以看出i和sum没有被初始化,而在循环中i进行了初始化,所以问题不大,sum执行完第一次调用后的值是55,所以最终运行完1到10相加,再运行1到100相加的最终结果是5105
+</code></pre><h1 id="顺序调试"><a href="#顺序调试" class="headerlink" title="顺序调试"></a>顺序调试</h1><h3 id="查看mian函数-不能发现问题处在哪"><a href="#查看mian函数-不能发现问题处在哪" class="headerlink" title="查看mian函数,不能发现问题处在哪"></a>查看mian函数,不能发现问题处在哪</h3><pre><code>首先我们看到gdb停在第14行的位置,执行了add_range的函数调用,正等待我们执行命令
+14        result[0] = add_range(1, 10);
+接着我们执行了n,gdb执行下一条命令,
+15        result[1] = add_range(1, 100);
+最后知道输出结果
+</code></pre><p><img src="/img/gdb_test/step_start.png" alt="Alt text" title="调试main函数"></p>
+<h3 id="进入子函数add-range中-查看具体的执行步骤"><a href="#进入子函数add-range中-查看具体的执行步骤" class="headerlink" title="进入子函数add_range中,查看具体的执行步骤"></a>进入子函数add_range中,查看具体的执行步骤</h3><pre><code>调试子函数的第一次调用,gdb停留在add_range(1,10)这行代码的位置,直接使用s进入子函数
+Temporary breakpoint 3, main () at gdb.c:14
+14        result[0] = add_range(1, 10);
+(gdb) s
+add_range (low=1, high=10) at gdb.c:6
+6        for (i = low; i &lt;= high; i++)
+
+接着直接回车进入下一步,在使用info locals进行当前栈帧局部变量的值,也就是add_range函数中i和sum的值
+在使用f 1进入1号栈帧也就是main函数中,查看main栈帧局部变量的值(info locals)
+本次调用(add_range(1,10))没有错误,直接使用finish运行完当前函数,并让gdb回到main函数中,等待命令发出
+</code></pre><p><img src="/img/gdb_test/subfunc_start.png" alt="Alt text" title="调试子函数"></p>
+<pre><code>让gdb进入下一条命令(n),
+(gdb) n
+    15        result[1] = add_range(1, 100);
+
+再进入子函数(add_range(1,100))中,并查看当前栈帧局部变量的值
+(gdb) s
+    add_range (low=1, high=100) at gdb.c:6
+    6        for (i = low; i &lt;= high; i++)
+
+发现当前的i和sum没有进行初始化,还是上次函数add_range(1,10)执行完后的结果
+(gdb) info locals
+i = 11
+sum = 55
+
+使用bt查看函数的调用栈(当前调用add_range的蚕食是low=1,high=100),
+(gdb) bt
+    #0  add_range (low=1, high=100) at gdb.c:6
+    #1  0x0000000100000f07 in main () at gdb.c:15
+
+并进入下一步,设置i和sum的初始值(set var i=0),
+(gdb) set var i=0
+    (gdb) set var sum=0
+    (gdb) s
+    7            sum = sum + i;
+
+接着确认当前i和sum的值(p i),
+(gdb) p i
+    $2 = 1
+    (gdb) p sum
+    $3 = 0
+
+在用finish连续运行完当前函数,结果返回的值为5050
+(gdb) finish
+    Run till exit from #0  add_range (low=1, high=100) at gdb.c:7
+    0x0000000100000f07 in main () at gdb.c:15
+    15        result[1] = add_range(1, 100);
+    Value returned is $4 = 5050
+
+也就是说,函数返回了正确的结果,错误原因是在第一次add_range的调用之后,没有对i和sum进行初始化
+</code></pre><p><img src="/img/gdb_test/subfunc_end.png" alt="Alt text" title="调试子函数"></p>
+<h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><pre><code>命令                           描述
+backtrace（或bt）              查看各级函数调用及参数
+finish                        连续运行到当前函数返回为止，然后停下来等待命令
+frame（或f）                   帧编号    选择栈帧
+info（或i）locals              查看当前栈帧局部变量的值
+list（或l）                      列出源代码，接着上次的位置往下列，每次列10行
+list 行号                      列出从第几行开始的源代码
+list 函数名                      列出某个函数的源代码
+next（或n）                      执行下一行语句
+print（或p）                      打印表达式的值，通过表达式可以修改变量的值或者调用函数
+quit（或q）                      退出gdb调试环境
+set var                          修改变量的值
+start                          开始执行程序，停在main函数第一行语句前面等待命令
+step（或s）                      执行下一行语句，如果有函数调用则进入到函数中
+next(或n)                     执行下一条语句
+break 行号                     在源码的行数设置断点
+break 函数名                   在函数的入口处,设置断点
+info break                    查看断点信息
+continue(或c)                 继续运行程序
+print(或p) 变量名名            打印变量的值
+frame(或f)                    选择栈帧
+set var                       修改变量的值
+
+
+==========
+其他事例中没用到的命令
+call 函数                     调用函数
+print 函数                    调用函数
+</code></pre>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -738,11 +1143,14 @@ int add_range(int low, int high)
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -771,98 +1179,123 @@ int add_range(int low, int high)
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="狂奔的菜鸟" />
-          <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
-          <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives/">
-              <span class="site-state-item-count">153</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-          
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/SunnySmilez" target="_blank">
-                  
-                    <i class="fa fa-github"></i> GitHub
-                  
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
         </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">友情链接</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.taichirain.cn/" target="_blank">taichirain</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.chenjie.info/" target="_blank">陈捷的博客</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://52dachu.com/" target="_blank">大神-0x0886</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://phpmap.club/" target="_blank">程序员之路</a>
-              </span>
-            
-          
-        </div>
-
       </section>
+
+      
 
       
 
@@ -876,80 +1309,65 @@ int add_range(int low, int high)
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -957,40 +1375,140 @@ int add_range(int low, int high)
 
 
 
-  
+
+
+
+
+
+
 
 
 
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
