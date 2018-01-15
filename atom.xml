@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-01-04T14:48:56.000Z</updated>
+  <updated>2018-01-15T14:22:05.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,350 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[redis-dict源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/01/05/redis-dict%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/01/05/redis-dict源码阅读/</id>
+    <published>2018-01-05T07:26:40.000Z</published>
+    <updated>2018-01-15T14:22:05.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="dict结构"><a href="#dict结构" class="headerlink" title="dict结构"></a>dict结构</h1><pre><code>typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehashing not in progress if rehashidx == -1 */
+
+    // 目前正在运行的安全迭代器的数量
+    int iterators; /* number of iterators currently running */
+
+} dict;
+
+typedef struct dictType {
+
+    // 计算哈希值的函数
+    unsigned int (*hashFunction)(const void *key);
+
+    // 复制键的函数
+    void *(*keyDup)(void *privdata, const void *key);
+
+    // 复制值的函数
+    void *(*valDup)(void *privdata, const void *obj);
+
+    // 对比键的函数
+    int (*keyCompare)(void *privdata, const void *key1, const void *key2);
+
+    // 销毁键的函数
+    void (*keyDestructor)(void *privdata, void *key);
+
+    // 销毁值的函数
+    void (*valDestructor)(void *privdata, void *obj);
+
+} dictType;
+
+typedef struct dictht {
+
+    // 哈希表数组
+    dictEntry **table;
+
+    // 哈希表大小
+    unsigned long size;
+
+    // 哈希表大小掩码，用于计算索引值
+    // 总是等于 size - 1
+    unsigned long sizemask;
+
+    // 该哈希表已有节点的数量(注意used的数量是所有的链表中的节点，比如说key1和key2冲突hash后得到的key是0，但是这里的used要加2)
+
+    unsigned long used;
+
+} dictht;
+
+typedef struct dictEntry {
+
+    // 键
+    void *key;
+
+    // 值
+    union {
+        void *val;
+        uint64_t u64;
+        int64_t s64;
+    } v;
+
+    // 指向下个哈希表节点，形成链表
+    struct dictEntry *next;
+
+} dictEntry;
+</code></pre><p><img src="/img/redis/dict.svg" alt="Alt text" title="dict结构"></p>
+<h1 id="dict何时进行rehash（渐进式rehash）"><a href="#dict何时进行rehash（渐进式rehash）" class="headerlink" title="dict何时进行rehash（渐进式rehash）"></a>dict何时进行rehash（渐进式rehash）</h1><ol>
+<li>添加节点的时候，进行单步rehash（dictAddRaw）</li>
+<li>删除节点的时候，进行单步rehash（dictGenericDelete）</li>
+<li>进行查找节点的时候（dictFind）</li>
+<li>获取随机值的时候（dictGetRandomKey）</li>
+<li>dictRehashMilliseconds</li>
+<li>_dictRehashStep</li>
+<li>如下代码所示，每次进行上述操作的时候，会调用dictRehash（指定执行N步rehash，不会一次性rehash所有的dict节点）,渐进式的好处在于：1、不会阻塞用户的数据返回（假如用户的操作触发了rehash，如果是全量rehash，那么要等待全量rehash完成才返回数据，时间会非常长，体验不好）2、避免了系统的集中式计算 </li>
+</ol>
+<pre><code>int dictRehash(dict *d, int n) {
+
+    // 只可以在 rehash 进行中时执行
+    if (!dictIsRehashing(d)) {
+        return 0;   
+    }
+
+    // 进行 N 步迁移
+    // T = O(N)
+    while(n--) {
+        dictEntry *de, *nextde;
+
+        /* Check if we already rehashed the whole table... */
+        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
+        // T = O(1)
+        if (d-&gt;ht[0].used == 0) {
+            // 释放 0 号哈希表
+            zfree(d-&gt;ht[0].table);
+            // 将原来的 1 号哈希表设置为新的 0 号哈希表
+            d-&gt;ht[0] = d-&gt;ht[1];
+            // 重置旧的 1 号哈希表
+            _dictReset(&amp;d-&gt;ht[1]);
+            // 关闭 rehash 标识
+            d-&gt;rehashidx = -1;
+            // 返回 0 ，向调用者表示 rehash 已经完成
+            return 0;
+        }
+
+        /* Note that rehashidx can&apos;t overflow as we are sure there are more
+         * elements because ht[0].used != 0 */
+        // 确保 rehashidx 没有越界
+        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
+
+        // 略过数组中为空的索引，找到下一个非空索引
+        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
+            d-&gt;rehashidx++;
+        }
+
+        // 指向该索引的链表表头节点
+        de = d-&gt;ht[0].table[d-&gt;rehashidx];
+        /* Move all the keys in this bucket from the old to the new hash HT */
+        // 将链表中的所有节点迁移到新哈希表
+        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
+        // T = O(1)
+        while(de) {
+            unsigned int h;
+
+            // 保存下个节点的指针
+            nextde = de-&gt;next;
+
+            /* Get the index in the new hash table */
+            // 计算新哈希表的哈希值，以及节点插入的索引位置
+            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
+
+            // 插入节点到新哈希表
+            de-&gt;next = d-&gt;ht[1].table[h];
+            d-&gt;ht[1].table[h] = de;
+
+            // 更新计数器
+            d-&gt;ht[0].used--;
+            d-&gt;ht[1].used++;
+
+            // 继续处理下个节点
+            de = nextde;
+        }
+        // 将刚迁移完的哈希表索引的指针设为空
+        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
+        // 更新 rehash 索引
+        d-&gt;rehashidx++;
+    }
+
+    return 1;
+}
+</code></pre><h1 id="dict的rehash判断标准"><a href="#dict的rehash判断标准" class="headerlink" title="dict的rehash判断标准"></a>dict的rehash判断标准</h1><ol>
+<li>dict_can_resize标识可进行rehash</li>
+<li>dictIsRehashing标识没有正在进行rehash</li>
+<li>hashtable[1]的可用空间大小不能小于hashtable[0]的已用空间大小</li>
+<li>hashtable[0]的used!=0</li>
+</ol>
+<pre><code>int dictResize(dict *d)
+{
+    int minimal;
+
+    // 不能在关闭 rehash 或者正在 rehash 的时候调用
+    if (!dict_can_resize || dictIsRehashing(d)) {
+        return DICT_ERR;
+    }
+
+    // 计算让比率接近 1：1 所需要的最少节点数量
+    minimal = d-&gt;ht[0].used;
+    if (minimal &lt; DICT_HT_INITIAL_SIZE) {
+        minimal = DICT_HT_INITIAL_SIZE;
+    }
+
+    // 调整字典的大小
+    // T = O(N)
+    return dictExpand(d, minimal);
+}
+</code></pre><h1 id="dict怎样进行rehash"><a href="#dict怎样进行rehash" class="headerlink" title="dict怎样进行rehash"></a>dict怎样进行rehash</h1><ol>
+<li>进行一系列是否能rehash的判断</li>
+<li>找到当前存在ht[0]的rehashidx,表示当前rehashidx没有进行迁移（也就是：d-&gt;ht[0].table[d-&gt;rehashidx] != NULL）</li>
+<li>分配ht[1]-&gt;table的空间，大小至少为ht[0]-&gt;usedd的两倍</li>
+<li>遍历当前的节点对应的链（hash冲突使用链表法解决的，所以一个d-&gt;ht[0].table[d-&gt;rehashidx]保存了一个链表）</li>
+<li>把节点从ht[0]移动到ht[1],移动完所有的节点后，释放ht[0],将原来的ht[1]成为新的ht[0],创建一个新的ht[1]</li>
+<li>修改rehashidx的值</li>
+</ol>
+<pre><code>int dictRehash(dict *d, int n) {
+
+    // 只可以在 rehash 进行中时执行
+    if (!dictIsRehashing(d)) {
+        return 0;   
+    }
+
+    // 进行 N 步迁移
+    // T = O(N)
+    while(n--) {
+        dictEntry *de, *nextde;
+
+        /* Check if we already rehashed the whole table... */
+        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
+        // T = O(1)
+        if (d-&gt;ht[0].used == 0) {
+            // 释放 0 号哈希表
+            zfree(d-&gt;ht[0].table);
+            // 将原来的 1 号哈希表设置为新的 0 号哈希表
+            d-&gt;ht[0] = d-&gt;ht[1];
+            // 重置旧的 1 号哈希表
+            _dictReset(&amp;d-&gt;ht[1]);
+            // 关闭 rehash 标识
+            d-&gt;rehashidx = -1;
+            // 返回 0 ，向调用者表示 rehash 已经完成
+            return 0;
+        }
+
+        /* Note that rehashidx can&apos;t overflow as we are sure there are more
+         * elements because ht[0].used != 0 */
+        // 确保 rehashidx 没有越界
+        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
+
+        // 略过数组中为空的索引，找到下一个非空索引
+        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
+            d-&gt;rehashidx++;
+        }
+
+        // 指向该索引的链表表头节点
+        de = d-&gt;ht[0].table[d-&gt;rehashidx];
+        /* Move all the keys in this bucket from the old to the new hash HT */
+        // 将链表中的所有节点迁移到新哈希表
+        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
+        // T = O(1)
+        while(de) {
+            unsigned int h;
+
+            // 保存下个节点的指针
+            nextde = de-&gt;next;
+
+            /* Get the index in the new hash table */
+            // 计算新哈希表的哈希值，以及节点插入的索引位置
+            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
+
+            // 插入节点到新哈希表
+            de-&gt;next = d-&gt;ht[1].table[h];
+            d-&gt;ht[1].table[h] = de;
+
+            // 更新计数器
+            d-&gt;ht[0].used--;
+            d-&gt;ht[1].used++;
+
+            // 继续处理下个节点
+            de = nextde;
+        }
+        // 将刚迁移完的哈希表索引的指针设为空
+        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
+        // 更新 rehash 索引
+        d-&gt;rehashidx++;
+    }
+
+    return 1;
+}
+</code></pre><h1 id="dict如何解决hash冲突"><a href="#dict如何解决hash冲突" class="headerlink" title="dict如何解决hash冲突"></a>dict如何解决hash冲突</h1><ol>
+<li>hash冲突：指两个不同的键拥有相同的hash值 </li>
+<li>链地址法： 使用链表将多个哈希值相同的节点串连在一起， 从而解决冲突问题</li>
+<li>如图，0号节点的key4和key1产生了hash冲突（hash冲突：key4和key1算出来的hash的值都为0，链地址法：dict使用链表把key4和key1链接起来，从而可以解决hash冲突的问题）</li>
+</ol>
+<pre><code>static int _dictKeyIndex(dict *d, const void *key)
+{
+    unsigned int h, idx, table;
+    dictEntry *he;
+
+    /* Expand the hash table if needed */
+    // 单步 rehash
+    // T = O(N)
+    if (_dictExpandIfNeeded(d) == DICT_ERR)
+        return -1;
+
+    /* Compute the key hash value */
+    // 计算 key 的哈希值
+    h = dictHashKey(d, key);
+    // T = O(1)
+    for (table = 0; table &lt;= 1; table++) {
+
+        // 计算索引值
+        idx = h &amp; d-&gt;ht[table].sizemask;
+
+        /* Search if this slot does not already contain the given key */
+        // 查找 key 是否存在
+        // T = O(1)
+        he = d-&gt;ht[table].table[idx];
+        while(he) {//如果当前节点已经存在值（就是hash冲突），就计算他的链表的最后节点的指针
+            if (dictCompareKeys(d, key, he-&gt;key))
+                return -1;
+            he = he-&gt;next;
+        }
+
+        // 如果运行到这里时，说明 0 号哈希表中所有节点都不包含 key
+        // 如果这时 rehahs 正在进行，那么继续对 1 号哈希表进行 rehash
+        if (!dictIsRehashing(d)) break;
+    }
+
+    // 返回索引值
+    return idx;
+}
+</code></pre><p><img src="/img/redis/collision.svg" alt="Alt text" title="hash冲突"></p>
+<h1 id="安全迭代器和非安全迭代器有什么区别"><a href="#安全迭代器和非安全迭代器有什么区别" class="headerlink" title="安全迭代器和非安全迭代器有什么区别"></a>安全迭代器和非安全迭代器有什么区别</h1><ol>
+<li>安全迭代器：在迭代进行过程中，可以对字典进行修改</li>
+<li>不安全迭代器：在迭代进行过程中，不对字典进行修改</li>
+</ol>
+<h1 id="redis如何保证遍历dict的时候能遍历到全部的数据"><a href="#redis如何保证遍历dict的时候能遍历到全部的数据" class="headerlink" title="redis如何保证遍历dict的时候能遍历到全部的数据"></a>redis如何保证遍历dict的时候能遍历到全部的数据</h1><ol>
+<li>还需要查看dictscan函数，算法有点复杂</li>
+<li>建议阅读以下文章<blockquote>
+<p><a href="http://chenzhenianqing.com/articles/1101.html" target="_blank" rel="external">http://chenzhenianqing.com/articles/1101.html</a><br><a href="http://blog.csdn.net/gqtcgq/article/details/50533336" target="_blank" rel="external">http://blog.csdn.net/gqtcgq/article/details/50533336</a><br><a href="http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/" target="_blank" rel="external">http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/</a></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="有趣的代码"><a href="#有趣的代码" class="headerlink" title="有趣的代码"></a>有趣的代码</h1><ol>
+<li>计算索引值<br> 如下代码：d-&gt;ht[table].sizemask的值为2的n次方-1（为size-1）<br> 其实下面代码的含义可以理解为h和sizemask”取模”（不是真正意义的取模哦）</li>
+</ol>
+<pre><code>idx = h &amp; d-&gt;ht[table].sizemask;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="dict结构"><a href="#dict结构" class="headerlink" title="dict结构"></a>dict结构</h1><pre><code>typedef struct dict {
+
+    // 类型特定函数
+    dictT]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[redis-adlist源码阅读]]></title>
@@ -416,8 +760,9 @@ int sdsll2str(char *s, long long value) {
     <link href="http://www.cxyteam.com/2017/12/28/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://www.cxyteam.com/2017/12/28/常用命令/</id>
     <published>2017-12-28T02:29:39.000Z</published>
-    <updated>2017-12-28T02:44:39.000Z</updated>
+    <updated>2018-01-10T02:58:21.000Z</updated>
     <content type="html"><![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
+</code></pre><h1 id="mysql导出数据-数据量比较大，工具不好用的时候"><a href="#mysql导出数据-数据量比较大，工具不好用的时候" class="headerlink" title="mysql导出数据(数据量比较大，工具不好用的时候)"></a>mysql导出数据(数据量比较大，工具不好用的时候)</h1><pre><code>mysql -h 127.0.0.1 -uroot -P databases 3306 -e &quot;select count(*) from user;&quot;  &gt; /tmp/tetst.xls
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax]]>
@@ -1022,143 +1367,6 @@ $pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装
       <category term="产品&amp;运营" scheme="http://www.cxyteam.com/tags/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
     
       <category term="产品&amp;运营" scheme="http://www.cxyteam.com/categories/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Dockerfile的编写]]></title>
-    <link href="http://www.cxyteam.com/2017/06/04/Dockerfile%E7%9A%84%E7%BC%96%E5%86%99/"/>
-    <id>http://www.cxyteam.com/2017/06/04/Dockerfile的编写/</id>
-    <published>2017-06-04T08:21:31.000Z</published>
-    <updated>2017-06-12T01:29:51.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，构建操作等指定都写入其中，描述该层是如何创建的
-docker commit可以实现同样的功能（在容器中安装某些软件之后，提交到基础镜像中形成新的镜像），但是commit安装了什么，如何安装的都是黑盒，后面使用该镜像的人无从得知执行了哪些指令
-</code></pre><h1 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h1><h3 id="docker-build-其他用法"><a href="#docker-build-其他用法" class="headerlink" title="docker build 其他用法"></a>docker build 其他用法</h3><h6 id="标准用法"><a href="#标准用法" class="headerlink" title="标准用法"></a>标准用法</h6><pre><code>docker build -t image_name PATH
-在PATH目录下，按照Dockerfile建立一个新的image_name镜像
-path指的是上下文环境，当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎，这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件
-</code></pre><h6 id="直接用-Git-repo-进行构建"><a href="#直接用-Git-repo-进行构建" class="headerlink" title="直接用 Git repo 进行构建"></a>直接用 Git repo 进行构建</h6><pre><code>docker build https://github.com/twang2218/gitlab-ce-zh.git#:8.14
-指定了构建所需的 Git repo，并且指定默认的 master 分支，构建目录为 /8.14/，然后 Docker 就会自己去 git clone 这个项目、切换到指定分支、并进入到指定目录后开始构建
-</code></pre><h6 id="用给定的-tar-压缩包构建"><a href="#用给定的-tar-压缩包构建" class="headerlink" title="用给定的 tar 压缩包构建"></a>用给定的 tar 压缩包构建</h6><pre><code>docker build http://server/context.tar.gz
-Docker 引擎会下载这个包，并自动解压缩，以其作为上下文，开始构建
-</code></pre><h6 id="从标准输入中读取-Dockerfile-进行构建"><a href="#从标准输入中读取-Dockerfile-进行构建" class="headerlink" title="从标准输入中读取 Dockerfile 进行构建"></a>从标准输入中读取 Dockerfile 进行构建</h6><pre><code>docker build - &lt; Dockerfile或者cat Dockerfile | docker build -
-如果标准输入传入的是文本文件，则将其视为 Dockerfile，并开始构建。这种形式由于直接从标准输入中读取 Dockerfile 的内容，它没有上下文，因此不可以像其他方法那样可以将本地文件 COPY 进镜像之类的事情
-</code></pre><h6 id="从标准输入中读取上下文压缩包进行构建"><a href="#从标准输入中读取上下文压缩包进行构建" class="headerlink" title="从标准输入中读取上下文压缩包进行构建"></a>从标准输入中读取上下文压缩包进行构建</h6><pre><code>docker build - &lt; context.tar.gz
-如果发现标准输入的文件格式是 gzip、bzip2 以及 xz 的话，将会使其为上下文压缩包，直接将其展开，将里面视为上下文，并开始构建
-</code></pre><h6 id="From"><a href="#From" class="headerlink" title="From"></a>From</h6><pre><code>指定基础镜像，在其上进行定制
-</code></pre><h6 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h6><pre><code>执行命令行的命令，比如：RUN apt-get update是执行apt-get update命令
-执行此命令的时候需要注意，在Dockerfile中没执行一个指令都会新建一层(目前有个最大层的限制是127层)，所以每执行一个RUN就会和我们在执行安装软件然后执行commit一样，苟静一层镜像。因此在执行多个命令的时候使用&quot;&amp;&quot;符连接，用一个RUN执行，这样就只会新建一个层
-不可这样：
-RUN apt-get update
-RUN apt-get -y install vim
-应当改为：
-RUN apt-get update \
-    &amp;&amp; apt-get -y install vim
-</code></pre><h6 id="COPY-source-path-target-path"><a href="#COPY-source-path-target-path" class="headerlink" title="COPY source_path target_path"></a>COPY source_path target_path</h6><pre><code>将本地的source_path复制到新的一层镜像内的target_path位置（如果source_path是相对路径，那么需要注意的是他是相对于docker build -t image_name PATH时指定的PATH也就是上下文环境）
-source_path支持通配符
-target_path可以是容器的绝对路径，也可以是相对于工作目录的相对路径（工作目录用WORKDIR指令来指定）
-需要注意的是所有的source_path的文件属性都会保留（包含读写执行权限等）
-</code></pre><h6 id="ADD-source-path-target-path"><a href="#ADD-source-path-target-path" class="headerlink" title="ADD source_path target_path"></a>ADD source_path target_path</h6><pre><code>使用方式和COPY一样，但是添加了一些新的功能
-source_path可以是一个 URL，这种情况下，Docker 引擎会试图去下载这个链接的文件放到 target_path去。下载后的文件权限自动设置为 600，另外，如果下载的是个压缩包，需要解压缩，如果对权限不满足或者需要进行解压缩，那就需要再使用RUN命令调整
-如果source_path是一个tar压缩文件的话，ADD会将文件解压缩后到target_path中
-</code></pre><h6 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h6><pre><code>CMD与RUN类似
-shell格式：CMD 命令
-exec格式：CMD [&quot;可执行文件&quot;, &quot;参数1&quot;, &quot;参数2&quot;...]
-参数列表格式：CMD [&quot;参数1&quot;, &quot;参数2&quot;...]。在指定了 ENTRYPOINT 指令后，用 CMD 指定具体的参数
-需要注意的是：Docker 不是虚拟机，容器就是进程，容器就是为了主进程而存在的，主进程退出，容器就失去了存在的意义，从而退出，其它辅助进程不是它需要关心的东西(这块实验并没有成功，暂时忽略，有坑能想到这块就行)
-什么意思呢？重启nginx的时候可能会写成这样：CMD service nginx start
-在执行的时候会被理解为：CMD [ &quot;sh&quot;, &quot;-c&quot;, &quot;service nginx start&quot;]，因此主进程实际是sh，当service nginx start结束之后，sh也就结束了，sh作为主进程退出，自然容器也就退出了
-正确的做法是直接执行nginx可执行文件
-CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
-</code></pre><h6 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h6><pre><code>和cmd的命令差不多，两个应用场景
-1、启动一个服务前的准备工作
-    FROM alpine:3.4
-    ...
-    RUN addgroup -S redis &amp;&amp; adduser -S -G redis redis
-    ...
-    ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]
-
-    EXPOSE 6379
-    CMD [ &quot;redis-server&quot; ]
-
-
-    docker-entrypoint.sh的脚本
-    #!/bin/sh
-    ...
-    # allow the container to be started with `--user`
-    if [ &quot;$1&quot; = &apos;redis-server&apos; -a &quot;$(id -u)&quot; = &apos;0&apos; ]; then
-        chown -R redis .
-        exec su-exec redis &quot;$0&quot; &quot;$@&quot;
-    fi
-
-    exec &quot;$@&quot;
-    这时候的ENTRYPOINT会判断CMD的内容，如果是redis-server就切换redis用户身份启动服务器，否则用root身份执行
-
-2、让镜像像命令一样
-    FROM ubuntu:16.04
-    RUN apt-get update \
-        &amp;&amp; apt-get install -y curl \
-        &amp;&amp; rm -rf /var/lib/apt/lists/*
-    CMD [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
-
-    如上我们在构建好镜像之后，执行docker run container_name就会执行curl http://ip.cn
-    如果这个时候我想显示当前的http头信息，就需要加上-i的参数了，假如我们执行docker run container_name -I 命令会变成curl -I http://ip.cn？
-    记住在镜像的后面只能跟command，运行时会替换CMD的默认值，所以在这里的-i是把整个的CMD给替换了，而-I这个命令是不存在的，显然我们需要docker run container_name curl -I http://ip.cn这么写
-    如果我们换成这种写法
-    FROM ubuntu:16.04
-    RUN apt-get update \
-        &amp;&amp; apt-get install -y curl \
-        &amp;&amp; rm -rf /var/lib/apt/lists/*
-    ENTRYPOINT [ &quot;curl&quot;, &quot;-s&quot;, &quot;http://ip.cn&quot; ]
-
-    这样写就能构建完镜像之后，执行docker run container_name就能获取header信息
-    因为CMD的内容将会作为参数传给ENTRYPOINT，因此原本命令是curl http://ip.cn，CMD命令是-I所以最终执行的命令是curl -I http://ip.cn
-</code></pre><h6 id="ENV设置环境变量"><a href="#ENV设置环境变量" class="headerlink" title="ENV设置环境变量"></a>ENV设置环境变量</h6><pre><code>ENV key val
-ENV key1=val1 key2=val2
-ENV VERSION=1.01 NAME=&quot;TEST&quot;
-</code></pre><h6 id="ARG构建参数"><a href="#ARG构建参数" class="headerlink" title="ARG构建参数"></a>ARG构建参数</h6><pre><code>ARG key=val
-和ENV一样是设置环境变量，ARG构建的环境变量，在容器运行时不会存在这些环境变量（貌似就是一个临时的环境变量的概念，但是他能用docker history查看，所以不要以为真的是临时变量，直接传入账号密码）
-</code></pre><h6 id="VOLUME定义匿名卷"><a href="#VOLUME定义匿名卷" class="headerlink" title="VOLUME定义匿名卷"></a>VOLUME定义匿名卷</h6><pre><code>容器运行的时候，我们应该尽量保持容器存储层不发生写操作，对于数据库类需要动态保存数据的应用/或者上传文件的目录，我们应该把这些文件保存在卷中，比如在Dockerfile中，我们事先指定 /data/mysqldata为匿名卷，这样做会保证容器存储层无变化，说白了就是你把当前的容器做build的时候不会把mysqldata文件给打包进去
-VOLUME /data/mysqldata
-在执行：docker run -d -v mydata:/data/mysqldata container_name的时候是可以覆盖掉匿名卷的
-</code></pre><h6 id="EXPOSE暴露端口"><a href="#EXPOSE暴露端口" class="headerlink" title="EXPOSE暴露端口"></a>EXPOSE暴露端口</h6><pre><code>EXPOSE 端口1 端口2
-这样写在容器运行的时候也不会开启这个端口的服务
-他有两个作用：提醒，告诉镜像使用者理解这个服务的使用的端口；占用随机应用端口，
-</code></pre><h6 id="WORKDIR指定工作目录"><a href="#WORKDIR指定工作目录" class="headerlink" title="WORKDIR指定工作目录"></a>WORKDIR指定工作目录</h6><pre><code>指定工作目录，以后各层的当前目录就改为指定的目录
-</code></pre><h6 id="USER指定当前用户"><a href="#USER指定当前用户" class="headerlink" title="USER指定当前用户"></a>USER指定当前用户</h6><pre><code>切换到指定用户，该用户必须事先存在
-</code></pre><h6 id="HEALTHCHECK健康检查"><a href="#HEALTHCHECK健康检查" class="headerlink" title="HEALTHCHECK健康检查"></a>HEALTHCHECK健康检查</h6><pre><code>--interval  两次健康检查的间隔时间
---timeout   监看检查命令运行超时时间，如果超过这个时间，本次健康检查视为失败，默认30s
---retries   当连续失败命令运行
-
-FROM nginx
-RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*
-HEALTHCHECK --interval=5s --timeout=3s \
-  CMD curl -fs http://localhost/ || exit 1
-
-这里设置每隔5s检查一次，如果健康检查命令超过3s没响应就视为失败，并使用curl -fs http://localhost/ || exit 1作为健康检查命令
-</code></pre><h6 id="onbulid"><a href="#onbulid" class="headerlink" title="onbulid"></a>onbulid</h6><pre><code>他后面跟其他的指令，例如RUN,COPY等，而这些指令，在当前镜像构建时并不会被执行，只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行
-1、先编写一个Dockerfile文件，内容如下：
-    FROM web1
-    ONBUILD RUN mkdir /test
-
-2、利用上面的Dockerfile构建镜像：docker build -t web1
-    这个时候你在web1镜像中不会看到有/test文件夹
-
-3、在编写一个Dockerfile，内容如下
-    FROM web1
-
-4、构建镜像：docker build -t web2
-    这个时候你会看到镜像web2中有/test文件夹
-</code></pre><h6 id="dockerignore"><a href="#dockerignore" class="headerlink" title=".dockerignore"></a>.dockerignore</h6><pre><code>如果在docker build指定的上下文环境中有不需要COPY的文件，可以像.gitignore这样的语法写在.dockerignore
-.path/*
-.file_name
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Dockerfile-作用"><a href="#Dockerfile-作用" class="headerlink" title="Dockerfile 作用"></a>Dockerfile 作用</h1><pre><code>定制自己的镜像，明确的把修改，安装，]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
     
   </entry>
   

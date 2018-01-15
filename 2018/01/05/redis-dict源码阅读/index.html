@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="dict结构typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis-dict源码阅读">
+<meta property="og:url" content="http://www.cxyteam.com/2018/01/05/redis-dict源码阅读/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="dict结构typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehash">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/dict.svg">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/collision.svg">
+<meta property="og:updated_time" content="2018-01-15T14:22:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis-dict源码阅读">
+<meta name="twitter:description" content="dict结构typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehash">
+<meta name="twitter:image" content="http://www.cxyteam.com/img/redis/dict.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2018/01/05/redis-dict源码阅读/"/>
+
+
+
+
+
+  <title>redis-dict源码阅读 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/05/redis-dict源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redis-dict源码阅读</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T15:26:40+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/05/redis-dict源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/05/redis-dict源码阅读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="dict结构"><a href="#dict结构" class="headerlink" title="dict结构"></a>dict结构</h1><pre><code>typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehashing not in progress if rehashidx == -1 */
+
+    // 目前正在运行的安全迭代器的数量
+    int iterators; /* number of iterators currently running */
+
+} dict;
+
+typedef struct dictType {
+
+    // 计算哈希值的函数
+    unsigned int (*hashFunction)(const void *key);
+
+    // 复制键的函数
+    void *(*keyDup)(void *privdata, const void *key);
+
+    // 复制值的函数
+    void *(*valDup)(void *privdata, const void *obj);
+
+    // 对比键的函数
+    int (*keyCompare)(void *privdata, const void *key1, const void *key2);
+
+    // 销毁键的函数
+    void (*keyDestructor)(void *privdata, void *key);
+
+    // 销毁值的函数
+    void (*valDestructor)(void *privdata, void *obj);
+
+} dictType;
+
+typedef struct dictht {
+
+    // 哈希表数组
+    dictEntry **table;
+
+    // 哈希表大小
+    unsigned long size;
+
+    // 哈希表大小掩码，用于计算索引值
+    // 总是等于 size - 1
+    unsigned long sizemask;
+
+    // 该哈希表已有节点的数量(注意used的数量是所有的链表中的节点，比如说key1和key2冲突hash后得到的key是0，但是这里的used要加2)
+
+    unsigned long used;
+
+} dictht;
+
+typedef struct dictEntry {
+
+    // 键
+    void *key;
+
+    // 值
+    union {
+        void *val;
+        uint64_t u64;
+        int64_t s64;
+    } v;
+
+    // 指向下个哈希表节点，形成链表
+    struct dictEntry *next;
+
+} dictEntry;
+</code></pre><p><img src="/img/redis/dict.svg" alt="Alt text" title="dict结构"></p>
+<h1 id="dict何时进行rehash（渐进式rehash）"><a href="#dict何时进行rehash（渐进式rehash）" class="headerlink" title="dict何时进行rehash（渐进式rehash）"></a>dict何时进行rehash（渐进式rehash）</h1><ol>
+<li>添加节点的时候，进行单步rehash（dictAddRaw）</li>
+<li>删除节点的时候，进行单步rehash（dictGenericDelete）</li>
+<li>进行查找节点的时候（dictFind）</li>
+<li>获取随机值的时候（dictGetRandomKey）</li>
+<li>dictRehashMilliseconds</li>
+<li>_dictRehashStep</li>
+<li>如下代码所示，每次进行上述操作的时候，会调用dictRehash（指定执行N步rehash，不会一次性rehash所有的dict节点）,渐进式的好处在于：1、不会阻塞用户的数据返回（假如用户的操作触发了rehash，如果是全量rehash，那么要等待全量rehash完成才返回数据，时间会非常长，体验不好）2、避免了系统的集中式计算 </li>
+</ol>
+<pre><code>int dictRehash(dict *d, int n) {
+
+    // 只可以在 rehash 进行中时执行
+    if (!dictIsRehashing(d)) {
+        return 0;   
+    }
+
+    // 进行 N 步迁移
+    // T = O(N)
+    while(n--) {
+        dictEntry *de, *nextde;
+
+        /* Check if we already rehashed the whole table... */
+        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
+        // T = O(1)
+        if (d-&gt;ht[0].used == 0) {
+            // 释放 0 号哈希表
+            zfree(d-&gt;ht[0].table);
+            // 将原来的 1 号哈希表设置为新的 0 号哈希表
+            d-&gt;ht[0] = d-&gt;ht[1];
+            // 重置旧的 1 号哈希表
+            _dictReset(&amp;d-&gt;ht[1]);
+            // 关闭 rehash 标识
+            d-&gt;rehashidx = -1;
+            // 返回 0 ，向调用者表示 rehash 已经完成
+            return 0;
+        }
+
+        /* Note that rehashidx can&apos;t overflow as we are sure there are more
+         * elements because ht[0].used != 0 */
+        // 确保 rehashidx 没有越界
+        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
+
+        // 略过数组中为空的索引，找到下一个非空索引
+        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
+            d-&gt;rehashidx++;
+        }
+
+        // 指向该索引的链表表头节点
+        de = d-&gt;ht[0].table[d-&gt;rehashidx];
+        /* Move all the keys in this bucket from the old to the new hash HT */
+        // 将链表中的所有节点迁移到新哈希表
+        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
+        // T = O(1)
+        while(de) {
+            unsigned int h;
+
+            // 保存下个节点的指针
+            nextde = de-&gt;next;
+
+            /* Get the index in the new hash table */
+            // 计算新哈希表的哈希值，以及节点插入的索引位置
+            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
+
+            // 插入节点到新哈希表
+            de-&gt;next = d-&gt;ht[1].table[h];
+            d-&gt;ht[1].table[h] = de;
+
+            // 更新计数器
+            d-&gt;ht[0].used--;
+            d-&gt;ht[1].used++;
+
+            // 继续处理下个节点
+            de = nextde;
+        }
+        // 将刚迁移完的哈希表索引的指针设为空
+        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
+        // 更新 rehash 索引
+        d-&gt;rehashidx++;
+    }
+
+    return 1;
+}
+</code></pre><h1 id="dict的rehash判断标准"><a href="#dict的rehash判断标准" class="headerlink" title="dict的rehash判断标准"></a>dict的rehash判断标准</h1><ol>
+<li>dict_can_resize标识可进行rehash</li>
+<li>dictIsRehashing标识没有正在进行rehash</li>
+<li>hashtable[1]的可用空间大小不能小于hashtable[0]的已用空间大小</li>
+<li>hashtable[0]的used!=0</li>
+</ol>
+<pre><code>int dictResize(dict *d)
+{
+    int minimal;
+
+    // 不能在关闭 rehash 或者正在 rehash 的时候调用
+    if (!dict_can_resize || dictIsRehashing(d)) {
+        return DICT_ERR;
+    }
+
+    // 计算让比率接近 1：1 所需要的最少节点数量
+    minimal = d-&gt;ht[0].used;
+    if (minimal &lt; DICT_HT_INITIAL_SIZE) {
+        minimal = DICT_HT_INITIAL_SIZE;
+    }
+
+    // 调整字典的大小
+    // T = O(N)
+    return dictExpand(d, minimal);
+}
+</code></pre><h1 id="dict怎样进行rehash"><a href="#dict怎样进行rehash" class="headerlink" title="dict怎样进行rehash"></a>dict怎样进行rehash</h1><ol>
+<li>进行一系列是否能rehash的判断</li>
+<li>找到当前存在ht[0]的rehashidx,表示当前rehashidx没有进行迁移（也就是：d-&gt;ht[0].table[d-&gt;rehashidx] != NULL）</li>
+<li>分配ht[1]-&gt;table的空间，大小至少为ht[0]-&gt;usedd的两倍</li>
+<li>遍历当前的节点对应的链（hash冲突使用链表法解决的，所以一个d-&gt;ht[0].table[d-&gt;rehashidx]保存了一个链表）</li>
+<li>把节点从ht[0]移动到ht[1],移动完所有的节点后，释放ht[0],将原来的ht[1]成为新的ht[0],创建一个新的ht[1]</li>
+<li>修改rehashidx的值</li>
+</ol>
+<pre><code>int dictRehash(dict *d, int n) {
+
+    // 只可以在 rehash 进行中时执行
+    if (!dictIsRehashing(d)) {
+        return 0;   
+    }
+
+    // 进行 N 步迁移
+    // T = O(N)
+    while(n--) {
+        dictEntry *de, *nextde;
+
+        /* Check if we already rehashed the whole table... */
+        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
+        // T = O(1)
+        if (d-&gt;ht[0].used == 0) {
+            // 释放 0 号哈希表
+            zfree(d-&gt;ht[0].table);
+            // 将原来的 1 号哈希表设置为新的 0 号哈希表
+            d-&gt;ht[0] = d-&gt;ht[1];
+            // 重置旧的 1 号哈希表
+            _dictReset(&amp;d-&gt;ht[1]);
+            // 关闭 rehash 标识
+            d-&gt;rehashidx = -1;
+            // 返回 0 ，向调用者表示 rehash 已经完成
+            return 0;
+        }
+
+        /* Note that rehashidx can&apos;t overflow as we are sure there are more
+         * elements because ht[0].used != 0 */
+        // 确保 rehashidx 没有越界
+        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
+
+        // 略过数组中为空的索引，找到下一个非空索引
+        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
+            d-&gt;rehashidx++;
+        }
+
+        // 指向该索引的链表表头节点
+        de = d-&gt;ht[0].table[d-&gt;rehashidx];
+        /* Move all the keys in this bucket from the old to the new hash HT */
+        // 将链表中的所有节点迁移到新哈希表
+        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
+        // T = O(1)
+        while(de) {
+            unsigned int h;
+
+            // 保存下个节点的指针
+            nextde = de-&gt;next;
+
+            /* Get the index in the new hash table */
+            // 计算新哈希表的哈希值，以及节点插入的索引位置
+            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
+
+            // 插入节点到新哈希表
+            de-&gt;next = d-&gt;ht[1].table[h];
+            d-&gt;ht[1].table[h] = de;
+
+            // 更新计数器
+            d-&gt;ht[0].used--;
+            d-&gt;ht[1].used++;
+
+            // 继续处理下个节点
+            de = nextde;
+        }
+        // 将刚迁移完的哈希表索引的指针设为空
+        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
+        // 更新 rehash 索引
+        d-&gt;rehashidx++;
+    }
+
+    return 1;
+}
+</code></pre><h1 id="dict如何解决hash冲突"><a href="#dict如何解决hash冲突" class="headerlink" title="dict如何解决hash冲突"></a>dict如何解决hash冲突</h1><ol>
+<li>hash冲突：指两个不同的键拥有相同的hash值 </li>
+<li>链地址法： 使用链表将多个哈希值相同的节点串连在一起， 从而解决冲突问题</li>
+<li>如图，0号节点的key4和key1产生了hash冲突（hash冲突：key4和key1算出来的hash的值都为0，链地址法：dict使用链表把key4和key1链接起来，从而可以解决hash冲突的问题）</li>
+</ol>
+<pre><code>static int _dictKeyIndex(dict *d, const void *key)
+{
+    unsigned int h, idx, table;
+    dictEntry *he;
+
+    /* Expand the hash table if needed */
+    // 单步 rehash
+    // T = O(N)
+    if (_dictExpandIfNeeded(d) == DICT_ERR)
+        return -1;
+
+    /* Compute the key hash value */
+    // 计算 key 的哈希值
+    h = dictHashKey(d, key);
+    // T = O(1)
+    for (table = 0; table &lt;= 1; table++) {
+
+        // 计算索引值
+        idx = h &amp; d-&gt;ht[table].sizemask;
+
+        /* Search if this slot does not already contain the given key */
+        // 查找 key 是否存在
+        // T = O(1)
+        he = d-&gt;ht[table].table[idx];
+        while(he) {//如果当前节点已经存在值（就是hash冲突），就计算他的链表的最后节点的指针
+            if (dictCompareKeys(d, key, he-&gt;key))
+                return -1;
+            he = he-&gt;next;
+        }
+
+        // 如果运行到这里时，说明 0 号哈希表中所有节点都不包含 key
+        // 如果这时 rehahs 正在进行，那么继续对 1 号哈希表进行 rehash
+        if (!dictIsRehashing(d)) break;
+    }
+
+    // 返回索引值
+    return idx;
+}
+</code></pre><p><img src="/img/redis/collision.svg" alt="Alt text" title="hash冲突"></p>
+<h1 id="安全迭代器和非安全迭代器有什么区别"><a href="#安全迭代器和非安全迭代器有什么区别" class="headerlink" title="安全迭代器和非安全迭代器有什么区别"></a>安全迭代器和非安全迭代器有什么区别</h1><ol>
+<li>安全迭代器：在迭代进行过程中，可以对字典进行修改</li>
+<li>不安全迭代器：在迭代进行过程中，不对字典进行修改</li>
+</ol>
+<h1 id="redis如何保证遍历dict的时候能遍历到全部的数据"><a href="#redis如何保证遍历dict的时候能遍历到全部的数据" class="headerlink" title="redis如何保证遍历dict的时候能遍历到全部的数据"></a>redis如何保证遍历dict的时候能遍历到全部的数据</h1><ol>
+<li>还需要查看dictscan函数，算法有点复杂</li>
+<li>建议阅读以下文章<blockquote>
+<p><a href="http://chenzhenianqing.com/articles/1101.html" target="_blank" rel="external">http://chenzhenianqing.com/articles/1101.html</a><br><a href="http://blog.csdn.net/gqtcgq/article/details/50533336" target="_blank" rel="external">http://blog.csdn.net/gqtcgq/article/details/50533336</a><br><a href="http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/" target="_blank" rel="external">http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/</a></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="有趣的代码"><a href="#有趣的代码" class="headerlink" title="有趣的代码"></a>有趣的代码</h1><ol>
+<li>计算索引值<br> 如下代码：d-&gt;ht[table].sizemask的值为2的n次方-1（为size-1）<br> 其实下面代码的含义可以理解为h和sizemask”取模”（不是真正意义的取模哦）</li>
+</ol>
+<pre><code>idx = h &amp; d-&gt;ht[table].sizemask;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/redis-adlist源码阅读/" rel="next" title="redis-adlist源码阅读">
+                <i class="fa fa-chevron-left"></i> redis-adlist源码阅读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dict结构"><span class="nav-number">1.</span> <span class="nav-text">dict结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dict何时进行rehash（渐进式rehash）"><span class="nav-number">2.</span> <span class="nav-text">dict何时进行rehash（渐进式rehash）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dict的rehash判断标准"><span class="nav-number">3.</span> <span class="nav-text">dict的rehash判断标准</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dict怎样进行rehash"><span class="nav-number">4.</span> <span class="nav-text">dict怎样进行rehash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dict如何解决hash冲突"><span class="nav-number">5.</span> <span class="nav-text">dict如何解决hash冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全迭代器和非安全迭代器有什么区别"><span class="nav-number">6.</span> <span class="nav-text">安全迭代器和非安全迭代器有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis如何保证遍历dict的时候能遍历到全部的数据"><span class="nav-number">7.</span> <span class="nav-text">redis如何保证遍历dict的时候能遍历到全部的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有趣的代码"><span class="nav-number">8.</span> <span class="nav-text">有趣的代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
