@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="zskiplist结构/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis-zskiplist源码阅读">
+<meta property="og:url" content="http://www.cxyteam.com/2018/01/16/redis-zskiplist源码阅读/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="zskiplist结构/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplis">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/redis_skiplist.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/skiplist.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/skiplist_add.png">
+<meta property="og:updated_time" content="2018-02-03T08:43:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis-zskiplist源码阅读">
+<meta name="twitter:description" content="zskiplist结构/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplis">
+<meta name="twitter:image" content="http://www.cxyteam.com/img/redis/redis_skiplist.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2018/01/16/redis-zskiplist源码阅读/"/>
+
+
+
+
+
+  <title>redis-zskiplist源码阅读 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/16/redis-zskiplist源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redis-zskiplist源码阅读</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T00:57:45+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/16/redis-zskiplist源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/16/redis-zskiplist源码阅读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="zskiplist结构"><a href="#zskiplist结构" class="headerlink" title="zskiplist结构"></a>zskiplist结构</h1><pre><code>/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplist;
+
+/*
+ * 跳跃表节点
+ */
+typedef struct zskiplistNode {
+
+    // 成员对象
+    robj *obj;
+
+    // 分值
+    double score;
+
+    // 后退指针
+    struct zskiplistNode *backward;
+
+    // 层 , 柔性数组
+    struct zskiplistLevel {
+
+        // 前进指针
+        struct zskiplistNode *forward;
+
+        // 跨度
+        unsigned int span;
+
+    } level[];
+
+} zskiplistNode;
+</code></pre><p><img src="/img/redis/redis_skiplist.png" alt="Alt text" title="skiplist"></p>
+<h1 id="什么是span-forward-score-rank"><a href="#什么是span-forward-score-rank" class="headerlink" title="什么是span,forward,score,rank"></a>什么是span,forward,score,rank</h1><ol>
+<li>span是指同一层的当前节点到下一个节点相隔的节点数，比如说，在L3这一层上，header的span为2，因为他在L3的下一个节点是node2</li>
+<li>forward指的是同一层上，当前节点指向下一个节点的指针</li>
+<li>score就是设置的一个分值，用来做排序的</li>
+<li>rank是指当前节点到头节点的节点数目，比如说L3的node2的rank值为2</li>
+</ol>
+<p><img src="/img/redis/skiplist.png" alt="Alt text" title="skiplist"></p>
+<h1 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h1><ol>
+<li>判断随机的lever是否比目前的最大lever要大，如果大，需要先将大于最大的level的部分进行初始化</li>
+<li>寻找到同一层当前节点的score比插入节点的score小，下一个节点的score比插入score大的节点</li>
+<li>将节点的forward指针替换</li>
+<li>计算span值（这个很有意思）</li>
+<li><p>span计算核心代码及事例（如下）</p>
+<p> 如下图：假设zskiplist的节点已经存在：-1，5，11，30，68，99，现在插入20这个节点，计算他的span的过程</p>
+<ol>
+<li>目前的zsl-&gt;lever为3，当前的x节点是header，在一个for循环中，由于i=zsl-&gt;lever-1,故rank[2]=0</li>
+<li>由于x的下一个节点的score是-1，小于即将插入的score为20这个值，故：rank[i] += x-&gt;level[i].span；rank[2]=1;x-&gt;level[2].span=1（level3上x也就是header节点的下一个节点（score为-1的节点）的距离为1）,x节点替换成score为-1所在的节点</li>
+<li>由于当前的i为1不等于zsl-&gt;lever-1=2,故rank[1]=rank[2]=1</li>
+<li>x的下一个节点的score是11，小于即将插入的score为20的这个值，故：rank[i] += x-&gt;level[i].span;rank[1]为3;即：x-&gt;lever[1].span+rank[1]; x-&gt;lever[1].span=2（score为-1的节点到score为11的节点的距离为2）；rank[1]=1;x节点替换为score为11的节点</li>
+<li>同理可得，rank[0]=3;</li>
+<li>截止到此处，rank数组已经获取到了：rank[0]=3;rank[1]=3;rank[2]=1;</li>
+<li>接下来对于score为20的节点的span的计算与它的前一个节点的计算就看下面两行代码：</li>
+<li>x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);</li>
+<li>update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;</li>
+</ol>
+</li>
+</ol>
+<pre><code>for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
+
+        /* store rank that is crossed to reach the insert position */
+        // 如果 i 不是 zsl-&gt;level-1 层
+        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
+        // 各个层的 rank 值一层层累积
+        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
+        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
+        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找
+
+        redisLog(REDIS_WARNING, &quot;rank[%d]:%d&quot;, i, rank[i]);
+        redisLog(REDIS_WARNING, &quot;x-&gt;score:%f&quot;, x-&gt;score);
+        // 沿着前进指针遍历跳跃表
+        // T_wrost = O(N^2), T_avg = O(N log N)
+        /*
+          同一层往前寻找，直到不再满足以下条件再找下一层，
+          将要和新节点相连接的节点满足如下条件：
+            1、forward不存在
+            2、forward节点的score大于新节点的score
+            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
+         */
+        if (x-&gt;level[i].forward) {
+            redisLog(REDIS_WARNING, &quot;判断的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
+        }
+        while (x-&gt;level[i].forward &amp;&amp;
+               (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                 // 比对成员， T = O(N)
+                 compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 记录沿途跨越了多少个节点
+            redisLog(REDIS_WARNING, &quot;循环中的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
+            rank[i] += x-&gt;level[i].span;
+
+            // 移动至下一指针
+            x = x-&gt;level[i].forward;
+            redisLog(REDIS_WARNING, &quot;rank[%d]值:%d&quot;, i, rank[i]);
+        }
+        // 记录将要和新节点相连接的节点
+        update[i] = x;
+        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
+        redisLog(REDIS_WARNING, &quot;第%d遍历结束&quot;, i);
+    }
+
+for (i = 0; i &lt; level; i++) {
+    // 设置新节点的 forward 指针
+    x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
+
+    // 将沿途记录的各个节点的 forward 指针指向新节点
+    update[i]-&gt;level[i].forward = x;
+
+    /* update span covered by update[i] as x is inserted here */
+    // 计算新节点跨越的节点数量
+    x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
+    redisLog(REDIS_WARNING, &quot;update[%d]-&gt;score：%f&quot;,  i, update[i]-&gt;score);
+    // 更新新节点插入之后，沿途节点的 span 值
+    // 其中的 +1 计算的是新节点
+    update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
+
+    redisLog(REDIS_WARNING, &quot;新节点的span[%d]：%d&quot;, i, update[i]-&gt;level[i].span);
+}            
+</code></pre><p><img src="/img/redis/skiplist_add.png" alt="Alt text" title="skiplist"></p>
+<pre><code>zskiplistNode *zslInsert(zskiplist *zsl, double score, robj *obj) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    unsigned int rank[ZSKIPLIST_MAXLEVEL];
+    int i, level;
+
+    redisAssert(!isnan(score));
+
+    // 总体思路是先查找记录每层的节点位置,然后走和链表一样的插入操作
+    // 在各个层查找节点的插入位置, 更新update
+    // T_wrost = O(N^2), T_avg = O(N log N)
+    x = zsl-&gt;header;
+    redisLog(REDIS_WARNING, &quot;lever值为：%d&quot;, zsl-&gt;level);
+    redisLog(REDIS_WARNING, &quot;key为：%s&quot;, obj-&gt;ptr);
+    for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
+
+        /* store rank that is crossed to reach the insert position */
+        // 如果 i 不是 zsl-&gt;level-1 层
+        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
+        // 各个层的 rank 值一层层累积
+        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
+        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
+        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找，如图的L2的20这个节点，他的初始的rank是4而不是0，如果是0的话，因此他的路线才是l3的20节点，再从l2的20去找，而不是l2的-1节点重新遍历
+
+        redisLog(REDIS_WARNING, &quot;rank[i+1]:%d&quot;, rank[i + 1]);
+        // 沿着前进指针遍历跳跃表
+        // T_wrost = O(N^2), T_avg = O(N log N)
+        /*
+          同一层往前寻找，直到不再满足以下条件再找下一层，
+          将要和新节点相连接的节点满足如下条件：
+            1、forward不存在
+            2、forward节点的score大于新节点的score
+            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
+         */
+        while (x-&gt;level[i].forward &amp;&amp;
+            (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                // 比对成员， T = O(N)
+                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 记录沿途跨越了多少个节点
+            rank[i] += x-&gt;level[i].span;//将小于自己的节点的span值加起来，例如：rank[1]的值为rank[0]的值（也就是l3的-1节点的span加上l3的20节点的span）加上下一个节点的span（l2的30节点的span值）
+
+            // 移动至下一指针
+            x = x-&gt;level[i].forward;
+            redisLog(REDIS_WARNING, &quot;rank值:%d&quot;, rank[i]);
+        }
+        // 记录将要和新节点相连接的节点
+        update[i] = x;
+        redisLog(REDIS_WARNING, &quot;span的值：%d&quot;, rank[i]);
+        redisLog(REDIS_WARNING, &quot;第%d个指针&quot;, i);
+        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
+    }
+
+    /* we assume the key is not already inside, since we allow duplicated
+     * scores, and the re-insertion of score and redis object should never
+     * happen since the caller of zslInsert() should test in the hash table
+     * if the element is already inside or not. 
+     *
+     * zslInsert() 的调用者会确保同分值且同成员的元素不会出现，
+     * 所以这里不需要进一步进行检查，可以直接创建新元素。
+     */
+
+    // 获取一个随机值作为新节点的层数
+    // T = O(N)
+    level = zslRandomLevel();
+
+    // 如果新节点的层数比表中其他节点的层数都要大
+    // 那么初始化表头节点中未使用的层，并将它们记录到 update 数组中
+    // 将来也指向新节点
+    redisLog(REDIS_WARNING, &quot;随机分配的level:%d&quot;, level);
+    if (level &gt; zsl-&gt;level) {
+
+        // 初始化未使用层（因为是初始化大于最高层的层，因此只有header节点指向这些层）
+        // T = O(1)
+        for (i = zsl-&gt;level; i &lt; level; i++) {
+            rank[i] = 0;
+            update[i] = zsl-&gt;header;
+            update[i]-&gt;level[i].span = zsl-&gt;length;
+        }
+
+        // 更新表中节点最大层数
+        zsl-&gt;level = level;
+    }
+
+    // 创建新节点（创建数据和score）
+    x = zslCreateNode(level, score, obj);
+
+    // 分别处理每层update中对应的链表的insert操作
+    // 将前面记录的指针指向新节点，并做相应的设置
+    // T = O(1)
+    for (i = 0; i &lt; level; i++) {
+
+        // 设置新节点的 forward 指针
+        x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
+
+        // 将沿途记录的各个节点的 forward 指针指向新节点
+        update[i]-&gt;level[i].forward = x;
+
+        /* update span covered by update[i] as x is inserted here */
+        // 计算新节点跨越的节点数量
+        x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
+
+        // 更新新节点插入之后，沿途节点的 span 值
+        // 其中的 +1 计算的是新节点
+        update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
+        redisLog(REDIS_WARNING, &quot;新节点的span：%d&quot;, x-&gt;level[i].span);
+    }
+
+    /* increment span for untouched levels */
+    // 未接触的节点的 span 值也需要增一，这些节点直接从表头指向新节点
+    // T = O(1)
+    for (i = level; i &lt; zsl-&gt;level; i++) {
+        update[i]-&gt;level[i].span++;
+    }
+
+    // 设置新节点的后退指针
+    x-&gt;backward = (update[0] == zsl-&gt;header) ? NULL : update[0];
+    if (x-&gt;level[0].forward) {
+        x-&gt;level[0].forward-&gt;backward = x;
+    }
+    else {
+        zsl-&gt;tail = x;
+    }
+
+    // 跳跃表的节点计数增一
+    zsl-&gt;length++;
+
+    redisLog(REDIS_WARNING, &quot;长度:%lu&quot;, zsl-&gt;length);
+    printf(&quot;\n&quot;);
+    return x;
+}
+</code></pre><h1 id="节点删除"><a href="#节点删除" class="headerlink" title="节点删除"></a>节点删除</h1><ol>
+<li>找出要删除节点的前一个节点，存入update中，再遍历</li>
+<li>如果删除的节点不存在当前层，则span-1（因为需要删除当前节点）</li>
+<li>如果要删除的节点存在当前层，则span为当前节点的span+删除节点的span-1</li>
+<li>判断最大的level值，替换前置，后置指针，及length值</li>
+</ol>
+<pre><code>int zslDelete(zskiplist *zsl, double score, robj *obj) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    int i;
+
+    // 查找目标节点, 把前置节点记录在update中
+    // 遍历跳跃表，查找目标节点，并记录所有沿途节点
+    // T_wrost = O(N^2), T_avg = O(N log N)
+    x = zsl-&gt;header;
+    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
+
+        // 遍历跳跃表的复杂度为 T_wrost = O(N), T_avg = O(log N)
+        while (x-&gt;level[i].forward &amp;&amp;
+            (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                // 比对对象，T = O(N)
+                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 沿着前进指针移动
+            x = x-&gt;level[i].forward;
+        }
+
+        // 记录沿途节点
+        update[i] = x;
+    }
+
+    /* We may have multiple elements with the same score, what we need
+     * is to find the element with both the right score and object. 
+     *
+     * 检查找到的元素 x ，只有在它的分值和对象都相同时，才将它删除。
+     */
+    x = x-&gt;level[0].forward;
+    if (x &amp;&amp; score == x-&gt;score &amp;&amp; equalStringObjects(x-&gt;obj, obj)) {
+        // T = O(1)
+        zslDeleteNode(zsl, x, update);
+        // T = O(1)
+        zslFreeNode(x);
+        return 1;
+    } else {
+        return 0; /* not found */
+    }
+
+    return 0; /* not found */
+}
+
+/**
+ * zskiplistNode *x 删除节点的指针
+ * zskiplistNode **update 删除节点的backward节点的指针
+ */
+void zslDeleteNode(zskiplist *zsl, zskiplistNode *x, zskiplistNode **update) {
+    int i;
+
+    // 更新所有和被删除节点 x 有关的节点的指针，解除它们之间的关系
+    // T = O(1)
+    for (i = 0; i &lt; zsl-&gt;level; i++) {
+        //要删除的节点存在当前层
+        if (update[i]-&gt;level[i].forward == x) {
+            update[i]-&gt;level[i].span += x-&gt;level[i].span - 1;
+            update[i]-&gt;level[i].forward = x-&gt;level[i].forward;
+        } else {//删除的节点不存在当前层
+            update[i]-&gt;level[i].span -= 1;
+        }
+    }
+
+    // 更新被删除节点 x 的前进和后退指针
+    if (x-&gt;level[0].forward) {
+        x-&gt;level[0].forward-&gt;backward = x-&gt;backward;
+    } else {
+        zsl-&gt;tail = x-&gt;backward;
+    }
+
+    // 更新跳跃表最大层数（只在被删除节点是跳跃表中最高的节点时才执行）
+    // T = O(1)
+    while(zsl-&gt;level &gt; 1 &amp;&amp; zsl-&gt;header-&gt;level[zsl-&gt;level-1].forward == NULL) {
+        zsl-&gt;level--;
+    }
+
+    // 跳跃表节点计数器减一
+    zsl-&gt;length--;
+}
+</code></pre><h1 id="按照分值范围删除"><a href="#按照分值范围删除" class="headerlink" title="按照分值范围删除"></a>按照分值范围删除</h1><ol>
+<li>找到删除范围的最小的score的前一个节点的指针存入update</li>
+<li>在第0层中，找到所有的要删除的节点，并依次删除</li>
+<li>需要注意的是x-&gt;level[0].forward一定是删除范围最小的score的前一个最靠近的节点（因为第0层中是存在所有的节点的）</li>
+<li>另外关注一点的的：删除是从小到大，依次删除的，这样能保证update中的值，一定是被删除节点的前一个节点，比如说现在存在score为：1，2，3，4，5，6，7的节点，我要删除2-6之间的节点，那么我依次删除3，4，5；第一次删除3的时候他的前置节点是2，第二次删除4的时候，他的前置节点也是2，因为3被删除了</li>
+</ol>
+<pre><code>unsigned long zslDeleteRangeByScore(zskiplist *zsl, zrangespec *range, dict *dict) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    unsigned long removed = 0;
+    int i;
+
+    // 记录所有和被删除节点（们）有关的节点
+    // T_wrost = O(N) , T_avg = O(log N)
+    x = zsl-&gt;header;
+    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
+        while (x-&gt;level[i].forward &amp;&amp; (range-&gt;minex ?
+            x-&gt;level[i].forward-&gt;score &lt;= range-&gt;min :
+            x-&gt;level[i].forward-&gt;score &lt; range-&gt;min)) {
+                x = x-&gt;level[i].forward;
+        }
+        update[i] = x;
+    }
+
+    /* Current node is the last with score &lt; or &lt;= min. */
+    // 定位到给定范围开始的第一个节点
+    x = x-&gt;level[0].forward;
+
+    /* Delete nodes while in range. */
+    // 删除范围中的所有节点
+    // T = O(N)
+    //在第0层中，找到所有的要删除的节点，并依次删除
+    while (x &amp;&amp;
+           (range-&gt;maxex ? x-&gt;score &lt; range-&gt;max : x-&gt;score &lt;= range-&gt;max))
+    {
+        // 记录下个节点的指针
+        zskiplistNode *next = x-&gt;level[0].forward;
+        zslDeleteNode(zsl, x, update);
+        dictDelete(dict, x-&gt;obj);
+        zslFreeNode(x);
+        removed++;
+        x = next;
+    }
+    return removed;
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/redis-dict源码阅读/" rel="next" title="redis-dict源码阅读">
+                <i class="fa fa-chevron-left"></i> redis-dict源码阅读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/24/如何快速的上手一个项目/" rel="prev" title="如何快速的上手一个项目">
+                如何快速的上手一个项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zskiplist结构"><span class="nav-number">1.</span> <span class="nav-text">zskiplist结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是span-forward-score-rank"><span class="nav-number">2.</span> <span class="nav-text">什么是span,forward,score,rank</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入节点"><span class="nav-number">3.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节点删除"><span class="nav-number">4.</span> <span class="nav-text">节点删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按照分值范围删除"><span class="nav-number">5.</span> <span class="nav-text">按照分值范围删除</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-01-15T14:22:05.000Z</updated>
+  <updated>2018-02-12T01:35:24.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,857 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[活动机器数预估]]></title>
+    <link href="http://www.cxyteam.com/2018/02/12/%E6%B4%BB%E5%8A%A8%E6%9C%BA%E5%99%A8%E6%95%B0%E9%A2%84%E4%BC%B0/"/>
+    <id>http://www.cxyteam.com/2018/02/12/活动机器数预估/</id>
+    <published>2018-02-12T01:35:24.000Z</published>
+    <updated>2018-02-12T01:35:24.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[mysql字符集]]></title>
+    <link href="http://www.cxyteam.com/2018/02/09/mysql%E5%AD%97%E7%AC%A6%E9%9B%86/"/>
+    <id>http://www.cxyteam.com/2018/02/09/mysql字符集/</id>
+    <published>2018-02-09T03:48:24.000Z</published>
+    <updated>2018-02-11T09:56:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="影响mysql中文展示乱码的原因"><a href="#影响mysql中文展示乱码的原因" class="headerlink" title="影响mysql中文展示乱码的原因"></a>影响mysql中文展示乱码的原因</h1><ol>
+<li>库的字符集</li>
+<li>连接字符集</li>
+<li>页面显示字符集</li>
+</ol>
+<h1 id="查看mysql字符集设置"><a href="#查看mysql字符集设置" class="headerlink" title="查看mysql字符集设置"></a>查看mysql字符集设置</h1><pre><code>SHOW VARIABLES LIKE &apos;character%&apos;;
+</code></pre><h1 id="设置mysql字符集为utf8"><a href="#设置mysql字符集为utf8" class="headerlink" title="设置mysql字符集为utf8"></a>设置mysql字符集为utf8</h1><pre><code>SET character_set_client = utf8 ;  
+SET character_set_connection = utf8 ;   
+SET character_set_database = utf8 ;   
+SET character_set_results = utf8 ;    
+SET character_set_server = utf8;
+SET collation_connection = utf8 ;  
+SET collation_database = utf8 ;   
+SET collation_server = utf8 ; 
+SET NAMES &apos;utf8&apos;;
+set collation_database=utf8_general_ci;
+set collation_database=utf8_general_ci;
+set collation_server=utf8_general_ci;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="影响mysql中文展示乱码的原因"><a href="#影响mysql中文展示乱码的原因" class="headerlink" title="影响mysql中文展示乱码的原因"></a>影响mysql中文展示乱码的原因</h1><ol>
+<li>库的字符集</l]]>
+    </summary>
+    
+      <category term="Mysql" scheme="http://www.cxyteam.com/tags/Mysql/"/>
+    
+      <category term="Mysql" scheme="http://www.cxyteam.com/categories/Mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis-intset源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/02/06/redis-intset%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/02/06/redis-intset源码阅读/</id>
+    <published>2018-02-06T13:52:05.000Z</published>
+    <updated>2018-02-06T13:52:43.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="intset数据结构"><a href="#intset数据结构" class="headerlink" title="intset数据结构"></a>intset数据结构</h1><pre><code>typedef struct intset {
+
+    // 编码方式
+    uint32_t encoding;
+
+    // 集合包含的元素数量
+    uint32_t length;
+
+    // 保存元素的数组
+    int8_t contents[];
+
+} intset;
+</code></pre><p># </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="intset数据结构"><a href="#intset数据结构" class="headerlink" title="intset数据结构"></a>intset数据结构</h1><pre><code>typedef struct intset {
+
+    /]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis长连接与短连接]]></title>
+    <link href="http://www.cxyteam.com/2018/02/05/redis%E9%95%BF%E8%BF%9E%E6%8E%A5%E4%B8%8E%E7%9F%AD%E8%BF%9E%E6%8E%A5/"/>
+    <id>http://www.cxyteam.com/2018/02/05/redis长连接与短连接/</id>
+    <published>2018-02-05T09:07:20.000Z</published>
+    <updated>2018-02-05T11:16:19.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h1><ol>
+<li>定义：在同一个进程下进行多次命令发送，只需要发起一次连接请求</li>
+<li>优势：减少连接redis的次数，从而减少命令执行的时间，减少系统开销</li>
+<li>劣势：<ol>
+<li>如果该连接一直不产生活动，容易出现time_out错误</li>
+<li>长期占用一个redis连接</li>
+<li>高并发场景请求被串行（redis是单进程模式，例如一个php-fpm进程能处理多个请求，而redis需要一个个进行处理）</li>
+</ol>
+</li>
+</ol>
+<h1 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h1><ol>
+<li>定义：每次发起命令都需要进行一次连接，命令执行完之后，释放连接</li>
+<li><p>优势：及时释放连接，不占用redis连接数</p>
+</li>
+<li><p>劣势：每个命令执行都需要进行一次连接，延长命令执行时间，连接释放等操作需要占用内存，开销比较大</p>
+</li>
+</ol>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ol>
+<li>长连接主要用于少数客户端与服务端的频繁通信，因为这时候如果用短连接频繁通信常会发生Socket出错，并且频繁创建Socket连接也是对资源的浪费</li>
+<li>太多持久连接，大部分是sleep状态的，或者系统是高并发的，使用短连接更合适</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h1><ol>
+<li>定义：在同一个进程下进行多次命令发送，只需要发起一次连接请求</li>
+<li>优势：减少连接redis的次数，从而减少]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis-hyperloglog源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/02/03/redis-hyperloglog%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/02/03/redis-hyperloglog源码阅读/</id>
+    <published>2018-02-03T09:43:59.000Z</published>
+    <updated>2018-02-03T10:18:00.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="hyperloglog结构"><a href="#hyperloglog结构" class="headerlink" title="hyperloglog结构"></a>hyperloglog结构</h1><pre><code>struct hllhdr {
+    char magic[4];      // 固定‘HYLL’，用于标识hyperloglog键
+    uint8_t encoding;   // 编码模式，有密集标识Dence和稀疏模式sparse
+    uint8_t notused[3]; // 未使用字段，留着日后用
+    uint8_t card[8];    // 基数缓存，存储上一次计算的基数
+    uint8_t registers[]; // 桶个数，用来存放数据，Redis中大小为16384
+};
+</code></pre><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ol>
+<li>一般用于做基数统计，比如说，一个网站的独立ip的访问次数</li>
+<li>传统的做法可能会存储下访问的ip，然后进行统计，这样的话，随着ip数目的增加，存储的空间越大，统计的延时越长</li>
+<li>每个Hyperloglog键只需要12Kb的大小就能计算接近2^64个不同元素的基数，但是hyperloglog只会根据输入元素来计算基数，而不会存储元素本身，所以不能像集合那样返回各个元素本身</li>
+</ol>
+<h1 id="感觉"><a href="#感觉" class="headerlink" title="感觉"></a>感觉</h1><ol>
+<li>直观感觉就是将数据做了hash运算，存储hash后的值（可能还有别的处理），然后进行统计，不存储原始数据</li>
+</ol>
+<h1 id="果断看不懂，全是算法，放弃"><a href="#果断看不懂，全是算法，放弃" class="headerlink" title="果断看不懂，全是算法，放弃"></a>果断看不懂，全是算法，放弃</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="hyperloglog结构"><a href="#hyperloglog结构" class="headerlink" title="hyperloglog结构"></a>hyperloglog结构</h1><pre><code>struct hllhdr {
+  ]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[2017年个人总结]]></title>
+    <link href="http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.cxyteam.com/2018/02/03/2017年个人总结/</id>
+    <published>2018-02-03T07:07:06.000Z</published>
+    <updated>2018-02-11T13:57:18.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
+<li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br>c. 学习redis的源码<br>d. 了解Golang(没有应用起来)<br>e. 以后对于不应用的知识不去花太多时间去了解细节，做到了解就好了，不管了解到什么地步，只要不应用起来结果都是一样</p>
+</li>
+<li><p>管理<br>a. 负责php小组的事宜，招人，培训，提升，氛围打造都有过思考<br>b. 项目管理方面涉及较少（单个项目组成员较少，基本不需要额外的工作）</p>
+</li>
+<li><p>产品<br>a. 开发第一个自己的产品（从需求调研到上线都自己完成）<br>b. 进入业务一线，接触客户，了解原始需求</p>
+</li>
+<li><p>思维<br>a. 阅读了一些书籍，一些学习方法，做事方法慢慢的被关注到，并且实践其中的部分，未能坚持锻炼这些方法，以及总结对比整理出适合自己的方法<br>b. 能有初级的独立思考能力，还不是很深入，完善<br>c. 比较满意的一点：随时记录下来自己的思考，并试图划分事情的视角，从几个方向进行切入思考</p>
+</li>
+<li><p>投资<br>a. 制定了资产配置<br>b. 开销的预估不是很准确<br>c. 开始做定投股指及基金<br>d. 开始买股票<br>e. 年末才开始了解BTC，有点晚，之前一直都选择忽视，以后对于热点的东西都要及时跟进了解，哪怕就是不看好的，热点的东西必然有其学习的点<br>f. 虽然进行了基金，股票等投资但是专业知识还是很欠缺<br>g. 尚未进行保险购买</p>
+</li>
+<li><p>生活<br>a. 饮食方面控制的不错<br>b. 运动方面比较欠缺<br>c. 减肥这个事情看样子不是下决心这么简单<br>d. 重点关注运动健身方面，年纪越来越大，每天坐十多个小时身体还是扛不住的<br>e. 开始学习摄影，慢慢点培养点小爱好吧</p>
+</li>
+</ol>
+<h1 id="业务时间轴"><a href="#业务时间轴" class="headerlink" title="业务时间轴"></a>业务时间轴</h1><ol>
+<li><p>2月初-3月底<br> a. 基于钉钉的CRM系统收尾</p>
+<blockquote>
+<p>基于钉钉开发的一个客户管理系统，和订单进行了关联</p>
+</blockquote>
+<p> b. 跑市场，参与销售的总结会议，了解业务，挖掘需求</p>
+</li>
+</ol>
+<ol>
+<li><p>4月初-5月底<br> a. 一融通</p>
+<blockquote>
+<p><a href="http://www.cxyteam/2017/04/26/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E8%AF%9E%E7%94%9F/" target="_blank" rel="external">产品介绍</a></p>
+</blockquote>
+<p> b. 宅急融，金银屋</p>
+<blockquote>
+<p>商务用于针对超市等场所进行地推的工具</p>
+</blockquote>
+</li>
+<li><p>6月初-8月底<br> a. 贷款问答小程序<br> b. 产品宝典<br> c. 金银屋官网<br> d. 贷款评估</p>
+<blockquote>
+<p>这几个产品涵盖一个用户的转换路径，从web端浏览到微信端最终留下联系方式，针对几种类型的目标用户制定的产品，全程参与产品需求，讨论过程，理论基础是《用户体验要素》</p>
+</blockquote>
+</li>
+<li><p>8月初-11月底<br> a. 钱隆归来</p>
+<blockquote>
+<p>一款p2p理财产品，算是一个老的产品重启了，基础的逻辑没有修改，把对外对接的一些需求进行了更改，接入了新浪支付，以及做了部分附加的功能</p>
+</blockquote>
+</li>
+<li><p>11月初-11月底<br> a. 教育贷</p>
+<blockquote>
+<p>之前这个项目叫&lt;贷贷熊&gt;，在北京教育分期市场领域是第一，也是一个旧的项目重启，搭建到新的技术架构上面，整理了之前的需求，流程，最终形成文档</p>
+</blockquote>
+</li>
+<li><p>11月底-2月<br> a. 加入360</p>
+<p> b. 种草</p>
+<blockquote>
+<p>千万级流量的产品，内容型产品</p>
+</blockquote>
+<p> c. 模块化</p>
+<blockquote>
+<p>基础支持吧，可以认为是千人千面的实现，不过强大之处不在这里，具体之处好像不太合适说</p>
+</blockquote>
+<p> b. 百万赢家</p>
+<blockquote>
+<p>今年年底的一个热点，百万级别的并发，有幸加入这个项目组进行支援，还是学习到不少东西的</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h1><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>读的书籍数量增加了</li>
+<li>不仅仅局限在技术层面，内容变得宽泛</li>
+<li>抛弃了碎片阅读，在公众号消耗的时间减少了</li>
+<li>还是没能掌握方法，看完之后都不能总结这本书说了什么</li>
+<li>读书笔记还是没做</li>
+<li>读完一本书需要做读书笔记，哪怕是一句话总结也行</li>
+</ol>
+<h3 id="2017年读书单"><a href="#2017年读书单" class="headerlink" title="2017年读书单"></a>2017年读书单</h3><ol>
+<li><a href="https://book.douban.com/subject/26400900/" target="_blank" rel="external">创京东</a></li>
+<li><a href="https://book.douban.com/subject/1013208/" target="_blank" rel="external">如何阅读一本书</a></li>
+<li><a href="https://www.gitbook.com/download/pdf/book/xiaolai/reborn" target="_blank" rel="external">新生-七年就是一辈子</a></li>
+<li><a href="https://book.douban.com/subject/27173866/" target="_blank" rel="external">颠覆者</a></li>
+<li><a href="https://book.douban.com/subject/27204860/" target="_blank" rel="external">指数基金投资指南</a></li>
+<li><a href="https://book.douban.com/subject/25783654/" target="_blank" rel="external">如何高效学习</a> </li>
+<li><a href="https://book.douban.com/subject/6523997/" target="_blank" rel="external">用户体验要素</a></li>
+<li><a href="https://book.douban.com/subject/5914587/" target="_blank" rel="external">启示录</a></li>
+<li><a href="https://book.douban.com/subject/20036150/" target="_blank" rel="external">principles</a></li>
+<li><a href="https://book.douban.com/subject/2345548/" target="_blank" rel="external">学习之道</a></li>
+<li><a href="https://book.douban.com/subject/24737674/" target="_blank" rel="external">图解tcp/ip</a></li>
+<li><a href="https://book.douban.com/subject/25863515/" target="_blank" rel="external">图解http</a></li>
+<li><a href="https://book.douban.com/subject/26285268/" target="_blank" rel="external">第一本docker书</a></li>
+<li><a href="https://book.douban.com/subject/25940548/" target="_blank" rel="external">阅读整理学</a></li>
+<li><a href="https://book.douban.com/subject/3225979/" target="_blank" rel="external">一课经济学</a></li>
+<li><a href="https://book.douban.com/subject/25900156/" target="_blank" rel="external">redis设计与实现</a></li>
+<li><a href="https://book.douban.com/subject/20492550/" target="_blank" rel="external">清醒思考的艺术</a></li>
+<li><a href="https://book.douban.com/subject/25749845/" target="_blank" rel="external">把时间当作朋友</a></li>
+</ol>
+<h3 id="2018年计划书单"><a href="#2018年计划书单" class="headerlink" title="2018年计划书单"></a>2018年计划书单</h3><ol>
+<li>增长黑客</li>
+<li>思考，快与慢</li>
+<li>决策与判断</li>
+<li>软能力</li>
+<li>简单的逻辑学</li>
+<li>腾讯传</li>
+<li>硅谷钢铁侠</li>
+<li>乔布斯传</li>
+<li>小岛经济学</li>
+<li>富爸爸穷爸爸</li>
+<li>有钱人想的和你不一样</li>
+<li>经济学通识</li>
+<li>魔鬼经济学</li>
+<li>牛奶可乐经济学    </li>
+<li>七天读懂宏观经济</li>
+<li>百万富翁快车道</li>
+<li>人人都爱经济学</li>
+<li>邻家的百万富翁</li>
+<li>经济解释</li>
+<li>小狗钱钱</li>
+<li>蜡烛图</li>
+<li>谷歌和亚马逊如何做产品</li>
+<li>运营有道：重新定义互联网运营</li>
+<li>买基金为自己加薪</li>
+<li>银行行长不轻易说的理财经    </li>
+<li>一个经济杀手的自白</li>
+</ol>
+<h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><ol>
+<li>锻炼身体</li>
+<li>写读书笔记</li>
+<li>实践学习方法并整理总结合适自己的</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
+<li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[百万级项目用到的缓存]]></title>
+    <link href="http://www.cxyteam.com/2018/02/02/%E7%99%BE%E4%B8%87%E7%BA%A7%E9%A1%B9%E7%9B%AE%E7%94%A8%E5%88%B0%E7%9A%84%E7%BC%93%E5%AD%98/"/>
+    <id>http://www.cxyteam.com/2018/02/02/百万级项目用到的缓存/</id>
+    <published>2018-02-02T07:19:26.000Z</published>
+    <updated>2018-02-03T07:06:42.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>  有幸参加到百万并发的项目中来，第一件事情当然是翻看并发的接口是如何编写的,下面是伪代码(场景也是造的)</p>
+<pre><code>class user {
+    static $user;
+
+    function getUserInfo($uid) {
+        if (self::$user) {
+            return self::$user[$uid];
+        }
+
+        if ($info = Apc::get($uid)) {
+            self::$user[$uid] = $info;
+            return $info;
+        }
+
+        if ($info = Redis::get($uid)) {
+            self::$user[$uid] = $info;
+            Apc::set($uid) = $info;
+            return $info;
+        }
+
+        if ($info = Mysql::get($uid)) {
+            self::$user[$uid] = $info;
+            Apc::set($uid) = $info;
+            Redis::set($uid) = $info                
+            return $info;
+        }
+
+        return array();
+    } 
+}   
+</code></pre><p>  其实主要是用到了三级缓存，静态变量做了进程内缓存，Apc做了进程间缓存，Redis做了content cache，下面来简单的介绍一下      </p>
+<h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><ol>
+<li><p>简介<br>在本次进程中进行内存共享</p>
+</li>
+<li><p>优势<br>快速释放，不需要复杂的回收，删除机制<br>同进行中共享一份数据</p>
+</li>
+<li><p>应用场景<br>在一次访问中频繁访问的数据可以进行缓存，比如说：单例模式，在一个进程中，需要访问同一个对象，会进行多次实例化，使用静态变量对对象进行存储，只有第一次访问的时候进行实例化</p>
+</li>
+</ol>
+<h1 id="apc"><a href="#apc" class="headerlink" title="apc"></a>apc</h1><ol>
+<li><p>简介<br>系统数据缓存：把php文件源码编译后的结果缓存在共享内存中使用，优化php的执行过程，避免从磁盘读取代码再编译的流程<br>用户数据缓存（当然主要指这一块）：将数据存储在共享内存中，可以多个php-fpm进程共享</p>
+</li>
+<li><p>优势<br>在本地机器中的缓存中，和redis等相比不存在网络消耗<br>和进程间缓存相比，可以多个进程公用一个缓存数据<br>数据存储在内存中，读取速度更快</p>
+</li>
+<li><p>应用场景<br>存储共用的数据，不要存储较个性化的数据（举例说：如果是一个集群机器，存储用户A的个人信息，A的访问是随机的打到集群的任意一台机器的，而当请求打到新的机器上又要进行一次缓存的读写，不仅浪费内存还要做更复杂的操作）</p>
+</li>
+</ol>
+<h1 id="yac"><a href="#yac" class="headerlink" title="yac"></a>yac</h1><ol>
+<li>类似于apc缓存，具体解决了什么问题，请看作者的文章介绍<blockquote>
+<p><a href="http://www.laruence.com/2013/03/18/2846.html" target="_blank" rel="external">http://www.laruence.com/2013/03/18/2846.html</a></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><ol>
+<li><p>简介<br>不想介绍了</p>
+</li>
+<li><p>优势<br> contentcache，可以多机共享，但是会有网络的消耗<br> 可以提供给多种语言访问（不限于php）</p>
+</li>
+<li><p>应用场景<br>主要用来应对高并发场景，数据存储在内存中响应速度较快</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>  有幸参加到百万并发的项目中来，第一件事情当然是翻看并发的接口是如何编写的,下面是伪代码(场景也是造的)</p>
+<pre><code>c]]>
+    </summary>
+    
+      <category term="PHP" scheme="http://www.cxyteam.com/tags/PHP/"/>
+    
+      <category term="PHP" scheme="http://www.cxyteam.com/categories/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[如何快速的上手一个项目]]></title>
+    <link href="http://www.cxyteam.com/2018/01/24/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%9A%84%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://www.cxyteam.com/2018/01/24/如何快速的上手一个项目/</id>
+    <published>2018-01-24T06:51:53.000Z</published>
+    <updated>2018-01-25T15:27:54.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li><p>安装的软件（lnmp各种依赖的库）<br> 清楚安装了什么软件，用到了什么拓展，如何运行环境，做到在本地搭建环境</p>
+</li>
+<li><p>nginx，php-fpm配置文件，及日志目录<br> 了解nginx配置，确保知道项目路径，入口文件，错误日志位置，当发现问题的时候能快速的定位到是环境出了问题，还是代码出了问题</p>
+</li>
+</ol>
+<h1 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h1><ol>
+<li><p>nginx，php-fpm，应用等的转发流程<br> 快速定位到异常的位置，配置文件等</p>
+</li>
+<li><p>框架路由<br> 了解代码对应的路径，最简单的是控制器，模型，视图的对应关系<br> 了解项目目录，大致了解代码所在位置</p>
+</li>
+</ol>
+<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><ol>
+<li><p>nginx，php-fpm，应用日志位置<br> 通过日志快速定位</p>
+</li>
+<li><p>记录日志方式（一般项目都有固定的写日志的方法）<br> 能够记录日志，便于事后查看异常，或做应用报警</p>
+</li>
+</ol>
+<h1 id="存储操作"><a href="#存储操作" class="headerlink" title="存储操作"></a>存储操作</h1><ol>
+<li>mysql，redis等的连接及操作，配置文件位置<br> 数据操作这块，curd最基本的要求，以及了解服务的配置（服务器，用户，密码，端口）</li>
+</ol>
+<h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><ol>
+<li><p>了解具体的业务在做什么<br> 只有了解了想要做什么，才能更快的理解代码，千万不要试图看代码去理解业务逻辑</p>
+</li>
+<li><p>操作一遍系统（大概猜测会有哪些接口，提供什么功能）<br> 清楚接口被如何使用</p>
+</li>
+<li><p>过一遍代码接口（知道已经提供哪些能力）<br> 大致的看一下文件名称，控制器名称，有接口文档更好，直接看接口文档，如果函数名称就是abcd类似的话，老实看代码吧，谁也救不了你</p>
+</li>
+<li><p>根据业务来看一个接口的代码（最好具有代表性）<br> 找一个比较核心的业务逻辑，跟着代码走一遍，看看如何实现（不要揪太细的点）<br> 熟悉代码风格<br> 代码目录<br> 及存储操作，异常，日志，类库等的使用</p>
+</li>
+</ol>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><ol>
+<li>动手去修改或者去写一些简单的需求（不要去细看代码了，遇到什么坑再去看旧代码）<br> 只有动手才知道哪不懂</li>
+</ol>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
+<li><p>最好抽时间把用到的框架做个了解，如果是用到了很多类库，也去把类库熟悉熟悉（看看使用示例就好了）<br> 熟悉已用到的技术，避免重复造轮子<br> 更好的理解设计意图，和代码作者达到一定的默契<br> 优化项目</p>
+</li>
+<li><p>把问题较多的，比较核心的代码过一遍（根据需求）<br> 做到心中有数，毕竟谁也不想当救火员，线上出问题，压力还是很大的</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li><p>安装的软件（lnmp各种依赖的库）<br> 清楚安装了什么软件，用到了什么拓展，如何运行环境，做到在本地搭]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis-zskiplist源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/01/16/redis-zskiplist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/01/16/redis-zskiplist源码阅读/</id>
+    <published>2018-01-15T16:57:45.000Z</published>
+    <updated>2018-02-03T08:43:34.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="zskiplist结构"><a href="#zskiplist结构" class="headerlink" title="zskiplist结构"></a>zskiplist结构</h1><pre><code>/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplist;
+
+/*
+ * 跳跃表节点
+ */
+typedef struct zskiplistNode {
+
+    // 成员对象
+    robj *obj;
+
+    // 分值
+    double score;
+
+    // 后退指针
+    struct zskiplistNode *backward;
+
+    // 层 , 柔性数组
+    struct zskiplistLevel {
+
+        // 前进指针
+        struct zskiplistNode *forward;
+
+        // 跨度
+        unsigned int span;
+
+    } level[];
+
+} zskiplistNode;
+</code></pre><p><img src="/img/redis/redis_skiplist.png" alt="Alt text" title="skiplist"></p>
+<h1 id="什么是span-forward-score-rank"><a href="#什么是span-forward-score-rank" class="headerlink" title="什么是span,forward,score,rank"></a>什么是span,forward,score,rank</h1><ol>
+<li>span是指同一层的当前节点到下一个节点相隔的节点数，比如说，在L3这一层上，header的span为2，因为他在L3的下一个节点是node2</li>
+<li>forward指的是同一层上，当前节点指向下一个节点的指针</li>
+<li>score就是设置的一个分值，用来做排序的</li>
+<li>rank是指当前节点到头节点的节点数目，比如说L3的node2的rank值为2</li>
+</ol>
+<p><img src="/img/redis/skiplist.png" alt="Alt text" title="skiplist"></p>
+<h1 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h1><ol>
+<li>判断随机的lever是否比目前的最大lever要大，如果大，需要先将大于最大的level的部分进行初始化</li>
+<li>寻找到同一层当前节点的score比插入节点的score小，下一个节点的score比插入score大的节点</li>
+<li>将节点的forward指针替换</li>
+<li>计算span值（这个很有意思）</li>
+<li><p>span计算核心代码及事例（如下）</p>
+<p> 如下图：假设zskiplist的节点已经存在：-1，5，11，30，68，99，现在插入20这个节点，计算他的span的过程</p>
+<ol>
+<li>目前的zsl-&gt;lever为3，当前的x节点是header，在一个for循环中，由于i=zsl-&gt;lever-1,故rank[2]=0</li>
+<li>由于x的下一个节点的score是-1，小于即将插入的score为20这个值，故：rank[i] += x-&gt;level[i].span；rank[2]=1;x-&gt;level[2].span=1（level3上x也就是header节点的下一个节点（score为-1的节点）的距离为1）,x节点替换成score为-1所在的节点</li>
+<li>由于当前的i为1不等于zsl-&gt;lever-1=2,故rank[1]=rank[2]=1</li>
+<li>x的下一个节点的score是11，小于即将插入的score为20的这个值，故：rank[i] += x-&gt;level[i].span;rank[1]为3;即：x-&gt;lever[1].span+rank[1]; x-&gt;lever[1].span=2（score为-1的节点到score为11的节点的距离为2）；rank[1]=1;x节点替换为score为11的节点</li>
+<li>同理可得，rank[0]=3;</li>
+<li>截止到此处，rank数组已经获取到了：rank[0]=3;rank[1]=3;rank[2]=1;</li>
+<li>接下来对于score为20的节点的span的计算与它的前一个节点的计算就看下面两行代码：</li>
+<li>x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);</li>
+<li>update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;</li>
+</ol>
+</li>
+</ol>
+<pre><code>for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
+
+        /* store rank that is crossed to reach the insert position */
+        // 如果 i 不是 zsl-&gt;level-1 层
+        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
+        // 各个层的 rank 值一层层累积
+        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
+        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
+        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找
+
+        redisLog(REDIS_WARNING, &quot;rank[%d]:%d&quot;, i, rank[i]);
+        redisLog(REDIS_WARNING, &quot;x-&gt;score:%f&quot;, x-&gt;score);
+        // 沿着前进指针遍历跳跃表
+        // T_wrost = O(N^2), T_avg = O(N log N)
+        /*
+          同一层往前寻找，直到不再满足以下条件再找下一层，
+          将要和新节点相连接的节点满足如下条件：
+            1、forward不存在
+            2、forward节点的score大于新节点的score
+            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
+         */
+        if (x-&gt;level[i].forward) {
+            redisLog(REDIS_WARNING, &quot;判断的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
+        }
+        while (x-&gt;level[i].forward &amp;&amp;
+               (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                 // 比对成员， T = O(N)
+                 compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 记录沿途跨越了多少个节点
+            redisLog(REDIS_WARNING, &quot;循环中的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
+            rank[i] += x-&gt;level[i].span;
+
+            // 移动至下一指针
+            x = x-&gt;level[i].forward;
+            redisLog(REDIS_WARNING, &quot;rank[%d]值:%d&quot;, i, rank[i]);
+        }
+        // 记录将要和新节点相连接的节点
+        update[i] = x;
+        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
+        redisLog(REDIS_WARNING, &quot;第%d遍历结束&quot;, i);
+    }
+
+for (i = 0; i &lt; level; i++) {
+    // 设置新节点的 forward 指针
+    x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
+
+    // 将沿途记录的各个节点的 forward 指针指向新节点
+    update[i]-&gt;level[i].forward = x;
+
+    /* update span covered by update[i] as x is inserted here */
+    // 计算新节点跨越的节点数量
+    x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
+    redisLog(REDIS_WARNING, &quot;update[%d]-&gt;score：%f&quot;,  i, update[i]-&gt;score);
+    // 更新新节点插入之后，沿途节点的 span 值
+    // 其中的 +1 计算的是新节点
+    update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
+
+    redisLog(REDIS_WARNING, &quot;新节点的span[%d]：%d&quot;, i, update[i]-&gt;level[i].span);
+}            
+</code></pre><p><img src="/img/redis/skiplist_add.png" alt="Alt text" title="skiplist"></p>
+<pre><code>zskiplistNode *zslInsert(zskiplist *zsl, double score, robj *obj) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    unsigned int rank[ZSKIPLIST_MAXLEVEL];
+    int i, level;
+
+    redisAssert(!isnan(score));
+
+    // 总体思路是先查找记录每层的节点位置,然后走和链表一样的插入操作
+    // 在各个层查找节点的插入位置, 更新update
+    // T_wrost = O(N^2), T_avg = O(N log N)
+    x = zsl-&gt;header;
+    redisLog(REDIS_WARNING, &quot;lever值为：%d&quot;, zsl-&gt;level);
+    redisLog(REDIS_WARNING, &quot;key为：%s&quot;, obj-&gt;ptr);
+    for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
+
+        /* store rank that is crossed to reach the insert position */
+        // 如果 i 不是 zsl-&gt;level-1 层
+        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
+        // 各个层的 rank 值一层层累积
+        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
+        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
+        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找，如图的L2的20这个节点，他的初始的rank是4而不是0，如果是0的话，因此他的路线才是l3的20节点，再从l2的20去找，而不是l2的-1节点重新遍历
+
+        redisLog(REDIS_WARNING, &quot;rank[i+1]:%d&quot;, rank[i + 1]);
+        // 沿着前进指针遍历跳跃表
+        // T_wrost = O(N^2), T_avg = O(N log N)
+        /*
+          同一层往前寻找，直到不再满足以下条件再找下一层，
+          将要和新节点相连接的节点满足如下条件：
+            1、forward不存在
+            2、forward节点的score大于新节点的score
+            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
+         */
+        while (x-&gt;level[i].forward &amp;&amp;
+            (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                // 比对成员， T = O(N)
+                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 记录沿途跨越了多少个节点
+            rank[i] += x-&gt;level[i].span;//将小于自己的节点的span值加起来，例如：rank[1]的值为rank[0]的值（也就是l3的-1节点的span加上l3的20节点的span）加上下一个节点的span（l2的30节点的span值）
+
+            // 移动至下一指针
+            x = x-&gt;level[i].forward;
+            redisLog(REDIS_WARNING, &quot;rank值:%d&quot;, rank[i]);
+        }
+        // 记录将要和新节点相连接的节点
+        update[i] = x;
+        redisLog(REDIS_WARNING, &quot;span的值：%d&quot;, rank[i]);
+        redisLog(REDIS_WARNING, &quot;第%d个指针&quot;, i);
+        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
+    }
+
+    /* we assume the key is not already inside, since we allow duplicated
+     * scores, and the re-insertion of score and redis object should never
+     * happen since the caller of zslInsert() should test in the hash table
+     * if the element is already inside or not. 
+     *
+     * zslInsert() 的调用者会确保同分值且同成员的元素不会出现，
+     * 所以这里不需要进一步进行检查，可以直接创建新元素。
+     */
+
+    // 获取一个随机值作为新节点的层数
+    // T = O(N)
+    level = zslRandomLevel();
+
+    // 如果新节点的层数比表中其他节点的层数都要大
+    // 那么初始化表头节点中未使用的层，并将它们记录到 update 数组中
+    // 将来也指向新节点
+    redisLog(REDIS_WARNING, &quot;随机分配的level:%d&quot;, level);
+    if (level &gt; zsl-&gt;level) {
+
+        // 初始化未使用层（因为是初始化大于最高层的层，因此只有header节点指向这些层）
+        // T = O(1)
+        for (i = zsl-&gt;level; i &lt; level; i++) {
+            rank[i] = 0;
+            update[i] = zsl-&gt;header;
+            update[i]-&gt;level[i].span = zsl-&gt;length;
+        }
+
+        // 更新表中节点最大层数
+        zsl-&gt;level = level;
+    }
+
+    // 创建新节点（创建数据和score）
+    x = zslCreateNode(level, score, obj);
+
+    // 分别处理每层update中对应的链表的insert操作
+    // 将前面记录的指针指向新节点，并做相应的设置
+    // T = O(1)
+    for (i = 0; i &lt; level; i++) {
+
+        // 设置新节点的 forward 指针
+        x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
+
+        // 将沿途记录的各个节点的 forward 指针指向新节点
+        update[i]-&gt;level[i].forward = x;
+
+        /* update span covered by update[i] as x is inserted here */
+        // 计算新节点跨越的节点数量
+        x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
+
+        // 更新新节点插入之后，沿途节点的 span 值
+        // 其中的 +1 计算的是新节点
+        update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
+        redisLog(REDIS_WARNING, &quot;新节点的span：%d&quot;, x-&gt;level[i].span);
+    }
+
+    /* increment span for untouched levels */
+    // 未接触的节点的 span 值也需要增一，这些节点直接从表头指向新节点
+    // T = O(1)
+    for (i = level; i &lt; zsl-&gt;level; i++) {
+        update[i]-&gt;level[i].span++;
+    }
+
+    // 设置新节点的后退指针
+    x-&gt;backward = (update[0] == zsl-&gt;header) ? NULL : update[0];
+    if (x-&gt;level[0].forward) {
+        x-&gt;level[0].forward-&gt;backward = x;
+    }
+    else {
+        zsl-&gt;tail = x;
+    }
+
+    // 跳跃表的节点计数增一
+    zsl-&gt;length++;
+
+    redisLog(REDIS_WARNING, &quot;长度:%lu&quot;, zsl-&gt;length);
+    printf(&quot;\n&quot;);
+    return x;
+}
+</code></pre><h1 id="节点删除"><a href="#节点删除" class="headerlink" title="节点删除"></a>节点删除</h1><ol>
+<li>找出要删除节点的前一个节点，存入update中，再遍历</li>
+<li>如果删除的节点不存在当前层，则span-1（因为需要删除当前节点）</li>
+<li>如果要删除的节点存在当前层，则span为当前节点的span+删除节点的span-1</li>
+<li>判断最大的level值，替换前置，后置指针，及length值</li>
+</ol>
+<pre><code>int zslDelete(zskiplist *zsl, double score, robj *obj) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    int i;
+
+    // 查找目标节点, 把前置节点记录在update中
+    // 遍历跳跃表，查找目标节点，并记录所有沿途节点
+    // T_wrost = O(N^2), T_avg = O(N log N)
+    x = zsl-&gt;header;
+    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
+
+        // 遍历跳跃表的复杂度为 T_wrost = O(N), T_avg = O(log N)
+        while (x-&gt;level[i].forward &amp;&amp;
+            (x-&gt;level[i].forward-&gt;score &lt; score ||
+                // 比对分值
+                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
+                // 比对对象，T = O(N)
+                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
+
+            // 沿着前进指针移动
+            x = x-&gt;level[i].forward;
+        }
+
+        // 记录沿途节点
+        update[i] = x;
+    }
+
+    /* We may have multiple elements with the same score, what we need
+     * is to find the element with both the right score and object. 
+     *
+     * 检查找到的元素 x ，只有在它的分值和对象都相同时，才将它删除。
+     */
+    x = x-&gt;level[0].forward;
+    if (x &amp;&amp; score == x-&gt;score &amp;&amp; equalStringObjects(x-&gt;obj, obj)) {
+        // T = O(1)
+        zslDeleteNode(zsl, x, update);
+        // T = O(1)
+        zslFreeNode(x);
+        return 1;
+    } else {
+        return 0; /* not found */
+    }
+
+    return 0; /* not found */
+}
+
+/**
+ * zskiplistNode *x 删除节点的指针
+ * zskiplistNode **update 删除节点的backward节点的指针
+ */
+void zslDeleteNode(zskiplist *zsl, zskiplistNode *x, zskiplistNode **update) {
+    int i;
+
+    // 更新所有和被删除节点 x 有关的节点的指针，解除它们之间的关系
+    // T = O(1)
+    for (i = 0; i &lt; zsl-&gt;level; i++) {
+        //要删除的节点存在当前层
+        if (update[i]-&gt;level[i].forward == x) {
+            update[i]-&gt;level[i].span += x-&gt;level[i].span - 1;
+            update[i]-&gt;level[i].forward = x-&gt;level[i].forward;
+        } else {//删除的节点不存在当前层
+            update[i]-&gt;level[i].span -= 1;
+        }
+    }
+
+    // 更新被删除节点 x 的前进和后退指针
+    if (x-&gt;level[0].forward) {
+        x-&gt;level[0].forward-&gt;backward = x-&gt;backward;
+    } else {
+        zsl-&gt;tail = x-&gt;backward;
+    }
+
+    // 更新跳跃表最大层数（只在被删除节点是跳跃表中最高的节点时才执行）
+    // T = O(1)
+    while(zsl-&gt;level &gt; 1 &amp;&amp; zsl-&gt;header-&gt;level[zsl-&gt;level-1].forward == NULL) {
+        zsl-&gt;level--;
+    }
+
+    // 跳跃表节点计数器减一
+    zsl-&gt;length--;
+}
+</code></pre><h1 id="按照分值范围删除"><a href="#按照分值范围删除" class="headerlink" title="按照分值范围删除"></a>按照分值范围删除</h1><ol>
+<li>找到删除范围的最小的score的前一个节点的指针存入update</li>
+<li>在第0层中，找到所有的要删除的节点，并依次删除</li>
+<li>需要注意的是x-&gt;level[0].forward一定是删除范围最小的score的前一个最靠近的节点（因为第0层中是存在所有的节点的）</li>
+<li>另外关注一点的的：删除是从小到大，依次删除的，这样能保证update中的值，一定是被删除节点的前一个节点，比如说现在存在score为：1，2，3，4，5，6，7的节点，我要删除2-6之间的节点，那么我依次删除3，4，5；第一次删除3的时候他的前置节点是2，第二次删除4的时候，他的前置节点也是2，因为3被删除了</li>
+</ol>
+<pre><code>unsigned long zslDeleteRangeByScore(zskiplist *zsl, zrangespec *range, dict *dict) {
+    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
+    unsigned long removed = 0;
+    int i;
+
+    // 记录所有和被删除节点（们）有关的节点
+    // T_wrost = O(N) , T_avg = O(log N)
+    x = zsl-&gt;header;
+    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
+        while (x-&gt;level[i].forward &amp;&amp; (range-&gt;minex ?
+            x-&gt;level[i].forward-&gt;score &lt;= range-&gt;min :
+            x-&gt;level[i].forward-&gt;score &lt; range-&gt;min)) {
+                x = x-&gt;level[i].forward;
+        }
+        update[i] = x;
+    }
+
+    /* Current node is the last with score &lt; or &lt;= min. */
+    // 定位到给定范围开始的第一个节点
+    x = x-&gt;level[0].forward;
+
+    /* Delete nodes while in range. */
+    // 删除范围中的所有节点
+    // T = O(N)
+    //在第0层中，找到所有的要删除的节点，并依次删除
+    while (x &amp;&amp;
+           (range-&gt;maxex ? x-&gt;score &lt; range-&gt;max : x-&gt;score &lt;= range-&gt;max))
+    {
+        // 记录下个节点的指针
+        zskiplistNode *next = x-&gt;level[0].forward;
+        zslDeleteNode(zsl, x, update);
+        dictDelete(dict, x-&gt;obj);
+        zslFreeNode(x);
+        removed++;
+        x = next;
+    }
+    return removed;
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="zskiplist结构"><a href="#zskiplist结构" class="headerlink" title="zskiplist结构"></a>zskiplist结构</h1><pre><code>/*
+ * 跳跃表
+ */
+typedef stru]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[redis-dict源码阅读]]></title>
@@ -760,9 +1611,26 @@ int sdsll2str(char *s, long long value) {
     <link href="http://www.cxyteam.com/2017/12/28/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://www.cxyteam.com/2017/12/28/常用命令/</id>
     <published>2017-12-28T02:29:39.000Z</published>
-    <updated>2018-01-10T02:58:21.000Z</updated>
+    <updated>2018-02-07T03:18:50.000Z</updated>
     <content type="html"><![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
 </code></pre><h1 id="mysql导出数据-数据量比较大，工具不好用的时候"><a href="#mysql导出数据-数据量比较大，工具不好用的时候" class="headerlink" title="mysql导出数据(数据量比较大，工具不好用的时候)"></a>mysql导出数据(数据量比较大，工具不好用的时候)</h1><pre><code>mysql -h 127.0.0.1 -uroot -P databases 3306 -e &quot;select count(*) from user;&quot;  &gt; /tmp/tetst.xls
+</code></pre><h1 id="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><a href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入" class="headerlink" title="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"></a>redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</h1><pre><code>redis-cli -h 127.0.0.1 -p 6379 -a &quot;auth_command&quot;
+</code></pre><h1 id="no-space-left-on-disk"><a href="#no-space-left-on-disk" class="headerlink" title="no space left on disk"></a>no space left on disk</h1><pre><code>查看磁盘使用情况
+    df
+
+如果磁盘未满，查看inode是否满
+    df -i        
+</code></pre><h1 id="添加mysql用户和权限"><a href="#添加mysql用户和权限" class="headerlink" title="添加mysql用户和权限"></a>添加mysql用户和权限</h1><ol>
+<li><p>选择mysql库<br> use mysql</p>
+</li>
+<li><p>添加用户<br> create user zhangsan identified by ‘zhangsan’;<br> 或者<br> insert into user (Host,User,Password) value(‘127.0.0.1’, ‘test’, password(‘123123’));<br> 或者<br> grant all privileges on database.* to test@’127.0.0.1’ identified by ‘test’;</p>
+</li>
+<li><p>刷新系统权限表<br> flush privileges;</p>
+</li>
+</ol>
+<h1 id="查看进程句柄使用情况"><a href="#查看进程句柄使用情况" class="headerlink" title="查看进程句柄使用情况"></a>查看进程句柄使用情况</h1><pre><code>查看php-fpm（pid为192）句柄使用情况
+lsof -n -p 192
+</code></pre><h1 id="特定进程内运行的线程"><a href="#特定进程内运行的线程" class="headerlink" title="特定进程内运行的线程"></a>特定进程内运行的线程</h1><pre><code>top -H -p &lt;PID&gt;
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax]]>
@@ -826,7 +1694,7 @@ return ;</code></p>
     <link href="http://www.cxyteam.com/2017/12/04/%E5%AE%89%E8%A3%85laravel%E7%8E%AF%E5%A2%83/"/>
     <id>http://www.cxyteam.com/2017/12/04/安装laravel环境/</id>
     <published>2017-12-04T08:46:07.000Z</published>
-    <updated>2017-12-04T10:23:08.000Z</updated>
+    <updated>2018-01-30T11:00:06.000Z</updated>
     <content type="html"><![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
 </code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
 </code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
@@ -908,6 +1776,10 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
 修改权限为当前用户：
     cd ~/.composer/
     sudo chown -R $(whoami) vendor
+</code></pre><h1 id="google自动跳转https"><a href="#google自动跳转https" class="headerlink" title="google自动跳转https"></a>google自动跳转https</h1><pre><code>Chrome 于 V63 版本起会将 .dev 域名强制转换为 HTTPS。
+所以最简单的办法是：切换域名
+ valet domain test
+ 使用hello.test进行访问
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
@@ -1036,337 +1908,6 @@ PUSHER_APP_SECRET=
       <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
     
       <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git钩子介绍]]></title>
-    <link href="http://www.cxyteam.com/2017/08/15/git%E9%92%A9%E5%AD%90%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://www.cxyteam.com/2017/08/15/git钩子介绍/</id>
-    <published>2017-08-15T04:03:38.000Z</published>
-    <updated>2017-08-15T07:02:42.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="常用本地钩子"><a href="#常用本地钩子" class="headerlink" title="常用本地钩子"></a>常用本地钩子</h1><h6 id="pre-commit"><a href="#pre-commit" class="headerlink" title="pre-commit"></a>pre-commit</h6><h6 id="prepare-commit-msg"><a href="#prepare-commit-msg" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h6><h6 id="commit-msg"><a href="#commit-msg" class="headerlink" title="commit-msg"></a>commit-msg</h6><h6 id="post-commit"><a href="#post-commit" class="headerlink" title="post-commit"></a>post-commit</h6><h6 id="post-checkout"><a href="#post-checkout" class="headerlink" title="post-checkout"></a>post-checkout</h6><h6 id="pre-rebase"><a href="#pre-rebase" class="headerlink" title="pre-rebase"></a>pre-rebase</h6><h6 id="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"><a href="#前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git-checkout和git-rebase的安全检查-所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知" class="headerlink" title="前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知"></a>前四个钩子让你介入完整的提交生命周期，后两个允许你执行一些额外的操作，分别为git checkout和git rebase的安全检查.所有带pre-的钩子允许你修改即将发生的操作，而带post-的钩子只能用于通知</h6><h1 id="pre-commit-1"><a href="#pre-commit-1" class="headerlink" title="pre-commit"></a>pre-commit</h1><h6 id="在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"><a href="#在执行git-commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。" class="headerlink" title="在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。"></a>在执行git commit命令时，git向你询问提交信息或生产提交对象时执行。pre-commit不需要任何参数，以非0状态退出时将放弃整个提交。</h6><h1 id="prepare-commit-msg-1"><a href="#prepare-commit-msg-1" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h1><h6 id="在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交"><a href="#在pre-commit钩子在文本编辑器中生成提交信息之后被调用-prepare-commit-msg脚本的参数可以是下列三个：1-包含提交信息的文件名-2-提交类型-3-相关提交的SHA1哈希字串-和pre-commit一样，以非0状态退出会放弃提交" class="headerlink" title="在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交"></a>在pre-commit钩子在文本编辑器中生成提交信息之后被调用.prepare-commit-msg脚本的参数可以是下列三个：1.包含提交信息的文件名 2.提交类型 3.相关提交的SHA1哈希字串.和pre-commit一样，以非0状态退出会放弃提交</h6><h1 id="commit-msg-1"><a href="#commit-msg-1" class="headerlink" title="commit-msg"></a>commit-msg</h1><h6 id="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交"><a href="#commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用-传入这个钩子唯一的参数是包含提交信息的文件名-也是以非0状态退出会放弃提交" class="headerlink" title="commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交"></a>commit-msg钩子和prepare-commit-msg钩子很像，但它会在用户输入提交信息之后被调用.传入这个钩子唯一的参数是包含提交信息的文件名,也是以非0状态退出会放弃提交</h6><h1 id="post-commit-1"><a href="#post-commit-1" class="headerlink" title="post-commit"></a>post-commit</h1><h6 id="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"><a href="#post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git-commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交" class="headerlink" title="post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交"></a>post-commit钩子在commit-msg钩子之后立即被运行，它无法更改git commit的结果，所以这主要用于通知用途，这个脚本没有参数，而且退出状态不会影响提交</h6><h1 id="post-checkout-1"><a href="#post-checkout-1" class="headerlink" title="post-checkout"></a>post-checkout</h1><h6 id="post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout"><a href="#post-checkout钩子和post-commit钩子很像，但它在你用git-checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git-checkout命令。1-HEAD前一次提交的引用-2-新的HEAD的引用-3-1或0，分别代表是分支checkout还是文件checkout" class="headerlink" title="post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout"></a>post-checkout钩子和post-commit钩子很像，但它在你用git checkout查看引用的时候被调用。这个钩子接受三个参数，它的返回状态不影响git checkout命令。1.HEAD前一次提交的引用 2.新的HEAD的引用 3.1或0，分别代表是分支checkout还是文件checkout</h6><h1 id="pre-rebase-1"><a href="#pre-rebase-1" class="headerlink" title="pre-rebase"></a>pre-rebase</h1><h6 id="pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"><a href="#pre-rebase钩子在git-rebase发生更改之前运行。他接受两个参数：1-frok之前的上游分支-2-将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。" class="headerlink" title="pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。"></a>pre-rebase钩子在git rebase发生更改之前运行。他接受两个参数：1.frok之前的上游分支 2.将要rebase的下游分支。如果rebase当前分支则第二个参数为空。以非0状态退出会放弃这次rebase。</h6><h1 id="服务端钩子"><a href="#服务端钩子" class="headerlink" title="服务端钩子"></a>服务端钩子</h1><h6 id="pre-receive"><a href="#pre-receive" class="headerlink" title="pre-receive"></a>pre-receive</h6><h6 id="update"><a href="#update" class="headerlink" title="update"></a>update</h6><h6 id="post-receive"><a href="#post-receive" class="headerlink" title="post-receive"></a>post-receive</h6><h6 id="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"><a href="#服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中-这些钩子都允许你对git-push的不同阶段做出响应-服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的" class="headerlink" title="服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的"></a>服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中,这些钩子都允许你对git push的不同阶段做出响应,服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的</h6><h1 id="pre-receive-1"><a href="#pre-receive-1" class="headerlink" title="pre-receive"></a>pre-receive</h1><h6 id="当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："><a href="#当运行git-push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：" class="headerlink" title="当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行："></a>当运行git push向仓库推送代码时被执行，这是强制推行开发规范的好地方。这个脚本没有参数。这和其它钩子相比略微有些不同，因为信息是通过标准输入而不是命令行传入的。每一个推送上来的引用都会以下面的格式传入脚本的单独一行：</h6><pre><code>&lt;old-value&gt; &lt;new-value&gt; &lt;ref-name&gt;
-</code></pre><h6 id="常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"><a href="#常见的应用包含：1-拒绝将上游分支rebase的更改-2-防止错综复杂的合并（非快速向前，会造成项目历史非线性）-3-检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中）-4-如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交" class="headerlink" title="常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交"></a>常见的应用包含：1.拒绝将上游分支rebase的更改 2.防止错综复杂的合并（非快速向前，会造成项目历史非线性） 3.检查用户是否有正确的权限来做这些更改（大多用于中心化的Git工作流中） 4.如果多个引用被推送，在pre-receive中返回非0状态，拒绝所有提交</h6><h1 id="update-1"><a href="#update-1" class="headerlink" title="update"></a>update</h1><h6 id="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称"><a href="#update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1-更新的引用名称-2-引用中存放的旧的对象名称-3-引用中存放的新的对象名称" class="headerlink" title="update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称"></a>update钩子在pre-receive之后被调用，用法也差不多。在更新前被调用，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到4个分支，update会被执行4次。和pre-receive不一样，这个钩子不需要读取标准输入。事实上，它接受三个参数：1.更新的引用名称 2.引用中存放的旧的对象名称 3.引用中存放的新的对象名称</h6><h1 id="post-receive-1"><a href="#post-receive-1" class="headerlink" title="post-receive"></a>post-receive</h1><h6 id="成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取"><a href="#成功推送后被调用-适合用于发送通知-这个脚本没有参数，但和pre-receive一样通过标准输入读取" class="headerlink" title="成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取"></a>成功推送后被调用,适合用于发送通知.这个脚本没有参数，但和pre-receive一样通过标准输入读取</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="常用本地钩子"><a href="#常用本地钩子" class="headerlink" title="常用本地钩子"></a>常用本地钩子</h1><h6 id="pre-commit"><a href="#pre-commit" class="headerli]]>
-    </summary>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/tags/GIT/"/>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/categories/GIT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[添加git语法检查钩子]]></title>
-    <link href="http://www.cxyteam.com/2017/08/15/%E6%B7%BB%E5%8A%A0git%E8%AF%AD%E6%B3%95%E6%A3%80%E6%9F%A5%E9%92%A9%E5%AD%90/"/>
-    <id>http://www.cxyteam.com/2017/08/15/添加git语法检查钩子/</id>
-    <published>2017-08-15T03:13:49.000Z</published>
-    <updated>2017-08-15T03:52:37.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="添加pre-commit钩子"><a href="#添加pre-commit钩子" class="headerlink" title="添加pre-commit钩子"></a>添加pre-commit钩子</h1><pre><code>vim app_code/.git/hooks/pre-commit
-备注：在hooks下默认会有pre-commit.sample等文件存在，.sample拓展名防止它们默认被执行
-</code></pre><h1 id="添加语法检查内容"><a href="#添加语法检查内容" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>my $commit_id = `git rev-parse --verify HEAD`;
-my $against = &quot;4b825dc642cb6eb9a060e54bf8d69288fbee4904&quot;;
-
-if ($commit_id) {
-    $against=&quot;HEAD&quot;;
-}
-
-my @list = `git diff-index --cached --name-only $against --`;
-my $ret = 0;
-
-for my $x (@list) {
-    chomp $x;
-    if ($x =~ /\.php$/) {
-        if (-f &quot;$x&quot;) {
-            `php -l $x`;
-            if ($? != 0) {
-                $ret = 1;
-                goto end;
-            }
-        }
-    }
-}
-
-end:
-exit($ret);
-</code></pre><h1 id="添加执行权限"><a href="#添加执行权限" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-commit
-</code></pre><h1 id="添加测试"><a href="#添加测试" class="headerlink" title="添加测试"></a>添加测试</h1><p><img src="/img/git/php_check_grammar.png" alt="Alt text" title="php语法检查"></p>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>然而使用pre-commit脚本存在一个很大的缺陷，钩子脚本需要放置在每个开发者的每个项目中，很容易遗漏，同时代码库重新clone后也需要记得重新放置钩子脚本，没有办法从根源上禁止有语法错误的代码的提交
-</code></pre><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code>统一的在git服务端添加pre-receive钩子，当代码push到中心代码库的时候进行语法检测，如果存在语法错误则拒绝当前的push，这样可以只在服务端配置，不需要在每个人的每个项目中进行配置，Git在接受到push时会调用pre-receive钩子，如果pre-receive返回非0的返回值，则当前的push会被拒绝。在调用pre-receive脚本时，会从标准输入传递三个参数，分别为之前的版本，push的版本和push的分支
-</code></pre><h1 id="添加pre-receive钩子"><a href="#添加pre-receive钩子" class="headerlink" title="添加pre-receive钩子"></a>添加pre-receive钩子</h1><pre><code>vim app_code/.git/hooks/pre-receive
-</code></pre><h1 id="添加语法检查内容-1"><a href="#添加语法检查内容-1" class="headerlink" title="添加语法检查内容"></a>添加语法检查内容</h1><pre><code>#!/usr/bin/perl
-use File::Temp;
-use strict;
-
-#从标准输入中读取参数信息
-my $line = &lt;&gt;;
-#处理后得到旧版本，但前版本和分支
-my @argv = split(/\s/, $line);
-my $old = $argv[0];
-my $new = $argv[1];
-my $branch = $argv[2];
-#比较两个版本的差异
-my @out = `git diff --name-status $old $new`;
-
-for my $x (@out) {
-    my @param = split(/\s/, $x);
-    #如果文件不是被删除且是php文件，则进行语法检测
-    if ($param[0] ne &apos;D&apos; and $param[1] =~ /\.php$/) {
-        #取出文件的内容，将其写入到一个临时文件中
-        my $content = `git show $new:$param[1]`;
-        my $fh = File::Temp-&gt;new(SUFFIX =&gt; &apos;.php&apos;, UNLINK =&gt; 1);
-        print $fh $content;
-        #进行语法检测
-        my $result = `php -l $fh 2&gt;&amp;1`;
-        #如果出错则输出错误，输出时需要将临时文件名替换称为原来的文件名，并拒绝push
-        if ($? != 0) {
-            if ($result =~ s#$fh#$param[1]#g) {
-                print $result;
-            }
-            exit(1);
-        }
-    }
-}
-exit(0);
-</code></pre><h1 id="添加执行权限-1"><a href="#添加执行权限-1" class="headerlink" title="添加执行权限"></a>添加执行权限</h1><pre><code>chmod +x app_code/.git/hooks/pre-receive  
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="添加pre-commit钩子"><a href="#添加pre-commit钩子" class="headerlink" title="添加pre-commit钩子"></a>添加pre-commit钩子</h1><pre><code>vim app_code/.]]>
-    </summary>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/tags/GIT/"/>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/categories/GIT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[安装docker-swarm]]></title>
-    <link href="http://www.cxyteam.com/2017/08/03/%E5%AE%89%E8%A3%85docker-swarm/"/>
-    <id>http://www.cxyteam.com/2017/08/03/安装docker-swarm/</id>
-    <published>2017-08-03T02:08:49.000Z</published>
-    <updated>2017-08-07T02:17:34.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="在virtualbox安装centos7"><a href="#在virtualbox安装centos7" class="headerlink" title="在virtualbox安装centos7"></a>在virtualbox安装centos7</h1><pre><code>注意一定要是在centos7及以上的版本
-</code></pre><h1 id="centeos安装docker"><a href="#centeos安装docker" class="headerlink" title="centeos安装docker"></a>centeos安装docker</h1><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-</code></pre><h1 id="启动docker容器"><a href="#启动docker容器" class="headerlink" title="启动docker容器"></a>启动docker容器</h1><pre><code>service docker start
-</code></pre><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><pre><code>docker pull swarm
-</code></pre><h1 id="获取docker容器ip"><a href="#获取docker容器ip" class="headerlink" title="获取docker容器ip"></a>获取docker容器ip</h1><pre><code>本次我的两个主机的ip是：
-    manage：192.168.1.164
-    node1：192.168.1.183
-    node2：192.168.1.194
-</code></pre><h1 id="生产集群token"><a href="#生产集群token" class="headerlink" title="生产集群token"></a>生产集群token</h1><pre><code>docker run --rm swarm create
-执行命令后会生产一串集群的token，记录下来（我的token是：6335a310b4fe5b21492bc119a03980d6）
-</code></pre><h1 id="添加节点到集群"><a href="#添加节点到集群" class="headerlink" title="添加节点到集群"></a>添加节点到集群</h1><pre><code>docker run -d swarm join --addr=192.168.1.183:2375 token://6335a310b4fe5b21492bc119a03980d6
-docker run -d swarm join --addr=192.168.1.194:2375 token://6335a310b4fe5b21492bc119a03980d6
-</code></pre><h1 id="在manage上开启管理程序"><a href="#在manage上开启管理程序" class="headerlink" title="在manage上开启管理程序"></a>在manage上开启管理程序</h1><pre><code>docker run -d -p 8888:2375 swarm manage token://6335a310b4fe5b21492bc119a03980d6
-</code></pre><h1 id="列出集群中的节点"><a href="#列出集群中的节点" class="headerlink" title="列出集群中的节点"></a>列出集群中的节点</h1><pre><code>docker run --rm swarm list token://6335a310b4fe5b21492bc119a03980d6    
-</code></pre><h1 id="在manage上管理node1，node2"><a href="#在manage上管理node1，node2" class="headerlink" title="在manage上管理node1，node2"></a>在manage上管理node1，node2</h1><pre><code>docker -H 192.168.1.164:8888 info
-docker -H 192.168.1.164:8888 ps
-docker -H 192.168.1.164:8888 logs
-</code></pre><h1 id="在集群上运行容器"><a href="#在集群上运行容器" class="headerlink" title="在集群上运行容器"></a>在集群上运行容器</h1><pre><code>docker -H 192.168.1.164:8888 run -d --name web1 nginx
-docker -H 192.168.1.164:8888 run -d --name web2 nginx
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="在virtualbox安装centos7"><a href="#在virtualbox安装centos7" class="headerlink" title="在virtualbox安装centos7"></a>在virtualbox安装centos7</h1><]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker实践命令]]></title>
-    <link href="http://www.cxyteam.com/2017/08/03/docker%E5%AE%9E%E8%B7%B5%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.cxyteam.com/2017/08/03/docker实践命令/</id>
-    <published>2017-08-03T01:56:30.000Z</published>
-    <updated>2017-08-07T03:04:46.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="查看docker容器的ip"><a href="#查看docker容器的ip" class="headerlink" title="查看docker容器的ip"></a>查看docker容器的ip</h1><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; container_name/names
-</code></pre><h1 id="查看docker完整的额容器id"><a href="#查看docker完整的额容器id" class="headerlink" title="查看docker完整的额容器id"></a>查看docker完整的额容器id</h1><pre><code>docker ps --no-trunc
-</code></pre><h1 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h1><pre><code>docker logs -f docker_name
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="查看docker容器的ip"><a href="#查看docker容器的ip" class="headerlink" title="查看docker容器的ip"></a>查看docker容器的ip</h1><pre><code>docker inspect --f]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[登录docker容器]]></title>
-    <link href="http://www.cxyteam.com/2017/08/02/%E7%99%BB%E5%BD%95docker%E5%AE%B9%E5%99%A8/"/>
-    <id>http://www.cxyteam.com/2017/08/02/登录docker容器/</id>
-    <published>2017-08-02T13:48:26.000Z</published>
-    <updated>2017-08-07T03:02:42.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h1><h6 id="查看启动的容器"><a href="#查看启动的容器" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
-注意：CONTAINER ID，NAMES这两个信息下面命令会用到
-</code></pre><h6 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker attach contain_id(CONTAINER ID)
-docker attach contain_name(NAMES)
-</code></pre><h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><h6 id="查看启动的容器-1"><a href="#查看启动的容器-1" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
-</code></pre><h6 id="登录容器-1"><a href="#登录容器-1" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>docker exec -it  contain_id(CONTAINER ID) /bin/bash
-docker exec contain_name(NAMES) /bin/bash
-</code></pre><h1 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h1><h6 id="这应该是很传统的连接方式，但是不建议用这种方式进入容器"><a href="#这应该是很传统的连接方式，但是不建议用这种方式进入容器" class="headerlink" title="这应该是很传统的连接方式，但是不建议用这种方式进入容器"></a>这应该是很传统的连接方式，但是不建议用这种方式进入容器</h6><blockquote>
-<p><a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp" title="为什么不需要在docker中运行sshd" target="_blank" rel="external">为什么不需要在docker中运行sshd</a></p>
-</blockquote>
-<h1 id="nesenter"><a href="#nesenter" class="headerlink" title="nesenter"></a>nesenter</h1><h6 id="查看启动的容器-2"><a href="#查看启动的容器-2" class="headerlink" title="查看启动的容器"></a>查看启动的容器</h6><pre><code>docker ps
-</code></pre><h6 id="查看容器详细信息"><a href="#查看容器详细信息" class="headerlink" title="查看容器详细信息"></a>查看容器详细信息</h6><pre><code>docker inspect contain_id(CONTAINER ID)
-docker inspect contain_name(NAMES)
-</code></pre><h6 id="登录容器-2"><a href="#登录容器-2" class="headerlink" title="登录容器"></a>登录容器</h6><pre><code>nsenter --target $pid --mount --uts --ipc --net --pid
-$pid是在查看容器详细信息的时候拿到的pid，nsenter是需要安装的，自己去google吧
-</code></pre><blockquote>
-<p><a href="https://github.com/jpetazzo/nsenter" title="什么是nesenter" target="_blank" rel="external">什么是nesenter</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h1><h6 id="查看启动的容器"><a href="#查看启动的容器" class="headerlink" ti]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mac无法ping通docker容器]]></title>
-    <link href="http://www.cxyteam.com/2017/08/01/mac%E6%97%A0%E6%B3%95ping%E9%80%9Adocker%E5%AE%B9%E5%99%A8/"/>
-    <id>http://www.cxyteam.com/2017/08/01/mac无法ping通docker容器/</id>
-    <published>2017-08-01T02:02:03.000Z</published>
-    <updated>2017-08-03T01:34:55.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="不能ping通的原因"><a href="#不能ping通的原因" class="headerlink" title="不能ping通的原因"></a>不能ping通的原因</h1><pre><code>由于Docker for mac的网络实现方式，不能够创建docker0虚拟网卡，实际上它存在于HyperKit
-由于macox的限制，不能将流量转发给容器
-</code></pre><blockquote>
-<p><a href="https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos" title="mac不能ping通docker的原因" target="_blank" rel="external">mac不能ping通docker的原因</a></p>
-</blockquote>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h5 id="映射端口"><a href="#映射端口" class="headerlink" title="映射端口"></a>映射端口</h5><pre><code>docker run -d -p 80:80 --name webserver nginx
-</code></pre><h5 id="注意：需要查看80端口是否被占用"><a href="#注意：需要查看80端口是否被占用" class="headerlink" title="注意：需要查看80端口是否被占用"></a>注意：需要查看80端口是否被占用</h5><pre><code>lsof -P | grep &apos;:80&apos;
-</code></pre><h5 id="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"><a href="#如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）" class="headerlink" title="如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）"></a>如果想在本地开发，在docker环境中运行（实现代码上传至服务器查看运行效果）</h5><pre><code>docker run -d -p 80:80 -v /data1/htdocs/code /data1/htdocs/code --name webserver nginx
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="不能ping通的原因"><a href="#不能ping通的原因" class="headerlink" title="不能ping通的原因"></a>不能ping通的原因</h1><pre><code>由于Docker for mac的网络实现方式，不能够创建d]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何编写一个dockerfile]]></title>
-    <link href="http://www.cxyteam.com/2017/07/14/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdockerfile/"/>
-    <id>http://www.cxyteam.com/2017/07/14/如何编写一个dockerfile/</id>
-    <published>2017-07-14T01:22:39.000Z</published>
-    <updated>2017-08-03T01:37:33.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>更快的构建速度</li>
-<li>更小的Docker镜像大小</li>
-<li>更少的Docker镜像层</li>
-<li>充分利用镜像缓存</li>
-<li>增加Dockerfile可读性</li>
-<li>让Docker容器使用起来更简单</li>
-</ul>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
-<li>容器只运行单个应用</li>
-<li>将多个RUN指令合并为一个</li>
-<li>基础镜像的标签不要用latest</li>
-<li>每个RUN指令后删除多余文件</li>
-<li>选择合适的基础镜像(alpine版本最好，不过个人还是喜欢centos)</li>
-<li>设置WORKDIR和CMD</li>
-<li>COPY与ADD优先使用前者</li>
-<li>合理调整COPY与RUN的顺序</li>
-<li>设置默认的环境变量，映射端口和数据卷</li>
-<li>使用LABEL设置镜像元数据</li>
-<li>添加HEALTHCHECK</li>
-<li>使用ENTRYPOINT (可选，可以用于做不同环境的判断，不如dev，product)</li>
-<li>在entrypoint脚本中使用exec</li>
-</ul>
-<h1 id="编写步骤"><a href="#编写步骤" class="headerlink" title="编写步骤"></a>编写步骤</h1><blockquote>
-<p><a href="https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/" title="编写dockerfile" target="_blank" rel="external">编写dockerfile</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>更快的构建速度</li>
-<li>更小的Docker镜像大小</li>
-<li>更少的Docker镜像层</li>
-<li>充分]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go的应用场景]]></title>
-    <link href="http://www.cxyteam.com/2017/06/10/go%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
-    <id>http://www.cxyteam.com/2017/06/10/go的应用场景/</id>
-    <published>2017-06-10T09:26:53.000Z</published>
-    <updated>2017-06-10T09:45:57.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
-</code></pre><h3 id="并发性好"><a href="#并发性好" class="headerlink" title="并发性好"></a>并发性好</h3><pre><code>goruntime和channel使得编写高并发的服务端软件变得相当简单，很多情况下不需要考虑锁机制以及由此带来的问题。
-单个go应用能有效利用多个CPU内核，并行执行性能好
-</code></pre><h3 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h3><h3 id="丰富的标准库"><a href="#丰富的标准库" class="headerlink" title="丰富的标准库"></a>丰富的标准库</h3><h3 id="活跃的社区支持"><a href="#活跃的社区支持" class="headerlink" title="活跃的社区支持"></a>活跃的社区支持</h3>]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><pre><code>go直接生成一个静态编译文件，除了对glibc外没有其他的依赖
-</code></pre><h3 id="并]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[关于产品设计的几个小思考]]></title>
-    <link href="http://www.cxyteam.com/2017/06/06/%E5%85%B3%E4%BA%8E%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%80%9D%E8%80%83/"/>
-    <id>http://www.cxyteam.com/2017/06/06/关于产品设计的几个小思考/</id>
-    <published>2017-06-06T02:42:49.000Z</published>
-    <updated>2017-06-06T06:14:38.000Z</updated>
-    <content type="html"><![CDATA[<h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
-</code></pre><h6 id="明确的目标用户"><a href="#明确的目标用户" class="headerlink" title="明确的目标用户"></a>明确的目标用户</h6><pre><code>这个至关重要，是产品定位的大基调
-能够更精准的确定获取目标用户的渠道
-能够精准的给用户设计产品功能
-比如说：
-    我的目标用户是青年人，那么理想的状态是我会推广一个文章能够触达到我的青年用户，在获取
-    青年用户的同时希望能够剔除掉非青年用户（毕竟用户的运营也是有成本的，这里指的是个性化
-    运营，并不是群发文章之类的）
-</code></pre><h6 id="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？"><a href="#为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1-3或者一个产品介绍的部分？" class="headerlink" title="为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？"></a>为什么很多公司的官网的首屏在显示的时候，页面的底部会显示一个内容的部分：比如说一张图片的1/3或者一个产品介绍的部分？</h6><pre><code>提醒用户，首屏下面还有内容，网站是可以滚动的    
-</code></pre><p><img src="/img/product/think/home_part_negative.png" alt="Alt text" title="首屏是完整的页面"><br><img src="/img/product/think/home_part_positive.png" alt="Alt text" title="首屏只显示部分页面"></p>
-<h6 id="关注首屏"><a href="#关注首屏" class="headerlink" title="关注首屏"></a>关注首屏</h6><pre><code>首屏是决定用户是否继续浏览的关键因素
-解决用户的信任问题
-放足够吸引用户的东西
-依旧举个例子（如下图）：
-    1、首先打开官网最打眼的2的位置，一个大红包这是足够吸引我去看红包是怎么回事
-    2、3的位置很巧妙，2的位置引导眼球的时候，在视线的下方位置，
-       观看到3的红色的免费字样，接着我的视线一定会移动到3所在的功能块，这个时候又是
-       10位置的红色字样直接吸引过来，接着应该是顺理成章的做评估了，设计者最后在
-       8的位置还把评估的人数显示上来，低调的解除了用户的不信任危机
-    3、再者是7的位置和传统的轮播图比他的优势在于右边的文字，一次性列举出了所有
-       的轮播图的作用（不是像传统的那样就是两个箭头或者几个数字点击能够进行切换，作为
-       用户我哪来的耐心去猜测你的箭头会切换到哪个轮播图？）
-    4、再看1的位置，在导航栏中做了重点的突出，应该是吸引用户的一个重要功能，很
-       希望用户去点
-    5、看4，5的位置我认为都在解决一个信任的问题，首先是4的位置介绍我的资质，这
-       个是比较有说服力的客观事实你如果还不信的话可以到5的位置去看关于我们
-</code></pre><p><img src="/img/product/think/hainabian_home.png" alt="Alt text" title="优质首页分析"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><pre><code>以下的问题可能是对产品设计的一些比较粗糙的言论，很多想法主要来自公司产品组
-</code></pre><h6 id="明确的]]>
-    </summary>
-    
-      <category term="产品&amp;运营" scheme="http://www.cxyteam.com/tags/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
-    
-      <category term="产品&amp;运营" scheme="http://www.cxyteam.com/categories/%E4%BA%A7%E5%93%81-%E8%BF%90%E8%90%A5/"/>
     
   </entry>
   

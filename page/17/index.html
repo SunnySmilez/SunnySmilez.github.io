@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言语句/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/11/C语言内存泄露检测Valgrind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/14/C语言语句/" itemprop="url">C语言语句</a></h1>
+                <a class="post-title-link" href="/2016/08/11/C语言内存泄露检测Valgrind/" itemprop="url">C语言内存泄露检测Valgrind</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T21:41:07+08:00">
-                2016-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-11T09:05:15+08:00">
+                2016-08-11
               </time>
             
 
@@ -326,21 +326,12 @@
       
         
           
-          if语句if (condition) {
-    doSomething
-} elseif(condition) {
-    doSomething
-} else {
-    doSomething
-}
-
-例子:
-    #include &lt;stdio.h&gt;
-    int main()
+          valgrind使用场景检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
+valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/14/C语言语句/#more" rel="contents">
+            <a class="btn" href="/2016/08/11/C语言内存泄露检测Valgrind/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -391,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言数据类型/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/10/C语言动态存储/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -410,7 +401,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/14/C语言数据类型/" itemprop="url">C语言数据类型</a></h1>
+                <a class="post-title-link" href="/2016/08/10/C语言动态存储/" itemprop="url">C语言动态存储</a></h1>
         
 
         <div class="post-meta">
@@ -422,8 +413,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T21:17:42+08:00">
-                2016-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-10T08:12:39+08:00">
+                2016-08-10
               </time>
             
 
@@ -484,14 +475,16 @@
       
         
           
-          数据类型浮点型:float,double
-整型:short,long,int,char(char以字符编码保存,他们也是数字)
-char字符在计算机的存储器中以字符编码的形式保存,字符编码是一个数字,因此在计算机看来A(ASCII码)和数字65完全一样
-需要注意的点1.字符串会被当做数组来读取,这个
+          动态数据存储的位置堆,它是程序中用来保存长期使用数据的地方
+获取空间使用malloc()函数进行申请
+如何释放使用free()函数进行释放
+使用malloc#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/14/C语言数据类型/#more" rel="contents">
+            <a class="btn" href="/2016/08/10/C语言动态存储/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -542,7 +535,7 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言函数学习/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/09/C语言链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -561,7 +554,7 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/14/C语言函数学习/" itemprop="url">C语言函数学习</a></h1>
+                <a class="post-title-link" href="/2016/08/09/C语言链表/" itemprop="url">C语言链表</a></h1>
         
 
         <div class="post-meta">
@@ -573,8 +566,8 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T20:57:20+08:00">
-                2016-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-09T07:57:33+08:00">
+                2016-08-09
               </time>
             
 
@@ -635,16 +628,17 @@ char字符在计算机的存储器中以字符编码的形式保存,字符编码
       
         
           
-          puts将内容输入到终端
-例子:
-    puts(&quot;将内容输入到终端&quot;)
-printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表示整型)
-例子:
-    printf(&quot;%s说需要%i字节&quot;, &quot;小张&quot;, &quot;10
+          链表是一种抽象的数据结构
+使用场景为了保存可变数量的数据,需要一样比数组更灵活的东西
+工作原理保存了一条数据和链向另一条数据的链接
+创建链表#include &lt;stdio.h&gt;
+//注意要先定义函数在main函数的外部
+void display();
+//结构定义函数体的外面多个函数才能
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/14/C语言函数学习/#more" rel="contents">
+            <a class="btn" href="/2016/08/09/C语言链表/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -695,7 +689,7 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/14/C语言简单运行/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/27/C语言联合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -714,7 +708,7 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/14/C语言简单运行/" itemprop="url">C语言简单运行</a></h1>
+                <a class="post-title-link" href="/2016/07/27/C语言联合/" itemprop="url">C语言联合</a></h1>
         
 
         <div class="post-meta">
@@ -726,8 +720,8 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T20:39:10+08:00">
-                2016-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-27T07:42:29+08:00">
+                2016-07-27
               </time>
             
 
@@ -788,180 +782,174 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
       
         
           
-          执行Hello World1.创建HelloWorld.c
+          联合用union关键字定义的一个叫&quot;量&quot;的数据类型
+typedef union {
+    short count;
+    float volume;
+    float weight;
+} quantity;
+联合的特点1.可以有效的使用存储器空间
+    当定义联合的时候,
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/27/C语言联合/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-2.编写如下代码
-    /**
-      这是一段测试代码
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/26/C语言结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/26/C语言结构/" itemprop="url">C语言结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-26T08:14:25+08:00">
+                2016-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
+例如:
+    定义新结构
+    /*
+        注意fish只是结构的名字
     */
-    #include &lt;stdio.h&gt;
-
-    int main()
-    {
-        puts(&quot;Hello Worl
+    struct fish {
+        /*
+            const char * 是
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/14/C语言简单运行/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/12/lvs与keepalived/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/12/lvs与keepalived/" itemprop="url">lvs与keepalived</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T01:32:55+08:00">
-                2016-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          集群一组相互独立的计算机,利用高速通信网络组成的一个计算机系统,每个集群节点都是运行其自己进程的一个独立服务器
-集群特点1.高性能
-2.价格有效性
-3.可伸缩性
-4.高可用性
-集群优势1.透明性
-2.高性能
-3.高可用性
-4.可伸缩性
-5.可管理性
-6.可编程性
-负载均衡提供一种廉价,有效,透明的方
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/12/lvs与keepalived/#more" rel="contents">
+            <a class="btn" href="/2016/07/26/C语言结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1003,7 +991,7 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1049,7 +1037,7 @@ printf格式化输出,用变量的值来替换格式符(%s表示字符串,%i表�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

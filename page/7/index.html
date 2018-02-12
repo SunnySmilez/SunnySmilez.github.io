@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/08/go学习笔记并发-channel/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/02/docker的应用场景/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/08/go学习笔记并发-channel/" itemprop="url">go学习笔记并发-channel</a></h1>
+                <a class="post-title-link" href="/2017/06/02/docker的应用场景/" itemprop="url">docker的应用场景</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-08T20:43:15+08:00">
-                2017-03-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T10:31:31+08:00">
+                2017-06-02
               </time>
             
 
@@ -287,8 +287,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
                   </a>
                 </span>
 
@@ -326,17 +326,19 @@
       
         
           
-          定义引用类型channel是CSP模式的具体实现，用于多个goroutine通讯。其内部实现了同步没确保并发安全，默认为同步模式，需要发送和接收配对。否则会被阻塞，直到另一方准备好被唤醒package main
-
-import (
-    &quot;fmt&quot;
-)
-
-func main()
+          优势
+性能强大、成本低
+启动速度很快
+快速搭建部署环境，有现成的镜像，pull 下来 run 即可使用
+保证运行环境一致，比如 软件版本号，软件依赖，PHP 扩展
+灵活扩展、轻松维护，见下页
+作为开发环境：可直接本地搭建、开发
+作为测试环境：多版本、分支共存部署，快速切换，数据快速回滚
+作为生产环境
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/08/go学习笔记并发-channel/#more" rel="contents">
+            <a class="btn" href="/2017/06/02/docker的应用场景/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -387,7 +389,7 @@ func main()
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/03/go学习笔记并发/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/06/01/docker入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -406,7 +408,7 @@ func main()
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/03/go学习笔记并发/" itemprop="url">go学习笔记并发</a></h1>
+                <a class="post-title-link" href="/2017/06/01/docker入门/" itemprop="url">docker命令</a></h1>
         
 
         <div class="post-meta">
@@ -418,8 +420,8 @@ func main()
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T18:47:39+08:00">
-                2017-03-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T19:24:33+08:00">
+                2017-06-01
               </time>
             
 
@@ -441,8 +443,8 @@ func main()
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
                   </a>
                 </span>
 
@@ -480,19 +482,15 @@ func main()
       
         
           
-          定义只需在函数调用语句前添加go关键字，就可创建并发执行单元package main
-
-import (
-    &quot;fmt&quot;
-    &quot;runtime&quot;
-)
-
-func say(s string) {
-    for i := 0; i &lt; 3; i++
+          docker安装（mac）docker查询命令docker info查看docker信息
+docker ps -a查看所有的容器，包括运行的和退出的
+docker ps查看所有的运行的容器
+docker inspect container_id/names查看容器的详细信息
+docker searc
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/03/go学习笔记并发/#more" rel="contents">
+            <a class="btn" href="/2017/06/01/docker入门/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -543,7 +541,7 @@ func say(s string) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记接口/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/05/12/编写makefile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -562,7 +560,7 @@ func say(s string) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/01/go学习笔记接口/" itemprop="url">go学习笔记接口</a></h1>
+                <a class="post-title-link" href="/2017/05/12/编写makefile/" itemprop="url">编写makefile</a></h1>
         
 
         <div class="post-meta">
@@ -574,8 +572,8 @@ func say(s string) {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T15:06:44+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T09:52:04+08:00">
+                2017-05-12
               </time>
             
 
@@ -597,8 +595,8 @@ func say(s string) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -636,11 +634,12 @@ func say(s string) {
       
         
           
-          定义接口定义一个或多个方法签名的集合，任何类型的方法集中只要拥有与之对应的全部方法就表示它’实现’了该接口，无须在该类型上显示添加接口声明所谓接口对应方法，是指有相同名称，参数列表以及返回值。接口命名习惯以er结尾，结构体接口只有方法签名，没有实现接口没有数据字段可在接口中嵌入其他接口类型可实现多个
+          什么是makefile用于自动编译和链接的，一个工程有很多文件组成，每一个文件的改变都会导致工程的重新链接—–但是不是所有的文件都需要重新编译，makefile能够纪录文件的信息，决定在链接的时候需要重新编译哪些文件makefile规则target ... : prerequisites ...
+ 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/01/go学习笔记接口/#more" rel="contents">
+            <a class="btn" href="/2017/05/12/编写makefile/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -691,7 +690,7 @@ func say(s string) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记方法表达式/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/05/08/编译reids的sds文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -710,7 +709,7 @@ func say(s string) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/01/go学习笔记方法表达式/" itemprop="url">go学习笔记方法表达式</a></h1>
+                <a class="post-title-link" href="/2017/05/08/编译reids的sds文件/" itemprop="url">编译reids的sds文件</a></h1>
         
 
         <div class="post-meta">
@@ -722,8 +721,8 @@ func say(s string) {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T11:23:27+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T20:30:02+08:00">
+                2017-05-08
               </time>
             
 
@@ -745,8 +744,8 @@ func say(s string) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -784,16 +783,13 @@ func say(s string) {
       
         
           
-          表达式instance.method(args…) =&gt; method value.func(instance, args)  =&gt; method expressionpackage main
-
-import &quot;fmt&quot;
-
-type User struct {
-   
+          问题在学习redis源码的时候，只能傻傻的看代码，运行结果全靠猜，实在是忍受不了，就想着我能否像写php一样，不懂的直接运行起来初试想当然的，sds.c的文件嘛，直接使用如下命令gcc sds.c -o sds.o
+结果也很想当然的报错
+本能的去指定头文件,依旧报错gcc -I sds.h zmal
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/01/go学习笔记方法表达式/#more" rel="contents">
+            <a class="btn" href="/2017/05/08/编译reids的sds文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -844,7 +840,7 @@ type User struct {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/03/01/go学习笔记方法集/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/04/26/一个产品的诞生/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -863,7 +859,7 @@ type User struct {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/01/go学习笔记方法集/" itemprop="url">go学习笔记方法集</a></h1>
+                <a class="post-title-link" href="/2017/04/26/一个产品的诞生/" itemprop="url">一个产品的诞生</a></h1>
         
 
         <div class="post-meta">
@@ -875,8 +871,8 @@ type User struct {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T11:17:08+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T17:11:55+08:00">
+                2017-04-26
               </time>
             
 
@@ -898,8 +894,8 @@ type User struct {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GO/" itemprop="url" rel="index">
-                    <span itemprop="name">GO</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -937,11 +933,12 @@ type User struct {
       
         
           
-          定义类型T方法集包含全部receiver T方法类型T方法集合包含全部receiver T+T方法如类型S包含匿名字段T，则S方法集包含T方法如类型S包含匿名字段T，则S方法集包含T+T方法不管嵌入T或T，S方法集总是包含T+*T方法
-          
+          背景介绍此文介绍的是一个产品从需求调研到上线的整个流程，整个产品历经3周，参与人数4人，经历了下图三个阶段：找出痛点，缕清需求，写出代码
+项目起源在和流量战场的一次会议中，卡卡西老师对于业务的预测，未来一个月后，我们将会有大量的订单进入，为了提高目前我们对未来订单的应对能力，我们需要一个跟单系统，至
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/01/go学习笔记方法集/#more" rel="contents">
+            <a class="btn" href="/2017/04/26/一个产品的诞生/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -983,7 +980,7 @@ type User struct {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1029,7 +1026,7 @@ type User struct {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

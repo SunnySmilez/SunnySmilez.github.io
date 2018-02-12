@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记常量/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记reslice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记常量/" itemprop="url">go学习笔记常量</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记reslice/" itemprop="url">go学习笔记reslice</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T19:31:27+08:00">
-                2017-02-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T14:44:03+08:00">
+                2017-02-28
               </time>
             
 
@@ -326,19 +326,17 @@
       
         
           
-          常量常量值必须是编译器可确定的数字，字符串和布尔值,局部常量不会引发编译错误package main
+          定义基于已有slice创建新slice对象，以便在cap允许范围内调整属性package main
 
-const a int = 1
-const b = &quot;aaa&quot;
-const c = false
+import &quot;fmt&quot;
 
 func main() {
-    const d = 2
-    print
+    s := []int{0, 11, 10, 31, 4, 5, 6, 7, 8, 9}
+    s1 := s[2
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记常量/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记reslice/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -389,7 +387,7 @@ func main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记变量/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记slice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -408,7 +406,7 @@ func main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记变量/" itemprop="url">go学习笔记变量</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记slice/" itemprop="url">go学习笔记slice</a></h1>
         
 
         <div class="post-meta">
@@ -420,8 +418,8 @@ func main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T11:57:06+08:00">
-                2017-02-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:52:55+08:00">
+                2017-02-28
               </time>
             
 
@@ -482,21 +480,15 @@ func main() {
       
         
           
-          声明变量定义没有初始值的变量，必须带类型package main
-
-func main() {
-    var n int
-    n = 1
-    println(n)
-}
-有初始值不必须定义类型package main
-
-func main() {
-    var a = &quot;aaa&
+          sliceslice不是数组或数组指针，它是通过内部指针和相关属性引用数组片段，以实现边长方案slice引用类型，但自身是结构体，值拷贝传递//在runtime.h中的源码
+struct slice
+{
+    byte* array;
+    uintgo len;     //表示可用元素数量，
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记变量/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记slice/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -547,7 +539,7 @@ func main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/20/go学习笔记环境搭建/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -566,7 +558,7 @@ func main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/20/go学习笔记环境搭建/" itemprop="url">go环境搭建</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记array/" itemprop="url">go学习笔记array</a></h1>
         
 
         <div class="post-meta">
@@ -578,8 +570,8 @@ func main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T10:43:31+08:00">
-                2017-02-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:21:50+08:00">
+                2017-02-28
               </time>
             
 
@@ -640,11 +632,13 @@ func main() {
       
         
           
-          下载go在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz设置环境变
+          Array类型数据数组是值类型，赋值和传参会复制整个数组，而不是指针数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型支持”==”，”！=”操作符，因为内存总是被初始化过指针数组[n]T,数组指针[n]T定义数组的方式直接初始化package main
+
+import &q
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/20/go学习笔记环境搭建/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记array/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -695,7 +689,7 @@ func main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/01/29/2016年个人总结/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记延迟调用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -714,7 +708,7 @@ func main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/29/2016年个人总结/" itemprop="url">2016年总结</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记延迟调用/" itemprop="url">go学习笔记延迟调用</a></h1>
         
 
         <div class="post-meta">
@@ -726,8 +720,8 @@ func main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-29T17:41:34+08:00">
-                2017-01-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:18:53+08:00">
+                2017-02-28
               </time>
             
 
@@ -749,8 +743,8 @@ func main() {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -788,12 +782,16 @@ func main() {
       
         
           
-          技术技术总结
-去年总的技术学习分两个方面，一个是广度的学习也就是进行的linux中级运维知识学习；一个是深度的学习也就是redis源码阅读；广度方面的出发点是想拓宽眼界，对需要用到和可能接触到的东西进行扫盲；深度方面的出发点是觉得很多成熟的开源产品都包含网络，i/o，并发，性能等方面的处理，想要通过
+          延迟调用使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理package main
+
+import &quot;os&quot;
+
+func test() error {
+    f, err := os.Create(&quo
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/01/29/2016年个人总结/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记延迟调用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -844,7 +842,7 @@ func main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/12/21/环境变量的设置/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记异常处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -863,7 +861,7 @@ func main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/21/环境变量的设置/" itemprop="url">环境变量的设置</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记异常处理/" itemprop="url">go学习笔记异常处理</a></h1>
         
 
         <div class="post-meta">
@@ -875,8 +873,8 @@ func main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-21T11:06:19+08:00">
-                2016-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:17:53+08:00">
+                2017-02-28
               </time>
             
 
@@ -898,8 +896,8 @@ func main() {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
                   </a>
                 </span>
 
@@ -937,13 +935,16 @@ func main() {
       
         
           
-          永久对所有用户生效修改/etc/profile添加如下行(下面的PATH=$PATH…是添加的)，对/etc/profile的不同，添加的位置可能不同pathmunge () {
-    case &quot;:${PATH}:&quot; in
-        *:&quot;$1&quot;:*
+          异常处理没有结构化异常，使用panic抛出错误，recover捕获错误package main
+
+func test() {
+    defer func() {
+        if err := recover();err != nil {    //相当于php的错误异常处理的try
+    
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/12/21/环境变量的设置/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记异常处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -985,7 +986,7 @@ func main() {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1031,7 +1032,7 @@ func main() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

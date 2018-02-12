@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/关机-重启-注销/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/17/rsync安装和使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/24/关机-重启-注销/" itemprop="url">关机-重启-注销</a></h1>
+                <a class="post-title-link" href="/2016/05/17/rsync安装和使用/" itemprop="url">rsync安装和使用</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T15:02:19+08:00">
-                2016-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-17T22:19:14+08:00">
+                2016-05-17
               </time>
             
 
@@ -326,21 +326,17 @@
       
         
           
-          
-关机  shutdown -h now 立刻关机
-  shutdown -h +1 1分钟以后关机
-  init 0
-  halt 立即停止系统,需要人工关闭电源
-  halt -p
-  poweroff 立即停止系统,并且关闭电源
+          简介开源的,快速的,多功能的,可实现全量和增量的本地或远程数据同步的工具
 
-重启  reboot
-  shutdown -r now
-  
+1.支持拷贝特殊文件如链接文件,设备等
+2.可以排除指定文件或目录同步的功能,相当于打包命令tar的排除功能
+3.可以保持源文件或目录的权限,时间,软硬链接,属组,主等所有属性均不改变
+4.可实现增量同步
+5.可以使用rcp
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/24/关机-重启-注销/#more" rel="contents">
+            <a class="btn" href="/2016/05/17/rsync安装和使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -391,7 +387,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/linux运行级别/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/分发无权限文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -410,7 +406,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">linux运行级别</a></h1>
+                <a class="post-title-link" href="/2016/05/15/分发无权限文件/" itemprop="url">分发无权限文件</a></h1>
         
 
         <div class="post-meta">
@@ -422,8 +418,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T12:45:52+08:00">
-                2016-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T15:00:34+08:00">
+                2016-05-15
               </time>
             
 
@@ -484,23 +480,14 @@
       
         
           
-          
-linux运行级别的含义
-0: 关机模式
-1: 单用户模式(破解root密码)
-2: 无网络支持的多用户模式
-3: 有网络支持的多用户模式
-4: 保留,未使用
-5: 有网络支持的X-Window支持的多用户模式
-6: 重启
-
-
-
-
-          
+          利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)分发到家目录scp demo.txt /home/vagrant
+赋予用户cp权限visudo修改
+在最后添加:(赋予vagrant用户cp的权限)
+vagrant    ALL=(ALL)       N
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/24/linux运行级别/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/分发无权限文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -551,7 +538,7 @@ linux运行级别的含义
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/16/linux文件满了删除不了/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/ssh实现免密批量登陆/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -570,7 +557,7 @@ linux运行级别的含义
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/16/linux文件满了删除不了/" itemprop="url">linux文件满了删除不了</a></h1>
+                <a class="post-title-link" href="/2016/05/15/ssh实现免密批量登陆/" itemprop="url">ssh实现免密批量登陆</a></h1>
         
 
         <div class="post-meta">
@@ -582,8 +569,8 @@ linux运行级别的含义
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-16T17:45:21+08:00">
-                2016-04-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T13:26:32+08:00">
+                2016-05-15
               </time>
             
 
@@ -644,18 +631,18 @@ linux运行级别的含义
       
         
           
-          
-问题:系统日志满了(df -h 为100% df -i不为100%)以后,进行rm -rf文件,再次进行df -h磁盘依旧为100%  原因:
-有硬链接
-lsof | grep del  该文件被某些服务占用,导致不能及时释放
-磁盘空间维护出现问题
-  解决方案:
-1.删除文件,重启服务
-2.清空
+          创建用户生成密钥对1.以dsa的数字算法进行密钥生成
+    ssh-keygen -t dsa
+2.默认路径以及不给密码(接下来的是选项直接回车)
+分发公钥1.默认端口
+ssh-copy-id -i id_dsa.pub vagrant@172.16.17.11
+
+2.非默认端口
+ssh-copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/16/linux文件满了删除不了/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/ssh实现免密批量登陆/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -706,7 +693,7 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux扩展名的作用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/11/ssh介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -725,7 +712,7 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/14/linux扩展名的作用/" itemprop="url">linux扩展名的作用</a></h1>
+                <a class="post-title-link" href="/2016/05/11/ssh介绍/" itemprop="url">ssh介绍</a></h1>
         
 
         <div class="post-meta">
@@ -737,8 +724,8 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T23:46:59+08:00">
-                2016-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-11T20:55:25+08:00">
+                2016-05-11
               </time>
             
 
@@ -747,28 +734,6 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -799,15 +764,15 @@ lsof | grep del  该文件被某些服务占用,导致不能及时释放
       
         
           
-          压缩文件.tar,.tar.gz,.tgz,.tar.bz一般创建命令为tar,gzip
-shell脚本文件.sh,一般通过shell语言开发的程序
-perl语言文件.pl,通过perl语言开发的程序
-python语言文件.py,python语言开发的程序
-网页语言的文件.html,.htm,.ph
+          SSH提供的功能(支持:RSA,DSA加密方式)安全加密协议,远程联机访问,类似telnet
+类似FTP服务的sftp-server,借助SSH协议传输数据,提供更安全的SFTP服务(加密)
+RSA,DSA的区别RSA:既可以进行加密,也可以进行数字签名实现认证
+DSA:只能进行数字签名实现认证
+工
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/14/linux扩展名的作用/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/ssh介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -858,7 +823,7 @@ python语言文件.py,python语言开发的程序
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/03/14/linux文件类型及属性/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/04/文件系统NFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -877,7 +842,7 @@ python语言文件.py,python语言开发的程序
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/14/linux文件类型及属性/" itemprop="url">linux文件类型及属性</a></h1>
+                <a class="post-title-link" href="/2016/05/04/文件系统NFS/" itemprop="url">文件系统NFS</a></h1>
         
 
         <div class="post-meta">
@@ -889,8 +854,8 @@ python语言文件.py,python语言开发的程序
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T22:44:23+08:00">
-                2016-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-04T21:58:22+08:00">
+                2016-05-04
               </time>
             
 
@@ -951,16 +916,23 @@ python语言文件.py,python语言开发的程序
       
         
           
-          文件含义ls -lhi /data
-1966317 drwxrwxrwx.  2 root  root  4.0K 2月  22 16:16 data
+          文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
 
-1966317         表示inode索引节点编号
-drwxrwxrwx      文件类型及权限
-2               硬链接
+xfs
+    数据库MySQL业务,门户案例
+
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
+
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
+
+ext3(cento
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/14/linux文件类型及属性/#more" rel="contents">
+            <a class="btn" href="/2016/05/04/文件系统NFS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1002,7 +974,7 @@ drwxrwxrwx      文件类型及权限
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1048,7 +1020,7 @@ drwxrwxrwx      文件类型及权限
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

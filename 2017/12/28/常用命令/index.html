@@ -89,7 +89,7 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
 <meta property="og:site_name" content="狂奔的菜鸟">
 <meta property="og:description" content="linux杀死某个程序的多个进程ps uax | grep &amp;apos;you project process&amp;apos; | grep -v grep |awk &amp;apos;{print $2}&amp;apos; | xargs kill
 mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0.1 -uroot -P databases 3306 -e &amp;quot;sel">
-<meta property="og:updated_time" content="2018-01-10T02:58:21.000Z">
+<meta property="og:updated_time" content="2018-02-07T03:18:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用命令">
 <meta name="twitter:description" content="linux杀死某个程序的多个进程ps uax | grep &amp;apos;you project process&amp;apos; | grep -v grep |awk &amp;apos;{print $2}&amp;apos; | xargs kill
@@ -337,6 +337,23 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
       
         <h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
 </code></pre><h1 id="mysql导出数据-数据量比较大，工具不好用的时候"><a href="#mysql导出数据-数据量比较大，工具不好用的时候" class="headerlink" title="mysql导出数据(数据量比较大，工具不好用的时候)"></a>mysql导出数据(数据量比较大，工具不好用的时候)</h1><pre><code>mysql -h 127.0.0.1 -uroot -P databases 3306 -e &quot;select count(*) from user;&quot;  &gt; /tmp/tetst.xls
+</code></pre><h1 id="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><a href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入" class="headerlink" title="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"></a>redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</h1><pre><code>redis-cli -h 127.0.0.1 -p 6379 -a &quot;auth_command&quot;
+</code></pre><h1 id="no-space-left-on-disk"><a href="#no-space-left-on-disk" class="headerlink" title="no space left on disk"></a>no space left on disk</h1><pre><code>查看磁盘使用情况
+    df
+
+如果磁盘未满，查看inode是否满
+    df -i        
+</code></pre><h1 id="添加mysql用户和权限"><a href="#添加mysql用户和权限" class="headerlink" title="添加mysql用户和权限"></a>添加mysql用户和权限</h1><ol>
+<li><p>选择mysql库<br> use mysql</p>
+</li>
+<li><p>添加用户<br> create user zhangsan identified by ‘zhangsan’;<br> 或者<br> insert into user (Host,User,Password) value(‘127.0.0.1’, ‘test’, password(‘123123’));<br> 或者<br> grant all privileges on database.* to test@’127.0.0.1’ identified by ‘test’;</p>
+</li>
+<li><p>刷新系统权限表<br> flush privileges;</p>
+</li>
+</ol>
+<h1 id="查看进程句柄使用情况"><a href="#查看进程句柄使用情况" class="headerlink" title="查看进程句柄使用情况"></a>查看进程句柄使用情况</h1><pre><code>查看php-fpm（pid为192）句柄使用情况
+lsof -n -p 192
+</code></pre><h1 id="特定进程内运行的线程"><a href="#特定进程内运行的线程" class="headerlink" title="特定进程内运行的线程"></a>特定进程内运行的线程</h1><pre><code>top -H -p &lt;PID&gt;
 </code></pre>
       
     </div>
@@ -492,7 +509,7 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -596,7 +613,7 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux杀死某个程序的多个进程"><span class="nav-number">1.</span> <span class="nav-text">linux杀死某个程序的多个进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql导出数据-数据量比较大，工具不好用的时候"><span class="nav-number">2.</span> <span class="nav-text">mysql导出数据(数据量比较大，工具不好用的时候)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux杀死某个程序的多个进程"><span class="nav-number">1.</span> <span class="nav-text">linux杀死某个程序的多个进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql导出数据-数据量比较大，工具不好用的时候"><span class="nav-number">2.</span> <span class="nav-text">mysql导出数据(数据量比较大，工具不好用的时候)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><span class="nav-number">3.</span> <span class="nav-text">redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#no-space-left-on-disk"><span class="nav-number">4.</span> <span class="nav-text">no space left on disk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加mysql用户和权限"><span class="nav-number">5.</span> <span class="nav-text">添加mysql用户和权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看进程句柄使用情况"><span class="nav-number">6.</span> <span class="nav-text">查看进程句柄使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特定进程内运行的线程"><span class="nav-number">7.</span> <span class="nav-text">特定进程内运行的线程</span></a></li></ol></div>
             
 
           </div>

@@ -97,7 +97,7 @@
 安装软件使用brew安装php，mysql，redis
 安装composercurl -sS https://getcomposer.org/installer | php 
 失败尝试：php -r &amp;quot;rea">
-<meta property="og:updated_time" content="2017-12-04T10:23:08.000Z">
+<meta property="og:updated_time" content="2018-01-30T11:00:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装laravel环境">
 <meta name="twitter:description" content="前提说明在mac本地利用homebrew，使用Valet方式安装laravel
@@ -428,6 +428,10 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
 修改权限为当前用户：
     cd ~/.composer/
     sudo chown -R $(whoami) vendor
+</code></pre><h1 id="google自动跳转https"><a href="#google自动跳转https" class="headerlink" title="google自动跳转https"></a>google自动跳转https</h1><pre><code>Chrome 于 V63 版本起会将 .dev 域名强制转换为 HTTPS。
+所以最简单的办法是：切换域名
+ valet domain test
+ 使用hello.test进行访问
 </code></pre>
       
     </div>
@@ -583,7 +587,7 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -687,7 +691,7 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#前提说明"><span class="nav-number">1.</span> <span class="nav-text">前提说明</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新brew"><span class="nav-number"></span> <span class="nav-text">更新brew</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看brew-service"><span class="nav-number"></span> <span class="nav-text">查看brew service</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装软件"><span class="nav-number"></span> <span class="nav-text">安装软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装composer"><span class="nav-number"></span> <span class="nav-text">安装composer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过composer安装valet"><span class="nav-number"></span> <span class="nav-text">通过composer安装valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装valet"><span class="nav-number"></span> <span class="nav-text">安装valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置code目录"><span class="nav-number"></span> <span class="nav-text">设置code目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number"></span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动valet"><span class="nav-number"></span> <span class="nav-text">启动valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问项目"><span class="nav-number"></span> <span class="nav-text">访问项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#valet补充"><span class="nav-number"></span> <span class="nav-text">valet补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#各种错误"><span class="nav-number"></span> <span class="nav-text">各种错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#composer错误"><span class="nav-number"></span> <span class="nav-text">composer错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valet-install错误"><span class="nav-number"></span> <span class="nav-text">valet install错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valet权限错误（在安装的过程中使用了sudo）"><span class="nav-number"></span> <span class="nav-text">valet权限错误（在安装的过程中使用了sudo）</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#前提说明"><span class="nav-number">1.</span> <span class="nav-text">前提说明</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新brew"><span class="nav-number"></span> <span class="nav-text">更新brew</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看brew-service"><span class="nav-number"></span> <span class="nav-text">查看brew service</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装软件"><span class="nav-number"></span> <span class="nav-text">安装软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装composer"><span class="nav-number"></span> <span class="nav-text">安装composer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过composer安装valet"><span class="nav-number"></span> <span class="nav-text">通过composer安装valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装valet"><span class="nav-number"></span> <span class="nav-text">安装valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置code目录"><span class="nav-number"></span> <span class="nav-text">设置code目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number"></span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动valet"><span class="nav-number"></span> <span class="nav-text">启动valet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问项目"><span class="nav-number"></span> <span class="nav-text">访问项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#valet补充"><span class="nav-number"></span> <span class="nav-text">valet补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#各种错误"><span class="nav-number"></span> <span class="nav-text">各种错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#composer错误"><span class="nav-number"></span> <span class="nav-text">composer错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valet-install错误"><span class="nav-number"></span> <span class="nav-text">valet install错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valet权限错误（在安装的过程中使用了sudo）"><span class="nav-number"></span> <span class="nav-text">valet权限错误（在安装的过程中使用了sudo）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#google自动跳转https"><span class="nav-number"></span> <span class="nav-text">google自动跳转https</span></a></div>
             
 
           </div>
