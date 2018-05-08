@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="ziplist结构
+zlbytes：记录整个压缩列表占用的内存字节数
+zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节
+zllen：记录了压缩列表包含的节点数量
+entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定
+zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端
+
+节点结构/*
+ * 保存 ziplist 节点信息的结构
+ */
+typ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis-ziplist源码阅读">
+<meta property="og:url" content="http://www.cxyteam.com/2018/03/09/redis-ziplist源码阅读/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="ziplist结构
+zlbytes：记录整个压缩列表占用的内存字节数
+zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节
+zllen：记录了压缩列表包含的节点数量
+entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定
+zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端
+
+节点结构/*
+ * 保存 ziplist 节点信息的结构
+ */
+typ">
+<meta property="og:image" content="http://www.cxyteam.com/img/redis/ziplist.png">
+<meta property="og:updated_time" content="2018-04-05T09:06:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis-ziplist源码阅读">
+<meta name="twitter:description" content="ziplist结构
+zlbytes：记录整个压缩列表占用的内存字节数
+zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节
+zllen：记录了压缩列表包含的节点数量
+entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定
+zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端
+
+节点结构/*
+ * 保存 ziplist 节点信息的结构
+ */
+typ">
+<meta name="twitter:image" content="http://www.cxyteam.com/img/redis/ziplist.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2018/03/09/redis-ziplist源码阅读/"/>
+
+
+
+
+
+  <title>redis-ziplist源码阅读 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/03/09/redis-ziplist源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redis-ziplist源码阅读</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T10:23:29+08:00">
+                2018-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/09/redis-ziplist源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/09/redis-ziplist源码阅读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ziplist结构"><a href="#ziplist结构" class="headerlink" title="ziplist结构"></a>ziplist结构</h1><ol>
+<li>zlbytes：记录整个压缩列表占用的内存字节数</li>
+<li>zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节</li>
+<li>zllen：记录了压缩列表包含的节点数量</li>
+<li>entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定</li>
+<li>zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端</li>
+</ol>
+<h1 id="节点结构"><a href="#节点结构" class="headerlink" title="节点结构"></a>节点结构</h1><pre><code>/*
+ * 保存 ziplist 节点信息的结构
+ */
+typedef struct zlentry {
+
+    // prevrawlen ：前置节点的长度
+    // prevrawlensize ：编码 prevrawlen 所需的字节大小；只能是１字节或者５字节
+    unsigned int prevrawlensize, prevrawlen;
+
+    // len ：当前节点值的长度，指出实体字段的具体长度即真正存储数据的字段，单位是字节
+    // lensize ：编码 len 所需的字节大小, 1字节，　２字节　５字节
+    unsigned int lensize, len;
+
+    // 当前节点 header 的大小
+    // 等于 prevrawlensize + lensize
+    unsigned int headersize;
+
+    // 当前节点值所使用的编码类型
+    unsigned char encoding;
+
+    // 指向当前节点的指针
+    unsigned char *p;
+
+} zlentry;
+</code></pre><p><img src="/img/redis/ziplist.png" alt="Alt text" title="ziplist结构"></p>
+<ol>
+<li>prevrawlensize：编码prevrawlen所需的字节大小</li>
+<li>prevrawlen：前置节点的长度；当长度小于255字节时，用一个字节存储；当长度大于等于255时，用五个字节进行存储，其中第一个字节会被设置为255表示前一个entry的长度由后面四个字节表示</li>
+<li>len：当前节点值的长度</li>
+<li>lensize：编码 len 所需的字节大小, 1字节，　２字节　５字节</li>
+<li>headersize：等于 prevrawlensize + lensize</li>
+<li><p>encoding：当前节点值所使用的编码类；它会根据当前元素内容的不同会采用不同的编码方式<br> 如果元素内容为字符串，encoding的值分别为：<br> 00xx xxxx ：00开头表示该字符串的长度用6个bit表示。<br> 01xx xxxx | xxxx xxxx ：01开头表示字符串的长度由14bit表示，这14个bit采用大端存储。<br> 1000 0000 | xxxx xxxx | xxxx xxxx | xxxx xxxx | xxxx xxxx ：10开头表示后续的四个字节为字符串长度，这32个bit采用大端存储</p>
+<p> 如果元素内容为数字，encoding的值分别为：<br> 1100 0000：表示数字占用后面2个字节。<br> 1101 0000：表示数字占用后面4个字节。<br> 1110 0000：表示数字占用后面8个字节。<br> 1111 0000 ：表示数字占用后面3个字节。<br> 1111 1110 ：表示数字占用后面1个字节。<br> 1111 1111 ：表示压缩链表中最后一个元素（特殊编码）。<br> 1111 xxxx ：表示只用后4位表示0~12的整数，由于0000，1110跟1111三种已经被占用，也就是说这里的xxxx四位只能表示0001~1101，转换成十进制就是数字1~13，但是redis规定它用来表示0~12，因此当遇到这个编码时，我们需要取出后四位然后减1来得到正确的值。</p>
+</li>
+<li><p>*p：指向当前节点的指针</p>
+</li>
+</ol>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ol>
+<li>一个列表只含有少量列表项</li>
+<li>每个列表项是小整数值或者长度比较短的字符串</li>
+</ol>
+<h1 id="编码，解码"><a href="#编码，解码" class="headerlink" title="编码，解码"></a>编码，解码</h1><h3 id="编码前置节点长度信息"><a href="#编码前置节点长度信息" class="headerlink" title="编码前置节点长度信息"></a>编码前置节点长度信息</h3><pre><code>/* Encode the length of the previous entry and write it to &quot;p&quot;. Return the
+ * number of bytes needed to encode this length if &quot;p&quot; is NULL. 
+ *
+ * 对前置节点的长度 len 进行编码，并将它写入到 p 中，
+ * 然后返回编码 len 所需的字节数量。
+ *
+ * 如果 p 为 NULL ，那么不进行写入，仅返回编码 len 所需的字节数量。
+ *
+ * T = O(1)
+ * 前置节点的长度编码字节数只有１字节和５字节
+ * 如果前一节点的长度小于 254 字节， 那么 previous_entry_length 属性的长度为 1 字节： 前一节点的长度就保存在这一个字节里面。
+ * 如果前一节点的长度大于等于 254 字节， 那么 previous_entry_length 属性的长度为 5 字节： 其中属性的第一字节会被设置为 0xFE （十进制值 254）， 而之后的四个字节则用于保存前一节点的长度。
+ */
+static unsigned int zipPrevEncodeLength(unsigned char *p, unsigned int len) {
+
+    // 仅返回编码 len 所需的字节数量
+    if (p == NULL) {
+        return (len &lt; ZIP_BIGLEN) ? 1 : sizeof(len) + 1;
+    } else {
+        // 写入并返回编码 len 所需的字节数量
+        // 1 字节
+        if (len &lt; ZIP_BIGLEN) {
+            p[0] = len;
+            return 1;
+
+        // 5 字节
+        } else {
+            // 添加 5 字节长度标识
+            p[0] = ZIP_BIGLEN;
+            // 写入编码
+            memcpy(p + 1, &amp;len, sizeof(len));
+            // 如果有必要的话，进行大小端转换
+            memrev32ifbe(p + 1);
+            // 返回编码长度
+            return 1 + sizeof(len);
+        }
+    }
+}
+</code></pre><h3 id="解码前置节点长度信息"><a href="#解码前置节点长度信息" class="headerlink" title="解码前置节点长度信息"></a>解码前置节点长度信息</h3><pre><code>/* Decode the number of bytes required to store the length of the previous
+ * element, from the perspective of the entry pointed to by &apos;ptr&apos;. 
+ *
+ * 解码 ptr 指针，
+ * 取出编码前置节点长度所需的字节数，并将它保存到 prevlensize 变量中。
+ *
+ * T = O(1)
+ */
+#define ZIP_DECODE_PREVLENSIZE(ptr, prevlensize) do {                          \
+    if ((ptr)[0] &lt; ZIP_BIGLEN) {                                               \
+        (prevlensize) = 1;                                                     \
+    } else {                                                                   \
+        (prevlensize) = 5;                                                     \
+    }                                                                          \
+} while(0);
+
+/* Decode the length of the previous element, from the perspective of the entry
+ * pointed to by &apos;ptr&apos;. 
+ *
+ * 解码 ptr 指针，
+ * 取出编码前置节点长度所需的字节数，
+ * 并将这个字节数保存到 prevlensize 中。
+ *
+ * 然后根据 prevlensize ，从 ptr 中取出前置节点的长度值，
+ * 并将这个长度值保存到 prevlen 变量中。
+ *
+ * T = O(1)
+ */
+#define ZIP_DECODE_PREVLEN(ptr, prevlensize, prevlen) do {                     \
+                                                                               \
+    /* 先计算被编码长度值的字节数 */                                           \
+    ZIP_DECODE_PREVLENSIZE(ptr, prevlensize);                                  \
+                                                                               \
+    /* 再根据编码字节数来取出长度值 */                                         \
+    if ((prevlensize) == 1) {                                                  \
+        (prevlen) = (ptr)[0];                                                  \
+    } else if ((prevlensize) == 5) {                                           \
+        assert(sizeof((prevlensize)) == 4);                                    \
+        memcpy(&amp;(prevlen), ((char*)(ptr)) + 1, 4);                             \
+        memrev32ifbe(&amp;prevlen);                                                \
+    }                                                                          \
+} while(0);
+</code></pre><h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><h1 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/02/docker-如何解决配置文件变更的问题/" rel="next" title="docker-如何解决container服务中配置文件个性化的问题">
+                <i class="fa fa-chevron-left"></i> docker-如何解决container服务中配置文件个性化的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ziplist结构"><span class="nav-number">1.</span> <span class="nav-text">ziplist结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节点结构"><span class="nav-number">2.</span> <span class="nav-text">节点结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用场景"><span class="nav-number">3.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码，解码"><span class="nav-number">4.</span> <span class="nav-text">编码，解码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编码前置节点长度信息"><span class="nav-number">4.0.1.</span> <span class="nav-text">编码前置节点长度信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解码前置节点长度信息"><span class="nav-number">4.0.2.</span> <span class="nav-text">解码前置节点长度信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入"><span class="nav-number">5.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连锁更新"><span class="nav-number">6.</span> <span class="nav-text">连锁更新</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -89,7 +89,7 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
 <meta property="og:site_name" content="狂奔的菜鸟">
 <meta property="og:description" content="linux杀死某个程序的多个进程ps uax | grep &amp;apos;you project process&amp;apos; | grep -v grep |awk &amp;apos;{print $2}&amp;apos; | xargs kill
 mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0.1 -uroot -P databases 3306 -e &amp;quot;sel">
-<meta property="og:updated_time" content="2018-02-07T03:18:50.000Z">
+<meta property="og:updated_time" content="2018-03-22T08:32:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用命令">
 <meta name="twitter:description" content="linux杀死某个程序的多个进程ps uax | grep &amp;apos;you project process&amp;apos; | grep -v grep |awk &amp;apos;{print $2}&amp;apos; | xargs kill
@@ -354,6 +354,8 @@ mysql导出数据(数据量比较大，工具不好用的时候)mysql -h 127.0.0
 <h1 id="查看进程句柄使用情况"><a href="#查看进程句柄使用情况" class="headerlink" title="查看进程句柄使用情况"></a>查看进程句柄使用情况</h1><pre><code>查看php-fpm（pid为192）句柄使用情况
 lsof -n -p 192
 </code></pre><h1 id="特定进程内运行的线程"><a href="#特定进程内运行的线程" class="headerlink" title="特定进程内运行的线程"></a>特定进程内运行的线程</h1><pre><code>top -H -p &lt;PID&gt;
+</code></pre><h1 id="查找文件内容，并进行折行处理（直接用于mysql-in查询）"><a href="#查找文件内容，并进行折行处理（直接用于mysql-in查询）" class="headerlink" title="查找文件内容，并进行折行处理（直接用于mysql in查询）"></a>查找文件内容，并进行折行处理（直接用于mysql in查询）</h1><pre><code>grep &apos;WARN&apos; 1.txt  | grep &apos;exist&apos; | awk &apos;{print $7}&apos; | grep -v &quot;\\[&quot; | tr &quot;\n&quot; &quot;,&quot;
+</code></pre><h1 id="根据特定标识符分割，再排序去重"><a href="#根据特定标识符分割，再排序去重" class="headerlink" title="根据特定标识符分割，再排序去重"></a>根据特定标识符分割，再排序去重</h1><pre><code>grep -v &apos;从kafka获得数据&apos; 1.txt  | awk &apos;{print $4}&apos; | awk -F : &apos;{print $2}&apos; | sort | uniq &gt; game.txt    
 </code></pre>
       
     </div>
@@ -509,7 +511,7 @@ lsof -n -p 192
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">166</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +615,7 @@ lsof -n -p 192
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux杀死某个程序的多个进程"><span class="nav-number">1.</span> <span class="nav-text">linux杀死某个程序的多个进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql导出数据-数据量比较大，工具不好用的时候"><span class="nav-number">2.</span> <span class="nav-text">mysql导出数据(数据量比较大，工具不好用的时候)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><span class="nav-number">3.</span> <span class="nav-text">redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#no-space-left-on-disk"><span class="nav-number">4.</span> <span class="nav-text">no space left on disk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加mysql用户和权限"><span class="nav-number">5.</span> <span class="nav-text">添加mysql用户和权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看进程句柄使用情况"><span class="nav-number">6.</span> <span class="nav-text">查看进程句柄使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特定进程内运行的线程"><span class="nav-number">7.</span> <span class="nav-text">特定进程内运行的线程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux杀死某个程序的多个进程"><span class="nav-number">1.</span> <span class="nav-text">linux杀死某个程序的多个进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql导出数据-数据量比较大，工具不好用的时候"><span class="nav-number">2.</span> <span class="nav-text">mysql导出数据(数据量比较大，工具不好用的时候)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><span class="nav-number">3.</span> <span class="nav-text">redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#no-space-left-on-disk"><span class="nav-number">4.</span> <span class="nav-text">no space left on disk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加mysql用户和权限"><span class="nav-number">5.</span> <span class="nav-text">添加mysql用户和权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看进程句柄使用情况"><span class="nav-number">6.</span> <span class="nav-text">查看进程句柄使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特定进程内运行的线程"><span class="nav-number">7.</span> <span class="nav-text">特定进程内运行的线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找文件内容，并进行折行处理（直接用于mysql-in查询）"><span class="nav-number">8.</span> <span class="nav-text">查找文件内容，并进行折行处理（直接用于mysql in查询）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据特定标识符分割，再排序去重"><span class="nav-number">9.</span> <span class="nav-text">根据特定标识符分割，再排序去重</span></a></li></ol></div>
             
 
           </div>

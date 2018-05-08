@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-02-12T01:35:24.000Z</updated>
+  <updated>2018-04-05T09:06:53.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,19 +15,195 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[redis-ziplist源码阅读]]></title>
+    <link href="http://www.cxyteam.com/2018/03/09/redis-ziplist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.cxyteam.com/2018/03/09/redis-ziplist源码阅读/</id>
+    <published>2018-03-09T02:23:29.000Z</published>
+    <updated>2018-04-05T09:06:53.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="ziplist结构"><a href="#ziplist结构" class="headerlink" title="ziplist结构"></a>ziplist结构</h1><ol>
+<li>zlbytes：记录整个压缩列表占用的内存字节数</li>
+<li>zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节</li>
+<li>zllen：记录了压缩列表包含的节点数量</li>
+<li>entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定</li>
+<li>zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端</li>
+</ol>
+<h1 id="节点结构"><a href="#节点结构" class="headerlink" title="节点结构"></a>节点结构</h1><pre><code>/*
+ * 保存 ziplist 节点信息的结构
+ */
+typedef struct zlentry {
+
+    // prevrawlen ：前置节点的长度
+    // prevrawlensize ：编码 prevrawlen 所需的字节大小；只能是１字节或者５字节
+    unsigned int prevrawlensize, prevrawlen;
+
+    // len ：当前节点值的长度，指出实体字段的具体长度即真正存储数据的字段，单位是字节
+    // lensize ：编码 len 所需的字节大小, 1字节，　２字节　５字节
+    unsigned int lensize, len;
+
+    // 当前节点 header 的大小
+    // 等于 prevrawlensize + lensize
+    unsigned int headersize;
+
+    // 当前节点值所使用的编码类型
+    unsigned char encoding;
+
+    // 指向当前节点的指针
+    unsigned char *p;
+
+} zlentry;
+</code></pre><p><img src="/img/redis/ziplist.png" alt="Alt text" title="ziplist结构"></p>
+<ol>
+<li>prevrawlensize：编码prevrawlen所需的字节大小</li>
+<li>prevrawlen：前置节点的长度；当长度小于255字节时，用一个字节存储；当长度大于等于255时，用五个字节进行存储，其中第一个字节会被设置为255表示前一个entry的长度由后面四个字节表示</li>
+<li>len：当前节点值的长度</li>
+<li>lensize：编码 len 所需的字节大小, 1字节，　２字节　５字节</li>
+<li>headersize：等于 prevrawlensize + lensize</li>
+<li><p>encoding：当前节点值所使用的编码类；它会根据当前元素内容的不同会采用不同的编码方式<br> 如果元素内容为字符串，encoding的值分别为：<br> 00xx xxxx ：00开头表示该字符串的长度用6个bit表示。<br> 01xx xxxx | xxxx xxxx ：01开头表示字符串的长度由14bit表示，这14个bit采用大端存储。<br> 1000 0000 | xxxx xxxx | xxxx xxxx | xxxx xxxx | xxxx xxxx ：10开头表示后续的四个字节为字符串长度，这32个bit采用大端存储</p>
+<p> 如果元素内容为数字，encoding的值分别为：<br> 1100 0000：表示数字占用后面2个字节。<br> 1101 0000：表示数字占用后面4个字节。<br> 1110 0000：表示数字占用后面8个字节。<br> 1111 0000 ：表示数字占用后面3个字节。<br> 1111 1110 ：表示数字占用后面1个字节。<br> 1111 1111 ：表示压缩链表中最后一个元素（特殊编码）。<br> 1111 xxxx ：表示只用后4位表示0~12的整数，由于0000，1110跟1111三种已经被占用，也就是说这里的xxxx四位只能表示0001~1101，转换成十进制就是数字1~13，但是redis规定它用来表示0~12，因此当遇到这个编码时，我们需要取出后四位然后减1来得到正确的值。</p>
+</li>
+<li><p>*p：指向当前节点的指针</p>
+</li>
+</ol>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ol>
+<li>一个列表只含有少量列表项</li>
+<li>每个列表项是小整数值或者长度比较短的字符串</li>
+</ol>
+<h1 id="编码，解码"><a href="#编码，解码" class="headerlink" title="编码，解码"></a>编码，解码</h1><h3 id="编码前置节点长度信息"><a href="#编码前置节点长度信息" class="headerlink" title="编码前置节点长度信息"></a>编码前置节点长度信息</h3><pre><code>/* Encode the length of the previous entry and write it to &quot;p&quot;. Return the
+ * number of bytes needed to encode this length if &quot;p&quot; is NULL. 
+ *
+ * 对前置节点的长度 len 进行编码，并将它写入到 p 中，
+ * 然后返回编码 len 所需的字节数量。
+ *
+ * 如果 p 为 NULL ，那么不进行写入，仅返回编码 len 所需的字节数量。
+ *
+ * T = O(1)
+ * 前置节点的长度编码字节数只有１字节和５字节
+ * 如果前一节点的长度小于 254 字节， 那么 previous_entry_length 属性的长度为 1 字节： 前一节点的长度就保存在这一个字节里面。
+ * 如果前一节点的长度大于等于 254 字节， 那么 previous_entry_length 属性的长度为 5 字节： 其中属性的第一字节会被设置为 0xFE （十进制值 254）， 而之后的四个字节则用于保存前一节点的长度。
+ */
+static unsigned int zipPrevEncodeLength(unsigned char *p, unsigned int len) {
+
+    // 仅返回编码 len 所需的字节数量
+    if (p == NULL) {
+        return (len &lt; ZIP_BIGLEN) ? 1 : sizeof(len) + 1;
+    } else {
+        // 写入并返回编码 len 所需的字节数量
+        // 1 字节
+        if (len &lt; ZIP_BIGLEN) {
+            p[0] = len;
+            return 1;
+
+        // 5 字节
+        } else {
+            // 添加 5 字节长度标识
+            p[0] = ZIP_BIGLEN;
+            // 写入编码
+            memcpy(p + 1, &amp;len, sizeof(len));
+            // 如果有必要的话，进行大小端转换
+            memrev32ifbe(p + 1);
+            // 返回编码长度
+            return 1 + sizeof(len);
+        }
+    }
+}
+</code></pre><h3 id="解码前置节点长度信息"><a href="#解码前置节点长度信息" class="headerlink" title="解码前置节点长度信息"></a>解码前置节点长度信息</h3><pre><code>/* Decode the number of bytes required to store the length of the previous
+ * element, from the perspective of the entry pointed to by &apos;ptr&apos;. 
+ *
+ * 解码 ptr 指针，
+ * 取出编码前置节点长度所需的字节数，并将它保存到 prevlensize 变量中。
+ *
+ * T = O(1)
+ */
+#define ZIP_DECODE_PREVLENSIZE(ptr, prevlensize) do {                          \
+    if ((ptr)[0] &lt; ZIP_BIGLEN) {                                               \
+        (prevlensize) = 1;                                                     \
+    } else {                                                                   \
+        (prevlensize) = 5;                                                     \
+    }                                                                          \
+} while(0);
+
+/* Decode the length of the previous element, from the perspective of the entry
+ * pointed to by &apos;ptr&apos;. 
+ *
+ * 解码 ptr 指针，
+ * 取出编码前置节点长度所需的字节数，
+ * 并将这个字节数保存到 prevlensize 中。
+ *
+ * 然后根据 prevlensize ，从 ptr 中取出前置节点的长度值，
+ * 并将这个长度值保存到 prevlen 变量中。
+ *
+ * T = O(1)
+ */
+#define ZIP_DECODE_PREVLEN(ptr, prevlensize, prevlen) do {                     \
+                                                                               \
+    /* 先计算被编码长度值的字节数 */                                           \
+    ZIP_DECODE_PREVLENSIZE(ptr, prevlensize);                                  \
+                                                                               \
+    /* 再根据编码字节数来取出长度值 */                                         \
+    if ((prevlensize) == 1) {                                                  \
+        (prevlen) = (ptr)[0];                                                  \
+    } else if ((prevlensize) == 5) {                                           \
+        assert(sizeof((prevlensize)) == 4);                                    \
+        memcpy(&amp;(prevlen), ((char*)(ptr)) + 1, 4);                             \
+        memrev32ifbe(&amp;prevlen);                                                \
+    }                                                                          \
+} while(0);
+</code></pre><h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><h1 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="ziplist结构"><a href="#ziplist结构" class="headerlink" title="ziplist结构"></a>ziplist结构</h1><ol>
+<li>zlbytes：记录整个压缩列表占用的内存字节数</li>
+<li>zl]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker-如何解决container服务中配置文件个性化的问题]]></title>
+    <link href="http://www.cxyteam.com/2018/03/02/docker-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.cxyteam.com/2018/03/02/docker-如何解决配置文件变更的问题/</id>
+    <published>2018-03-02T02:33:25.000Z</published>
+    <updated>2018-04-13T04:03:01.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ol>
+<li>传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即可生效</li>
+<li>在docker搭建中，如果我们的image中已经使用了nginx.conf的配置文件，那么我docker run的container的配置文件和image中的配置文件是一致的，如果我想修改container中nginx的log路径，我应该怎么做呢？</li>
+<li>是不是我需要这样，首先修改nginx.conf 然后再commit当前container，最后再push当前container，如果我需要运行两个container有不一致的nginx.conf呢？</li>
+</ol>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
+<li>通过env传递，但是仅限于很简单的配置，像nginx这样的配置文件是不太可能使用这种方式</li>
+<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h k0204v.add.shbt.qihoo.net -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
+<li>使用zookeeper或者etcd来存放配置文件数据，创建容器时通过 ENV 传递配置文件的 KEY，应用启动前用 KEY 拉取配置文件，然后启动应用</li>
+</ol>
+<h1 id="查看容器启动时的命令"><a href="#查看容器启动时的命令" class="headerlink" title="查看容器启动时的命令"></a>查看容器启动时的命令</h1><pre><code>docker inspect pay_game
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ol>
+<li>传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[活动机器数预估]]></title>
     <link href="http://www.cxyteam.com/2018/02/12/%E6%B4%BB%E5%8A%A8%E6%9C%BA%E5%99%A8%E6%95%B0%E9%A2%84%E4%BC%B0/"/>
     <id>http://www.cxyteam.com/2018/02/12/活动机器数预估/</id>
     <published>2018-02-12T01:35:24.000Z</published>
-    <updated>2018-02-12T01:35:24.000Z</updated>
-    <content type="html"></content>
+    <updated>2018-02-12T01:38:34.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="qps"><a href="#qps" class="headerlink" title="qps"></a>qps</h1><h3 id="php连接数"><a href="#php连接数" class="headerlink" title="php连接数"></a>php连接数</h3><h3 id="redis连接数"><a href="#redis连接数" class="headerlink" title="redis连接数"></a>redis连接数</h3><h3 id="mysql连接数"><a href="#mysql连接数" class="headerlink" title="mysql连接数"></a>mysql连接数</h3><h1 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h1>]]></content>
     <summary type="html">
-    
+    <![CDATA[<h1 id="qps"><a href="#qps" class="headerlink" title="qps"></a>qps</h1><h3 id="php连接数"><a href="#php连接数" class="headerlink" title="php连接数"><]]>
     </summary>
     
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
     
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
     
   </entry>
   
@@ -72,7 +248,7 @@ set collation_server=utf8_general_ci;
     <link href="http://www.cxyteam.com/2018/02/06/redis-intset%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
     <id>http://www.cxyteam.com/2018/02/06/redis-intset源码阅读/</id>
     <published>2018-02-06T13:52:05.000Z</published>
-    <updated>2018-02-06T13:52:43.000Z</updated>
+    <updated>2018-03-08T09:53:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="intset数据结构"><a href="#intset数据结构" class="headerlink" title="intset数据结构"></a>intset数据结构</h1><pre><code>typedef struct intset {
 
     // 编码方式
@@ -85,8 +261,276 @@ set collation_server=utf8_general_ci;
     int8_t contents[];
 
 } intset;
-</code></pre><p># </p>
-]]></content>
+</code></pre><h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ol>
+<li>元素类型只能是数字</li>
+<li>元素有三种类型：int16_t,int32_t,int64_t</li>
+<li>元素有序，不能重复</li>
+<li>inset和sds一样，内存连续，就像数组一样</li>
+<li>intset不提供降级操作，一旦对编码进行了升级，编码就会一直保持升级后的状态</li>
+</ol>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ol>
+<li>主要用于集合(set)的底层实现之一</li>
+<li>当集合元素不大于设定值并且元素都是整数时</li>
+</ol>
+<h1 id="编码方式的获取"><a href="#编码方式的获取" class="headerlink" title="编码方式的获取"></a>编码方式的获取</h1><ol>
+<li>这个函数试试判断传入的数据应该用什么数据类型进行存储</li>
+<li>需要注意一点的是INT32_MIN是负值的最小值（-2147483648）<br> static uint8_t _intsetValueEncoding(int64_t v) {<pre><code>if (v &lt; INT32_MIN || v &gt; INT32_MAX) {
+    return INTSET_ENC_INT64;
+}
+else if (v &lt; INT16_MIN || v &gt; INT16_MAX) {
+    return INTSET_ENC_INT32;
+}
+else {
+    return INTSET_ENC_INT16;
+}
+</code></pre> }</li>
+</ol>
+<h1 id="大小端模式"><a href="#大小端模式" class="headerlink" title="大小端模式"></a>大小端模式</h1><ol>
+<li>大端模式，是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中，这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放</li>
+<li>小端模式，是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低，和我们的逻辑方法一致<br><img src="/img/redis/duan.png" alt="Alt text" title="大小端模式"></li>
+</ol>
+<h1 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h1><ol>
+<li>还是老一套，判断encode，修改值；修改length值，添加到content中</li>
+<li>如果需要添加的值存在的话不会再进行添加</li>
+</ol>
+<pre><code>intset *intsetAdd(intset *is, int64_t value, uint8_t *success) {
+    //printf(&quot;---------\n&quot;);
+    //printf(&quot;start\n&quot;);
+    // 计算编码 value 所需的长度
+    uint8_t valenc = _intsetValueEncoding(value);
+    uint32_t pos;
+    // 默认设置插入为成功
+    if (success) {
+        *success = 1;
+    }
+
+    /* Upgrade encoding if necessary. If we need to upgrade, we know that
+     * this value should be either appended (if &gt; 0) or prepended (if &lt; 0),
+     * because it lies outside the range of existing values. */
+    // 如果 value 的编码比整数集合现在的编码要大
+    // 那么表示 value 必然可以添加到整数集合中
+    // 并且整数集合需要对自身进行升级，才能满足 value 所需的编码
+    if (valenc &gt; intrev32ifbe(is-&gt;encoding)) {
+        //printf(&quot;大于\n&quot;);
+        /* This always succeeds, so we don&apos;t need to curry *success. */
+        // T = O(N)
+        return intsetUpgradeAndAdd(is, value);
+    } else {
+        //printf(&quot;小于\n&quot;);
+        // 运行到这里，表示整数集合现有的编码方式适用于 value
+
+        /* Abort if the value is already present in the set.
+         * This call will populate &quot;pos&quot; with the right position to insert
+         * the value when it cannot be found. */
+        // 在整数集合中查找 value ，看他是否存在：
+        // - 如果存在，那么将 *success 设置为 0 ，并返回未经改动的整数集合
+        // - 如果不存在，那么可以插入 value 的位置将被保存到 pos 指针中
+        //   等待后续程序使用
+        if (intsetSearch(is, value, &amp;pos)) {
+            //printf(&quot;存在\n&quot;);
+            if (success) {
+                *success = 0;
+            }
+            return is;
+        }
+
+        //printf(&quot;不存在，search后的pos值：%d\n&quot;, pos);
+
+        // 运行到这里，表示 value 不存在于集合中
+        // 程序需要将 value 添加到整数集合中
+
+        // 为 value 在集合中分配空间
+        is = intsetResize(is, intrev32ifbe(is-&gt;length) + 1);
+        // 如果新元素不是被添加到底层数组的末尾
+        // 那么需要对现有元素的数据进行移动，空出 pos 上的位置，用于设置新值
+        // 举个例子
+        // 如果数组为：
+        // | x | y | z | ? |
+        //     |&lt;-----&gt;|
+        // 而新元素 n 的 pos 为 1 ，那么数组将移动 y 和 z 两个元素
+        // | x | y | y | z |
+        //         |&lt;-----&gt;|
+        // 这样就可以将新元素设置到 pos 上了：
+        // | x | n | y | z |
+        // T = O(N)
+        //printf(&quot;pos:%d\n&quot;, pos);
+        //printf(&quot;is-&gt;length:%d\n&quot;, intrev32ifbe(is-&gt;length));
+        if (pos &lt; intrev32ifbe(is-&gt;length)) {
+            //printf(&quot;pos&lt;length\n&quot;);
+            intsetMoveTail(is, pos, pos + 1);
+        }
+    }
+
+    // 将新值设置到底层数组的指定位置中
+    _intsetSet(is, pos, value);
+    //printf(&quot;value:%lld\n&quot;, value);
+
+    // 增加集合元素数量的计数器
+    is-&gt;length = intrev32ifbe(intrev32ifbe(is-&gt;length) + 1);
+
+    // 返回添加新元素后的整数集合
+    return is;
+
+    /* p.s. 上面的代码可以重构成以下更简单的形式：
+
+    if (valenc &gt; intrev32ifbe(is-&gt;encoding)) {
+        return intsetUpgradeAndAdd(is,value);
+    }
+
+    if (intsetSearch(is,value,&amp;pos)) {
+        if (success) *success = 0;
+        return is;
+    } else {
+        is = intsetResize(is,intrev32ifbe(is-&gt;length)+1);
+        if (pos &lt; intrev32ifbe(is-&gt;length)) intsetMoveTail(is,pos,pos+1);
+        _intsetSet(is,pos,value);
+
+        is-&gt;length = intrev32ifbe(intrev32ifbe(is-&gt;length)+1);
+        return is;
+    }
+    */
+}
+</code></pre><h1 id="搜索元素"><a href="#搜索元素" class="headerlink" title="搜索元素"></a>搜索元素</h1><ol>
+<li>主要看看二分排序法</li>
+<li>如果该值不存在，会把该值的前一个元素的pos返回回来（比如要查找8，但是intset结构中只存在6这个元素，就会把6所在的pos返回）</li>
+</ol>
+<pre><code>static uint8_t intsetSearch(intset *is, int64_t value, uint32_t *pos) {
+    int min = 0, max = intrev32ifbe(is-&gt;length) - 1, mid = -1;
+    int64_t cur = -1;
+
+    /* The value can never be found when the set is empty */
+    // 处理 is 为空时的情况
+    if (intrev32ifbe(is-&gt;length) == 0) {
+        if (pos) {
+            *pos = 0;
+        }
+        printf(&quot;不存在,pos为：%d\n&quot;, *pos);
+        return 0;
+    } else {
+        /* Check for the case where we know we cannot find the value,
+         * but do know the insert position. */
+        // 因为底层数组是有序的，如果 value 比数组中最后一个值都要大
+        // 那么 value 肯定不存在于集合中，
+        // 并且应该将 value 添加到底层数组的最末端
+        if (value &gt; _intsetGet(is, intrev32ifbe(is-&gt;length) - 1)) {
+            if (pos) {
+                *pos = intrev32ifbe(is-&gt;length);//返回最末端的pos
+            }
+            printf(&quot;最大值,pos为：%d\n&quot;, *pos);
+            return 0;
+        // 因为底层数组是有序的，如果 value 比数组中最前一个值都要小
+        // 那么 value 肯定不存在于集合中，
+        // 并且应该将它添加到底层数组的最前端
+        } else if (value &lt; _intsetGet(is,0)) {
+            if (pos) {
+                *pos = 0;
+            }
+            printf(&quot;最小值,pos为：%d\n&quot;, *pos);
+            return 0;
+        }
+    }
+
+    // 在有序数组中进行二分查找
+    // T = O(log N)
+    while(max &gt;= min) {
+        mid = (min+max) / 2;
+        cur = _intsetGet(is, mid);
+        if (value &gt; cur) {
+            min = mid + 1;
+        } else if (value &lt; cur) {
+            max = mid - 1;
+        } else {
+            break;
+        }
+    }
+
+    // 检查是否已经找到了 value
+    if (value == cur) {
+        if (pos) {
+            *pos = mid;
+        }
+        return 1;
+    } else {
+        if (pos) {//返回前面的节点
+            *pos = min;
+        }
+        return 0;
+    }
+}
+</code></pre><h1 id="编码升级"><a href="#编码升级" class="headerlink" title="编码升级"></a>编码升级</h1><ol>
+<li>此处传入的value都是超过当前编码的值</li>
+<li>需要考虑更新编码可能当前value在首部（负值的时候）也可能在尾部</li>
+</ol>
+<pre><code>static intset *intsetUpgradeAndAdd(intset *is, int64_t value) {
+
+    // 当前的编码方式
+    uint8_t curenc = intrev32ifbe(is-&gt;encoding);
+
+    // 新值所需的编码方式
+    uint8_t newenc = _intsetValueEncoding(value);
+
+    // 当前集合的元素数量
+    int length = intrev32ifbe(is-&gt;length);
+
+    // 根据 value 的值，决定是将它添加到底层数组的最前端还是最后端
+    // 注意，因为 value 的编码比集合原有的其他元素的编码都要大
+    // 所以 value 要么大于集合中的所有元素，要么小于集合中的所有元素
+    // 因此，value 只能添加到底层数组的最前端或最后端
+    // 此处需要考虑负数的情况，比如说现在是INTSET_ENC_INT16的编码方式，其范围为：-32768~32767，那么只有当value值大于32767的时候，或者小于-32768的时候才会进行扩容，因此，如果为负数就在最前端，为正数就在最后端
+    int prepend = value &lt; 0 ? 1 : 0;
+
+    /* First set new encoding and resize */
+    // 更新集合的编码方式
+    is-&gt;encoding = intrev32ifbe(newenc);
+    // 根据新编码对集合（的底层数组）进行空间调整
+    // T = O(N)
+    is = intsetResize(is, intrev32ifbe(is-&gt;length) + 1);
+
+    /* Upgrade back-to-front so we don&apos;t overwrite values.
+     * Note that the &quot;prepend&quot; variable is used to make sure we have an empty
+     * space at either the beginning or the end of the intset. */
+    // 根据集合原来的编码方式，从底层数组中取出集合元素
+    // 然后再将元素以新编码的方式添加到集合中
+    // 当完成了这个步骤之后，集合中所有原有的元素就完成了从旧编码到新编码的转换
+    // 因为新分配的空间都放在数组的后端，所以程序先从后端向前端移动元素
+    // 举个例子，假设原来有 curenc 编码的三个元素，它们在数组中排列如下：
+    // | x | y | z | 
+    // 当程序对数组进行重分配之后，数组就被扩容了（符号 ？ 表示未使用的内存）：
+    // | x | y | z | ? |   ?   |   ?   |
+    // 这时程序从数组后端开始，重新插入元素：
+    // | x | y | z | ? |   z   |   ?   |
+    // | x | y |   y   |   z   |   ?   |
+    // |   x   |   y   |   z   |   ?   |
+    // 最后，程序可以将新元素添加到最后 ？ 号标示的位置中：
+    // |   x   |   y   |   z   |  new  |
+    // 上面演示的是新元素比原来的所有元素都大的情况，也即是 prepend == 0
+    // 当新元素比原来的所有元素都小时（prepend == 1），调整的过程如下：
+    // | x | y | z | ? |   ?   |   ?   |
+    // | x | y | z | ? |   ?   |   z   |
+    // | x | y | z | ? |   y   |   z   |
+    // | x | y |   x   |   y   |   z   |
+    // 当添加新值时，原本的 | x | y | 的数据将被新值代替
+    // |  new  |   x   |   y   |   z   |
+    // T = O(N)
+    while(length--) {//这里是从高位开始一个个向后移动，如果低位开始移动会存在覆盖问题
+        _intsetSet(is, length + prepend, _intsetGetEncoded(is, length, curenc));
+    }
+
+    /* Set the value at the beginning or the end. */
+    // 设置新值，根据 prepend 的值来决定是添加到数组头还是数组尾
+    if (prepend) {
+        _intsetSet(is, 0, value);
+    }
+    else {
+        _intsetSet(is, intrev32ifbe(is-&gt;length), value);
+    }
+
+    // 更新整数集合的元素数量
+    is-&gt;length = intrev32ifbe(intrev32ifbe(is-&gt;length) + 1);
+
+    return is;
+}    
+</code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="intset数据结构"><a href="#intset数据结构" class="headerlink" title="intset数据结构"></a>intset数据结构</h1><pre><code>typedef struct intset {
 
@@ -177,7 +621,7 @@ set collation_server=utf8_general_ci;
     <link href="http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"/>
     <id>http://www.cxyteam.com/2018/02/03/2017年个人总结/</id>
     <published>2018-02-03T07:07:06.000Z</published>
-    <updated>2018-02-11T13:57:18.000Z</updated>
+    <updated>2018-04-27T04:29:24.000Z</updated>
     <content type="html"><![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
 <li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br>c. 学习redis的源码<br>d. 了解Golang(没有应用起来)<br>e. 以后对于不应用的知识不去花太多时间去了解细节，做到了解就好了，不管了解到什么地步，只要不应用起来结果都是一样</p>
 </li>
@@ -269,32 +713,50 @@ set collation_server=utf8_general_ci;
 <li><a href="https://book.douban.com/subject/25749845/" target="_blank" rel="external">把时间当作朋友</a></li>
 </ol>
 <h3 id="2018年计划书单"><a href="#2018年计划书单" class="headerlink" title="2018年计划书单"></a>2018年计划书单</h3><ol>
-<li>增长黑客</li>
-<li>思考，快与慢</li>
+<li><a href="https://www.amazon.cn/dp/B01ESWMJOK" target="_blank" rel="external">第一次买保险就买对</a></li>
+<li><p><a href="https://www.zhihu.com/question/22316395/answer/100909780" target="_blank" rel="external">如何用保险保障自己的一生</a><br> 以上两本都是保险方面的科普知识，总的来说我留下几个点：1、买消费型保险，不买分红型保险，买定期保险，不买终身保险 2、家庭经济支柱着重保障，整个保险支出不超过家庭收入的5% 3、为父母购置意外险，尤其注意保险须知 4、为家人选意外险，医疗险，定期寿险，重疾险 5、保险公司几乎不存在无法理赔的情况，不管是倒闭还是其他情况，国家在这方面做了很多事情，因此不要因为保险公司的大小去选择一款保险，当然要注意区分哪些是销售渠道 6、早买保险比晚买保险要划算，最好在30岁之前，30岁是个坎</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/6798611/" target="_blank" rel="external">乔布斯传</a><br> 主要是描述了乔布斯的一生，从经历及出生来还原乔布斯的性格，及为人处事方式，以及面对挫折的态度；做产品要排除任何因素做到极简，注重细节，哪怕是内部的布线；擅于听取意见（虽然很专制），只要能说服我，那就听你的；敢做，不被常理束缚只要是认为对的，就坚持做下去；从小发觉并培养爱好<br> 对于这类书籍不是太懂怎么读，更多的都是在描述一个成功人士的这一生，看他们处理事情的方式，应对危机的反应，有些事情没经历过还是很难有共鸣，希望更多的去学习人家的处事方式，以及学习其失败经验</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/26897464/" target="_blank" rel="external">小岛经济学</a><br> 通过一个小岛的发展，描述了一个国家经济从无到有，由盛转衰的过程，前面一大截还是很容易懂，到后面看有点吃力，对经济感兴趣的，强烈推荐这本书，不是讲生硬的经济学原理，而是通过生活的例子来叙述，里面讲述的金融的发展，通货膨胀及房地产泡沫还是很有意思的</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/24754537/" target="_blank" rel="external">简单的逻辑学</a><br> 讲的是一些基本的逻辑问题，前面一部分在说逻辑的一些基本的概念，后面是在拿实际例子在说明，看起来有点枯燥，留在脑海中的东西不多，唯一印象深刻一点的是以后说话需要遵循逻辑，事实，不能去夸大，缩小。这类型的书籍还是得掌握看书的方法</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/3000997/" target="_blank" rel="external">牛奶可乐经济学</a><br> 超级好的一本能够培养对经济感兴趣的书籍，没有枯燥的理论，都是实际的生活现象解释，通俗易懂，让人看了能够对生活现象恍然大悟，强烈推荐</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/1095634/" target="_blank" rel="external">小狗钱钱</a><br> 理财的入门书籍，讲述的都是一些很简单的知识，能够引导人形成理财的思维，是以童话的形式描述主人公一步步实现财务自由，同时灌输的一些理财知识，很适合用于小孩做财商的启蒙</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/26541801/" target="_blank" rel="external">增长黑客</a><br> 推荐看，本书主要从获取用户，提高留存，激发活跃，增加收入，加大传播等多个方面介绍增长的一些方法，衡量指标，里面有丰富的案例信息，更多的我是带着一种运营的眼光去看的，还是能提供很多思路，增长见识</p>
+</li>
+<li><p><a href="https://book.douban.com/subject/6519055/" target="_blank" rel="external">买基金为自己加薪</a><br> 适合打算投资基金和基金的投资新手，主要在说为什么要买，如何买，如何去执行定投等购买策略有什么好处，算是介绍的比较全面了，对我来说比较有用的是基本面和技术面的这两节</p>
+</li>
+<li><p>思考，快与慢</p>
+</li>
 <li>决策与判断</li>
 <li>软能力</li>
-<li>简单的逻辑学</li>
 <li>腾讯传</li>
 <li>硅谷钢铁侠</li>
-<li>乔布斯传</li>
-<li>小岛经济学</li>
 <li>富爸爸穷爸爸</li>
 <li>有钱人想的和你不一样</li>
 <li>经济学通识</li>
 <li>魔鬼经济学</li>
-<li>牛奶可乐经济学    </li>
 <li>七天读懂宏观经济</li>
 <li>百万富翁快车道</li>
 <li>人人都爱经济学</li>
 <li>邻家的百万富翁</li>
 <li>经济解释</li>
-<li>小狗钱钱</li>
 <li>蜡烛图</li>
 <li>谷歌和亚马逊如何做产品</li>
 <li>运营有道：重新定义互联网运营</li>
-<li>买基金为自己加薪</li>
-<li>银行行长不轻易说的理财经    </li>
+<li>银行行长不轻易说的理财经</li>
 <li>一个经济杀手的自白</li>
+<li>Redis开发与运维</li>
+<li>王二的经济学故事</li>
+<li>经济学</li>
+<li>一沙一世界</li>
+<li>冰与火，中国股市记忆</li>
+<li>小狗钱钱的爸爸教你实现财务自由</li>
+<li>解读基金-我的投资观与实践</li>
 </ol>
 <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><ol>
 <li>锻炼身体</li>
@@ -1611,7 +2073,7 @@ int sdsll2str(char *s, long long value) {
     <link href="http://www.cxyteam.com/2017/12/28/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://www.cxyteam.com/2017/12/28/常用命令/</id>
     <published>2017-12-28T02:29:39.000Z</published>
-    <updated>2018-02-07T03:18:50.000Z</updated>
+    <updated>2018-03-22T08:32:00.000Z</updated>
     <content type="html"><![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
 </code></pre><h1 id="mysql导出数据-数据量比较大，工具不好用的时候"><a href="#mysql导出数据-数据量比较大，工具不好用的时候" class="headerlink" title="mysql导出数据(数据量比较大，工具不好用的时候)"></a>mysql导出数据(数据量比较大，工具不好用的时候)</h1><pre><code>mysql -h 127.0.0.1 -uroot -P databases 3306 -e &quot;select count(*) from user;&quot;  &gt; /tmp/tetst.xls
 </code></pre><h1 id="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><a href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入" class="headerlink" title="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"></a>redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</h1><pre><code>redis-cli -h 127.0.0.1 -p 6379 -a &quot;auth_command&quot;
@@ -1631,6 +2093,8 @@ int sdsll2str(char *s, long long value) {
 <h1 id="查看进程句柄使用情况"><a href="#查看进程句柄使用情况" class="headerlink" title="查看进程句柄使用情况"></a>查看进程句柄使用情况</h1><pre><code>查看php-fpm（pid为192）句柄使用情况
 lsof -n -p 192
 </code></pre><h1 id="特定进程内运行的线程"><a href="#特定进程内运行的线程" class="headerlink" title="特定进程内运行的线程"></a>特定进程内运行的线程</h1><pre><code>top -H -p &lt;PID&gt;
+</code></pre><h1 id="查找文件内容，并进行折行处理（直接用于mysql-in查询）"><a href="#查找文件内容，并进行折行处理（直接用于mysql-in查询）" class="headerlink" title="查找文件内容，并进行折行处理（直接用于mysql in查询）"></a>查找文件内容，并进行折行处理（直接用于mysql in查询）</h1><pre><code>grep &apos;WARN&apos; 1.txt  | grep &apos;exist&apos; | awk &apos;{print $7}&apos; | grep -v &quot;\\[&quot; | tr &quot;\n&quot; &quot;,&quot;
+</code></pre><h1 id="根据特定标识符分割，再排序去重"><a href="#根据特定标识符分割，再排序去重" class="headerlink" title="根据特定标识符分割，再排序去重"></a>根据特定标识符分割，再排序去重</h1><pre><code>grep -v &apos;从kafka获得数据&apos; 1.txt  | awk &apos;{print $4}&apos; | awk -F : &apos;{print $2}&apos; | sort | uniq &gt; game.txt    
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax]]>
@@ -1793,11 +2257,11 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
   </entry>
   
   <entry>
-    <title><![CDATA[phpsttorm添加laravel代码提示]]></title>
-    <link href="http://www.cxyteam.com/2017/11/27/phpsttorm%E6%B7%BB%E5%8A%A0laravel%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/"/>
-    <id>http://www.cxyteam.com/2017/11/27/phpsttorm添加laravel代码提示/</id>
+    <title><![CDATA[phpstorm添加laravel代码提示]]></title>
+    <link href="http://www.cxyteam.com/2017/11/27/phpstorm%E6%B7%BB%E5%8A%A0laravel%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/"/>
+    <id>http://www.cxyteam.com/2017/11/27/phpstorm添加laravel代码提示/</id>
     <published>2017-11-26T16:58:03.000Z</published>
-    <updated>2017-12-04T10:29:42.000Z</updated>
+    <updated>2018-04-13T03:54:13.000Z</updated>
     <content type="html"><![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
 </code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
 <h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
@@ -1824,90 +2288,6 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
       <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
     
       <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker创建laravel环境]]></title>
-    <link href="http://www.cxyteam.com/2017/11/26/docker%E5%88%9B%E5%BB%BAlaravel%E7%8E%AF%E5%A2%83/"/>
-    <id>http://www.cxyteam.com/2017/11/26/docker创建laravel环境/</id>
-    <published>2017-11-26T10:39:18.000Z</published>
-    <updated>2017-11-26T10:56:19.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜像" class="headerlink" title="拉取laravel镜像"></a>拉取laravel镜像</h1><pre><code>docker pull laraedit/laraedit
-</code></pre><h1 id="创建laravel容器"><a href="#创建laravel容器" class="headerlink" title="创建laravel容器"></a>创建laravel容器</h1><pre><code>docker run --name laravel -itd -p 8080:80 -v ~/Desktop/laravel:/var/www/html/app laraedit/laraedit
---name 指定新建容器名称
--p 端口映射，指定本地端口8080映射到容器的80端口
--v 目录挂载，本机目录:容器目录
--d 在后台运行
-</code></pre><h1 id="登录容器"><a href="#登录容器" class="headerlink" title="登录容器"></a>登录容器</h1><pre><code>docker exec -it laravel /bim/bash
-</code></pre><h1 id="创建项目-容器内"><a href="#创建项目-容器内" class="headerlink" title="创建项目(容器内)"></a>创建项目(容器内)</h1><pre><code>cd /var/www/html/
-laravel new app
-</code></pre><h1 id="查看应用日志（容器内）"><a href="#查看应用日志（容器内）" class="headerlink" title="查看应用日志（容器内）"></a>查看应用日志（容器内）</h1><pre><code>tail -f /var/www/html/app/storage/logs/laravel.log
-</code></pre><h1 id="查看容器日志-容器外"><a href="#查看容器日志-容器外" class="headerlink" title="查看容器日志(容器外)"></a>查看容器日志(容器外)</h1><pre><code>docker logs -f laravel
-</code></pre><h1 id="创建文件（容器内）"><a href="#创建文件（容器内）" class="headerlink" title="创建文件（容器内）"></a>创建文件（容器内）</h1><pre><code>touch /var/www/html/app/.env
-添加内容如下：
-
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_LOG_LEVEL=debug
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
-DB_PASSWORD=secret
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-QUEUE_DRIVER=sync
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-</code></pre><h1 id="生成key"><a href="#生成key" class="headerlink" title="生成key"></a>生成key</h1><pre><code>php /var/www/html/app/artisan key:generate
-</code></pre><h1 id="测试安装成功"><a href="#测试安装成功" class="headerlink" title="测试安装成功"></a>测试安装成功</h1><pre><code>访问127.0.0.1:8080会看到laravel首页，否则的话就查日志看看原因吧
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h1><h1 id="拉取laravel镜像"><a href="#拉取laravel镜]]>
-    </summary>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[在小公司的成长]]></title>
-    <link href="http://www.cxyteam.com/2017/11/01/%E5%9C%A8%E5%B0%8F%E5%85%AC%E5%8F%B8%E7%9A%84%E6%88%90%E9%95%BF/"/>
-    <id>http://www.cxyteam.com/2017/11/01/在小公司的成长/</id>
-    <published>2017-10-31T16:51:10.000Z</published>
-    <updated>2017-10-31T17:10:13.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><h1 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h1><h1 id="认知"><a href="#认知" class="headerlink" title="认知"></a>认知</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
     
   </entry>
   
