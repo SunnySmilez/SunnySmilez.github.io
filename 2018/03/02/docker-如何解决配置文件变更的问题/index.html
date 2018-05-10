@@ -93,7 +93,7 @@
 传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即可生效
 在docker搭建中，如果我们的image中已经使用了nginx.conf的配置文件，那么我docker run的container的配置文件和image中的配置文件是一致的，如果我想修改container中nginx的log路径，我应该怎么做呢？
 是不是我需要这样，首">
-<meta property="og:updated_time" content="2018-04-13T04:03:01.000Z">
+<meta property="og:updated_time" content="2018-05-10T11:12:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker-如何解决container服务中配置文件个性化的问题">
 <meta name="twitter:description" content="问题描述
@@ -348,7 +348,7 @@
 </ol>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
 <li>通过env传递，但是仅限于很简单的配置，像nginx这样的配置文件是不太可能使用这种方式</li>
-<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h k0204v.add.shbt.qihoo.net -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
+<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h 127.0.0.1 -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
 <li>使用zookeeper或者etcd来存放配置文件数据，创建容器时通过 ENV 传递配置文件的 KEY，应用启动前用 KEY 拉取配置文件，然后启动应用</li>
 </ol>
 <h1 id="查看容器启动时的命令"><a href="#查看容器启动时的命令" class="headerlink" title="查看容器启动时的命令"></a>查看容器启动时的命令</h1><pre><code>docker inspect pay_game
@@ -507,7 +507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-count">167</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

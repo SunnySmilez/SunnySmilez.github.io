@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-04-05T09:06:53.000Z</updated>
+  <updated>2018-05-09T13:19:20.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql分表]]></title>
+    <link href="http://www.cxyteam.com/2018/05/08/mysql%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/"/>
+    <id>http://www.cxyteam.com/2018/05/08/mysql分库分表/</id>
+    <published>2018-05-08T10:46:59.000Z</published>
+    <updated>2018-05-09T13:19:20.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>问题<br>  1、做分页，检索</p>
+<pre><code>合并查询
+es
+</code></pre><p>  2、跨库事务</p>
+<pre><code>程序和数据库自己控制
+分布式事务
+</code></pre><p>  3、join，count，group by等操作</p>
+<pre><code>分两次查询
+</code></pre><p>  4、分布式id的生成</p>
+<pre><code>雪花算法
+uuid
+</code></pre><p>  5、数据迁移，容量规划，扩容</p>
+<pre><code>利用主从同步，或者双主，来冗余数据，重新搭建主从或者双主同步关系来实现成倍扩容
+http://www.10tiao.com/html/249/201702/2651959883/1.html
+</code></pre></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>问题<br>  1、做分页，检索</p>
+<pre><code>合并查询
+es
+</code></pre><p>  2、跨库事务</p>
+<pre><code>程序和数据库自己控制
+分布式事务
+</code></pre><p>  3、join，count，]]>
+    </summary>
+    
+      <category term="Mysql" scheme="http://www.cxyteam.com/tags/Mysql/"/>
+    
+      <category term="Mysql" scheme="http://www.cxyteam.com/categories/Mysql/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[redis-ziplist源码阅读]]></title>
@@ -166,7 +207,7 @@ static unsigned int zipPrevEncodeLength(unsigned char *p, unsigned int len) {
     <link href="http://www.cxyteam.com/2018/03/02/docker-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://www.cxyteam.com/2018/03/02/docker-如何解决配置文件变更的问题/</id>
     <published>2018-03-02T02:33:25.000Z</published>
-    <updated>2018-04-13T04:03:01.000Z</updated>
+    <updated>2018-05-10T11:12:37.000Z</updated>
     <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ol>
 <li>传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即可生效</li>
 <li>在docker搭建中，如果我们的image中已经使用了nginx.conf的配置文件，那么我docker run的container的配置文件和image中的配置文件是一致的，如果我想修改container中nginx的log路径，我应该怎么做呢？</li>
@@ -174,7 +215,7 @@ static unsigned int zipPrevEncodeLength(unsigned char *p, unsigned int len) {
 </ol>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
 <li>通过env传递，但是仅限于很简单的配置，像nginx这样的配置文件是不太可能使用这种方式</li>
-<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h k0204v.add.shbt.qihoo.net -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
+<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h 127.0.0.1 -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
 <li>使用zookeeper或者etcd来存放配置文件数据，创建容器时通过 ENV 传递配置文件的 KEY，应用启动前用 KEY 拉取配置文件，然后启动应用</li>
 </ol>
 <h1 id="查看容器启动时的命令"><a href="#查看容器启动时的命令" class="headerlink" title="查看容器启动时的命令"></a>查看容器启动时的命令</h1><pre><code>docker inspect pay_game
@@ -2248,41 +2289,6 @@ Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/ve
     <summary type="html">
     <![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
 </code></pre><h1 i]]>
-    </summary>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[phpstorm添加laravel代码提示]]></title>
-    <link href="http://www.cxyteam.com/2017/11/27/phpstorm%E6%B7%BB%E5%8A%A0laravel%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/"/>
-    <id>http://www.cxyteam.com/2017/11/27/phpstorm添加laravel代码提示/</id>
-    <published>2017-11-26T16:58:03.000Z</published>
-    <updated>2018-04-13T03:54:13.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
-</code></pre><p>   <img src="/img/laravel/phpstorm_larvale.png" alt="Alt text" title="安装插件"></p>
-<h1 id="添加”barryvdh-laravel-ide-helper”"><a href="#添加”barryvdh-laravel-ide-helper”" class="headerlink" title="添加”barryvdh/laravel-ide-helper”"></a>添加”barryvdh/laravel-ide-helper”</h1><pre><code>在compose.json中添加如下(在require的数组中添加)：
-&quot;require&quot;: {
-        &quot;laravel/framework&quot;: &quot;5.5.*&quot;,
-        &quot;barryvdh/laravel-ide-helper&quot;: &quot;dev-master&quot;
-},
-</code></pre><h1 id="composer加载插件"><a href="#composer加载插件" class="headerlink" title="composer加载插件"></a>composer加载插件</h1><pre><code>在项目根目录运行：composer update
-</code></pre><h1 id="添加service-provider"><a href="#添加service-provider" class="headerlink" title="添加service provider"></a>添加service provider</h1><pre><code>在项目下的config/app.php在providers中添加一行&quot;&apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;&quot;
-
-&apos;providers&apos; =&gt; [
-    &apos;Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider&apos;
-    //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//具体什么方式添加看版本
-]
-</code></pre><h1 id="执行artisan命令"><a href="#执行artisan命令" class="headerlink" title="执行artisan命令"></a>执行artisan命令</h1><pre><code>php artisan ide-helper:generate
-最终生成_ide_helper.php的文件
-</code></pre><h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><pre><code>如果没效果，重启下编辑器试试
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><pre><code>preferences-&gt;plugins 搜索laravel plugin
-</code></pre>]]>
     </summary>
     
       <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
