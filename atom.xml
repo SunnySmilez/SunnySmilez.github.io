@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-05-09T13:19:20.000Z</updated>
+  <updated>2018-06-15T08:55:14.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,127 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[docker镜像如何维护]]></title>
+    <link href="http://www.cxyteam.com/2018/06/15/docker%E9%95%9C%E5%83%8F%E5%A6%82%E4%BD%95%E7%BB%B4%E6%8A%A4/"/>
+    <id>http://www.cxyteam.com/2018/06/15/docker镜像如何维护/</id>
+    <published>2018-06-15T07:05:46.000Z</published>
+    <updated>2018-06-15T08:55:14.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="通过Dockerfile维护"><a href="#通过Dockerfile维护" class="headerlink" title="通过Dockerfile维护"></a>通过Dockerfile维护</h1><h6 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h6><pre><code>    编写Dockerfile -&gt; 通过docker build生成一个镜像 -&gt; docker push 提交到远程 -&gt; docker pull 别人拉取使用
+或
+    编写Dockerfile -&gt; 提交到github -&gt; docker hub 设置automated build -&gt; docker pull 别人拉取使用
+</code></pre><h6 id="通过镜像直接维护"><a href="#通过镜像直接维护" class="headerlink" title="通过镜像直接维护"></a>通过镜像直接维护</h6><pre><code>本地docker pull最简单的镜像 -&gt; docker commit提交镜像 -&gt; docker push 提交到远程 -&gt; docker pull 别人拉取使用
+</code></pre><h1 id="DockerFile流程"><a href="#DockerFile流程" class="headerlink" title="DockerFile流程"></a>DockerFile流程</h1><h6 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h6><pre><code>不重复，可以看之前的文章
+注意一点，编写的时候，可以边写，边执行自己的命令进行测试，构建自己的系统；
+</code></pre><h6 id="生成镜像"><a href="#生成镜像" class="headerlink" title="生成镜像"></a>生成镜像</h6><pre><code>docker build -t 容器名称 dockerfile路径(eg:docker build -t test_weeb ./)
+执行的时候如果出错了，可以docker run生成一个容器，然后进行调试
+需要注意的是，出错了之后不需要删除之前的，docker build会有缓存镜像，然后继续往下执行
+</code></pre><h6 id="接下来的流程和”通过镜像维护差不多”"><a href="#接下来的流程和”通过镜像维护差不多”" class="headerlink" title="接下来的流程和”通过镜像维护差不多”"></a>接下来的流程和”通过镜像维护差不多”</h6><pre><code>创建容器
+提交到本地库
+....
+需要注意的是每一条修改镜像的命令都写入到dockerfile中，下次构建的话就是最新的镜像了
+</code></pre><h1 id="通过镜像维护"><a href="#通过镜像维护" class="headerlink" title="通过镜像维护"></a>通过镜像维护</h1><h6 id="搜索可用镜像"><a href="#搜索可用镜像" class="headerlink" title="搜索可用镜像"></a>搜索可用镜像</h6><pre><code>docker search alpine
+</code></pre><h6 id="拉取远程镜像"><a href="#拉取远程镜像" class="headerlink" title="拉取远程镜像"></a>拉取远程镜像</h6><pre><code>docker  pull alpine
+</code></pre><h6 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h6><pre><code>docker run -t -i -d -p 8004:80 --name=test -h 127.0.0.1 test_web /bin/bash
+注意替换成自己需要的镜像名称
+</code></pre><h6 id="提交到本地库"><a href="#提交到本地库" class="headerlink" title="提交到本地库"></a>提交到本地库</h6><pre><code>docker commit -m=&quot;this is test&quot; --author=&apos;sunnysmilez&apos; test test_web_bak:v1
+</code></pre><h6 id="本地登录docker-hub"><a href="#本地登录docker-hub" class="headerlink" title="本地登录docker hub"></a>本地登录docker hub</h6><pre><code>查看文件（~/.docker/config.json）是否存在，不存在则创建
+docker login 输入用户名密码
+</code></pre><h6 id="修改本地镜像名称为远程的名称"><a href="#修改本地镜像名称为远程的名称" class="headerlink" title="修改本地镜像名称为远程的名称"></a>修改本地镜像名称为远程的名称</h6><pre><code>docker tag test_web_bak:v1 sunnysmilez/web-lnmpr
+我远程的是sunnysmilez/web-lnmpr
+</code></pre><h6 id="提交到远程"><a href="#提交到远程" class="headerlink" title="提交到远程"></a>提交到远程</h6><pre><code>docker push sunnysmilez/web-lnmpr
+</code></pre><h1 id="如果别人想启动一样的环境有没有快速的办法"><a href="#如果别人想启动一样的环境有没有快速的办法" class="headerlink" title="如果别人想启动一样的环境有没有快速的办法"></a>如果别人想启动一样的环境有没有快速的办法</h1><h2 id="“拷贝，粘贴”"><a href="#“拷贝，粘贴”" class="headerlink" title="“拷贝，粘贴”"></a>“拷贝，粘贴”</h2><h6 id="导出本地容器"><a href="#导出本地容器" class="headerlink" title="导出本地容器"></a>导出本地容器</h6><pre><code>docker export web_test &gt; web_test.tar
+</code></pre><h6 id="传递给别人"><a href="#传递给别人" class="headerlink" title="传递给别人"></a>传递给别人</h6><h6 id="导入本地"><a href="#导入本地" class="headerlink" title="导入本地"></a>导入本地</h6><pre><code>cat web_test.tar | docker import - web_test:latest
+注意是导入本地形成了镜像，使用的话需要执行上面的创建容器命令
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="通过Dockerfile维护"><a href="#通过Dockerfile维护" class="headerlink" title="通过Dockerfile维护"></a>通过Dockerfile维护</h1><h6 id="整体流程"><a href="#整]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[为什么要买重疾险]]></title>
+    <link href="http://www.cxyteam.com/2018/06/12/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B9%B0%E9%87%8D%E7%96%BE%E9%99%A9/"/>
+    <id>http://www.cxyteam.com/2018/06/12/为什么要买重疾险/</id>
+    <published>2018-06-12T12:53:06.000Z</published>
+    <updated>2018-06-12T13:12:26.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="保险分类"><a href="#保险分类" class="headerlink" title="保险分类"></a>保险分类</h1><h5 id="意外险"><a href="#意外险" class="headerlink" title="意外险"></a>意外险</h5><h5 id="重疾险"><a href="#重疾险" class="headerlink" title="重疾险"></a>重疾险</h5><pre><code>在合同约定的期间内，如果被保险人发生合同约定的重大疾病，或者达到约定的条件后，一次性给付保额
+</code></pre><h5 id="医疗险"><a href="#医疗险" class="headerlink" title="医疗险"></a>医疗险</h5><h5 id="寿险"><a href="#寿险" class="headerlink" title="寿险"></a>寿险</h5><pre><code>在合同约定期内，如果被保险人因疾病或者意外造成死亡，则保险公司按照约定的保额给付保险金
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="保险分类"><a href="#保险分类" class="headerlink" title="保险分类"></a>保险分类</h1><h5 id="意外险"><a href="#意外险" class="headerlink" title="意外险"></a>意外]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用beego]]></title>
+    <link href="http://www.cxyteam.com/2018/06/06/%E4%BD%BF%E7%94%A8beego/"/>
+    <id>http://www.cxyteam.com/2018/06/06/使用beego/</id>
+    <published>2018-06-06T13:16:23.000Z</published>
+    <updated>2018-06-06T14:10:14.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>govendor fetch  github.com/astaxie/beego
+govendor fetch  github.com/beego/bee
+</code></pre><h1 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h1><pre><code>编辑文件：
+    sudo vim /etc/profile
+    在末尾添加内容如下:
+        PATH=$PATH:/usr/local/go/bin:/Users/sunnysmilez/Desktop/code/go_study/bin
+        export GOPATH=/Users/sunnysmilez/Desktop/code/go_study
+</code></pre><h1 id="检验"><a href="#检验" class="headerlink" title="检验"></a>检验</h1><pre><code>bee 
+</code></pre><h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src
+bee new web
+</code></pre><h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src/web
+bee run
+</code></pre><h1 id="运行不同端口"><a href="#运行不同端口" class="headerlink" title="运行不同端口"></a>运行不同端口</h1><pre><code>修改文件(/Users/sunnysmilez/Desktop/code/go_study/src/web/conf/app.conf)中的的httpport
+</code></pre><h1 id="其他使用事项"><a href="#其他使用事项" class="headerlink" title="其他使用事项"></a>其他使用事项</h1><pre><code>查看手册：https://beego.me/docs/install/bee.md
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>govendor fetch  github.com/astaxie/beego
+govendor fetch  githu]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[go依赖管理工具]]></title>
+    <link href="http://www.cxyteam.com/2018/06/06/go%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"/>
+    <id>http://www.cxyteam.com/2018/06/06/go依赖管理工具/</id>
+    <published>2018-06-06T13:02:51.000Z</published>
+    <updated>2018-06-06T13:16:03.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="设置GOPATH"><a href="#设置GOPATH" class="headerlink" title="设置GOPATH"></a>设置GOPATH</h1><pre><code>export GOPATH=/Users/sunnysmilez/Desktop/code/go_study
+</code></pre><h1 id="获取govendor"><a href="#获取govendor" class="headerlink" title="获取govendor"></a>获取govendor</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study
+go get -u github.com/kardianos/govendor
+</code></pre><h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src
+mkdir web
+govendor init
+</code></pre><h1 id="拉取远程资源"><a href="#拉取远程资源" class="headerlink" title="拉取远程资源"></a>拉取远程资源</h1><pre><code>govendor fetch  github.com/go-xorm/xorm
+govendor fetch  github.com/astaxie/beego
+govendor fetch  github.com/beego/bee
+</code></pre><h1 id="查看本地的包"><a href="#查看本地的包" class="headerlink" title="查看本地的包"></a>查看本地的包</h1><pre><code>govendor list
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="设置GOPATH"><a href="#设置GOPATH" class="headerlink" title="设置GOPATH"></a>设置GOPATH</h1><pre><code>export GOPATH=/Users/sunnysmilez/Deskt]]>
+    </summary>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
+    
+      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql分表]]></title>
@@ -1084,7 +1205,7 @@ else {
     <link href="http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"/>
     <id>http://www.cxyteam.com/2018/02/03/2017年个人总结/</id>
     <published>2018-02-03T07:07:06.000Z</published>
-    <updated>2018-05-15T12:10:18.000Z</updated>
+    <updated>2018-06-12T16:51:16.000Z</updated>
     <content type="html"><![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
 <li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br>c. 学习redis的源码<br>d. 了解Golang(没有应用起来)<br>e. 以后对于不应用的知识不去花太多时间去了解细节，做到了解就好了，不管了解到什么地步，只要不应用起来结果都是一样</p>
 </li>
@@ -1197,9 +1318,10 @@ else {
 </li>
 <li><p><a href="https://book.douban.com/subject/1958147/comments/" target="_blank" rel="external">一个经济杀手的自白</a><br>跟预料中的有点差距，还是应该老实的先阅读目录。内容不太适合，讲的是通过一些手段去控制一个国家或者地区，从而获利，揭露了当时美国政府的一些阴暗面吧</p>
 </li>
-</ol>
-<ol>
-<li>思考，快与慢</li>
+<li><p><a href="https://www.amazon.cn/dp/B07B4V226W?tag=baiduiclickcn-23&amp;ref=DEP_18412_sy_96" target="_blank" rel="external">好好赚钱</a><br>比较全面的入门的理财书籍，从教你如何对待钱，花钱到教你捋清楚自己的财务情况，介绍了多种理财产品，以及投资方式，最后介绍了极简投资的方式，感觉这本书学到了一个评估指数基金的方法：指数盈利收益率如果大于2倍国债收益率那就是低估，反之则是高估。盈利收益率就是市盈率的倒数（市盈率在股票软件都能查到），国债收益率也可以查到。以及指数基金卖出的三个原则：基本面恶化；有更好的选择；指数价格太高。<br>这本书总时间花了两个半小时，但是跨越了好几周，知识点都断开了，以后看书还是尽量连续的看。再者就是书中很多东西其实都了解了，但是又过了一遍，收益并不到。</p>
+</li>
+<li><p>思考，快与慢</p>
+</li>
 <li>决策与判断</li>
 <li>软能力</li>
 <li>腾讯传</li>
@@ -1217,13 +1339,13 @@ else {
 <li>谷歌和亚马逊如何做产品</li>
 <li>运营有道：重新定义互联网运营</li>
 <li>银行行长不轻易说的理财经</li>
-<li></li>
 <li>Redis开发与运维</li>
 <li>王二的经济学故事</li>
 <li>经济学</li>
 <li>一沙一世界</li>
 <li>冰与火，中国股市记忆</li>
 <li>解读基金-我的投资观与实践</li>
+<li>金字塔原理</li>
 </ol>
 <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><ol>
 <li>锻炼身体</li>
@@ -2532,194 +2654,6 @@ int sdsll2str(char *s, long long value) {
       <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
     
       <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[常用命令]]></title>
-    <link href="http://www.cxyteam.com/2017/12/28/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.cxyteam.com/2017/12/28/常用命令/</id>
-    <published>2017-12-28T02:29:39.000Z</published>
-    <updated>2018-03-22T08:32:00.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax | grep &apos;you project process&apos; | grep -v grep |awk &apos;{print $2}&apos; | xargs kill
-</code></pre><h1 id="mysql导出数据-数据量比较大，工具不好用的时候"><a href="#mysql导出数据-数据量比较大，工具不好用的时候" class="headerlink" title="mysql导出数据(数据量比较大，工具不好用的时候)"></a>mysql导出数据(数据量比较大，工具不好用的时候)</h1><pre><code>mysql -h 127.0.0.1 -uroot -P databases 3306 -e &quot;select count(*) from user;&quot;  &gt; /tmp/tetst.xls
-</code></pre><h1 id="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"><a href="#redis的auth命令，仅连接的时候输入一次，不需要每次重新输入" class="headerlink" title="redis的auth命令，仅连接的时候输入一次，不需要每次重新输入"></a>redis的auth命令，仅连接的时候输入一次，不需要每次重新输入</h1><pre><code>redis-cli -h 127.0.0.1 -p 6379 -a &quot;auth_command&quot;
-</code></pre><h1 id="no-space-left-on-disk"><a href="#no-space-left-on-disk" class="headerlink" title="no space left on disk"></a>no space left on disk</h1><pre><code>查看磁盘使用情况
-    df
-
-如果磁盘未满，查看inode是否满
-    df -i        
-</code></pre><h1 id="添加mysql用户和权限"><a href="#添加mysql用户和权限" class="headerlink" title="添加mysql用户和权限"></a>添加mysql用户和权限</h1><ol>
-<li><p>选择mysql库<br> use mysql</p>
-</li>
-<li><p>添加用户<br> create user zhangsan identified by ‘zhangsan’;<br> 或者<br> insert into user (Host,User,Password) value(‘127.0.0.1’, ‘test’, password(‘123123’));<br> 或者<br> grant all privileges on database.* to test@’127.0.0.1’ identified by ‘test’;</p>
-</li>
-<li><p>刷新系统权限表<br> flush privileges;</p>
-</li>
-</ol>
-<h1 id="查看进程句柄使用情况"><a href="#查看进程句柄使用情况" class="headerlink" title="查看进程句柄使用情况"></a>查看进程句柄使用情况</h1><pre><code>查看php-fpm（pid为192）句柄使用情况
-lsof -n -p 192
-</code></pre><h1 id="特定进程内运行的线程"><a href="#特定进程内运行的线程" class="headerlink" title="特定进程内运行的线程"></a>特定进程内运行的线程</h1><pre><code>top -H -p &lt;PID&gt;
-</code></pre><h1 id="查找文件内容，并进行折行处理（直接用于mysql-in查询）"><a href="#查找文件内容，并进行折行处理（直接用于mysql-in查询）" class="headerlink" title="查找文件内容，并进行折行处理（直接用于mysql in查询）"></a>查找文件内容，并进行折行处理（直接用于mysql in查询）</h1><pre><code>grep &apos;WARN&apos; 1.txt  | grep &apos;exist&apos; | awk &apos;{print $7}&apos; | grep -v &quot;\\[&quot; | tr &quot;\n&quot; &quot;,&quot;
-</code></pre><h1 id="根据特定标识符分割，再排序去重"><a href="#根据特定标识符分割，再排序去重" class="headerlink" title="根据特定标识符分割，再排序去重"></a>根据特定标识符分割，再排序去重</h1><pre><code>grep -v &apos;从kafka获得数据&apos; 1.txt  | awk &apos;{print $4}&apos; | awk -F : &apos;{print $2}&apos; | sort | uniq &gt; game.txt    
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="linux杀死某个程序的多个进程"><a href="#linux杀死某个程序的多个进程" class="headerlink" title="linux杀死某个程序的多个进程"></a>linux杀死某个程序的多个进程</h1><pre><code>ps uax]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis源码断点调试]]></title>
-    <link href="http://www.cxyteam.com/2017/12/13/redis%E6%BA%90%E7%A0%81%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95/"/>
-    <id>http://www.cxyteam.com/2017/12/13/redis源码断点调试/</id>
-    <published>2017-12-13T12:37:19.000Z</published>
-    <updated>2017-12-13T12:54:32.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="redis断点调试的方式有两种"><a href="#redis断点调试的方式有两种" class="headerlink" title="redis断点调试的方式有两种"></a>redis断点调试的方式有两种</h1><h6 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h6><h6 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h6><h3 id="记录日志-1"><a href="#记录日志-1" class="headerlink" title="记录日志"></a>记录日志</h3><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)</code></p>
-<h5 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h5><h6 id="在t-string-c的getCommand方法中添加如下内容"><a href="#在t-string-c的getCommand方法中添加如下内容" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;);
-return ;</code></p>
-<h6 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h6><p><code>make &amp;&amp; src/redis-server</code></p>
-<h6 id="连接redis"><a href="#连接redis" class="headerlink" title="连接redis"></a>连接redis</h6><p><code>src/redis-cli</code></p>
-<h6 id="查看结果（注意是在redis-server查看结果）"><a href="#查看结果（注意是在redis-server查看结果）" class="headerlink" title="查看结果（注意是在redis-server查看结果）"></a>查看结果（注意是在redis-server查看结果）</h6><p><code>get name</code></p>
-<h6 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h6><pre><code>由于getCommand是定义的get命令的操作，因此get name命令能够触发redisLog记录日志
-</code></pre><h3 id="printf-1"><a href="#printf-1" class="headerlink" title="printf"></a>printf</h3><h6 id="在t-string-c的getCommand方法中添加如下内容-1"><a href="#在t-string-c的getCommand方法中添加如下内容-1" class="headerlink" title="在t_string.c的getCommand方法中添加如下内容"></a>在t_string.c的getCommand方法中添加如下内容</h6><p><code>printf(&quot;hello world!&quot;)</code></p>
-<h6 id="启动redis，连接redis，查看结果和上述流程一直"><a href="#启动redis，连接redis，查看结果和上述流程一直" class="headerlink" title="启动redis，连接redis，查看结果和上述流程一直"></a>启动redis，连接redis，查看结果和上述流程一直</h6><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h6 id="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"><a href="#每次操作完成之后都要进行编译，并重新启动服务端和连接redis" class="headerlink" title="每次操作完成之后都要进行编译，并重新启动服务端和连接redis"></a>每次操作完成之后都要进行编译，并重新启动服务端和连接redis</h6><h6 id="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"><a href="#执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢" class="headerlink" title="执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢"></a>执行命令的时候最好加上路径，万一环境变量中有全局的redis-cli呢</h6><h6 id="redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）"><a href="#redisLog在有些文件中不能使用，例如sds-c（也许是我水平有限，反正我是跳过了）" class="headerlink" title="redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）"></a>redisLog在有些文件中不能使用，例如sds.c（也许是我水平有限，反正我是跳过了）</h6><h6 id="printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr"><a href="#printf打sizeof类型，使用lu参数。printf-“默认长度：-lu”-sizeof-struct-sdshdr" class="headerlink" title="printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));"></a>printf打sizeof类型，使用lu参数。printf(“默认长度：%lu”, sizeof(struct sdshdr));</h6>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="redis断点调试的方式有两种"><a href="#redis断点调试的方式有两种" class="headerlink" title="redis断点调试的方式有两种"></a>redis断点调试的方式有两种</h1><h6 id="记录日志"><a href]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis用到的函数]]></title>
-    <link href="http://www.cxyteam.com/2017/12/12/redis%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%BD%E6%95%B0/"/>
-    <id>http://www.cxyteam.com/2017/12/12/redis用到的函数/</id>
-    <published>2017-12-12T15:18:48.000Z</published>
-    <updated>2018-01-04T08:09:27.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
-触发记录hello world日志
-例如：在t_string.c的文件中的getCommand方法中添加：redisLog(REDIS_WARNING, &quot;hello world!&quot;);return ;
-当你启动redis-server后，在客户端，执行get name命令，会在redis-server终端输出&quot;hello world！&quot;
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h1><pre><code>redisLog(REDIS_WARNING, &quot;hello world!&quot;)
-触发记录]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[安装laravel环境]]></title>
-    <link href="http://www.cxyteam.com/2017/12/04/%E5%AE%89%E8%A3%85laravel%E7%8E%AF%E5%A2%83/"/>
-    <id>http://www.cxyteam.com/2017/12/04/安装laravel环境/</id>
-    <published>2017-12-04T08:46:07.000Z</published>
-    <updated>2018-01-30T11:00:06.000Z</updated>
-    <content type="html"><![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
-</code></pre><h1 id="更新brew"><a href="#更新brew" class="headerlink" title="更新brew"></a>更新brew</h1><pre><code>brew update
-</code></pre><h1 id="查看brew-service"><a href="#查看brew-service" class="headerlink" title="查看brew service"></a>查看brew service</h1><pre><code>brew services list
-</code></pre><h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><pre><code>使用brew安装php，mysql，redis
-</code></pre><h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><pre><code>curl -sS https://getcomposer.org/installer | php 
-失败尝试：php -r &quot;readfile(&apos;https://getcomposer.org/installer&apos;);&quot; | php
-全局有效：mv composer.phar /usr/local/bin/composer
-验证：composer --version
-</code></pre><h1 id="通过composer安装valet"><a href="#通过composer安装valet" class="headerlink" title="通过composer安装valet"></a>通过composer安装valet</h1><pre><code>添加环境变量：
-    PATH=$PATH:~/.composer/vendor/bin
-
-修改composer源（默认的是国外的，需要翻墙）
-    1、查询composer配置文件所在位置
-        composer config -l -g
-
-    2、查看显示的home选项（就是composer所在配置的目录）
-        [home] /Users/sunnysmilez/.composer
-
-    3、在配置文件添加下载路径
-        vim /Users/sunnysmilez/.composer/config.json         
-        内容如下：
-            {
-                &quot;config&quot;: {
-                },
-                &quot;repositories&quot;: {
-                    &quot;packagist&quot;: {
-                        &quot;type&quot;: &quot;composer&quot;,
-                        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;
-                    }
-                }
-            }
-
-下载安装：valet
-    composer global require laravel/valet
-</code></pre><h1 id="安装valet"><a href="#安装valet" class="headerlink" title="安装valet"></a>安装valet</h1><pre><code>安装：
-    valet install
-
-测试：（127.0.0.1会响应所有*.dev的域名）
-    ping foobar.dev
-</code></pre><h1 id="设置code目录"><a href="#设置code目录" class="headerlink" title="设置code目录"></a>设置code目录</h1><pre><code>cd code
-valet park
-</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>composer create-project laravel/laravel=5.2.* hello --prefer-dist
-
-不知道为什么反正我的laravel new hello 不能使用
-项目使用的5.2的版本，如果你需要更高版本请自行更改
-</code></pre><h1 id="启动valet"><a href="#启动valet" class="headerlink" title="启动valet"></a>启动valet</h1><pre><code>valet start
-</code></pre><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><pre><code>http://hello.dev/
-</code></pre><h1 id="valet补充"><a href="#valet补充" class="headerlink" title="valet补充"></a>valet补充</h1><pre><code>valet start         启动valet
-valet stop          停止valet
-valet restart       重启valet
-valet share         共享项目（比较有意思）
-valet uninstall     卸载valet
-valet park          设置代码目录
-valet paths         查看代码目录
-等
-</code></pre><h1 id="各种错误"><a href="#各种错误" class="headerlink" title="各种错误"></a>各种错误</h1><h3 id="composer错误"><a href="#composer错误" class="headerlink" title="composer错误"></a>composer错误</h3><pre><code>类似此种下载不成功的，直接替换composer源
-[Composer\Downloader\TransportException]
-      The &quot;http://packagist.org/p/laravel/valet%2439296a873ae09b56ed010fd93604f08291f6223ad85ddf3bc5cb02af8a4035f3.json&quot; file could not be downloaded (HTTP/1.1 302 Found)
-
-[Composer\Downloader\TransportException]
-       Your configuration does not allow connections to http://pkg.phpcomposer.com/repo/packagist/packages.json. See https://getcomposer.org/doc/06-config.md#secure-http for details. 
-[Composer\Downloader\TransportException]
-      The &quot;http://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 301 Moved Permanently)
-
-[Composer\Downloader\TransportException]
- The &quot;https://pkg.phpcomposer.com/repo/packagist/packages.json&quot; file could not be downloaded (HTTP/1.1 404 Not Found)
-</code></pre><h3 id="valet-install错误"><a href="#valet-install错误" class="headerlink" title="valet install错误"></a>valet install错误</h3><pre><code>Brew was unable to install [dnsmasq].
-    手动安装dnsmasq：brew install dnsmasq（报下面的错误）
-
-Error: Xcode alone is not sufficient on Sierra.
-    执行：xcode-select --install
-
-执行：valet install       
-</code></pre><h3 id="valet权限错误（在安装的过程中使用了sudo）"><a href="#valet权限错误（在安装的过程中使用了sudo）" class="headerlink" title="valet权限错误（在安装的过程中使用了sudo）"></a>valet权限错误（在安装的过程中使用了sudo）</h3><pre><code>Warning: file_get_contents(/var/root/.valet/config.json): failed to open stream: Permission denied in /Users/Username/.composer/vendor/laravel/valet/server.php on line 23
-
-Warning: Invalid argument supplied for foreach() in /Users/Username/.composer/vendor/laravel/valet/server.php on line 47
-404 - Not Found
-
-修改权限为当前用户：
-    cd ~/.composer/
-    sudo chown -R $(whoami) vendor
-</code></pre><h1 id="google自动跳转https"><a href="#google自动跳转https" class="headerlink" title="google自动跳转https"></a>google自动跳转https</h1><pre><code>Chrome 于 V63 版本起会将 .dev 域名强制转换为 HTTPS。
-所以最简单的办法是：切换域名
- valet domain test
- 使用hello.test进行访问
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h6 id="前提说明"><a href="#前提说明" class="headerlink" title="前提说明"></a>前提说明</h6><pre><code>在mac本地利用homebrew，使用Valet方式安装laravel
-</code></pre><h1 i]]>
-    </summary>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/tags/laravel/"/>
-    
-      <category term="laravel" scheme="http://www.cxyteam.com/categories/laravel/"/>
     
   </entry>
   
