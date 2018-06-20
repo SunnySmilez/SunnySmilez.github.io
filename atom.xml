@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-06-15T08:55:14.000Z</updated>
+  <updated>2018-06-20T12:58:05.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,11 +15,106 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[docker-compose文件语法]]></title>
+    <link href="http://www.cxyteam.com/2018/06/20/docker-compose%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95/"/>
+    <id>http://www.cxyteam.com/2018/06/20/docker-compose文件语法/</id>
+    <published>2018-06-20T02:51:16.000Z</published>
+    <updated>2018-06-20T12:58:05.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h1><pre><code>以&quot;yml&quot;或者&quot;yaml&quot;为文件后缀
+</code></pre><h1 id="version"><a href="#version" class="headerlink" title="version"></a>version</h1><pre><code>设置docker compose解析语法版本号
+eg: version: &quot;v1&quot;
+</code></pre><h1 id="services"><a href="#services" class="headerlink" title="services"></a>services</h1><pre><code>一个结构体，表示服务配置开始
+</code></pre><h1 id="build"><a href="#build" class="headerlink" title="build"></a>build</h1><pre><code>指定dockerfile所在路径，compose将使用该dickerfile构建镜像
+eg: build: /dockerfile/path
+</code></pre><h1 id="container-name"><a href="#container-name" class="headerlink" title="container_name"></a>container_name</h1><pre><code>设置容器名称，注意如果指定了容器名称，必须保证名称唯一
+eg：
+    container_name: test_php
+</code></pre><h1 id="image"><a href="#image" class="headerlink" title="image"></a>image</h1><pre><code>指定要从中启动容器的镜像(如果是通过build方式构建镜像，设置这个参数相当于给镜像重命名)
+eg: image: mysql:5.7
+</code></pre><h1 id="ports"><a href="#ports" class="headerlink" title="ports"></a>ports</h1><pre><code>暴露端口信息，格式为：(宿主机端口:容器端口)；端口号最好大于60，因为yaml解析xx:yy这种格式为60进制
+eg: ports: 
+        - 8001:80
+</code></pre><h1 id="expose"><a href="#expose" class="headerlink" title="expose"></a>expose</h1><pre><code>暴露端口，不映射到主机，只被链接访问
+eg: expose:
+        22
+</code></pre><h1 id="environment"><a href="#environment" class="headerlink" title="environment"></a>environment</h1><pre><code>设置环境变量
+eg : environment:
+        - ENV:dev
+</code></pre><h1 id="env-file"><a href="#env-file" class="headerlink" title="env_file"></a>env_file</h1><pre><code>从文件中获取环境变量，可以单个文件路径或者文件列表；
+
+注意：
+    如果docker-compose -f FILE 指定了模板文件，则 env_file 中路径会基于模板文件路径
+    如果文件中指定的变量与environment中的变量有冲突，则以后者为准
+    env文件中支持&apos;#&apos;好注释，使用ENV=dev这样的格式
+eg: env_file:
+        - ./build/env/php-fpm.env
+        - ./build/env/nginx.env
+</code></pre><h1 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h1><pre><code>挂载卷盘；宿主机目录:容器目录
+volumes:
+    ./public:/data/public
+</code></pre><h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><pre><code>链接到其他服务中的容器(使用服务名称)
+eg: links: 
+        - test_mysql
+        - test_redis
+</code></pre><h1 id="external-links"><a href="#external-links" class="headerlink" title="external_links"></a>external_links</h1><pre><code>链接到docker-compose.yaml外部的容器，可以说非compose管理的容器
+eg: external_links: 
+        - test_mysql
+        - test_redis
+</code></pre><h1 id="command"><a href="#command" class="headerlink" title="command"></a>command</h1><pre><code>覆盖容器启动后默认执行的命令
+eg: command: php-fpm
+</code></pre><h1 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h1><pre><code>基于已有服务进行他拓展
+eg: 我们有个公有的php服务（common-php.yaml）, 内容如下
+    common_php:
+        build: ./build/common_php
+        command: php-fpm
+        links:
+          - jyd_mysql
+          - jyd_redis
+
+这时候有个新的需求，要求搭建一个新的php，需要设置一个环境变量，我们可以这样做（dev_xx.yaml）,内如如下：
+    dev_xx:
+    extends:
+    file: common-php.yaml
+    service: common_php
+    environment:
+        - DEBUG=true
+
+后者的dev_xx.yaml会继承common-php.yaml中的common_php服务
+</code></pre><h1 id="extra-hosts"><a href="#extra-hosts" class="headerlink" title="extra_hosts"></a>extra_hosts</h1><pre><code>添加主机名映射额
+eg: extra_hosts
+        - &quot;test.com:10.11.2.12&quot;
+        - &quot;demo.com:10.12.22.42&quot;
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h1><pre><code>以&quot;yml&quot;或者&quot;yaml&quot;为文件后缀
+</code></pre><]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[利用doker-compose构建开发环境]]></title>
+    <link href="http://www.cxyteam.com/2018/06/15/%E5%88%A9%E7%94%A8doker-compose%E6%9E%84%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2018/06/15/利用doker-compose构建开发环境/</id>
+    <published>2018-06-15T09:45:09.000Z</published>
+    <updated>2018-06-15T09:45:09.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[docker镜像如何维护]]></title>
     <link href="http://www.cxyteam.com/2018/06/15/docker%E9%95%9C%E5%83%8F%E5%A6%82%E4%BD%95%E7%BB%B4%E6%8A%A4/"/>
     <id>http://www.cxyteam.com/2018/06/15/docker镜像如何维护/</id>
     <published>2018-06-15T07:05:46.000Z</published>
-    <updated>2018-06-15T08:55:14.000Z</updated>
+    <updated>2018-06-20T12:58:24.000Z</updated>
     <content type="html"><![CDATA[<h1 id="通过Dockerfile维护"><a href="#通过Dockerfile维护" class="headerlink" title="通过Dockerfile维护"></a>通过Dockerfile维护</h1><h6 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h6><pre><code>    编写Dockerfile -&gt; 通过docker build生成一个镜像 -&gt; docker push 提交到远程 -&gt; docker pull 别人拉取使用
 或
     编写Dockerfile -&gt; 提交到github -&gt; docker hub 设置automated build -&gt; docker pull 别人拉取使用
@@ -2424,231 +2519,6 @@ list *listDup(list *orig)
     <![CDATA[<h1 id="adlist结构"><a href="#adlist结构" class="headerlink" title="adlist结构"></a>adlist结构</h1><pre><code>typedef struct list {
 
     /** 表头节点 */]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-sds源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/01/03/redis-sds%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/01/03/redis-sds源码阅读/</id>
-    <published>2018-01-03T03:57:42.000Z</published>
-    <updated>2018-01-03T13:40:25.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
-
-    /** buf 中已占用空间的长度*/
-    int len;
-
-    /** buf 中剩余可用空间的长度*/
-    int free;
-
-    /** 数据空间*/ 
-    /** 柔性数组*/
-    char buf[];
-};
-</code></pre><p><img src="/img/redis/sds.jpg" alt="Alt text" title="sds结构"></p>
-<h1 id="获取字符串长度复杂度为O-1"><a href="#获取字符串长度复杂度为O-1" class="headerlink" title="获取字符串长度复杂度为O(1)"></a>获取字符串长度复杂度为O(1)</h1><pre><code>在sds的结构中，保存了sds的占用空间的长度，可以使用sdslen进行读取，代码实现如下：
-
-static inline size_t sdslen(const sds s) {
-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
-    return sh-&gt;len;
-}
-</code></pre><h1 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h1><pre><code>二进制安全：比如说在c语言中，strlen计算长度，是依赖于特殊的字符&apos;\0&apos;来判断是否到达字符串的最末尾，所以对于&quot;aaa\0bbb&quot;来说，它就不是二进制安全的
-sds的二进制安全，它不仅仅根据&quot;\0&quot;来判断是否到达字符串的末尾，还根据len的长度来进行计算
-</code></pre><h1 id="杜绝缓冲区溢出"><a href="#杜绝缓冲区溢出" class="headerlink" title="杜绝缓冲区溢出"></a>杜绝缓冲区溢出</h1><pre><code>缓冲区溢出，指的是在修改字符串的时候，没有对该字符串分配足够的空间
-sds在对字符串进行修改的时候，都会使用（sdsMakeRoomFor）判断是否有足够的空间
-sds sdscatlen(sds s, const void *t, size_t len) {
-    struct sdshdr *sh;
-    // 原有字符串长度
-    size_t curlen = sdslen(s);
-
-    // 扩展 sds 空间
-    // T = O(N)
-    s = sdsMakeRoomFor(s, len);
-
-    // 内存不足？直接返回
-    if (s == NULL) {
-        return NULL;
-    }
-
-    // 复制 t 中的内容到字符串后部
-    // T = O(N)
-    sh = (void*) (s - (sizeof(struct sdshdr)));
-    memcpy(s + curlen, t, len);
-
-    // 更新属性
-    sh-&gt;len = curlen + len;
-    sh-&gt;free = sh-&gt;free - len;
-
-    // 添加新结尾符号
-    s[curlen + len] = &apos;\0&apos;;
-
-    // 返回新 sds
-    return s;
-}
-</code></pre><h1 id="动态扩展，空间预分配"><a href="#动态扩展，空间预分配" class="headerlink" title="动态扩展，空间预分配"></a>动态扩展，空间预分配</h1><pre><code>对字符串进行修改的时候，会判断sds的剩余空间，如果大小不足够会重新进行分配，具体分配逻辑如下：
-    1、如果新长度小于SDS_MAX_PREALLOC定义的最大空间，就分配两倍所需空间；
-    2、否则在目前的长度上再增加SDS_MAX_PREALLOC定义的最大空间
-
-代码实现如下：
-/*
- * 对 sds 中 buf 的长度进行扩展，确保在函数执行之后，
- * buf 至少会有 addlen + 1 长度的空余空间
- * （额外的 1 字节是为 \0 准备的）
- *
- * 返回值
- *  sds ：扩展成功返回扩展后的 sds
- *        扩展失败返回 NULL
- *
- * 复杂度
- *  T = O(N)
- */
-sds sdsMakeRoomFor(sds s, size_t addlen) {
-    struct sdshdr *sh, *newsh;
-
-    // 获取 s 目前的空余空间长度
-    size_t free = sdsavail(s);
-
-    size_t len, newlen;
-
-    // s 目前的空余空间已经足够，无须再进行扩展，直接返回
-    if (free &gt;= addlen) {
-        return s;
-    }
-
-    // 获取 s 目前已占用空间的长度
-    len = sdslen(s);
-    sh = (void*)(s - (sizeof(struct sdshdr)));
-
-    // s 最少需要的长度
-    newlen = (len + addlen);
-
-    // 根据新长度，为 s 分配新空间所需的大小
-    // 如果当前占用内存小于1M那么就分配两倍于当前长度的内存
-    // 如果当前占用内存大于等于1M那么就分配当前长度+1M的内存
-    // 内存增长策略*****
-    if (newlen &lt; SDS_MAX_PREALLOC) {
-        // 如果新长度小于 SDS_MAX_PREALLOC 
-        // 那么为它分配两倍于所需长度的空间
-        newlen *= 2;
-    } else {
-        // 否则，分配长度为目前长度加上 SDS_MAX_PREALLOC
-        newlen += SDS_MAX_PREALLOC;
-    }
-
-    // T = O(N)
-    newsh = zrealloc(sh, sizeof(struct sdshdr) + newlen + 1);
-
-    // 内存不足，分配失败，返回
-    if (newsh == NULL) { 
-        return NULL;
-    }
-
-    // 更新 sds 的空余长度
-    newsh-&gt;free = newlen - len;
-
-    // 返回 sds
-    return newsh-&gt;buf;
-}
-</code></pre><h1 id="惰性释放，减少内存分配次数"><a href="#惰性释放，减少内存分配次数" class="headerlink" title="惰性释放，减少内存分配次数"></a>惰性释放，减少内存分配次数</h1><pre><code>对sds字符串进行缩减操作的时候，不会对空间进行释放，仅仅只是改变len属性和free属性的值
-
-void sdsclear(sds s) {
-
-    // 取出 sdshdr
-    struct sdshdr *sh = (void*) (s - (sizeof(struct sdshdr)));
-
-    // 重新计算属性
-    sh-&gt;free += sh-&gt;len;
-    sh-&gt;len = 0;
-
-    // 将结束符放到最前面（相当于惰性地删除 buf 中的内容）
-    sh-&gt;buf[0] = &apos;\0&apos;;
-}
-</code></pre><h1 id="long数值转字符串"><a href="#long数值转字符串" class="headerlink" title="long数值转字符串"></a>long数值转字符串</h1><pre><code>这个函数比较有意思，他将long long类型的数值转换成string类型
-    1、将数值按照10取模，取模后的值保存，在除10（相当于是对当前位的上一位进行获取 12345第一次取模的值是5，除10变成1234.5取模的值变成4）（注意101.1与10取模是1不是1.1）
-    2、将保存的字符串再进行翻转
-    比如：
-        12345 取模后得到的值依次是5，4，3，2，1 连接成最后的字符串是54321
-        再进行倒转以后变成12345
-
-int sdsll2str(char *s, long long value) {
-    char *p, aux;
-    unsigned long long v;
-    size_t l;
-
-    /* Generate the string representation, this method produces
-     * an reversed string. */
-    v = (value &lt; 0) ? -value : value;
-    p = s;
-    do {
-        *p++ = &apos;0&apos; + (v%10);
-        v /= 10;
-    } while(v);
-    if (value &lt; 0) *p++ = &apos;-&apos;;
-
-    /* Compute length and add null term. */
-    l = p - s;
-    *p = &apos;\0&apos;;
-
-    /* Reverse the string. */
-    p--;
-    while(s &lt; p) {
-        aux = *s;
-        *s = *p;
-        *p = aux;
-        s++;
-        p--;
-    }
-    return l;
-}
-
-为什么要&apos;0&apos;+单个数字？
-参考ascii表，字符串1对应的ascii码是49，&apos;0&apos;对应的ancii值是48，比如说数字3想存储到字符串中表示也为&apos;3&apos;，那么它对应的ascii就是3+48也就是3+&apos;0&apos;
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h1><pre><code>struct sdshdr {
-
-    /** buf 中已占用空间的长度*/
-    int l]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis对象类型及数据结构]]></title>
-    <link href="http://www.cxyteam.com/2018/01/02/redis%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/</id>
-    <published>2018-01-02T09:42:59.000Z</published>
-    <updated>2018-01-02T11:06:05.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
-可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
-</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
-因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
-</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
-    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
-    2、列表对象保存的元素数量小于 512 个
-</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
-    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
-    2、哈希对象保存的键值对数量小于 512 个；
-</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
-    1、集合对象保存的所有元素都是整数值；
-    2、集合对象保存的元素数量不超过 512 个；
-</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
-    1、有序集合保存的元素数量小于 128 个；
-    2、有序集合保存的所有元素成员的长度都小于 64 字节；
-</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（]]>
     </summary>
     
       <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
