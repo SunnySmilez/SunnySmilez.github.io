@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/26/gdb调试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">C语言静态库和动态库</a></h1>
+                <a class="post-title-link" href="/2016/10/26/gdb调试/" itemprop="url">gdb调试</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T16:51:13+08:00">
-                2016-09-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-26T07:44:26+08:00">
+                2016-10-26
               </time>
             
 
@@ -326,22 +326,17 @@
       
         
           
-          实现文件共享例子:
-目录结构如下:
-|--myHeader
-  --checksum.h
-  --encrypt.h
-|--checksum.c
-|--encrypt.c
-|--test.c
-|--myObject
+          调试文件内容gdb.c#include &lt;stdio.h&gt;
 
-在myHeader文件中建立头文件checksum.h
-int checksum(
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = low; i &lt;= high; i++)
+                s
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
+            <a class="btn" href="/2016/10/26/gdb调试/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -392,7 +387,7 @@ int checksum(
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/09/代码设计/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/mac安装gdb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -411,7 +406,7 @@ int checksum(
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">代码设计</a></h1>
+                <a class="post-title-link" href="/2016/10/21/mac安装gdb/" itemprop="url">mac安装gdb</a></h1>
         
 
         <div class="post-meta">
@@ -423,8 +418,140 @@ int checksum(
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-09T17:29:39+08:00">
-                2016-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:32:25+08:00">
+                2016-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Mac安装GDB安装GDBbrew install gdb
+使用gdb进行调试gbd.c文件中的内容#include &lt;stdio.h&gt;
+
+int add_range(int low, int high)
+{
+        int i, sum;
+        for (i = lo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/21/mac安装gdb/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/redis源码阅读-准备工作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/21/redis源码阅读-准备工作/" itemprop="url">redis源码阅读-准备工作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T17:29:44+08:00">
+                2016-10-21
               </time>
             
 
@@ -446,8 +573,8 @@ int checksum(
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -485,11 +612,11 @@ int checksum(
       
         
           
-          暂未找到合适的表述方法
+          编辑器调试器
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/redis源码阅读-准备工作/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -540,7 +667,7 @@ int checksum(
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/02/git的使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/21/Primary-script-unknown排查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -559,7 +686,7 @@ int checksum(
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">git的使用</a></h1>
+                <a class="post-title-link" href="/2016/10/21/Primary-script-unknown排查/" itemprop="url">Primary script unknown排查</a></h1>
         
 
         <div class="post-meta">
@@ -571,8 +698,8 @@ int checksum(
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T12:17:48+08:00">
-                2016-09-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-21T12:21:14+08:00">
+                2016-10-21
               </time>
             
 
@@ -594,8 +721,8 @@ int checksum(
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -633,17 +760,13 @@ int checksum(
       
         
           
-          初始化一个git项目git init
-添加文件git add filename
-添加目录git add .
-只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
-查看当前工作区文件提交的状态git status
-git status -s 查看简便信息
-提交文件到本地git 
-          ...
+          现象#    tcpdump  -i  lo -Anns0 port 9000
+#    ps aux|grep fpm|grep -v grep |awk ‘{printf “ -p “ $2}’    strace
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/09/02/git的使用/#more" rel="contents">
+            <a class="btn" href="/2016/10/21/Primary-script-unknown排查/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -694,7 +817,7 @@ git status -s 查看简便信息
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/15/C语言高级函数使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/16/C语言进程间通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -713,7 +836,7 @@ git status -s 查看简便信息
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/15/C语言高级函数使用/" itemprop="url">C语言高级函数使用</a></h1>
+                <a class="post-title-link" href="/2016/10/16/C语言进程间通信/" itemprop="url">C语言进程间通信</a></h1>
         
 
         <div class="post-meta">
@@ -725,159 +848,8 @@ git status -s 查看简便信息
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T08:17:17+08:00">
-                2016-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          函数的指针当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
-创建函数指针int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
-warp_fn = test;
-warp_fn(4);             #
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/15/C语言高级函数使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/11/C语言内存泄露检测Valgrind/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/11/C语言内存泄露检测Valgrind/" itemprop="url">C语言内存泄露检测Valgrind</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-11T09:05:15+08:00">
-                2016-08-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-16T16:02:11+08:00">
+                2016-10-16
               </time>
             
 
@@ -938,12 +910,15 @@ warp_fn(4);             #
       
         
           
-          valgrind使用场景检查代码中在堆上分配存储器,但是没释放的位置,也就是找出存储器泄露位置
-valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当程序想分配堆存储器时,valgrind将会拦截你对malloc和free的调用,然后运行自己的malloc和free函数,它会记录哪
+          数据流标准输入:stdin          对应描述符:0
+标准输出:stdout         对应描述符:1
+标准错误:stderr         对应描述符:2
+重定向数据流重定向输出数据流 &quot;&gt;&quot;,&quot;&gt;&gt;&quot;
+重定向输入数据流 &
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/08/11/C语言内存泄露检测Valgrind/#more" rel="contents">
+            <a class="btn" href="/2016/10/16/C语言进程间通信/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -985,7 +960,7 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1031,7 +1006,7 @@ valgrind工作原理通过伪造malloc可以监控分配在堆上的数据,当�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">173</span>
+                  <span class="site-state-item-count">179</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

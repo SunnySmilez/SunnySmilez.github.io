@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/28/网络/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/17/rsync安装和使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/28/网络/" itemprop="url">网络</a></h1>
+                <a class="post-title-link" href="/2016/05/17/rsync安装和使用/" itemprop="url">rsync安装和使用</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-28T21:48:39+08:00">
-                2016-04-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-17T22:19:14+08:00">
+                2016-05-17
               </time>
             
 
@@ -326,15 +326,17 @@
       
         
           
-          私有IP地址A类: 10.0.0.0 - 10.255.255.255
-B类: 172.16.0.0 - 172.31.255.255
-C类: 192.168.0.0 - 192.168.255.255
-访问网站基本流程(主要解释DNS)1.输入网址(www.demo.com.)
-2.访问本地hos
+          简介开源的,快速的,多功能的,可实现全量和增量的本地或远程数据同步的工具
+
+1.支持拷贝特殊文件如链接文件,设备等
+2.可以排除指定文件或目录同步的功能,相当于打包命令tar的排除功能
+3.可以保持源文件或目录的权限,时间,软硬链接,属组,主等所有属性均不改变
+4.可实现增量同步
+5.可以使用rcp
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/28/网络/#more" rel="contents">
+            <a class="btn" href="/2016/05/17/rsync安装和使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -385,7 +387,7 @@ C类: 192.168.0.0 - 192.168.255.255
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/27/su命令执行流程/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/分发无权限文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -404,7 +406,7 @@ C类: 192.168.0.0 - 192.168.255.255
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/27/su命令执行流程/" itemprop="url">su命令执行流程</a></h1>
+                <a class="post-title-link" href="/2016/05/15/分发无权限文件/" itemprop="url">分发无权限文件</a></h1>
         
 
         <div class="post-meta">
@@ -416,8 +418,8 @@ C类: 192.168.0.0 - 192.168.255.255
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T22:34:53+08:00">
-                2016-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T15:00:34+08:00">
+                2016-05-15
               </time>
             
 
@@ -478,17 +480,14 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          流程1.普通用户运行sudo
-2.检查/var/run/sudo下是否有时间戳文件,并检查是否过期
-3.如果过期,需要用户输入自己的口令
-4.如果没过期,检查/etc/sudoers配置文件是否运行sudo和执行相应命令的权限
-5.无权限则退出sudo
-6.有权限则执行命令并返回结果,退出sudo
-
+          利用root用户远程登录(一般ssh出于安全考虑,它的配置文件都会配置不允许root远程登录)分发到家目录scp demo.txt /home/vagrant
+赋予用户cp权限visudo修改
+在最后添加:(赋予vagrant用户cp的权限)
+vagrant    ALL=(ALL)       N
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/27/su命令执行流程/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/分发无权限文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -539,7 +538,7 @@ C类: 192.168.0.0 - 192.168.255.255
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/26/定时任务/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/15/ssh实现免密批量登陆/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -558,7 +557,7 @@ C类: 192.168.0.0 - 192.168.255.255
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/26/定时任务/" itemprop="url">定时任务</a></h1>
+                <a class="post-title-link" href="/2016/05/15/ssh实现免密批量登陆/" itemprop="url">ssh实现免密批量登陆</a></h1>
         
 
         <div class="post-meta">
@@ -570,8 +569,8 @@ C类: 192.168.0.0 - 192.168.255.255
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-26T00:14:41+08:00">
-                2016-04-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-15T13:26:32+08:00">
+                2016-05-15
               </time>
             
 
@@ -632,19 +631,18 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          系统定时任务ls /etc | grep cron
-用户定时任务* * * * * (分时日月周)
-符号*
-    表示任意时间
-    eg: * * * * * 表示每分钟都执行
+          创建用户生成密钥对1.以dsa的数字算法进行密钥生成
+    ssh-keygen -t dsa
+2.默认路径以及不给密码(接下来的是选项直接回车)
+分发公钥1.默认端口
+ssh-copy-id -i id_dsa.pub vagrant@172.16.17.11
 
--
-    a-b,表示在a到b的范围内,包括a,b
-    eg:30 1-3 * * * 表示在1点30,2点
+2.非默认端口
+ssh-copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/26/定时任务/#more" rel="contents">
+            <a class="btn" href="/2016/05/15/ssh实现免密批量登陆/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -695,7 +693,7 @@ C类: 192.168.0.0 - 192.168.255.255
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/关机-重启-注销/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/11/ssh介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -714,7 +712,7 @@ C类: 192.168.0.0 - 192.168.255.255
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/24/关机-重启-注销/" itemprop="url">关机-重启-注销</a></h1>
+                <a class="post-title-link" href="/2016/05/11/ssh介绍/" itemprop="url">ssh介绍</a></h1>
         
 
         <div class="post-meta">
@@ -726,8 +724,8 @@ C类: 192.168.0.0 - 192.168.255.255
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T15:02:19+08:00">
-                2016-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-11T20:55:25+08:00">
+                2016-05-11
               </time>
             
 
@@ -736,28 +734,6 @@ C类: 192.168.0.0 - 192.168.255.255
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -788,21 +764,15 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          
-关机  shutdown -h now 立刻关机
-  shutdown -h +1 1分钟以后关机
-  init 0
-  halt 立即停止系统,需要人工关闭电源
-  halt -p
-  poweroff 立即停止系统,并且关闭电源
-
-重启  reboot
-  shutdown -r now
-  
+          SSH提供的功能(支持:RSA,DSA加密方式)安全加密协议,远程联机访问,类似telnet
+类似FTP服务的sftp-server,借助SSH协议传输数据,提供更安全的SFTP服务(加密)
+RSA,DSA的区别RSA:既可以进行加密,也可以进行数字签名实现认证
+DSA:只能进行数字签名实现认证
+工
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/24/关机-重启-注销/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/ssh介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -853,7 +823,7 @@ C类: 192.168.0.0 - 192.168.255.255
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/04/24/linux运行级别/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/05/04/文件系统NFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -872,7 +842,7 @@ C类: 192.168.0.0 - 192.168.255.255
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/24/linux运行级别/" itemprop="url">linux运行级别</a></h1>
+                <a class="post-title-link" href="/2016/05/04/文件系统NFS/" itemprop="url">文件系统NFS</a></h1>
         
 
         <div class="post-meta">
@@ -884,8 +854,8 @@ C类: 192.168.0.0 - 192.168.255.255
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-24T12:45:52+08:00">
-                2016-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-04T21:58:22+08:00">
+                2016-05-04
               </time>
             
 
@@ -946,23 +916,23 @@ C类: 192.168.0.0 - 192.168.255.255
       
         
           
-          
-linux运行级别的含义
-0: 关机模式
-1: 单用户模式(破解root密码)
-2: 无网络支持的多用户模式
-3: 有网络支持的多用户模式
-4: 保留,未使用
-5: 有网络支持的X-Window支持的多用户模式
-6: 重启
+          文件系统reiserfs
+    大量小文件业务首选reiserfs(几十到上百K)
 
+xfs
+    数据库MySQL业务,门户案例
 
+ext4
+    视频下载,流媒体,数据库,小文件业务也OK
 
+ext2(数据恢复困难)
+    蓝汛的cache业务,CDN网站加速服务
 
-          
+ext3(cento
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/24/linux运行级别/#more" rel="contents">
+            <a class="btn" href="/2016/05/04/文件系统NFS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1004,7 +974,7 @@ linux运行级别的含义
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1050,7 +1020,7 @@ linux运行级别的含义
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">173</span>
+                  <span class="site-state-item-count">179</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

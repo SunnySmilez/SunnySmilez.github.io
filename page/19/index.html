@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/10/C语言动态存储/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/10/14/C语言进程与系统调用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/10/C语言动态存储/" itemprop="url">C语言动态存储</a></h1>
+                <a class="post-title-link" href="/2016/10/14/C语言进程与系统调用/" itemprop="url">C语言进程与系统调用</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-10T08:12:39+08:00">
-                2016-08-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-14T10:34:53+08:00">
+                2016-10-14
               </time>
             
 
@@ -326,16 +326,14 @@
       
         
           
-          动态数据存储的位置堆,它是程序中用来保存长期使用数据的地方
-获取空间使用malloc()函数进行申请
-如何释放使用free()函数进行释放
-使用malloc#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h
+          execl,execlp,execle第一个参数是exec系列函数告诉将要运行什么程序(区别就是execlp可以就是命令的名字,而execl和execle需要完整路径名)
+第一个命令行的参数必须是程序名,因此第二个参数和第一个参数是一致的
+中间都被当做脚本所需要的参数
+最后一个参数是NULL,告诉函
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/08/10/C语言动态存储/#more" rel="contents">
+            <a class="btn" href="/2016/10/14/C语言进程与系统调用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -386,7 +384,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/09/C语言链表/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/11/C语言静态库和动态库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -405,7 +403,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/09/C语言链表/" itemprop="url">C语言链表</a></h1>
+                <a class="post-title-link" href="/2016/09/11/C语言静态库和动态库/" itemprop="url">C语言静态库和动态库</a></h1>
         
 
         <div class="post-meta">
@@ -417,8 +415,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-09T07:57:33+08:00">
-                2016-08-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T16:51:13+08:00">
+                2016-09-11
               </time>
             
 
@@ -479,17 +477,22 @@
       
         
           
-          链表是一种抽象的数据结构
-使用场景为了保存可变数量的数据,需要一样比数组更灵活的东西
-工作原理保存了一条数据和链向另一条数据的链接
-创建链表#include &lt;stdio.h&gt;
-//注意要先定义函数在main函数的外部
-void display();
-//结构定义函数体的外面多个函数才能
+          实现文件共享例子:
+目录结构如下:
+|--myHeader
+  --checksum.h
+  --encrypt.h
+|--checksum.c
+|--encrypt.c
+|--test.c
+|--myObject
+
+在myHeader文件中建立头文件checksum.h
+int checksum(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/08/09/C语言链表/#more" rel="contents">
+            <a class="btn" href="/2016/09/11/C语言静态库和动态库/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -540,7 +543,7 @@ void display();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/27/C语言联合/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/09/代码设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -559,7 +562,7 @@ void display();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/27/C语言联合/" itemprop="url">C语言联合</a></h1>
+                <a class="post-title-link" href="/2016/09/09/代码设计/" itemprop="url">代码设计</a></h1>
         
 
         <div class="post-meta">
@@ -571,8 +574,310 @@ void display();
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-27T07:42:29+08:00">
-                2016-07-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-09T17:29:39+08:00">
+                2016-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          暂未找到合适的表述方法
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/09/代码设计/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/09/02/git的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/02/git的使用/" itemprop="url">git的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T12:17:48+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          初始化一个git项目git init
+添加文件git add filename
+添加目录git add .
+只提交已提交过得文件(不添加新增文件,只添加修改的文件)git add -u
+查看当前工作区文件提交的状态git status
+git status -s 查看简便信息
+提交文件到本地git 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/02/git的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/08/15/C语言高级函数使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/15/C语言高级函数使用/" itemprop="url">C语言高级函数使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T08:17:17+08:00">
+                2016-08-15
               </time>
             
 
@@ -633,307 +938,14 @@ void display();
       
         
           
-          联合用union关键字定义的一个叫&quot;量&quot;的数据类型
-typedef union {
-    short count;
-    float volume;
-    float weight;
-} quantity;
-联合的特点1.可以有效的使用存储器空间
-    当定义联合的时候,
+          函数的指针当你创建一个函数test的时候,同时也会创建test的指针变量,变量中保存了函数的地址
+创建函数指针int(*warp_fn)(int);     #创建warp_fn的变量,用来保存test()函数的地址
+warp_fn = test;
+warp_fn(4);             #
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/27/C语言联合/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/26/C语言结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/26/C语言结构/" itemprop="url">C语言结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-26T08:14:25+08:00">
-                2016-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          结构把不同的数据类型写在一起,封装成一个大数据类型;结构的大小固定;结构中的数据都有名字
-例如:
-    定义新结构
-    /*
-        注意fish只是结构的名字
-    */
-    struct fish {
-        /*
-            const char * 是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/26/C语言结构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/07/24/C语言使用多个源文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="狂奔的菜鸟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂奔的菜鸟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/24/C语言使用多个源文件/" itemprop="url">C语言声明与定义分离</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-24T17:56:26+08:00">
-                2016-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          为什么要使用声明与定义分离,它解决了什么问题1.代码顺序的问题
-    #include &lt;stdio.h&gt;
-        /*
-            由于函数定义顺序产生的一个编译的错误
-        */
-        int main()
-        {
-       
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/24/C语言使用多个源文件/#more" rel="contents">
+            <a class="btn" href="/2016/08/15/C语言高级函数使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -975,7 +987,7 @@ typedef union {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1021,7 +1033,7 @@ typedef union {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">173</span>
+                  <span class="site-state-item-count">179</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

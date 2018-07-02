@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-06-20T12:58:05.000Z</updated>
+  <updated>2018-07-02T13:04:10.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,314 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[docker部署mysql的疑问]]></title>
+    <link href="http://www.cxyteam.com/2018/07/02/docker%E9%83%A8%E7%BD%B2mysql%E7%9A%84%E7%96%91%E9%97%AE/"/>
+    <id>http://www.cxyteam.com/2018/07/02/docker部署mysql的疑问/</id>
+    <published>2018-07-02T12:52:34.000Z</published>
+    <updated>2018-07-02T13:04:10.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="mysql的初始密码是什么"><a href="#mysql的初始密码是什么" class="headerlink" title="mysql的初始密码是什么"></a>mysql的初始密码是什么</h1><pre><code>设置环境变量：MYSQL_ROOT_PASSWORD
+eg:
+   docker run --name=mysql  -e MYSQL_ROOT_PASSWORD=123123 -e MYSQL_DATABASE=test1 -p 3307:3306 -d mysql_image_name
+   注释：
+     --name 指定容器名称
+     -e 设置环境变量
+        MYSQL_ROOT_PASSWORD   设置root的初始密码
+        MYSQL_USER，MYSQL_PASSWORD  设置新用户及密码
+        MYSQL_DATABASE 指定镜像启动容器时创建的数据库
+     -p 设置端口映射，将宿主机端口3307映射到容器端口3306
+     -d 后台运行
+     mysql_image_name  镜像的名称
+</code></pre><h1 id="mysql的数据会不会因为docker重启就消失了"><a href="#mysql的数据会不会因为docker重启就消失了" class="headerlink" title="mysql的数据会不会因为docker重启就消失了"></a>mysql的数据会不会因为docker重启就消失了</h1><pre><code>进行数据卷的挂载
+eg:
+    docker run --namee=mysql -e MYSQL_ROOT_PASSWORD=123123 -p 3307:3306 -v /data/mysql:/var/lib/mysql -d mysql_image_name
+    注释：
+        -v 设置挂载卷 将宿主机的/data/mysql挂载到容器的/var/lib/mysql
+        这样重启的时候数据不会丢失，因为在宿主机上
+</code></pre><h1 id="如何初始mysql数据"><a href="#如何初始mysql数据" class="headerlink" title="如何初始mysql数据"></a>如何初始mysql数据</h1><pre><code>将sql文件复制到mysql容器
+    docker cp a.sql mysql_docker:/tmp
+
+登录mysql容器
+    docker exec -it mysql_docker /bin/bash
+
+进入mysql    
+    mysql -uroot -p
+
+选择库，导入sql文件
+    use database_name;
+    source /tmp/a.sql
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="mysql的初始密码是什么"><a href="#mysql的初始密码是什么" class="headerlink" title="mysql的初始密码是什么"></a>mysql的初始密码是什么</h1><pre><code>设置环境变量：MYSQL_ROOT_]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[PhantomJS截图工具]]></title>
+    <link href="http://www.cxyteam.com/2018/06/28/PhantomJS%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/"/>
+    <id>http://www.cxyteam.com/2018/06/28/PhantomJS截图工具/</id>
+    <published>2018-06-28T12:41:52.000Z</published>
+    <updated>2018-07-02T13:41:31.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装PhantomJS"><a href="#安装PhantomJS" class="headerlink" title="安装PhantomJS"></a>安装PhantomJS</h1><pre><code>直接在官网下载编译好的包就行
+http://phantomjs.org/download.html
+</code></pre><h1 id="截图使用介绍"><a href="#截图使用介绍" class="headerlink" title="截图使用介绍"></a>截图使用介绍</h1><pre><code>1、写一个需要被截图的页面
+    用www.baidu.com做例子
+
+2、写截图的js（test.js）
+    var page = require(&apos;webpage&apos;).create(),
+        system = require(&apos;system&apos;),
+        address;
+
+    page.viewportSize = { width: 720, height: 1247 };
+
+    // 如果命令行没有给出网址
+    if (system.args.length === 1) {
+        console.log(&apos;Usage: page.js &lt;some URL&gt;&apos;);
+        phantom.exit();
+    }
+
+    address = system.args[1];
+    id = system.args[2];
+
+    page.open(address, function (status) {
+        page.evaluate(function() {
+            document.body.bgColor = &apos;white&apos;;
+        });
+
+        page.render(&apos;/tmp/&apos;+id+&apos;.jpeg&apos;, {format: &apos;jpeg&apos;, quality: &apos;70&apos;});
+
+        phantom.exit();
+    });
+
+3、运行phantomjs的服务端代码(a.php)
+    $str = &apos;/usr/local/phantomjs/bin/phantomjs test.js http://www.baidu.com &apos;.$id;
+    shell_exec($str);
+    注释：
+        /usr/local/phantomjs/bin/phantomjs是我的命令安装路径
+        test.js 是js地址
+        http://www.baidu.com 是需要截图的网站
+        $id     是传入的参数
+</code></pre><h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><pre><code>官网
+    http://phantomjs.org/
+
+中文
+    http://javascript.ruanyifeng.com/tool/phantomjs.html
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装PhantomJS"><a href="#安装PhantomJS" class="headerlink" title="安装PhantomJS"></a>安装PhantomJS</h1><pre><code>直接在官网下载编译好的包就行
+http://phan]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[centos安装docker]]></title>
+    <link href="http://www.cxyteam.com/2018/06/27/centos%E5%AE%89%E8%A3%85docker/"/>
+    <id>http://www.cxyteam.com/2018/06/27/centos安装docker/</id>
+    <published>2018-06-27T13:48:57.000Z</published>
+    <updated>2018-06-27T13:53:39.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="更新epel第三方软件库"><a href="#更新epel第三方软件库" class="headerlink" title="更新epel第三方软件库"></a>更新epel第三方软件库</h1><pre><code>yum install epel-release
+</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>yum install docker-io
+</code></pre><h1 id="验证是否成功"><a href="#验证是否成功" class="headerlink" title="验证是否成功"></a>验证是否成功</h1><pre><code>docker version 或者docker -h    
+</code></pre><h1 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h1><pre><code>sevice docker start
+</code></pre><h1 id="更改镜像源"><a href="#更改镜像源" class="headerlink" title="更改镜像源"></a>更改镜像源</h1><pre><code>vim /etc/docker/daemon.json
+添加如下内容：
+    {
+      &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]
+    }    
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="更新epel第三方软件库"><a href="#更新epel第三方软件库" class="headerlink" title="更新epel第三方软件库"></a>更新epel第三方软件库</h1><pre><code>yum install epel-relea]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[vm搭建docker-swarm]]></title>
+    <link href="http://www.cxyteam.com/2018/06/27/vm%E6%90%AD%E5%BB%BAdocker-swarm/"/>
+    <id>http://www.cxyteam.com/2018/06/27/vm搭建docker-swarm/</id>
+    <published>2018-06-27T02:38:52.000Z</published>
+    <updated>2018-06-27T14:00:37.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装vm"><a href="#安装vm" class="headerlink" title="安装vm"></a>安装vm</h1><h1 id="安装cento6-8"><a href="#安装cento6-8" class="headerlink" title="安装cento6.8"></a>安装cento6.8</h1><pre><code>https://blog.csdn.net/Podge/article/details/79182615
+记得设置启动方式为终端
+    临时方式：init 3
+    永久方式：vim /etc/inittab
+        将id:5:中的5改为3
+</code></pre><h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><pre><code>1、关闭防火墙
+    永久关闭SELinux
+        vi /etc/selinux/config
+        将 SELINUX=enforcing 
+        改为 SELINUX=disabled
+
+    永久关闭防火墙
+        chkconfig iptables off
+
+2、配置网络
+    设置vm为桥接
+        在vm-&gt;审核之后-&gt;网络-&gt;连接方式选择桥接网卡-&gt;界面名称（看你希望桥接你本机电脑的哪个网络，en0一般是wifi）
+
+    vim /etc/sysconfig/network-scripts/ifcfg-eth0
+        DEVICE=eth0
+        HWADDR=08:00:27:D8:2C:F8
+        TYPE=Ethernet
+        UUID=fd397c03-6719-4cf3-8e88-e6df26256ba1
+        ONBOOT=yes
+        NM_CONTROLLED=yes
+        BOOTPROTO=static
+        IPADDR=10.17.8.108
+        NETMASK=255.255.192.0
+        GATEWAY=10.17.0.1
+        USERCTL=no
+        DNS1=10.16.0.222
+        DNS2=114.114.114.114
+
+    注意：
+        IPADDR保持和主机在同一个网段
+        netmask，GATEWAY保持和你的主机一致
+
+    vim /etc/sysconfig/network
+        NETWORKING=yes
+        HOSTNAME=swarm-node1
+        GATEWAY=10.17.0.1
+
+    重启
+        service network restart
+</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><h1 id="添加主节点"><a href="#添加主节点" class="headerlink" title="添加主节点"></a>添加主节点</h1><pre><code>docker swarm init --advertise-addr 10.17.8.102
+</code></pre><h1 id="加入主节点"><a href="#加入主节点" class="headerlink" title="加入主节点"></a>加入主节点</h1><pre><code>docker swarm join --token SWMTKN-1-1muumruf8zsdl07li7z4gssp5gnfw6v01e5uovsaa8ik2exabl-e3ga0wgk05uaboouo64t1xxmg 10.17.8.102:2377
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装vm"><a href="#安装vm" class="headerlink" title="安装vm"></a>安装vm</h1><h1 id="安装cento6-8"><a href="#安装cento6-8" class="headerlink" titl]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[git服务搭建]]></title>
+    <link href="http://www.cxyteam.com/2018/06/26/git%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.cxyteam.com/2018/06/26/git服务搭建/</id>
+    <published>2018-06-26T13:02:45.000Z</published>
+    <updated>2018-06-26T14:06:31.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><pre><code>yum install git
+</code></pre><h1 id="初始化git库（在-data目录下）"><a href="#初始化git库（在-data目录下）" class="headerlink" title="初始化git库（在/data目录下）"></a>初始化git库（在/data目录下）</h1><pre><code>git init --bare test.git
+</code></pre><h1 id="修改目录权限"><a href="#修改目录权限" class="headerlink" title="修改目录权限"></a>修改目录权限</h1><pre><code>chmod -R 755 /data
+</code></pre><h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><pre><code>useradd test
+</code></pre><h1 id="创建密码"><a href="#创建密码" class="headerlink" title="创建密码"></a>创建密码</h1><pre><code>passwd test
+</code></pre><h1 id="克隆代码"><a href="#克隆代码" class="headerlink" title="克隆代码"></a>克隆代码</h1><pre><code>git clone test@ip:/data/test.git
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><pre><code>yum install git
+</code></pre><h1 id="初始化git库（在-dat]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker-compose配置laravel环境]]></title>
+    <link href="http://www.cxyteam.com/2018/06/21/docker-compose%E9%85%8D%E7%BD%AElaravel%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2018/06/21/docker-compose配置laravel环境/</id>
+    <published>2018-06-21T02:43:07.000Z</published>
+    <updated>2018-06-25T16:34:32.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="docker-compose搭建lareval环境遇到的坑"><a href="#docker-compose搭建lareval环境遇到的坑" class="headerlink" title="docker-compose搭建lareval环境遇到的坑"></a>docker-compose搭建lareval环境遇到的坑</h1><h3 id="images不存在"><a href="#images不存在" class="headerlink" title="images不存在"></a>images不存在</h3><pre><code>1、修改docker的镜像源
+2、docker search 确认是否存在
+</code></pre><h1 id="ENTRYPOINT脚本路径"><a href="#ENTRYPOINT脚本路径" class="headerlink" title="ENTRYPOINT脚本路径"></a>ENTRYPOINT脚本路径</h1><pre><code>1、先复制到/usr/local/bin目录下
+2、在填入绝对路径
+eg：（dockerfile文件中）
+    COPY ./docker-entrypoint.sh /usr/local/bin/
+    ENTRYPOINT [&quot;/usr/local/bin/docker-entrypoint.sh&quot;]
+</code></pre><h1 id="ENTRYPOINT脚本权限"><a href="#ENTRYPOINT脚本权限" class="headerlink" title="ENTRYPOINT脚本权限"></a>ENTRYPOINT脚本权限</h1><pre><code>1、脚本记得给权限（dockerfile文件中）
+eg: RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+</code></pre><h1 id="mysql默认密码及库"><a href="#mysql默认密码及库" class="headerlink" title="mysql默认密码及库"></a>mysql默认密码及库</h1><pre><code>设置两个环境：（docker-compose.yaml文件中）
+1、mysql初始密码：MYSQL_ROOT_PASSWORD
+2、mysql初始化创建的数据库：MYSQL_DATABASE
+eg: 
+    MYSQL_ROOT_PASSWORD: 123123
+    MYSQL_DATABASE: laravel_tet
+</code></pre><h1 id="初始化sql"><a href="#初始化sql" class="headerlink" title="初始化sql"></a>初始化sql</h1><pre><code>1、搭建开发环境的时候，肯定会有已有的数据结果和数据，需要进行初始化
+2、在docker mysql的官方镜像中，镜像首次启动时，会自动执行这个目录（/docker-entrypoint-initdb.d）下的脚本
+3、所以我们直接把需要执行的脚本挂载到执行的目录中去
+eg：
+    volumes:
+        - ./build/sql:/docker-entrypoint-initdb.d
+</code></pre><h1 id="修改image名称"><a href="#修改image名称" class="headerlink" title="修改image名称"></a>修改image名称</h1><pre><code>1、设置image的值；如果是根据dockerfile来build，那么就是image的值；如果image是dockerhub中的镜像名称，那么就是这个镜像名称
+eg:（docker-compose.yaml文件中）
+    第一种：(名称为test_laravel_nginx)
+        build: ./build/docker/nginx
+        image: test_laravel_nginx
+
+    第二种：（名称为redis）
+        image: redis:latest
+</code></pre><h1 id="修改容器名称"><a href="#修改容器名称" class="headerlink" title="修改容器名称"></a>修改容器名称</h1><pre><code>1、设置container_name的值
+eg：（docker-compose.yaml文件中）
+    container_name: test_laravel_php
+</code></pre><h1 id="nginx日志查看"><a href="#nginx日志查看" class="headerlink" title="nginx日志查看"></a>nginx日志查看</h1><h1 id="php日志查看"><a href="#php日志查看" class="headerlink" title="php日志查看"></a>php日志查看</h1><h1 id="strace使用"><a href="#strace使用" class="headerlink" title="strace使用"></a>strace使用</h1><pre><code>1、使用特权启动：(--privileged)
+    在run的时候使用
+        docker run -t -i --privileged container_name /bin/bash
+    在docker-compose使用
+        privileged: true
+
+2、docker-compose中设置权限
+    cap_add: 添加linux的部分功能
+    cap_drop：删除linux的部分功能
+    eg:
+        在run的时候使用
+            docker run -t -i --cap_add=ALL  --cap_drop=MKNOD container_name /bin/bash
+
+        在docker-compose使用
+            cap_add:
+              - ALL
+
+            cap_drop:
+              - NET_ADMIN
+              - SYS_ADMIN
+</code></pre><h1 id="如何跑crontab"><a href="#如何跑crontab" class="headerlink" title="如何跑crontab"></a>如何跑crontab</h1><pre><code>1、安装crontab
+2、在docker-entrypoint.sh中写入如下语句：
+        service crond start
+        crontab /data/htdocs/test_laravel/app/Console/crontab
+</code></pre><h1 id="nginx的容器如何安装软件"><a href="#nginx的容器如何安装软件" class="headerlink" title="nginx的容器如何安装软件"></a>nginx的容器如何安装软件</h1><pre><code>使用apt-get安装
+eg:    
+    1、apt-get update
+    2、apt-get install vim
+    3、apt-get install procps    (安装ps命令工具)
+</code></pre><h1 id="容器一启动就退出"><a href="#容器一启动就退出" class="headerlink" title="容器一启动就退出"></a>容器一启动就退出</h1><pre><code>1、查看日志（docker logs container_name）
+2、/usr/sbin/sshd -D
+3、如果可以启动，登录容器查看
+4、查看容器信息（docker inspect container_name）
+</code></pre><h1 id="如何对外提供访问"><a href="#如何对外提供访问" class="headerlink" title="如何对外提供访问"></a>如何对外提供访问</h1><pre><code>端口映射
+    1、宿主机解析域名
+    2、设置端口映射
+    3、访问宿主机指定端口
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="docker-compose搭建lareval环境遇到的坑"><a href="#docker-compose搭建lareval环境遇到的坑" class="headerlink" title="docker-compose搭建lareval环境遇到的坑"></a]]>
+    </summary>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
+    
+      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[docker-compose文件语法]]></title>
@@ -1287,1238 +1595,6 @@ else {
     <summary type="html">
     <![CDATA[<h1 id="hyperloglog结构"><a href="#hyperloglog结构" class="headerlink" title="hyperloglog结构"></a>hyperloglog结构</h1><pre><code>struct hllhdr {
   ]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[2017年个人总结]]></title>
-    <link href="http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.cxyteam.com/2018/02/03/2017年个人总结/</id>
-    <published>2018-02-03T07:07:06.000Z</published>
-    <updated>2018-06-12T16:51:16.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
-<li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br>c. 学习redis的源码<br>d. 了解Golang(没有应用起来)<br>e. 以后对于不应用的知识不去花太多时间去了解细节，做到了解就好了，不管了解到什么地步，只要不应用起来结果都是一样</p>
-</li>
-<li><p>管理<br>a. 负责php小组的事宜，招人，培训，提升，氛围打造都有过思考<br>b. 项目管理方面涉及较少（单个项目组成员较少，基本不需要额外的工作）</p>
-</li>
-<li><p>产品<br>a. 开发第一个自己的产品（从需求调研到上线都自己完成）<br>b. 进入业务一线，接触客户，了解原始需求</p>
-</li>
-<li><p>思维<br>a. 阅读了一些书籍，一些学习方法，做事方法慢慢的被关注到，并且实践其中的部分，未能坚持锻炼这些方法，以及总结对比整理出适合自己的方法<br>b. 能有初级的独立思考能力，还不是很深入，完善<br>c. 比较满意的一点：随时记录下来自己的思考，并试图划分事情的视角，从几个方向进行切入思考</p>
-</li>
-<li><p>投资<br>a. 制定了资产配置<br>b. 开销的预估不是很准确<br>c. 开始做定投股指及基金<br>d. 开始买股票<br>e. 年末才开始了解BTC，有点晚，之前一直都选择忽视，以后对于热点的东西都要及时跟进了解，哪怕就是不看好的，热点的东西必然有其学习的点<br>f. 虽然进行了基金，股票等投资但是专业知识还是很欠缺<br>g. 尚未进行保险购买</p>
-</li>
-<li><p>生活<br>a. 饮食方面控制的不错<br>b. 运动方面比较欠缺<br>c. 减肥这个事情看样子不是下决心这么简单<br>d. 重点关注运动健身方面，年纪越来越大，每天坐十多个小时身体还是扛不住的<br>e. 开始学习摄影，慢慢点培养点小爱好吧</p>
-</li>
-</ol>
-<h1 id="业务时间轴"><a href="#业务时间轴" class="headerlink" title="业务时间轴"></a>业务时间轴</h1><ol>
-<li><p>2月初-3月底<br> a. 基于钉钉的CRM系统收尾</p>
-<blockquote>
-<p>基于钉钉开发的一个客户管理系统，和订单进行了关联</p>
-</blockquote>
-<p> b. 跑市场，参与销售的总结会议，了解业务，挖掘需求</p>
-</li>
-</ol>
-<ol>
-<li><p>4月初-5月底<br> a. 一融通</p>
-<blockquote>
-<p><a href="http://www.cxyteam/2017/04/26/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E8%AF%9E%E7%94%9F/" target="_blank" rel="external">产品介绍</a></p>
-</blockquote>
-<p> b. 宅急融，金银屋</p>
-<blockquote>
-<p>商务用于针对超市等场所进行地推的工具</p>
-</blockquote>
-</li>
-<li><p>6月初-8月底<br> a. 贷款问答小程序<br> b. 产品宝典<br> c. 金银屋官网<br> d. 贷款评估</p>
-<blockquote>
-<p>这几个产品涵盖一个用户的转换路径，从web端浏览到微信端最终留下联系方式，针对几种类型的目标用户制定的产品，全程参与产品需求，讨论过程，理论基础是《用户体验要素》</p>
-</blockquote>
-</li>
-<li><p>8月初-11月底<br> a. 钱隆归来</p>
-<blockquote>
-<p>一款p2p理财产品，算是一个老的产品重启了，基础的逻辑没有修改，把对外对接的一些需求进行了更改，接入了新浪支付，以及做了部分附加的功能</p>
-</blockquote>
-</li>
-<li><p>11月初-11月底<br> a. 教育贷</p>
-<blockquote>
-<p>之前这个项目叫&lt;贷贷熊&gt;，在北京教育分期市场领域是第一，也是一个旧的项目重启，搭建到新的技术架构上面，整理了之前的需求，流程，最终形成文档</p>
-</blockquote>
-</li>
-<li><p>11月底-2月<br> a. 加入360</p>
-<p> b. 种草</p>
-<blockquote>
-<p>千万级流量的产品，内容型产品</p>
-</blockquote>
-<p> c. 模块化</p>
-<blockquote>
-<p>基础支持吧，可以认为是千人千面的实现，不过强大之处不在这里，具体之处好像不太合适说</p>
-</blockquote>
-<p> b. 百万赢家</p>
-<blockquote>
-<p>今年年底的一个热点，百万级别的并发，有幸加入这个项目组进行支援，还是学习到不少东西的</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h1><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
-<li>读的书籍数量增加了</li>
-<li>不仅仅局限在技术层面，内容变得宽泛</li>
-<li>抛弃了碎片阅读，在公众号消耗的时间减少了</li>
-<li>还是没能掌握方法，看完之后都不能总结这本书说了什么</li>
-<li>读书笔记还是没做</li>
-<li>读完一本书需要做读书笔记，哪怕是一句话总结也行</li>
-</ol>
-<h3 id="2017年读书单"><a href="#2017年读书单" class="headerlink" title="2017年读书单"></a>2017年读书单</h3><ol>
-<li><a href="https://book.douban.com/subject/26400900/" target="_blank" rel="external">创京东</a></li>
-<li><a href="https://book.douban.com/subject/1013208/" target="_blank" rel="external">如何阅读一本书</a></li>
-<li><a href="https://www.gitbook.com/download/pdf/book/xiaolai/reborn" target="_blank" rel="external">新生-七年就是一辈子</a></li>
-<li><a href="https://book.douban.com/subject/27173866/" target="_blank" rel="external">颠覆者</a></li>
-<li><a href="https://book.douban.com/subject/27204860/" target="_blank" rel="external">指数基金投资指南</a></li>
-<li><a href="https://book.douban.com/subject/25783654/" target="_blank" rel="external">如何高效学习</a> </li>
-<li><a href="https://book.douban.com/subject/6523997/" target="_blank" rel="external">用户体验要素</a></li>
-<li><a href="https://book.douban.com/subject/5914587/" target="_blank" rel="external">启示录</a></li>
-<li><a href="https://book.douban.com/subject/20036150/" target="_blank" rel="external">principles</a></li>
-<li><a href="https://book.douban.com/subject/2345548/" target="_blank" rel="external">学习之道</a></li>
-<li><a href="https://book.douban.com/subject/24737674/" target="_blank" rel="external">图解tcp/ip</a></li>
-<li><a href="https://book.douban.com/subject/25863515/" target="_blank" rel="external">图解http</a></li>
-<li><a href="https://book.douban.com/subject/26285268/" target="_blank" rel="external">第一本docker书</a></li>
-<li><a href="https://book.douban.com/subject/25940548/" target="_blank" rel="external">阅读整理学</a></li>
-<li><a href="https://book.douban.com/subject/3225979/" target="_blank" rel="external">一课经济学</a></li>
-<li><a href="https://book.douban.com/subject/25900156/" target="_blank" rel="external">redis设计与实现</a></li>
-<li><a href="https://book.douban.com/subject/20492550/" target="_blank" rel="external">清醒思考的艺术</a></li>
-<li><a href="https://book.douban.com/subject/25749845/" target="_blank" rel="external">把时间当作朋友</a></li>
-</ol>
-<h3 id="2018年计划书单"><a href="#2018年计划书单" class="headerlink" title="2018年计划书单"></a>2018年计划书单</h3><ol>
-<li><a href="https://www.amazon.cn/dp/B01ESWMJOK" target="_blank" rel="external">第一次买保险就买对</a></li>
-<li><p><a href="https://www.zhihu.com/question/22316395/answer/100909780" target="_blank" rel="external">如何用保险保障自己的一生</a><br> 以上两本都是保险方面的科普知识，总的来说我留下几个点：1、买消费型保险，不买分红型保险，买定期保险，不买终身保险 2、家庭经济支柱着重保障，整个保险支出不超过家庭收入的5% 3、为父母购置意外险，尤其注意保险须知 4、为家人选意外险，医疗险，定期寿险，重疾险 5、保险公司几乎不存在无法理赔的情况，不管是倒闭还是其他情况，国家在这方面做了很多事情，因此不要因为保险公司的大小去选择一款保险，当然要注意区分哪些是销售渠道 6、早买保险比晚买保险要划算，最好在30岁之前，30岁是个坎</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/6798611/" target="_blank" rel="external">乔布斯传</a><br> 主要是描述了乔布斯的一生，从经历及出生来还原乔布斯的性格，及为人处事方式，以及面对挫折的态度；做产品要排除任何因素做到极简，注重细节，哪怕是内部的布线；擅于听取意见（虽然很专制），只要能说服我，那就听你的；敢做，不被常理束缚只要是认为对的，就坚持做下去；从小发觉并培养爱好<br> 对于这类书籍不是太懂怎么读，更多的都是在描述一个成功人士的这一生，看他们处理事情的方式，应对危机的反应，有些事情没经历过还是很难有共鸣，希望更多的去学习人家的处事方式，以及学习其失败经验</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/26897464/" target="_blank" rel="external">小岛经济学</a><br> 通过一个小岛的发展，描述了一个国家经济从无到有，由盛转衰的过程，前面一大截还是很容易懂，到后面看有点吃力，对经济感兴趣的，强烈推荐这本书，不是讲生硬的经济学原理，而是通过生活的例子来叙述，里面讲述的金融的发展，通货膨胀及房地产泡沫还是很有意思的</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/24754537/" target="_blank" rel="external">简单的逻辑学</a><br> 讲的是一些基本的逻辑问题，前面一部分在说逻辑的一些基本的概念，后面是在拿实际例子在说明，看起来有点枯燥，留在脑海中的东西不多，唯一印象深刻一点的是以后说话需要遵循逻辑，事实，不能去夸大，缩小。这类型的书籍还是得掌握看书的方法</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/3000997/" target="_blank" rel="external">牛奶可乐经济学</a><br> 超级好的一本能够培养对经济感兴趣的书籍，没有枯燥的理论，都是实际的生活现象解释，通俗易懂，让人看了能够对生活现象恍然大悟，强烈推荐</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/1095634/" target="_blank" rel="external">小狗钱钱</a><br> 理财的入门书籍，讲述的都是一些很简单的知识，能够引导人形成理财的思维，是以童话的形式描述主人公一步步实现财务自由，同时灌输的一些理财知识，很适合用于小孩做财商的启蒙</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/26541801/" target="_blank" rel="external">增长黑客</a><br> 推荐看，本书主要从获取用户，提高留存，激发活跃，增加收入，加大传播等多个方面介绍增长的一些方法，衡量指标，里面有丰富的案例信息，更多的我是带着一种运营的眼光去看的，还是能提供很多思路，增长见识</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/6519055/" target="_blank" rel="external">买基金为自己加薪</a><br> 适合打算投资基金和基金的投资新手，主要在说为什么要买，如何买，如何去执行定投等购买策略有什么好处，算是介绍的比较全面了，对我来说比较有用的是基本面和技术面的这两节</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/10826987/" target="_blank" rel="external">小狗钱钱的爸爸教你实现财务自由</a><br>理财的入门书籍，旨在教你如何对待金钱，和小狗钱钱是同一个作者，稍微比小狗钱钱入门一点，不过我看着更像是一篇篇的鸡汤，看了几章实在看不下去了，初理财者或者自己财务管理不当的读者可以看看这本书</p>
-</li>
-<li><p><a href="https://book.douban.com/subject/1958147/comments/" target="_blank" rel="external">一个经济杀手的自白</a><br>跟预料中的有点差距，还是应该老实的先阅读目录。内容不太适合，讲的是通过一些手段去控制一个国家或者地区，从而获利，揭露了当时美国政府的一些阴暗面吧</p>
-</li>
-<li><p><a href="https://www.amazon.cn/dp/B07B4V226W?tag=baiduiclickcn-23&amp;ref=DEP_18412_sy_96" target="_blank" rel="external">好好赚钱</a><br>比较全面的入门的理财书籍，从教你如何对待钱，花钱到教你捋清楚自己的财务情况，介绍了多种理财产品，以及投资方式，最后介绍了极简投资的方式，感觉这本书学到了一个评估指数基金的方法：指数盈利收益率如果大于2倍国债收益率那就是低估，反之则是高估。盈利收益率就是市盈率的倒数（市盈率在股票软件都能查到），国债收益率也可以查到。以及指数基金卖出的三个原则：基本面恶化；有更好的选择；指数价格太高。<br>这本书总时间花了两个半小时，但是跨越了好几周，知识点都断开了，以后看书还是尽量连续的看。再者就是书中很多东西其实都了解了，但是又过了一遍，收益并不到。</p>
-</li>
-<li><p>思考，快与慢</p>
-</li>
-<li>决策与判断</li>
-<li>软能力</li>
-<li>腾讯传</li>
-<li>硅谷钢铁侠</li>
-<li>富爸爸穷爸爸</li>
-<li>有钱人想的和你不一样</li>
-<li>经济学通识</li>
-<li>魔鬼经济学</li>
-<li>七天读懂宏观经济</li>
-<li>百万富翁快车道</li>
-<li>人人都爱经济学</li>
-<li>邻家的百万富翁</li>
-<li>经济解释</li>
-<li>蜡烛图</li>
-<li>谷歌和亚马逊如何做产品</li>
-<li>运营有道：重新定义互联网运营</li>
-<li>银行行长不轻易说的理财经</li>
-<li>Redis开发与运维</li>
-<li>王二的经济学故事</li>
-<li>经济学</li>
-<li>一沙一世界</li>
-<li>冰与火，中国股市记忆</li>
-<li>解读基金-我的投资观与实践</li>
-<li>金字塔原理</li>
-</ol>
-<h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><ol>
-<li>锻炼身体</li>
-<li>写读书笔记</li>
-<li>实践学习方法并整理总结合适自己的</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ol>
-<li><p>技术<br>a. 对自己的技能进行了梳理，整理了一些串联的知识点<br>b. 学习docker并在工作中应用<br]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[百万级项目用到的缓存]]></title>
-    <link href="http://www.cxyteam.com/2018/02/02/%E7%99%BE%E4%B8%87%E7%BA%A7%E9%A1%B9%E7%9B%AE%E7%94%A8%E5%88%B0%E7%9A%84%E7%BC%93%E5%AD%98/"/>
-    <id>http://www.cxyteam.com/2018/02/02/百万级项目用到的缓存/</id>
-    <published>2018-02-02T07:19:26.000Z</published>
-    <updated>2018-02-03T07:06:42.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>  有幸参加到百万并发的项目中来，第一件事情当然是翻看并发的接口是如何编写的,下面是伪代码(场景也是造的)</p>
-<pre><code>class user {
-    static $user;
-
-    function getUserInfo($uid) {
-        if (self::$user) {
-            return self::$user[$uid];
-        }
-
-        if ($info = Apc::get($uid)) {
-            self::$user[$uid] = $info;
-            return $info;
-        }
-
-        if ($info = Redis::get($uid)) {
-            self::$user[$uid] = $info;
-            Apc::set($uid) = $info;
-            return $info;
-        }
-
-        if ($info = Mysql::get($uid)) {
-            self::$user[$uid] = $info;
-            Apc::set($uid) = $info;
-            Redis::set($uid) = $info                
-            return $info;
-        }
-
-        return array();
-    } 
-}   
-</code></pre><p>  其实主要是用到了三级缓存，静态变量做了进程内缓存，Apc做了进程间缓存，Redis做了content cache，下面来简单的介绍一下      </p>
-<h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><ol>
-<li><p>简介<br>在本次进程中进行内存共享</p>
-</li>
-<li><p>优势<br>快速释放，不需要复杂的回收，删除机制<br>同进行中共享一份数据</p>
-</li>
-<li><p>应用场景<br>在一次访问中频繁访问的数据可以进行缓存，比如说：单例模式，在一个进程中，需要访问同一个对象，会进行多次实例化，使用静态变量对对象进行存储，只有第一次访问的时候进行实例化</p>
-</li>
-</ol>
-<h1 id="apc"><a href="#apc" class="headerlink" title="apc"></a>apc</h1><ol>
-<li><p>简介<br>系统数据缓存：把php文件源码编译后的结果缓存在共享内存中使用，优化php的执行过程，避免从磁盘读取代码再编译的流程<br>用户数据缓存（当然主要指这一块）：将数据存储在共享内存中，可以多个php-fpm进程共享</p>
-</li>
-<li><p>优势<br>在本地机器中的缓存中，和redis等相比不存在网络消耗<br>和进程间缓存相比，可以多个进程公用一个缓存数据<br>数据存储在内存中，读取速度更快</p>
-</li>
-<li><p>应用场景<br>存储共用的数据，不要存储较个性化的数据（举例说：如果是一个集群机器，存储用户A的个人信息，A的访问是随机的打到集群的任意一台机器的，而当请求打到新的机器上又要进行一次缓存的读写，不仅浪费内存还要做更复杂的操作）</p>
-</li>
-</ol>
-<h1 id="yac"><a href="#yac" class="headerlink" title="yac"></a>yac</h1><ol>
-<li>类似于apc缓存，具体解决了什么问题，请看作者的文章介绍<blockquote>
-<p><a href="http://www.laruence.com/2013/03/18/2846.html" target="_blank" rel="external">http://www.laruence.com/2013/03/18/2846.html</a></p>
-</blockquote>
-</li>
-</ol>
-<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><ol>
-<li><p>简介<br>不想介绍了</p>
-</li>
-<li><p>优势<br> contentcache，可以多机共享，但是会有网络的消耗<br> 可以提供给多种语言访问（不限于php）</p>
-</li>
-<li><p>应用场景<br>主要用来应对高并发场景，数据存储在内存中响应速度较快</p>
-</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>  有幸参加到百万并发的项目中来，第一件事情当然是翻看并发的接口是如何编写的,下面是伪代码(场景也是造的)</p>
-<pre><code>c]]>
-    </summary>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/tags/PHP/"/>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/categories/PHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何快速的上手一个项目]]></title>
-    <link href="http://www.cxyteam.com/2018/01/24/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%9A%84%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://www.cxyteam.com/2018/01/24/如何快速的上手一个项目/</id>
-    <published>2018-01-24T06:51:53.000Z</published>
-    <updated>2018-01-25T15:27:54.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
-<li><p>安装的软件（lnmp各种依赖的库）<br> 清楚安装了什么软件，用到了什么拓展，如何运行环境，做到在本地搭建环境</p>
-</li>
-<li><p>nginx，php-fpm配置文件，及日志目录<br> 了解nginx配置，确保知道项目路径，入口文件，错误日志位置，当发现问题的时候能快速的定位到是环境出了问题，还是代码出了问题</p>
-</li>
-</ol>
-<h1 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h1><ol>
-<li><p>nginx，php-fpm，应用等的转发流程<br> 快速定位到异常的位置，配置文件等</p>
-</li>
-<li><p>框架路由<br> 了解代码对应的路径，最简单的是控制器，模型，视图的对应关系<br> 了解项目目录，大致了解代码所在位置</p>
-</li>
-</ol>
-<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><ol>
-<li><p>nginx，php-fpm，应用日志位置<br> 通过日志快速定位</p>
-</li>
-<li><p>记录日志方式（一般项目都有固定的写日志的方法）<br> 能够记录日志，便于事后查看异常，或做应用报警</p>
-</li>
-</ol>
-<h1 id="存储操作"><a href="#存储操作" class="headerlink" title="存储操作"></a>存储操作</h1><ol>
-<li>mysql，redis等的连接及操作，配置文件位置<br> 数据操作这块，curd最基本的要求，以及了解服务的配置（服务器，用户，密码，端口）</li>
-</ol>
-<h1 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h1><ol>
-<li><p>了解具体的业务在做什么<br> 只有了解了想要做什么，才能更快的理解代码，千万不要试图看代码去理解业务逻辑</p>
-</li>
-<li><p>操作一遍系统（大概猜测会有哪些接口，提供什么功能）<br> 清楚接口被如何使用</p>
-</li>
-<li><p>过一遍代码接口（知道已经提供哪些能力）<br> 大致的看一下文件名称，控制器名称，有接口文档更好，直接看接口文档，如果函数名称就是abcd类似的话，老实看代码吧，谁也救不了你</p>
-</li>
-<li><p>根据业务来看一个接口的代码（最好具有代表性）<br> 找一个比较核心的业务逻辑，跟着代码走一遍，看看如何实现（不要揪太细的点）<br> 熟悉代码风格<br> 代码目录<br> 及存储操作，异常，日志，类库等的使用</p>
-</li>
-</ol>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><ol>
-<li>动手去修改或者去写一些简单的需求（不要去细看代码了，遇到什么坑再去看旧代码）<br> 只有动手才知道哪不懂</li>
-</ol>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
-<li><p>最好抽时间把用到的框架做个了解，如果是用到了很多类库，也去把类库熟悉熟悉（看看使用示例就好了）<br> 熟悉已用到的技术，避免重复造轮子<br> 更好的理解设计意图，和代码作者达到一定的默契<br> 优化项目</p>
-</li>
-<li><p>把问题较多的，比较核心的代码过一遍（根据需求）<br> 做到心中有数，毕竟谁也不想当救火员，线上出问题，压力还是很大的</p>
-</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
-<li><p>安装的软件（lnmp各种依赖的库）<br> 清楚安装了什么软件，用到了什么拓展，如何运行环境，做到在本地搭]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-zskiplist源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/01/16/redis-zskiplist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/01/16/redis-zskiplist源码阅读/</id>
-    <published>2018-01-15T16:57:45.000Z</published>
-    <updated>2018-02-03T08:43:34.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="zskiplist结构"><a href="#zskiplist结构" class="headerlink" title="zskiplist结构"></a>zskiplist结构</h1><pre><code>/*
- * 跳跃表
- */
-typedef struct zskiplist {
-
-    // 表头节点和表尾节点
-    struct zskiplistNode *header, *tail;
-
-    // 表中节点的数量
-    unsigned long length;
-
-    // 表中层数最大的节点的层数
-    int level;
-
-} zskiplist;
-
-/*
- * 跳跃表节点
- */
-typedef struct zskiplistNode {
-
-    // 成员对象
-    robj *obj;
-
-    // 分值
-    double score;
-
-    // 后退指针
-    struct zskiplistNode *backward;
-
-    // 层 , 柔性数组
-    struct zskiplistLevel {
-
-        // 前进指针
-        struct zskiplistNode *forward;
-
-        // 跨度
-        unsigned int span;
-
-    } level[];
-
-} zskiplistNode;
-</code></pre><p><img src="/img/redis/redis_skiplist.png" alt="Alt text" title="skiplist"></p>
-<h1 id="什么是span-forward-score-rank"><a href="#什么是span-forward-score-rank" class="headerlink" title="什么是span,forward,score,rank"></a>什么是span,forward,score,rank</h1><ol>
-<li>span是指同一层的当前节点到下一个节点相隔的节点数，比如说，在L3这一层上，header的span为2，因为他在L3的下一个节点是node2</li>
-<li>forward指的是同一层上，当前节点指向下一个节点的指针</li>
-<li>score就是设置的一个分值，用来做排序的</li>
-<li>rank是指当前节点到头节点的节点数目，比如说L3的node2的rank值为2</li>
-</ol>
-<p><img src="/img/redis/skiplist.png" alt="Alt text" title="skiplist"></p>
-<h1 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h1><ol>
-<li>判断随机的lever是否比目前的最大lever要大，如果大，需要先将大于最大的level的部分进行初始化</li>
-<li>寻找到同一层当前节点的score比插入节点的score小，下一个节点的score比插入score大的节点</li>
-<li>将节点的forward指针替换</li>
-<li>计算span值（这个很有意思）</li>
-<li><p>span计算核心代码及事例（如下）</p>
-<p> 如下图：假设zskiplist的节点已经存在：-1，5，11，30，68，99，现在插入20这个节点，计算他的span的过程</p>
-<ol>
-<li>目前的zsl-&gt;lever为3，当前的x节点是header，在一个for循环中，由于i=zsl-&gt;lever-1,故rank[2]=0</li>
-<li>由于x的下一个节点的score是-1，小于即将插入的score为20这个值，故：rank[i] += x-&gt;level[i].span；rank[2]=1;x-&gt;level[2].span=1（level3上x也就是header节点的下一个节点（score为-1的节点）的距离为1）,x节点替换成score为-1所在的节点</li>
-<li>由于当前的i为1不等于zsl-&gt;lever-1=2,故rank[1]=rank[2]=1</li>
-<li>x的下一个节点的score是11，小于即将插入的score为20的这个值，故：rank[i] += x-&gt;level[i].span;rank[1]为3;即：x-&gt;lever[1].span+rank[1]; x-&gt;lever[1].span=2（score为-1的节点到score为11的节点的距离为2）；rank[1]=1;x节点替换为score为11的节点</li>
-<li>同理可得，rank[0]=3;</li>
-<li>截止到此处，rank数组已经获取到了：rank[0]=3;rank[1]=3;rank[2]=1;</li>
-<li>接下来对于score为20的节点的span的计算与它的前一个节点的计算就看下面两行代码：</li>
-<li>x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);</li>
-<li>update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;</li>
-</ol>
-</li>
-</ol>
-<pre><code>for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
-
-        /* store rank that is crossed to reach the insert position */
-        // 如果 i 不是 zsl-&gt;level-1 层
-        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
-        // 各个层的 rank 值一层层累积
-        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
-        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
-        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找
-
-        redisLog(REDIS_WARNING, &quot;rank[%d]:%d&quot;, i, rank[i]);
-        redisLog(REDIS_WARNING, &quot;x-&gt;score:%f&quot;, x-&gt;score);
-        // 沿着前进指针遍历跳跃表
-        // T_wrost = O(N^2), T_avg = O(N log N)
-        /*
-          同一层往前寻找，直到不再满足以下条件再找下一层，
-          将要和新节点相连接的节点满足如下条件：
-            1、forward不存在
-            2、forward节点的score大于新节点的score
-            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
-         */
-        if (x-&gt;level[i].forward) {
-            redisLog(REDIS_WARNING, &quot;判断的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
-        }
-        while (x-&gt;level[i].forward &amp;&amp;
-               (x-&gt;level[i].forward-&gt;score &lt; score ||
-                // 比对分值
-                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
-                 // 比对成员， T = O(N)
-                 compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
-
-            // 记录沿途跨越了多少个节点
-            redisLog(REDIS_WARNING, &quot;循环中的：x-&gt;level[%d].forward-&gt;score:%f&quot;, i, x-&gt;level[i].forward-&gt;score);
-            rank[i] += x-&gt;level[i].span;
-
-            // 移动至下一指针
-            x = x-&gt;level[i].forward;
-            redisLog(REDIS_WARNING, &quot;rank[%d]值:%d&quot;, i, rank[i]);
-        }
-        // 记录将要和新节点相连接的节点
-        update[i] = x;
-        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
-        redisLog(REDIS_WARNING, &quot;第%d遍历结束&quot;, i);
-    }
-
-for (i = 0; i &lt; level; i++) {
-    // 设置新节点的 forward 指针
-    x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
-
-    // 将沿途记录的各个节点的 forward 指针指向新节点
-    update[i]-&gt;level[i].forward = x;
-
-    /* update span covered by update[i] as x is inserted here */
-    // 计算新节点跨越的节点数量
-    x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
-    redisLog(REDIS_WARNING, &quot;update[%d]-&gt;score：%f&quot;,  i, update[i]-&gt;score);
-    // 更新新节点插入之后，沿途节点的 span 值
-    // 其中的 +1 计算的是新节点
-    update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
-
-    redisLog(REDIS_WARNING, &quot;新节点的span[%d]：%d&quot;, i, update[i]-&gt;level[i].span);
-}            
-</code></pre><p><img src="/img/redis/skiplist_add.png" alt="Alt text" title="skiplist"></p>
-<pre><code>zskiplistNode *zslInsert(zskiplist *zsl, double score, robj *obj) {
-    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
-    unsigned int rank[ZSKIPLIST_MAXLEVEL];
-    int i, level;
-
-    redisAssert(!isnan(score));
-
-    // 总体思路是先查找记录每层的节点位置,然后走和链表一样的插入操作
-    // 在各个层查找节点的插入位置, 更新update
-    // T_wrost = O(N^2), T_avg = O(N log N)
-    x = zsl-&gt;header;
-    redisLog(REDIS_WARNING, &quot;lever值为：%d&quot;, zsl-&gt;level);
-    redisLog(REDIS_WARNING, &quot;key为：%s&quot;, obj-&gt;ptr);
-    for (i = zsl-&gt;level - 1; i &gt;= 0; i--) {//按层遍历，最高层开始遍历，最底层遍历的话要走过每一个节点，跳跃表就没有任何意义了
-
-        /* store rank that is crossed to reach the insert position */
-        // 如果 i 不是 zsl-&gt;level-1 层
-        // 那么 i 层的起始 rank 值为 i+1 层的 rank 值
-        // 各个层的 rank 值一层层累积
-        // 最终 rank[0] 的值加一就是新节点的前置节点的排位
-        // rank[0] 会在后面成为计算 span 值和 rank 值的基础
-        rank[i] = i == (zsl-&gt;level - 1) ? 0 : rank[i + 1];//进行跳跃，如果最上面一层，老实的初始化，如果到了倒数第二层，则以最上面一层为起点开始寻找，如图的L2的20这个节点，他的初始的rank是4而不是0，如果是0的话，因此他的路线才是l3的20节点，再从l2的20去找，而不是l2的-1节点重新遍历
-
-        redisLog(REDIS_WARNING, &quot;rank[i+1]:%d&quot;, rank[i + 1]);
-        // 沿着前进指针遍历跳跃表
-        // T_wrost = O(N^2), T_avg = O(N log N)
-        /*
-          同一层往前寻找，直到不再满足以下条件再找下一层，
-          将要和新节点相连接的节点满足如下条件：
-            1、forward不存在
-            2、forward节点的score大于新节点的score
-            3、forward的节点和新的节点的score相等，forward节点的值大于新节点
-         */
-        while (x-&gt;level[i].forward &amp;&amp;
-            (x-&gt;level[i].forward-&gt;score &lt; score ||
-                // 比对分值
-                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
-                // 比对成员， T = O(N)
-                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
-
-            // 记录沿途跨越了多少个节点
-            rank[i] += x-&gt;level[i].span;//将小于自己的节点的span值加起来，例如：rank[1]的值为rank[0]的值（也就是l3的-1节点的span加上l3的20节点的span）加上下一个节点的span（l2的30节点的span值）
-
-            // 移动至下一指针
-            x = x-&gt;level[i].forward;
-            redisLog(REDIS_WARNING, &quot;rank值:%d&quot;, rank[i]);
-        }
-        // 记录将要和新节点相连接的节点
-        update[i] = x;
-        redisLog(REDIS_WARNING, &quot;span的值：%d&quot;, rank[i]);
-        redisLog(REDIS_WARNING, &quot;第%d个指针&quot;, i);
-        redisLog(REDIS_WARNING, &quot;score:%f&quot;, score);
-    }
-
-    /* we assume the key is not already inside, since we allow duplicated
-     * scores, and the re-insertion of score and redis object should never
-     * happen since the caller of zslInsert() should test in the hash table
-     * if the element is already inside or not. 
-     *
-     * zslInsert() 的调用者会确保同分值且同成员的元素不会出现，
-     * 所以这里不需要进一步进行检查，可以直接创建新元素。
-     */
-
-    // 获取一个随机值作为新节点的层数
-    // T = O(N)
-    level = zslRandomLevel();
-
-    // 如果新节点的层数比表中其他节点的层数都要大
-    // 那么初始化表头节点中未使用的层，并将它们记录到 update 数组中
-    // 将来也指向新节点
-    redisLog(REDIS_WARNING, &quot;随机分配的level:%d&quot;, level);
-    if (level &gt; zsl-&gt;level) {
-
-        // 初始化未使用层（因为是初始化大于最高层的层，因此只有header节点指向这些层）
-        // T = O(1)
-        for (i = zsl-&gt;level; i &lt; level; i++) {
-            rank[i] = 0;
-            update[i] = zsl-&gt;header;
-            update[i]-&gt;level[i].span = zsl-&gt;length;
-        }
-
-        // 更新表中节点最大层数
-        zsl-&gt;level = level;
-    }
-
-    // 创建新节点（创建数据和score）
-    x = zslCreateNode(level, score, obj);
-
-    // 分别处理每层update中对应的链表的insert操作
-    // 将前面记录的指针指向新节点，并做相应的设置
-    // T = O(1)
-    for (i = 0; i &lt; level; i++) {
-
-        // 设置新节点的 forward 指针
-        x-&gt;level[i].forward = update[i]-&gt;level[i].forward;
-
-        // 将沿途记录的各个节点的 forward 指针指向新节点
-        update[i]-&gt;level[i].forward = x;
-
-        /* update span covered by update[i] as x is inserted here */
-        // 计算新节点跨越的节点数量
-        x-&gt;level[i].span = update[i]-&gt;level[i].span - (rank[0] - rank[i]);
-
-        // 更新新节点插入之后，沿途节点的 span 值
-        // 其中的 +1 计算的是新节点
-        update[i]-&gt;level[i].span = (rank[0] - rank[i]) + 1;
-        redisLog(REDIS_WARNING, &quot;新节点的span：%d&quot;, x-&gt;level[i].span);
-    }
-
-    /* increment span for untouched levels */
-    // 未接触的节点的 span 值也需要增一，这些节点直接从表头指向新节点
-    // T = O(1)
-    for (i = level; i &lt; zsl-&gt;level; i++) {
-        update[i]-&gt;level[i].span++;
-    }
-
-    // 设置新节点的后退指针
-    x-&gt;backward = (update[0] == zsl-&gt;header) ? NULL : update[0];
-    if (x-&gt;level[0].forward) {
-        x-&gt;level[0].forward-&gt;backward = x;
-    }
-    else {
-        zsl-&gt;tail = x;
-    }
-
-    // 跳跃表的节点计数增一
-    zsl-&gt;length++;
-
-    redisLog(REDIS_WARNING, &quot;长度:%lu&quot;, zsl-&gt;length);
-    printf(&quot;\n&quot;);
-    return x;
-}
-</code></pre><h1 id="节点删除"><a href="#节点删除" class="headerlink" title="节点删除"></a>节点删除</h1><ol>
-<li>找出要删除节点的前一个节点，存入update中，再遍历</li>
-<li>如果删除的节点不存在当前层，则span-1（因为需要删除当前节点）</li>
-<li>如果要删除的节点存在当前层，则span为当前节点的span+删除节点的span-1</li>
-<li>判断最大的level值，替换前置，后置指针，及length值</li>
-</ol>
-<pre><code>int zslDelete(zskiplist *zsl, double score, robj *obj) {
-    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
-    int i;
-
-    // 查找目标节点, 把前置节点记录在update中
-    // 遍历跳跃表，查找目标节点，并记录所有沿途节点
-    // T_wrost = O(N^2), T_avg = O(N log N)
-    x = zsl-&gt;header;
-    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
-
-        // 遍历跳跃表的复杂度为 T_wrost = O(N), T_avg = O(log N)
-        while (x-&gt;level[i].forward &amp;&amp;
-            (x-&gt;level[i].forward-&gt;score &lt; score ||
-                // 比对分值
-                (x-&gt;level[i].forward-&gt;score == score &amp;&amp;
-                // 比对对象，T = O(N)
-                compareStringObjects(x-&gt;level[i].forward-&gt;obj, obj) &lt; 0))) {
-
-            // 沿着前进指针移动
-            x = x-&gt;level[i].forward;
-        }
-
-        // 记录沿途节点
-        update[i] = x;
-    }
-
-    /* We may have multiple elements with the same score, what we need
-     * is to find the element with both the right score and object. 
-     *
-     * 检查找到的元素 x ，只有在它的分值和对象都相同时，才将它删除。
-     */
-    x = x-&gt;level[0].forward;
-    if (x &amp;&amp; score == x-&gt;score &amp;&amp; equalStringObjects(x-&gt;obj, obj)) {
-        // T = O(1)
-        zslDeleteNode(zsl, x, update);
-        // T = O(1)
-        zslFreeNode(x);
-        return 1;
-    } else {
-        return 0; /* not found */
-    }
-
-    return 0; /* not found */
-}
-
-/**
- * zskiplistNode *x 删除节点的指针
- * zskiplistNode **update 删除节点的backward节点的指针
- */
-void zslDeleteNode(zskiplist *zsl, zskiplistNode *x, zskiplistNode **update) {
-    int i;
-
-    // 更新所有和被删除节点 x 有关的节点的指针，解除它们之间的关系
-    // T = O(1)
-    for (i = 0; i &lt; zsl-&gt;level; i++) {
-        //要删除的节点存在当前层
-        if (update[i]-&gt;level[i].forward == x) {
-            update[i]-&gt;level[i].span += x-&gt;level[i].span - 1;
-            update[i]-&gt;level[i].forward = x-&gt;level[i].forward;
-        } else {//删除的节点不存在当前层
-            update[i]-&gt;level[i].span -= 1;
-        }
-    }
-
-    // 更新被删除节点 x 的前进和后退指针
-    if (x-&gt;level[0].forward) {
-        x-&gt;level[0].forward-&gt;backward = x-&gt;backward;
-    } else {
-        zsl-&gt;tail = x-&gt;backward;
-    }
-
-    // 更新跳跃表最大层数（只在被删除节点是跳跃表中最高的节点时才执行）
-    // T = O(1)
-    while(zsl-&gt;level &gt; 1 &amp;&amp; zsl-&gt;header-&gt;level[zsl-&gt;level-1].forward == NULL) {
-        zsl-&gt;level--;
-    }
-
-    // 跳跃表节点计数器减一
-    zsl-&gt;length--;
-}
-</code></pre><h1 id="按照分值范围删除"><a href="#按照分值范围删除" class="headerlink" title="按照分值范围删除"></a>按照分值范围删除</h1><ol>
-<li>找到删除范围的最小的score的前一个节点的指针存入update</li>
-<li>在第0层中，找到所有的要删除的节点，并依次删除</li>
-<li>需要注意的是x-&gt;level[0].forward一定是删除范围最小的score的前一个最靠近的节点（因为第0层中是存在所有的节点的）</li>
-<li>另外关注一点的的：删除是从小到大，依次删除的，这样能保证update中的值，一定是被删除节点的前一个节点，比如说现在存在score为：1，2，3，4，5，6，7的节点，我要删除2-6之间的节点，那么我依次删除3，4，5；第一次删除3的时候他的前置节点是2，第二次删除4的时候，他的前置节点也是2，因为3被删除了</li>
-</ol>
-<pre><code>unsigned long zslDeleteRangeByScore(zskiplist *zsl, zrangespec *range, dict *dict) {
-    zskiplistNode *update[ZSKIPLIST_MAXLEVEL], *x;
-    unsigned long removed = 0;
-    int i;
-
-    // 记录所有和被删除节点（们）有关的节点
-    // T_wrost = O(N) , T_avg = O(log N)
-    x = zsl-&gt;header;
-    for (i = zsl-&gt;level-1; i &gt;= 0; i--) {
-        while (x-&gt;level[i].forward &amp;&amp; (range-&gt;minex ?
-            x-&gt;level[i].forward-&gt;score &lt;= range-&gt;min :
-            x-&gt;level[i].forward-&gt;score &lt; range-&gt;min)) {
-                x = x-&gt;level[i].forward;
-        }
-        update[i] = x;
-    }
-
-    /* Current node is the last with score &lt; or &lt;= min. */
-    // 定位到给定范围开始的第一个节点
-    x = x-&gt;level[0].forward;
-
-    /* Delete nodes while in range. */
-    // 删除范围中的所有节点
-    // T = O(N)
-    //在第0层中，找到所有的要删除的节点，并依次删除
-    while (x &amp;&amp;
-           (range-&gt;maxex ? x-&gt;score &lt; range-&gt;max : x-&gt;score &lt;= range-&gt;max))
-    {
-        // 记录下个节点的指针
-        zskiplistNode *next = x-&gt;level[0].forward;
-        zslDeleteNode(zsl, x, update);
-        dictDelete(dict, x-&gt;obj);
-        zslFreeNode(x);
-        removed++;
-        x = next;
-    }
-    return removed;
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="zskiplist结构"><a href="#zskiplist结构" class="headerlink" title="zskiplist结构"></a>zskiplist结构</h1><pre><code>/*
- * 跳跃表
- */
-typedef stru]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-dict源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/01/05/redis-dict%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/01/05/redis-dict源码阅读/</id>
-    <published>2018-01-05T07:26:40.000Z</published>
-    <updated>2018-01-15T14:22:05.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="dict结构"><a href="#dict结构" class="headerlink" title="dict结构"></a>dict结构</h1><pre><code>typedef struct dict {
-
-    // 类型特定函数
-    dictType *type;
-
-    // 私有数据
-    void *privdata;
-
-    // 哈希表
-    dictht ht[2];
-
-    // rehash 索引
-    // 当 rehash 不在进行时，值为 -1
-    int rehashidx; /* rehashing not in progress if rehashidx == -1 */
-
-    // 目前正在运行的安全迭代器的数量
-    int iterators; /* number of iterators currently running */
-
-} dict;
-
-typedef struct dictType {
-
-    // 计算哈希值的函数
-    unsigned int (*hashFunction)(const void *key);
-
-    // 复制键的函数
-    void *(*keyDup)(void *privdata, const void *key);
-
-    // 复制值的函数
-    void *(*valDup)(void *privdata, const void *obj);
-
-    // 对比键的函数
-    int (*keyCompare)(void *privdata, const void *key1, const void *key2);
-
-    // 销毁键的函数
-    void (*keyDestructor)(void *privdata, void *key);
-
-    // 销毁值的函数
-    void (*valDestructor)(void *privdata, void *obj);
-
-} dictType;
-
-typedef struct dictht {
-
-    // 哈希表数组
-    dictEntry **table;
-
-    // 哈希表大小
-    unsigned long size;
-
-    // 哈希表大小掩码，用于计算索引值
-    // 总是等于 size - 1
-    unsigned long sizemask;
-
-    // 该哈希表已有节点的数量(注意used的数量是所有的链表中的节点，比如说key1和key2冲突hash后得到的key是0，但是这里的used要加2)
-
-    unsigned long used;
-
-} dictht;
-
-typedef struct dictEntry {
-
-    // 键
-    void *key;
-
-    // 值
-    union {
-        void *val;
-        uint64_t u64;
-        int64_t s64;
-    } v;
-
-    // 指向下个哈希表节点，形成链表
-    struct dictEntry *next;
-
-} dictEntry;
-</code></pre><p><img src="/img/redis/dict.svg" alt="Alt text" title="dict结构"></p>
-<h1 id="dict何时进行rehash（渐进式rehash）"><a href="#dict何时进行rehash（渐进式rehash）" class="headerlink" title="dict何时进行rehash（渐进式rehash）"></a>dict何时进行rehash（渐进式rehash）</h1><ol>
-<li>添加节点的时候，进行单步rehash（dictAddRaw）</li>
-<li>删除节点的时候，进行单步rehash（dictGenericDelete）</li>
-<li>进行查找节点的时候（dictFind）</li>
-<li>获取随机值的时候（dictGetRandomKey）</li>
-<li>dictRehashMilliseconds</li>
-<li>_dictRehashStep</li>
-<li>如下代码所示，每次进行上述操作的时候，会调用dictRehash（指定执行N步rehash，不会一次性rehash所有的dict节点）,渐进式的好处在于：1、不会阻塞用户的数据返回（假如用户的操作触发了rehash，如果是全量rehash，那么要等待全量rehash完成才返回数据，时间会非常长，体验不好）2、避免了系统的集中式计算 </li>
-</ol>
-<pre><code>int dictRehash(dict *d, int n) {
-
-    // 只可以在 rehash 进行中时执行
-    if (!dictIsRehashing(d)) {
-        return 0;   
-    }
-
-    // 进行 N 步迁移
-    // T = O(N)
-    while(n--) {
-        dictEntry *de, *nextde;
-
-        /* Check if we already rehashed the whole table... */
-        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
-        // T = O(1)
-        if (d-&gt;ht[0].used == 0) {
-            // 释放 0 号哈希表
-            zfree(d-&gt;ht[0].table);
-            // 将原来的 1 号哈希表设置为新的 0 号哈希表
-            d-&gt;ht[0] = d-&gt;ht[1];
-            // 重置旧的 1 号哈希表
-            _dictReset(&amp;d-&gt;ht[1]);
-            // 关闭 rehash 标识
-            d-&gt;rehashidx = -1;
-            // 返回 0 ，向调用者表示 rehash 已经完成
-            return 0;
-        }
-
-        /* Note that rehashidx can&apos;t overflow as we are sure there are more
-         * elements because ht[0].used != 0 */
-        // 确保 rehashidx 没有越界
-        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
-
-        // 略过数组中为空的索引，找到下一个非空索引
-        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
-            d-&gt;rehashidx++;
-        }
-
-        // 指向该索引的链表表头节点
-        de = d-&gt;ht[0].table[d-&gt;rehashidx];
-        /* Move all the keys in this bucket from the old to the new hash HT */
-        // 将链表中的所有节点迁移到新哈希表
-        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
-        // T = O(1)
-        while(de) {
-            unsigned int h;
-
-            // 保存下个节点的指针
-            nextde = de-&gt;next;
-
-            /* Get the index in the new hash table */
-            // 计算新哈希表的哈希值，以及节点插入的索引位置
-            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
-
-            // 插入节点到新哈希表
-            de-&gt;next = d-&gt;ht[1].table[h];
-            d-&gt;ht[1].table[h] = de;
-
-            // 更新计数器
-            d-&gt;ht[0].used--;
-            d-&gt;ht[1].used++;
-
-            // 继续处理下个节点
-            de = nextde;
-        }
-        // 将刚迁移完的哈希表索引的指针设为空
-        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
-        // 更新 rehash 索引
-        d-&gt;rehashidx++;
-    }
-
-    return 1;
-}
-</code></pre><h1 id="dict的rehash判断标准"><a href="#dict的rehash判断标准" class="headerlink" title="dict的rehash判断标准"></a>dict的rehash判断标准</h1><ol>
-<li>dict_can_resize标识可进行rehash</li>
-<li>dictIsRehashing标识没有正在进行rehash</li>
-<li>hashtable[1]的可用空间大小不能小于hashtable[0]的已用空间大小</li>
-<li>hashtable[0]的used!=0</li>
-</ol>
-<pre><code>int dictResize(dict *d)
-{
-    int minimal;
-
-    // 不能在关闭 rehash 或者正在 rehash 的时候调用
-    if (!dict_can_resize || dictIsRehashing(d)) {
-        return DICT_ERR;
-    }
-
-    // 计算让比率接近 1：1 所需要的最少节点数量
-    minimal = d-&gt;ht[0].used;
-    if (minimal &lt; DICT_HT_INITIAL_SIZE) {
-        minimal = DICT_HT_INITIAL_SIZE;
-    }
-
-    // 调整字典的大小
-    // T = O(N)
-    return dictExpand(d, minimal);
-}
-</code></pre><h1 id="dict怎样进行rehash"><a href="#dict怎样进行rehash" class="headerlink" title="dict怎样进行rehash"></a>dict怎样进行rehash</h1><ol>
-<li>进行一系列是否能rehash的判断</li>
-<li>找到当前存在ht[0]的rehashidx,表示当前rehashidx没有进行迁移（也就是：d-&gt;ht[0].table[d-&gt;rehashidx] != NULL）</li>
-<li>分配ht[1]-&gt;table的空间，大小至少为ht[0]-&gt;usedd的两倍</li>
-<li>遍历当前的节点对应的链（hash冲突使用链表法解决的，所以一个d-&gt;ht[0].table[d-&gt;rehashidx]保存了一个链表）</li>
-<li>把节点从ht[0]移动到ht[1],移动完所有的节点后，释放ht[0],将原来的ht[1]成为新的ht[0],创建一个新的ht[1]</li>
-<li>修改rehashidx的值</li>
-</ol>
-<pre><code>int dictRehash(dict *d, int n) {
-
-    // 只可以在 rehash 进行中时执行
-    if (!dictIsRehashing(d)) {
-        return 0;   
-    }
-
-    // 进行 N 步迁移
-    // T = O(N)
-    while(n--) {
-        dictEntry *de, *nextde;
-
-        /* Check if we already rehashed the whole table... */
-        // 如果 0 号哈希表为空，那么表示 rehash 执行完毕
-        // T = O(1)
-        if (d-&gt;ht[0].used == 0) {
-            // 释放 0 号哈希表
-            zfree(d-&gt;ht[0].table);
-            // 将原来的 1 号哈希表设置为新的 0 号哈希表
-            d-&gt;ht[0] = d-&gt;ht[1];
-            // 重置旧的 1 号哈希表
-            _dictReset(&amp;d-&gt;ht[1]);
-            // 关闭 rehash 标识
-            d-&gt;rehashidx = -1;
-            // 返回 0 ，向调用者表示 rehash 已经完成
-            return 0;
-        }
-
-        /* Note that rehashidx can&apos;t overflow as we are sure there are more
-         * elements because ht[0].used != 0 */
-        // 确保 rehashidx 没有越界
-        assert(d-&gt;ht[0].size &gt; (unsigned)d-&gt;rehashidx);
-
-        // 略过数组中为空的索引，找到下一个非空索引
-        while(d-&gt;ht[0].table[d-&gt;rehashidx] == NULL) {
-            d-&gt;rehashidx++;
-        }
-
-        // 指向该索引的链表表头节点
-        de = d-&gt;ht[0].table[d-&gt;rehashidx];
-        /* Move all the keys in this bucket from the old to the new hash HT */
-        // 将链表中的所有节点迁移到新哈希表
-        // 注意：hash的冲突解决是链地址法，所以一个rehashidx对应的是一个链表，需要将整个链表移动过去
-        // T = O(1)
-        while(de) {
-            unsigned int h;
-
-            // 保存下个节点的指针
-            nextde = de-&gt;next;
-
-            /* Get the index in the new hash table */
-            // 计算新哈希表的哈希值，以及节点插入的索引位置
-            h = dictHashKey(d, de-&gt;key) &amp; d-&gt;ht[1].sizemask;
-
-            // 插入节点到新哈希表
-            de-&gt;next = d-&gt;ht[1].table[h];
-            d-&gt;ht[1].table[h] = de;
-
-            // 更新计数器
-            d-&gt;ht[0].used--;
-            d-&gt;ht[1].used++;
-
-            // 继续处理下个节点
-            de = nextde;
-        }
-        // 将刚迁移完的哈希表索引的指针设为空
-        d-&gt;ht[0].table[d-&gt;rehashidx] = NULL;
-        // 更新 rehash 索引
-        d-&gt;rehashidx++;
-    }
-
-    return 1;
-}
-</code></pre><h1 id="dict如何解决hash冲突"><a href="#dict如何解决hash冲突" class="headerlink" title="dict如何解决hash冲突"></a>dict如何解决hash冲突</h1><ol>
-<li>hash冲突：指两个不同的键拥有相同的hash值 </li>
-<li>链地址法： 使用链表将多个哈希值相同的节点串连在一起， 从而解决冲突问题</li>
-<li>如图，0号节点的key4和key1产生了hash冲突（hash冲突：key4和key1算出来的hash的值都为0，链地址法：dict使用链表把key4和key1链接起来，从而可以解决hash冲突的问题）</li>
-</ol>
-<pre><code>static int _dictKeyIndex(dict *d, const void *key)
-{
-    unsigned int h, idx, table;
-    dictEntry *he;
-
-    /* Expand the hash table if needed */
-    // 单步 rehash
-    // T = O(N)
-    if (_dictExpandIfNeeded(d) == DICT_ERR)
-        return -1;
-
-    /* Compute the key hash value */
-    // 计算 key 的哈希值
-    h = dictHashKey(d, key);
-    // T = O(1)
-    for (table = 0; table &lt;= 1; table++) {
-
-        // 计算索引值
-        idx = h &amp; d-&gt;ht[table].sizemask;
-
-        /* Search if this slot does not already contain the given key */
-        // 查找 key 是否存在
-        // T = O(1)
-        he = d-&gt;ht[table].table[idx];
-        while(he) {//如果当前节点已经存在值（就是hash冲突），就计算他的链表的最后节点的指针
-            if (dictCompareKeys(d, key, he-&gt;key))
-                return -1;
-            he = he-&gt;next;
-        }
-
-        // 如果运行到这里时，说明 0 号哈希表中所有节点都不包含 key
-        // 如果这时 rehahs 正在进行，那么继续对 1 号哈希表进行 rehash
-        if (!dictIsRehashing(d)) break;
-    }
-
-    // 返回索引值
-    return idx;
-}
-</code></pre><p><img src="/img/redis/collision.svg" alt="Alt text" title="hash冲突"></p>
-<h1 id="安全迭代器和非安全迭代器有什么区别"><a href="#安全迭代器和非安全迭代器有什么区别" class="headerlink" title="安全迭代器和非安全迭代器有什么区别"></a>安全迭代器和非安全迭代器有什么区别</h1><ol>
-<li>安全迭代器：在迭代进行过程中，可以对字典进行修改</li>
-<li>不安全迭代器：在迭代进行过程中，不对字典进行修改</li>
-</ol>
-<h1 id="redis如何保证遍历dict的时候能遍历到全部的数据"><a href="#redis如何保证遍历dict的时候能遍历到全部的数据" class="headerlink" title="redis如何保证遍历dict的时候能遍历到全部的数据"></a>redis如何保证遍历dict的时候能遍历到全部的数据</h1><ol>
-<li>还需要查看dictscan函数，算法有点复杂</li>
-<li>建议阅读以下文章<blockquote>
-<p><a href="http://chenzhenianqing.com/articles/1101.html" target="_blank" rel="external">http://chenzhenianqing.com/articles/1101.html</a><br><a href="http://blog.csdn.net/gqtcgq/article/details/50533336" target="_blank" rel="external">http://blog.csdn.net/gqtcgq/article/details/50533336</a><br><a href="http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/" target="_blank" rel="external">http://www.arthuryangcs.com/2016/12/10/Redis%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3dict%E5%8F%8AdictScan/</a></p>
-</blockquote>
-</li>
-</ol>
-<h1 id="有趣的代码"><a href="#有趣的代码" class="headerlink" title="有趣的代码"></a>有趣的代码</h1><ol>
-<li>计算索引值<br> 如下代码：d-&gt;ht[table].sizemask的值为2的n次方-1（为size-1）<br> 其实下面代码的含义可以理解为h和sizemask”取模”（不是真正意义的取模哦）</li>
-</ol>
-<pre><code>idx = h &amp; d-&gt;ht[table].sizemask;
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="dict结构"><a href="#dict结构" class="headerlink" title="dict结构"></a>dict结构</h1><pre><code>typedef struct dict {
-
-    // 类型特定函数
-    dictT]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-adlist源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/01/04/redis-adlist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/01/04/redis-adlist源码阅读/</id>
-    <published>2018-01-04T14:02:22.000Z</published>
-    <updated>2018-01-04T14:48:56.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="adlist结构"><a href="#adlist结构" class="headerlink" title="adlist结构"></a>adlist结构</h1><pre><code>typedef struct list {
-
-    /** 表头节点 */
-    listNode *head;
-
-    /** 表尾节点 */
-    listNode *tail;
-
-    /** 节点值复制函数 */
-    void *(*dup)(void *ptr);
-
-    /** 节点值释放函数 */
-    void (*free)(void *ptr);
-
-    /** 节点值对比函数 */
-    int (*match)(void *ptr, void *key);
-
-    /** 链表所包含的节点数量 */
-    unsigned long len;
-
-} list;
-
-typedef struct listNode {
-
-    /** 前置节点 */
-    struct listNode *prev;
-
-    /** 后置节点 */
-    struct listNode *next;
-
-    /** 节点的值 */
-    void *value;
-
-} listNode;
-</code></pre><p><img src="/img/redis/adlist.svg" alt="Alt text" title="adlist结构">    </p>
-<h1 id="双端链表修改注意事项"><a href="#双端链表修改注意事项" class="headerlink" title="双端链表修改注意事项"></a>双端链表修改注意事项</h1><h3 id="在进行修改（增，删）双端链表的时候需要考虑这四个方面："><a href="#在进行修改（增，删）双端链表的时候需要考虑这四个方面：" class="headerlink" title="在进行修改（增，删）双端链表的时候需要考虑这四个方面："></a>在进行修改（增，删）双端链表的时候需要考虑这四个方面：</h3><h6 id="1、修改当前节点的前后指针"><a href="#1、修改当前节点的前后指针" class="headerlink" title="1、修改当前节点的前后指针"></a>1、修改当前节点的前后指针</h6><h6 id="2、修改当前节点的相邻节点的前后指针"><a href="#2、修改当前节点的相邻节点的前后指针" class="headerlink" title="2、修改当前节点的相邻节点的前后指针"></a>2、修改当前节点的相邻节点的前后指针</h6><h6 id="3、判断当前节点是否是首尾节点，修改list的首尾节点指针"><a href="#3、判断当前节点是否是首尾节点，修改list的首尾节点指针" class="headerlink" title="3、判断当前节点是否是首尾节点，修改list的首尾节点指针"></a>3、判断当前节点是否是首尾节点，修改list的首尾节点指针</h6><h6 id="4、修改len值"><a href="#4、修改len值" class="headerlink" title="4、修改len值"></a>4、修改len值</h6><h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><h6 id="如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）"><a href="#如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）" class="headerlink" title="如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）"></a>如果要修改将node2，添加到node1和node3之间（添加之前试想一下只存在node1，node3，node4节点）</h6><h6 id="操作步奏："><a href="#操作步奏：" class="headerlink" title="操作步奏："></a>操作步奏：</h6><h6 id="1、将node2的prev指向node1，将node2的next指向node3"><a href="#1、将node2的prev指向node1，将node2的next指向node3" class="headerlink" title="1、将node2的prev指向node1，将node2的next指向node3"></a>1、将node2的prev指向node1，将node2的next指向node3</h6><h6 id="2、将node1的next指向node2，将node3的orev指向node2"><a href="#2、将node1的next指向node2，将node3的orev指向node2" class="headerlink" title="2、将node1的next指向node2，将node3的orev指向node2"></a>2、将node1的next指向node2，将node3的orev指向node2</h6><h6 id="3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2"><a href="#3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2" class="headerlink" title="3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2"></a>3、判断不是首尾节点，如果是的话，需要将list的tail或者list的head指向node2</h6><h6 id="4-len的值加1"><a href="#4-len的值加1" class="headerlink" title="4.len的值加1"></a>4.len的值加1</h6><pre><code>示例代码：
-list *listInsertNode(list *list, listNode *old_node, void *value, int after) {
-    listNode *node;
-
-    // 创建新节点
-    if ((node = zmalloc(sizeof(*node))) == NULL)
-        return NULL;
-
-    // 保存值
-    node-&gt;value = value;
-
-    // 将新节点添加到给定节点之后
-    if (after) {
-        node-&gt;prev = old_node;
-        node-&gt;next = old_node-&gt;next;
-        // 给定节点是原表尾节点
-        if (list-&gt;tail == old_node) {
-            list-&gt;tail = node;
-        }
-    // 将新节点添加到给定节点之前
-    } else {
-        node-&gt;next = old_node;
-        node-&gt;prev = old_node-&gt;prev;
-        // 给定节点是原表头节点
-        if (list-&gt;head == old_node) {
-            list-&gt;head = node;
-        }
-    }
-
-    //这里需要注意的是，两个节点的连接，既要改变当前插入节点的前后节点指针，也要改变相邻节点的指针
-    // 更新新节点的前置指针
-    if (node-&gt;prev != NULL) {
-        node-&gt;prev-&gt;next = node;
-    }
-    // 更新新节点的后置指针
-    if (node-&gt;next != NULL) {
-        node-&gt;next-&gt;prev = node;
-    }
-
-    // 更新链表节点数
-    list-&gt;len++;
-
-    return list;
-}
-</code></pre><p><img src="/img/redis/mod_adlist.png" alt="Alt text" title="修改adlist示意图">    </p>
-<h1 id="双端链表遍历"><a href="#双端链表遍历" class="headerlink" title="双端链表遍历"></a>双端链表遍历</h1><h6 id="迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向"><a href="#迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向" class="headerlink" title="迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向"></a>迭代器相对来说比较简单，首先listIter定义了当前节点，和迭代方向</h6><h6 id="然后使用listNext进行节点的移动"><a href="#然后使用listNext进行节点的移动" class="headerlink" title="然后使用listNext进行节点的移动"></a>然后使用listNext进行节点的移动</h6><h6 id="最后使用len属性和while进行节点的循环遍历"><a href="#最后使用len属性和while进行节点的循环遍历" class="headerlink" title="最后使用len属性和while进行节点的循环遍历"></a>最后使用len属性和while进行节点的循环遍历</h6><pre><code>示例代码：
-typedef struct listIter {
-
-    /** 当前迭代到的节点 */
-    listNode *next;
-
-    /** 迭代的方向 */
-    int direction;
-
-} listIter;
-
-listNode *listNext(listIter *iter)
-{
-    listNode *current = iter-&gt;next;
-
-    if (current != NULL) {
-        // 根据方向选择下一个节点
-        if (iter-&gt;direction == AL_START_HEAD)
-            // 保存下一个节点，防止当前节点被删除而造成指针丢失
-            iter-&gt;next = current-&gt;next;
-        else
-            // 保存下一个节点，防止当前节点被删除而造成指针丢失
-            iter-&gt;next = current-&gt;prev;
-    }
-
-    return current;
-}
-
-list *listDup(list *orig)
-{
-    list *copy;
-    listIter *iter;
-    listNode *node;
-
-    // 创建新链表
-    if ((copy = listCreate()) == NULL)
-        return NULL;
-
-    // 设置节点值处理函数
-    copy-&gt;dup = orig-&gt;dup;
-    copy-&gt;free = orig-&gt;free;
-    copy-&gt;match = orig-&gt;match;
-
-    // 迭代整个输入链表
-    iter = listGetIterator(orig, AL_START_HEAD);
-    while((node = listNext(iter)) != NULL) {
-        void *value;
-
-        // 复制节点值到新节点
-        if (copy-&gt;dup) {
-            value = copy-&gt;dup(node-&gt;value);
-            if (value == NULL) {
-                listRelease(copy);
-                listReleaseIterator(iter);
-                return NULL;
-            }
-        } else
-            value = node-&gt;value;
-
-        // 将节点添加到链表
-        if (listAddNodeTail(copy, value) == NULL) {
-            listRelease(copy);
-            listReleaseIterator(iter);
-            return NULL;
-        }
-    }
-
-    // 释放迭代器
-    listReleaseIterator(iter);
-
-    // 返回副本
-    return copy;
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="adlist结构"><a href="#adlist结构" class="headerlink" title="adlist结构"></a>adlist结构</h1><pre><code>typedef struct list {
-
-    /** 表头节点 */]]>
     </summary>
     
       <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>

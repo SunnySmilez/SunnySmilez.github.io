@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="docker-compose搭建lareval环境遇到的坑images不存在1、修改docker的镜像源
+2、docker search 确认是否存在
+ENTRYPOINT脚本路径1、先复制到/usr/local/bin目录下
+2、在填入绝对路径
+eg：（dockerfile文件中）
+    COPY ./docker-entrypoint.sh /usr/local/bin/
+    ENTRY">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker-compose配置laravel环境">
+<meta property="og:url" content="http://www.cxyteam.com/2018/06/21/docker-compose配置laravel环境/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="docker-compose搭建lareval环境遇到的坑images不存在1、修改docker的镜像源
+2、docker search 确认是否存在
+ENTRYPOINT脚本路径1、先复制到/usr/local/bin目录下
+2、在填入绝对路径
+eg：（dockerfile文件中）
+    COPY ./docker-entrypoint.sh /usr/local/bin/
+    ENTRY">
+<meta property="og:updated_time" content="2018-06-25T16:34:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker-compose配置laravel环境">
+<meta name="twitter:description" content="docker-compose搭建lareval环境遇到的坑images不存在1、修改docker的镜像源
+2、docker search 确认是否存在
+ENTRYPOINT脚本路径1、先复制到/usr/local/bin目录下
+2、在填入绝对路径
+eg：（dockerfile文件中）
+    COPY ./docker-entrypoint.sh /usr/local/bin/
+    ENTRY">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2018/06/21/docker-compose配置laravel环境/"/>
+
+
+
+
+
+  <title>docker-compose配置laravel环境 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/06/21/docker-compose配置laravel环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker-compose配置laravel环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T10:43:07+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/21/docker-compose配置laravel环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/21/docker-compose配置laravel环境/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="docker-compose搭建lareval环境遇到的坑"><a href="#docker-compose搭建lareval环境遇到的坑" class="headerlink" title="docker-compose搭建lareval环境遇到的坑"></a>docker-compose搭建lareval环境遇到的坑</h1><h3 id="images不存在"><a href="#images不存在" class="headerlink" title="images不存在"></a>images不存在</h3><pre><code>1、修改docker的镜像源
+2、docker search 确认是否存在
+</code></pre><h1 id="ENTRYPOINT脚本路径"><a href="#ENTRYPOINT脚本路径" class="headerlink" title="ENTRYPOINT脚本路径"></a>ENTRYPOINT脚本路径</h1><pre><code>1、先复制到/usr/local/bin目录下
+2、在填入绝对路径
+eg：（dockerfile文件中）
+    COPY ./docker-entrypoint.sh /usr/local/bin/
+    ENTRYPOINT [&quot;/usr/local/bin/docker-entrypoint.sh&quot;]
+</code></pre><h1 id="ENTRYPOINT脚本权限"><a href="#ENTRYPOINT脚本权限" class="headerlink" title="ENTRYPOINT脚本权限"></a>ENTRYPOINT脚本权限</h1><pre><code>1、脚本记得给权限（dockerfile文件中）
+eg: RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+</code></pre><h1 id="mysql默认密码及库"><a href="#mysql默认密码及库" class="headerlink" title="mysql默认密码及库"></a>mysql默认密码及库</h1><pre><code>设置两个环境：（docker-compose.yaml文件中）
+1、mysql初始密码：MYSQL_ROOT_PASSWORD
+2、mysql初始化创建的数据库：MYSQL_DATABASE
+eg: 
+    MYSQL_ROOT_PASSWORD: 123123
+    MYSQL_DATABASE: laravel_tet
+</code></pre><h1 id="初始化sql"><a href="#初始化sql" class="headerlink" title="初始化sql"></a>初始化sql</h1><pre><code>1、搭建开发环境的时候，肯定会有已有的数据结果和数据，需要进行初始化
+2、在docker mysql的官方镜像中，镜像首次启动时，会自动执行这个目录（/docker-entrypoint-initdb.d）下的脚本
+3、所以我们直接把需要执行的脚本挂载到执行的目录中去
+eg：
+    volumes:
+        - ./build/sql:/docker-entrypoint-initdb.d
+</code></pre><h1 id="修改image名称"><a href="#修改image名称" class="headerlink" title="修改image名称"></a>修改image名称</h1><pre><code>1、设置image的值；如果是根据dockerfile来build，那么就是image的值；如果image是dockerhub中的镜像名称，那么就是这个镜像名称
+eg:（docker-compose.yaml文件中）
+    第一种：(名称为test_laravel_nginx)
+        build: ./build/docker/nginx
+        image: test_laravel_nginx
+
+    第二种：（名称为redis）
+        image: redis:latest
+</code></pre><h1 id="修改容器名称"><a href="#修改容器名称" class="headerlink" title="修改容器名称"></a>修改容器名称</h1><pre><code>1、设置container_name的值
+eg：（docker-compose.yaml文件中）
+    container_name: test_laravel_php
+</code></pre><h1 id="nginx日志查看"><a href="#nginx日志查看" class="headerlink" title="nginx日志查看"></a>nginx日志查看</h1><h1 id="php日志查看"><a href="#php日志查看" class="headerlink" title="php日志查看"></a>php日志查看</h1><h1 id="strace使用"><a href="#strace使用" class="headerlink" title="strace使用"></a>strace使用</h1><pre><code>1、使用特权启动：(--privileged)
+    在run的时候使用
+        docker run -t -i --privileged container_name /bin/bash
+    在docker-compose使用
+        privileged: true
+
+2、docker-compose中设置权限
+    cap_add: 添加linux的部分功能
+    cap_drop：删除linux的部分功能
+    eg:
+        在run的时候使用
+            docker run -t -i --cap_add=ALL  --cap_drop=MKNOD container_name /bin/bash
+
+        在docker-compose使用
+            cap_add:
+              - ALL
+
+            cap_drop:
+              - NET_ADMIN
+              - SYS_ADMIN
+</code></pre><h1 id="如何跑crontab"><a href="#如何跑crontab" class="headerlink" title="如何跑crontab"></a>如何跑crontab</h1><pre><code>1、安装crontab
+2、在docker-entrypoint.sh中写入如下语句：
+        service crond start
+        crontab /data/htdocs/test_laravel/app/Console/crontab
+</code></pre><h1 id="nginx的容器如何安装软件"><a href="#nginx的容器如何安装软件" class="headerlink" title="nginx的容器如何安装软件"></a>nginx的容器如何安装软件</h1><pre><code>使用apt-get安装
+eg:    
+    1、apt-get update
+    2、apt-get install vim
+    3、apt-get install procps    (安装ps命令工具)
+</code></pre><h1 id="容器一启动就退出"><a href="#容器一启动就退出" class="headerlink" title="容器一启动就退出"></a>容器一启动就退出</h1><pre><code>1、查看日志（docker logs container_name）
+2、/usr/sbin/sshd -D
+3、如果可以启动，登录容器查看
+4、查看容器信息（docker inspect container_name）
+</code></pre><h1 id="如何对外提供访问"><a href="#如何对外提供访问" class="headerlink" title="如何对外提供访问"></a>如何对外提供访问</h1><pre><code>端口映射
+    1、宿主机解析域名
+    2、设置端口映射
+    3、访问宿主机指定端口
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/docker-compose文件语法/" rel="next" title="docker-compose文件语法">
+                <i class="fa fa-chevron-left"></i> docker-compose文件语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/26/git服务搭建/" rel="prev" title="git服务搭建">
+                git服务搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">179</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-compose搭建lareval环境遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">docker-compose搭建lareval环境遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#images不存在"><span class="nav-number">1.0.1.</span> <span class="nav-text">images不存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ENTRYPOINT脚本路径"><span class="nav-number">2.</span> <span class="nav-text">ENTRYPOINT脚本路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ENTRYPOINT脚本权限"><span class="nav-number">3.</span> <span class="nav-text">ENTRYPOINT脚本权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql默认密码及库"><span class="nav-number">4.</span> <span class="nav-text">mysql默认密码及库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化sql"><span class="nav-number">5.</span> <span class="nav-text">初始化sql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改image名称"><span class="nav-number">6.</span> <span class="nav-text">修改image名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改容器名称"><span class="nav-number">7.</span> <span class="nav-text">修改容器名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx日志查看"><span class="nav-number">8.</span> <span class="nav-text">nginx日志查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php日志查看"><span class="nav-number">9.</span> <span class="nav-text">php日志查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strace使用"><span class="nav-number">10.</span> <span class="nav-text">strace使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何跑crontab"><span class="nav-number">11.</span> <span class="nav-text">如何跑crontab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx的容器如何安装软件"><span class="nav-number">12.</span> <span class="nav-text">nginx的容器如何安装软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器一启动就退出"><span class="nav-number">13.</span> <span class="nav-text">容器一启动就退出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何对外提供访问"><span class="nav-number">14.</span> <span class="nav-text">如何对外提供访问</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
