@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-07-02T17:34:36.000Z</updated>
+  <updated>2018-07-09T17:31:02.000Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[如何阅读一本书]]></title>
+    <link href="http://www.cxyteam.com/2018/07/10/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/"/>
+    <id>http://www.cxyteam.com/2018/07/10/如何阅读一本书/</id>
+    <published>2018-07-09T17:22:30.000Z</published>
+    <updated>2018-07-09T17:31:02.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="《如何阅读一本书》"><a href="#《如何阅读一本书》" class="headerlink" title="《如何阅读一本书》"></a>《如何阅读一本书》</h1><pre><code>再次读起这本书的时候，依然觉得自己欠缺很多，决定书中的步骤给记录下来，下次读书的时候，按照步骤来进行练习
+</code></pre><h1 id="检视阅读"><a href="#检视阅读" class="headerlink" title="检视阅读"></a>检视阅读</h1><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>阅读书名页，在看序</li>
+<li>研究目录页</li>
+<li>书中索引</li>
+<li>出版者介绍</li>
+<li>挑几个和主题相关的章节看看</li>
+<li>随意翻翻</li>
+</ol>
+<h3 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h3><ol>
+<li>在阅读的时候别陷入细节，尽量做到完整的读完</li>
+<li>抓住主旨，不必每个字都细看</li>
+</ol>
+<h3 id="阅读时需要找的问题答案"><a href="#阅读时需要找的问题答案" class="headerlink" title="阅读时需要找的问题答案"></a>阅读时需要找的问题答案</h3><ol>
+<li>这是一本怎样的书</li>
+<li>这本书都说了什么</li>
+<li>作者借着怎样的整体架构来发展他的观点和陈序他的理解</li>
+<li>这本书说的有道理吗</li>
+<li>这本书和我有什么关系</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="《如何阅读一本书》"><a href="#《如何阅读一本书》" class="headerlink" title="《如何阅读一本书》"></a>《如何阅读一本书》</h1><pre><code>再次读起这本书的时候，依然觉得自己欠缺很多，决定书中的步骤给记录下来]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[docker部署mysql的疑问]]></title>
@@ -1714,39 +1751,6 @@ else {
     <![CDATA[<h1 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h1><ol>
 <li>定义：在同一个进程下进行多次命令发送，只需要发起一次连接请求</li>
 <li>优势：减少连接redis的次数，从而减少]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-hyperloglog源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/02/03/redis-hyperloglog%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/02/03/redis-hyperloglog源码阅读/</id>
-    <published>2018-02-03T09:43:59.000Z</published>
-    <updated>2018-02-03T10:18:00.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="hyperloglog结构"><a href="#hyperloglog结构" class="headerlink" title="hyperloglog结构"></a>hyperloglog结构</h1><pre><code>struct hllhdr {
-    char magic[4];      // 固定‘HYLL’，用于标识hyperloglog键
-    uint8_t encoding;   // 编码模式，有密集标识Dence和稀疏模式sparse
-    uint8_t notused[3]; // 未使用字段，留着日后用
-    uint8_t card[8];    // 基数缓存，存储上一次计算的基数
-    uint8_t registers[]; // 桶个数，用来存放数据，Redis中大小为16384
-};
-</code></pre><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ol>
-<li>一般用于做基数统计，比如说，一个网站的独立ip的访问次数</li>
-<li>传统的做法可能会存储下访问的ip，然后进行统计，这样的话，随着ip数目的增加，存储的空间越大，统计的延时越长</li>
-<li>每个Hyperloglog键只需要12Kb的大小就能计算接近2^64个不同元素的基数，但是hyperloglog只会根据输入元素来计算基数，而不会存储元素本身，所以不能像集合那样返回各个元素本身</li>
-</ol>
-<h1 id="感觉"><a href="#感觉" class="headerlink" title="感觉"></a>感觉</h1><ol>
-<li>直观感觉就是将数据做了hash运算，存储hash后的值（可能还有别的处理），然后进行统计，不存储原始数据</li>
-</ol>
-<h1 id="果断看不懂，全是算法，放弃"><a href="#果断看不懂，全是算法，放弃" class="headerlink" title="果断看不懂，全是算法，放弃"></a>果断看不懂，全是算法，放弃</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="hyperloglog结构"><a href="#hyperloglog结构" class="headerlink" title="hyperloglog结构"></a>hyperloglog结构</h1><pre><code>struct hllhdr {
-  ]]>
     </summary>
     
       <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
