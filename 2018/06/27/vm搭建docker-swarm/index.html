@@ -81,37 +81,34 @@
 
 
 
-<meta name="description" content="安装vm安装cento6.8https://blog.csdn.net/Podge/article/details/79182615
-记得设置启动方式为终端
-    临时方式：init 3
-    永久方式：vim /etc/inittab
-        将id:5:中的5改为3
-配置网络1、关闭防火墙
-    永久关闭SELinux
-        vi /etc/selinux/config">
+<meta name="description" content="安装vm安装cento7.0（至少7.0以上才行）配置网络静态网络1、关闭防火墙
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
+
+2、配置网络
+    设置vm为桥接
+        在vm-&amp;gt;审核之后-&amp;gt;网络-&amp;gt;连接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vm搭建docker-swarm">
 <meta property="og:url" content="http://www.cxyteam.com/2018/06/27/vm搭建docker-swarm/index.html">
 <meta property="og:site_name" content="狂奔的菜鸟">
-<meta property="og:description" content="安装vm安装cento6.8https://blog.csdn.net/Podge/article/details/79182615
-记得设置启动方式为终端
-    临时方式：init 3
-    永久方式：vim /etc/inittab
-        将id:5:中的5改为3
-配置网络1、关闭防火墙
-    永久关闭SELinux
-        vi /etc/selinux/config">
-<meta property="og:updated_time" content="2018-06-27T14:00:37.000Z">
+<meta property="og:description" content="安装vm安装cento7.0（至少7.0以上才行）配置网络静态网络1、关闭防火墙
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
+
+2、配置网络
+    设置vm为桥接
+        在vm-&amp;gt;审核之后-&amp;gt;网络-&amp;gt;连接">
+<meta property="og:updated_time" content="2018-07-11T17:08:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vm搭建docker-swarm">
-<meta name="twitter:description" content="安装vm安装cento6.8https://blog.csdn.net/Podge/article/details/79182615
-记得设置启动方式为终端
-    临时方式：init 3
-    永久方式：vim /etc/inittab
-        将id:5:中的5改为3
-配置网络1、关闭防火墙
-    永久关闭SELinux
-        vi /etc/selinux/config">
+<meta name="twitter:description" content="安装vm安装cento7.0（至少7.0以上才行）配置网络静态网络1、关闭防火墙
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
+
+2、配置网络
+    设置vm为桥接
+        在vm-&amp;gt;审核之后-&amp;gt;网络-&amp;gt;连接">
 
 
 
@@ -353,19 +350,9 @@
       
 
       
-        <h1 id="安装vm"><a href="#安装vm" class="headerlink" title="安装vm"></a>安装vm</h1><h1 id="安装cento6-8"><a href="#安装cento6-8" class="headerlink" title="安装cento6.8"></a>安装cento6.8</h1><pre><code>https://blog.csdn.net/Podge/article/details/79182615
-记得设置启动方式为终端
-    临时方式：init 3
-    永久方式：vim /etc/inittab
-        将id:5:中的5改为3
-</code></pre><h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><pre><code>1、关闭防火墙
-    永久关闭SELinux
-        vi /etc/selinux/config
-        将 SELINUX=enforcing 
-        改为 SELINUX=disabled
-
-    永久关闭防火墙
-        chkconfig iptables off
+        <h1 id="安装vm"><a href="#安装vm" class="headerlink" title="安装vm"></a>安装vm</h1><h1 id="安装cento7-0（至少7-0以上才行）"><a href="#安装cento7-0（至少7-0以上才行）" class="headerlink" title="安装cento7.0（至少7.0以上才行）"></a>安装cento7.0（至少7.0以上才行）</h1><h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><h3 id="静态网络"><a href="#静态网络" class="headerlink" title="静态网络"></a>静态网络</h3><pre><code>1、关闭防火墙
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
 
 2、配置网络
     设置vm为桥接
@@ -397,9 +384,63 @@
 
     重启
         service network restart
-</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><h1 id="安装docker-swarm"><a href="#安装docker-swarm" class="headerlink" title="安装docker swarm"></a>安装docker swarm</h1><h1 id="添加主节点"><a href="#添加主节点" class="headerlink" title="添加主节点"></a>添加主节点</h1><pre><code>docker swarm init --advertise-addr 10.17.8.102
-</code></pre><h1 id="加入主节点"><a href="#加入主节点" class="headerlink" title="加入主节点"></a>加入主节点</h1><pre><code>docker swarm join --token SWMTKN-1-1muumruf8zsdl07li7z4gssp5gnfw6v01e5uovsaa8ik2exabl-e3ga0wgk05uaboouo64t1xxmg 10.17.8.102:2377
-</code></pre>
+</code></pre><h3 id="动态网络"><a href="#动态网络" class="headerlink" title="动态网络"></a>动态网络</h3><pre><code>比较坑的地方，公司的网线各种代理，但是吧，网线又能翻墙，wifi不能翻墙，各种折腾桥接到usb网线不通，直接换成网络地址转换NAT
+vim /etc/sysconfig/network-scripts/ifcfg-eth0    
+    DEVICE=eth0
+    HWADDR=08:00:27:D8:2C:F8
+    TYPE=Ethernet
+    UUID=fd397c03-6719-4cf3-8e88-e6df26256ba1
+    ONBOOT=yes
+    NM_CONTROLLED=yes
+    BOOTPROTO=dhcp
+    USERCTL=no
+重启，ping www.baidu.com 果断能上网还能翻墙，爽歪歪
+</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><ol>
+<li><p>安装需要的依赖包<br> yum install -y yum-utils device-mapper-persistent-data</p>
+</li>
+<li><p>配置稳定仓库</p>
+<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</code></pre></li>
+<li><p>安装指定版本<br> 查看版本</p>
+<pre><code>yum list docker-ce --showduplicates | sort -r
+</code></pre><p> 安装18.03.1.ce-1.el7版本(这里可以在上面的列表中查询自己需要的版本)</p>
+<pre><code>yum -y install docker-ce-18.03.1.ce-1.el7.centos.x86_64
+</code></pre></li>
+<li><p>查看版本<br> docker version</p>
+</li>
+<li><p>启动docker<br> systemctl start docker</p>
+</li>
+<li><p>docker开机自启动<br> systemctl enable docker</p>
+</li>
+</ol>
+<h1 id="测试docker-swarm"><a href="#测试docker-swarm" class="headerlink" title="测试docker swarm"></a>测试docker swarm</h1><pre><code>docker swarm
+</code></pre><h1 id="设置国内镜像源"><a href="#设置国内镜像源" class="headerlink" title="设置国内镜像源"></a>设置国内镜像源</h1><h3 id="设置镜像源"><a href="#设置镜像源" class="headerlink" title="设置镜像源"></a>设置镜像源</h3><ol>
+<li>daocloud curl -sSL <a href="https://get.daocloud.io/daotools/set_mirror.sh" target="_blank" rel="external">https://get.daocloud.io/daotools/set_mirror.sh</a> | sh -s 你的地址  在daocloud能看到这个命令</li>
+<li>编辑这个文件：/etc/docker/daemon.json，内容如下<pre><code>{&quot;registry-mirrors&quot;: [&quot;镜像地址&quot;]}
+</code></pre></li>
+</ol>
+<h3 id="重启docker"><a href="#重启docker" class="headerlink" title="重启docker"></a>重启docker</h3><pre><code>sudo systemctl restart docker
+</code></pre><h1 id="设置主机名称"><a href="#设置主机名称" class="headerlink" title="设置主机名称"></a>设置主机名称</h1><pre><code>hostnamectl set-hostname swarm-node-1       swarm-node-1为我要设置的主机的名称   
+</code></pre><h1 id="重启机器"><a href="#重启机器" class="headerlink" title="重启机器"></a>重启机器</h1><h1 id="安装swarm"><a href="#安装swarm" class="headerlink" title="安装swarm"></a>安装swarm</h1><pre><code>我的docker版本里面自带的，不需要安装
+</code></pre><h1 id="设置mannage，ip为当前机器的ip（添加主节点）"><a href="#设置mannage，ip为当前机器的ip（添加主节点）" class="headerlink" title="设置mannage，ip为当前机器的ip（添加主节点）"></a>设置mannage，ip为当前机器的ip（添加主节点）</h1><pre><code>docker swarm init --advertise-addr 192.168.1.110
+
+显示如下信息：
+Swarm initialized: current node (dbpnzm7m57nc060ws4of92uh2) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0mph6qu3756p99i2hl1soaxxy6zl6h0jnpu07pf2b46q8x5s1u-8nizhk0z629pbe4rfjskdjx97 192.168.1.110:2377
+
+To add a manager to this swarm, run &apos;docker swarm join-token manager&apos; and follow the instructions.
+</code></pre><h1 id="在节点机器执行如下命令（加入主节点）"><a href="#在节点机器执行如下命令（加入主节点）" class="headerlink" title="在节点机器执行如下命令（加入主节点）"></a>在节点机器执行如下命令（加入主节点）</h1><pre><code>docker swarm join --token SWMTKN-1-0mph6qu3756p99i2hl1soaxxy6zl6h0jnpu07pf2b46q8x5s1u-8nizhk0z629pbe4rfjskdjx97 192.168.1.110:2377
+</code></pre><h1 id="查看节点"><a href="#查看节点" class="headerlink" title="查看节点"></a>查看节点</h1><pre><code>docker node ls
+</code></pre><h1 id="安装docker-swarm图形化界面"><a href="#安装docker-swarm图形化界面" class="headerlink" title="安装docker swarm图形化界面"></a>安装docker swarm图形化界面</h1><ol>
+<li><p>在manage机器执行命令<br> docker service create \<br> –name portainer \<br> –publish 9000:9000 \<br> –constraint ‘node.role == manager’ \<br> –mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \<br> portainer/portainer \<br> -H unix:///var/run/docker.sock</p>
+</li>
+<li><p>访问地址<br> ip:9000   ip为manage的ip地址，eg：192.168.1.110:9000 我的manage地址是192.168.1.110</p>
+</li>
+</ol>
+
       
     </div>
     
@@ -658,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装vm"><span class="nav-number">1.</span> <span class="nav-text">安装vm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装cento6-8"><span class="nav-number">2.</span> <span class="nav-text">安装cento6.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置网络"><span class="nav-number">3.</span> <span class="nav-text">配置网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker-swarm"><span class="nav-number">5.</span> <span class="nav-text">安装docker swarm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加主节点"><span class="nav-number">6.</span> <span class="nav-text">添加主节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加入主节点"><span class="nav-number">7.</span> <span class="nav-text">加入主节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装vm"><span class="nav-number">1.</span> <span class="nav-text">安装vm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装cento7-0（至少7-0以上才行）"><span class="nav-number">2.</span> <span class="nav-text">安装cento7.0（至少7.0以上才行）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置网络"><span class="nav-number">3.</span> <span class="nav-text">配置网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态网络"><span class="nav-number">3.0.1.</span> <span class="nav-text">静态网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态网络"><span class="nav-number">3.0.2.</span> <span class="nav-text">动态网络</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试docker-swarm"><span class="nav-number">5.</span> <span class="nav-text">测试docker swarm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置国内镜像源"><span class="nav-number">6.</span> <span class="nav-text">设置国内镜像源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置镜像源"><span class="nav-number">6.0.1.</span> <span class="nav-text">设置镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启docker"><span class="nav-number">6.0.2.</span> <span class="nav-text">重启docker</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置主机名称"><span class="nav-number">7.</span> <span class="nav-text">设置主机名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重启机器"><span class="nav-number">8.</span> <span class="nav-text">重启机器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装swarm"><span class="nav-number">9.</span> <span class="nav-text">安装swarm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置mannage，ip为当前机器的ip（添加主节点）"><span class="nav-number">10.</span> <span class="nav-text">设置mannage，ip为当前机器的ip（添加主节点）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在节点机器执行如下命令（加入主节点）"><span class="nav-number">11.</span> <span class="nav-text">在节点机器执行如下命令（加入主节点）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看节点"><span class="nav-number">12.</span> <span class="nav-text">查看节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker-swarm图形化界面"><span class="nav-number">13.</span> <span class="nav-text">安装docker swarm图形化界面</span></a></li></ol></div>
             
 
           </div>

@@ -941,12 +941,11 @@ http://phantomjs.org/download.html
       
         
           
-          安装vm安装cento6.8https://blog.csdn.net/Podge/article/details/79182615
-记得设置启动方式为终端
-    临时方式：init 3
-    永久方式：vim /etc/inittab
-        将id:5:中的5改为3
-配置网络1、关闭
+          安装vm安装cento7.0（至少7.0以上才行）配置网络静态网络1、关闭防火墙
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
+
+2、配
           ...
           <!--noindex-->
           <div class="post-button text-center">
