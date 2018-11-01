@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-08-01T13:08:28.198Z</updated>
+  <updated>2018-11-01T05:21:48.221Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,174 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[golang的func如何传入关联数组]]></title>
+    <link href="http://www.cxyteam.com/2018/11/01/golang%E7%9A%84func%E5%A6%82%E4%BD%95%E4%BC%A0%E5%85%A5%E5%85%B3%E8%81%94%E6%95%B0%E7%BB%84/"/>
+    <id>http://www.cxyteam.com/2018/11/01/golang的func如何传入关联数组/</id>
+    <published>2018-11-01T05:10:03.000Z</published>
+    <updated>2018-11-01T05:21:48.221Z</updated>
+    <content type="html"><![CDATA[<p>最近项目中使用golang，在封装函数的时候，想到传入php的数组概念，记录一下</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	Params := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</div><div class="line">		<span class="string">"name"</span>				: <span class="string">"hello"</span>,</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	demo(Params)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">demo</span><span class="params">(param <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span></span> &#123;</div><div class="line">	fmt.Printf(param[<span class="string">"name"</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近项目中使用golang，在封装函数的时候，想到传入php的数组概念，记录一下</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[golang使用net/http]]></title>
+    <link href="http://www.cxyteam.com/2018/11/01/golang%E4%BD%BF%E7%94%A8net-http/"/>
+    <id>http://www.cxyteam.com/2018/11/01/golang使用net-http/</id>
+    <published>2018-11-01T04:54:09.000Z</published>
+    <updated>2018-11-01T05:08:53.716Z</updated>
+    <content type="html"><![CDATA[<p>在使用golang的net/http发送请求的时候，碰到了不少问题，下面总结下http的几种方式</p>
+<h3 id="json格式请求-php的-POST不能获取"><a href="#json格式请求-php的-POST不能获取" class="headerlink" title="json格式请求,php的$_POST不能获取"></a>json格式请求,php的$_POST不能获取</h3><p>传参方式用json比较舒服；Content-Type为application/json发送，在php端会有一个问题，不能使用$_POST获取，只能使用file_get_contents(“php://input”)去获取值<br>用post方式发送数据，代码简单，不能设置header<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"bytes"</span></div><div class="line">	<span class="string">"encoding/json"</span></div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</div><div class="line">	path := <span class="string">"http://test.com"</span></div><div class="line">	values := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;<span class="string">"username"</span>:<span class="string">"username"</span>,<span class="string">"passwd"</span>:<span class="string">"passwd"</span>&#125;</div><div class="line">	jsonvalue, _ := json.Marshal(values)</div><div class="line">	resp,err := http.Post(path, <span class="string">"application/json"</span>, bytes.NewBuffer(jsonvalue))</div><div class="line">	<span class="keyword">defer</span>  resp.Body.Close()</div><div class="line"></div><div class="line">	respBody,_:=ioutil.ReadAll(resp.Body)</div><div class="line">	fmt.Println(<span class="keyword">string</span>(respBody), err)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>用request方式发送，能设置header，代码稍微复杂<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"bytes"</span></div><div class="line">	<span class="string">"encoding/json"</span></div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	Params := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</div><div class="line">		<span class="string">"is_init"</span> 			: <span class="string">"1"</span>,</div><div class="line">		<span class="string">"name"</span>				: <span class="string">"a.mp4"</span>,</div><div class="line">		<span class="string">"size"</span>				: <span class="string">"111"</span>,</div><div class="line">		<span class="string">"lastModifiedDate"</span> 	: <span class="string">"bbb.mp4"</span>,</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	body, _ := json.Marshal(Params)</div><div class="line"></div><div class="line">	client := &amp;http.Client&#123;&#125;<span class="comment">//客户端,被Get,Head以及Post使用</span></div><div class="line">	reqest, err := http.NewRequest(<span class="string">"POST"</span>, <span class="string">"http://test.com"</span>, bytes.NewBuffer(body))</div><div class="line">	fmt.Println(Params, body, bytes.NewBuffer(body))</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(<span class="string">"Fatal error "</span>, err.Error())</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	reqest.Header.Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>) <span class="comment">//必须设定该参数,POST参数才能正常提交</span></div><div class="line"></div><div class="line">	resp, err := client.Do(reqest)<span class="comment">//发送请求</span></div><div class="line">	<span class="keyword">defer</span> resp.Body.Close()<span class="comment">//一定要关闭resp.Body</span></div><div class="line">	content, err := ioutil.ReadAll(resp.Body)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(<span class="string">"Fatal error "</span>, err.Error())</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="keyword">string</span>(content))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="postfrom模拟表单发送数据"><a href="#postfrom模拟表单发送数据" class="headerlink" title="postfrom模拟表单发送数据"></a>postfrom模拟表单发送数据</h3><p>php能够正常接收$_POST数据，代码也很简洁；弊端就是不能发送header数据<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"net/url"</span></div><div class="line">	<span class="string">"os"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	UserName := <span class="string">"username"</span></div><div class="line">	PassWD := <span class="string">"passwd"</span></div><div class="line"></div><div class="line">	v := url.Values&#123;&#125;</div><div class="line">	v.Set(<span class="string">"username"</span>, UserName)</div><div class="line">	v.Set(<span class="string">"password"</span>, PassWD)</div><div class="line"></div><div class="line">	resp, err := http.PostForm(<span class="string">"http://test.com"</span>, v)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(<span class="string">"Fatal error "</span>, err.Error())</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">defer</span> resp.Body.Close()</div><div class="line"></div><div class="line">	content, err := ioutil.ReadAll(resp.Body)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Fprintf(os.Stderr, <span class="string">"get token err"</span>)</div><div class="line">		os.Exit(<span class="number">1</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="keyword">string</span>(content))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="发送post请求，带header数据"><a href="#发送post请求，带header数据" class="headerlink" title="发送post请求，带header数据"></a>发送post请求，带header数据</h3><p>php能正常接收$_POST数据，也能设置header数据，就是代码稍微复杂点<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"net/url"</span></div><div class="line">	<span class="string">"strings"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</div><div class="line">	v := url.Values&#123;&#125;</div><div class="line">	v.Set(<span class="string">"name"</span>, <span class="string">"name"</span>)</div><div class="line">	v.Set(<span class="string">"is_init"</span>, <span class="string">"1"</span>)</div><div class="line"></div><div class="line">	body := ioutil.NopCloser(strings.NewReader(v.Encode()))</div><div class="line">	client := &amp;http.Client&#123;&#125;<span class="comment">//客户端,被Get,Head以及Post使用</span></div><div class="line">	reqest, err := http.NewRequest(<span class="string">"POST"</span>, <span class="string">"http://test.com"</span>, body)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(<span class="string">"Fatal error "</span>, err.Error())</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	reqest.Header.Set(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded;param=value"</span>) <span class="comment">//必须设定该参数,POST参数才能正常提交</span></div><div class="line"></div><div class="line">	resp, err := client.Do(reqest)<span class="comment">//发送请求</span></div><div class="line">	<span class="keyword">defer</span> resp.Body.Close()<span class="comment">//一定要关闭resp.Body</span></div><div class="line">	content, err := ioutil.ReadAll(resp.Body)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(<span class="string">"Fatal error "</span>, err.Error())</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"response=&gt;"</span>, <span class="keyword">string</span>(content))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上就是几种我用到的http的post请求方式，按需选择</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在使用golang的net/http发送请求的时候，碰到了不少问题，下面总结下http的几种方式</p>
+<h3 id="json格式请求-php的-POST不能获取"><a href="#json格式请求-php的-POST不能获取" class="headerlink"]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[golang执行定时脚本]]></title>
+    <link href="http://www.cxyteam.com/2018/10/30/golang%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/"/>
+    <id>http://www.cxyteam.com/2018/10/30/golang执行定时脚本/</id>
+    <published>2018-10-30T15:22:55.000Z</published>
+    <updated>2018-11-01T05:10:45.069Z</updated>
+    <content type="html"><![CDATA[<p>第一次拿golang写业务的代码，其中需要使用定时脚本<br>注:「用的beego开发」</p>
+<ol>
+<li>beego如何在controller引用models</li>
+<li>func如何传入关联数组</li>
+</ol>
+<h3 id="如何执行定时脚本"><a href="#如何执行定时脚本" class="headerlink" title="如何执行定时脚本"></a>如何执行定时脚本</h3><p>注：「项目名称为api，在api/tasks/first_task.go文件写入如下代码」</p>
+<p>使用toolbox的task及robfig/cron进行定时任务编写</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> tasks</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"github.com/astaxie/beego"</span></div><div class="line">    <span class="string">"github.com/astaxie/beego/toolbox"</span></div><div class="line">    <span class="string">"github.com/robfig/cron"</span></div><div class="line">    <span class="string">"log"</span></div><div class="line">    <span class="string">"time"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="comment">//beego/toolbox/task实现</span></div><div class="line">	first_task := toolbox.NewTask(<span class="string">"first_task"</span>, <span class="string">"* * * * * *"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">error</span></span> &#123;</div><div class="line">        log.Printf(<span class="string">"\nNotification task ran at: %s\n"</span>, time.Now())</div><div class="line">        fmt.Print(time.Now())</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;)</div><div class="line"></div><div class="line">    err := first_task.Run()</div><div class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">        beego.Error(err)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    toolbox.AddTask(<span class="string">"first_task"</span>, first_task)</div><div class="line">    toolbox.StartTask()</div><div class="line"></div><div class="line">    <span class="keyword">defer</span> toolbox.StopTask()</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//robfig/cron实现</span></div><div class="line">    i := <span class="number">0</span></div><div class="line">    c := cron.New()</div><div class="line">    spec := <span class="string">"* * * * * *"</span></div><div class="line">    c.AddFunc(spec, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">        i++</div><div class="line">        log.Println(<span class="string">"start"</span>, i)</div><div class="line">    &#125;)</div><div class="line">    c.Start()</div><div class="line">    <span class="keyword">select</span>&#123;&#125; <span class="comment">//阻塞主线程不退出</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在main.go引入tasks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">    _ &quot;api/tasks&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">    beego.Run()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="controller引用models"><a href="#controller引用models" class="headerlink" title="controller引用models"></a>controller引用models</h3>]]></content>
+    <summary type="html">
+    <![CDATA[<p>第一次拿golang写业务的代码，其中需要使用定时脚本<br>注:「用的beego开发」</p>
+<ol>
+<li>beego如何在controller引用models</li>
+<li>func如何传入关联数组</li>
+</ol>
+<h3 id="如何执行定时脚本"><]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用tcpdump排查zRangeByScore参数无效问题]]></title>
+    <link href="http://www.cxyteam.com/2018/10/29/%E4%BD%BF%E7%94%A8tcpdump%E6%8E%92%E6%9F%A5zRangeByScore%E5%8F%82%E6%95%B0%E6%97%A0%E6%95%88%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.cxyteam.com/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/</id>
+    <published>2018-10-29T15:47:12.000Z</published>
+    <updated>2018-10-29T16:36:05.639Z</updated>
+    <content type="html"><![CDATA[<p>在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>($start, $size)));</div></pre></td></tr></table></figure></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据</p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h3 id="排查命令是否写错"><a href="#排查命令是否写错" class="headerlink" title="排查命令是否写错"></a>排查命令是否写错</h3><p>注：「直接将start和size写成定值」</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>(<span class="number">10</span>, <span class="number">10</span>)));</div></pre></td></tr></table></figure>
+<p>数据正常返回，想当然肯定是start，size传入不对</p>
+<h3 id="打印start，size"><a href="#打印start，size" class="headerlink" title="打印start，size"></a>打印start，size</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123;</div><div class="line">  [<span class="string">"limit"</span>]=&gt;</div><div class="line">  <span class="keyword">array</span>(<span class="number">2</span>) &#123;</div><div class="line">    [<span class="number">0</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">    [<span class="number">1</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果出乎意料，start，size传入没有问题<br>可是传入的都是page=10，size=10，为什么结果会不一样呢，那么这两种方式有什么不同呢，redis最终执行的是什么命令呢？</p>
+<h3 id="查看传给redis的命令"><a href="#查看传给redis的命令" class="headerlink" title="查看传给redis的命令"></a>查看传给redis的命令</h3><p>在服务器用tcpdump抓取redis的网络包<br>注：「在开发服务器执行tcpdump命令；redis端口为6379」</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]<span class="comment"># tcpdump port 6379 and tcp -X -s 0</span></div></pre></td></tr></table></figure>
+<p>发现当走参数传入的方式的时候，最终redis执行的命令是这样的<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">02</span>:<span class="number">46</span>:<span class="number">46.220417</span> IP local_host<span class="number">.45816</span> &gt; redis_host<span class="number">.6379</span>: Flags [P.], seq <span class="number">38</span>:<span class="number">129</span>, ack <span class="number">6</span>, win <span class="number">29200</span>, length <span class="number">91</span></div><div class="line">	<span class="number">0x0000</span>:  <span class="number">4500</span> <span class="number">0083</span> d940 <span class="number">4000</span> <span class="number">4006</span> <span class="number">32</span>a2 ac11 <span class="number">0005</span>  E....@@.@<span class="number">.2</span>.....</div><div class="line">	<span class="number">0x0010</span>:  <span class="number">0</span>a83 <span class="number">77</span>f9 b2f8 <span class="number">1875</span> e8b6 <span class="number">5</span>ad8 <span class="number">4953</span> <span class="number">9e07</span>  ..w....u..Z.IS..</div><div class="line">	<span class="number">0x0020</span>:  <span class="number">5018</span> <span class="number">7210</span> <span class="number">2</span>f08 <span class="number">0000</span> <span class="number">2</span>a35 <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">330</span>d  P.r./...*<span class="number">5.</span>.$<span class="number">13.</span></div><div class="line">	<span class="number">0x0030</span>:  <span class="number">0</span>a5a <span class="number">5241</span> <span class="number">4e47</span> <span class="number">4542</span> <span class="number">5953</span> <span class="number">434</span>f <span class="number">5245</span> <span class="number">0</span>d0a  .ZRANGEBYSCORE..</div><div class="line">	<span class="number">0x0040</span>:  <span class="number">2432</span> <span class="number">330</span>d <span class="number">0</span>a70 <span class="number">6572</span> <span class="number">6665</span> <span class="number">6374</span> <span class="number">5</span>f63 <span class="number">6</span>f6d  $<span class="number">23.</span>.perfect_com</div><div class="line">	<span class="number">0x0050</span>:  <span class="number">6</span>d65 <span class="number">6e74</span> <span class="number">5</span>f69 <span class="number">645</span>f <span class="number">6</span>c69 <span class="number">7374</span> <span class="number">0</span>d0a <span class="number">2434</span>  ment_id_list..$<span class="number">4</span></div><div class="line">	<span class="number">0x0060</span>:  <span class="number">0</span>d0a <span class="number">2</span>d69 <span class="number">6e66</span> <span class="number">0</span>d0a <span class="number">2434</span> <span class="number">0</span>d0a <span class="number">2</span>b69 <span class="number">6e66</span>  ..-inf..$<span class="number">4.</span>.+inf</div><div class="line">	<span class="number">0x0070</span>:  <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">300</span>d <span class="number">0</span>a57 <span class="number">4954</span> <span class="number">4853</span> <span class="number">434</span>f <span class="number">5245</span>  ..$<span class="number">10.</span>.WITHSCORE</div><div class="line">	<span class="number">0x0080</span>:  <span class="number">530</span>d <span class="number">0</span>a                                  S..</div></pre></td></tr></table></figure></p>
+<p>很显然没有limit参数信息，当然会返回有序集合所有的数据，而对比之后也可以很明显的发现，start，limit参数传入和写定值的方式唯一的不同就是数据类型。</p>
+<p>愉快的将参数传入进行了强制类型转换，问题得到解决。</p>
+<p>最后，查看使用的redis连接类库是phpredis。<br>再确认redis终端执行命令能正常返回之后，果断给phpredis提了一个issue。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div cla]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[tcpdump查看redis连接过程]]></title>
+    <link href="http://www.cxyteam.com/2018/10/28/tcpdump%E6%9F%A5%E7%9C%8Bredis%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/"/>
+    <id>http://www.cxyteam.com/2018/10/28/tcpdump查看redis连接过程/</id>
+    <published>2018-10-28T13:06:28.000Z</published>
+    <updated>2018-10-28T13:19:22.918Z</updated>
+    <content type="html"><![CDATA[<p>在看tcpdump的手册的时候，突然想起tcp的三次握手，四次挥手；心血来潮，就用tcpdump抓取redis的连接过程。</p>
+<p>操作如下：「redis的服务器是host_redis,端口为6379」</p>
+<p>1、在redis的服务器，抓取6379及tcp的网络协议包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]# tcpdump port 6379 and tcp -X -s 0</div></pre></td></tr></table></figure>
+<p>2、在客户端使用telnet连接redis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ telnet host_redis 6379</div><div class="line"></div><div class="line">    Trying host_redis...</div><div class="line"></div><div class="line">    Connected to host_redis</div><div class="line"></div><div class="line">    Escape character is &apos;^]&apos;.</div><div class="line"></div><div class="line">    ^]</div><div class="line"></div><div class="line">    telnet&gt; quit</div></pre></td></tr></table></figure>
+<h3 id="tcpdump参数介绍"><a href="#tcpdump参数介绍" class="headerlink" title="tcpdump参数介绍"></a>tcpdump参数介绍</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">port</div><div class="line"></div><div class="line">    指定端口号</div><div class="line"></div><div class="line">tcp</div><div class="line"></div><div class="line">    指定协议为tcp</div><div class="line"></div><div class="line">-X</div><div class="line"></div><div class="line">    以16进制和ASCII码形式显示每个报文</div><div class="line"></div><div class="line">-s</div><div class="line"></div><div class="line">    从每个分组中读取最开始的snaplen个字节，而不是默认的68个字节</div></pre></td></tr></table></figure>
+<h3 id="tcpdump输出介绍"><a href="#tcpdump输出介绍" class="headerlink" title="tcpdump输出介绍"></a>tcpdump输出介绍</h3><p>注：「本机服务器为host_local」<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">02:45:1.622225 IP host_local.55638 &gt; host_redis.6379: Flags [S], seq 1105795559, win 29200, options [mss 1460,sackOK,TS val 43986276 ecr 0,nop,wscale 7], length 0</div></pre></td></tr></table></figure></p>
+<h3 id="输出信息"><a href="#输出信息" class="headerlink" title="输出信息"></a>输出信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">02:45:1.622225是时间</div><div class="line"></div><div class="line">host_local.55638 &gt; 是发送端主机和端口，符号‘ &gt;’ 表明数据的传输方向</div><div class="line"></div><div class="line">host_redis.6379接收端的主机名和端口</div><div class="line"></div><div class="line">Flags [S]TCP包中的标志信息</div><div class="line"></div><div class="line">    [S] 表示这是一个SYN请求</div><div class="line"></div><div class="line">    [S.] 表示这是一个SYN+ACK确认包: </div><div class="line">    </div><div class="line">    [.] 表示这是一个ACT确认包， (client)SYN-&gt;(server)SYN-&gt;(client)ACT 就是3次握手过程</div><div class="line">    </div><div class="line">    [P] 表示这个是一个数据推送，可以是从服务器端向客户端推送，也可以从客户端向服务器端推</div><div class="line">    </div><div class="line">    [F] 表示这是一个FIN包，是关闭连接操作，client/server都有可能发起</div><div class="line">    </div><div class="line">    [R] 表示这是一个RST包，与F包作用相同，但RST表示连接关闭时，仍然有数据未被处理。可以理解为是强制切断连接</div><div class="line"></div><div class="line">seq 1105795559 序列号</div><div class="line"></div><div class="line">win 29200 指滑动窗口的大小</div><div class="line"></div><div class="line">option </div><div class="line"></div><div class="line">length 0 指数据包的大小为0</div></pre></td></tr></table></figure>
+<h3 id="tcp三次握手，四次挥手图示："><a href="#tcp三次握手，四次挥手图示：" class="headerlink" title="tcp三次握手，四次挥手图示："></a>tcp三次握手，四次挥手图示：</h3><p><img src="/img/redis/tcp.jpeg" alt="Al text" title="tcp"></p>
+<h1 id="三次握手流程"><a href="#三次握手流程" class="headerlink" title="三次握手流程"></a>三次握手流程</h1><h3 id="client向server发送SYN"><a href="#client向server发送SYN" class="headerlink" title="client向server发送SYN"></a>client向server发送SYN</h3><p>注：「seq=x=2440373000」</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.882139 IP host_local.55638 &gt; host_redis.6379: Flags [SEW], seq 2440373000, win 65535, options [mss 1366,nop,wscale 5,nop,nop,TS val 776806643 ecr 0,sackOK,eol], length 0</div></pre></td></tr></table></figure>
+<h3 id="server向client发送一个SYN，ACK包"><a href="#server向client发送一个SYN，ACK包" class="headerlink" title="server向client发送一个SYN，ACK包"></a>server向client发送一个SYN，ACK包</h3><p>注：「ack=x+1=2440373001；seq=y=3103132894」<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.882181 IP host_redis.6379 &gt; host_local.55638: Flags [S.E], seq 3103132894, ack 2440373001, win 14480, options [mss 1460,sackOK,TS val 3145177219 ecr 776806643,nop,wscale 7], length 0</div></pre></td></tr></table></figure></p>
+<h3 id="client向server响应一个ACK"><a href="#client向server响应一个ACK" class="headerlink" title="client向server响应一个ACK"></a>client向server响应一个ACK</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.922149 IP host_local.55638 &gt; host_redis.6379: Flags [.], ack 1, win 4104, options [nop,nop,TS val 776806681 ecr 3145177219], length 0</div></pre></td></tr></table></figure>
+<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><h3 id="client向server发送FIN结束命令"><a href="#client向server发送FIN结束命令" class="headerlink" title="client向server发送FIN结束命令"></a>client向server发送FIN结束命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490726 IP host_local.55638 &gt; host_redis.6379: Flags [F.], seq 1, ack 1, win 4104, options [nop,nop,TS val 776811227 ecr 3145177219], length 0</div></pre></td></tr></table></figure>
+<h3 id="server向client发送响应信息，"><a href="#server向client发送响应信息，" class="headerlink" title="server向client发送响应信息，"></a>server向client发送响应信息，</h3><p>注：表示收到client的结束信号，即将关闭连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490893 IP host_redis.6379 &gt; host_local.55638: Flags [.], ack 2, win 114, options [nop,nop,TS val 3145181828 ecr 776811227], length 0</div></pre></td></tr></table></figure></p>
+<h3 id="server关闭连接，并发送FIN给client"><a href="#server关闭连接，并发送FIN给client" class="headerlink" title="server关闭连接，并发送FIN给client"></a>server关闭连接，并发送FIN给client</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490929 IP host_redis.6379 &gt; host_local.55638: Flags [F.], seq 1, ack 2, win 114, options [nop,nop,TS val 3145181828 ecr 776811227], length 0</div></pre></td></tr></table></figure>
+<h3 id="client发送ACK给server进行确认"><a href="#client发送ACK给server进行确认" class="headerlink" title="client发送ACK给server进行确认"></a>client发送ACK给server进行确认</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.533767 IP host_local.55638 &gt; host_redis.6379: Flags [.], ack 2, win 4104, options [nop,nop,TS val 776811267 ecr 3145181828], length 0</div></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在看tcpdump的手册的时候，突然想起tcp的三次握手，四次挥手；心血来潮，就用tcpdump抓取redis的连接过程。</p>
+<p>操作如下：「redis的服务器是host_redis,端口为6379」</p>
+<p>1、在redis的服务器，抓取6379及tcp的网]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis对象]]></title>
+    <link href="http://www.cxyteam.com/2018/10/24/redis%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://www.cxyteam.com/2018/10/24/redis对象/</id>
+    <published>2018-10-24T12:28:34.000Z</published>
+    <updated>2018-10-24T13:00:17.554Z</updated>
+    <content type="html"><![CDATA[<h1 id="redis对象"><a href="#redis对象" class="headerlink" title="redis对象"></a>redis对象</h1><pre><code>对象包含三部分：type，encoding，ptr
+type：记录对象的类型
+encoding：记录对象底层的数据结构
+ptr：指向底层实现的数据结构的指针
+</code></pre><p><img src="/img/redis/redis_object.png" alt="Alt text" title="redis-object"></p>
+<h3 id="查看key的type类型"><a href="#查看key的type类型" class="headerlink" title="查看key的type类型"></a>查看key的type类型</h3><pre><code>type key
+</code></pre><h3 id="查看key的encoding的值"><a href="#查看key的encoding的值" class="headerlink" title="查看key的encoding的值"></a>查看key的encoding的值</h3><pre><code>object encoding key
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="redis对象"><a href="#redis对象" class="headerlink" title="redis对象"></a>redis对象</h1><pre><code>对象包含三部分：type，encoding，ptr
+type：记录对象的类型
+enc]]>
+    </summary>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
+    
+      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[2018年年中总结]]></title>
+    <link href="http://www.cxyteam.com/2018/08/06/2018%E5%B9%B4%E5%B9%B4%E4%B8%AD%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.cxyteam.com/2018/08/06/2018年年中总结/</id>
+    <published>2018-08-06T12:57:12.000Z</published>
+    <updated>2018-08-06T12:58:29.891Z</updated>
+    <content type="html"><![CDATA[<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h1 id]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[设置disable_functions失效]]></title>
@@ -767,757 +935,6 @@ docker login 输入用户名密码
       <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
     
       <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[使用beego]]></title>
-    <link href="http://www.cxyteam.com/2018/06/06/%E4%BD%BF%E7%94%A8beego/"/>
-    <id>http://www.cxyteam.com/2018/06/06/使用beego/</id>
-    <published>2018-06-06T13:16:23.000Z</published>
-    <updated>2018-06-06T14:10:14.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>govendor fetch  github.com/astaxie/beego
-govendor fetch  github.com/beego/bee
-</code></pre><h1 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h1><pre><code>编辑文件：
-    sudo vim /etc/profile
-    在末尾添加内容如下:
-        PATH=$PATH:/usr/local/go/bin:/Users/sunnysmilez/Desktop/code/go_study/bin
-        export GOPATH=/Users/sunnysmilez/Desktop/code/go_study
-</code></pre><h1 id="检验"><a href="#检验" class="headerlink" title="检验"></a>检验</h1><pre><code>bee 
-</code></pre><h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src
-bee new web
-</code></pre><h1 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src/web
-bee run
-</code></pre><h1 id="运行不同端口"><a href="#运行不同端口" class="headerlink" title="运行不同端口"></a>运行不同端口</h1><pre><code>修改文件(/Users/sunnysmilez/Desktop/code/go_study/src/web/conf/app.conf)中的的httpport
-</code></pre><h1 id="其他使用事项"><a href="#其他使用事项" class="headerlink" title="其他使用事项"></a>其他使用事项</h1><pre><code>查看手册：https://beego.me/docs/install/bee.md
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>govendor fetch  github.com/astaxie/beego
-govendor fetch  githu]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[go依赖管理工具]]></title>
-    <link href="http://www.cxyteam.com/2018/06/06/go%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"/>
-    <id>http://www.cxyteam.com/2018/06/06/go依赖管理工具/</id>
-    <published>2018-06-06T13:02:51.000Z</published>
-    <updated>2018-06-06T13:16:03.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="设置GOPATH"><a href="#设置GOPATH" class="headerlink" title="设置GOPATH"></a>设置GOPATH</h1><pre><code>export GOPATH=/Users/sunnysmilez/Desktop/code/go_study
-</code></pre><h1 id="获取govendor"><a href="#获取govendor" class="headerlink" title="获取govendor"></a>获取govendor</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study
-go get -u github.com/kardianos/govendor
-</code></pre><h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><pre><code>cd /Users/sunnysmilez/Desktop/code/go_study/src
-mkdir web
-govendor init
-</code></pre><h1 id="拉取远程资源"><a href="#拉取远程资源" class="headerlink" title="拉取远程资源"></a>拉取远程资源</h1><pre><code>govendor fetch  github.com/go-xorm/xorm
-govendor fetch  github.com/astaxie/beego
-govendor fetch  github.com/beego/bee
-</code></pre><h1 id="查看本地的包"><a href="#查看本地的包" class="headerlink" title="查看本地的包"></a>查看本地的包</h1><pre><code>govendor list
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="设置GOPATH"><a href="#设置GOPATH" class="headerlink" title="设置GOPATH"></a>设置GOPATH</h1><pre><code>export GOPATH=/Users/sunnysmilez/Deskt]]>
-    </summary>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/tags/GO/"/>
-    
-      <category term="GO" scheme="http://www.cxyteam.com/categories/GO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mysql分表]]></title>
-    <link href="http://www.cxyteam.com/2018/05/08/mysql%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/"/>
-    <id>http://www.cxyteam.com/2018/05/08/mysql分库分表/</id>
-    <published>2018-05-08T10:46:59.000Z</published>
-    <updated>2018-05-09T13:19:20.000Z</updated>
-    <content type="html"><![CDATA[<ul>
-<li><p>问题<br>  1、做分页，检索</p>
-<pre><code>合并查询
-es
-</code></pre><p>  2、跨库事务</p>
-<pre><code>程序和数据库自己控制
-分布式事务
-</code></pre><p>  3、join，count，group by等操作</p>
-<pre><code>分两次查询
-</code></pre><p>  4、分布式id的生成</p>
-<pre><code>雪花算法
-uuid
-</code></pre><p>  5、数据迁移，容量规划，扩容</p>
-<pre><code>利用主从同步，或者双主，来冗余数据，重新搭建主从或者双主同步关系来实现成倍扩容
-http://www.10tiao.com/html/249/201702/2651959883/1.html
-</code></pre></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<ul>
-<li><p>问题<br>  1、做分页，检索</p>
-<pre><code>合并查询
-es
-</code></pre><p>  2、跨库事务</p>
-<pre><code>程序和数据库自己控制
-分布式事务
-</code></pre><p>  3、join，count，]]>
-    </summary>
-    
-      <category term="Mysql" scheme="http://www.cxyteam.com/tags/Mysql/"/>
-    
-      <category term="Mysql" scheme="http://www.cxyteam.com/categories/Mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis-ziplist源码阅读]]></title>
-    <link href="http://www.cxyteam.com/2018/03/09/redis-ziplist%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://www.cxyteam.com/2018/03/09/redis-ziplist源码阅读/</id>
-    <published>2018-03-09T02:23:29.000Z</published>
-    <updated>2018-05-28T15:57:37.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="ziplist结构"><a href="#ziplist结构" class="headerlink" title="ziplist结构"></a>ziplist结构</h1><ol>
-<li>zlbytes：记录整个压缩列表占用的内存字节数</li>
-<li>zltail：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节</li>
-<li>zllen：记录了压缩列表包含的节点数量</li>
-<li>entryX：压缩列表包含的各个节点，节点的长度由节点保存的内容决定</li>
-<li>zlend：特殊值 0xFF （十进制 255 ），用于标记压缩列表的末端</li>
-</ol>
-<h1 id="节点结构"><a href="#节点结构" class="headerlink" title="节点结构"></a>节点结构</h1><pre><code>/*
- * 保存 ziplist 节点信息的结构
- */
-typedef struct zlentry {
-
-    // prevrawlen ：前置节点的长度
-    // prevrawlensize ：编码 prevrawlen 所需的字节大小；只能是１字节或者５字节
-    unsigned int prevrawlensize, prevrawlen;
-
-    // len ：当前节点值的长度，指出实体字段的具体长度即真正存储数据的字段，单位是字节
-    // lensize ：编码 len 所需的字节大小, 1字节，　２字节　５字节
-    unsigned int lensize, len;
-
-    // 当前节点 header 的大小
-    // 等于 prevrawlensize + lensize
-    unsigned int headersize;
-
-    // 当前节点值所使用的编码类型
-    unsigned char encoding;
-
-    // 指向当前节点的指针
-    unsigned char *p;
-
-} zlentry;
-</code></pre><p><img src="/img/redis/ziplist.png" alt="Alt text" title="ziplist结构"></p>
-<ol>
-<li>prevrawlensize：编码prevrawlen所需的字节大小</li>
-<li>prevrawlen：前置节点的长度；当长度小于255字节时，用一个字节存储；当长度大于等于255时，用五个字节进行存储，其中第一个字节会被设置为255表示前一个entry的长度由后面四个字节表示</li>
-<li>len：当前节点值的长度</li>
-<li>lensize：编码 len 所需的字节大小, 1字节，　２字节　５字节</li>
-<li>headersize：等于 prevrawlensize + lensize</li>
-<li><p>encoding：当前节点值所使用的编码类；它会根据当前元素内容的不同会采用不同的编码方式<br> 如果元素内容为字符串，encoding的值分别为：<br> 00xx xxxx ：00开头表示该字符串的长度用6个bit表示。<br> 01xx xxxx | xxxx xxxx ：01开头表示字符串的长度由14bit表示，这14个bit采用大端存储。<br> 1000 0000 | xxxx xxxx | xxxx xxxx | xxxx xxxx | xxxx xxxx ：10开头表示后续的四个字节为字符串长度，这32个bit采用大端存储</p>
-<p> 如果元素内容为数字，encoding的值分别为：<br> 1100 0000：表示数字占用后面2个字节。<br> 1101 0000：表示数字占用后面4个字节。<br> 1110 0000：表示数字占用后面8个字节。<br> 1111 0000 ：表示数字占用后面3个字节。<br> 1111 1110 ：表示数字占用后面1个字节。<br> 1111 1111 ：表示压缩链表中最后一个元素（特殊编码）。<br> 1111 xxxx ：表示只用后4位表示0~12的整数，由于0000，1110跟1111三种已经被占用，也就是说这里的xxxx四位只能表示0001~1101，转换成十进制就是数字1~13，但是redis规定它用来表示0~12，因此当遇到这个编码时，我们需要取出后四位然后减1来得到正确的值。</p>
-</li>
-<li><p>*p：指向当前节点的指针</p>
-</li>
-</ol>
-<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ol>
-<li>一个列表只含有少量列表项</li>
-<li>每个列表项是小整数值或者长度比较短的字符串</li>
-</ol>
-<h1 id="编码，解码"><a href="#编码，解码" class="headerlink" title="编码，解码"></a>编码，解码</h1><h3 id="编码前置节点长度信息"><a href="#编码前置节点长度信息" class="headerlink" title="编码前置节点长度信息"></a>编码前置节点长度信息</h3><pre><code>/* Encode the length of the previous entry and write it to &quot;p&quot;. Return the
- * number of bytes needed to encode this length if &quot;p&quot; is NULL. 
- *
- * 对前置节点的长度 len 进行编码，并将它写入到 p 中，
- * 然后返回编码 len 所需的字节数量。
- *
- * 如果 p 为 NULL ，那么不进行写入，仅返回编码 len 所需的字节数量。
- *
- * T = O(1)
- * 前置节点的长度编码字节数只有１字节和５字节
- * 如果前一节点的长度小于 254 字节， 那么 previous_entry_length 属性的长度为 1 字节： 前一节点的长度就保存在这一个字节里面。
- * 如果前一节点的长度大于等于 254 字节， 那么 previous_entry_length 属性的长度为 5 字节： 其中属性的第一字节会被设置为 0xFE （十进制值 254）， 而之后的四个字节则用于保存前一节点的长度。
- */
-static unsigned int zipPrevEncodeLength(unsigned char *p, unsigned int len) {
-
-    // 仅返回编码 len 所需的字节数量
-    if (p == NULL) {
-        return (len &lt; ZIP_BIGLEN) ? 1 : sizeof(len) + 1;
-    } else {
-        // 写入并返回编码 len 所需的字节数量
-        // 1 字节
-        if (len &lt; ZIP_BIGLEN) {
-            p[0] = len;
-            return 1;
-
-        // 5 字节
-        } else {
-            // 添加 5 字节长度标识
-            p[0] = ZIP_BIGLEN;
-            // 写入编码
-            memcpy(p + 1, &amp;len, sizeof(len));
-            // 如果有必要的话，进行大小端转换
-            memrev32ifbe(p + 1);
-            // 返回编码长度
-            return 1 + sizeof(len);
-        }
-    }
-}
-</code></pre><h3 id="解码前置节点长度信息"><a href="#解码前置节点长度信息" class="headerlink" title="解码前置节点长度信息"></a>解码前置节点长度信息</h3><pre><code>/* Decode the number of bytes required to store the length of the previous
- * element, from the perspective of the entry pointed to by &apos;ptr&apos;. 
- *
- * 解码 ptr 指针，
- * 取出编码前置节点长度所需的字节数，并将它保存到 prevlensize 变量中。
- *
- * T = O(1)
- */
-#define ZIP_DECODE_PREVLENSIZE(ptr, prevlensize) do {                          \
-    if ((ptr)[0] &lt; ZIP_BIGLEN) {                                               \
-        (prevlensize) = 1;                                                     \
-    } else {                                                                   \
-        (prevlensize) = 5;                                                     \
-    }                                                                          \
-} while(0);
-
-/* Decode the length of the previous element, from the perspective of the entry
- * pointed to by &apos;ptr&apos;. 
- *
- * 解码 ptr 指针，
- * 取出编码前置节点长度所需的字节数，
- * 并将这个字节数保存到 prevlensize 中。
- *
- * 然后根据 prevlensize ，从 ptr 中取出前置节点的长度值，
- * 并将这个长度值保存到 prevlen 变量中。
- *
- * T = O(1)
- */
-#define ZIP_DECODE_PREVLEN(ptr, prevlensize, prevlen) do {                     \
-                                                                               \
-    /* 先计算被编码长度值的字节数 */                                           \
-    ZIP_DECODE_PREVLENSIZE(ptr, prevlensize);                                  \
-                                                                               \
-    /* 再根据编码字节数来取出长度值 */                                         \
-    if ((prevlensize) == 1) {                                                  \
-        (prevlen) = (ptr)[0];                                                  \
-    } else if ((prevlensize) == 5) {                                           \
-        assert(sizeof((prevlensize)) == 4);                                    \
-        memcpy(&amp;(prevlen), ((char*)(ptr)) + 1, 4);                             \
-        memrev32ifbe(&amp;prevlen);                                                \
-    }                                                                          \
-} while(0);
-</code></pre><h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><pre><code>/*
- * 根据指针 p 所指定的位置，将长度为 slen 的字符串 s 插入到 zl 中。
- *
- * 函数的返回值为完成插入操作之后的 ziplist
- *
- * T = O(N^2)
- */
-static unsigned char *__ziplistInsert(unsigned char *zl, unsigned char *p, unsigned char *s, unsigned int slen) {
-    // 记录当前 ziplist 的长度
-    size_t curlen = intrev32ifbe(ZIPLIST_BYTES(zl)), reqlen, prevlen = 0;
-    size_t offset;
-    int nextdiff = 0;
-    unsigned char encoding = 0;
-    long long value = 123456789; /* initialized to avoid warning. Using a value
-                                    that is easy to see if for some reason
-                                    we use it uninitialized. */
-    zlentry entry, tail;
-
-    /* Find out prevlen for the entry that is inserted. */
-    if (p[0] != ZIP_END) {
-        // 如果 p[0] 不指向列表末端，说明列表非空，并且 p 正指向列表的其中一个节点
-        // 那么取出 p 所指向节点的信息，并将它保存到 entry 结构中
-        // 然后用 prevlen 变量记录前置节点的长度
-        // （当插入新节点之后 p 所指向的节点就成了新节点的前置节点）
-        // T = O(1)
-        entry = zipEntry(p);
-        prevlen = entry.prevrawlen;
-    } else {
-        // 如果 p 指向表尾末端，那么程序需要检查列表是否为：
-        // 1)如果 ptail 也指向 ZIP_END ，那么列表为空；
-        // 2)如果列表不为空，那么 ptail 将指向列表的最后一个节点。
-        unsigned char *ptail = ZIPLIST_ENTRY_TAIL(zl);
-        if (ptail[0] != ZIP_END) {
-            // 表尾节点为新节点的前置节点
-
-            // 取出表尾节点的长度
-            // T = O(1)
-            prevlen = zipRawEntryLength(ptail);
-        }
-    }
-
-    /* See if the entry can be encoded */
-    // 尝试看能否将输入字符串转换为整数，如果成功的话：
-    // 1)value 将保存转换后的整数值
-    // 2)encoding 则保存适用于 value 的编码方式
-    // 无论使用什么编码， reqlen 都保存节点值的长度
-    // T = O(N)
-    if (zipTryEncoding(s, slen, &amp;value, &amp;encoding)) {
-        /* &apos;encoding&apos; is set to the appropriate integer encoding */
-        reqlen = zipIntSize(encoding);
-    } else {
-        /* &apos;encoding&apos; is untouched, however zipEncodeLength will use the
-         * string length to figure out how to encode it. */
-        reqlen = slen;
-    }
-    /* We need space for both the length of the previous entry and
-     * the length of the payload. */
-    // 计算编码前置节点的长度所需的大小
-    // T = O(1)
-    reqlen += zipPrevEncodeLength(NULL, prevlen);
-    // 计算编码当前节点值所需的大小
-    // T = O(1)
-    reqlen += zipEncodeLength(NULL, encoding, slen);
-
-    /* When the insert position is not equal to the tail, we need to
-     * make sure that the next entry can hold this entry&apos;s length in
-     * its prevlen field. */
-    // 只要新节点不是被添加到列表末端，
-    // 那么程序就需要检查看 p 所指向的节点（的 header）能否编码新节点的长度。
-    // nextdiff 保存了新旧编码之间的字节大小差，如果这个值大于 0
-    // 那么说明需要对 p 所指向的节点（的 header ）进行扩展
-    // T = O(1)
-    nextdiff = (p[0] != ZIP_END) ? zipPrevLenByteDiff(p, reqlen) : 0;
-
-    /* Store offset because a realloc may change the address of zl. */
-    // 因为重分配空间可能会改变 zl 的地址
-    // 所以在分配之前，需要记录 zl 到 p 的偏移量，然后在分配之后依靠偏移量还原 p
-    offset = p-zl;
-    // curlen 是 ziplist 原来的长度
-    // reqlen 是整个新节点的长度
-    // nextdiff 是新节点的后继节点扩展 header 的长度（要么 0 字节，要么 4 个字节）
-    // T = O(N)
-    zl = ziplistResize(zl, curlen + reqlen + nextdiff);
-    p = zl + offset;
-
-    /* Apply memory move when necessary and update tail offset. */
-    if (p[0] != ZIP_END) {
-        // 新元素之后还有节点，因为新元素的加入，需要对这些原有节点进行调整
-
-        /* Subtract one because of the ZIP_END bytes */
-        // 移动现有元素，为新元素的插入空间腾出位置
-        // T = O(N)
-        memmove(p + reqlen, p - nextdiff, curlen - offset - 1 + nextdiff);
-
-        /* Encode this entry&apos;s raw length in the next entry. */
-        // 将新节点的长度编码至后置节点
-        // p+reqlen 定位到后置节点
-        // reqlen 是新节点的长度
-        // T = O(1)
-        zipPrevEncodeLength(p + reqlen, reqlen);
-
-        /* Update offset for tail */
-        // 更新到达表尾的偏移量，将新节点的长度也算上
-        ZIPLIST_TAIL_OFFSET(zl) =
-                intrev32ifbe(intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl)) + reqlen);
-
-        /* When the tail contains more than one entry, we need to take
-         * &quot;nextdiff&quot; in account as well. Otherwise, a change in the
-         * size of prevlen doesn&apos;t have an effect on the *tail* offset. */
-        // 如果新节点的后面有多于一个节点
-        // 那么程序需要将 nextdiff 记录的字节数也计算到表尾偏移量中
-        // 这样才能让表尾偏移量正确对齐表尾节点
-        // T = O(1)
-        tail = zipEntry(p + reqlen);
-        if (p[reqlen + tail.headersize + tail.len] != ZIP_END) {
-            ZIPLIST_TAIL_OFFSET(zl) =
-                    intrev32ifbe(intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl)) + nextdiff);
-        }
-    } else {
-        /* This element will be the new tail. */
-        // 新元素是新的表尾节点
-        ZIPLIST_TAIL_OFFSET(zl) = intrev32ifbe(p - zl);
-    }
-
-    /* When nextdiff != 0, the raw length of the next entry has changed, so
-     * we need to cascade the update throughout the ziplist */
-    // 当 nextdiff != 0 时，新节点的后继节点的（header 部分）长度已经被改变，
-    // 所以需要级联地更新后续的节点
-    if (nextdiff != 0) {
-        offset = p - zl;
-        // T  = O(N^2)
-        zl = __ziplistCascadeUpdate(zl, p + reqlen);
-        p = zl + offset;
-    }
-
-    /* Write the entry */
-    // 一切搞定，将前置节点的长度写入新节点的 header
-    p += zipPrevEncodeLength(p, prevlen);
-    // 将节点值的长度写入新节点的 header
-    p += zipEncodeLength(p, encoding, slen);
-    // 写入节点值
-    if (ZIP_IS_STR(encoding)) {
-        // T = O(N)
-        memcpy(p, s, slen);
-    } else {
-        // T = O(1)
-        zipSaveInteger(p, value, encoding);
-    }
-
-    // 更新列表的节点数量计数器
-    // T = O(1)
-    ZIPLIST_INCR_LENGTH(zl, 1);
-
-    return zl;
-}
-</code></pre><h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><pre><code>/* Delete &quot;num&quot; entries, starting at &quot;p&quot;. Returns pointer to the ziplist.
- *
- * 从位置 p 开始，连续删除 num 个节点。
- *
- * 函数的返回值为处理删除操作之后的 ziplist 。
- *
- * T = O(N^2)
- */
-static unsigned char *__ziplistDelete(unsigned char *zl, unsigned char *p, unsigned int num) {
-    unsigned int i, totlen, deleted = 0;
-    size_t offset;
-    int nextdiff = 0;
-    zlentry first, tail;
-
-    // 计算被删除节点总共占用的内存字节数
-    // 以及被删除节点的总个数
-    // T = O(N)
-    first = zipEntry(p);
-    for (i = 0; p[0] != ZIP_END &amp;&amp; i &lt; num; i++) {
-        p += zipRawEntryLength(p);
-        deleted++;
-    }
-
-    // totlen 是所有被删除节点总共占用的内存字节数
-    totlen = p-first.p;
-    if (totlen &gt; 0) {
-        if (p[0] != ZIP_END) {
-
-            // 执行这里，表示被删除节点之后仍然有节点存在
-
-            /* Storing `prevrawlen` in this entry may increase or decrease the
-             * number of bytes required compare to the current `prevrawlen`.
-             * There always is room to store this, because it was previously
-             * stored by an entry that is now being deleted. */
-            // 因为位于被删除范围之后的第一个节点的 header 部分的大小
-            // 可能容纳不了新的前置节点，所以需要计算新旧前置节点之间的字节数差
-            // T = O(1)
-            nextdiff = zipPrevLenByteDiff(p, first.prevrawlen);
-            // 如果有需要的话，将指针 p 后退 nextdiff 字节，为新 header 空出空间
-            p -= nextdiff;
-            // 将 first 的前置节点的长度编码至 p 中
-            // T = O(1)
-            zipPrevEncodeLength(p, first.prevrawlen);
-
-            /* Update offset for tail */
-            // 更新到达表尾的偏移量
-            // T = O(1)
-            ZIPLIST_TAIL_OFFSET(zl) =
-                    intrev32ifbe(intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl)) - totlen);
-
-            /* When the tail contains more than one entry, we need to take
-             * &quot;nextdiff&quot; in account as well. Otherwise, a change in the
-             * size of prevlen doesn&apos;t have an effect on the *tail* offset. */
-            // 如果被删除节点之后，有多于一个节点
-            // 那么程序需要将 nextdiff 记录的字节数也计算到表尾偏移量中
-            // 这样才能让表尾偏移量正确对齐表尾节点
-            // T = O(1)
-            tail = zipEntry(p);
-            if (p[tail.headersize+tail.len] != ZIP_END) {
-                ZIPLIST_TAIL_OFFSET(zl) =
-                        intrev32ifbe(intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl)) + nextdiff);
-            }
-
-            /* Move tail to the front of the ziplist */
-            // 从表尾向表头移动数据，覆盖被删除节点的数据
-            // T = O(N)
-            memmove(first.p, p,
-                    intrev32ifbe(ZIPLIST_BYTES(zl)) - (p - zl) - 1);
-        } else {
-
-            // 执行这里，表示被删除节点之后已经没有其他节点了
-
-            /* The entire tail was deleted. No need to move memory. */
-            // T = O(1)
-            ZIPLIST_TAIL_OFFSET(zl) =
-                    intrev32ifbe((first.p-zl) - first.prevrawlen);
-        }
-
-        /* Resize and update length */
-        // 缩小并更新 ziplist 的长度
-        offset = first.p - zl;
-        zl = ziplistResize(zl, intrev32ifbe(ZIPLIST_BYTES(zl)) - totlen+nextdiff);
-        ZIPLIST_INCR_LENGTH(zl, -deleted);
-        p = zl + offset;
-
-        /* When nextdiff != 0, the raw length of the next entry has changed, so
-         * we need to cascade the update throughout the ziplist */
-        // 如果 p 所指向的节点的大小已经变更，那么进行级联更新
-        // 检查 p 之后的所有节点是否符合 ziplist 的编码要求
-        // T = O(N^2)
-        if (nextdiff != 0) {
-            zl = __ziplistCascadeUpdate(zl, p);
-        }
-    }
-
-    return zl;
-}
-</code></pre><h1 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h1><pre><code>/* When an entry is inserted, we need to set the prevlen field of the next
- * entry to equal the length of the inserted entry. It can occur that this
- * length cannot be encoded in 1 byte and the next entry needs to be grow
- * a bit larger to hold the 5-byte encoded prevlen. This can be done for free,
- * because this only happens when an entry is already being inserted (which
- * causes a realloc and memmove). However, encoding the prevlen may require
- * that this entry is grown as well. This effect may cascade throughout
- * the ziplist when there are consecutive entries with a size close to
- * ZIP_BIGLEN, so we need to check that the prevlen can be encoded in every
- * consecutive entry.
- *
- * 当将一个新节点添加到某个节点之前的时候，
- * 如果原节点的 header 空间不足以保存新节点的长度，
- * 那么就需要对原节点的 header 空间进行扩展（从 1 字节扩展到 5 字节）。
- *
- * 但是，当对原节点进行扩展之后，原节点的下一个节点的 prevlen 可能出现空间不足，
- * 这种情况在多个连续节点的长度都接近 ZIP_BIGLEN 时可能发生。
- *
- * 这个函数就用于检查并修复后续节点的空间问题。
- *
- * Note that this effect can also happen in reverse, where the bytes required
- * to encode the prevlen field can shrink. This effect is deliberately ignored,
- * because it can cause a &quot;flapping&quot; effect where a chain prevlen fields is
- * first grown and then shrunk again after consecutive inserts. Rather, the
- * field is allowed to stay larger than necessary, because a large prevlen
- * field implies the ziplist is holding large entries anyway.
- *
- * 反过来说，
- * 因为节点的长度变小而引起的连续缩小也是可能出现的，
- * 不过，为了避免扩展-缩小-扩展-缩小这样的情况反复出现（flapping，抖动），
- * 我们不处理这种情况，而是任由 prevlen 比所需的长度更长。
-
- * The pointer &quot;p&quot; points to the first entry that does NOT need to be
- * updated, i.e. consecutive fields MAY need an update.
- *
- * 注意，程序的检查是针对 p 的后续节点，而不是 p 所指向的节点。
- * 因为节点 p 在传入之前已经完成了所需的空间扩展工作。
- *
- * T = O(N^2)
- */
-static unsigned char *__ziplistCascadeUpdate(unsigned char *zl, unsigned char *p) {
-    size_t curlen = intrev32ifbe(ZIPLIST_BYTES(zl)), rawlen, rawlensize;
-    size_t offset, noffset, extra;
-    unsigned char *np;
-    zlentry cur, next;
-
-    // T = O(N^2)
-    while (p[0] != ZIP_END) {
-
-        // 将 p 所指向的节点的信息保存到 cur 结构中
-        cur = zipEntry(p);
-        // 当前节点的长度
-        rawlen = cur.headersize + cur.len;
-        // 计算编码当前节点的长度所需的字节数
-        // T = O(1)
-        rawlensize = zipPrevEncodeLength(NULL, rawlen);
-
-        /* Abort if there is no next entry. */
-        // 如果已经没有后续空间需要更新了，跳出
-        if (p[rawlen] == ZIP_END) {
-            break;
-        }
-
-        // 取出后续节点的信息，保存到 next 结构中
-        // T = O(1)
-        next = zipEntry(p + rawlen);
-
-        /* Abort when &quot;prevlen&quot; has not changed. */
-        // 后续节点编码当前节点的空间已经足够，无须再进行任何处理，跳出
-        // 可以证明，只要遇到一个空间足够的节点，
-        // 那么这个节点之后的所有节点的空间都是足够的
-        if (next.prevrawlen == rawlen) {
-            break;
-        }
-
-        if (next.prevrawlensize &lt; rawlensize) {
-
-            /* The &quot;prevlen&quot; field of &quot;next&quot; needs more bytes to hold
-             * the raw length of &quot;cur&quot;. */
-            // 执行到这里，表示 next 空间的大小不足以编码 cur 的长度
-            // 所以程序需要对 next 节点的（header 部分）空间进行扩展
-
-            // 记录 p 的偏移量
-            offset = p - zl;
-            // 计算需要增加的节点数量
-            extra = rawlensize - next.prevrawlensize;
-            // 扩展 zl 的大小
-            // T = O(N)
-            zl = ziplistResize(zl, curlen + extra);
-            // 还原指针 p
-            p = zl + offset;
-
-            /* Current pointer and offset for next element. */
-            // 记录下一节点的偏移量
-            np = p + rawlen;
-            noffset = np - zl;
-
-            /* Update tail offset when next element is not the tail element. */
-            // 当 next 节点不是表尾节点时，更新列表到表尾节点的偏移量
-            //
-            // 不用更新的情况（next 为表尾节点）：
-            //
-            // |     | next |      ==&gt;    |     | new next          |
-            //       ^                          ^
-            //       |                          |
-            //     tail                        tail
-            //
-            // 需要更新的情况（next 不是表尾节点）：
-            //
-            // | next |     |   ==&gt;     | new next          |     |
-            //        ^                        ^
-            //        |                        |
-            //    old tail                 old tail
-            //
-            // 更新之后：
-            //
-            // | new next          |     |
-            //                     ^
-            //                     |
-            //                  new tail
-            // T = O(1)
-            if ((zl + intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl))) != np) {
-                ZIPLIST_TAIL_OFFSET(zl) =
-                        intrev32ifbe(intrev32ifbe(ZIPLIST_TAIL_OFFSET(zl)) + extra);
-            }
-
-            /* Move the tail to the back. */
-            // 向后移动 cur 节点之后的数据，为 cur 的新 header 腾出空间
-            //
-            // 示例：
-            //
-            // | header | value |  ==&gt;  | header |    | value |  ==&gt;  | header      | value |
-            //                                   |&lt;--&gt;|
-            //                            为新 header 腾出的空间
-            // T = O(N)
-            memmove(np+rawlensize,
-                    np+next.prevrawlensize,
-                    curlen - noffset - next.prevrawlensize - 1);
-            // 将新的前一节点长度值编码进新的 next 节点的 header
-            // T = O(1)
-            zipPrevEncodeLength(np, rawlen);
-
-            /* Advance the cursor */
-            // 移动指针，继续处理下个节点
-            p += rawlen;
-            curlen += extra;
-        } else {
-            if (next.prevrawlensize &gt; rawlensize) {
-                /* This would result in shrinking, which we want to avoid.
-                 * So, set &quot;rawlen&quot; in the available bytes. */
-                // 执行到这里，说明 next 节点编码前置节点的 header 空间有 5 字节
-                // 而编码 rawlen 只需要 1 字节
-                // 但是程序不会对 next 进行缩小，
-                // 所以这里只将 rawlen 写入 5 字节的 header 中就算了。
-                // T = O(1)
-                zipPrevEncodeLengthForceLarge(p + rawlen, rawlen);
-            } else {
-                // 运行到这里，
-                // 说明 cur 节点的长度正好可以编码到 next 节点的 header 中
-                // T = O(1)
-                zipPrevEncodeLength(p + rawlen, rawlen);
-            }
-
-            /* Stop here, as the raw length of &quot;next&quot; has not changed. */
-            break;
-        }
-    }
-
-    return zl;
-}
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="ziplist结构"><a href="#ziplist结构" class="headerlink" title="ziplist结构"></a>ziplist结构</h1><ol>
-<li>zlbytes：记录整个压缩列表占用的内存字节数</li>
-<li>zl]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker-如何解决container服务中配置文件个性化的问题]]></title>
-    <link href="http://www.cxyteam.com/2018/03/02/docker-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://www.cxyteam.com/2018/03/02/docker-如何解决配置文件变更的问题/</id>
-    <published>2018-03-02T02:33:25.000Z</published>
-    <updated>2018-05-10T11:12:37.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ol>
-<li>传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即可生效</li>
-<li>在docker搭建中，如果我们的image中已经使用了nginx.conf的配置文件，那么我docker run的container的配置文件和image中的配置文件是一致的，如果我想修改container中nginx的log路径，我应该怎么做呢？</li>
-<li>是不是我需要这样，首先修改nginx.conf 然后再commit当前container，最后再push当前container，如果我需要运行两个container有不一致的nginx.conf呢？</li>
-</ol>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
-<li>通过env传递，但是仅限于很简单的配置，像nginx这样的配置文件是不太可能使用这种方式</li>
-<li>通过volume挂载宿主机文件，但如果在集群中，容器漂移到其他宿主机就找不到配置文件，缺乏横向扩展<br>  docker run -t -i -d -p 8004:80 –name=pay_game -h 127.0.0.1 -v ~/Desktop/devspace/apo_api:/data1/htdocs/apo_api -v ~/Desktop/devspace/apo_api/project/config/nginx/vhosts:/usr/local/openresty/nginx/conf/vhosts lnmpr</li>
-<li>使用zookeeper或者etcd来存放配置文件数据，创建容器时通过 ENV 传递配置文件的 KEY，应用启动前用 KEY 拉取配置文件，然后启动应用</li>
-</ol>
-<h1 id="查看容器启动时的命令"><a href="#查看容器启动时的命令" class="headerlink" title="查看容器启动时的命令"></a>查看容器启动时的命令</h1><pre><code>docker inspect pay_game
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ol>
-<li>传统的服务中，如果我们需要修改nginx的配置，只需要对nginx.conf进行修改，然后重启nginx的服务即]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[活动机器数预估]]></title>
-    <link href="http://www.cxyteam.com/2018/02/12/%E6%B4%BB%E5%8A%A8%E6%9C%BA%E5%99%A8%E6%95%B0%E9%A2%84%E4%BC%B0/"/>
-    <id>http://www.cxyteam.com/2018/02/12/活动机器数预估/</id>
-    <published>2018-02-12T01:35:24.000Z</published>
-    <updated>2018-02-12T01:38:34.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="qps"><a href="#qps" class="headerlink" title="qps"></a>qps</h1><h3 id="php连接数"><a href="#php连接数" class="headerlink" title="php连接数"></a>php连接数</h3><h3 id="redis连接数"><a href="#redis连接数" class="headerlink" title="redis连接数"></a>redis连接数</h3><h3 id="mysql连接数"><a href="#mysql连接数" class="headerlink" title="mysql连接数"></a>mysql连接数</h3><h1 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="qps"><a href="#qps" class="headerlink" title="qps"></a>qps</h1><h3 id="php连接数"><a href="#php连接数" class="headerlink" title="php连接数"><]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mysql字符集]]></title>
-    <link href="http://www.cxyteam.com/2018/02/09/mysql%E5%AD%97%E7%AC%A6%E9%9B%86/"/>
-    <id>http://www.cxyteam.com/2018/02/09/mysql字符集/</id>
-    <published>2018-02-09T03:48:24.000Z</published>
-    <updated>2018-02-11T09:56:36.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="影响mysql中文展示乱码的原因"><a href="#影响mysql中文展示乱码的原因" class="headerlink" title="影响mysql中文展示乱码的原因"></a>影响mysql中文展示乱码的原因</h1><ol>
-<li>库的字符集</li>
-<li>连接字符集</li>
-<li>页面显示字符集</li>
-</ol>
-<h1 id="查看mysql字符集设置"><a href="#查看mysql字符集设置" class="headerlink" title="查看mysql字符集设置"></a>查看mysql字符集设置</h1><pre><code>SHOW VARIABLES LIKE &apos;character%&apos;;
-</code></pre><h1 id="设置mysql字符集为utf8"><a href="#设置mysql字符集为utf8" class="headerlink" title="设置mysql字符集为utf8"></a>设置mysql字符集为utf8</h1><pre><code>SET character_set_client = utf8 ;  
-SET character_set_connection = utf8 ;   
-SET character_set_database = utf8 ;   
-SET character_set_results = utf8 ;    
-SET character_set_server = utf8;
-SET collation_connection = utf8 ;  
-SET collation_database = utf8 ;   
-SET collation_server = utf8 ; 
-SET NAMES &apos;utf8&apos;;
-set collation_database=utf8_general_ci;
-set collation_database=utf8_general_ci;
-set collation_server=utf8_general_ci;
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="影响mysql中文展示乱码的原因"><a href="#影响mysql中文展示乱码的原因" class="headerlink" title="影响mysql中文展示乱码的原因"></a>影响mysql中文展示乱码的原因</h1><ol>
-<li>库的字符集</l]]>
-    </summary>
-    
-      <category term="Mysql" scheme="http://www.cxyteam.com/tags/Mysql/"/>
-    
-      <category term="Mysql" scheme="http://www.cxyteam.com/categories/Mysql/"/>
     
   </entry>
   

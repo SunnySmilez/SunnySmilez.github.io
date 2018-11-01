@@ -2,6 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.cxyteam.com/2018/11/01/golang%E7%9A%84func%E5%A6%82%E4%BD%95%E4%BC%A0%E5%85%A5%E5%85%B3%E8%81%94%E6%95%B0%E7%BB%84/</loc>
+    <lastmod>2018-11-01T05:21:48.221Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/10/30/golang%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2018-11-01T05:10:45.069Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/11/01/golang%E4%BD%BF%E7%94%A8net-http/</loc>
+    <lastmod>2018-11-01T05:08:53.716Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/10/29/%E4%BD%BF%E7%94%A8tcpdump%E6%8E%92%E6%9F%A5zRangeByScore%E5%8F%82%E6%95%B0%E6%97%A0%E6%95%88%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-10-29T16:36:05.639Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/10/28/tcpdump%E6%9F%A5%E7%9C%8Bredis%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2018-10-28T13:19:22.918Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2016/10/26/gdb%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2018-10-28T13:12:33.982Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/10/24/redis%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2018-10-24T13:00:17.554Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/01/02/redis%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%B3%E7%B3%BB/</loc>
+    <lastmod>2018-10-24T12:57:48.773Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-10-24T05:07:16.884Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2017/02/20/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B8%B8%E9%87%8F/</loc>
+    <lastmod>2018-09-30T10:32:31.177Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/08/06/2018%E5%B9%B4%E5%B9%B4%E4%B8%AD%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-08-06T12:58:29.891Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.cxyteam.com/2018/08/01/%E8%AE%BE%E7%BD%AEdisable-functions%E5%A4%B1%E6%95%88/</loc>
     <lastmod>2018-08-01T13:08:28.198Z</lastmod>
   </url>
@@ -9,11 +64,6 @@
   <url>
     <loc>http://www.cxyteam.com/2018/07/31/git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%BA%BA%E7%9A%84%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8/</loc>
     <lastmod>2018-07-31T11:19:30.458Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-07-16T05:13:12.000Z</lastmod>
   </url>
   
   <url>
@@ -177,11 +227,6 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/gitment/gitment1.css</loc>
-    <lastmod>2018-01-04T07:29:43.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.cxyteam.com/gitment/gitment.css</loc>
     <lastmod>2018-01-04T07:29:43.000Z</lastmod>
   </url>
@@ -197,13 +242,13 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2018/01/03/redis-sds%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2018-01-03T13:40:25.000Z</lastmod>
+    <loc>http://www.cxyteam.com/gitment/gitment1.css</loc>
+    <lastmod>2018-01-04T07:29:43.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2018/01/02/redis%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2018-01-02T11:06:05.000Z</lastmod>
+    <loc>http://www.cxyteam.com/2018/01/03/redis-sds%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2018-01-03T13:40:25.000Z</lastmod>
   </url>
   
   <url>
@@ -382,11 +427,6 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2017/02/20/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%B8%B8%E9%87%8F/</loc>
-    <lastmod>2017-03-01T12:05:31.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.cxyteam.com/2017/02/20/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%8F%98%E9%87%8F/</loc>
     <lastmod>2017-03-01T12:05:27.000Z</lastmod>
   </url>
@@ -484,11 +524,6 @@
   <url>
     <loc>http://www.cxyteam.com/2016/11/02/gdb%E8%B0%83%E8%AF%95redis/</loc>
     <lastmod>2016-11-02T03:02:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2016/10/26/gdb%E8%B0%83%E8%AF%95/</loc>
-    <lastmod>2016-11-01T06:27:23.000Z</lastmod>
   </url>
   
   <url>
@@ -792,77 +827,12 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/05/28/Xhprof%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/29/uniq%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2016/01/27/lsof%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/05/29/Mysql-InnnoDB%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E9%82%A3%E4%BA%9B%E5%86%85%E5%AE%B9/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/20/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/03/Redis%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/29/sort%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/18/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E7%9A%84cookie/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/05/21/ntp%E5%90%8C%E6%AD%A5linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E9%97%B4/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.cxyteam.com/2015/12/17/siege%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://www.cxyteam.com/2015/11/04/%E5%88%86%E9%A1%B5%E7%9A%84%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/05/21/PHPUnit%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/29/wc%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2015/12/26/join%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2016/01/27/top%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
@@ -877,12 +847,22 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2016/01/26/set%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://www.cxyteam.com/2015/12/20/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/11/04/Strace%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://www.cxyteam.com/2015/12/29/wc%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/12/29/uniq%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2016/01/26/set%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
@@ -892,12 +872,32 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/12/29/fmt%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://www.cxyteam.com/2015/12/18/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E7%9A%84cookie/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/05/20/Innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-1-2/</loc>
+    <loc>http://www.cxyteam.com/2015/05/21/ntp%E5%90%8C%E6%AD%A5linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E9%97%B4/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2016/01/27/top%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2016/01/27/lsof%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/12/26/join%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/12/29/fmt%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
@@ -907,22 +907,57 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2016/01/22/expr%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.cxyteam.com/2016/01/26/du%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/05/19/Innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-1-1/</loc>
+    <loc>http://www.cxyteam.com/2016/01/22/expr%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://www.cxyteam.com/2015/11/04/decrby%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/12/29/sort%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/05/28/Xhprof%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/11/04/Strace%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/12/03/Redis%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/05/21/PHPUnit%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/05/29/Mysql-InnnoDB%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E9%82%A3%E4%BA%9B%E5%86%85%E5%AE%B9/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/05/20/Innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-1-2/</loc>
+    <lastmod>2016-02-17T02:36:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2015/05/19/Innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-1-1/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   

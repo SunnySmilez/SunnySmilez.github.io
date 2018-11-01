@@ -81,19 +81,22 @@
 
 
 
-<meta name="description" content="字符创对象（REDIS_STRING | string）整数值（int）embstr编码的简单动态字符串（SDS）（embstr）动态字符串（raw）编码存储选择如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长">
+<meta name="description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
+排查过程排查命">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis对象类型及数据结构">
-<meta property="og:url" content="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/index.html">
+<meta property="og:title" content="使用tcpdump排查zRangeByScore参数无效问题">
+<meta property="og:url" content="http://www.cxyteam.com/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/index.html">
 <meta property="og:site_name" content="狂奔的菜鸟">
-<meta property="og:description" content="字符创对象（REDIS_STRING | string）整数值（int）embstr编码的简单动态字符串（SDS）（embstr）动态字符串（raw）编码存储选择如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长">
-<meta property="og:updated_time" content="2018-01-02T11:06:05.000Z">
+<meta property="og:description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
+排查过程排查命">
+<meta property="og:updated_time" content="2018-10-29T16:36:05.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis对象类型及数据结构">
-<meta name="twitter:description" content="字符创对象（REDIS_STRING | string）整数值（int）embstr编码的简单动态字符串（SDS）（embstr）动态字符串（raw）编码存储选择如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长">
+<meta name="twitter:title" content="使用tcpdump排查zRangeByScore参数无效问题">
+<meta name="twitter:description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
+排查过程排查命">
 
 
 
@@ -123,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/"/>
+  <link rel="canonical" href="http://www.cxyteam.com/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/"/>
 
 
 
 
 
-  <title>redis对象类型及数据结构 | 狂奔的菜鸟</title>
+  <title>使用tcpdump排查zRangeByScore参数无效问题 | 狂奔的菜鸟</title>
   
 
 
@@ -236,7 +239,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/01/02/redis对象类型及数据结构/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -253,7 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis对象类型及数据结构</h1>
+          <h1 class="post-title" itemprop="name headline">使用tcpdump排查zRangeByScore参数无效问题</h1>
         
 
         <div class="post-meta">
@@ -265,8 +268,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T17:42:59+08:00">
-                2018-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T23:47:12+08:00">
+                2018-10-29
               </time>
             
 
@@ -306,8 +309,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/02/redis对象类型及数据结构/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/02/redis对象类型及数据结构/" itemprop="commentsCount"></span>
+                <a href="/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,25 +338,20 @@
       
 
       
-        <h1 id="字符创对象（REDIS-STRING-string）"><a href="#字符创对象（REDIS-STRING-string）" class="headerlink" title="字符创对象（REDIS_STRING | string）"></a>字符创对象（REDIS_STRING | string）</h1><h4 id="整数值（int）"><a href="#整数值（int）" class="headerlink" title="整数值（int）"></a>整数值（int）</h4><h4 id="embstr编码的简单动态字符串（SDS）（embstr）"><a href="#embstr编码的简单动态字符串（SDS）（embstr）" class="headerlink" title="embstr编码的简单动态字符串（SDS）（embstr）"></a>embstr编码的简单动态字符串（SDS）（embstr）</h4><h4 id="动态字符串（raw）"><a href="#动态字符串（raw）" class="headerlink" title="动态字符串（raw）"></a>动态字符串（raw）</h4><h6 id="编码存储选择"><a href="#编码存储选择" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度大于 39 字节， 那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串值， 并将对象的编码设置为 raw
-如果字符串对象保存的是一个字符串值， 并且这个字符串值的长度小于等于 39 字节， 那么字符串对象将使用 embstr 编码的方式来保存这个字符串值
-可以用 long double 类型表示的浮点数在 Redis 中也是作为字符串值来保存的： 如果我们要保存一个浮点数到字符串对象里面， 那么程序会先将这个浮点数转换成字符串值， 然后再保存起转换所得的字符串值
-</code></pre><h6 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>对于 int 编码的字符串对象来说， 如果我们向对象执行了一些命令， 使得这个对象保存的不再是整数值， 而是一个字符串值， 那么字符串对象的编码将从 int 变为 raw
-因为 Redis 没有为 embstr 编码的字符串对象编写任何相应的修改程序 （只有 int 编码的字符串对象和 raw 编码的字符串对象有这些程序）， 所以 embstr 编码的字符串对象实际上是只读的： 当我们对 embstr 编码的字符串对象执行任何修改命令时， 程序会先将对象的编码从 embstr 转换成 raw ， 然后再执行修改命令； 因为这个原因， embstr 编码的字符串对象在执行修改命令之后， 总会变成一个 raw 编码的字符串对象    
-</code></pre><h1 id="列表对象（REDIS-LIST-list）"><a href="#列表对象（REDIS-LIST-list）" class="headerlink" title="列表对象（REDIS_LIST | list）"></a>列表对象（REDIS_LIST | list）</h1><h4 id="压缩列表（ziplist）"><a href="#压缩列表（ziplist）" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="双端链表（linkedlist）"><a href="#双端链表（linkedlist）" class="headerlink" title="双端链表（linkedlist）"></a>双端链表（linkedlist）</h4><h6 id="编码存储选择-1"><a href="#编码存储选择-1" class="headerlink" title="编码存储选择"></a>编码存储选择</h6><pre><code>当列表对象可以同时满足以下两个条件时， 列表对象使用 ziplist 编码：
-    1、列表对象保存的所有字符串元素的长度都小于 64 字节；
-    2、列表对象保存的元素数量小于 512 个
-</code></pre><h1 id="哈希对象（REDIS-HASH-hash）"><a href="#哈希对象（REDIS-HASH-hash）" class="headerlink" title="哈希对象（REDIS_HASH | hash）"></a>哈希对象（REDIS_HASH | hash）</h1><h4 id="压缩列表（ziplist）-1"><a href="#压缩列表（ziplist）-1" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="字典（hashtable）"><a href="#字典（hashtable）" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当哈希对象可以同时满足以下两个条件时， 哈希对象使用 ziplist 编码：
-    1、哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；
-    2、哈希对象保存的键值对数量小于 512 个；
-</code></pre><h1 id="集合对象（REDIS-SET-set）"><a href="#集合对象（REDIS-SET-set）" class="headerlink" title="集合对象（REDIS_SET | set）"></a>集合对象（REDIS_SET | set）</h1><h4 id="整数集合（intset）"><a href="#整数集合（intset）" class="headerlink" title="整数集合（intset）"></a>整数集合（intset）</h4><h4 id="字典（hashtable）-1"><a href="#字典（hashtable）-1" class="headerlink" title="字典（hashtable）"></a>字典（hashtable）</h4><h6 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
-    1、集合对象保存的所有元素都是整数值；
-    2、集合对象保存的元素数量不超过 512 个；
-</code></pre><h1 id="有序集合对象（REDIS-ZSET-zset）"><a href="#有序集合对象（REDIS-ZSET-zset）" class="headerlink" title="有序集合对象（REDIS_ZSET | zset）"></a>有序集合对象（REDIS_ZSET | zset）</h1><h4 id="压缩列表（ziplist）-2"><a href="#压缩列表（ziplist）-2" class="headerlink" title="压缩列表（ziplist）"></a>压缩列表（ziplist）</h4><h4 id="跳跃表和字典（skiplist）"><a href="#跳跃表和字典（skiplist）" class="headerlink" title="跳跃表和字典（skiplist）"></a>跳跃表和字典（skiplist）</h4><h6 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h6><pre><code>当有序集合对象可以同时满足以下两个条件时， 对象使用 ziplist 编码：
-    1、有序集合保存的元素数量小于 128 个；
-    2、有序集合保存的所有元素成员的长度都小于 64 字节；
-</code></pre><h6 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h6><pre><code>查看一个key的编码类型：OBJECT ENCODING key
-</code></pre>
+        <p>在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>($start, $size)));</div></pre></td></tr></table></figure></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据</p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h3 id="排查命令是否写错"><a href="#排查命令是否写错" class="headerlink" title="排查命令是否写错"></a>排查命令是否写错</h3><p>注：「直接将start和size写成定值」</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>(<span class="number">10</span>, <span class="number">10</span>)));</div></pre></td></tr></table></figure>
+<p>数据正常返回，想当然肯定是start，size传入不对</p>
+<h3 id="打印start，size"><a href="#打印start，size" class="headerlink" title="打印start，size"></a>打印start，size</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123;</div><div class="line">  [<span class="string">"limit"</span>]=&gt;</div><div class="line">  <span class="keyword">array</span>(<span class="number">2</span>) &#123;</div><div class="line">    [<span class="number">0</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">    [<span class="number">1</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果出乎意料，start，size传入没有问题<br>可是传入的都是page=10，size=10，为什么结果会不一样呢，那么这两种方式有什么不同呢，redis最终执行的是什么命令呢？</p>
+<h3 id="查看传给redis的命令"><a href="#查看传给redis的命令" class="headerlink" title="查看传给redis的命令"></a>查看传给redis的命令</h3><p>在服务器用tcpdump抓取redis的网络包<br>注：「在开发服务器执行tcpdump命令；redis端口为6379」</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]<span class="comment"># tcpdump port 6379 and tcp -X -s 0</span></div></pre></td></tr></table></figure>
+<p>发现当走参数传入的方式的时候，最终redis执行的命令是这样的<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">02</span>:<span class="number">46</span>:<span class="number">46.220417</span> IP local_host<span class="number">.45816</span> &gt; redis_host<span class="number">.6379</span>: Flags [P.], seq <span class="number">38</span>:<span class="number">129</span>, ack <span class="number">6</span>, win <span class="number">29200</span>, length <span class="number">91</span></div><div class="line">	<span class="number">0x0000</span>:  <span class="number">4500</span> <span class="number">0083</span> d940 <span class="number">4000</span> <span class="number">4006</span> <span class="number">32</span>a2 ac11 <span class="number">0005</span>  E....@@.@<span class="number">.2</span>.....</div><div class="line">	<span class="number">0x0010</span>:  <span class="number">0</span>a83 <span class="number">77</span>f9 b2f8 <span class="number">1875</span> e8b6 <span class="number">5</span>ad8 <span class="number">4953</span> <span class="number">9e07</span>  ..w....u..Z.IS..</div><div class="line">	<span class="number">0x0020</span>:  <span class="number">5018</span> <span class="number">7210</span> <span class="number">2</span>f08 <span class="number">0000</span> <span class="number">2</span>a35 <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">330</span>d  P.r./...*<span class="number">5.</span>.$<span class="number">13.</span></div><div class="line">	<span class="number">0x0030</span>:  <span class="number">0</span>a5a <span class="number">5241</span> <span class="number">4e47</span> <span class="number">4542</span> <span class="number">5953</span> <span class="number">434</span>f <span class="number">5245</span> <span class="number">0</span>d0a  .ZRANGEBYSCORE..</div><div class="line">	<span class="number">0x0040</span>:  <span class="number">2432</span> <span class="number">330</span>d <span class="number">0</span>a70 <span class="number">6572</span> <span class="number">6665</span> <span class="number">6374</span> <span class="number">5</span>f63 <span class="number">6</span>f6d  $<span class="number">23.</span>.perfect_com</div><div class="line">	<span class="number">0x0050</span>:  <span class="number">6</span>d65 <span class="number">6e74</span> <span class="number">5</span>f69 <span class="number">645</span>f <span class="number">6</span>c69 <span class="number">7374</span> <span class="number">0</span>d0a <span class="number">2434</span>  ment_id_list..$<span class="number">4</span></div><div class="line">	<span class="number">0x0060</span>:  <span class="number">0</span>d0a <span class="number">2</span>d69 <span class="number">6e66</span> <span class="number">0</span>d0a <span class="number">2434</span> <span class="number">0</span>d0a <span class="number">2</span>b69 <span class="number">6e66</span>  ..-inf..$<span class="number">4.</span>.+inf</div><div class="line">	<span class="number">0x0070</span>:  <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">300</span>d <span class="number">0</span>a57 <span class="number">4954</span> <span class="number">4853</span> <span class="number">434</span>f <span class="number">5245</span>  ..$<span class="number">10.</span>.WITHSCORE</div><div class="line">	<span class="number">0x0080</span>:  <span class="number">530</span>d <span class="number">0</span>a                                  S..</div></pre></td></tr></table></figure></p>
+<p>很显然没有limit参数信息，当然会返回有序集合所有的数据，而对比之后也可以很明显的发现，start，limit参数传入和写定值的方式唯一的不同就是数据类型。</p>
+<p>愉快的将参数传入进行了强制类型转换，问题得到解决。</p>
+<p>最后，查看使用的redis连接类库是phpredis。<br>再确认redis终端执行命令能正常返回之后，果断给phpredis提了一个issue。</p>
+
       
     </div>
     
@@ -412,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/28/常用命令/" rel="next" title="常用命令">
-                <i class="fa fa-chevron-left"></i> 常用命令
+              <a href="/2018/10/28/tcpdump查看redis连接过程/" rel="next" title="tcpdump查看redis连接过程">
+                <i class="fa fa-chevron-left"></i> tcpdump查看redis连接过程
               </a>
             
           </div>
@@ -422,8 +420,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/03/redis-sds源码阅读/" rel="prev" title="redis-sds源码阅读">
-                redis-sds源码阅读 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/30/golang执行定时脚本/" rel="prev" title="golang执行定时脚本">
+                golang执行定时脚本 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -508,7 +506,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -612,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字符创对象（REDIS-STRING-string）"><span class="nav-number">1.</span> <span class="nav-text">字符创对象（REDIS_STRING | string）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数值（int）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">整数值（int）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embstr编码的简单动态字符串（SDS）（embstr）"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">embstr编码的简单动态字符串（SDS）（embstr）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态字符串（raw）"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">动态字符串（raw）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编码存储选择"><span class="nav-number">1.0.0.3.0.1.</span> <span class="nav-text">编码存储选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#编码转换"><span class="nav-number">1.0.0.3.0.2.</span> <span class="nav-text">编码转换</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表对象（REDIS-LIST-list）"><span class="nav-number">2.</span> <span class="nav-text">列表对象（REDIS_LIST | list）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩列表（ziplist）"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">压缩列表（ziplist）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双端链表（linkedlist）"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">双端链表（linkedlist）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编码存储选择-1"><span class="nav-number">2.0.0.2.0.1.</span> <span class="nav-text">编码存储选择</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希对象（REDIS-HASH-hash）"><span class="nav-number">3.</span> <span class="nav-text">哈希对象（REDIS_HASH | hash）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩列表（ziplist）-1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">压缩列表（ziplist）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典（hashtable）"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">字典（hashtable）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编码转换-1"><span class="nav-number">3.0.0.2.0.1.</span> <span class="nav-text">编码转换</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合对象（REDIS-SET-set）"><span class="nav-number">4.</span> <span class="nav-text">集合对象（REDIS_SET | set）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数集合（intset）"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">整数集合（intset）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典（hashtable）-1"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">字典（hashtable）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编码转换-2"><span class="nav-number">4.0.0.2.0.1.</span> <span class="nav-text">编码转换</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序集合对象（REDIS-ZSET-zset）"><span class="nav-number">5.</span> <span class="nav-text">有序集合对象（REDIS_ZSET | zset）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩列表（ziplist）-2"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">压缩列表（ziplist）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳跃表和字典（skiplist）"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">跳跃表和字典（skiplist）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编码转换-3"><span class="nav-number">5.0.0.2.0.1.</span> <span class="nav-text">编码转换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#友情提示"><span class="nav-number">5.0.0.2.0.2.</span> <span class="nav-text">友情提示</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排查过程"><span class="nav-number"></span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排查命令是否写错"><span class="nav-number">1.</span> <span class="nav-text">排查命令是否写错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印start，size"><span class="nav-number">2.</span> <span class="nav-text">打印start，size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看传给redis的命令"><span class="nav-number">3.</span> <span class="nav-text">查看传给redis的命令</span></a></li></ol></div>
             
 
           </div>

@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记array/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记面向对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记array/" itemprop="url">go学习笔记array</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记面向对象/" itemprop="url">go学习笔记面向对象</a></h1>
         
 
         <div class="post-meta">
@@ -264,7 +264,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:21:50+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T20:13:38+08:00">
                 2017-02-28
               </time>
             
@@ -326,13 +326,22 @@
       
         
           
-          Array类型数据数组是值类型，赋值和传参会复制整个数组，而不是指针数组长度必须是常量，且是类型的组成部分。[2]int和[3]int是不同类型支持”==”，”！=”操作符，因为内存总是被初始化过指针数组[n]T,数组指针[n]T定义数组的方式直接初始化package main
+          定义面向对象三大特征，go仅支持封装。没有class关键字，没有继承，多态等package main
 
-import &q
+import &quot;fmt&quot;
+
+type User struct {
+    id int
+    name string
+}
+
+
+type Manager struct {
+  
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记array/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记面向对象/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -383,7 +392,7 @@ import &q
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记延迟调用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记struct/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -402,7 +411,7 @@ import &q
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记延迟调用/" itemprop="url">go学习笔记延迟调用</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记struct/" itemprop="url">go学习笔记struct</a></h1>
         
 
         <div class="post-meta">
@@ -414,7 +423,7 @@ import &q
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:18:53+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T17:07:11+08:00">
                 2017-02-28
               </time>
             
@@ -476,16 +485,18 @@ import &q
       
         
           
-          延迟调用使用defer用于注册延迟调用，可以理解为类似PHP对象中的析构函数，只有在ret前才被执行，通常用于释放资源或者错误处理package main
+          定义值类型，赋值和传参会复制全部内容。可用”_”定义补位字段，支持指向自身类型的指针成员package main
 
-import &quot;os&quot;
+import &quot;fmt&quot;
 
-func test() error {
-    f, err := os.Create(&quo
+type Node struct {
+    _       int
+    id      int
+    data    *byte
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记延迟调用/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记struct/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -536,7 +547,7 @@ func test() error {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记异常处理/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记map/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -555,7 +566,7 @@ func test() error {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/28/go学习笔记异常处理/" itemprop="url">go学习笔记异常处理</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记map/" itemprop="url">go学习笔记map</a></h1>
         
 
         <div class="post-meta">
@@ -567,7 +578,7 @@ func test() error {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T11:17:53+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T16:20:07+08:00">
                 2017-02-28
               </time>
             
@@ -629,16 +640,18 @@ func test() error {
       
         
           
-          异常处理没有结构化异常，使用panic抛出错误，recover捕获错误package main
+          定义引用类型，哈希表，键必须是支持相等运算符类型。值可以是任意类型，没有限制package main
 
-func test() {
-    defer func() {
-        if err := recover();err != nil {    //相当于php的错误异常处理的try
-    
+import &quot;fmt&quot;
+
+func main() {
+    m := map[int]struct{
+        name string
+        age int
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/28/go学习笔记异常处理/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记map/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -689,7 +702,7 @@ func test() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/24/go学习笔记函数/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记copy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -708,7 +721,7 @@ func test() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/24/go学习笔记函数/" itemprop="url">go学习笔记函数</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记copy/" itemprop="url">go学习笔记copy</a></h1>
         
 
         <div class="post-meta">
@@ -720,8 +733,8 @@ func test() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T17:10:31+08:00">
-                2017-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T16:09:06+08:00">
+                2017-02-28
               </time>
             
 
@@ -782,13 +795,16 @@ func test() {
       
         
           
-          函数定义不支持嵌套，重载和默认参数无需声明原型支持不定长变参支持多返回值支持命名返回参数支持匿名函数和闭包使用func定义函数，左大括号依旧不能另起一行package main
+          定义函数copy在两个slice间复制数据，复制长度以len小的为准，两个slice可指向同一层数组，允许元素区间重叠package main
 
-func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
+import &quot;fmt&quot;
+
+func main() {
+    data := [...]int{0, 1, 2, 3, 4, 5, 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/24/go学习笔记函数/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记copy/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -839,7 +855,7 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/22/go学习笔记表达式/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2017/02/28/go学习笔记append/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -858,7 +874,7 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/22/go学习笔记表达式/" itemprop="url">go学习笔记表达式</a></h1>
+                <a class="post-title-link" href="/2017/02/28/go学习笔记append/" itemprop="url">go学习笔记append</a></h1>
         
 
         <div class="post-meta">
@@ -870,8 +886,8 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T10:54:47+08:00">
-                2017-02-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T15:38:23+08:00">
+                2017-02-28
               </time>
             
 
@@ -932,12 +948,17 @@ func test (x, y int, s string) (int, string) {  //需要定义返回参数的类
       
         
           
-          保留字在程序中不可以使用的名字break,deafault,func,interface,select,case,defer,go,map,struct,chan,else,goto,
-package,switch,const,fallthrough,if,range,type,continue,f
+          append向slice尾部添加数据，返回新的slice对象package main
+
+import &quot;fmt&quot;
+
+func main() {
+    s := make([]int, 0, 5)
+    fmt.Printf(&quot;%p\n&quot;, &amp;s) 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/22/go学习笔记表达式/#more" rel="contents">
+            <a class="btn" href="/2017/02/28/go学习笔记append/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -979,7 +1000,7 @@ package,switch,const,fallthrough,if,range,type,continue,f
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1025,7 +1046,7 @@ package,switch,const,fallthrough,if,range,type,continue,f
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

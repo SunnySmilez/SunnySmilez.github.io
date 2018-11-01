@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/26/join的使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/17/shell语句块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -252,7 +252,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/26/join的使用/" itemprop="url">join的使用</a></h1>
+                <a class="post-title-link" href="/2016/01/17/shell语句块/" itemprop="url">shell语句块</a></h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-26T10:17:46+08:00">
-                2015-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-17T10:31:13+08:00">
+                2016-01-17
               </time>
             
 
@@ -326,22 +326,28 @@
       
         
           
-          join的使用案例1.文件内容cat month_cn.txt
-1       一月
-2       二月
-3       三月
-4       四月
-5       五月
-6       六月
-7       七月
-8       八月
-9       九月
-10      十月
-11      
+          if-elif-else-fi用法（方括号为可选部分）if
+    条件
+then
+    结果
+[
+elif
+    条件
+then
+    结果
+]
+[
+else
+    结果
+]
+fi
+例子#!/bin/bash
+if
+        ls | grep &apos;demo.log&apos
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/26/join的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/17/shell语句块/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -392,7 +398,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/cut的使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/10/shell预定义变量及标准变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -411,7 +417,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/24/cut的使用/" itemprop="url">cut的使用</a></h1>
+                <a class="post-title-link" href="/2016/01/10/shell预定义变量及标准变量/" itemprop="url">shell预定义变量及标准变量</a></h1>
         
 
         <div class="post-meta">
@@ -423,8 +429,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T10:48:06+08:00">
-                2015-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-10T16:14:12+08:00">
+                2016-01-10
               </time>
             
 
@@ -485,15 +491,20 @@
       
         
           
-          cut使用案例1.按字节切割
-tail -n 1 /etc/passwd | cut -b 1-10,15-20（获取密码文件下的第1到10个字符以及第15到20个字符）`一个汉字算三个字节`
+          export,readonly
+export 用于修改或打印环境变量
 
-2.指定分隔符切割
-tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
+export name[=word] 修改环境变量 export PATH=$PATH:/home/bin
+export -p 打印出环境变量的名称与值
+
+
+readonly 使变量不能修改
+
+readonly name[=wo
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/24/cut的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/10/shell预定义变量及标准变量/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -544,7 +555,7 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/awk的使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2016/01/05/2015年个人总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -563,7 +574,7 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/24/awk的使用/" itemprop="url">awk的使用</a></h1>
+                <a class="post-title-link" href="/2016/01/05/2015年个人总结/" itemprop="url">2015年个人总结</a></h1>
         
 
         <div class="post-meta">
@@ -575,8 +586,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T09:42:03+08:00">
-                2015-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-05T20:37:22+08:00">
+                2016-01-05
               </time>
             
 
@@ -598,8 +609,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -637,14 +648,22 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          awk使用案例1.以每一行为输入，指定分隔符，输出指定域
-    tail -n 10 test.txt | awk -F &apos; &apos;  &apos;{print $1&quot;,\t&quot;$2}&apos;（以空格为分隔符，输出第一个域与第二个域并以,和tab连接）
+          阅读
+选书：
 
-2.
+先选择大概一个学习的方向，比如说mysql，redis，linux等
+再选择典型性的书籍（每个方面都会有几本特别经典的书籍）
+
+
+阅读：
+
+先查阅目录，思考为什么会是这些章节，这个技术大概涵盖哪些内容
+再选择阅读的章节，思考作者写作思路，为什么先写这块知识，再写这块，有什么必然联系
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/24/awk的使用/#more" rel="contents">
+            <a class="btn" href="/2016/01/05/2015年个人总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -695,7 +714,7 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/24/sed的使用/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/wc的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -714,7 +733,7 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/24/sed的使用/" itemprop="url">sed的使用</a></h1>
+                <a class="post-title-link" href="/2015/12/29/wc的使用/" itemprop="url">wc的使用</a></h1>
         
 
         <div class="post-meta">
@@ -726,8 +745,8 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-24T09:41:56+08:00">
-                2015-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T10:05:34+08:00">
+                2015-12-29
               </time>
             
 
@@ -788,14 +807,12 @@ tail -n 1 /etc/passwd | cut -d : -f 1,5（以:
       
         
           
-          sed使用场景1.获取指定行数
-sed -n &apos;1,2p&apos; test.txt（查看第1到2行的内容）
-sed -n &apos;1,$p&apos; test.txt（查看第1行到文件末尾的内容）
-sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
-          ...
+          ###
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/24/sed的使用/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/wc的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -846,7 +863,7 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/22/shell常识/">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2015/12/29/fmt的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="狂奔的菜鸟">
@@ -865,7 +882,7 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/22/shell常识/" itemprop="url">shell常识</a></h1>
+                <a class="post-title-link" href="/2015/12/29/fmt的使用/" itemprop="url">fmt的使用</a></h1>
         
 
         <div class="post-meta">
@@ -877,8 +894,8 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-22T09:53:00+08:00">
-                2015-12-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-29T10:05:16+08:00">
+                2015-12-29
               </time>
             
 
@@ -939,17 +956,12 @@ sed -n &apos;2,3!&apos;p test.txt（查看不在第2到
       
         
           
-          path环境变量环境变量是一个以‘:’分割的目录列表，可以在列表指定的目录下找到所要执行的命令
-echo $PATH（查看目前执行shell寻找的目录）
-:（表示查找的优先级）
-PATH=$PATH:$HOME/bin（将家目录下的bin添加到环境变量）
-echo $PATH（查看环境变量）
+          ###
 
-环境
-          ...
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/22/shell常识/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/fmt的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -991,7 +1003,7 @@ echo $PATH（查看环境变量）
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1037,7 +1049,7 @@ echo $PATH（查看环境变量）
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
