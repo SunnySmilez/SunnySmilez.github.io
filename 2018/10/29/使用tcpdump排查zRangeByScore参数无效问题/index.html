@@ -81,22 +81,28 @@
 
 
 
-<meta name="description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
-问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
-排查过程排查命">
+<meta name="description" content="在做列表数据分页的时候，是将数据存储在redis的有序集合中实现的
+核心代码如下
+1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，没有获取到新一页的数据，而是返回有序集合所有的数据
+排查过程排查命令是否写错注：「将start和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用tcpdump排查zRangeByScore参数无效问题">
 <meta property="og:url" content="http://www.cxyteam.com/2018/10/29/使用tcpdump排查zRangeByScore参数无效问题/index.html">
 <meta property="og:site_name" content="狂奔的菜鸟">
-<meta property="og:description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
-问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
-排查过程排查命">
-<meta property="og:updated_time" content="2018-10-29T16:36:05.639Z">
+<meta property="og:description" content="在做列表数据分页的时候，是将数据存储在redis的有序集合中实现的
+核心代码如下
+1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，没有获取到新一页的数据，而是返回有序集合所有的数据
+排查过程排查命令是否写错注：「将start和">
+<meta property="og:updated_time" content="2018-11-01T13:07:59.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用tcpdump排查zRangeByScore参数无效问题">
-<meta name="twitter:description" content="在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
-问题在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据
-排查过程排查命">
+<meta name="twitter:description" content="在做列表数据分页的时候，是将数据存储在redis的有序集合中实现的
+核心代码如下
+1zRangeByScore($key, &apos;-inf&apos;, &apos;+inf&apos;, array(&apos;limit&apos; =&amp;gt; array($start, $size)));
+问题在进行翻页的时候，传入start=10，size=10，没有获取到新一页的数据，而是返回有序集合所有的数据
+排查过程排查命令是否写错注：「将start和">
 
 
 
@@ -338,19 +344,31 @@
       
 
       
-        <p>在做列表数据的提供的时候，将列表数据存储在redis的有序结合中，使用zRangeByScore进行排序及分页。代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>($start, $size)));</div></pre></td></tr></table></figure></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在进行翻页的时候，传入start=10，size=10，limit参数无效，返回有序集合所有的数据</p>
-<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h3 id="排查命令是否写错"><a href="#排查命令是否写错" class="headerlink" title="排查命令是否写错"></a>排查命令是否写错</h3><p>注：「直接将start和size写成定值」</p>
+        <p>在做列表数据分页的时候，是将数据存储在redis的有序集合中实现的</p>
+<p>核心代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>($start, $size)));</div></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在进行翻页的时候，传入start=10，size=10，没有获取到新一页的数据，而是返回有序集合所有的数据</p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h3 id="排查命令是否写错"><a href="#排查命令是否写错" class="headerlink" title="排查命令是否写错"></a>排查命令是否写错</h3><p>注：「将start和size写成定值」</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zRangeByScore($key, <span class="string">'-inf'</span>, <span class="string">'+inf'</span>, <span class="keyword">array</span>(<span class="string">'limit'</span> =&gt; <span class="keyword">array</span>(<span class="number">10</span>, <span class="number">10</span>)));</div></pre></td></tr></table></figure>
-<p>数据正常返回，想当然肯定是start，size传入不对</p>
+<p>数据正常返回，排查传参问题</p>
 <h3 id="打印start，size"><a href="#打印start，size" class="headerlink" title="打印start，size"></a>打印start，size</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123;</div><div class="line">  [<span class="string">"limit"</span>]=&gt;</div><div class="line">  <span class="keyword">array</span>(<span class="number">2</span>) &#123;</div><div class="line">    [<span class="number">0</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">    [<span class="number">1</span>]=&gt;</div><div class="line">    string(<span class="number">2</span>) <span class="string">"10"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>结果出乎意料，start，size传入没有问题<br>可是传入的都是page=10，size=10，为什么结果会不一样呢，那么这两种方式有什么不同呢，redis最终执行的是什么命令呢？</p>
-<h3 id="查看传给redis的命令"><a href="#查看传给redis的命令" class="headerlink" title="查看传给redis的命令"></a>查看传给redis的命令</h3><p>在服务器用tcpdump抓取redis的网络包<br>注：「在开发服务器执行tcpdump命令；redis端口为6379」</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]<span class="comment"># tcpdump port 6379 and tcp -X -s 0</span></div></pre></td></tr></table></figure>
-<p>发现当走参数传入的方式的时候，最终redis执行的命令是这样的<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">02</span>:<span class="number">46</span>:<span class="number">46.220417</span> IP local_host<span class="number">.45816</span> &gt; redis_host<span class="number">.6379</span>: Flags [P.], seq <span class="number">38</span>:<span class="number">129</span>, ack <span class="number">6</span>, win <span class="number">29200</span>, length <span class="number">91</span></div><div class="line">	<span class="number">0x0000</span>:  <span class="number">4500</span> <span class="number">0083</span> d940 <span class="number">4000</span> <span class="number">4006</span> <span class="number">32</span>a2 ac11 <span class="number">0005</span>  E....@@.@<span class="number">.2</span>.....</div><div class="line">	<span class="number">0x0010</span>:  <span class="number">0</span>a83 <span class="number">77</span>f9 b2f8 <span class="number">1875</span> e8b6 <span class="number">5</span>ad8 <span class="number">4953</span> <span class="number">9e07</span>  ..w....u..Z.IS..</div><div class="line">	<span class="number">0x0020</span>:  <span class="number">5018</span> <span class="number">7210</span> <span class="number">2</span>f08 <span class="number">0000</span> <span class="number">2</span>a35 <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">330</span>d  P.r./...*<span class="number">5.</span>.$<span class="number">13.</span></div><div class="line">	<span class="number">0x0030</span>:  <span class="number">0</span>a5a <span class="number">5241</span> <span class="number">4e47</span> <span class="number">4542</span> <span class="number">5953</span> <span class="number">434</span>f <span class="number">5245</span> <span class="number">0</span>d0a  .ZRANGEBYSCORE..</div><div class="line">	<span class="number">0x0040</span>:  <span class="number">2432</span> <span class="number">330</span>d <span class="number">0</span>a70 <span class="number">6572</span> <span class="number">6665</span> <span class="number">6374</span> <span class="number">5</span>f63 <span class="number">6</span>f6d  $<span class="number">23.</span>.perfect_com</div><div class="line">	<span class="number">0x0050</span>:  <span class="number">6</span>d65 <span class="number">6e74</span> <span class="number">5</span>f69 <span class="number">645</span>f <span class="number">6</span>c69 <span class="number">7374</span> <span class="number">0</span>d0a <span class="number">2434</span>  ment_id_list..$<span class="number">4</span></div><div class="line">	<span class="number">0x0060</span>:  <span class="number">0</span>d0a <span class="number">2</span>d69 <span class="number">6e66</span> <span class="number">0</span>d0a <span class="number">2434</span> <span class="number">0</span>d0a <span class="number">2</span>b69 <span class="number">6e66</span>  ..-inf..$<span class="number">4.</span>.+inf</div><div class="line">	<span class="number">0x0070</span>:  <span class="number">0</span>d0a <span class="number">2431</span> <span class="number">300</span>d <span class="number">0</span>a57 <span class="number">4954</span> <span class="number">4853</span> <span class="number">434</span>f <span class="number">5245</span>  ..$<span class="number">10.</span>.WITHSCORE</div><div class="line">	<span class="number">0x0080</span>:  <span class="number">530</span>d <span class="number">0</span>a                                  S..</div></pre></td></tr></table></figure></p>
-<p>很显然没有limit参数信息，当然会返回有序集合所有的数据，而对比之后也可以很明显的发现，start，limit参数传入和写定值的方式唯一的不同就是数据类型。</p>
-<p>愉快的将参数传入进行了强制类型转换，问题得到解决。</p>
-<p>最后，查看使用的redis连接类库是phpredis。<br>再确认redis终端执行命令能正常返回之后，果断给phpredis提了一个issue。</p>
+<p>结果出乎意料，start，size传入没有问题<br>可是传入的都是page=10，size=10<br>为什么两种方式的结果会不一样，redis最终执行的是什么命令呢？</p>
+<h3 id="查看redis最终执行的命令"><a href="#查看redis最终执行的命令" class="headerlink" title="查看redis最终执行的命令"></a>查看redis最终执行的命令</h3><p>在服务器用tcpdump抓取redis的网络包<br>注：「在开发服务器执行tcpdump命令；redis端口为6379」</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]# tcpdump port 6379 and tcp -X -s 0</div></pre></td></tr></table></figure>
+<p>当走传参的方式的时候，最终redis执行的命令是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">02:46:46.220417 IP local_host.45816 &gt; redis_host.6379: Flags [P.], seq 38:129, ack 6, win 29200, length 91</div><div class="line">	0x0000:  4500 0083 d940 4000 4006 32a2 ac11 0005  E....@@.@.2.....</div><div class="line">	0x0010:  0a83 77f9 b2f8 1875 e8b6 5ad8 4953 9e07  ..w....u..Z.IS..</div><div class="line">	0x0020:  5018 7210 2f08 0000 2a35 0d0a 2431 330d  P.r./...*5..$13.</div><div class="line">	0x0030:  0a5a 5241 4e47 4542 5953 434f 5245 0d0a  .ZRANGEBYSCORE..</div><div class="line">	0x0040:  2432 330d 0a70 6572 6665 6374 5f63 6f6d  $23..perfect_com</div><div class="line">	0x0050:  6d65 6e74 5f69 645f 6c69 7374 0d0a 2434  ment_id_list..$4</div><div class="line">	0x0060:  0d0a 2d69 6e66 0d0a 2434 0d0a 2b69 6e66  ..-inf..$4..+inf</div><div class="line">	0x0070:  0d0a 2431 300d 0a57 4954 4853 434f 5245  ..$10..WITHSCORE</div><div class="line">	0x0080:  530d 0a                                  S..</div></pre></td></tr></table></figure>
+<p>可以看出传输的redis的命令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ZRANGEBYSCORE perfect_comment_id_list -inf +inf WITHSCORES</div></pre></td></tr></table></figure>
+<p>没有limit参数信息，当然会返回有序集合所有的数据</p>
+<p>对比传入数据后发现：<br>定值的时候传入的是数字类型，传参的方式传入的是字符串类型</p>
+<p>猜测是因为php连接redis的拓展的问题<br>当传入的start，size参数为字符串类型的时候会被过滤掉</p>
+<p>为什么要这样做呢，难道是redis不支持吗<br>测试后发现redis是支持的</p>
+<p>愉快的将参数做了类型转换，问题得到解决</p>
+<p>最后也没忘记给phpredis提了一个issue</p>
+<p>「注：phpredis的版本为3.0.0」</p>
+<p>后记：在tcpdump使用的时候，也可以用来查询执行的MySQL语句<br>比如说，当我需要去熟悉一个新业务或者排查bug的时候，我会将该业务的sql语句都抓取出来<br>命令如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -A -s 0 port 3306 and tcp &gt; ~/sql.log</div></pre></td></tr></table></figure>
+<p>感兴趣的朋友可以试试</p>
 
       
     </div>
@@ -506,7 +524,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">189</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排查过程"><span class="nav-number"></span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排查命令是否写错"><span class="nav-number">1.</span> <span class="nav-text">排查命令是否写错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印start，size"><span class="nav-number">2.</span> <span class="nav-text">打印start，size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看传给redis的命令"><span class="nav-number">3.</span> <span class="nav-text">查看传给redis的命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排查过程"><span class="nav-number"></span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排查命令是否写错"><span class="nav-number">1.</span> <span class="nav-text">排查命令是否写错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印start，size"><span class="nav-number">2.</span> <span class="nav-text">打印start，size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看redis最终执行的命令"><span class="nav-number">3.</span> <span class="nav-text">查看redis最终执行的命令</span></a></li></ol></div>
             
 
           </div>
