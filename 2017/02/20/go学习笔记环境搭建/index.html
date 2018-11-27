@@ -87,7 +87,7 @@
 <meta property="og:url" content="http://www.cxyteam.com/2017/02/20/go学习笔记环境搭建/index.html">
 <meta property="og:site_name" content="狂奔的菜鸟">
 <meta property="og:description" content="下载go在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz设置环境变量export PATH=$PATH:/usr/local/go/bin (临时生效)在/etc/p">
-<meta property="og:updated_time" content="2018-11-27T09:36:50.181Z">
+<meta property="og:updated_time" content="2018-11-27T09:38:51.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go环境搭建">
 <meta name="twitter:description" content="下载go在列表中选择需要的版本：http://code.google.com/p/go/downloads/list?q=OpSys-Darwin+AND+Type-Installer将安装包安装到/usr/local目录下：tar -C /usr/local -xzf go.tar.gz设置环境变量export PATH=$PATH:/usr/local/go/bin (临时生效)在/etc/p">
@@ -347,12 +347,13 @@ func main() {
 <pre><code>GOROOT=/usr/local/Cellar/go/1.11.2/libexec
 </code></pre><p>GOPATH是本地项目代码存储路径</p>
 <ol>
-<li>环境确认，三个环境确认一直就没问题</li>
+<li>环境确认，三个环境确认一致就没问题</li>
 </ol>
 <pre><code>go env
 go version
 $GOROOT/bin/go version
-</code></pre>
+</code></pre><p>我在更新完golang之后就出现环境的问题，然后修改了GOROOT到最新的golang路径就好了    </p>
+
       
     </div>
     
