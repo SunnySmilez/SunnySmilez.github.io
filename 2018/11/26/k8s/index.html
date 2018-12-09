@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
 
@@ -101,7 +99,7 @@ http://docs.kubernetes.org.cn/475.html
 查看版本号    
 kubectl version
 启动mi">
-<meta property="og:updated_time" content="2018-11-27T07:33:51.445Z">
+<meta property="og:updated_time" content="2018-12-09T04:00:39.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k8s">
 <meta name="twitter:description" content="官网https://github.com/kubernetes/kubernetes
@@ -399,6 +397,7 @@ kubectl describe services/kubernetes-bootcamp
 export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template=&apos;{{(index .spec.ports 0).nodePort}}&apos;)
 echo $NODE_PORT
 curl $(minikube ip):$NODE_PORT
+</code></pre><h1 id="生成pod的yaml文件"><a href="#生成pod的yaml文件" class="headerlink" title="生成pod的yaml文件"></a>生成pod的yaml文件</h1><pre><code>kubectl get pod web01 -o yaml
 </code></pre><h1 id="给pod打标签"><a href="#给pod打标签" class="headerlink" title="给pod打标签"></a>给pod打标签</h1><p>通过标签，查看指定的pods</p>
 <pre><code>kubectl get pods -l run=kubernetes-bootcamp
 kubectl get service -l run=kubernetes-bootcamp
@@ -489,7 +488,50 @@ spec:
 <pre><code>kubectl describe pod &lt;pod_name&gt;
 </code></pre><p>删除deployment</p>
 <pre><code>kubectl delete deployment nginx-deployment        
-</code></pre>
+</code></pre><h1 id="service进行负载均衡"><a href="#service进行负载均衡" class="headerlink" title="service进行负载均衡"></a>service进行负载均衡</h1><p>创建deployments</p>
+<pre><code>kubectl run hello-world --replicas=2 --labels=&quot;run=load-balancer-example&quot; --image=gcr.io/google-samples/node-hello:1.0  --port=8080
+</code></pre><p>查看deployments信息</p>
+<pre><code>kubectl get deployments hello-world
+kubectl describe deployments hello-world
+</code></pre><p>显示ReplicaSet信息</p>
+<pre><code>kubectl get replicasets
+kubectl describe replicasets
+</code></pre><p>创建暴露deployments的service</p>
+<pre><code>kubectl expose deployment hello-world --type=NodePort --name=example-service
+</code></pre><p>列出运行Hello World应用程序的pod</p>
+<pre><code>kubectl get pods --selector=&quot;run=load-balancer-example&quot; --output=wide
+</code></pre><p>查看公网ip</p>
+<pre><code>export NODE_PORT=$(kubectl get services/example-service  -o go-template=&apos;{{(index .spec.ports 0).nodePort}}&apos;)
+echo NODE_PORT=$NODE_PORT
+curl $(minikube ip):$NODE_PORT
+</code></pre><h1 id="查看集群中所有的Container"><a href="#查看集群中所有的Container" class="headerlink" title="查看集群中所有的Container"></a>查看集群中所有的Container</h1><p>方法一</p>
+<pre><code>kubectl get pods --all-namespaces -o jsonpath=&quot;{..image}&quot; |\
+tr -s &apos;[[:space:]]&apos; &apos;\n&apos; |\
+sort |\
+uniq -c
+</code></pre><p>方法二</p>
+<pre><code>kubectl get pods --all-namespaces -o jsonpath=&quot;{.items[*].spec.containers[*].image}&quot;
+</code></pre><p>方法三</p>
+<pre><code>kubectl get pods --all-namespaces -o=jsonpath=&apos;{range .items[*]}{&quot;\n&quot;}{.metadata.name}{&quot;:\t&quot;}{range .spec.containers[*]}{.image}{&quot;, &quot;}{end}{end}&apos; |\
+sort
+</code></pre><p>方法五</p>
+<pre><code>kubectl get pods --all-namespaces -o=jsonpath=&quot;{..image}&quot; -l app=nginx
+</code></pre><p>方法六</p>
+<pre><code>kubectl get pods --namespace kube-system -o jsonpath=&quot;{..image}&quot;
+</code></pre><p>方法七</p>
+<pre><code>kubectl get pods --all-namespaces -o go-template --template=&quot;{{range .items}}{{range .spec.containers}}{{.image}} {{end}}{{end}}&quot;            
+</code></pre><h1 id="pod启动失败"><a href="#pod启动失败" class="headerlink" title="pod启动失败"></a>pod启动失败</h1><p>查看pod详情信息</p>
+<pre><code>kubectl describe pod/{name}
+</code></pre><p>查看pod日志</p>
+<pre><code>kubectl logs pod/{name}
+</code></pre><h1 id="pod拉取镜像失败-我是使用的mac的minikube"><a href="#pod拉取镜像失败-我是使用的mac的minikube" class="headerlink" title="pod拉取镜像失败(我是使用的mac的minikube)"></a>pod拉取镜像失败(我是使用的mac的minikube)</h1><p>登录虚拟机<br>「minikube是利用virtual box启动了一个虚拟机」</p>
+<pre><code>minikube ssh
+</code></pre><p>拉取镜像</p>
+<pre><code>docker pull {image_name}    
+</code></pre><blockquote>
+<p><a href="https://k8smeetup.github.io/docs/tasks/access-application-cluster/list-all-running-container-images/" target="_blank" rel="external">查看所有 namespace 中所有的 Container</a>    </p>
+</blockquote>
+
       
     </div>
     
@@ -557,6 +599,10 @@ spec:
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/28/beego使用示例/" rel="prev" title="beego使用示例">
+                beego使用示例 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -640,7 +686,7 @@ spec:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">192</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -744,7 +790,7 @@ spec:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官网"><span class="nav-number">1.</span> <span class="nav-text">官网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装minikube"><span class="nav-number">2.</span> <span class="nav-text">安装minikube</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#给pod打标签"><span class="nav-number">3.</span> <span class="nav-text">给pod打标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展应用程序"><span class="nav-number">4.</span> <span class="nav-text">扩展应用程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Load-Balancing"><span class="nav-number">5.</span> <span class="nav-text">Load Balancing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#滚动更新"><span class="nav-number">6.</span> <span class="nav-text">滚动更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回滚更新"><span class="nav-number">7.</span> <span class="nav-text">回滚更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deployments操作"><span class="nav-number">8.</span> <span class="nav-text">deployments操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官网"><span class="nav-number">1.</span> <span class="nav-text">官网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装minikube"><span class="nav-number">2.</span> <span class="nav-text">安装minikube</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成pod的yaml文件"><span class="nav-number">3.</span> <span class="nav-text">生成pod的yaml文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#给pod打标签"><span class="nav-number">4.</span> <span class="nav-text">给pod打标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展应用程序"><span class="nav-number">5.</span> <span class="nav-text">扩展应用程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Load-Balancing"><span class="nav-number">6.</span> <span class="nav-text">Load Balancing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#滚动更新"><span class="nav-number">7.</span> <span class="nav-text">滚动更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回滚更新"><span class="nav-number">8.</span> <span class="nav-text">回滚更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deployments操作"><span class="nav-number">9.</span> <span class="nav-text">deployments操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#service进行负载均衡"><span class="nav-number">10.</span> <span class="nav-text">service进行负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看集群中所有的Container"><span class="nav-number">11.</span> <span class="nav-text">查看集群中所有的Container</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pod启动失败"><span class="nav-number">12.</span> <span class="nav-text">pod启动失败</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pod拉取镜像失败-我是使用的mac的minikube"><span class="nav-number">13.</span> <span class="nav-text">pod拉取镜像失败(我是使用的mac的minikube)</span></a></li></ol></div>
             
 
           </div>
