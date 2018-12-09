@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-12-09T08:24:19.219Z</updated>
+  <updated>2018-12-09T10:08:53.190Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[yaml的使用]]></title>
+    <link href="http://www.cxyteam.com/2018/12/09/yaml%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://www.cxyteam.com/2018/12/09/yaml的使用/</id>
+    <published>2018-12-09T09:15:04.000Z</published>
+    <updated>2018-12-09T10:08:53.190Z</updated>
+    <content type="html"><![CDATA[<p>Yaml是专门用来编写配置文件的，非常的简洁强大</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><p>大小写敏感</p>
+<p>使用缩进表示层级关系</p>
+<p>缩进时不允许使用Tab键，只允许使用空格。</p>
+<p>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</p>
+<p>使用#表示注释，从这个字符一直到行尾，都会被解析器忽略</p>
+<p>yaml一共三种结构</p>
+<ol>
+<li>Lists（数组）</li>
+<li>Maps（对象）</li>
+<li>scalars（存量）</li>
+</ol>
+<h1 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h1><p>一组连线开头的行，构成一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">command</div><div class="line">    - &apos;sh&apos;</div><div class="line">    - &apos;cmd&apos;</div></pre></td></tr></table></figure></p>
+<p>用json表示则是<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"command"</span>:['sh', 'cmd']</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h1><p>一组键值对，使用冒号结构表示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kind:Pod</div></pre></td></tr></table></figure></p>
+<p>使用json表示则是<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"kind"</span>:<span class="string">"pod"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="组合方式"><a href="#组合方式" class="headerlink" title="组合方式"></a>组合方式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">spec:</div><div class="line">  restartPolicy: Always</div><div class="line">  nodeSelector:</div><div class="line">    zone: node1</div><div class="line">  containers:</div><div class="line">  - name: web01-pod</div><div class="line">    image: sunnysmilez/php</div><div class="line">    imagePullPolicy: Never</div></pre></td></tr></table></figure>
+<p>使用json表示<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"spec"</span> : &#123;</div><div class="line">    <span class="attr">"restartPolicy"</span>:<span class="string">"Always"</span>,</div><div class="line">    <span class="attr">"nodeSelector"</span>:&#123;</div><div class="line">      <span class="attr">"zone"</span>:<span class="string">"node1"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"containers"</span>:[&#123;</div><div class="line">        <span class="attr">"name"</span>:<span class="string">"web01-pod"</span>,</div><div class="line">        <span class="attr">"image"</span>:<span class="string">"sunnysmilez/php"</span>,</div><div class="line">        <span class="attr">"imagePullPolicy"</span>:<span class="string">"Never"</span></div><div class="line">    &#125;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Yaml是专门用来编写配置文件的，非常的简洁强大</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><p>大小写敏感</p>
+<p>使用缩进表示层级关系</p>
+<p]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[k8s使用yaml搭建lnmp]]></title>
@@ -1116,32 +1154,6 @@ http://phan]]>
       <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
     
       <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[centos安装docker]]></title>
-    <link href="http://www.cxyteam.com/2018/06/27/centos%E5%AE%89%E8%A3%85docker/"/>
-    <id>http://www.cxyteam.com/2018/06/27/centos安装docker/</id>
-    <published>2018-06-27T13:48:57.000Z</published>
-    <updated>2018-06-27T13:53:39.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="更新epel第三方软件库"><a href="#更新epel第三方软件库" class="headerlink" title="更新epel第三方软件库"></a>更新epel第三方软件库</h1><pre><code>yum install epel-release
-</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>yum install docker-io
-</code></pre><h1 id="验证是否成功"><a href="#验证是否成功" class="headerlink" title="验证是否成功"></a>验证是否成功</h1><pre><code>docker version 或者docker -h    
-</code></pre><h1 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h1><pre><code>sevice docker start
-</code></pre><h1 id="更改镜像源"><a href="#更改镜像源" class="headerlink" title="更改镜像源"></a>更改镜像源</h1><pre><code>vim /etc/docker/daemon.json
-添加如下内容：
-    {
-      &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]
-    }    
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="更新epel第三方软件库"><a href="#更新epel第三方软件库" class="headerlink" title="更新epel第三方软件库"></a>更新epel第三方软件库</h1><pre><code>yum install epel-relea]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
     
   </entry>
   
