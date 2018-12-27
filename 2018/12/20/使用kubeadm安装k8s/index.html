@@ -105,7 +105,7 @@ virtualBox 5.0.38
 
 机器
 ma">
-<meta property="og:updated_time" content="2018-12-20T17:12:57.906Z">
+<meta property="og:updated_time" content="2018-12-27T14:20:43.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用kubeadm安装k8s">
 <meta name="twitter:description" content="在安装前，最好事先准备好一个干净的环境，不然会浪费更多的时间，尤其是之前折腾过docker的一些环境。我因为之前安装过一个低版本的docker-ce，之后用yum进行升级之后，再去安装kubeadm，kubectl出现各种问题，最后放弃解决了。
@@ -383,6 +383,8 @@ ma">
 </ol>
 <p>临时生效</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swapoff -a</div></pre></td></tr></table></figure>
+<p>永久生效</p>
+<p>在文件/etc/fstab中，删除”swap”这一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/mapper/cl-swap     swap                    swap    defaults        0 0</div></pre></td></tr></table></figure></p>
 <ol>
 <li>修改hostname<br>注： kubernetes 是根据 hostname 来标示各节点的</li>
 </ol>
@@ -392,13 +394,17 @@ ma">
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/docker.repo</div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https://yum.dockerproject.org/repo/main/centos/7/</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=https://yum.dockerproject.org/gpg</div><div class="line">EOF</div></pre></td></tr></table></figure>
 <ol>
+<li>安装依赖，添加镜像</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</div><div class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</div></pre></td></tr></table></figure>
+<ol>
 <li>查看最新的docker版本</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list docker-ce.x86_64  --showduplicates |sort -r</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum makecache fast</div><div class="line">yum list docker-ce.x86_64  --showduplicates |sort -r</div></pre></td></tr></table></figure>
 <ol>
 <li>安装18.06.1<br>注：Kubernetes 1.12已经针对Docker的1.11.1, 1.12.1, 1.13.1, 17.03, 17.06, 17.09, 18.06等版本做了验证，需要注意Kubernetes 1.12最低支持的Docker版本是1.11.1</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum makecache fast</div><div class="line"></div><div class="line">yum install -y --setopt=obsoletes=0 \</div><div class="line">  docker-ce-18.06.1.ce-3.el7</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y --setopt=obsoletes=0 \</div><div class="line">  docker-ce-18.06.1.ce-3.el7</div></pre></td></tr></table></figure>
 <p>启动docker</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start docker</div><div class="line">systemctl enable docker</div></pre></td></tr></table></figure>
 <p>验证</p>
@@ -429,13 +435,10 @@ ma">
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload</div><div class="line">systemctl enable kubelet &amp;&amp; systemctl restart kubelet</div></pre></td></tr></table></figure>
 <h3 id="启动master"><a href="#启动master" class="headerlink" title="启动master"></a>启动master</h3><ol>
-<li>配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cat &gt;kubeadm.yaml&lt;&lt;EOF</div><div class="line">apiVersion: kubeadm.k8s.io/v1alpha3</div><div class="line">kind: InitConfiguration</div><div class="line">controllerManagerExtraArgs:</div><div class="line">  horizontal-pod-autoscaler-use-rest-clients: &quot;true&quot;</div><div class="line">  horizontal-pod-autoscaler-sync-period: &quot;10s&quot;</div><div class="line">  node-monitor-grace-period: &quot;10s&quot;</div><div class="line">apiServerExtraArgs:</div><div class="line">  runtime-config: &quot;api/all=true&quot;</div><div class="line">kubernetesVersion: &quot;v1.13.1&quot;</div><div class="line">EOF</div></pre></td></tr></table></figure>
-<ol>
 <li>kubeadm初始化<br>注：见到这个文字就表示成功了”Your Kubernetes master has initialized successfully!”<br>如果失败了，执行kubeadm reset删除之前的一些文件，再进行kubeadm init</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubeadm init --config kubeadm.yaml</div></pre></td></tr></table></figure>
+<p>因为我们选择flannel作为Pod网络插件，所以上面的命令指定–pod-network-cidr=10.244.0.0/16</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubeadm init --kubernetes-version=v1.13.1 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.17.3.110</div></pre></td></tr></table></figure>
 <ol>
 <li>按照successfully提示执行后续命令</li>
 </ol>
@@ -444,8 +447,79 @@ ma">
 <li>验证</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">kubectl version</div><div class="line">kubectl get nodes</div></pre></td></tr></table></figure>
+<h3 id="添加flannel网络"><a href="#添加flannel网络" class="headerlink" title="添加flannel网络"></a>添加flannel网络</h3><ol>
+<li><p>下载yml文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加iface启动参数<br>注：有多个网卡的话，需要在kube-flannel.yml中使用–iface参数指定集群主机内网网卡的名称，否则可能会出现dns无法解析。比如我是用的virtualBox，存在多个网卡，使用的是enp0s3网卡，所以修改如下（因为yaml文件创建5个针对不同平台的DaemonSet，所以最好是都改了）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">containers:</span></div><div class="line"><span class="attr">  - name:</span> kube-flannel</div><div class="line"><span class="attr">    image:</span> quay.io/coreos/flannel:v0<span class="number">.10</span><span class="number">.0</span>-amd64</div><div class="line"><span class="attr">    command:</span></div><div class="line"><span class="bullet">    -</span> /opt/bin/flanneld</div><div class="line"><span class="attr">    args:</span></div><div class="line"><span class="bullet">    -</span> --ip-masq</div><div class="line"><span class="bullet">    -</span> --kube-subnet-mgr</div><div class="line"><span class="bullet">    -</span> --iface=enp0s3</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl apply -f  kube-flannel.yml</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="添加node节点"><a href="#添加node节点" class="headerlink" title="添加node节点"></a>添加node节点</h3><ol>
+<li>添加节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubeadm join 10.17.3.110:6443 --token vh535w.c4abw601jzuxt7su --discovery-token-ca-cert-hash sha256:25bf91dd3e69f0bfe1f5600f0ac56633ed5c58ca89d906b6cad611eb01e04356</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h3><ol>
+<li><p>创建测试development</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl run curl --image=radial/busyboxplus:curl -it</div></pre></td></tr></table></figure>
+</li>
+<li><p>在容器中执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nslookup kubernetes.default</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Server:    10.96.0.10</div><div class="line">Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local</div><div class="line"></div><div class="line">Name:      kubernetes.default</div><div class="line">Address 1: 10.96.0.1 kubernetes.default.svc.cluster.local</div><div class="line"></div><div class="line">kubectl delete deployment curl</div></pre></td></tr></table></figure>
+<ol>
+<li>删除<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl delete deployment curl</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="验证集群"><a href="#验证集群" class="headerlink" title="验证集群"></a>验证集群</h3><ol>
+<li>查看集群状态<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl get cs</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NAME                 STATUS    MESSAGE              ERROR</div><div class="line">scheduler            Healthy   ok</div><div class="line">controller-manager   Healthy   ok</div><div class="line">etcd-0               Healthy   &#123;&quot;health&quot;: &quot;true&quot;&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>查看node状态<br>注：刚执行完添加节点命令后，可以稍等下再去查看<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl get nodes</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NAME                 STATUS   ROLES    AGE     VERSION</div><div class="line">kubeadm-node1        Ready    &lt;none&gt;   8m36s   v1.13.1</div><div class="line">master.localdomain   Ready    master   15m     v1.13.1</div></pre></td></tr></table></figure></p>
+<ol>
+<li>查看pod状态<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl -n kube-system get pod --all-namespaces</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">NAMESPACE     NAME                                         READY   STATUS    RESTARTS   AGE</div><div class="line">kube-system   coredns-86c58d9df4-tjcdl                     1/1     Running   0          12m</div><div class="line">kube-system   coredns-86c58d9df4-vzf95                     1/1     Running   0          12m</div><div class="line">kube-system   etcd-master.localdomain                      1/1     Running   0          12m</div><div class="line">kube-system   kube-apiserver-master.localdomain            1/1     Running   0          12m</div><div class="line">kube-system   kube-controller-manager-master.localdomain   1/1     Running   0          12m</div><div class="line">kube-system   kube-flannel-ds-amd64-6zvwg                  1/1     Running   5          6m2s</div><div class="line">kube-system   kube-flannel-ds-amd64-q62rd                  1/1     Running   0          9m47s</div><div class="line">kube-system   kube-proxy-8dlpf                             1/1     Running   0          12m</div><div class="line">kube-system   kube-proxy-xcwhj                             1/1     Running   0          6m2s</div><div class="line">kube-system   kube-scheduler-master.localdomain            1/1     Running   0          12m</div></pre></td></tr></table></figure></p>
+<h3 id="其他注意项"><a href="#其他注意项" class="headerlink" title="其他注意项"></a>其他注意项</h3><ol>
+<li><p>初始化master节点（kubeadm init）失败后，使用”kubeadm reset”回到初始化之前的状态，再次进行初始化</p>
+</li>
+<li><p>master初始化成功后，没有记录node加入集群的命令（kubectl join）<br>简单方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubeadm token create --print-join-command</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第二种方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">token=$(kubeadm token generate)</div><div class="line">kubeadm token create $token --print-join-command --ttl=0</div></pre></td></tr></table></figure></p>
+<p>token 是使用指令 kubeadm token generate 生成的，执行过程如有异常，用命令kubeadm reset 初始化后重试，生成的 token 有效时间为 24 小时，超过 24 小时后需要重新使用命令 kubeadm token create 创建新的 token。<br>discovery-token-ca-cert-hash 的值可以使用命令查看，命令：openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2&gt;/dev/null | openssl dgst -sha256 -hex | sed ‘s/^.* //‘</p>
+<ol>
+<li>查看kube-system日志</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl -n kube-system logs kube-controller-manager-master.localdomain</div></pre></td></tr></table></figure>
+<ol>
+<li>重新部署node</li>
+</ol>
+<p>在集群中删除node信息（在master执行）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">kubectl drain &lt;node_name&gt; --delete-local-data --force --ignore-daemonsets</div><div class="line">kubectl delete node &lt;node_name&gt;</div></pre></td></tr></table></figure></p>
+<p>node删除flannel网段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">kubeadm reset</div><div class="line">ifconfig cni0 down</div><div class="line">ip link delete cni0</div><div class="line">ifconfig flannel.1 down</div><div class="line">ip link delete flannel.1</div><div class="line">rm -rf /var/lib/cni/</div></pre></td></tr></table></figure></p>
+<ol>
+<li>节点状态不正确<br>查看日志</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">journalctl -u kubelet</div></pre></td></tr></table></figure>
+<p>查看kubelet状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl status kubelet</div></pre></td></tr></table></figure></p>
+<ol>
+<li>其他节点管理集群<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scp root@&lt;master_ip&gt;:/etc/kubernetes/admin.conf .</div><div class="line">kubectl --kubeconfig ./admin.conf get nodes</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>注意：<br>当使用systemctl start kubelet失败的时候，可以使用”systemctl status kubelet -l”，”journalctl -xeu kubelet<br>“查看详细信息</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://github.com/youngperson/study-100/wiki/kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4" title="亮亮的k8s搭建" target="_blank" rel="external">亮亮的k8s搭建</a><br><a href="https://www.kubernetes.org.cn/4256.html" title="centos7使用kubeadm安装kubernetes 1.11版本多主高可用" target="_blank" rel="external">centos7使用kubeadm安装kubernetes 1.11版本多主高可用</a><br><a href="https://www.kubernetes.org.cn/4619.html" title="使用kubeadm安装Kubernetes 1.12" target="_blank" rel="external">使用kubeadm安装Kubernetes 1.12</a><br><a href="https://blog.csdn.net/aixiaoyang168/article/details/78411511" title="国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群" target="_blank" rel="external">国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://github.com/youngperson/study-100/wiki/kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4" title="亮亮的k8s搭建" target="_blank" rel="external">亮亮的k8s搭建</a><br><a href="https://github.com/HikoQiu/kubeadm-install-k8s" title="kubeadm-install-k8s" target="_blank" rel="external">kubeadm-install-k8s</a><br><a href="https://www.kubernetes.org.cn/4256.html" title="centos7使用kubeadm安装kubernetes 1.11版本多主高可用" target="_blank" rel="external">centos7使用kubeadm安装kubernetes 1.11版本多主高可用</a><br><a href="https://www.kubernetes.org.cn/4619.html" title="使用kubeadm安装Kubernetes 1.12" target="_blank" rel="external">使用kubeadm安装Kubernetes 1.12</a><br><a href="https://blog.csdn.net/aixiaoyang168/article/details/78411511" title="国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群" target="_blank" rel="external">国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群</a></p>
 
       
     </div>
@@ -701,7 +775,7 @@ ma">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器"><span class="nav-number">2.</span> <span class="nav-text">机器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装kubelet-kubeadm-kubectl"><span class="nav-number">5.</span> <span class="nav-text">安装kubelet,kubeadm,kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动master"><span class="nav-number">6.</span> <span class="nav-text">启动master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器"><span class="nav-number">2.</span> <span class="nav-text">机器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装docker"><span class="nav-number">4.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装kubelet-kubeadm-kubectl"><span class="nav-number">5.</span> <span class="nav-text">安装kubelet,kubeadm,kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动master"><span class="nav-number">6.</span> <span class="nav-text">启动master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加flannel网络"><span class="nav-number">7.</span> <span class="nav-text">添加flannel网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加node节点"><span class="nav-number">8.</span> <span class="nav-text">添加node节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试网络"><span class="nav-number">9.</span> <span class="nav-text">测试网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证集群"><span class="nav-number">10.</span> <span class="nav-text">验证集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他注意项"><span class="nav-number">11.</span> <span class="nav-text">其他注意项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">12.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
