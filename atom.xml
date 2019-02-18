@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2018-12-27T14:20:43.326Z</updated>
+  <updated>2019-02-18T12:49:19.456Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -13,6 +13,105 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[2019年读书单]]></title>
+    <link href="http://www.cxyteam.com/2019/02/18/2019%E5%B9%B4%E8%AF%BB%E4%B9%A6%E5%8D%95/"/>
+    <id>http://www.cxyteam.com/2019/02/18/2019年读书单/</id>
+    <published>2019-02-18T12:18:17.000Z</published>
+    <updated>2019-02-18T12:49:19.456Z</updated>
+    <content type="html"><![CDATA[<h1 id="三体"><a href="#三体" class="headerlink" title="三体"></a><a href="https://book.douban.com/subject/2567698/" target="_blank" rel="external">三体</a></h1><ol>
+<li>一本脑洞大开的科幻小说，看完这本书之后，能够理解很多科幻电影中的情节和概念</li>
+<li>所有的一切共识，道德，约定，制度，法律都是基于解决了生存的基本问题，一旦生存问题没能解决，所有的一切都将被推翻</li>
+<li>书太长了，往往陷入情节之中，一些想法到最后看完再总结就不那么清晰了，后面看书一定要有想法就事先记录<blockquote>
+<p>2019.2.10-2019.2.17</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="韭菜的自我修养"><a href="#韭菜的自我修养" class="headerlink" title="韭菜的自我修养"></a><a href="https://book.douban.com/subject/30314653/" target="_blank" rel="external">韭菜的自我修养</a></h1><ol>
+<li>认同建立止盈止损线，而且不是拍脑袋的</li>
+<li>认同投资需要计算收益风险比，不过还是不会计算</li>
+<li>股市是一个零和游戏还是一个正和游戏？</li>
+<li>认同降低交易频率，频繁交易损耗手续费，不过港股打新好像不是这么回事</li>
+<li>长线持有？A股市场真的适合吗？</li>
+<li>这本书更多的是在将一些规则，并没有详细的告知为什么会这样，都是点到为止，感兴趣的点需要自己去深入阅读<blockquote>
+<p>2019.2.17-2019.2.18</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="三体"><a href="#三体" class="headerlink" title="三体"></a><a href="https://book.douban.com/subject/2567698/" target="_blank" rel="external]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[mac搭建《unix环境高级编程》环境]]></title>
+    <link href="http://www.cxyteam.com/2019/01/16/mac%E6%90%AD%E5%BB%BA%E3%80%8Aunix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.cxyteam.com/2019/01/16/mac搭建《unix环境高级编程》环境/</id>
+    <published>2019-01-16T10:52:11.000Z</published>
+    <updated>2019-01-17T03:27:33.762Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li><p><a href="http://www.apuebook.com/" target="_blank" rel="external">官网下载对应版本的源码</a></p>
+</li>
+<li><p>解压后，include/apue.h文件中的的最后一个#endif处添加#include “error.c”</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span>    <span class="title">WAIT_CHILD</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"error.c"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">/* _APUE_H */</span></span></div></pre></td></tr></table></figure>
+<ol>
+<li>复制文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp include/apue.h /usr/include/</div><div class="line">cp lib/error.c /usr/include/</div></pre></td></tr></table></figure>
+<ol>
+<li><p>编译，运行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>移动文件，出现权限不足的问题”Operation not permitted”</p>
+</li>
+</ol>
+<p>a. macOS /usr/include 目录不存在,在终端运行 xcode-select –install,等待软件安装<br>b. 关机重启，按command + r 键进入恢复模式，注意不要被弹出框迷惑，直接在工具中选择命令行，键入 csrutil disable,提示成功后，键入reboot重启,再进行写入，记得修改完之后，设置回csrutil enable</p>
+<ol>
+<li>推荐博客</li>
+</ol>
+<p><a href="https://github.com/MeiK-h/apue" target="_blank" rel="external">整理好的随书代码</a>    </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li><p><a href="http://www.apuebook.com/" target="_blank" rel="external">官网下载对应版本的源码</a></p>
+</li>
+<li><p>解压后，include/apue.h文件中的的最后一个#e]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[2018年个人总结]]></title>
+    <link href="http://www.cxyteam.com/2019/01/02/2018%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.cxyteam.com/2019/01/02/2018年个人总结/</id>
+    <published>2019-01-02T12:57:12.000Z</published>
+    <updated>2019-01-03T13:14:45.322Z</updated>
+    <content type="html"><![CDATA[<p>过去的一年时间里，收获了很多，也多了不少的迷茫。</p>
+<ol>
+<li>感情上，收获了爱情，并等待猪宝宝的降临</li>
+<li>财务上，坚持定投，港股打新，学会看财报，为家人配置保险，信用卡积分</li>
+<li>思想上，学会了一些适合自己的学习方法，及思维模式</li>
+<li>技术上，应用docker-compose，及kubernetes管理容器，golang实战，redis源码阅读，自动发布文章</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>过去的一年时间里，收获了很多，也多了不少的迷茫。</p>
+<ol>
+<li>感情上，收获了爱情，并等待猪宝宝的降临</li>
+<li>财务上，坚持定投，港股打新，学会看财报，为家人配置保险，信用卡积分</li>
+<li>思想上，学会了一些适合自己的学习方法，及思维模式</l]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[使用kubeadm安装k8s]]></title>
@@ -969,19 +1068,6 @@ enc]]>
   </entry>
   
   <entry>
-    <title><![CDATA[2018年年中总结]]></title>
-    <link href="http://www.cxyteam.com/2018/08/06/2018%E5%B9%B4%E5%B9%B4%E4%B8%AD%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.cxyteam.com/2018/08/06/2018年年中总结/</id>
-    <published>2018-08-06T12:57:12.000Z</published>
-    <updated>2018-08-06T12:58:29.891Z</updated>
-    <content type="html"><![CDATA[<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><h1 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h1><h1 id]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[设置disable_functions失效]]></title>
     <link href="http://www.cxyteam.com/2018/08/01/%E8%AE%BE%E7%BD%AEdisable-functions%E5%A4%B1%E6%95%88/"/>
     <id>http://www.cxyteam.com/2018/08/01/设置disable-functions失效/</id>
@@ -1036,242 +1122,6 @@ enc]]>
       <category term="GIT" scheme="http://www.cxyteam.com/tags/GIT/"/>
     
       <category term="GIT" scheme="http://www.cxyteam.com/categories/GIT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何阅读一本书]]></title>
-    <link href="http://www.cxyteam.com/2018/07/10/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/"/>
-    <id>http://www.cxyteam.com/2018/07/10/如何阅读一本书/</id>
-    <published>2018-07-09T17:22:30.000Z</published>
-    <updated>2018-07-09T17:31:02.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="《如何阅读一本书》"><a href="#《如何阅读一本书》" class="headerlink" title="《如何阅读一本书》"></a>《如何阅读一本书》</h1><pre><code>再次读起这本书的时候，依然觉得自己欠缺很多，决定书中的步骤给记录下来，下次读书的时候，按照步骤来进行练习
-</code></pre><h1 id="检视阅读"><a href="#检视阅读" class="headerlink" title="检视阅读"></a>检视阅读</h1><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>阅读书名页，在看序</li>
-<li>研究目录页</li>
-<li>书中索引</li>
-<li>出版者介绍</li>
-<li>挑几个和主题相关的章节看看</li>
-<li>随意翻翻</li>
-</ol>
-<h3 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h3><ol>
-<li>在阅读的时候别陷入细节，尽量做到完整的读完</li>
-<li>抓住主旨，不必每个字都细看</li>
-</ol>
-<h3 id="阅读时需要找的问题答案"><a href="#阅读时需要找的问题答案" class="headerlink" title="阅读时需要找的问题答案"></a>阅读时需要找的问题答案</h3><ol>
-<li>这是一本怎样的书</li>
-<li>这本书都说了什么</li>
-<li>作者借着怎样的整体架构来发展他的观点和陈序他的理解</li>
-<li>这本书说的有道理吗</li>
-<li>这本书和我有什么关系</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="《如何阅读一本书》"><a href="#《如何阅读一本书》" class="headerlink" title="《如何阅读一本书》"></a>《如何阅读一本书》</h1><pre><code>再次读起这本书的时候，依然觉得自己欠缺很多，决定书中的步骤给记录下来]]>
-    </summary>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
-    
-      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[docker部署mysql的疑问]]></title>
-    <link href="http://www.cxyteam.com/2018/07/02/docker%E9%83%A8%E7%BD%B2mysql%E7%9A%84%E7%96%91%E9%97%AE/"/>
-    <id>http://www.cxyteam.com/2018/07/02/docker部署mysql的疑问/</id>
-    <published>2018-07-02T12:52:34.000Z</published>
-    <updated>2018-07-02T17:34:36.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="mysql的初始密码是什么"><a href="#mysql的初始密码是什么" class="headerlink" title="mysql的初始密码是什么"></a>mysql的初始密码是什么</h1><pre><code>设置环境变量：MYSQL_ROOT_PASSWORD
-eg:
-   docker run --name=mysql  -e MYSQL_ROOT_PASSWORD=123123 -e MYSQL_DATABASE=test1 -p 3307:3306 -d mysql_image_name
-   注释：
-     --name 指定容器名称
-     -e 设置环境变量
-        MYSQL_ROOT_PASSWORD   设置root的初始密码
-        MYSQL_USER，MYSQL_PASSWORD  设置新用户及密码
-        MYSQL_DATABASE 指定镜像启动容器时创建的数据库
-     -p 设置端口映射，将宿主机端口3307映射到容器端口3306
-     -d 后台运行
-     mysql_image_name  镜像的名称
-</code></pre><h1 id="mysql的数据会不会因为docker重启就消失了"><a href="#mysql的数据会不会因为docker重启就消失了" class="headerlink" title="mysql的数据会不会因为docker重启就消失了"></a>mysql的数据会不会因为docker重启就消失了</h1><pre><code>进行数据卷的挂载
-eg:
-    docker run --namee=mysql -e MYSQL_ROOT_PASSWORD=123123 -p 3307:3306 -v /data/mysql:/var/lib/mysql -d mysql_image_name
-    注释：
-        -v 设置挂载卷 将宿主机的/data/mysql挂载到容器的/var/lib/mysql
-        这样重启的时候数据不会丢失，因为在宿主机上
-</code></pre><h1 id="如何初始mysql数据"><a href="#如何初始mysql数据" class="headerlink" title="如何初始mysql数据"></a>如何初始mysql数据</h1><pre><code>将sql文件复制到mysql容器
-    docker cp a.sql mysql_docker:/tmp
-
-登录mysql容器
-    docker exec -it mysql_docker /bin/bash
-
-进入mysql    
-    mysql -uroot -p
-
-选择库，导入sql文件
-    use database_name;
-    source /tmp/a.sql
-</code></pre><h1 id="乱码问题解决"><a href="#乱码问题解决" class="headerlink" title="乱码问题解决"></a>乱码问题解决</h1><pre><code>挂载my.cnf
-mysql的配置文件在：/var/lib/mysql/my.cnf
-eg：
-    docker run -d --name=mysql -e MYSQL_ROOT_PASSWORD=123123 -e MYSQL_DATABASE=test1 -p 3308:3306 -v /data/htdocs/mysql/data:/var/lib/mysql -v /data/htdocs/mysql/conf/my.cnf:/var/lib/mysql/my.cnf eromero/mysql5.1.73
-
-my.cnf 内容如下：    
-    # Example MySQL config file for medium systems.
-    #
-    # This is for a system with little memory (32M - 64M) where MySQL plays
-    # an important part, or systems up to 128M where MySQL is used together with
-    # other programs (such as a web server)
-    #
-    # MySQL programs look for option files in a set of
-    # locations which depend on the deployment platform.
-    # You can copy this option file to one of those
-    # locations. For information about these locations, see:
-    # http://dev.mysql.com/doc/mysql/en/option-files.html
-    #
-    # In this file, you can use all long options that a program supports.
-    # If you want to know which options a program supports, run the program
-    # with the &quot;--help&quot; option.
-    # The following options will be passed to all MySQL clients
-    [client]
-    default-character-set=utf8
-    #password = your_password
-    port = 3306
-    socket = /tmp/mysql.sock
-    # Here follows entries for some specific programs
-    # The MySQL server
-    [mysqld]
-    character-set-server=utf8
-    init_connect=&apos;SET NAMES utf8&apos;
-    port = 3306
-    socket = /tmp/mysql.sock
-    skip-external-locking
-    key_buffer_size = 16M
-    max_allowed_packet = 1M
-    table_open_cache = 64
-    sort_buffer_size = 512K
-    net_buffer_length = 8K
-    read_buffer_size = 256K
-    read_rnd_buffer_size = 512K
-    myisam_sort_buffer_size = 8M
-    character-set-server=utf8
-    secure_file_priv=&apos;&apos;
-    init_connect=&apos;SET NAMES utf8&apos;
-    # Don&apos;t listen on a TCP/IP port at all. This can be a security enhancement,
-    # if all processes that need to connect to mysqld run on the same host.
-    # All interaction with mysqld must be made via Unix sockets or named pipes.
-    # Note that using this option without enabling named pipes on Windows
-    # (via the &quot;enable-named-pipe&quot; option) will render mysqld useless!
-    #
-    #skip-networking
-
-    # Replication Master Server (default)
-    # binary logging is required for replication
-    log-bin=mysql-bin
-
-    # binary logging format - mixed recommended
-    binlog_format=mixed
-
-    # required unique id between 1 and 2^32 - 1
-    # defaults to 1 if master-host is not set
-    # but will not function as a master if omitted
-    server-id = 1    
-    # Replication Slave (comment out master section to use this)
-    #
-    # To configure this host as a replication slave, you can choose between
-    # two methods :
-    #
-    # 1) Use the CHANGE MASTER TO command (fully described in our manual) -
-    # the syntax is:
-    #
-    # CHANGE MASTER TO MASTER_HOST=&lt;host&gt;, MASTER_PORT=&lt;port&gt;,
-    # MASTER_USER=&lt;user&gt;, MASTER_PASSWORD=&lt;password&gt; ;
-    #
-    # where you replace &lt;host&gt;, &lt;user&gt;, &lt;password&gt; by quoted strings and
-    # &lt;port&gt; by the master&apos;s port number (3306 by default).
-    #
-    # Example:
-    #
-    # CHANGE MASTER TO MASTER_HOST=&apos;125.564.12.1&apos;, MASTER_PORT=3306,
-    # MASTER_USER=&apos;joe&apos;, MASTER_PASSWORD=&apos;secret&apos;;
-    #
-    # OR
-    #
-    # 2) Set the variables below. However, in case you choose this method, then
-    # start replication for the first time (even unsuccessfully, for example
-    # if you mistyped the password in master-password and the slave fails to
-    # connect), the slave will create a master.info file, and any later
-    # change in this file to the variables&apos; values below will be ignored and
-    # overridden by the content of the master.info file, unless you shutdown
-    # the slave server, delete master.info and restart the slaver server.
-    # For that reason, you may want to leave the lines below untouched
-    # (commented) and instead use CHANGE MASTER TO (see above)
-    #
-    # required unique id between 2 and 2^32 - 1
-    # (and different from the master)
-    # defaults to 2 if master-host is set
-    # but will not function as a slave if omitted
-    #server-id = 2
-    #
-    # The replication master for this slave - required
-    #master-host = &lt;hostname&gt;
-    #
-    # The username the slave will use for authentication when connecting
-    # to the master - required
-    #master-user = &lt;username&gt;
-    #
-    # The password the slave will authenticate with when connecting to
-    # the master - required
-    #master-password = &lt;password&gt;
-    #
-    # The port the master is listening on.
-    # optional - defaults to 3306
-    #master-port = &lt;port&gt;
-    #
-    # binary logging - not required for slaves, but recommended
-    #log-bin=mysql-bin
-
-    # Uncomment the following if you are using InnoDB tables
-    #innodb_data_home_dir = /usr/local/mysql/data
-    #innodb_data_file_path = ibdata1:10M:autoextend
-    #innodb_log_group_home_dir = /usr/local/mysql/data
-    # You can set .._buffer_pool_size up to 50 - 80 %
-    # of RAM but beware of setting memory usage too high
-    #innodb_buffer_pool_size = 16M
-    #innodb_additional_mem_pool_size = 2M
-    # Set .._log_file_size to 25 % of buffer pool size
-    #innodb_log_file_size = 5M
-    #innodb_log_buffer_size = 8M
-    #innodb_flush_log_at_trx_commit = 1
-    #innodb_lock_wait_timeout = 50
-
-    [mysqldump]
-    quick
-    max_allowed_packet = 16M
-
-    [mysql]
-    no-auto-rehash
-    # Remove the next comment character if you are not familiar with SQL
-    #safe-updates
-    default-character-set=utf8
-
-    [myisamchk]
-    key_buffer_size = 20M
-    sort_buffer_size = 20M
-    read_buffer = 2M
-    write_buffer = 2M
-
-    [mysqlhotcopy]
-    interactive-timeout
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="mysql的初始密码是什么"><a href="#mysql的初始密码是什么" class="headerlink" title="mysql的初始密码是什么"></a>mysql的初始密码是什么</h1><pre><code>设置环境变量：MYSQL_ROOT_]]>
-    </summary>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/tags/Docker/"/>
-    
-      <category term="Docker" scheme="http://www.cxyteam.com/categories/Docker/"/>
     
   </entry>
   
