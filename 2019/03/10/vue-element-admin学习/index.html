@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Other," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基础文档学习
+vue文档
+vue-element-admin文档
+
+安装
+源码下载地址
+
+运行流程（登录为例）
+初始化(main.js)
+
+查找路由(route/index.js)
+
+
+定义路由(login)，对应视图(views/login/index){
+    path: &amp;apos;/login&amp;apos;,
+    component: () =&amp;gt; import(&amp;apos;@/v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-element-admin学习">
+<meta property="og:url" content="http://www.cxyteam.com/2019/03/10/vue-element-admin学习/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="基础文档学习
+vue文档
+vue-element-admin文档
+
+安装
+源码下载地址
+
+运行流程（登录为例）
+初始化(main.js)
+
+查找路由(route/index.js)
+
+
+定义路由(login)，对应视图(views/login/index){
+    path: &amp;apos;/login&amp;apos;,
+    component: () =&amp;gt; import(&amp;apos;@/v">
+<meta property="og:updated_time" content="2019-03-10T15:09:15.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-element-admin学习">
+<meta name="twitter:description" content="基础文档学习
+vue文档
+vue-element-admin文档
+
+安装
+源码下载地址
+
+运行流程（登录为例）
+初始化(main.js)
+
+查找路由(route/index.js)
+
+
+定义路由(login)，对应视图(views/login/index){
+    path: &amp;apos;/login&amp;apos;,
+    component: () =&amp;gt; import(&amp;apos;@/v">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2019/03/10/vue-element-admin学习/"/>
+
+
+
+
+
+  <title>vue-element-admin学习 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2019/03/10/vue-element-admin学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue-element-admin学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T17:14:12+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/10/vue-element-admin学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/10/vue-element-admin学习/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础文档学习"><a href="#基础文档学习" class="headerlink" title="基础文档学习"></a>基础文档学习</h1><ol>
+<li><a href="&#39;https://cn.vuejs.org/v2/guide/installation.html&#39;">vue文档</a></li>
+<li><a href="&#39;https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD&#39;">vue-element-admin文档</a></li>
+</ol>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><a href="&#39;https://github.com/PanJiaChen/vue-element-admin&#39;">源码下载地址</a></li>
+</ol>
+<h1 id="运行流程（登录为例）"><a href="#运行流程（登录为例）" class="headerlink" title="运行流程（登录为例）"></a>运行流程（登录为例）</h1><ol>
+<li><p>初始化(main.js)</p>
+</li>
+<li><p>查找路由(route/index.js)</p>
+</li>
+</ol>
+<h6 id="定义路由-login-，对应视图-views-login-index"><a href="#定义路由-login-，对应视图-views-login-index" class="headerlink" title="定义路由(login)，对应视图(views/login/index)"></a>定义路由(login)，对应视图(views/login/index)</h6><pre><code>{
+    path: &apos;/login&apos;,
+    component: () =&gt; import(&apos;@/views/login/index&apos;),
+    hidden: true
+},
+</code></pre><ol>
+<li><p>查找’界面’ (views/login/index.vue)</p>
+</li>
+<li><p>查找store(store/modules/user.js)</p>
+</li>
+</ol>
+<h6 id="调用store中定义的actions"><a href="#调用store中定义的actions" class="headerlink" title="调用store中定义的actions"></a>调用store中定义的actions</h6><pre><code>this.$store.dispatch(&apos;LoginByUsername&apos;, ......
+</code></pre><ol>
+<li>查找接口调用定义(api/login.js)</li>
+</ol>
+<h6 id="定义loginByUsername调用的接口地址"><a href="#定义loginByUsername调用的接口地址" class="headerlink" title="定义loginByUsername调用的接口地址"></a>定义loginByUsername调用的接口地址</h6><pre><code>export function loginByUsername(username, password) {
+  const data = {
+    username,
+    password
+  }
+  return request({
+    url: &apos;/user/login&apos;,
+    method: &apos;post&apos;,
+    data
+  })
+}
+</code></pre><ol>
+<li>遍历rule时判断(permission.js)<h6 id="定义遍历rule前具体代码"><a href="#定义遍历rule前具体代码" class="headerlink" title="定义遍历rule前具体代码"></a>定义遍历rule前具体代码</h6> router.beforeEach(……</li>
+</ol>
+<h1 id="mock数据"><a href="#mock数据" class="headerlink" title="mock数据"></a>mock数据</h1><h6 id="加载位置-main-js"><a href="#加载位置-main-js" class="headerlink" title="加载位置(main.js)"></a>加载位置(main.js)</h6><pre><code>import &apos;./mock&apos; //不需要mock的话，将这里注释
+</code></pre><h6 id="mock的接口"><a href="#mock的接口" class="headerlink" title="mock的接口"></a>mock的接口</h6><pre><code>Mock.mock(/\/login\/login/, &apos;post&apos;, loginAPI.loginByUsername)
+</code></pre><h6 id="mock具体数据-mock-login-js"><a href="#mock具体数据-mock-login-js" class="headerlink" title="mock具体数据(mock/login.js)"></a>mock具体数据(mock/login.js)</h6><pre><code>loginByUsername: config =&gt; {
+    const { username } = JSON.parse(config.body)
+    return userMap[username]
+},
+</code></pre><h6 id="修改为自己定义的host-dev-env-js"><a href="#修改为自己定义的host-dev-env-js" class="headerlink" title="修改为自己定义的host(dev.env.js)"></a>修改为自己定义的host(dev.env.js)</h6><pre><code>module.exports = {
+  NODE_ENV: &apos;&quot;development&quot;&apos;,
+  ENV_CONFIG: &apos;&quot;dev&quot;&apos;,
+  BASE_API: &apos;&quot;http://demo.com/api&quot;&apos;
+}
+</code></pre><h6 id="设置跨域信息"><a href="#设置跨域信息" class="headerlink" title="设置跨域信息"></a>设置跨域信息</h6><pre><code>header(&apos;Access-Control-Allow-Origin:*&apos;);//生产环境记得对指定域名添加
+header(&apos;Access-Control-Allow-Headers:Origin, Content-Type, Cookie, X-CSRF-TOKEN, Accept, Authorization, X-XSRF-TOKEN&apos;);
+header(&apos;Access-Control-Expose-Headers:Authorization, authenticated&apos;);
+header(&apos;Access-Control-Allow-Methods:GET, POST, PATCH, PUT, OPTIONS&apos;);
+header(&apos;Access-Control-Allow-Credentials:true&apos;);        
+</code></pre><blockquote>
+<p><a href="https://www.jianshu.com/p/d3e3b21696e4" target="_blank" rel="external">https://www.jianshu.com/p/d3e3b21696e4</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag"># Other</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/wayne源码学习/" rel="next" title="wayne源码学习">
+                <i class="fa fa-chevron-left"></i> wayne源码学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/27/docker原理介绍/" rel="prev" title="docker原理介绍">
+                docker原理介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">202</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础文档学习"><span class="nav-number">1.</span> <span class="nav-text">基础文档学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行流程（登录为例）"><span class="nav-number">3.</span> <span class="nav-text">运行流程（登录为例）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义路由-login-，对应视图-views-login-index"><span class="nav-number">3.0.0.0.0.1.</span> <span class="nav-text">定义路由(login)，对应视图(views/login/index)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#调用store中定义的actions"><span class="nav-number">3.0.0.0.0.2.</span> <span class="nav-text">调用store中定义的actions</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#定义loginByUsername调用的接口地址"><span class="nav-number">3.0.0.0.0.3.</span> <span class="nav-text">定义loginByUsername调用的接口地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#定义遍历rule前具体代码"><span class="nav-number">3.0.0.0.0.4.</span> <span class="nav-text">定义遍历rule前具体代码</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mock数据"><span class="nav-number">4.</span> <span class="nav-text">mock数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#加载位置-main-js"><span class="nav-number">4.0.0.0.0.1.</span> <span class="nav-text">加载位置(main.js)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mock的接口"><span class="nav-number">4.0.0.0.0.2.</span> <span class="nav-text">mock的接口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mock具体数据-mock-login-js"><span class="nav-number">4.0.0.0.0.3.</span> <span class="nav-text">mock具体数据(mock/login.js)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改为自己定义的host-dev-env-js"><span class="nav-number">4.0.0.0.0.4.</span> <span class="nav-text">修改为自己定义的host(dev.env.js)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设置跨域信息"><span class="nav-number">4.0.0.0.0.5.</span> <span class="nav-text">设置跨域信息</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

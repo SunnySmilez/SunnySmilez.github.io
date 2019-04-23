@@ -4,7 +4,7 @@
   <subtitle><![CDATA[当你的实力支撑不起你的野心的时候，静下心来好好学习吧！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.cxyteam.com/"/>
-  <updated>2019-02-20T07:39:55.518Z</updated>
+  <updated>2019-03-29T10:28:59.725Z</updated>
   <id>http://www.cxyteam.com/</id>
   
   <author>
@@ -15,11 +15,208 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[swagger使用]]></title>
+    <link href="http://www.cxyteam.com/2019/03/29/swagger%E4%BD%BF%E7%94%A8/"/>
+    <id>http://www.cxyteam.com/2019/03/29/swagger使用/</id>
+    <published>2019-03-29T09:29:36.000Z</published>
+    <updated>2019-03-29T10:28:59.725Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装swagger-editor"><a href="#安装swagger-editor" class="headerlink" title="安装swagger-editor"></a>安装swagger-editor</h1><h6 id="安装npm"><a href="#安装npm" class="headerlink" title="安装npm"></a>安装npm</h6><h6 id="安装http-server"><a href="#安装http-server" class="headerlink" title="安装http-server"></a>安装http-server</h6><pre><code>npm install -g http-server
+</code></pre><h6 id="安装swagger-editor-1"><a href="#安装swagger-editor-1" class="headerlink" title="安装swagger-editor"></a>安装swagger-editor</h6><blockquote>
+<p><a href="&quot;https://github.com/swagger-api/swagger-editor/releases&quot;">swagger-editor下载</a><br>解压swagger-editor:tar -zxvf swagger-editor.tar.gz</p>
+</blockquote>
+<h6 id="启动swagger服务"><a href="#启动swagger服务" class="headerlink" title="启动swagger服务"></a>启动swagger服务</h6><pre><code>http-server -p 8082 swagger-editor
+</code></pre><h6 id="访问服务"><a href="#访问服务" class="headerlink" title="访问服务"></a>访问服务</h6><pre><code>http://127.0.0.1:8082
+</code></pre><h1 id="安装swagger-ui"><a href="#安装swagger-ui" class="headerlink" title="安装swagger-ui"></a>安装swagger-ui</h1><h6 id="下载swagger-ui"><a href="#下载swagger-ui" class="headerlink" title="下载swagger-ui"></a>下载swagger-ui</h6><pre><code>git clone https://github.com/swagger-api/swagger-ui.git
+</code></pre><h6 id="启动swagger-ui服务"><a href="#启动swagger-ui服务" class="headerlink" title="启动swagger-ui服务"></a>启动swagger-ui服务</h6><pre><code>http-server -p 8004 swagger-ui
+</code></pre><h6 id="修改接口地址"><a href="#修改接口地址" class="headerlink" title="修改接口地址"></a>修改接口地址</h6><pre><code>vim dist/index.html
+将SwaggerUIBundle中的uri换成你的json文件
+</code></pre><h1 id="安装go-swagger自动生成接口文档"><a href="#安装go-swagger自动生成接口文档" class="headerlink" title="安装go-swagger自动生成接口文档"></a>安装go-swagger自动生成接口文档</h1><h6 id="安装go-swagger"><a href="#安装go-swagger" class="headerlink" title="安装go-swagger"></a>安装go-swagger</h6><pre><code>brew tap go-swagger/go-swagger
+brew install go-swagger
+</code></pre><h6 id="进入项目目录，生成文档"><a href="#进入项目目录，生成文档" class="headerlink" title="进入项目目录，生成文档"></a>进入项目目录，生成文档</h6><pre><code>swagger generate spec -o ./swagger.json
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装swagger-editor"><a href="#安装swagger-editor" class="headerlink" title="安装swagger-editor"></a>安装swagger-editor</h1><h6 id="安装npm"><a]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker原理介绍]]></title>
+    <link href="http://www.cxyteam.com/2019/03/27/docker%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://www.cxyteam.com/2019/03/27/docker原理介绍/</id>
+    <published>2019-03-27T11:12:39.000Z</published>
+    <updated>2019-03-27T16:52:06.101Z</updated>
+    <content type="html"><![CDATA[<h1 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h1><h6 id="挂载a目录到b目录（b目录的子目录被隐藏，所有的对b的修改都作用a上）"><a href="#挂载a目录到b目录（b目录的子目录被隐藏，所有的对b的修改都作用a上）" class="headerlink" title="挂载a目录到b目录（b目录的子目录被隐藏，所有的对b的修改都作用a上）"></a>挂载a目录到b目录（b目录的子目录被隐藏，所有的对b的修改都作用a上）</h6><p>mount –bind a b</p>
+<h6 id="切换根目录"><a href="#切换根目录" class="headerlink" title="切换根目录"></a>切换根目录</h6><pre><code>privot_root new_root old_root
+</code></pre><h1 id="aufs创建容器层"><a href="#aufs创建容器层" class="headerlink" title="aufs创建容器层"></a>aufs创建容器层</h1><h6 id="将pathA和pathB挂载到mount-path目录；默认只有最上面一层是可读写的也就是pathB，其他是只读"><a href="#将pathA和pathB挂载到mount-path目录；默认只有最上面一层是可读写的也就是pathB，其他是只读" class="headerlink" title="将pathA和pathB挂载到mount_path目录；默认只有最上面一层是可读写的也就是pathB，其他是只读"></a>将pathA和pathB挂载到mount_path目录；默认只有最上面一层是可读写的也就是pathB，其他是只读</h6><pre><code>mount -t aufs -o dirs=pathA:pathB none mount_path
+</code></pre><h5 id="删除容器信息"><a href="#删除容器信息" class="headerlink" title="删除容器信息"></a>删除容器信息</h5><pre><code>umount mount_path
+rm -rf mount_path
+</code></pre><h1 id="volume实现"><a href="#volume实现" class="headerlink" title="volume实现"></a>volume实现</h1><pre><code>-v a:b
+mount -t aufs -o dirs=a none none b
+</code></pre><h1 id="镜像打包"><a href="#镜像打包" class="headerlink" title="镜像打包"></a>镜像打包</h1><pre><code>commit imageName
+tar -xzf imageName.tar -C mount_path .
+</code></pre><h1 id="容器后台运行"><a href="#容器后台运行" class="headerlink" title="容器后台运行"></a>容器后台运行</h1><h6 id="原理：容器实际就是一个进程，当前运行命令的是主进程，容器是被当前主进程fork出来的子进程。子进程的结束和父进程的运行是一个异步过程。如果创建的子进程的父进程退出，那么子进程就会成为孤儿进程。为了避免孤儿进程退出时无法释放所占用的资源而僵死，进程号为1的进程init就会接受这些孤儿进程"><a href="#原理：容器实际就是一个进程，当前运行命令的是主进程，容器是被当前主进程fork出来的子进程。子进程的结束和父进程的运行是一个异步过程。如果创建的子进程的父进程退出，那么子进程就会成为孤儿进程。为了避免孤儿进程退出时无法释放所占用的资源而僵死，进程号为1的进程init就会接受这些孤儿进程" class="headerlink" title="原理：容器实际就是一个进程，当前运行命令的是主进程，容器是被当前主进程fork出来的子进程。子进程的结束和父进程的运行是一个异步过程。如果创建的子进程的父进程退出，那么子进程就会成为孤儿进程。为了避免孤儿进程退出时无法释放所占用的资源而僵死，进程号为1的进程init就会接受这些孤儿进程"></a>原理：容器实际就是一个进程，当前运行命令的是主进程，容器是被当前主进程fork出来的子进程。子进程的结束和父进程的运行是一个异步过程。如果创建的子进程的父进程退出，那么子进程就会成为孤儿进程。为了避免孤儿进程退出时无法释放所占用的资源而僵死，进程号为1的进程init就会接受这些孤儿进程</h6><pre><code>run -d
+docker代码：如果是非&quot;-d&quot;模式，父进程等待子进程执行完成即可：parent.wait()
+</code></pre><h1 id="查看运行中的容器"><a href="#查看运行中的容器" class="headerlink" title="查看运行中的容器"></a>查看运行中的容器</h1><pre><code>ps
+</code></pre><h5 id="原理：将容器的信息写入一个日志文件中，当执行ps的时候，读取文件中的信息，使用fmt-Fprintf格式化输出到标准输出流缓存区"><a href="#原理：将容器的信息写入一个日志文件中，当执行ps的时候，读取文件中的信息，使用fmt-Fprintf格式化输出到标准输出流缓存区" class="headerlink" title="原理：将容器的信息写入一个日志文件中，当执行ps的时候，读取文件中的信息，使用fmt.Fprintf格式化输出到标准输出流缓存区"></a>原理：将容器的信息写入一个日志文件中，当执行ps的时候，读取文件中的信息，使用fmt.Fprintf格式化输出到标准输出流缓存区</h5><h1 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h1><pre><code>logs
+</code></pre><h6 id="原理：如果是-d模式，将标准输出的信息写入到一个文件中，执行logs的时候，读取文件信息，使用fmt-Fprint输出"><a href="#原理：如果是-d模式，将标准输出的信息写入到一个文件中，执行logs的时候，读取文件信息，使用fmt-Fprint输出" class="headerlink" title="原理：如果是-d模式，将标准输出的信息写入到一个文件中，执行logs的时候，读取文件信息，使用fmt.Fprint输出"></a>原理：如果是-d模式，将标准输出的信息写入到一个文件中，执行logs的时候，读取文件信息，使用fmt.Fprint输出</h6><h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><pre><code>exec
+</code></pre><h6 id="原理：使用setns可以根据提供的pid进入指定的namespace中，需要先打开指定文件"><a href="#原理：使用setns可以根据提供的pid进入指定的namespace中，需要先打开指定文件" class="headerlink" title="原理：使用setns可以根据提供的pid进入指定的namespace中，需要先打开指定文件"></a>原理：使用setns可以根据提供的pid进入指定的namespace中，需要先打开指定文件</h6><h1 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h1><pre><code>stop
+</code></pre><h6 id="原理：kill-pid"><a href="#原理：kill-pid" class="headerlink" title="原理：kill pid"></a>原理：kill pid</h6><h1 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h1><pre><code>rm
+</code></pre><h6 id="原理：删除所有文件（容器文件，日志文件）"><a href="#原理：删除所有文件（容器文件，日志文件）" class="headerlink" title="原理：删除所有文件（容器文件，日志文件）"></a>原理：删除所有文件（容器文件，日志文件）</h6><h1 id="容器制作镜像"><a href="#容器制作镜像" class="headerlink" title="容器制作镜像"></a>容器制作镜像</h1><pre><code>commit
+</code></pre><h6 id="原理：将指定的容器的文件，打包到固定的image-tar"><a href="#原理：将指定的容器的文件，打包到固定的image-tar" class="headerlink" title="原理：将指定的容器的文件，打包到固定的image.tar"></a>原理：将指定的容器的文件，打包到固定的image.tar</h6><pre><code>run --name container imageName
+</code></pre><h6 id="原理：将指定的imageName解压，创建可写文件，挂载"><a href="#原理：将指定的imageName解压，创建可写文件，挂载" class="headerlink" title="原理：将指定的imageName解压，创建可写文件，挂载"></a>原理：将指定的imageName解压，创建可写文件，挂载</h6><h1 id="提前准备"><a href="#提前准备" class="headerlink" title="提前准备"></a>提前准备</h1><h6 id="ubuntu14-04下载"><a href="#ubuntu14-04下载" class="headerlink" title="ubuntu14.04下载"></a>ubuntu14.04下载</h6><p><a href="&quot;http://mirrors.163.com/ubuntu-releases/14.04/ubuntu-14.04.6-server-amd64.iso&quot;">ubuntu14.04下载地址</a></p>
+<h6 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h6><pre><code>apt-get install bridge-utils
+apt-get install gcc
+apt-get install -y linux-tools-$(uname -r)
+apt-get install stress
+apt-get install cgroup-bin
+</code></pre><h6 id="依赖包下载"><a href="#依赖包下载" class="headerlink" title="依赖包下载"></a>依赖包下载</h6><pre><code>go get github.com/Sirupsen/logrus
+go get github.com/urfave/cli
+go get github.com/vishvananda/netlink
+go get github.com/vishvananda/netns
+go get github.com/vishvananda/netlink/nl        
+</code></pre><h6 id="golang-org-x包下载脚本（log）"><a href="#golang-org-x包下载脚本（log）" class="headerlink" title="golang.org/x包下载脚本（log）"></a>golang.org/x包下载脚本（log）</h6><pre><code>#!/usr/bin/env bash
+#为了兼容windows下的bash
+cd $GOPATH;
+#创建 $GOPATH/src/golang.org/x 目录
+mkdir -p $GOPATH/src/golang.org/x;
+
+echo &quot;已经安装的golang.org/x package&quot;;
+ls;
+echo &quot;下面一行 for in 中包的名字您可以自己来定义&quot;
+for name in &quot;glog&quot; &quot;image&quot; &quot;perf&quot; &quot;snappy&quot; &quot;term&quot; &quot;sync&quot; &quot;winstrap&quot; &quot;cwg&quot; &quot;leveldb&quot; &quot;text&quot; &quot;net&quot; &quot;build&quot; &quot;protobuf&quot; &quot;dep&quot; &quot;sys&quot; &quot;crypto&quot; &quot;gddo&quot; &quot;tools&quot; &quot;scratch&quot; &quot;proposal&quot; &quot;mock&quot; &quot;oauth2&quot; &quot;freetype&quot; &quot;debug&quot; &quot;mobile&quot; &quot;gofrontend&quot; &quot;lint&quot; &quot;appengine&quot; &quot;geo&quot; &quot;review&quot; &quot;arch&quot; &quot;vgo&quot; &quot;exp&quot; &quot;time&quot;;do
+   cd $GOPATH/src/golang.org/x;
+   if [ -d &quot;$name&quot; ]
+   then
+     cd $name;
+     echo $name &quot;包已经存在,使用git pull来更新源码&quot;;
+     git pull;
+   else
+     git_url=&quot;https://github.com/golang/${name}.git&quot;;
+     echo &quot;开始clone golang.org/x 在github.com上的镜像代码:${git_url}&quot;;
+     git clone --depth 1 &quot;$git_url&quot;;
+     cd $name;
+   fi
+   #go install;
+done
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h1><h6 id="挂载a目录到b目录（b目录的子目录被隐藏，所有的对b的修改都作用a上）"><a href="#挂载a目录到b目录（]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[vue-element-admin学习]]></title>
+    <link href="http://www.cxyteam.com/2019/03/10/vue-element-admin%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://www.cxyteam.com/2019/03/10/vue-element-admin学习/</id>
+    <published>2019-03-10T09:14:12.000Z</published>
+    <updated>2019-03-10T15:09:15.441Z</updated>
+    <content type="html"><![CDATA[<h1 id="基础文档学习"><a href="#基础文档学习" class="headerlink" title="基础文档学习"></a>基础文档学习</h1><ol>
+<li><a href="&#39;https://cn.vuejs.org/v2/guide/installation.html&#39;">vue文档</a></li>
+<li><a href="&#39;https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD&#39;">vue-element-admin文档</a></li>
+</ol>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><a href="&#39;https://github.com/PanJiaChen/vue-element-admin&#39;">源码下载地址</a></li>
+</ol>
+<h1 id="运行流程（登录为例）"><a href="#运行流程（登录为例）" class="headerlink" title="运行流程（登录为例）"></a>运行流程（登录为例）</h1><ol>
+<li><p>初始化(main.js)</p>
+</li>
+<li><p>查找路由(route/index.js)</p>
+</li>
+</ol>
+<h6 id="定义路由-login-，对应视图-views-login-index"><a href="#定义路由-login-，对应视图-views-login-index" class="headerlink" title="定义路由(login)，对应视图(views/login/index)"></a>定义路由(login)，对应视图(views/login/index)</h6><pre><code>{
+    path: &apos;/login&apos;,
+    component: () =&gt; import(&apos;@/views/login/index&apos;),
+    hidden: true
+},
+</code></pre><ol>
+<li><p>查找’界面’ (views/login/index.vue)</p>
+</li>
+<li><p>查找store(store/modules/user.js)</p>
+</li>
+</ol>
+<h6 id="调用store中定义的actions"><a href="#调用store中定义的actions" class="headerlink" title="调用store中定义的actions"></a>调用store中定义的actions</h6><pre><code>this.$store.dispatch(&apos;LoginByUsername&apos;, ......
+</code></pre><ol>
+<li>查找接口调用定义(api/login.js)</li>
+</ol>
+<h6 id="定义loginByUsername调用的接口地址"><a href="#定义loginByUsername调用的接口地址" class="headerlink" title="定义loginByUsername调用的接口地址"></a>定义loginByUsername调用的接口地址</h6><pre><code>export function loginByUsername(username, password) {
+  const data = {
+    username,
+    password
+  }
+  return request({
+    url: &apos;/user/login&apos;,
+    method: &apos;post&apos;,
+    data
+  })
+}
+</code></pre><ol>
+<li>遍历rule时判断(permission.js)<h6 id="定义遍历rule前具体代码"><a href="#定义遍历rule前具体代码" class="headerlink" title="定义遍历rule前具体代码"></a>定义遍历rule前具体代码</h6> router.beforeEach(……</li>
+</ol>
+<h1 id="mock数据"><a href="#mock数据" class="headerlink" title="mock数据"></a>mock数据</h1><h6 id="加载位置-main-js"><a href="#加载位置-main-js" class="headerlink" title="加载位置(main.js)"></a>加载位置(main.js)</h6><pre><code>import &apos;./mock&apos; //不需要mock的话，将这里注释
+</code></pre><h6 id="mock的接口"><a href="#mock的接口" class="headerlink" title="mock的接口"></a>mock的接口</h6><pre><code>Mock.mock(/\/login\/login/, &apos;post&apos;, loginAPI.loginByUsername)
+</code></pre><h6 id="mock具体数据-mock-login-js"><a href="#mock具体数据-mock-login-js" class="headerlink" title="mock具体数据(mock/login.js)"></a>mock具体数据(mock/login.js)</h6><pre><code>loginByUsername: config =&gt; {
+    const { username } = JSON.parse(config.body)
+    return userMap[username]
+},
+</code></pre><h6 id="修改为自己定义的host-dev-env-js"><a href="#修改为自己定义的host-dev-env-js" class="headerlink" title="修改为自己定义的host(dev.env.js)"></a>修改为自己定义的host(dev.env.js)</h6><pre><code>module.exports = {
+  NODE_ENV: &apos;&quot;development&quot;&apos;,
+  ENV_CONFIG: &apos;&quot;dev&quot;&apos;,
+  BASE_API: &apos;&quot;http://demo.com/api&quot;&apos;
+}
+</code></pre><h6 id="设置跨域信息"><a href="#设置跨域信息" class="headerlink" title="设置跨域信息"></a>设置跨域信息</h6><pre><code>header(&apos;Access-Control-Allow-Origin:*&apos;);//生产环境记得对指定域名添加
+header(&apos;Access-Control-Allow-Headers:Origin, Content-Type, Cookie, X-CSRF-TOKEN, Accept, Authorization, X-XSRF-TOKEN&apos;);
+header(&apos;Access-Control-Expose-Headers:Authorization, authenticated&apos;);
+header(&apos;Access-Control-Allow-Methods:GET, POST, PATCH, PUT, OPTIONS&apos;);
+header(&apos;Access-Control-Allow-Credentials:true&apos;);        
+</code></pre><blockquote>
+<p><a href="https://www.jianshu.com/p/d3e3b21696e4" target="_blank" rel="external">https://www.jianshu.com/p/d3e3b21696e4</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="基础文档学习"><a href="#基础文档学习" class="headerlink" title="基础文档学习"></a>基础文档学习</h1><ol>
+<li><a href="&#39;https://cn.vuejs.org/v2/guide/inst]]>
+    </summary>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/tags/Other/"/>
+    
+      <category term="Other" scheme="http://www.cxyteam.com/categories/Other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[wayne源码学习]]></title>
+    <link href="http://www.cxyteam.com/2019/03/05/wayne%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://www.cxyteam.com/2019/03/05/wayne源码学习/</id>
+    <published>2019-03-05T03:34:43.000Z</published>
+    <updated>2019-03-05T11:59:46.130Z</updated>
+    <content type="html"><![CDATA[<h1 id="wayne开发环境部署"><a href="#wayne开发环境部署" class="headerlink" title="wayne开发环境部署"></a><a href="https://github.com/Qihoo360/wayne/wiki/Wayne-dev-develop-flow" target="_blank" rel="external">wayne开发环境部署</a></h1><ol>
+<li>mac配置mysql的时候，需要配置成本地的ip，如果本地和docker同时启动了同一端口的mysql，需要注意区分好密码</li>
+<li><a href="">wayne中使用到的路由规则</a></li>
+<li>使用localhost:8080访问后端的接口，过程中进行<a href="https://github.com/dgrijalva/jwt-go" target="_blank" rel="external">jwt token</a>的验证，两种方式跳过验证</li>
+</ol>
+<ul>
+<li>打开后端，查看对应的token值，然后使用postman发送请求<br><img src="/img/wayne/jwt_token.png" alt="Al text" title="查看token值"><br><img src="/img/wayne/postman.png" alt="Al text" title="postman发送请求"> </li>
+</ul>
+<p>glide<br>Travis CI<br>cobra command</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="wayne开发环境部署"><a href="#wayne开发环境部署" class="headerlink" title="wayne开发环境部署"></a><a href="https://github.com/Qihoo360/wayne/wiki/Wayne]]>
+    </summary>
+    
+      <category term="k8s" scheme="http://www.cxyteam.com/tags/k8s/"/>
+    
+      <category term="k8s" scheme="http://www.cxyteam.com/categories/k8s/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[2019年读书单]]></title>
     <link href="http://www.cxyteam.com/2019/02/18/2019%E5%B9%B4%E8%AF%BB%E4%B9%A6%E5%8D%95/"/>
     <id>http://www.cxyteam.com/2019/02/18/2019年读书单/</id>
     <published>2019-02-18T12:18:17.000Z</published>
-    <updated>2019-02-20T07:39:55.518Z</updated>
+    <updated>2019-03-20T05:25:32.592Z</updated>
     <content type="html"><![CDATA[<h1 id="三体"><a href="#三体" class="headerlink" title="三体"></a><a href="https://book.douban.com/subject/2567698/" target="_blank" rel="external">三体</a></h1><h6 id="2019-2-10-2019-2-17"><a href="#2019-2-10-2019-2-17" class="headerlink" title="2019.2.10-2019.2.17"></a><em>2019.2.10-2019.2.17</em></h6><ol>
 <li>一本脑洞大开的科幻小说，看完这本书之后，能够理解很多科幻电影中的情节和概念</li>
 <li>所有的一切共识，道德，约定，制度，法律都是基于解决了生存的基本问题，一旦生存问题没能解决，所有的一切都将被推翻</li>
@@ -35,11 +232,23 @@
 </ol>
 <h1 id="零秒思考"><a href="#零秒思考" class="headerlink" title="零秒思考"></a><a href="https://book.douban.com/subject/26260187/" target="_blank" rel="external">零秒思考</a></h1><h6 id="2019-2-20-2019-2-20"><a href="#2019-2-20-2019-2-20" class="headerlink" title="2019.2.20-2019.2.20"></a><em>2019.2.20-2019.2.20</em></h6><p>最近一直在寻找深度思考，锻炼思维能力的方法，经过检索，找到了这本书，介绍了锻炼思维能力，整理思路的一个方法：”一分钟记笔记”，具体方法：</p>
 <ol>
-<li>笔记要求：用一页A4纸，横着摆着，在1分钟之内，围绕某一个标题，写4-6条想法，每条多少个字，每天写10页</li>
+<li>笔记要求：用一页A4纸，横着摆着，在1分钟之内，围绕某一个标题，写4-6条想法，每条8-12个字，每天写10页</li>
 <li>笔记格式：在顶部的左侧写上带下划线的标题；右边写上日期；正文出按序记录笔记，每一条开始前面打原点号</li>
 <li>深入思考：对一个标题可以记录多次笔记；对于一个标题的笔记，可以作为下一个笔记的标题，深入挖掘</li>
 <li>利用笔记：每隔5天对笔记进行分类整理，按主题整理成PPT</li>
 </ol>
+<h1 id="结构思考力"><a href="#结构思考力" class="headerlink" title="结构思考力"></a><a href="https://book.douban.com/subject/26145094/" target="_blank" rel="external">结构思考力</a></h1><h6 id="2019-2-22-2019-3-4"><a href="#2019-2-22-2019-3-4" class="headerlink" title="2019.2.22-2019.3.4"></a><em>2019.2.22-2019.3.4</em></h6><p>依然是关于思考和思维方面的书籍</p>
+<ol>
+<li>“汇报工作说结果，检讨工作说流程，请示工作说方案” 这句话说得很精辟</li>
+<li>“总分结构”，结论先行</li>
+<li>作者给出了很多的方式方法，各种缩写简写应该是想让读者更易记住吧，看到这么多的概念和缩写简写之后，发现好像什么也没看懂，什么也不记得了</li>
+<li>财务人员做汇报的时候，被几个问题就问倒了；和我目前的做技术分享讨论的时候，很容易就被人家问倒，很容易就认同人家的说法是否是一个现象？没有站在参会这的角度思考问题？</li>
+<li>﻿5w2h原则<br> What：是什么？做什么？目的是什么？<br> Why：为什么？为什么这样做？理由是什么？原因是什么？<br> Who：谁来做？谁来负责？由谁来承担？谁来完成？<br> When：什么时候开始做？什么时候完成？最佳时机是什么时候？﻿<br> Where：何处？在哪儿做？从哪儿入手做？<br> How：如何做？怎么去做？从哪儿入手做？<br> How much：做多少？完成量是多少？合格率是多少？费用是多少？</li>
+<li>纵向结构分层次这一章：1、结论先行，才能吸引人，才能在短时间内表达完观点；2、抽象，总结，最后形成结论</li>
+<li>值得再次阅读一遍，尤其是后面几章，需要碰到实际的例子来练习</li>
+</ol>
+<h1 id="金字塔原理"><a href="#金字塔原理" class="headerlink" title="金字塔原理"></a><a href="https://book.douban.com/subject/1020644/" target="_blank" rel="external">金字塔原理</a></h1><h6 id="2019-3-6-2019-3"><a href="#2019-3-6-2019-3" class="headerlink" title="2019.3.6-2019.3."></a><em>2019.3.6-2019.3.</em></h6><p>﻿<br>如果思想的组织方式是演绎推理，那么这些思想的逻辑顺序就是演绎顺序；如果思想按因果关系组织，那么其逻辑顺序就是时间顺序；如果是对某种现有结构进行评论，那么其逻辑顺序就是结构顺序；如果按类别组织思想，那么其逻辑顺序就是程度顺序（重要性顺序）<br>抽象思维、演化思维、分层思维、分治思维</p>
+<h1 id="指数基金投资指南"><a href="#指数基金投资指南" class="headerlink" title="指数基金投资指南"></a><a href="https://book.douban.com/subject/27204860/" target="_blank" rel="external">指数基金投资指南</a></h1><h6 id="2019-3-12-2019-3-20"><a href="#2019-3-12-2019-3-20" class="headerlink" title="2019.3.12-2019.3.20"></a><em>2019.3.12-2019.3.20</em></h6><p>一本比较基础的指数基金投资方面的书籍。主要了解了各基金的品种，及特性；其实了解了衡量基金的一些指标。其中两种高估低估的方式，不是太理解。以及后续的基金定投方案不是太认同。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="三体"><a href="#三体" class="headerlink" title="三体"></a><a href="https://book.douban.com/subject/2567698/" target="_blank" rel="external]]>
@@ -337,7 +546,7 @@
     <link href="http://www.cxyteam.com/2018/12/07/k8s%E4%BD%BF%E7%94%A8yaml%E6%90%AD%E5%BB%BAlnmp/"/>
     <id>http://www.cxyteam.com/2018/12/07/k8s使用yaml搭建lnmp/</id>
     <published>2018-12-07T05:31:44.000Z</published>
-    <updated>2018-12-09T08:24:19.219Z</updated>
+    <updated>2019-04-17T16:10:16.398Z</updated>
     <content type="html"><![CDATA[<h1 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h1><p>「mac+minikube」</p>
 <ol>
 <li>mac10.13.6</li>
@@ -388,7 +597,7 @@
 <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h3 id="pod启动问题"><a href="#pod启动问题" class="headerlink" title="pod启动问题"></a>pod启动问题</h3><ul>
 <li>定位pod问题</li>
 </ul>
-<p>查看pod日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl pod &#123;pod name&#125;</div></pre></td></tr></table></figure></p>
+<p>查看pod日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl logs &#123;pod name&#125;</div></pre></td></tr></table></figure></p>
 <p>查看pod的event日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kubectl describe pods &#123;pod-name&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>镜像拉取失败<br>登录到虚拟主机，拉取镜像进行测试</li>
@@ -580,7 +789,7 @@
     <link href="http://www.cxyteam.com/2018/11/26/k8s/"/>
     <id>http://www.cxyteam.com/2018/11/26/k8s/</id>
     <published>2018-11-26T05:10:16.000Z</published>
-    <updated>2018-12-09T04:00:39.647Z</updated>
+    <updated>2019-04-23T16:13:37.457Z</updated>
     <content type="html"><![CDATA[<h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><pre><code>https://github.com/kubernetes/kubernetes
 https://github.com/kubernetes/minikube
 http://docs.kubernetes.org.cn/475.html
@@ -759,6 +968,26 @@ sort
 <pre><code>minikube ssh
 </code></pre><p>拉取镜像</p>
 <pre><code>docker pull {image_name}    
+</code></pre><h1 id="node隔离与恢复"><a href="#node隔离与恢复" class="headerlink" title="node隔离与恢复"></a>node隔离与恢复</h1><h3 id="将node脱离k8s集群的调度范围"><a href="#将node脱离k8s集群的调度范围" class="headerlink" title="将node脱离k8s集群的调度范围"></a>将node脱离k8s集群的调度范围</h3><h5 id="修改yaml，添加unschedulable属性"><a href="#修改yaml，添加unschedulable属性" class="headerlink" title="修改yaml，添加unschedulable属性"></a>修改yaml，添加unschedulable属性</h5><pre><code>node.yaml
+...
+spec:
+    unschedulable:true
+...        
+
+kubectl replace -f node.yaml
+</code></pre><h5 id="使用命令"><a href="#使用命令" class="headerlink" title="使用命令"></a>使用命令</h5><pre><code>kubectl patch node {node_name} -p &apos;{&quot;spec&quot;:{unschedulable&quot;:true}}&apos;
+或者
+kubectl cordon {node_name}
+</code></pre><h3 id="将node恢复调度"><a href="#将node恢复调度" class="headerlink" title="将node恢复调度"></a>将node恢复调度</h3><pre><code>其余两种方式将unschedulable属性改为false即可
+kubectl uncordon {node_name}  
+</code></pre><h1 id="更新资源对象的Label"><a href="#更新资源对象的Label" class="headerlink" title="更新资源对象的Label"></a>更新资源对象的Label</h1><h3 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h3><pre><code>kubectl label pod {pod_name} role=test
+</code></pre><h3 id="查看pod的label"><a href="#查看pod的label" class="headerlink" title="查看pod的label"></a>查看pod的label</h3><pre><code>kubectl get pods -Lrole
+</code></pre><h3 id="删除一个Label"><a href="#删除一个Label" class="headerlink" title="删除一个Label"></a>删除一个Label</h3><pre><code>kubectl label pod {pod_name} role-
+</code></pre><h3 id="覆盖修改"><a href="#覆盖修改" class="headerlink" title="覆盖修改"></a>覆盖修改</h3><pre><code>kubectl label pod {pod_name} role=test --overwrite
+</code></pre><h1 id="context定义"><a href="#context定义" class="headerlink" title="context定义"></a>context定义</h1><h3 id="定义两个context，即运行环境，这个运行环境属于某个特定的命名空间"><a href="#定义两个context，即运行环境，这个运行环境属于某个特定的命名空间" class="headerlink" title="定义两个context，即运行环境，这个运行环境属于某个特定的命名空间"></a>定义两个context，即运行环境，这个运行环境属于某个特定的命名空间</h3><pre><code>kubectl config set-context ctx-dev --namespace=development --cluster=kubernets-cluster --user=dev
+kubectl config set-context ctx-prod --namespace=production --cluster=kubernets-cluster --user=prod
+</code></pre><h3 id="查看已定义的context"><a href="#查看已定义的context" class="headerlink" title="查看已定义的context"></a>查看已定义的context</h3><pre><code>kubectl config view
+</code></pre><h3 id="设定工作组在特定context环境中工作"><a href="#设定工作组在特定context环境中工作" class="headerlink" title="设定工作组在特定context环境中工作"></a>设定工作组在特定context环境中工作</h3><pre><code>kubectl config use-context ctx-dev
 </code></pre><blockquote>
 <p><a href="https://k8smeetup.github.io/docs/tasks/access-application-cluster/list-all-running-container-images/" target="_blank" rel="external">查看所有 namespace 中所有的 Container</a>    </p>
 </blockquote>
@@ -1002,127 +1231,6 @@ https://github.com/ku]]>
       <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
     
       <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[tcpdump查看redis连接过程]]></title>
-    <link href="http://www.cxyteam.com/2018/10/28/tcpdump%E6%9F%A5%E7%9C%8Bredis%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/"/>
-    <id>http://www.cxyteam.com/2018/10/28/tcpdump查看redis连接过程/</id>
-    <published>2018-10-28T13:06:28.000Z</published>
-    <updated>2018-10-28T13:19:22.918Z</updated>
-    <content type="html"><![CDATA[<p>在看tcpdump的手册的时候，突然想起tcp的三次握手，四次挥手；心血来潮，就用tcpdump抓取redis的连接过程。</p>
-<p>操作如下：「redis的服务器是host_redis,端口为6379」</p>
-<p>1、在redis的服务器，抓取6379及tcp的网络协议包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@test01v /]# tcpdump port 6379 and tcp -X -s 0</div></pre></td></tr></table></figure>
-<p>2、在客户端使用telnet连接redis</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ telnet host_redis 6379</div><div class="line"></div><div class="line">    Trying host_redis...</div><div class="line"></div><div class="line">    Connected to host_redis</div><div class="line"></div><div class="line">    Escape character is &apos;^]&apos;.</div><div class="line"></div><div class="line">    ^]</div><div class="line"></div><div class="line">    telnet&gt; quit</div></pre></td></tr></table></figure>
-<h3 id="tcpdump参数介绍"><a href="#tcpdump参数介绍" class="headerlink" title="tcpdump参数介绍"></a>tcpdump参数介绍</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">port</div><div class="line"></div><div class="line">    指定端口号</div><div class="line"></div><div class="line">tcp</div><div class="line"></div><div class="line">    指定协议为tcp</div><div class="line"></div><div class="line">-X</div><div class="line"></div><div class="line">    以16进制和ASCII码形式显示每个报文</div><div class="line"></div><div class="line">-s</div><div class="line"></div><div class="line">    从每个分组中读取最开始的snaplen个字节，而不是默认的68个字节</div></pre></td></tr></table></figure>
-<h3 id="tcpdump输出介绍"><a href="#tcpdump输出介绍" class="headerlink" title="tcpdump输出介绍"></a>tcpdump输出介绍</h3><p>注：「本机服务器为host_local」<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">02:45:1.622225 IP host_local.55638 &gt; host_redis.6379: Flags [S], seq 1105795559, win 29200, options [mss 1460,sackOK,TS val 43986276 ecr 0,nop,wscale 7], length 0</div></pre></td></tr></table></figure></p>
-<h3 id="输出信息"><a href="#输出信息" class="headerlink" title="输出信息"></a>输出信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">02:45:1.622225是时间</div><div class="line"></div><div class="line">host_local.55638 &gt; 是发送端主机和端口，符号‘ &gt;’ 表明数据的传输方向</div><div class="line"></div><div class="line">host_redis.6379接收端的主机名和端口</div><div class="line"></div><div class="line">Flags [S]TCP包中的标志信息</div><div class="line"></div><div class="line">    [S] 表示这是一个SYN请求</div><div class="line"></div><div class="line">    [S.] 表示这是一个SYN+ACK确认包: </div><div class="line">    </div><div class="line">    [.] 表示这是一个ACT确认包， (client)SYN-&gt;(server)SYN-&gt;(client)ACT 就是3次握手过程</div><div class="line">    </div><div class="line">    [P] 表示这个是一个数据推送，可以是从服务器端向客户端推送，也可以从客户端向服务器端推</div><div class="line">    </div><div class="line">    [F] 表示这是一个FIN包，是关闭连接操作，client/server都有可能发起</div><div class="line">    </div><div class="line">    [R] 表示这是一个RST包，与F包作用相同，但RST表示连接关闭时，仍然有数据未被处理。可以理解为是强制切断连接</div><div class="line"></div><div class="line">seq 1105795559 序列号</div><div class="line"></div><div class="line">win 29200 指滑动窗口的大小</div><div class="line"></div><div class="line">option </div><div class="line"></div><div class="line">length 0 指数据包的大小为0</div></pre></td></tr></table></figure>
-<h3 id="tcp三次握手，四次挥手图示："><a href="#tcp三次握手，四次挥手图示：" class="headerlink" title="tcp三次握手，四次挥手图示："></a>tcp三次握手，四次挥手图示：</h3><p><img src="/img/redis/tcp.jpeg" alt="Al text" title="tcp"></p>
-<h1 id="三次握手流程"><a href="#三次握手流程" class="headerlink" title="三次握手流程"></a>三次握手流程</h1><h3 id="client向server发送SYN"><a href="#client向server发送SYN" class="headerlink" title="client向server发送SYN"></a>client向server发送SYN</h3><p>注：「seq=x=2440373000」</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.882139 IP host_local.55638 &gt; host_redis.6379: Flags [SEW], seq 2440373000, win 65535, options [mss 1366,nop,wscale 5,nop,nop,TS val 776806643 ecr 0,sackOK,eol], length 0</div></pre></td></tr></table></figure>
-<h3 id="server向client发送一个SYN，ACK包"><a href="#server向client发送一个SYN，ACK包" class="headerlink" title="server向client发送一个SYN，ACK包"></a>server向client发送一个SYN，ACK包</h3><p>注：「ack=x+1=2440373001；seq=y=3103132894」<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.882181 IP host_redis.6379 &gt; host_local.55638: Flags [S.E], seq 3103132894, ack 2440373001, win 14480, options [mss 1460,sackOK,TS val 3145177219 ecr 776806643,nop,wscale 7], length 0</div></pre></td></tr></table></figure></p>
-<h3 id="client向server响应一个ACK"><a href="#client向server响应一个ACK" class="headerlink" title="client向server响应一个ACK"></a>client向server响应一个ACK</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:26.922149 IP host_local.55638 &gt; host_redis.6379: Flags [.], ack 1, win 4104, options [nop,nop,TS val 776806681 ecr 3145177219], length 0</div></pre></td></tr></table></figure>
-<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><h3 id="client向server发送FIN结束命令"><a href="#client向server发送FIN结束命令" class="headerlink" title="client向server发送FIN结束命令"></a>client向server发送FIN结束命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490726 IP host_local.55638 &gt; host_redis.6379: Flags [F.], seq 1, ack 1, win 4104, options [nop,nop,TS val 776811227 ecr 3145177219], length 0</div></pre></td></tr></table></figure>
-<h3 id="server向client发送响应信息，"><a href="#server向client发送响应信息，" class="headerlink" title="server向client发送响应信息，"></a>server向client发送响应信息，</h3><p>注：表示收到client的结束信号，即将关闭连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490893 IP host_redis.6379 &gt; host_local.55638: Flags [.], ack 2, win 114, options [nop,nop,TS val 3145181828 ecr 776811227], length 0</div></pre></td></tr></table></figure></p>
-<h3 id="server关闭连接，并发送FIN给client"><a href="#server关闭连接，并发送FIN给client" class="headerlink" title="server关闭连接，并发送FIN给client"></a>server关闭连接，并发送FIN给client</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.490929 IP host_redis.6379 &gt; host_local.55638: Flags [F.], seq 1, ack 2, win 114, options [nop,nop,TS val 3145181828 ecr 776811227], length 0</div></pre></td></tr></table></figure>
-<h3 id="client发送ACK给server进行确认"><a href="#client发送ACK给server进行确认" class="headerlink" title="client发送ACK给server进行确认"></a>client发送ACK给server进行确认</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23:32:31.533767 IP host_local.55638 &gt; host_redis.6379: Flags [.], ack 2, win 4104, options [nop,nop,TS val 776811267 ecr 3145181828], length 0</div></pre></td></tr></table></figure>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在看tcpdump的手册的时候，突然想起tcp的三次握手，四次挥手；心血来潮，就用tcpdump抓取redis的连接过程。</p>
-<p>操作如下：「redis的服务器是host_redis,端口为6379」</p>
-<p>1、在redis的服务器，抓取6379及tcp的网]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/tags/Linux/"/>
-    
-      <category term="Linux" scheme="http://www.cxyteam.com/categories/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis对象]]></title>
-    <link href="http://www.cxyteam.com/2018/10/24/redis%E5%AF%B9%E8%B1%A1/"/>
-    <id>http://www.cxyteam.com/2018/10/24/redis对象/</id>
-    <published>2018-10-24T12:28:34.000Z</published>
-    <updated>2018-10-24T13:00:17.554Z</updated>
-    <content type="html"><![CDATA[<h1 id="redis对象"><a href="#redis对象" class="headerlink" title="redis对象"></a>redis对象</h1><pre><code>对象包含三部分：type，encoding，ptr
-type：记录对象的类型
-encoding：记录对象底层的数据结构
-ptr：指向底层实现的数据结构的指针
-</code></pre><p><img src="/img/redis/redis_object.png" alt="Alt text" title="redis-object"></p>
-<h3 id="查看key的type类型"><a href="#查看key的type类型" class="headerlink" title="查看key的type类型"></a>查看key的type类型</h3><pre><code>type key
-</code></pre><h3 id="查看key的encoding的值"><a href="#查看key的encoding的值" class="headerlink" title="查看key的encoding的值"></a>查看key的encoding的值</h3><pre><code>object encoding key
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="redis对象"><a href="#redis对象" class="headerlink" title="redis对象"></a>redis对象</h1><pre><code>对象包含三部分：type，encoding，ptr
-type：记录对象的类型
-enc]]>
-    </summary>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/tags/Redis/"/>
-    
-      <category term="Redis" scheme="http://www.cxyteam.com/categories/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设置disable_functions失效]]></title>
-    <link href="http://www.cxyteam.com/2018/08/01/%E8%AE%BE%E7%BD%AEdisable-functions%E5%A4%B1%E6%95%88/"/>
-    <id>http://www.cxyteam.com/2018/08/01/设置disable-functions失效/</id>
-    <published>2018-08-01T12:51:50.000Z</published>
-    <updated>2018-08-01T13:08:28.198Z</updated>
-    <content type="html"><![CDATA[<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><pre><code>使用docker-compose搭建了一套环境，在运行larveral框架的时候，报错&quot;get_cfg_var() has been disabled for security reasons in...&quot;
-</code></pre><h1 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h1><ol>
-<li><p>登录php的docker容器</p>
-</li>
-<li><p>找到php.ini文件路径<br> php -i | grep php.ini</p>
-</li>
-<li><p>注释disable_functions<br> ;disable_functions = system,passthru,popen,phpinfo,proc_close,proc_open,dl,show_source,get_cfg_var</p>
-</li>
-<li><p>重启容器<br> docker-compose restart    </p>
-</li>
-<li><p>运行，依然报错</p>
-</li>
-<li><p>确认disable_functions选项<br> php -i| grep php.ini</p>
-</li>
-<li><p>php-fpm.conf的锅,果断注释<br> ;php_admin_value[disable_functions] = system,passthru,shell_exec,exec,popen,phpinfo,proc_close,proc_open,dl,show_source,get_cfg_var</p>
-</li>
-<li><p>完美解决</p>
-</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><pre><code>使用docker-compose搭建了一套环境，在运行larveral框架的时候，报错&quot;get_cfg_var()]]>
-    </summary>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/tags/PHP/"/>
-    
-      <category term="PHP" scheme="http://www.cxyteam.com/categories/PHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git查看某人的提交文件列表]]></title>
-    <link href="http://www.cxyteam.com/2018/07/31/git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%BA%BA%E7%9A%84%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8/"/>
-    <id>http://www.cxyteam.com/2018/07/31/git查看某人的提交文件列表/</id>
-    <published>2018-07-31T11:13:30.000Z</published>
-    <updated>2018-07-31T11:19:30.458Z</updated>
-    <content type="html"><![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><pre><code>想查看很久以前的某一次提交所改动的文件列表
-</code></pre><h1 id="查看某人所有的提交"><a href="#查看某人所有的提交" class="headerlink" title="查看某人所有的提交"></a>查看某人所有的提交</h1><pre><code>git log --author=sunnysmilez
-</code></pre><h1 id="查看某次提交的文件列表"><a href="#查看某次提交的文件列表" class="headerlink" title="查看某次提交的文件列表"></a>查看某次提交的文件列表</h1><pre><code>git whatchanged | grep -A 10  commitid(这里为上一个步骤查出来的commitid)
-</code></pre><h1 id="查看某次提交具体改的内容"><a href="#查看某次提交具体改的内容" class="headerlink" title="查看某次提交具体改的内容"></a>查看某次提交具体改的内容</h1><pre><code>git show commitid
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><pre><code>想查看很久以前的某一次提交所改动的文件列表
-</code></pre><h1 id="查看某人所有的提交">]]>
-    </summary>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/tags/GIT/"/>
-    
-      <category term="GIT" scheme="http://www.cxyteam.com/categories/GIT/"/>
     
   </entry>
   
