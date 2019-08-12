@@ -103,7 +103,7 @@ virtualBox 5.0.38
 
 机器
 ma">
-<meta property="og:updated_time" content="2018-12-27T14:20:43.326Z">
+<meta property="og:updated_time" content="2019-04-30T03:03:47.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用kubeadm安装k8s">
 <meta name="twitter:description" content="在安装前，最好事先准备好一个干净的环境，不然会浪费更多的时间，尤其是之前折腾过docker的一些环境。我因为之前安装过一个低版本的docker-ce，之后用yum进行升级之后，再去安装kubeadm，kubectl出现各种问题，最后放弃解决了。
@@ -424,6 +424,7 @@ ma">
 <li>安装</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y kubelet kubeadm kubectl ipvsadm</div></pre></td></tr></table></figure>
+<p>3.1 安装k8s-1.11.3的版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir k8s-1.11.3 &amp;&amp; cd k8s-1.11.3</div><div class="line">yumdownloader kubectl-1.11.3 kubelet-1.11.3 kubeadm-1.11.3  cri-tools-1.12.0 kubernetes-cni-0.6.0  socat-1.7.3.2</div><div class="line">yum install ./*.rpm -y</div></pre></td></tr></table></figure></p>
 <ol>
 <li>配置kubelet和docker的cgroups一致</li>
 </ol>
@@ -517,7 +518,13 @@ ma">
 </li>
 </ol>
 <p>注意：<br>当使用systemctl start kubelet失败的时候，可以使用”systemctl status kubelet -l”，”journalctl -xeu kubelet<br>“查看详细信息</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://github.com/youngperson/study-100/wiki/kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4" title="亮亮的k8s搭建" target="_blank" rel="external">亮亮的k8s搭建</a><br><a href="https://github.com/HikoQiu/kubeadm-install-k8s" title="kubeadm-install-k8s" target="_blank" rel="external">kubeadm-install-k8s</a><br><a href="https://www.kubernetes.org.cn/4256.html" title="centos7使用kubeadm安装kubernetes 1.11版本多主高可用" target="_blank" rel="external">centos7使用kubeadm安装kubernetes 1.11版本多主高可用</a><br><a href="https://www.kubernetes.org.cn/4619.html" title="使用kubeadm安装Kubernetes 1.12" target="_blank" rel="external">使用kubeadm安装Kubernetes 1.12</a><br><a href="https://blog.csdn.net/aixiaoyang168/article/details/78411511" title="国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群" target="_blank" rel="external">国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群</a></p>
+<ol>
+<li>如果网络发生了变更<br>先回滚，再初始化，按照上述流程走<pre><code>kubeadm reset
+kubeadm init
+#记得修改/etc/hosts
+#记得修改hostname（/etc/hostname和/etc/sysconfig/network）
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><a href="https://github.com/youngperson/study-100/wiki/kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4" title="亮亮的k8s搭建" target="_blank" rel="external">亮亮的k8s搭建</a><br><a href="https://github.com/HikoQiu/kubeadm-install-k8s" title="kubeadm-install-k8s" target="_blank" rel="external">kubeadm-install-k8s</a><br><a href="https://www.kubernetes.org.cn/4256.html" title="centos7使用kubeadm安装kubernetes 1.11版本多主高可用" target="_blank" rel="external">centos7使用kubeadm安装kubernetes 1.11版本多主高可用</a><br><a href="https://www.kubernetes.org.cn/4619.html" title="使用kubeadm安装Kubernetes 1.12" target="_blank" rel="external">使用kubeadm安装Kubernetes 1.12</a><br><a href="https://blog.csdn.net/aixiaoyang168/article/details/78411511" title="国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群" target="_blank" rel="external">国内使用 kubeadm 在 Centos 7 搭建 Kubernetes 集群</a></li>
+</ol>
 
       
     </div>
@@ -673,7 +680,7 @@ ma">
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">202</span>
+                  <span class="site-state-item-count">204</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -684,7 +691,7 @@ ma">
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -695,7 +702,7 @@ ma">
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
