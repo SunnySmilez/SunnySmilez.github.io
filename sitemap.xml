@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.cxyteam.com/2019/08/13/anki%E4%BD%BF%E7%94%A8%E8%83%8C%E5%8D%95%E8%AF%8D/</loc>
+    <lastmod>2019-08-13T10:42:44.904Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2019-08-12T12:21:02.791Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.cxyteam.com/2019/08/12/mysql%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2019-08-12T11:08:31.159Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.cxyteam.com/2019/08/12/%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2019-08-12T09:16:33.310Z</lastmod>
   </url>
@@ -39,11 +54,6 @@
   <url>
     <loc>http://www.cxyteam.com/2019/02/18/2019%E5%B9%B4%E8%AF%BB%E4%B9%A6%E5%8D%95/</loc>
     <lastmod>2019-03-20T05:25:32.592Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.cxyteam.com/2018/02/03/2017%E5%B9%B4%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-03-11T05:05:39.611Z</lastmod>
   </url>
   
   <url>
@@ -317,12 +327,12 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/gitment/gitment.css</loc>
+    <loc>http://www.cxyteam.com/gitment/gitment1.css</loc>
     <lastmod>2018-01-04T07:29:43.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/gitment/gitment1.css</loc>
+    <loc>http://www.cxyteam.com/gitment/gitment.css</loc>
     <lastmod>2018-01-04T07:29:43.000Z</lastmod>
   </url>
   
@@ -937,12 +947,12 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/05/28/Xhprof%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://www.cxyteam.com/2015/11/04/decrby%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/11/04/decrby%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</loc>
+    <loc>http://www.cxyteam.com/2015/05/28/Xhprof%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
@@ -992,12 +1002,12 @@
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2015/12/17/siege%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://www.cxyteam.com/2016/01/17/shell%E8%AF%AD%E5%8F%A5%E5%9D%97/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.cxyteam.com/2016/01/17/shell%E8%AF%AD%E5%8F%A5%E5%9D%97/</loc>
+    <loc>http://www.cxyteam.com/2015/12/17/siege%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-02-17T02:36:58.000Z</lastmod>
   </url>
   

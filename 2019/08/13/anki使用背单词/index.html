@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Other," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="狂奔的菜鸟" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="昨天看完《如何学习》这本书，当时介绍了一个应用《anki》，并给自己定了个flag，每天背15个单词
+今天就介绍下如何使用anki进行单词背诵，anki的主要功能是维护自己的单词本，并根据记忆的熟练程度进行复习
+我对他进行了设置，主要实现了根据单词记忆释义，以及根据释义记忆单词两个简单的功能
+效果展示根据单词记忆释义
+根据释义记忆单词
+操作流程
+下载anki
+制作anki单词本
+设置卡片模板
+设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="anki使用背单词">
+<meta property="og:url" content="http://www.cxyteam.com/2019/08/13/anki使用背单词/index.html">
+<meta property="og:site_name" content="狂奔的菜鸟">
+<meta property="og:description" content="昨天看完《如何学习》这本书，当时介绍了一个应用《anki》，并给自己定了个flag，每天背15个单词
+今天就介绍下如何使用anki进行单词背诵，anki的主要功能是维护自己的单词本，并根据记忆的熟练程度进行复习
+我对他进行了设置，主要实现了根据单词记忆释义，以及根据释义记忆单词两个简单的功能
+效果展示根据单词记忆释义
+根据释义记忆单词
+操作流程
+下载anki
+制作anki单词本
+设置卡片模板
+设置">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/word.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/answer1.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/shiyi.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/answer.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/word_format.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/create_jyk.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/type.png">
+<meta property="og:image" content="http://www.cxyteam.com/img/anki/add_field.png">
+<meta property="og:updated_time" content="2019-08-13T10:42:44.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="anki使用背单词">
+<meta name="twitter:description" content="昨天看完《如何学习》这本书，当时介绍了一个应用《anki》，并给自己定了个flag，每天背15个单词
+今天就介绍下如何使用anki进行单词背诵，anki的主要功能是维护自己的单词本，并根据记忆的熟练程度进行复习
+我对他进行了设置，主要实现了根据单词记忆释义，以及根据释义记忆单词两个简单的功能
+效果展示根据单词记忆释义
+根据释义记忆单词
+操作流程
+下载anki
+制作anki单词本
+设置卡片模板
+设置">
+<meta name="twitter:image" content="http://www.cxyteam.com/img/anki/word.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cxyteam.com/2019/08/13/anki使用背单词/"/>
+
+
+
+
+
+  <title>anki使用背单词 | 狂奔的菜鸟</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狂奔的菜鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">当你的实力支撑不起你的野心的时候，静下心来好好学习吧！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cxyteam.com/2019/08/13/anki使用背单词/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="狂奔的菜鸟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂奔的菜鸟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">anki使用背单词</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T16:39:32+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/13/anki使用背单词/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/13/anki使用背单词/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>昨天看完《如何学习》这本书，当时介绍了一个应用《anki》，并给自己定了个flag，每天背15个单词</p>
+<p>今天就介绍下如何使用anki进行单词背诵，anki的主要功能是维护自己的单词本，并根据记忆的熟练程度进行复习</p>
+<p>我对他进行了设置，主要实现了根据单词记忆释义，以及根据释义记忆单词两个简单的功能</p>
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p>根据单词记忆释义<br><img src="/img/anki/word.png" alt="Alt text" title="单词问题"><br><img src="/img/anki/answer1.png" alt="Alt text" title="查看答案"></p>
+<p>根据释义记忆单词<br><img src="/img/anki/shiyi.png" alt="Alt text" title="释义问题"><br><img src="/img/anki/answer.png" alt="Alt text" title="查看答案"></p>
+<h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><ul>
+<li>下载anki</li>
+<li>制作anki单词本</li>
+<li>设置卡片模板</li>
+<li>设置卡片样式</li>
+<li>导入单词</li>
+<li>多端同步单词</li>
+</ul>
+<h3 id="下载anki"><a href="#下载anki" class="headerlink" title="下载anki"></a>下载anki</h3><p>墙内下载地址：<a href="https://apps.ankiweb.net/#download「选择自己合适的平台下载就行，ios是需要进行付费的」" target="_blank" rel="external">https://apps.ankiweb.net/#download「选择自己合适的平台下载就行，ios是需要进行付费的」</a></p>
+<p>注意：「以下操作都是基于mac版本的anki进行」</p>
+<h3 id="制作anki单词本"><a href="#制作anki单词本" class="headerlink" title="制作anki单词本"></a>制作anki单词本</h3><p>将需要记忆的单词对应的信息按固定顺序整理到excel中</p>
+<p>比如下图的例子，第一行是单词，第二行是音标，第三行是释义，第四行是例句「顺序按照你的需求来」</p>
+<p><img src="/img/anki/word_format.png" alt="Alt text" title="单词添加"></p>
+<p>将单词复制到txt文档中，注意要设置txt的文档的字符格式为utf8「mac默认是utf8」</p>
+<p>至此单词本制作完毕，保存下来一会用的上</p>
+<h3 id="设置卡片模板"><a href="#设置卡片模板" class="headerlink" title="设置卡片模板"></a>设置卡片模板</h3><ul>
+<li><p>创建记忆库<br><img src="/img/anki/create_jyk.png" alt="Alt text" title="单词问题"></p>
+</li>
+<li><p>选择卡片类型「一个卡片需要创建正反两个卡片，所以选择Basic（and reversed card）」<br><img src="/img/anki/type.png" alt="Alt text" title="卡片类型"></p>
+</li>
+<li><p>设置字段</p>
+<ul>
+<li>点击添加进入单词添加</li>
+<li>再点击字段进行对应字段添加「字段顺序和excel的字段保持一致」<br><img src="/img/anki/add_field.png" alt="Alt text" title="字段设置"></li>
+</ul>
+</li>
+</ul>
+<h3 id="修改模板样式"><a href="#修改模板样式" class="headerlink" title="修改模板样式"></a>修改模板样式</h3><p>点击卡片进行卡片样式设置「注意会有两个卡片类型」</p>
+<p>在这里样式的设置可以使用css，不用担心，下面会贴出我的样式来</p>
+<p>其中大括号包裹的”单词”表示你要显示对应的字段为单词字段，大括号包裹的”FrontSide”则表示正面的所有的内容</p>
+<h3 id="卡片模板信息"><a href="#卡片模板信息" class="headerlink" title="卡片模板信息"></a>卡片模板信息</h3><p>根据单词显示释义模板样式如下</p>
+<p>正面模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;单词&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;&#123;音标&#125;&#125;&#125;&#125;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>格式刷（卡片格式共享）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">﻿.card &#123;</div><div class="line"> font-family: &quot;微软雅黑&quot;, sans-serif;</div><div class="line"> font-size: 20px;</div><div class="line"> color: #000;</div><div class="line"> background: #eeeeee;</div><div class="line">&#125;</div><div class="line">.frontside &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">	color: #209e85;</div><div class="line">	font-size: 24px;</div><div class="line">&#125;</div><div class="line">.backside &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">	border-top: 1px solid #eeeeee;</div><div class="line">&#125;</div><div class="line">.examplesen, .examplesen + div &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">&#125;</div><div class="line">.sen1 strong, .sen1 b, .sen2 strong, .sen2 b &#123;</div><div class="line">	color: #209e85;</div><div class="line">&#125;</div><div class="line">.exampletitle &#123;</div><div class="line">	line-height: 36px;</div><div class="line">&#125;</div><div class="line">.examplesen + div &#123;</div><div class="line">	border-top: 1px solid #eeeeee;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>背面模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;hr id=answer&gt;</div><div class="line"></div><div class="line">&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;FrontSide&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;backside&quot;&gt;&#123;&#123;释义&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;exampletitle&quot;&gt;例句&lt;/div&gt;</div><div class="line">&lt;div class=&quot;examplesen sen1&quot;&gt;&#123;&#123;例句&#125;&#125;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>根据释义显示单词样式信息<br>正面模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">﻿&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;释义&#125;&#125;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>格式刷（卡片格式共享）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">﻿.card &#123;</div><div class="line"> font-family: &quot;微软雅黑&quot;, sans-serif;</div><div class="line"> font-size: 20px;</div><div class="line"> color: #000;</div><div class="line"> background: #eeeeee;</div><div class="line">&#125;</div><div class="line">.frontside &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">	color: #209e85;</div><div class="line">	font-size: 24px;</div><div class="line">&#125;</div><div class="line">.backside &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">	border-top: 1px solid #eeeeee;</div><div class="line">&#125;</div><div class="line">.examplesen, .examplesen + div &#123;</div><div class="line">	display: block;</div><div class="line">	background: #fff;</div><div class="line">	padding: .6em 1.4em;</div><div class="line">&#125;</div><div class="line">.sen1 strong, .sen1 b, .sen2 strong, .sen2 b &#123;</div><div class="line">	color: #209e85;</div><div class="line">&#125;</div><div class="line">.exampletitle &#123;</div><div class="line">	line-height: 36px;</div><div class="line">&#125;</div><div class="line">.examplesen + div &#123;</div><div class="line">	border-top: 1px solid #eeeeee;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>背面模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;hr id=answer&gt;</div><div class="line">&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;单词&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;frontside&quot;&gt;&#123;&#123;&#123;音标&#125;&#125;&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;backside&quot;&gt;&#123;&#123;释义&#125;&#125;&lt;/div&gt;</div><div class="line">&lt;div class=&quot;exampletitle&quot;&gt;例句&lt;/div&gt;</div><div class="line">&lt;div class=&quot;examplesen sen1&quot;&gt;&#123;&#123;例句&#125;&#125;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="导入单词"><a href="#导入单词" class="headerlink" title="导入单词"></a>导入单词</h3><ul>
+<li>点击导入文件</li>
+<li>选择上面做好的anki单词本</li>
+<li>确认类型，牌组和上面设置的保持一致则点击导入</li>
+</ul>
+<h3 id="多端同步单词"><a href="#多端同步单词" class="headerlink" title="多端同步单词"></a>多端同步单词</h3><p>在这里遵守一个原则：用mac端进行上传，用手机端进行下载，千万别用手机端进行上传，会将之前设置好的单词覆盖「anki单词本进的备份，万一覆盖了，还能用单词本进行恢复」</p>
+<p>在关闭mac电脑端的时候应用会提示是上传还是下载，在这里一定要选择上传</p>
+<p>打开应用，点击更新的按钮直接更新，就可以在手机端愉快的背单词了</p>
+<p>注意：多个设备同步必须登录同一个账号，这里需要注意的是账号是在手机端的app或者mac的app中注册而不是在”<a href="http://www.ankichina.net&quot;注册，网页的账号不能用于app" target="_blank" rel="external">http://www.ankichina.net&quot;注册，网页的账号不能用于app</a></p>
+<blockquote>
+<p><a href="http://www.ankichina.net/anki20.html" target="_blank" rel="external">有问题，上官网</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/img/wechat.jpeg" alt="狂奔的菜鸟 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/img/alipay.png" alt="狂奔的菜鸟 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag"># Other</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/mysql索引原理/" rel="next" title="mysql索引原理">
+                <i class="fa fa-chevron-left"></i> mysql索引原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">狂奔的菜鸟</p>
+              <p class="site-description motion-element" itemprop="description">狂奔的菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">206</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SunnySmilez" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:phpchengxuyuan@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.taichirain.cn/" title="taichirain" target="_blank">taichirain</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.chenjie.info/" title="陈捷的博客" target="_blank">陈捷的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://52dachu.com/" title="大神-0x0886" target="_blank">大神-0x0886</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://phpmap.club/" title="程序员之路" target="_blank">程序员之路</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#效果展示"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作流程"><span class="nav-number">2.</span> <span class="nav-text">操作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载anki"><span class="nav-number">3.</span> <span class="nav-text">下载anki</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作anki单词本"><span class="nav-number">4.</span> <span class="nav-text">制作anki单词本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置卡片模板"><span class="nav-number">5.</span> <span class="nav-text">设置卡片模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模板样式"><span class="nav-number">6.</span> <span class="nav-text">修改模板样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡片模板信息"><span class="nav-number">7.</span> <span class="nav-text">卡片模板信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入单词"><span class="nav-number">8.</span> <span class="nav-text">导入单词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多端同步单词"><span class="nav-number">9.</span> <span class="nav-text">多端同步单词</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狂奔的菜鸟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254841266'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254841266%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'SunnySmilez',
+            repo: 'SunnySmilez.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ea9245f2e5ad42412cb4851ef3a6b1ea0271647f',
+            
+                client_id: '0f0f9461c8cd507d8d51'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
